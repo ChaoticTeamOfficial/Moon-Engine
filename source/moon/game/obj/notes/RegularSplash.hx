@@ -1,16 +1,15 @@
 package moon.game.obj.notes;
 
-import flixel.FlxG;
 import flixel.util.FlxSignal;
+import flixel.FlxG;
 import openfl.display.BlendMode;
 
 class RegularSplash extends MoonSprite
 {
     public var skin(default, set):String;
     public var data:Int;
-
-    public final onSpawn = new FlxTypedSignal<Void->Void>();
-    public var playRandom:Bool = false;
+	public final onSpawn = new FlxTypedSignal<Void->Void>();
+	public var playRandom:Bool = false;
 
     public function new(skin:String, data:Int = 0):Void
     {
@@ -24,10 +23,10 @@ class RegularSplash extends MoonSprite
 
     public function spawn():Void
     {
-        playAnim((playRandom) ? 'splash${FlxG.random.int(1, this.animation.getAnimationList().length - 1)}' : 'splash', true);
+        playAnim((playRandom) ? 'splash' + FlxG.random.int(1, this.animation.getAnimationList().length - 1) : 'splash', true);
         if(this.alpha <= 0.1) alpha = 1;
         visible = active = true;
-        onSpawn.dispatch();
+		onSpawn.dispatch();
     }
 
     @:noCompletion public function set_skin(skn:String):String

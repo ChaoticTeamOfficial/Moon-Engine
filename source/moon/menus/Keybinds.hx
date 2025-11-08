@@ -12,61 +12,98 @@ import flixel.input.gamepad.FlxGamepadInputID as FlxPad;
 import flixel.input.keyboard.FlxKey;
 import flixel.effects.FlxFlicker;
 import flixel.group.FlxGroup;
+import flixel.FlxSprite;
+import flixel.input.FlxInput.FlxInputState;
 import moon.dependency.user.MoonInput.MoonKeys;
 
 using StringTools;
+
 class Keybinds extends FlxSubState
 {
-    /**
-     * TODO for this menu:
-     * * Kinda revamp it. It should work like FPS plus, in which you can add up to... i think 5 keybinds? idk yet.
-     * * and when holding backspace/delete it removes the last binded key.
-     * * I'm so demotivated to work on it right now.
-     */
     private var curSelection:Int = 0;
-    private var curAltSelection:Int = 0;
     private var keysGrp:FlxTypedGroup<FlxText>;
-    private var altKeysGrp:FlxTypedGroup<FlxText>;
+    private var bindTextsGrp:FlxTypedGroup<FlxText>;
+    private var linesGrp:FlxTypedGroup<FlxSprite>;
+
+    private var selectableIndices:Array<Int> = [];
+    private var headerIndices:Array<Int> = [];
+    private var controlNames:Array<String> = [];
+
+    private var positionOffsets:Array<Float> = [];
     private var rebindMode:Bool = false;
     private var showKeyboard:Bool = true;
-    private var offsetY:Float = 200;
 
-    private var keysArray:Array<String> = [
-        "LEFT", "DOWN", "UP", "RIGHT", "RESET",
-        "UI_LEFT", "UI_DOWN", "UI_UP", "UI_RIGHT",
-        "ACCEPT", "BACK", "PAUSE", "TEXT_LOG"
-    ];
+    private var removeHoldTime:Float = 0;
+    private var offsetY:Float = 200;
+    private var allButtons:Array<FlxPad>;
+
+    private static inline var MAX_BINDS:Int = 5;
+    private static inline var INITIAL_REMOVE_DELAY:Float = 0.5;
+    private static inline var REPEAT_REMOVE_DELAY:Float = 0.05;
+    private static inline var LINE_SPACING:Float = 60;
+    private static inline var EXTRA_CATEGORY_SPACING:Float = 90;
 
     public function new(camera:FlxCamera):Void
     {
         super();
         this.camera = camera;
-
         keysGrp = new FlxTypedGroup<FlxText>();
-        altKeysGrp = new FlxTypedGroup<FlxText>();
+        bindTextsGrp = new FlxTypedGroup<FlxText>();
+        linesGrp = new FlxTypedGroup<FlxSprite>();
+        removeHoldTime = 0;
+        allButtons = [];
+        for (key in FlxPad.fromStringMap.keys())
+        {
+            var id:FlxPad = FlxPad.fromString(key);
+            if (id != FlxPad.ANY && id != FlxPad.NONE)
+                allButtons.push(id);
+        }
+        
+        // build headers and sectionssss
+        addHeader("Notes");
+        final noteControls = ["LEFT", "DOWN", "UP", "RIGHT", "RESET"];
+        final noteLabels = ["Left (First Key)", "Down (Second Key)", "Up (Third Key)", "Right (Fourth Key)", 'Reset'];
+        final arrows = ['←', '↓', '↑', '→', ''];
+        for (i in 0...noteControls.length)
+            addKeyItem(noteControls[i], arrows[i] + ' ' + noteLabels[i]);
+
+        addHeader("UI");
+        var uiControls = ["UI_UP", "UI_DOWN", "UI_LEFT", "UI_RIGHT", "ACCEPT", "BACK", "PAUSE"];
+        var uiLabels = ["Up", "Down", "Left", "Right", "Accept", "Cancel", "CharScreen"];
+        for (i in 0...uiControls.length)
+            addKeyItem(uiControls[i], uiLabels[i]);
+
+        // Add lines for headers omg they suck (lie)
+        for (j in 0...headerIndices.length)
+            linesGrp.add(new FlxSprite(20, 0).makeGraphic(FlxG.width - 40, 1, FlxColor.WHITE));
+
+        add(keysGrp);
+        add(bindTextsGrp);
+        add(linesGrp);
+
+        var pos:Float = 0;
+        for (i in 0...keysGrp.length)
+        {
+            if (headerIndices.contains(i) && headerIndices.indexOf(i) > 0)
+                pos += EXTRA_CATEGORY_SPACING;
+
+            positionOffsets.push(pos);
+            pos += LINE_SPACING;
+        }
 
         refreshList();
-        add(keysGrp);
-        add(altKeysGrp);
-
-        changeSelection(0, 0);
+        changeSelection(0);
     }
-
+    
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
-
         updateTextPositions(elapsed);
-
-        if (rebindMode) handleRebinding();
+        if (rebindMode) handleRebinding(elapsed);
         else
         {
-            if (MoonInput.justPressed(UI_UP)) changeSelection(-1, 0);
-            else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1, 0);
-
-            if (MoonInput.justPressed(UI_LEFT)) changeSelection(0, -1);
-            else if (MoonInput.justPressed(UI_RIGHT)) changeSelection(0, 1);
-
+            if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
+            else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
             if (MoonInput.justPressed(ACCEPT)) openRebindMode();
             else if (MoonInput.justPressed(BACK)) close();
             else if (FlxG.keys.justPressed.TAB && Global.allowInputs)
@@ -79,75 +116,112 @@ class Keybinds extends FlxSubState
 
     private function refreshList():Void
     {
-        keysGrp.clear();
-        altKeysGrp.clear();
-
-        for (controlString in keysArray)
+        for (i in 0...controlNames.length)
         {
-            if (!MoonInput.binds.exists(controlString)) continue;
-
-            var actionText = new FlxText(20, 0, FlxG.width, controlString.replace('_', ' '));
-            actionText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, CENTER);
-            keysGrp.add(actionText);
-
-            var keyList = MoonInput.binds.get(controlString);
-            for (i in 0...2)
-            {
-                var keyString = "none";
-
-                if (showKeyboard && i < keyList[0].length)
-                    keyString = getKeyString(keyList[0][i]);
-                else if (!showKeyboard && i < keyList[1].length)
-                    keyString = getGamepadString(keyList[1][i]);
-
-                var keyText = new FlxText(0, 0, FlxG.width, keyString);
-                keyText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, CENTER);
-                keyText.x = ((i + 1) * 420) / 1.5;
-                altKeysGrp.add(keyText);
-            }
+            var control = controlNames[i];
+            var itemIndex = selectableIndices[i];
+            var bindType = showKeyboard ? 0 : 1;
+            var keyList:Array<Dynamic> = MoonInput.binds.get(control)[bindType];
+            var keyStrings:Array<String> = [];
+            for (k in keyList)
+                keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
+            bindTextsGrp.members[itemIndex].text = keyStrings.join(', ');
         }
     }
 
-    private function changeSelection(change:Int = 0, altChange:Int = 0):Void
+    private function changeSelection(change:Int = 0):Void
     {
-        curSelection = FlxMath.wrap(curSelection + change, 0, keysGrp.length - 1);
-        curAltSelection = FlxMath.wrap(curAltSelection + altChange, 0, 1);
+        curSelection = FlxMath.wrap(curSelection + change, 0, controlNames.length - 1);
     }
 
-    var curText:String;
     private function openRebindMode():Void
     {
-        // must have a timer otherwise it'll recognize the enter key you just pressed
         new FlxTimer().start(0.1, (_) -> {
             rebindMode = true;
-            curText = altKeysGrp.members[curSelection * 2 + curAltSelection].text;
+            removeHoldTime = 0;
         });
     }
 
-    private function handleRebinding():Void
+    private function handleRebinding(elapsed:Float):Void
     {
-        final txt = altKeysGrp.members[curSelection * 2 + curAltSelection];
-        if (FlxG.keys.justPressed.ESCAPE)
-        {
-            rebindMode = false;
-            txt.text = curText;
-        }
+        var isKeyboard:Bool = showKeyboard;
+        var bindType:Int = isKeyboard ? 0 : 1;
+        var control:String = controlNames[curSelection];
+        var keyList:Array<Dynamic> = MoonInput.binds.get(control)[bindType];
+        var removePressed:Bool = false;
+        if (isKeyboard)
+            removePressed = FlxG.keys.pressed.BACKSPACE || FlxG.keys.pressed.DELETE;
         else
         {
-            //TODO: Controllers rebinding work
-            txt.text = '...';
-            final pressedKeys = FlxG.keys.getIsDown();
-            if (pressedKeys.length > 0)
+            if (FlxG.gamepads.lastActive == null)
             {
-                final newKey = pressedKeys[0].ID;
-
-                var controlKey = keysGrp.members[curSelection].text.replace(' ', '_');
-                MoonInput.binds.get(controlKey)[0][curAltSelection] = newKey;
-
-                txt.text = getKeyString(newKey);
-
-                MoonInput.saveControls();
                 rebindMode = false;
+                return;
+            }
+            removePressed = FlxG.gamepads.lastActive.pressed.X;
+        }
+        if (removePressed)
+        {
+            if (removeHoldTime == 0)
+            {
+                if (keyList.length > 0) keyList.pop();
+                removeHoldTime = elapsed;
+            }
+            else removeHoldTime += elapsed;
+
+            if (removeHoldTime > INITIAL_REMOVE_DELAY)
+            {
+                if (keyList.length > 0) keyList.pop();
+                removeHoldTime -= REPEAT_REMOVE_DELAY;
+            }
+            refreshList();
+            MoonInput.saveControls();
+        }
+        else removeHoldTime = 0;
+        if (isKeyboard)
+        {
+            final keyCode:Int = FlxG.keys.firstJustPressed();
+            if (keyCode != -1)
+            {
+                var key:FlxKey = keyCode;
+                if (key == FlxKey.ESCAPE)
+                    rebindMode = false;
+
+                else if (key != FlxKey.BACKSPACE && key != FlxKey.DELETE)
+                {
+                    if (keyList.length < MAX_BINDS && !keyList.contains(key))
+                    {
+                        keyList.push(key);
+                        refreshList();
+                        MoonInput.saveControls();
+                    }
+                }
+            }
+        }
+        else // Controller
+        {
+            var pressedButton:FlxPad = FlxPad.NONE;
+            for (button in allButtons)
+            {
+                if (FlxG.gamepads.lastActive.checkStatus(button, JUST_PRESSED))
+                {
+                    pressedButton = button;
+                    break;
+                }
+            }
+            if (pressedButton != FlxPad.NONE)
+            {
+                if (pressedButton == FlxPad.B)
+                    rebindMode = false;
+                else if (pressedButton != FlxPad.X)
+                {
+                    if (keyList.length < MAX_BINDS && !keyList.contains(pressedButton))
+                    {
+                        keyList.push(pressedButton);
+                        refreshList();
+                        MoonInput.saveControls();
+                    }
+                }
             }
         }
     }
@@ -155,35 +229,73 @@ class Keybinds extends FlxSubState
     private function updateTextPositions(elapsed:Float):Void
     {
         final centerY = FlxG.height / 2 - offsetY;
-
+        final selectedIndex = selectableIndices[curSelection];
+        final selectedPos = positionOffsets[selectedIndex];
         for (i in 0...keysGrp.length)
         {
-            final targetY = centerY + (i - curSelection) * 90;
+            final targetY = centerY + (positionOffsets[i] - selectedPos);
             keysGrp.members[i].y = FlxMath.lerp(keysGrp.members[i].y, targetY, elapsed * 6);
+            bindTextsGrp.members[i].y = FlxMath.lerp(bindTextsGrp.members[i].y, targetY, elapsed * 6);
         }
 
         for (i in 0...keysGrp.length)
         {
-            for (j in 0...2)
-            {
-                final altTargetY = centerY + (i - curSelection) * 90;
-                final altKey = altKeysGrp.members[i * 2 + j];
-                altKey.y = FlxMath.lerp(altKey.y, altTargetY, elapsed * 6);
-            }
+            final col = (i == selectedIndex) ? FlxColor.CYAN : FlxColor.WHITE;
+            keysGrp.members[i].color = col;
+            bindTextsGrp.members[i].color = col;
         }
 
-        for (i in 0...keysGrp.members.length)
-            keysGrp.members[i].color = FlxColor.WHITE;
-        for (i in 0...altKeysGrp.members.length)
-            altKeysGrp.members[i].color = FlxColor.WHITE;
+        for (j in 0...headerIndices.length)
+        {
+            final headerI = headerIndices[j];
+            linesGrp.members[j].y = keysGrp.members[headerI].y + keysGrp.members[headerI].height + 16;
+            linesGrp.members[j].x = 20;
+        }
+    }
 
-        keysGrp.members[curSelection].color = FlxColor.CYAN;
-        altKeysGrp.members[curSelection * 2 + curAltSelection].color = FlxColor.CYAN;
+    private function addHeader(label:String):Void
+    {
+        var headerText = new FlxText(50, 0, 400, label);
+        headerText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
+        keysGrp.add(headerText);
+
+        var emptyBind = new FlxText(500, 0, 700, "");
+        emptyBind.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
+        bindTextsGrp.add(emptyBind);
+        headerIndices.push(keysGrp.length - 1);
+    }
+
+    private function addKeyItem(control:String, label:String):Void
+    {
+        if (!MoonInput.binds.exists(control)) return;
+        var actionText = new FlxText(50, 0, 400, label);
+        actionText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
+        keysGrp.add(actionText);
+
+        var bindText = new FlxText(500, 0, 700, "");
+        bindText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
+        bindTextsGrp.add(bindText);
+
+        selectableIndices.push(keysGrp.length - 1);
+        controlNames.push(control);
     }
 
     private function getKeyString(key:FlxKey):String
-        return key.toString().replace("_", " ");
-
+    {
+        return switch(key)
+        {
+            case LEFT: "LeftArrow";
+            case DOWN: "DownArrow";
+            case UP: "UpArrow";
+            case RIGHT: "RightArrow";
+            case ENTER: "Enter";
+            case SPACE: "Space";
+            case BACKSPACE: "Backspace";
+            case ESCAPE: "Esc";
+            case TAB: "Tab";
+            default: key.toString().replace("_", " ");
+        };
+    }
     private function getGamepadString(gamepadKey:FlxPad):String
         return gamepadKey.toString().replace("_", " ");
 }

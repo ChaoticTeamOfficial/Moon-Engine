@@ -29,7 +29,7 @@ function createReceptor(direction)
 
     // <SETUP SPLASH> //
     splash.frames = Paths.getSparrowAtlas(p + 'splash');
-
+	splash.playRandom = true;
     splash.animation.addByPrefix('splash0', direction + '10', 32, false);
     splash.animation.addByPrefix('splash1', direction + '20', 32, false);
     splash.scale.set(scale + 0.2, scale + 0.2);
@@ -75,7 +75,7 @@ function createStaticNote(skin, direction)
  */
 function onNoteHit(playerID, note, timing, isSustain)
 {
-    if(timing == 'sick' && !isSustain)
+    if(playerID == 'p1' && timing == 'sick' && !isSustain)
     {
         splash.angle = FlxG.random.float(-360, 360);
     }
