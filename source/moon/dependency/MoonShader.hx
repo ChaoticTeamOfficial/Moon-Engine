@@ -9,10 +9,10 @@ class MoonShader extends FlxRuntimeShader
     public var script:MoonScript;
     public function new(shader:String)
     {
-        super(Assets.getText(Paths.Paths.getPath('data/shaders/$shader.frag')));
+        super(Assets.getText(Paths.getPath('data/shaders/$shader.frag')));
 
         script = new MoonScript();
-        script.load(Paths.getPath('data/shaders/$shader.hx'));
+        script.load('data/shaders/$shader.hx');
         script.set('shader', this);
     }
 }

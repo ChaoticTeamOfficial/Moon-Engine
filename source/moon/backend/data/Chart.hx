@@ -4,9 +4,9 @@ import moonchart.formats.fnf.legacy.FNFLegacy;
 import moon.dependency.scripting.MoonEvent;
 import haxe.Json;
 #if sys
-import moonchart.formats.fnf.legacy.FNFPsych;
-import moonchart.formats.fnf.FNFCodename;
-import moonchart.formats.fnf.FNFVSlice;
+import moonchart.formats.fnf.legacy.*;
+import moonchart.formats.fnf.*;
+import moonchart.formats.*;
 #end
 import haxe.io.Path;
 using StringTools;
@@ -93,7 +93,8 @@ class Chart
         'legacy',
         'psych',
         'codename',
-        'v-slice'
+        'v-slice',
+        'osu'
     ];
 
     /**
@@ -128,6 +129,7 @@ class Chart
     public static function convert(type:String, path:String, difficulty:String, ?metaPath:String):ConvertResult
     {
         // gotta do that since moonchart uses filesystem.
+
         #if sys
         // So first, we'll get the chart format and convert 'em to
         // vslice, because vslice will be our main 'base' for converting.
@@ -137,15 +139,10 @@ class Chart
         final chart = switch (type)
         {
             // This switch is a mess btw!!!
-            case 'psych':
-                final psy = new FNFPsych().fromFile(path, null, difficulty);
-                new FNFVSlice().fromFormat(psy);
-            case 'codename': 
-                final code = new FNFCodename().fromFile(path, metaPath, difficulty);
-                new FNFVSlice().fromFormat(code);
-            case 'legacy':
-                final code = new FNFLegacy().fromFile(path, null, difficulty);
-                new FNFVSlice().fromFormat(code);
+            case 'psych': new FNFVSlice().fromFormat(new FNFPsych().fromFile(path, null, difficulty));
+            case 'codename': new FNFVSlice().fromFormat(new FNFCodename().fromFile(path, metaPath, difficulty));
+            case 'legacy': new FNFVSlice().fromFormat(new FNFLegacy().fromFile(path, null, difficulty));
+            case 'osu': new FNFVSlice().fromFormat(new OsuMania().fromFile(path, null, difficulty));
             default: new FNFVSlice().fromFile(path, metaPath, difficulty);
         };
 

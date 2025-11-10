@@ -55,16 +55,6 @@ function onCreate()
 	background.add(background.spectators);
 	background.add(background.opponents);
 	background.add(background.players);
-
-	var smokeFront = new FlxBackdrop(Paths.image(p + 'mistFront'), 0x01);
-	smokeFront.y = 220;
-	smokeFront.alpha = 0.6;
-	smokeFront.velocity.x = -125;
-	smokeFront.blend = 0;
-	smokeFront.scrollFactor.set(1.3, 1.2);
-	background.add(smokeFront);
-
-	FlxTween.tween(smokeFront, {y: smokeFront.y-34}, 3, {ease: FlxEase.quadInOut, type: 4});
 }
 
 function onPostCreate()

@@ -1,0 +1,321 @@
+[
+	{
+		"tag": "ChangeBPM",
+		"time": 168484,
+		"values": {
+			"bpm": 191,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 169741,
+		"values": {
+			"bpm": 184,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 171045,
+		"values": {
+			"bpm": 177,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 171723,
+		"values": {
+			"bpm": 174,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 172413,
+		"values": {
+			"bpm": 170,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 173119,
+		"values": {
+			"bpm": 168,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 173833,
+		"values": {
+			"bpm": 165,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 174560,
+		"values": {
+			"bpm": 156,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 175330,
+		"values": {
+			"bpm": 155,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 176104,
+		"values": {
+			"bpm": 151,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 176898,
+		"values": {
+			"bpm": 145,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 177726,
+		"values": {
+			"bpm": 143,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 178565,
+		"values": {
+			"bpm": 139,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 261443,
+		"values": {
+			"bpm": 141,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 262294,
+		"values": {
+			"bpm": 145,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 263122,
+		"values": {
+			"bpm": 151,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 263916,
+		"values": {
+			"bpm": 156,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 264685,
+		"values": {
+			"bpm": 157,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 265450,
+		"values": {
+			"bpm": 164,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 266181,
+		"values": {
+			"bpm": 166,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 266904,
+		"values": {
+			"bpm": 172,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 267602,
+		"values": {
+			"bpm": 173,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 268296,
+		"values": {
+			"bpm": 180,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 268962,
+		"values": {
+			"bpm": 182,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 269622,
+		"values": {
+			"bpm": 183,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 270277,
+		"values": {
+			"bpm": 185,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 270926,
+		"values": {
+			"bpm": 194,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 271545,
+		"values": {
+			"bpm": 198,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 272757,
+		"values": {
+			"bpm": 201,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	}
+]

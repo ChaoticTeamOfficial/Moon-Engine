@@ -27,13 +27,14 @@ class Freeplay extends FlxSubState
         'gerson' => 'gerson',
         'amusia' => 'bf',
         'blammed' => 'pico',
-        'darnell' => 'cow',
+        'darnell' => 'bf',
         'monochrome' => 'bf',
         'senpai' => 'noimix',
         'roses' => 'noimix',
         'thorns' => 'noimix',
         'shitno' => 'bf',
-        'silly billy' => 'bf'
+        'silly billy' => 'bf',
+        'nacreous-snowmelt' => 'bf'
     ];
     var texts:Array<FlxText> = [];
     
@@ -113,7 +114,7 @@ class Freeplay extends FlxSubState
         if(MoonInput.justPressed(ACCEPT))
         {
             for(song => mix in s)
-                if(texts[curSelected].text == '$song-$mix') FlxG.switchState(new PlayState(song, 'hard', mix));
+                if(texts[curSelected].text == '$song-$mix') FlxG.switchState(()->new PlayState(song, 'hard', mix));
         }
         
         if(mainBG.script.exists('onUpdate')) mainBG.script.get('onUpdate')(elapsed);

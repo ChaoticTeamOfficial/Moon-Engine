@@ -3,107 +3,130 @@ package moon.game.obj.notes;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import moon.backend.data.Chart.NoteStruct;
 import flixel.group.FlxGroup;
-import flixel.group.FlxGroup.FlxTypedGroup;
 
 class NoteSpawner extends FlxGroup
 {
-    public var notes(default, null):Array<Note> = [];
-    private var _notes:Array<Note> = [];
+    public var notes(get, never):Array<Note>;
+    final _notes:Array<Note> = [];
+    final _strumlineMap:Map<String, Strumline> = new Map();
 
-    private var strumlines:Array<Strumline> = [];
-    private var conductor:Conductor;
+    var conductor:Conductor;
+    var nextNoteIndex:Int = 0;
 
-    public var scrollSpeed(default, set):Float = 1;
+    public var scrollSpeed(default, set):Float = 1.0;
+    public var spawnThreshold:Float = 700;
 
-    private var nextNoteIndex:Int = 0;
-    
-    public var offset:Float;
+    var _noteOffset:Float = 0;
+    var _downscroll:Bool = false;
+
     public function new(noteStructs:Array<NoteStruct>, strumlines:Array<Strumline>, conductor:Conductor)
     {
         super();
-        notes = _notes;
-        this.strumlines = strumlines;
         this.conductor = conductor;
 
-        offset = MoonSettings.callSetting('Note Offset');
+        // build strumline lookup map
+        for (strum in strumlines)
+            _strumlineMap[strum.playerID] = strum;
 
-        for (noteStruct in noteStructs)
+        // create and sort notes
+        for (struct in noteStructs)
         {
-            var note = createNoteFromStruct(noteStruct);
+            final note = createNoteFromStruct(struct);
             if (note != null)
                 _notes.push(note);
         }
-
-        _notes.sort((a, b) ->  Std.int(a.time - b.time));
+        _notes.sort((a, b) -> Std.int(a.time - b.time));
+        updateCachedSettings();
     }
 
-    public var spawnThreshold:Float;
-
-    override public function update(dt:Float)
+    override function update(dt:Float):Void
     {
-        spawnThreshold = (scrollSpeed <= 0.9) ? 2000 : 700;
-        offset = MoonSettings.callSetting('Note Offset');
+        updateCachedSettings();
+        updateSpawnThreshold();
+
         super.update(dt);
 
-        while (nextNoteIndex < _notes.length && (_notes[nextNoteIndex].time) <= conductor.time + spawnThreshold)
-        {
-            recycleNote(_notes[nextNoteIndex]);
-            nextNoteIndex++;
-        }
+        final spawnTime = conductor.time + spawnThreshold;
+        var i = nextNoteIndex;
+        while (i < _notes.length && _notes[i].time <= spawnTime)
+            recycleNote(_notes[i++]);
+
+        nextNoteIndex = i;
     }
 
-    public function recycleNote(note:Note)
+    inline function updateCachedSettings():Void
     {
-        for (strum in strumlines)
-        {
-            if (strum.playerID == note.lane)
+        _noteOffset = MoonSettings.callSetting('Note Offset');
+        _downscroll = MoonSettings.callSetting('Downscroll');
+    }
+
+    inline function updateSpawnThreshold():Void
+    {
+        final newThreshold = (scrollSpeed <= 0.9) ? 3000 : (scrollSpeed <= 0.4) ? 5000 : 700;
+        if (spawnThreshold != newThreshold)
+            spawnThreshold = newThreshold;
+    }
+
+    function recycleNote(note:Note):Void
+    {
+        final strum = _strumlineMap[note.lane];
+        if (strum == null) return;
+
+        final group = strum.members[note.direction];
+        if (group?.notesGroup == null) return;
+
+        group.notesGroup.recycle(Note, () -> {
+            note.receptor = strum.members[note.direction];
+            note.visible = false;
+            note.speed = scrollSpeed;
+            note.state = NONE;
+            if (note.duration > 0)
+                recycleSustain(note, group.sustainsGroup);
+            return note;
+        });
+    }
+
+    function recycleSustain(note:Note, sustainGroup:FlxTypedSpriteGroup<NoteSustain>):Void
+    {
+        sustainGroup.recycle(NoteSustain, () -> {
+            var sustain = note.child;
+            if (sustain == null)
             {
-                final group = strum.members[note.direction];
-                group.notesGroup.recycle(Note, function():Note
-                {
-                    note.receptor = strum.members[note.direction];
-                    note.visible = false;
-                    note.speed = scrollSpeed;
-                    note.state = NONE;
-                    if(note.duration > 0) recycleSustain(note, group.sustainsGroup);
-                    return note;
-                });
+                sustain = new NoteSustain(note);
+                note.child = sustain;
             }
-        }
-    }
-
-    public function recycleSustain(note:Note, group:FlxTypedSpriteGroup<NoteSustain>)
-    {
-        group.recycle(NoteSustain, function():NoteSustain
-        {
-            var sustain = note.child != null ? note.child : new NoteSustain(note);
-            if (note.child == null) note.child = sustain;
+            sustain.downscroll = _downscroll;
             return sustain;
         });
     }
 
-    private function createNoteFromStruct(noteStruct:NoteStruct):Note
+    function createNoteFromStruct(struct:NoteStruct):Note
     {
-        for (strum in strumlines)
-        {
-            if (strum.playerID == noteStruct.lane)
-            {
-                var note = new Note(noteStruct.data, noteStruct.time - offset,
-                noteStruct.type, strum.members[noteStruct.data].skin, noteStruct.duration, conductor);
+        final strum = _strumlineMap[struct.lane];
+        if (strum == null || strum.members[struct.data] == null) return null;
 
-                note.speed = scrollSpeed;
-                note.lane = noteStruct.lane;
-                return note;
-            }
-        }
-        return null;
+        final note = new Note(
+            struct.data,
+            struct.time - _noteOffset,
+            struct.type,
+            strum.members[struct.data].skin,
+            struct.duration,
+            conductor
+        );
+        note.speed = scrollSpeed;
+        note.lane = struct.lane;
+        return note; 
     }
 
-    @:noCompletion public function set_scrollSpeed(sp:Float)
+    // === GETTERS === //
+    inline function get_notes():Array<Note> return _notes;
+
+    // === SETTERS === //
+    function set_scrollSpeed(sp:Float):Float
     {
-        this.scrollSpeed = sp / 2.4; // SÃO PAULO?!?!?!
+        scrollSpeed = sp / 2.4; // adoro sao paulo...
         for (note in _notes)
-            note.speed = sp;
-        return sp; // SÃO PAULO VOLTOU VAMBORAAAAAAAAAAA
+            note.speed = scrollSpeed;
+        return scrollSpeed;
     }
 }

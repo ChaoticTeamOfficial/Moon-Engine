@@ -53,10 +53,7 @@ class Song extends FlxTypedGroup<MoonSound>
         super();
         this.conductor = conductor;
 
-        var audList =
-        [
-            Voices_Opponent, Voices_Player, Inst
-        ];
+        var audList =[Voices_Opponent, Voices_Player, Inst];
 
         for(i in 0...audList.length)
         {
@@ -93,9 +90,27 @@ class Song extends FlxTypedGroup<MoonSound>
             finish();
     }
 
+    /**
+     * Mutes/Unmutes certain audio types.
+     * @param mute Whether it should be mute or not
+     * @param type The music type (e.g. Inst)
+     */
+    public function muteStatus(mute:Bool, type:MusicType)
+    {
+        for (aud in this.members)
+            if(aud.type == type)
+                aud.volume = mute ? 0 : MoonSettings.callSetting(type == Inst ? 'Instrumental Volume' : 'Voices Volume') / 100;
+    }
+
+    public function updateVolume()
+    {
+        for (aud in this.members)
+            aud.volume = MoonSettings.callSetting(aud.type == Inst ? 'Instrumental Volume' : 'Voices Volume') / 100;
+    }
+
     function finish()
     {
-        trace("AAAAAAAAAAAA");
+        //trace("AAAAAAAAAAAA");
         onFinish.dispatch();
     }
 

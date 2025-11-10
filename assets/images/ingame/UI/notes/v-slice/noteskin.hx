@@ -77,6 +77,6 @@ function onNoteHit(playerID, note, timing, isSustain)
 {
     if(playerID == 'p1' && timing == 'sick' && !isSustain)
     {
-        splash.angle = FlxG.random.float(-360, 360);
+        //splash.angle = FlxG.random.float(-360, 360);
     }
 }

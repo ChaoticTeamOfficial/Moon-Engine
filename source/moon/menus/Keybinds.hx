@@ -11,7 +11,7 @@ import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.FlxGamepadInputID as FlxPad;
 import flixel.input.keyboard.FlxKey;
 import flixel.effects.FlxFlicker;
-import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.FlxSprite;
 import flixel.input.FlxInput.FlxInputState;
 import moon.dependency.user.MoonInput.MoonKeys;
@@ -21,18 +21,12 @@ using StringTools;
 class Keybinds extends FlxSubState
 {
     private var curSelection:Int = 0;
-    private var keysGrp:FlxTypedGroup<FlxText>;
-    private var bindTextsGrp:FlxTypedGroup<FlxText>;
-    private var linesGrp:FlxTypedGroup<FlxSprite>;
-
     private var selectableIndices:Array<Int> = [];
     private var headerIndices:Array<Int> = [];
     private var controlNames:Array<String> = [];
-
     private var positionOffsets:Array<Float> = [];
     private var rebindMode:Bool = false;
     private var showKeyboard:Bool = true;
-
     private var removeHoldTime:Float = 0;
     private var offsetY:Float = 200;
     private var allButtons:Array<FlxPad>;
@@ -43,62 +37,72 @@ class Keybinds extends FlxSubState
     private static inline var LINE_SPACING:Float = 60;
     private static inline var EXTRA_CATEGORY_SPACING:Float = 90;
 
+    private var menuContainer:FlxSpriteGroup;
+    private var leftItems:Array<FlxText> = [];
+    private var rightItems:Array<FlxText> = [];
+    private var lineItems:Array<FlxSprite> = [];
+
     public function new(camera:FlxCamera):Void
     {
         super();
         this.camera = camera;
-        keysGrp = new FlxTypedGroup<FlxText>();
-        bindTextsGrp = new FlxTypedGroup<FlxText>();
-        linesGrp = new FlxTypedGroup<FlxSprite>();
+
+        menuContainer = new FlxSpriteGroup();
+        add(menuContainer);
+
         removeHoldTime = 0;
         allButtons = [];
         for (key in FlxPad.fromStringMap.keys())
         {
-            var id:FlxPad = FlxPad.fromString(key);
+            final id:FlxPad = FlxPad.fromString(key);
             if (id != FlxPad.ANY && id != FlxPad.NONE)
                 allButtons.push(id);
         }
-        
-        // build headers and sectionssss
+       
+        // build headers and sections
         addHeader("Notes");
         final noteControls = ["LEFT", "DOWN", "UP", "RIGHT", "RESET"];
-        final noteLabels = ["Left (First Key)", "Down (Second Key)", "Up (Third Key)", "Right (Fourth Key)", 'Reset'];
-        final arrows = ['←', '↓', '↑', '→', ''];
+        final noteLabels = ["← Left (First Key)", "↓ Down (Second Key)", "↑ Up (Third Key)", "→ Right (Fourth Key)", 'Reset'];
+
         for (i in 0...noteControls.length)
-            addKeyItem(noteControls[i], arrows[i] + ' ' + noteLabels[i]);
+            addKeyItem(noteControls[i], noteLabels[i]);
 
         addHeader("UI");
-        var uiControls = ["UI_UP", "UI_DOWN", "UI_LEFT", "UI_RIGHT", "ACCEPT", "BACK", "PAUSE"];
-        var uiLabels = ["Up", "Down", "Left", "Right", "Accept", "Cancel", "CharScreen"];
+        final uiControls = ["UI_LEFT", "UI_DOWN", "UI_UP", "UI_RIGHT", "ACCEPT", "BACK", "PAUSE"];
+        final uiLabels = ["Left", "Down", "Up", "Right", "Accept", "Cancel", "Pause"];
+
         for (i in 0...uiControls.length)
             addKeyItem(uiControls[i], uiLabels[i]);
 
-        // Add lines for headers omg they suck (lie)
-        for (j in 0...headerIndices.length)
-            linesGrp.add(new FlxSprite(20, 0).makeGraphic(FlxG.width - 40, 1, FlxColor.WHITE));
-
-        add(keysGrp);
-        add(bindTextsGrp);
-        add(linesGrp);
-
         var pos:Float = 0;
-        for (i in 0...keysGrp.length)
+        for (i in 0...leftItems.length)
         {
             if (headerIndices.contains(i) && headerIndices.indexOf(i) > 0)
                 pos += EXTRA_CATEGORY_SPACING;
 
             positionOffsets.push(pos);
+
+            leftItems[i].y = pos;
+            rightItems[i].y = pos;
+
             pos += LINE_SPACING;
         }
 
+        // Shitty headers
+        for (j in 0...lineItems.length)
+            lineItems[j].y = leftItems[headerIndices[j]].y + leftItems[headerIndices[j]].height + 32;
+
         refreshList();
         changeSelection(0);
+
+        menuContainer.y = (FlxG.height / 2 - offsetY) - positionOffsets[selectableIndices[0]];
     }
-    
+   
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
-        updateTextPositions(elapsed);
+
+        // Navigation / rebind input
         if (rebindMode) handleRebinding(elapsed);
         else
         {
@@ -106,11 +110,22 @@ class Keybinds extends FlxSubState
             else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
             if (MoonInput.justPressed(ACCEPT)) openRebindMode();
             else if (MoonInput.justPressed(BACK)) close();
-            else if (FlxG.keys.justPressed.TAB && Global.allowInputs)
+            else if (FlxG.keys.justPressed.TAB)
             {
                 showKeyboard = !showKeyboard;
                 refreshList();
             }
+        }
+
+        final selectedIndex = selectableIndices[curSelection];
+        var targetY:Float = FlxG.height / 2 - offsetY - positionOffsets[selectedIndex];
+        menuContainer.y = FlxMath.lerp(menuContainer.y, targetY, elapsed * 6);
+
+        for (i in 0...leftItems.length)
+        {
+            var col = (i == selectedIndex) ? FlxColor.CYAN : FlxColor.WHITE;
+            leftItems[i].color = col;
+            rightItems[i].color = col;
         }
     }
 
@@ -118,14 +133,10 @@ class Keybinds extends FlxSubState
     {
         for (i in 0...controlNames.length)
         {
-            var control = controlNames[i];
-            var itemIndex = selectableIndices[i];
-            var bindType = showKeyboard ? 0 : 1;
-            var keyList:Array<Dynamic> = MoonInput.binds.get(control)[bindType];
             var keyStrings:Array<String> = [];
-            for (k in keyList)
+            for (k in MoonInput.binds.get(controlNames[i])[showKeyboard ? 0 : 1])
                 keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
-            bindTextsGrp.members[itemIndex].text = keyStrings.join(', ');
+            rightItems[selectableIndices[i]].text = keyStrings.join(', ');
         }
     }
 
@@ -149,6 +160,7 @@ class Keybinds extends FlxSubState
         var control:String = controlNames[curSelection];
         var keyList:Array<Dynamic> = MoonInput.binds.get(control)[bindType];
         var removePressed:Bool = false;
+
         if (isKeyboard)
             removePressed = FlxG.keys.pressed.BACKSPACE || FlxG.keys.pressed.DELETE;
         else
@@ -160,6 +172,7 @@ class Keybinds extends FlxSubState
             }
             removePressed = FlxG.gamepads.lastActive.pressed.X;
         }
+
         if (removePressed)
         {
             if (removeHoldTime == 0)
@@ -178,6 +191,7 @@ class Keybinds extends FlxSubState
             MoonInput.saveControls();
         }
         else removeHoldTime = 0;
+
         if (isKeyboard)
         {
             final keyCode:Int = FlxG.keys.firstJustPressed();
@@ -186,7 +200,6 @@ class Keybinds extends FlxSubState
                 var key:FlxKey = keyCode;
                 if (key == FlxKey.ESCAPE)
                     rebindMode = false;
-
                 else if (key != FlxKey.BACKSPACE && key != FlxKey.DELETE)
                 {
                     if (keyList.length < MAX_BINDS && !keyList.contains(key))
@@ -226,57 +239,42 @@ class Keybinds extends FlxSubState
         }
     }
 
-    private function updateTextPositions(elapsed:Float):Void
-    {
-        final centerY = FlxG.height / 2 - offsetY;
-        final selectedIndex = selectableIndices[curSelection];
-        final selectedPos = positionOffsets[selectedIndex];
-        for (i in 0...keysGrp.length)
-        {
-            final targetY = centerY + (positionOffsets[i] - selectedPos);
-            keysGrp.members[i].y = FlxMath.lerp(keysGrp.members[i].y, targetY, elapsed * 6);
-            bindTextsGrp.members[i].y = FlxMath.lerp(bindTextsGrp.members[i].y, targetY, elapsed * 6);
-        }
-
-        for (i in 0...keysGrp.length)
-        {
-            final col = (i == selectedIndex) ? FlxColor.CYAN : FlxColor.WHITE;
-            keysGrp.members[i].color = col;
-            bindTextsGrp.members[i].color = col;
-        }
-
-        for (j in 0...headerIndices.length)
-        {
-            final headerI = headerIndices[j];
-            linesGrp.members[j].y = keysGrp.members[headerI].y + keysGrp.members[headerI].height + 16;
-            linesGrp.members[j].x = 20;
-        }
-    }
-
+    final headerFont = Paths.font('HoltwoodOne.ttf');
+    final font = Paths.font('vcr.ttf');
     private function addHeader(label:String):Void
     {
         var headerText = new FlxText(50, 0, 400, label);
-        headerText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
-        keysGrp.add(headerText);
+        headerText.setFormat(headerFont, 32, FlxColor.WHITE, LEFT);
+        menuContainer.add(headerText);
+        leftItems.push(headerText);
 
         var emptyBind = new FlxText(500, 0, 700, "");
-        emptyBind.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
-        bindTextsGrp.add(emptyBind);
-        headerIndices.push(keysGrp.length - 1);
+        emptyBind.setFormat(font, 32, FlxColor.WHITE, LEFT);
+        menuContainer.add(emptyBind);
+        rightItems.push(emptyBind);
+
+        var line = new FlxSprite(20, 0).makeGraphic(FlxG.width - 40, 1, FlxColor.WHITE);
+        menuContainer.add(line);
+        lineItems.push(line);
+
+        headerIndices.push(leftItems.length - 1);
     }
 
     private function addKeyItem(control:String, label:String):Void
     {
         if (!MoonInput.binds.exists(control)) return;
+
         var actionText = new FlxText(50, 0, 400, label);
-        actionText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
-        keysGrp.add(actionText);
+        actionText.setFormat(font, 32, FlxColor.WHITE, LEFT);
+        menuContainer.add(actionText);
+        leftItems.push(actionText);
 
         var bindText = new FlxText(500, 0, 700, "");
-        bindText.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, LEFT);
-        bindTextsGrp.add(bindText);
+        bindText.setFormat(font, 32, FlxColor.WHITE, LEFT);
+        menuContainer.add(bindText);
+        rightItems.push(bindText);
 
-        selectableIndices.push(keysGrp.length - 1);
+        selectableIndices.push(leftItems.length - 1);
         controlNames.push(control);
     }
 
@@ -284,18 +282,19 @@ class Keybinds extends FlxSubState
     {
         return switch(key)
         {
-            case LEFT: "LeftArrow";
-            case DOWN: "DownArrow";
-            case UP: "UpArrow";
-            case RIGHT: "RightArrow";
+            case LEFT: '←';
+            case DOWN: '↓';
+            case UP: '↑';
+            case RIGHT: '→';
             case ENTER: "Enter";
             case SPACE: "Space";
             case BACKSPACE: "Backspace";
-            case ESCAPE: "Esc";
+            case ESCAPE: "Esc"; // not even possible lmfao but whatever
             case TAB: "Tab";
             default: key.toString().replace("_", " ");
         };
     }
+
     private function getGamepadString(gamepadKey:FlxPad):String
         return gamepadKey.toString().replace("_", " ");
 }

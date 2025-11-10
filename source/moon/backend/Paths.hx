@@ -6,13 +6,15 @@ import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.sound.FlxSound;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
 import openfl.utils.ByteArray;
 import lime.media.AudioBuffer;
+#if sys
 import sys.FileSystem;
 import sys.io.File;
+#end
 import haxe.io.Bytes;
 
 using StringTools;

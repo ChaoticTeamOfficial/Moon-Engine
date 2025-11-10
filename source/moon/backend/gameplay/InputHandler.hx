@@ -134,7 +134,8 @@ class InputHandler
             );
 
             // sort them bc why not :P
-            possibleNotes.sort((a, b) -> Std.int(a.time - b.time));
+            //possibleNotes.sort((a, b) -> Std.int(a.time - b.time));
+            // we dont need sorting for cpu dumbass
 
             // then call onhit
             if (possibleNotes.length > 0)
@@ -179,7 +180,14 @@ class InputHandler
                     if(onGhostTap != null) onGhostTap(i);
 
                     strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
-                    if(!MoonSettings.callSetting('Ghost Tapping')) onMiss(null);
+                    if(!MoonSettings.callSetting('Ghost Tapping')){
+                        if(attachedChar != null) 
+                        {
+                            attachedChar.playAnim('sing${MoonUtils.intToDir(i).toUpperCase()}-miss', true);
+                            attachedChar.animationHold = 0;
+                        }
+                        onMiss(null);
+                    }
                 }
             }
         }
@@ -195,6 +203,7 @@ class InputHandler
 
                 // now all this does is check if a key got released early while holding a sustain
                 // then 'kill' it (not necessarily kill. we dont kill notes around here...)
+                // shh emoji
                 if (heldSustains.exists(i))
                 {
                     strumline.members[i].sustainSplash.despawn(true);
@@ -229,6 +238,7 @@ class InputHandler
         stats.score += (!isSustain) ? Timings.getParameters(timing)[2] : 2;
         stats.combo++;
         strumline.members[note.direction].onNoteHit(note, timing, isSustain);
+        stats.updtAccuracy();
         
         // little workaround if it doesnt despawn, which may happen sometimes...
         if(!isSustain) strumline.members[note.direction].sustainSplash.despawn((CPUMode));
@@ -248,6 +258,12 @@ class InputHandler
         {
             note.state = TOO_LATE;
             note.visible = note.active = false;
+
+            if(attachedChar != null) 
+            {
+                attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction).toUpperCase()}-miss', true);
+                attachedChar.animationHold = 0;
+            }
         }
         
         stats.accuracyCount += Timings.getParameters('miss')[0];
@@ -256,6 +272,7 @@ class InputHandler
         stats.misses++;
         stats.combo = 0;
         stats.noSustainCombo = 0;
+        stats.updtAccuracy();
         
         if(onNoteMiss != null) onNoteMiss(note);
     }

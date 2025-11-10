@@ -220,6 +220,8 @@ class PlayField extends FlxGroup
         ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
         : healthBar.y + stats.height + 8;
         updateP1Stats(null, false);
+
+        playback.updateVolume();
     }
 
     function restartSong()
@@ -294,6 +296,7 @@ class PlayField extends FlxGroup
         //TODO: REMOVE, PLACEHOLDER.
         if(FlxG.keys.justPressed.I) playback.pitch -= 0.05;
         else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
+        if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
         
         // update health based on p1's health.
         healthBar.health = inputHandlers.get('p1').stats.health;
@@ -313,12 +316,13 @@ class PlayField extends FlxGroup
             // actually its colored by judgement now so fuck
             //if(timing != null) setStatsColor(Timings.getParameters(timing)[4]);
             updateP1Stats(timing);
+            playback.muteStatus(false, Voices_Player);
         }
-
-        if(onNoteHit != null) onNoteHit(playerID, note, timing, isSustain);
 
         //final input = inputHandlers.get(playerID);
         //input.attachedChar
+
+        if(onNoteHit != null) onNoteHit(playerID, note, timing, isSustain);
     }
 
     var statShake:FlxTween;
@@ -332,8 +336,14 @@ class PlayField extends FlxGroup
 
             // and do a lil cool thing to the stats
             setStatsColor(FlxColor.RED);
+
             MoonUtils.cancelActiveTwn(statShake);
             statShake = FlxTween.shake(stats, 0.04, 0.14, X);
+
+            // the good ol sfx ahaha
+            Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}');
+
+            if(MoonSettings.callSetting('Mute Voices on Miss')) playback.muteStatus(true, Voices_Player);
         }
         if(onNoteMiss != null) onNoteMiss(playerID, note);
     }
@@ -392,7 +402,6 @@ class PlayField extends FlxGroup
                     inCountdown = false;
                     if(onSongStart != null) onSongStart();
                 case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0', 'sounds'));
-
                 default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}', 'sounds'));
             }
 

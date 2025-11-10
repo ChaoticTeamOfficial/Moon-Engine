@@ -7,6 +7,7 @@ class Project extends HXProject
 	static final TITLE:String = "Friday Night Funkin' - Moon Engine";
 	static final VERSION:String = "0.0.0";
 	static final EXECUTABLE_NAME:String = "Moon-Engine";
+	static final PRELOADER:String = "flixel.system.FlxPreloader";
 
 	static final SOURCE_DIR:String = "source";
 	static final PACKAGE_NAME:String = "me.chaoticteam.fnfme";
@@ -62,6 +63,7 @@ class Project extends HXProject
 
 		this.app.main = MAIN_CLASS;
 		this.app.file = EXECUTABLE_NAME;
+		this.app.preloader = PRELOADER;
 		this.sources.push(SOURCE_DIR);
 
 		info('$TITLE v.$VERSION in ${(isDebug()) ? 'debug' : 'release'}');
