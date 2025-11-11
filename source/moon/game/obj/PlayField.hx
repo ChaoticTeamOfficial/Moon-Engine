@@ -296,7 +296,7 @@ class PlayField extends FlxGroup
         //TODO: REMOVE, PLACEHOLDER.
         if(FlxG.keys.justPressed.I) playback.pitch -= 0.05;
         else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
-        if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
+        //if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
         
         // update health based on p1's health.
         healthBar.health = inputHandlers.get('p1').stats.health;
@@ -343,7 +343,7 @@ class PlayField extends FlxGroup
             // the good ol sfx ahaha
             Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}');
 
-            if(MoonSettings.callSetting('Mute Voices on Miss')) playback.muteStatus(true, Voices_Player);
+            playback.muteStatus(MoonSettings.callSetting('Mute Voices on Miss'), Voices_Player);
         }
         if(onNoteMiss != null) onNoteMiss(playerID, note);
     }

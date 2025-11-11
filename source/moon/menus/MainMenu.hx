@@ -1,55 +1,59 @@
 package moon.menus;
-
 import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.FlxG;
 import flixel.FlxState;
+import moon.menus.obj.main.*;
 
 class MainMenu extends FlxState
 {
-    //! THIS MENU IS A PLACEHOLDER. TODO. YEAH. I HATE MY LIFE.
-    var opt:Array<String> = ['story mode', 'freeplay', 'settings', 'character select', 'fuck off'];
-
-    var texts:Array<FlxText> = []; //not a group because its a fucking placeholder
-    // why the fuck am I saying fuck so many fucking times
-    // someone fucking help me
-
-    // no but really, this menu is awful
-    // (because its a placeholder)
-
+    final opt:Array<String> = ['story mode', 'freeplay', 'mods', 'toolbox', 'settings', 'exit'];
+    var buttons:Array<MenuItem> = [];
     var curSelected:Int = 0;
+    var maxVisible:Int = 2;
+
     override public function create()
     {
         super.create();
-
-        var yPos = 0.0;
         for (i in 0...opt.length)
         {
-            var text = new FlxText(0, yPos, 900, opt[i], 32);
-            text.font = Paths.font('vcr.ttf');
-            texts.push(text);
-            text.screenCenter(X);
-            add(text);
-            yPos += text.height;
+            var btn = new MenuItem(20, 128 + 64 * i, opt[i].toUpperCase());
+            add(btn);
+            buttons.push(btn);
         }
-
         changeSelection(0);
+        calculateTargets();
+        for (btn in buttons)
+        {
+            btn.x = btn.targetX;
+            btn.y = btn.targetY;
+            btn.alpha = btn.targetAlpha;
+            var sc = btn.targetScale;
+            btn.scale.set(sc, sc);
+        }
     }
 
-    override public function update(elapsed) {
+    override public function update(elapsed:Float)
+    {
         super.update(elapsed);
-        if(MoonInput.justPressed(UI_DOWN)) changeSelection(1);
-        if(MoonInput.justPressed(UI_UP)) changeSelection(-1);
-        
-        if(MoonInput.justPressed(ACCEPT))
+        if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
+        if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
+
+        if (MoonInput.justPressed(ACCEPT))
         {
-            switch(opt[curSelected])
-            {
-                case 'story mode': return; // nothing for now.
-                case 'freeplay': openSubState(new Freeplay('bf')); //TODO
-                case 'settings': openSubState(new Settings(false));
-                case 'fuck off': #if system Sys.exit(1); #end
-            }
+            // TODO: Implement actions for each option here
+        }
+
+        final lerpSpeed = 10;
+        for (btn in buttons)
+        {
+            btn.x += (btn.targetX - btn.x) * lerpSpeed * elapsed;
+            btn.y += (btn.targetY - btn.y) * lerpSpeed * elapsed;
+            btn.alpha += (btn.targetAlpha - btn.alpha) * lerpSpeed * elapsed;
+            var targetSc = btn.targetScale;
+            btn.scale.x += (targetSc - btn.scale.x) * lerpSpeed * elapsed;
+            btn.scale.y += (targetSc - btn.scale.y) * lerpSpeed * elapsed;
         }
     }
 
@@ -57,11 +61,52 @@ class MainMenu extends FlxState
     {
         curSelected = FlxMath.wrap(curSelected + change, 0, opt.length - 1);
         Paths.playSFX('ui/scrollMenu');
+        calculateTargets();
+    }
 
-        for(i in 0...texts.length)
+    function calculateTargets():Void
+    {
+        final total = opt.length;
+        final centerX = 78;
+        final centerY = FlxG.height / 2;
+        final radiusX = 300;
+        final radiusY = 200;
+
+        for (i in 0...total)
         {
-            texts[i].color = (i == curSelected) ? FlxColor.CYAN : FlxColor.WHITE;
-            texts[i].text = (i == curSelected) ? '${opt[i]} < (you)' : opt[i];
+            var diff:Float = (i - curSelected) % total;
+            if (diff < 0) diff += total;
+            if (diff > total / 2) diff -= total;
+
+            final absDiff:Float = Math.abs(diff);
+            final btn = buttons[i];
+            btn.selected = (absDiff == 0);
+
+            var targetAlpha:Float = 1.0;
+            var targetScale:Float = 1.0;
+            var angle:Float = 0.0;
+
+            if (absDiff <= maxVisible)
+            {
+                angle = diff * (Math.PI / 2 / maxVisible);
+                targetScale = Math.cos(angle) * 0.4 + 0.6;
+            }
+            else
+            {
+                targetAlpha = 0.0;
+                targetScale = 0.5;
+                btn.targetX = -btn.width - 10;
+                btn.targetY = centerY + diff * radiusY;
+                btn.targetAlpha = targetAlpha;
+                btn.targetScale = targetScale;
+                continue;
+            }
+
+            // position calculations
+            btn.targetX = centerX + (Math.cos(angle) - 1) * radiusX;
+            btn.targetY = centerY + Math.sin(angle) * radiusY;
+            btn.targetAlpha = targetAlpha;
+            btn.targetScale = targetScale;
         }
     }
 }

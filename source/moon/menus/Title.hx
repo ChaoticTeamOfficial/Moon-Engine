@@ -243,7 +243,7 @@ class Title extends FlxState
 
     public function getRandomTXT()
     {
-        var allTxts = MoonUtils.getArrayFromFile(Paths.getPath('data/introTexts.txt'));
+        var allTxts = MoonUtils.getArrayFromFile('data/introTexts.txt');
         var lines = [];
         for (i in allTxts) lines.push(i.split('--'));
         randomText = FlxG.random.getObject(lines);
