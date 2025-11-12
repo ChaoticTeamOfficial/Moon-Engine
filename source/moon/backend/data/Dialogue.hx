@@ -95,7 +95,9 @@ class DialogueParser
         var stack:Array<{name:String, argsStr:String, start:Int}> = [];
 
         // regex to match <tag>, <tag=...>, </tag>, <tag/...> and such!
-        var tagRegex = ~/<(\/?)([\w-]+)(?:=([^>]*?))?(\/?)>/g;
+        // it took... me a few researches to figure this out.
+        // it truly seems more confusing than what it is
+        final tagRegex = ~/<(\/?)([\w-]+)(?:=([^>]*?))?(\/?)>/g;
 
         var pos = 0;
         var lastEnd = 0;
