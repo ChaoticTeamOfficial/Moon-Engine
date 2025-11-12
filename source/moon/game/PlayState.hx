@@ -249,7 +249,7 @@ class PlayState extends FlxState
 		final charPos = getCamPos(char);
 
 		if(!isInstant)
-			camMov = FlxTween.tween(camFollower, {x: charPos[0] + (offsets[0] ?? 0), y: charPos[1] + (offsets[1] ?? 0)}, 
+			camMov = FlxTween.tween(camFollower, {x: (charPos[0] ?? 0) + (offsets[0] ?? 0), y: (charPos[1] ?? 0) + (offsets[1] ?? 0)}, 
 			duration, options);
 		else
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));

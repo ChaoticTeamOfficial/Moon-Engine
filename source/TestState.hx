@@ -21,6 +21,7 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.events.ProgressEvent;
 import moon.global_obj.PixelIcon;
+import moon.backend.data.Dialogue.DialogueParser;
 
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
@@ -101,7 +102,8 @@ class TestState extends FlxState
 
         //trace();
 
-        testMod();
+        //testMod();
+        testParser();
     }
 
     //helper 'w'
@@ -121,6 +123,23 @@ class TestState extends FlxState
         //var popup = new Popup(500, 164);
         //popup.screenCenter();
         //add(popup);
+    }
+
+    function testParser() {
+        // this could be awesome for making custom events!
+        // oh my god the potential...
+        final schema:Map<String, Array<String>> = [
+            "wave" => ["intensity", "duration"],
+            "shake" => ["intensity"]
+        ];
+        final raw = 'I have the <wave=0.3, 1>feeling</wave> that this dialogue is <shake=0.5>very cool</shake>';
+        final parsed = DialogueParser.parseTaggedText(raw, schema);
+
+        trace('raw text: $raw', "DEBUG");
+        trace('clean text: ${parsed.text}', "DEBUG");
+        for (e in parsed.events)
+            trace('event: ${e.name} chars= ${e.range} values= ${e.values}', "DEBUG");
+
     }
 
     override public function update(elapsed:Float)

@@ -42,7 +42,10 @@ class MainMenu extends FlxState
 
         if (MoonInput.justPressed(ACCEPT))
         {
-            // TODO: Implement actions for each option here
+            switch(opt[curSelected].toLowerCase())
+			{
+				case 'freeplay': openSubState(new Freeplay('bf'));
+			}
         }
 
         final lerpSpeed = 10;
