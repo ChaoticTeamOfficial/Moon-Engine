@@ -45,6 +45,7 @@ class MainMenu extends FlxState
             switch(opt[curSelected].toLowerCase())
 			{
 				case 'freeplay': openSubState(new Freeplay('bf'));
+                case 'settings': openSubState(new Settings());
 			}
         }
 

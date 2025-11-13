@@ -202,6 +202,8 @@ class MoonSettings
         //trace("Monitor resolution: " + Capabilities.screenResolutionX + " x " + Capabilities.screenResolutionY);
     }
 
+    // actually shortens (isBorderlessFullscreen) LOL
+    static var isBF:Bool = false;
     static function updateWindow()
     {
         FlxG.fullscreen = (callSetting('Screen Mode') == 'Fullscreen');
@@ -225,32 +227,32 @@ class MoonSettings
             "3840x2160"   => [3840, 2160]
         ];
 
+        // very neat borderless fullscreen workaround by tracedinpurple (A.K.A Tiago.hx, thanks man!!)
+        final window = Application.current.window;
+        final bounds = window.display.bounds;
+
+        isBF = callSetting('Screen Mode') == 'Borderless Fullscreen';
+        if(!isBF)
+            window.borderless = false;
+        else
+        {
+            window.borderless = true;
+            window.x = Std.int(bounds.x);
+            window.y = Std.int(bounds.y);
+            window.width = Std.int(bounds.width);
+            window.height = Std.int(bounds.height + 1);
+        }
+
         final curWidth = resolutions.get(callSetting("Window Resolution"))[0];
         final curHeight = resolutions.get(callSetting("Window Resolution"))[1];
-        switch(callSetting('Screen Mode'))
+        if(callSetting('Screen Mode') == "Windowed")
         {
-            case "Windowed":
-                FlxG.stage.window.width = curWidth;
-                FlxG.stage.window.height = curHeight;
-                FlxG.stage.window.x = Std.int((Capabilities.screenResolutionX - curWidth) / 2);
-                FlxG.stage.window.y = Std.int((Capabilities.screenResolutionY - curHeight) / 2);
-            //case "Borderless Fullscreen":
-                // this for some reason is just broken.
-                // asked for help in the haxe server
-                // And it seems to be a opengl* issue
-                // welp. nothing I can do about it for now, sooo...
-
-                /*
-                FlxG.stage.window.borderless = true;
-                FlxG.stage.window.width = Std.int(Capabilities.screenResolutionX);
-                FlxG.stage.window.height = Std.int(Capabilities.screenResolutionY);
-                FlxG.stage.window.x = FlxG.stage.window.y = 0;
-                FlxG.fullscreen = false;
-                trace(FlxG.fullscreen);
-                */
-            //case "Fullscreen": FlxG.stage.window.borderless = false; FlxG.fullscreen = true;
-
+            window.width = curWidth;
+            window.height = curHeight;
+            window.x = Std.int((Capabilities.screenResolutionX - curWidth) / 2);
+            window.y = Std.int((Capabilities.screenResolutionY - curHeight) / 2);
         }
+
     }
 
     /**
