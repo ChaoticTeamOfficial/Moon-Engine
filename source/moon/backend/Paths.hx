@@ -241,6 +241,61 @@ class Paths
             renderedSounds.remove(key);
         }
     }
+
+    public static function clearUnusedAssets()
+    {
+        // Clear unused graphics
+        var clearedGraphics:Array<String> = [];
+        for (key => graphic in renderedGraphics)
+        {
+            if (dumpExclusions.contains(key + '.png')) continue;
+            if (graphic.useCount > 0) continue;
+
+            clearedGraphics.push(key);
+            renderedGraphics.remove(key);
+            FlxG.bitmap.remove(graphic);
+            #if (flixel < "6.0.0")
+            graphic.dump();
+            #end
+            graphic.destroy();
+        }
+
+        // Clear unused sounds (not referenced by any active sound)
+        var clearedSounds:Array<String> = [];
+        for (key => sound in renderedSounds)
+        {
+            if (dumpExclusions.contains(key + '.ogg')) continue;
+
+            var isUsed:Bool = false;
+
+            // Check music
+            @:privateAccess
+            if (FlxG.sound.music != null && FlxG.sound.music._sound == sound)
+                isUsed = true;
+
+            // Check active sounds
+            if (!isUsed)
+            {
+                for (flxSound in FlxG.sound.list)
+                {
+                    if (@:privateAccess flxSound._sound == sound)
+                    {
+                        isUsed = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!isUsed)
+            {
+                clearedSounds.push(key);
+                renderedSounds.remove(key);
+            }
+        }
+
+        trace('cleared graphics $clearedGraphics', "DEBUG");
+        trace('cleared sounds $clearedSounds', "DEBUG");
+    }
     
     public static function sound(key:String, from:String = 'music', ?library:String):Sound
         return getSound('$from/$key', library);

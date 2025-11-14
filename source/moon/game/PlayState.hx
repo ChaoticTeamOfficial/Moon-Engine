@@ -305,4 +305,9 @@ class PlayState extends FlxState
 		Global.clearScriptList();
 		FlxG.switchState(() -> new ResultsState(stat));
 	}
+
+	override function closeSubState()
+	{
+		super.closeSubState();
+	}
 }

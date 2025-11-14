@@ -266,6 +266,11 @@ class PauseScreen extends FlxSubState
         }, 5);
     }
 
+    override public function close()
+    {
+        super.close();
+    }
+
     @:noCompletion function get_game():PlayState
         return PlayState.instance;
 }
