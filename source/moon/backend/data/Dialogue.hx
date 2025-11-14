@@ -65,7 +65,7 @@ typedef DialogueFile = {
 @:forward
 abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
 {
-    public static function getDialogue(dialogueFile:String):Dialogue
+    static function getDialogue(dialogueFile:String):Dialogue
     {
         if (Paths.exists(dialogueFile))
             return Paths.JSON(dialogueFile);
@@ -76,8 +76,7 @@ abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
 }
 
 /**
- * Parses dialogues tag events. It can be used for other stuff too but
- * it was made mostly with dialogue support in mind.
+ * Class used for parsing dialogue tag events.
  */
 class DialogueParser
 {

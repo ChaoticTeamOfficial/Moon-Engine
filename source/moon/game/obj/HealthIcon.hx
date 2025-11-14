@@ -29,12 +29,12 @@ class HealthIcon extends MoonSprite
 
     @:noCompletion public function set_icon(val:String)
     {
-        final char = (Paths.exists('images/ingame/characters/$val/icon.png')) ? val : 'dummy';
+        final char = (Paths.exists('characters/$val/icon.png')) ? val : 'dummy';
         this.icon = char;
 
         centerAnimations = true;
         
-        loadGraphic(Paths.image('ingame/characters/$char/icon'), true, 150, 150);
+        loadGraphic(Paths.image('$char/icon', 'characters'), true, 150, 150);
 
         animation.add('icon', [0, 1], 0, false);
 		playAnim('icon');

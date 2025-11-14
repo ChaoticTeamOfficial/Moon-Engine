@@ -21,10 +21,10 @@ class PixelIcon extends MoonSprite
         this.origin.x = 100;
         this.scale.set(2, 2);
 
-        final actualIcon = (Paths.exists('images/ingame/characters/$iconName/ui_icon.png')) ? iconName : 'dummy';
+        final actualIcon = (Paths.exists('characters/$iconName/ui_icon.png')) ? iconName : 'dummy';
         this.character = actualIcon;
 
-        this.frames = Paths.getSparrowAtlas('ingame/characters/$actualIcon/ui_icon');
+        this.frames = Paths.getSparrowAtlas('$actualIcon/ui_icon', 'characters');
         this.centerAnimations = true;
         this.animation.addByPrefix('idle', 'idle0', 12, true);
         this.animation.addByPrefix('select', 'confirm0', 12, false);

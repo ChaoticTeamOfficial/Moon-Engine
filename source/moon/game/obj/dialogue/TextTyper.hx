@@ -149,8 +149,7 @@ class TextTyper extends FlxSpriteGroup
                     case "size":
                         props.size = Std.int(Reflect.field(ev.values, "size") != null ? Reflect.field(ev.values, "size") :
                             (Std.isOfType(ev.values, Float) || Std.isOfType(ev.values, Int) ? ev.values : defaultSize));
-                    default:
-                        trace('Unknown effect: ${ev.name}', "WARNING");
+                    default: trace('Unknown effect: ${ev.name}', "WARNING");
                 }
             }
         }
