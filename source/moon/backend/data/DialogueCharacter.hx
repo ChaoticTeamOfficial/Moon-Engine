@@ -3,46 +3,41 @@ package moon.backend.data;
 using StringTools;
 
 /**
- * Structure for a Character Dialogue data.
+ * Structure for a Character's Dialogue data.
  **/
-typedef DialogueLine = {
+typedef DialogueChar = {
     /**
-     * The character who's speaking.
+     * The name that will be displayed when a character is speaking.
      */
-    ?character:String,
+    ?displayName:String,
+
     /**
-     * The expression a character will do.
+     * The position the character will be.
      */
-    ?expression:String,
+    ?pos:Array<Float>,
+
     /**
-     * The text displayed when a character speaks.
+     * Data for dialogue sounds.
      */
-    text:String,
+    ?soundData:{sounds:Array<String>, ?playType:String, ?pitchIntensity:Float, ?volume:Float},
+
     /**
-     * The text's speed.
-     */
-    ?speed:Float,
-    /**
-     * The event that'll execute on this dialogue line (if exists.)
-     */
-    ?events:Array<DialogueEvent>,
-    /**
-     * Color that overrides the character's one if exists.
+     * The color that will override the character's default.
      */
     ?color:String
 }
 
 @:publicFields
 @:forward
-abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
+abstract DialogueCharacter(DialogueChar) from DialogueChar to DialogueChar
 {
-    static function getDialogue(characterPath:String):Dialogue
+    static function getChar(characterPath:String):DialogueCharacter
     {
-        final actualPath = 'characters/'
-        if (Paths.exists(characterPath))
-            return Paths.JSON(characterPath);
+        final actualPath = 'characters/$characterPath/dialogue/data';
+        if (Paths.exists('$actualPath.json'))
+            return Paths.JSON(actualPath);
 
-        trace('$characterPath was not found.', "ERROR");
+        trace('$actualPath was not found.', "ERROR");
         return null;
     }
 }

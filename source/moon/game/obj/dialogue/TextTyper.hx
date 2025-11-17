@@ -15,10 +15,13 @@ using StringTools;
  */
 class TextTyper extends FlxSpriteGroup
 {
+    //TODO: documment this class properly
     public var defaultFont:String = "vcr.ttf";
     public var defaultSize:Int = 32;
     public var defaultColor:Int = 0xFFFFFFFF;
     public var lineHeight:Float = 40;
+    public var lineWidth:Float = 500;
+    public var spacing:Float = 0;
 
     public var text:String;
     public var events:Array<DialogueEvent>;
@@ -40,17 +43,18 @@ class TextTyper extends FlxSpriteGroup
 	 * @param events The array containing all events.
 	 * @param speed The typer speed.
 	 */
-    public function new(x:Float = 0, y:Float = 0, text:String, events:Array<DialogueEvent>, ?speed:Float = 30)
+    public function new(x:Float = 0, y:Float = 0, ?text:String, ?events:Array<DialogueEvent>, ?speed:Float = 30)
     {
         super(x, y);
         this.text = text;
         this.events = events ?? [];
         this.speed = speed;
 
-        buildCharacters();
+        //buildCharacters();
     }
 
-    public function resetTyper():Void {
+    public function resetTyper():Void
+    {
         clear();
         chars = [];
         currentIndex = 0;
@@ -59,11 +63,13 @@ class TextTyper extends FlxSpriteGroup
         buildCharacters();
     }
 
-    public function finish():Void {
+    public function finish():Void
+    {
         for (cd in chars) {
             cd.sprite.visible = true;
             cd.appearTime = FlxG.game.ticks / 1000;
         }
+
         currentIndex = chars.length;
         if (!finished)
         {
@@ -72,14 +78,17 @@ class TextTyper extends FlxSpriteGroup
         }
     }
 
-    private function buildCharacters():Void {
+    private function buildCharacters():Void
+    {
         var curX:Float = 0;
         var curY:Float = 0;
         var lineChars:Array<CharData> = [];
 
-        for (i in 0...text.length) {
+        for (i in 0...text.length)
+        {
             final ch:String = text.charAt(i);
-            if (ch == "\n") {
+            if (ch == "\n" || curX > lineWidth)
+            {
                 alignLine(lineChars);
                 lineChars = [];
                 curX = 0;
@@ -87,7 +96,7 @@ class TextTyper extends FlxSpriteGroup
                 continue;
             }
 
-            final props = { font: defaultFont, size: defaultSize, color: defaultColor };
+            final props = {font: defaultFont, size: defaultSize, color: defaultColor};
             final effs:Array<TextEffect> = [];
             collectEffects(i, props, effs);
 
@@ -95,6 +104,8 @@ class TextTyper extends FlxSpriteGroup
             sprite.font = Paths.font(props.font);
             sprite.color = props.color;
             sprite.visible = false;
+            sprite.textField.antiAliasType = ADVANCED;
+            sprite.textField.sharpness = 200;
             add(sprite);
 
             var cd:CharData = {
@@ -105,10 +116,11 @@ class TextTyper extends FlxSpriteGroup
                 appearTime: 0,
                 index: i
             };
+            sprite.updateHitbox();
 
             chars.push(cd);
             lineChars.push(cd);
-            curX += sprite.width;
+            curX += sprite.width + spacing;
         }
 
         alignLine(lineChars);
@@ -165,9 +177,11 @@ class TextTyper extends FlxSpriteGroup
     	'white' => FlxColor.WHITE, 'yellow' => FlxColor.YELLOW, 'transparent' => FlxColor.TRANSPARENT
     ];
 
-    private function parseColor(val:Dynamic):Int {
+    private function parseColor(val:Dynamic):Int
+    {
         if (Std.isOfType(val, Int)) return val;
-        if (Std.isOfType(val, String)) {
+        if (Std.isOfType(val, String))
+        {
             var str:String = val;
             if (str.startsWith("#")) return Std.parseInt("0x" + str.substr(1));
         	return colorsMap.get(str.toLowerCase());
@@ -175,14 +189,17 @@ class TextTyper extends FlxSpriteGroup
         return defaultColor;
     }
 
-    override public function update(elapsed:Float):Void {
+    override public function update(elapsed:Float):Void
+    {
         super.update(elapsed);
 
         // typing behavior
-        if (currentIndex < chars.length) {
+        if (currentIndex < chars.length)
+        {
             timer += elapsed;
             var charTime = 1 / speed;
-            while (timer >= charTime) {
+            while (timer >= charTime)
+            {
                 final cd = chars[currentIndex];
                 //trace('typing: ${cd.sprite.text}');
 
@@ -192,7 +209,8 @@ class TextTyper extends FlxSpriteGroup
 
                 currentIndex++;
                 timer -= charTime;
-                if (currentIndex >= chars.length && !finished) {
+                if (currentIndex >= chars.length && !finished)
+                {
                     finished = true;
                     onFinish.dispatch();
                 }
@@ -201,7 +219,8 @@ class TextTyper extends FlxSpriteGroup
 
         // dynamic updates
         final globalTime = FlxG.game.ticks / 1000;
-        for (cd in chars) {
+        for (cd in chars)
+        {
             if (!cd.sprite.visible) continue;
             cd.sprite.x = cd.baseX + this.x;
             cd.sprite.y = cd.baseY + this.y;

@@ -67,10 +67,10 @@ abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
 {
     static function getDialogue(dialogueFile:String):Dialogue
     {
-        if (Paths.exists(dialogueFile))
+        if (Paths.exists('$dialogueFile.json'))
             return Paths.JSON(dialogueFile);
 
-        trace('$dialogueFile was not found.', "ERROR");
+        trace('$dialogueFile.json was not found.', "ERROR");
         return null;
     }
 }
@@ -209,7 +209,7 @@ class DialogueParser
             return obj;
         }
 
-        // ptherwise return array or single value
+        // otherwise return array or single value
         return (values.length == 1) ? values[0] : values;
     }
 }

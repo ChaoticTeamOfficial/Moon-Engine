@@ -21,7 +21,7 @@ import openfl.events.IOErrorEvent;
 import openfl.events.ProgressEvent;
 import moon.global_obj.PixelIcon;
 import moon.backend.data.Dialogue.DialogueParser;
-import moon.game.obj.dialogue.TextTyper;
+import moon.game.obj.dialogue.*;
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
 import moon.toolkit.*;
@@ -127,7 +127,7 @@ class TestState extends FlxState
         */
 
         // -- TEST FOR ACTUAL TEXT RENDERING -- //
-        final rawDialogue = "I hate this <color=pink>fucking</color> typer\n" +
+        /*final rawDialogue = "I hate this <color=pink>fucking</color> typer\n" +
         "Ok these should <wave=3>float</wave> in a nice sine\n" +
         "<shake=0.8>ooooo i shake</shake>\n" +
         "suck my <size=48>WOAH</size> <size=16>stop swearing dude...</size>\n" +
@@ -148,7 +148,16 @@ class TestState extends FlxState
         typer.defaultSize = 32;
         typer.defaultColor = 0xFFFFFFFF;
         typer.lineHeight = 48;
-        add(typer);
+        add(typer);*/
+
+        add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
+
+        var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
+        add(box);
+        box.screenCenter(X);
+        box.y = FlxG.height - box.height - 64;
+        box.visible = true;
+        box.show();
     }
 
     override public function update(elapsed:Float)

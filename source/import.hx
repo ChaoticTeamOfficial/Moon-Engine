@@ -2,6 +2,8 @@ package;
 #if !macro
 import flixel.*;
 import flixel.text.*;
+import flixel.util.*;
+
 import moon.backend.*;
 import moon.dependency.*;
 import moon.dependency.user.*;

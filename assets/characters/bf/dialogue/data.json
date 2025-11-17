@@ -1,0 +1,9 @@
+{
+	"displayName": "Boyfriend",
+	"pos": [0, 0],
+	"soundData": {
+		"sounds": ["beep1.wav", "beep2.wav", "beep3.wav", "beep4.wav"],
+		"playType": "random",
+		"pitchIntensity": 0.05
+	}
+}

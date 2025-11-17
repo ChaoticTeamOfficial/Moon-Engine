@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="portraits.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="angy0000" x="0" y="452" width="453" height="411"/>
+	<SubTexture name="dodge0000" x="458" y="421" width="415" height="405"/>
+	<SubTexture name="hit0000" x="851" y="0" width="410" height="397"/>
+	<SubTexture name="miss0000" x="878" y="402" width="370" height="430"/>
+	<SubTexture name="normal0000" x="435" y="0" width="411" height="416"/>
+	<SubTexture name="yeah!0000" x="0" y="0" width="430" height="447"/>
+</TextureAtlas>

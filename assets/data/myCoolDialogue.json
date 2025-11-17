@@ -1,0 +1,29 @@
+{
+	"lines": [
+		{
+			"character":"dad",
+			"expression":"angry",
+			"text": "<shake=2><size=48><color=red>HEY!</color></size></shake>"
+		},
+		{
+			"character":"bf",
+			"expression":"dodge",
+			"text": "beep?"
+		},
+		{
+			"character":"dad",
+			"expression":"angry",
+			"text": "You think you can just sing with my daughter like that?!"
+		},
+		{
+			"character":"dad",
+			"expression":"eyes-closed",
+			"text": "If you want to date her..."
+		},
+		{
+			"character":"dad",
+			"expression":"determined",
+			"text": "You're going to have to go through <color=red>ME</color> first!"
+		}
+	]
+}
