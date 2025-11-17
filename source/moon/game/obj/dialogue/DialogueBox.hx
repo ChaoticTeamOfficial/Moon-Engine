@@ -33,6 +33,7 @@ class DialogueBox extends FlxSpriteGroup
 	 */
 	public var autoProceed:Bool = false;
 
+	private var box:MoonSprite;
 	private var typer:TextTyper;
 
 	/**
@@ -51,12 +52,24 @@ class DialogueBox extends FlxSpriteGroup
 
 		for(dialogue in data.lines)
 		{
-			if(!characters.contains(dialogue.character)) characters.push(dialogue.character);
+			if(!characters.contains(dialogue.character))
+			{
+				characters.push(dialogue.character);
+
+				//this is the most dumb shit i've done
+				var tryData:Array<Int> = [];
+				final ogdata = DialogueCharacter.getChar(dialogue.character);
+				final chardata = Paths.JSON('characters/${dialogue.character}/data');
+				try{tryData =  (ogdata == null) ? chardata.healthbarColors : ogdata.color ?? chardata.healthbarColors;}
+				catch(e){tryData = [255,255,255];}
+
+				charColors.set(dialogue.character, FlxColor.fromRGB(tryData[0], tryData[1], tryData[2]));
+			}
 		}
 
 		//trace(characters);
 
-		var box = new MoonSprite().loadGraphic(Paths.image('ingame/dialogue-box/$skin/box'));
+		box = new MoonSprite().loadGraphic(Paths.image('ingame/dialogue-box/$skin/box'));
 		add(box);
 
         typer = new TextTyper(64, 32);
@@ -72,6 +85,7 @@ class DialogueBox extends FlxSpriteGroup
 	}
 
 	private var curIdx = 0;
+	private var charColors:Map<String, FlxColor> = [];
 	override public function update(elapsed:Float)
 	{
 		if(!visible) return;
@@ -101,9 +115,17 @@ class DialogueBox extends FlxSpriteGroup
 
         final parsed = DialogueParser.parseTaggedText(line.text, schema);
 
+        box.color = charColors.get(line.character);
+
 		typer.text = parsed.text ?? '';
 		typer.events = parsed.events ?? [];
 		typer.speed = line.speed ?? 16;
 		typer.resetTyper();
+
+		//typer.onType.addOnce(()->{
+		for(ye in typer.members)
+			if(Std.isOfType(ye, FlxText))
+				cast(ye, FlxText).setBorderStyle(SHADOW, charColors.get(line.character), 2);
+		//});
 	}
 }

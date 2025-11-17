@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<TextureAtlas imagePath="daddyDearest.png" width="3120" height="2047">
+<TextureAtlas imagePath="dad.png" width="3120" height="2047">
   <SubTexture name="idle0001" x="1723" y="8" width="421" height="767" frameX="-5" frameY="-0" frameWidth="429" frameHeight="767" />
   <SubTexture name="idle0002" x="1723" y="8" width="421" height="767" frameX="-5" frameY="-0" frameWidth="429" frameHeight="767" />
   <SubTexture name="idle0003" x="1820" y="791" width="429" height="759" frameX="-0" frameY="-8" frameWidth="429" frameHeight="767" />

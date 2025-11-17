@@ -29,7 +29,7 @@ typedef DialogueLine = {
     /**
      * Color that overrides the character's one if exists.
      */
-    ?color:String
+    ?color:Array<Int>
 }
 
 /**

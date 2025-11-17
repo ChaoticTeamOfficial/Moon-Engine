@@ -24,7 +24,7 @@ typedef DialogueChar = {
     /**
      * The color that will override the character's default.
      */
-    ?color:String
+    ?color:Array<Int>
 }
 
 @:publicFields
@@ -37,7 +37,7 @@ abstract DialogueCharacter(DialogueChar) from DialogueChar to DialogueChar
         if (Paths.exists('$actualPath.json'))
             return Paths.JSON(actualPath);
 
-        trace('$actualPath was not found.', "ERROR");
+        trace('$actualPath.json was not found.', "ERROR");
         return null;
     }
 }
