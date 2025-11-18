@@ -65,7 +65,7 @@ class OptionObject extends FlxSpriteGroup
 
                 if (direction != 0)
                 {
-                    Paths.playSFX('menus/settings/configClick');
+                    Paths.playSFX('menus/settings/configClick.ogg');
                     changeValue(direction);
                 }
 

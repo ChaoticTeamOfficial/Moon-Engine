@@ -38,7 +38,7 @@ class ChartConvert extends FlxState
     {
         super.create();
 
-        FlxG.sound.playMusic(Paths.sound('toolbox/chillPlace'));
+        FlxG.sound.playMusic(Paths.sound('toolbox/chillPlace.ogg'));
 
         _text = new FlxText(0, 40, FlxG.width, '');
         _text.setFormat(Paths.font('5by7_b.ttf'), 32, FlxColor.WHITE, CENTER);

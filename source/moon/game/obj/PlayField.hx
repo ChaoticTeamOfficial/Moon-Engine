@@ -341,7 +341,7 @@ class PlayField extends FlxGroup
             statShake = FlxTween.shake(stats, 0.04, 0.14, X);
 
             // the good ol sfx ahaha
-            Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}');
+            Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}.ogg');
 
             playback.muteStatus(MoonSettings.callSetting('Mute Voices on Miss'), Voices_Player);
         }
@@ -401,8 +401,8 @@ class PlayField extends FlxGroup
                     playback.state = PLAY;
                     inCountdown = false;
                     if(onSongStart != null) onSongStart();
-                case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0', 'sounds'));
-                default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}', 'sounds'));
+                case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
+                default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
             }
 
             if(onSongCountdown != null) onSongCountdown(Std.int(beat));

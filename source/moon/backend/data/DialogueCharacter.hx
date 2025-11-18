@@ -12,14 +12,27 @@ typedef DialogueChar = {
     ?displayName:String,
 
     /**
-     * The position the character will be.
+     * Data for dialogue sounds.
+     * @param sounds All the sounds the dialogue can play when typing.
+     * @param playType How will the sound play. Types: `order`, `random`, `order-double` and `even-odds`.
+     * @param pitchIntensity How much will the pitch vary when typing.
      */
-    ?pos:Array<Float>,
+    ?soundData:{sounds:Array<String>, ?playType:String, ?pitchIntensity:Float},
 
     /**
-     * Data for dialogue sounds.
+     * Position in-screen.
      */
-    ?soundData:{sounds:Array<String>, ?playType:String, ?pitchIntensity:Float, ?volume:Float},
+    ?position:Array<Float>,
+
+    /**
+     * The sprite's antialiasing,
+     */
+    ?antialiasing:Bool,
+
+    /**
+     * All the animations on this portrait.
+     */
+    animations:Array<Paths.AnimationData>,
 
     /**
      * The color that will override the character's default.

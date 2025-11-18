@@ -25,7 +25,7 @@ function onPostCreate()
 	
 	bf.visible = gf.visible = false;
 	
-	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL', 'music'));
+	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
 }
 
 function onIntroEnd()

@@ -118,18 +118,17 @@ class Paths
         var cacheKey:String = key;
         var isMod = key.startsWith('curMod/');
         var soundRelative:String = isMod ? key.substr(7) : key;
-        var soundPath:String = soundRelative + '.ogg';
         if (!renderedSounds.exists(cacheKey))
         {
-            if (!fileExists(soundPath, library, isMod))
+            if (!fileExists(soundRelative, library, isMod))
             {
-                trace('$soundPath doesnt exist!${isMod ? " in mod" : ""}', "ERROR");
+                trace('$soundRelative doesnt exist!${isMod ? " in mod" : ""}', "ERROR");
                 return null;
             }
             var sound:Sound;
             if (isMod)
             {
-                var bytes:Bytes = getFileBytes(soundPath, library, true);
+                var bytes:Bytes = getFileBytes(soundRelative, library, true);
                 if (bytes == null)
                 {
                     return null;
@@ -140,9 +139,9 @@ class Paths
             else
             {
                 #if desktop
-                sound = Sound.fromFile(getPath(soundPath, library));
+                sound = Sound.fromFile(getPath(soundRelative, library));
                 #else
-                sound = Assets.getSound(getPath(soundPath, library), false);
+                sound = Assets.getSound(getPath(soundRelative, library), false);
                 #end
             }
             renderedSounds.set(cacheKey, sound);

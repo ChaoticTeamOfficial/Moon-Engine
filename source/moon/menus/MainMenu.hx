@@ -64,7 +64,7 @@ class MainMenu extends FlxState
     function changeSelection(change:Int = 0):Void
     {
         curSelected = FlxMath.wrap(curSelected + change, 0, opt.length - 1);
-        Paths.playSFX('ui/scrollMenu');
+        Paths.playSFX('ui/scrollMenu.ogg');
         calculateTargets();
     }
 

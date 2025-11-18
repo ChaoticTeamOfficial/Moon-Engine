@@ -131,7 +131,7 @@ class PauseScreen extends FlxSubState
         for(i in 0...wawa.length)
             FlxTween.tween(wawa[i], {x: wawa[i].x + 30, alpha: 1}, pf.conductor.crochet / 2000, {ease: FlxEase.quadOut, startDelay: 0.1 * i});
 
-        Paths.playSFX('game/pause/onPause');
+        Paths.playSFX('game/pause/onPause.ogg');
     }
 
     override public function update(elapsed:Float)
@@ -151,11 +151,11 @@ class PauseScreen extends FlxSubState
             {
                 case 'resume': 
                     prepareToClose();
-                    Paths.playSFX('ui/confirmMenu');
+                    Paths.playSFX('ui/confirmMenu.ogg');
                 case 'restart': 
                     //TODO: This isn't actually visible due to how fast it resets lol
                     // so uhhh... get it to be shown!!
-                    paused.loadGraphic(Paths.image('menus/pause/reset'));
+                    paused.loadGraphic(Paths.image('menus/pause/reset.ogg'));
                     pf.restartSong();
                     close();
                 case 'settings': 
@@ -182,7 +182,7 @@ class PauseScreen extends FlxSubState
     {
         curSelected = FlxMath.wrap(curSelected + change, 0, pauseItems.members.length - 1);
         pauseItems.members[curSelected].x += 10;
-        Paths.playSFX('ui/scrollMenu');
+        Paths.playSFX('ui/scrollMenu.ogg');
 
         selector.text = switch(pauseItems.members[curSelected].text.toLowerCase())
         {
@@ -254,7 +254,7 @@ class PauseScreen extends FlxSubState
             }
             else
             {
-                Paths.playSFX((counter == 0) ? 'game/pause/pausecountdown-end' : 'game/pause/pausecountdown-normal');
+                Paths.playSFX((counter == 0) ? 'game/pause/pausecountdown-end.ogg' : 'game/pause/pausecountdown-normal.ogg');
                 wah.color = colors[counter];
                 wah.text = txtDisplay[counter];
                 wah.alpha = 1;

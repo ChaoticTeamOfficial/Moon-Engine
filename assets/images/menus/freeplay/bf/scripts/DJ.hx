@@ -63,7 +63,7 @@ function onUpdate(elapsed)
 
                 new FlxTimer().start(3.5, function(_)
                 {
-                    FlxG.sound.play(Paths.sound('menus/freeplay/tv_on', 'sounds'));
+                    FlxG.sound.play(Paths.sound('menus/freeplay/tv_on.ogg', 'sounds'));
                     new FlxTimer().start(0.3, (_) -> playRandomCartoon());
                 });
             }
@@ -77,7 +77,7 @@ function chooseNextDJAction()
         dj.anim.play("afk2", true, false, 55);
         new FlxTimer().start(1, function(_)
         {
-            FlxG.sound.play(Paths.sound('menus/freeplay/channel_switch', 'sounds'));
+            FlxG.sound.play(Paths.sound('menus/freeplay/channel_switch.ogg', 'sounds'));
             new FlxTimer().start(0.3, (_) -> playRandomCartoon());
         });
     }
@@ -95,7 +95,7 @@ function playRandomCartoon()
             cartoonPlayer.stop();
         }
 
-        cartoonPlayer.loadEmbedded(Paths.sound('menus/freeplay/cartoons/cartoon' + FlxG.random.int(1, 24)));
+        cartoonPlayer.loadEmbedded(Paths.sound('menus/freeplay/cartoons/cartoon' + FlxG.random.int(1, 24) + '.ogg'));
         cartoonPlayer.play();
         FlxG.sound.list.add(cartoonPlayer);
     }, true);

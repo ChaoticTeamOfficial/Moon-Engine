@@ -83,7 +83,7 @@ function onUpdate(elapsed)
 	if(carTimer >= FlxG.random.float(6, 10))
 	{
 		carTimer = 0;
-		FlxG.sound.play(Paths.sound('stages/limo/carPass' + FlxG.random.int(0, 1), "sounds"));
+		FlxG.sound.play(Paths.sound('stages/limo/carPass' + FlxG.random.int(0, 1) + '.ogg', "sounds"));
 		FlxTween.tween(veryFastCar, {x: -1200}, 0.13, {startDelay: 1, onComplete: (_) -> veryFastCar.x = 1600});
 	}
 }

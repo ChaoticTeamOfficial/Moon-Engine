@@ -647,7 +647,7 @@ class LevelEditor extends FlxState
     public function sfx(p:String)
     {
         if(playback.state != PLAY)
-            Paths.playSFX('toolkit/level-editor/$p');
+            Paths.playSFX('toolkit/level-editor/$p.ogg');
     }
 
     function changeTab(change:Int = 0):Void

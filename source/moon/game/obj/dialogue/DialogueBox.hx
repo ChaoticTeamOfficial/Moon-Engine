@@ -24,6 +24,16 @@ class DialogueBox extends FlxSpriteGroup
 	public var characters:Array<String> = [];
 
 	/**
+	 * An map contaning all the character portraits.
+	 */
+	public var chars:Map<String, Portrait> = [];
+
+	/**
+	 * The group the portraits are added on.
+	 */
+	public var portraitsGrp:FlxSpriteGroup = new FlxSpriteGroup();
+
+	/**
 	 * The current dialogue skin.
 	 */
 	public var skin:String = '';
@@ -35,6 +45,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	private var box:MoonSprite;
 	private var typer:TextTyper;
+	private var nameplate:FlxText;
 
 	/**
 	 * Creates the Dialogue Box.
@@ -46,24 +57,21 @@ class DialogueBox extends FlxSpriteGroup
 	{
 		super(x, y);
 		this.skin = skin;
+		portraitsGrp.setPosition(x, y);
 
 		data = Dialogue.getDialogue(dialoguePath);
 		//trace(data);
 
 		for(dialogue in data.lines)
 		{
+			if(dialogue.character == null) dialogue.character = 'Narrator';
 			if(!characters.contains(dialogue.character))
 			{
 				characters.push(dialogue.character);
-
-				//this is the most dumb shit i've done
-				var tryData:Array<Int> = [];
-				final ogdata = DialogueCharacter.getChar(dialogue.character);
-				final chardata = Paths.JSON('characters/${dialogue.character}/data');
-				try{tryData =  (ogdata == null) ? chardata.healthbarColors : ogdata.color ?? chardata.healthbarColors;}
-				catch(e){tryData = [255,255,255];}
-
-				charColors.set(dialogue.character, FlxColor.fromRGB(tryData[0], tryData[1], tryData[2]));
+				var portrait = new Portrait(dialogue.character);
+				if(portrait.strID != 'noAnim')portraitsGrp.add(portrait);
+				portrait.visible = false;
+				chars.set(dialogue.character, portrait);
 			}
 		}
 
@@ -73,19 +81,30 @@ class DialogueBox extends FlxSpriteGroup
 		add(box);
 
         typer = new TextTyper(64, 32);
-        typer.defaultFont = 'vcr.ttf';
-        typer.defaultSize = 28;
+        typer.defaultFont = 'CRIKEY SQUATS REGULAR.TTF';
+        typer.defaultSize = 24;
         typer.defaultColor = FlxColor.WHITE;
         typer.lineHeight = 30;
-        typer.lineWidth = box.width - typer.x;
+        typer.lineWidth = box.width - typer.x - typer.defaultSize;
         typer.spacing = -3;
         add(typer);
+
+        for(a => c in chars){
+			typer.onType.add(()->{
+				if(c.char == data.lines[curIdx].character) c.playBeep();
+			});
+        }
+
+        nameplate = new FlxText(64,0,0,'Dummy');
+        nameplate.setFormat(Paths.font('CRIKEY SQUATS REGULAR.TTF'), 48, FlxColor.WHITE);
+        add(nameplate);
+        nameplate.y = -nameplate.height + 48;
+        nameplate.text = '';
 
 		this.visible = false;
 	}
 
 	private var curIdx = 0;
-	private var charColors:Map<String, FlxColor> = [];
 	override public function update(elapsed:Float)
 	{
 		if(!visible) return;
@@ -102,7 +121,9 @@ class DialogueBox extends FlxSpriteGroup
 
 	public function show(index:Int = 0)
 	{
+		portraitsGrp.camera = this.camera;
 		final line = data.lines[index];
+		final char = chars.get(line.character);
 
 		//TODO: make this better...
         final schema:Map<String, Array<String>> = [
@@ -114,18 +135,36 @@ class DialogueBox extends FlxSpriteGroup
         ];
 
         final parsed = DialogueParser.parseTaggedText(line.text, schema);
+        final colorr:FlxColor = (line.color != null) ? FlxColor.fromRGB(line?.color[0] ?? 255, line?.color[1] ?? 255, line?.color[2] ?? 255) : (char != null) ? char.getColor() : 0xFFFFFFFF;
+        box.color = colorr;
 
-        box.color = charColors.get(line.character);
+        //TODO: Make box and typer default properties softcoded by a json!
+        nameplate.text = char.data.displayName;
+        nameplate.setBorderStyle(SHADOW, colorr, 4);
 
 		typer.text = parsed.text ?? '';
 		typer.events = parsed.events ?? [];
 		typer.speed = line.speed ?? 16;
+		typer.antialiasing = true;
 		typer.resetTyper();
 
 		//typer.onType.addOnce(()->{
 		for(ye in typer.members)
 			if(Std.isOfType(ye, FlxText))
-				cast(ye, FlxText).setBorderStyle(SHADOW, charColors.get(line.character), 2);
+				cast(ye, FlxText).setBorderStyle(SHADOW, colorr, 2);
 		//});
+
+		for(name => charac in chars)
+		{
+			charac.resetBeeps();
+			charac.alpha = (name == line.character) ? 1 : 0.5;
+		}
+
+		if(char != null && char.strID != 'noAnim'){
+			char.playAnim(line.expression, true);
+			char.visible = true;
+			char.doAnim(line.anim ?? NONE);
+		}
+		//trace(char.animation.getNameList());
 	}
 }

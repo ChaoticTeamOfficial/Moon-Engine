@@ -50,7 +50,7 @@ class MoonUtils
     {
         if ((FlxG.sound.music != null && !FlxG.sound.music.playing ) || (FlxG.sound.music == null))
         {
-            FlxG.sound.playMusic(Paths.sound(song), (fade) ? 0 : MoonSettings.callSetting('Music Volume'), true);
+            FlxG.sound.playMusic(Paths.sound('$song.ogg'), (fade) ? 0 : MoonSettings.callSetting('Music Volume'), true);
             if (fade) FlxG.sound.music.fadeIn(140, 0, MoonSettings.callSetting('Music Volume'));
         }
     }

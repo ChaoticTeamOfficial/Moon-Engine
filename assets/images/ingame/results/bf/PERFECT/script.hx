@@ -16,7 +16,7 @@ function onPostCreate()
 
 function onIntroEnd()
 {
-	FlxG.sound.playMusic(Paths.sound('results/bf/PERFECT', 'music'));
+	FlxG.sound.playMusic(Paths.sound('results/bf/PERFECT.ogg', 'music'));
 	fuckers.visible = true;
 	fuckers.anim.play("intro", true);
 	//fuckers.screenCenter();

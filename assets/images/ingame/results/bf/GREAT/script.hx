@@ -22,7 +22,7 @@ function onPostCreate()
 	
 	gf.scale.x = gf.scale.y = bf.scale.x = bf.scale.y = 0.93;
 	
-	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL', 'music'));
+	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
 }
 
 function onIntroEnd()

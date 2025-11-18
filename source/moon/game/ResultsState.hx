@@ -162,7 +162,7 @@ class ResultsState extends FlxState
                         clear.x = FlxG.width - clear.width - 128;
 
                         FlxTween.color(clear, 1, rankData.color, FlxColor.WHITE);
-                        Paths.playSFX('results/reveal$rank');
+                        Paths.playSFX('results/reveal$rank.ogg');
 
                         if(rank != 'LOSS')
                         {
@@ -192,7 +192,7 @@ class ResultsState extends FlxState
     function set_accTemp(a:Int):Int
     {
         if(accTemp != a)
-            Paths.playSFX('ui/scrollMenu');
+            Paths.playSFX('ui/scrollMenu.ogg');
 
         accTemp = a;
 

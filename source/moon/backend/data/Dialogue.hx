@@ -29,7 +29,11 @@ typedef DialogueLine = {
     /**
      * Color that overrides the character's one if exists.
      */
-    ?color:Array<Int>
+    ?color:Array<Int>,
+    /**
+     * The tweened animation the portrait will do.
+     */
+    ?anim:moon.game.obj.dialogue.Portrait.PortraitAnim
 }
 
 /**

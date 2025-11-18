@@ -35,7 +35,7 @@ class Settings extends FlxSubState
         super();
         
         if(isPlayState)this.camera = PlayState.instance.camALT;
-        Paths.playSFX('menus/settings/configEnter');
+        Paths.playSFX('menus/settings/configEnter.ogg');
 
         var back = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLUE);
         back.blend = ADD;
@@ -155,7 +155,7 @@ class Settings extends FlxSubState
         //exit
         if(MoonInput.justPressed(BACK))
         {
-            Paths.playSFX('menus/settings/configExit');
+            Paths.playSFX('menus/settings/configExit.ogg');
             close();
             if(isPlayState) PlayState.instance.openSubState(new PauseScreen(PlayState.instance.camALT));
         }
@@ -164,7 +164,7 @@ class Settings extends FlxSubState
     function changeSelection(change:Int):Void
     {
         curSelected = FlxMath.wrap(curSelected + change, 0, navOptions.length - 1);
-        Paths.playSFX('menus/settings/configScroll');
+        Paths.playSFX('menus/settings/configScroll.ogg');
 
         optionDesc.text = navOptions[curSelected].setting.description;
         optionDesc.x = (FlxG.width - optionDesc.width) - 12;

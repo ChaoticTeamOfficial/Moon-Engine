@@ -124,7 +124,7 @@ class Freeplay extends FlxSubState
     function changeSelection(change:Int = 0):Void
     {
         curSelected = flixel.math.FlxMath.wrap(curSelected + change, 0, texts.length - 1);
-        Paths.playSFX('ui/scrollMenu');
+        Paths.playSFX('ui/scrollMenu.ogg');
 
         for(i in 0...texts.length)
             texts[i].color = (i == curSelected) ? FlxColor.CYAN : FlxColor.WHITE;

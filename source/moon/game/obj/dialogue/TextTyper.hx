@@ -16,7 +16,7 @@ using StringTools;
 class TextTyper extends FlxSpriteGroup
 {
     //TODO: documment this class properly
-    public var defaultFont:String = "vcr.ttf";
+    public var defaultFont:String = "";
     public var defaultSize:Int = 32;
     public var defaultColor:Int = 0xFFFFFFFF;
     public var lineHeight:Float = 40;
@@ -104,8 +104,9 @@ class TextTyper extends FlxSpriteGroup
             sprite.font = Paths.font(props.font);
             sprite.color = props.color;
             sprite.visible = false;
-            sprite.textField.antiAliasType = ADVANCED;
-            sprite.textField.sharpness = 200;
+            sprite.antialiasing = this.antialiasing;
+            //sprite.textField.antiAliasType = ADVANCED;
+            //sprite.textField.sharpness = 400;
             add(sprite);
 
             var cd:CharData = {

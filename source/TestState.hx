@@ -153,11 +153,14 @@ class TestState extends FlxState
         add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
 
         var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
+        add(box.portraitsGrp);
         add(box);
         box.screenCenter(X);
-        box.y = FlxG.height - box.height - 64;
+        box.y = FlxG.height - box.height - 32;
         box.visible = true;
         box.show();
+
+        FlxG.sound.playMusic(Paths.sound('bittersweet sunset/luna/Inst.ogg', 'songs'));
     }
 
     override public function update(elapsed:Float)
