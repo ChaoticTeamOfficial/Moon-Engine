@@ -3,6 +3,8 @@ package;
 import flixel.*;
 import flixel.text.*;
 import flixel.util.*;
+import flixel.tweens.*;
+import flixel.math.*;
 
 import moon.backend.*;
 import moon.dependency.*;

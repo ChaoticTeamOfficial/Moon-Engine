@@ -1,0 +1,9318 @@
+[
+	{
+		"tag": "baralway",
+		"time": 0,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0"
+		}
+	},
+	{
+		"tag": "notealway",
+		"time": 0,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 1500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 3000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 4500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 6000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 7500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 9000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 10500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 12000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 13500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 15000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 16500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 18000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "healthalpha",
+		"time": 18000,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "1"
+		}
+	},
+	{
+		"tag": "notesin",
+		"time": 18000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 19500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 19500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Image Flash",
+		"time": 19500,
+		"values": {
+			"VALUE_1": "flash",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 19500,
+		"values": {
+			"VALUE_1": "FUN IS INFINITE",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 19875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 20250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 20625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 21000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 21000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 21375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 21750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 22125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 22500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 22500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 22875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 23250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 23625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "CameraZoom",
+		"time": 24000,
+		"values": {
+			"VALUE_1": "1.5",
+			"VALUE_2": "1"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 24375,
+		"values": {
+			"VALUE_1": "fun",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 24562.5,
+		"values": {
+			"VALUE_1": "The",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 24562.5,
+		"values": {
+			"VALUE_1": "the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 24750,
+		"values": {
+			"VALUE_1": "The fun",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 24750,
+		"values": {
+			"VALUE_1": "fun",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 25125,
+		"values": {
+			"VALUE_1": "The fun ne",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 25125,
+		"values": {
+			"VALUE_1": "ne",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 25312.5,
+		"values": {
+			"VALUE_1": "The fun never",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 25312.5,
+		"values": {
+			"VALUE_1": "never",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 25500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 25500,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 25500,
+		"values": {
+			"VALUE_1": "The fun never ends!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 25500,
+		"values": {
+			"VALUE_1": "ends",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 25875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 26250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 26250,
+		"values": {
+			"VALUE_1": "FUN IS INFINITE",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "theFunNeverEnds",
+		"time": 26250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 26625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 27000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 27375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 27750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 28125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 28500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 28875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 29250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 29625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 30000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 30375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 30750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Set Target",
+		"time": 30750,
+		"values": {
+			"VALUE_1": "D",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 31125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 31500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 31500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 31875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 32250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 32625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 33000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 33375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 33750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 34125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 34500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 34875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 35250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 35625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 36000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Set Target",
+		"time": 36000,
+		"values": {
+			"VALUE_1": "B",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 36375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 36750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 37125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 37500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 37500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 37875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 38250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 38625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 39000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 39375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 39750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 40125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 40500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 40500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 40875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 41250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 41625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 42000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 42000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 43125,
+		"values": {
+			"VALUE_1": "monitor",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 43125,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BfMonitor"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 43125,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "Monitor"
+		}
+	},
+	{
+		"tag": "ChangeScrollFactor",
+		"time": 43125,
+		"values": {
+			"VALUE_1": "1.5",
+			"VALUE_2": "bf"
+		}
+	},
+	{
+		"tag": "Image Flash",
+		"time": 43125,
+		"values": {
+			"VALUE_1": "blue-flash",
+			"VALUE_2": "0.3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 43500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 43500,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 43500,
+		"values": {
+			"VALUE_1": "0.5, 0.02",
+			"VALUE_2": "0.5, 0.02"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 45000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 45000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 46500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 46500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 48000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 48000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 49500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 49500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 51000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 51000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 52500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 54000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 55500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 57000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 58500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 60000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 60000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 61500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 63000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 64500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 66000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 66000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 67500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 67500,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 67500,
+		"values": {
+			"VALUE_1": "scream",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 67500,
+		"values": {
+			"VALUE_1": "1.5, 0.01",
+			"VALUE_2": "1.5, 0.01"
+		}
+	},
+	{
+		"tag": "Image Flash",
+		"time": 67500,
+		"values": {
+			"VALUE_1": "flash",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68250,
+		"values": {
+			"VALUE_1": "FNU IS NNIIFITE",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68375,
+		"values": {
+			"VALUE_1": " ",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68500,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68500,
+		"values": {
+			"VALUE_1": "FUNFUNFUNFUN",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68625,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68625,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68625,
+		"values": {
+			"VALUE_1": "INFINITE",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68750,
+		"values": {
+			"VALUE_1": "fun is inifnite",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 68875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 68875,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 68875,
+		"values": {
+			"VALUE_1": "AAAAAAAA",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "xscene",
+		"time": 69000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "hud"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 69000,
+		"values": {
+			"VALUE_1": " ",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 69187.5,
+		"values": {
+			"VALUE_1": "x",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 69187.5,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "X"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 69187.5,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BfX"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 75000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 75375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 75750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 76125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 76500,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 76875,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 77250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 77625,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 78000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 78375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 78750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 79125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 79500,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 79875,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 80250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 80625,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81187.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81562.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 81937.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 82125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 82312.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 82500,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 82687.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 82875,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 83062.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 83250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 83437.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 83625,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 83812.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84093.75,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84187.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84281.25,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84468.75,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84562.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84656.25,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84843.75,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 84937.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 85031.25,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 85125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 85218.75,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 85312.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 85406.25,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 85500,
+		"values": {
+			"VALUE_1": "Re",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 85625,
+		"values": {
+			"VALUE_1": "Ready",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 85828.125,
+		"values": {
+			"VALUE_1": "Ready for",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86062.5,
+		"values": {
+			"VALUE_1": "Ready for ROUND",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86625,
+		"values": {
+			"VALUE_1": "Ready for ROUND 2?",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86812.5,
+		"values": {
+			"VALUE_1": "Ready for ROUND 2??",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86835.9375,
+		"values": {
+			"VALUE_1": "Ready for ROUND 2???",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86859.375,
+		"values": {
+			"VALUE_1": "Ready for ROUND 2????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86882.8125,
+		"values": {
+			"VALUE_1": "REAdy FOr ROUND 2?????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86906.25,
+		"values": {
+			"VALUE_1": "Ready for ROUND 2??????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86929.6875,
+		"values": {
+			"VALUE_1": "REaDY fOR ROUND 2??????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86953.125,
+		"values": {
+			"VALUE_1": "Ready fOr ROUND 2????????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 86976.5625,
+		"values": {
+			"VALUE_1": "READY FOR ROUND 2????????",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 87000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SlowZoom",
+		"time": 87000,
+		"values": {
+			"VALUE_1": "2",
+			"VALUE_2": "0.01,2"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 87000,
+		"values": {
+			"VALUE_1": "SONIC.EXE",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 87375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 87750,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 88125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 88500,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 88875,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 89250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 89625,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 90000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 90000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 90375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 90750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 91125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 91500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 91875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 92250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 92625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 93000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 93000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 93375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 93750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 94125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 94500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 94500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 94875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 95250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 95625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 96000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 96000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 96375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 96750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 96937.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 97125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 97312.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 97500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 97500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 97875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 98250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 98437.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 98625,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 99000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 99375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 99750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 100125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 100500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 100500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 100875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 101250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 101625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 102000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 102000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 102375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 102750,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 103125,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 103500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 103500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 103875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 104250,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 104625,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 105000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 105375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 105750,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 106312.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 106500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 106875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 107250,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 107812.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 108000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 108000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 108375,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 108750,
+		"values": {
+			"VALUE_1": "1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 109312.5,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 109500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 109875,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 110250,
+		"values": {
+			"VALUE_1": "GON",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "fusion",
+		"time": 110250,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "hud"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 110437.5,
+		"values": {
+			"VALUE_1": "GONNA",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 110625,
+		"values": {
+			"VALUE_1": "GONNA GET",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 110812.5,
+		"values": {
+			"VALUE_1": "GONNA GETCHA!!!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 111000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 135000,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "XRodentRap"
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 135000,
+		"values": {
+			"VALUE_1": "rodentrap",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "setCheckpointTime",
+		"time": 135000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 135000,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BfRodentRap"
+		}
+	},
+	{
+		"tag": "setNoteskin",
+		"time": 135000,
+		"values": {
+			"VALUE_1": "NOTE_assets-FNF",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 135750,
+		"values": {
+			"VALUE_1": "Friday Night Funkin': Rodentrap",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 136125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 136500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 137062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 137625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 138000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 138562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 139125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 139500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 140062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 140625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 141000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 141562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 142125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 142500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 143062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 143625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 144000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 144562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 145125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 145500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 146062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 146625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 147000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 147562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 148125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 148500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 149062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 149625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 150000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 150562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 151125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 151500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 152062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 152625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 153000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 153562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 154125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 154500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 155062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 155625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 156000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 156562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 157125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 157500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 158062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 158625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 159000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 159562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 160125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 160500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 161062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 161625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 162000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 162562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 163125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 163500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 164062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 164625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 165000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 165562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 166125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 166500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 167062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 167625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 168000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 168562.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 169125,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 169500,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 170062.5,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 170625,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 171000,
+		"values": {
+			"VALUE_1": "0.06",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "setNoteskin",
+		"time": 173531.25,
+		"values": {
+			"VALUE_1": "NOTE_assets",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 174000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "LordX"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BflordX"
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "lx",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "ChangeScrollFactor",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "1.4",
+			"VALUE_2": "bf"
+		}
+	},
+	{
+		"tag": "ChangeScrollFactor",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "0.8",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 174000,
+		"values": {
+			"VALUE_1": " ",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lxscene",
+		"time": 174000,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Alt Idle Animation",
+		"time": 174468.75,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": "-alt"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 174468.75,
+		"values": {
+			"VALUE_1": "idle-alt",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 175500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 177000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 178500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 180000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 181500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 183000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 184500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 186000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 187500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 189000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 192750,
+		"values": {
+			"VALUE_1": "laugh",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Set Property",
+		"time": 194906.25,
+		"values": {
+			"VALUE_1": "camZooming",
+			"VALUE_2": "false"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197250,
+		"values": {
+			"VALUE_1": "WEL",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197437.5,
+		"values": {
+			"VALUE_1": "WELCOME",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197625,
+		"values": {
+			"VALUE_1": "WELCOME BACK!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197718.75,
+		"values": {
+			"VALUE_1": "WeLCOME BaCK!!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197812.5,
+		"values": {
+			"VALUE_1": "WELCOME BACK!!!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197859.375,
+		"values": {
+			"VALUE_1": "Welcome Back!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197906.25,
+		"values": {
+			"VALUE_1": "welCOME BACk!!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 197953.125,
+		"values": {
+			"VALUE_1": "!!!!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Set Property",
+		"time": 197953.125,
+		"values": {
+			"VALUE_1": "camZooming",
+			"VALUE_2": "true"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 198000,
+		"values": {
+			"VALUE_1": "Sonic PC Port",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Alt Idle Animation",
+		"time": 198187.5,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 201000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 204000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 207000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 210000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 210000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 210000,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "LordXB"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 210000,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BflordXB"
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 210000,
+		"values": {
+			"VALUE_1": "lx2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 210375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 210750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211031.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211312.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 212250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 212531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 212812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 213000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 213375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 213750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 214031.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 214312.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 214500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 214875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 215250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 215531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 215812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 216000,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 216000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 216375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 216750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 217031.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 217312.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 217500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 217875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 218250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 218531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 218812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 219000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 219375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 219750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 220031.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 220312.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 220500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 220875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 221250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 221531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 221812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 222000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 223500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 223500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 223875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 224250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 224531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 224812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 225000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 225000,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 225375,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 225750,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 226031.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 226312.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 226500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 226500,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 226875,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 227250,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 227531.25,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 227812.5,
+		"values": {
+			"VALUE_1": "0.1",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 228000,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 228000,
+		"values": {
+			"VALUE_1": "lx",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Image Flash",
+		"time": 228000,
+		"values": {
+			"VALUE_1": "flash",
+			"VALUE_2": "0.05"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 228000,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "LordX"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 228000,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "BflordX"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 229125,
+		"values": {
+			"VALUE_1": "glitch",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 229125,
+		"values": {
+			"VALUE_1": "0.5, 0.01",
+			"VALUE_2": "0.5, 0.01"
+		}
+	},
+	{
+		"tag": "setNoteskin",
+		"time": 234187.5,
+		"values": {
+			"VALUE_1": "internalX_Notes",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 235500,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "LordXInternal"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 236250,
+		"values": {
+			"VALUE_1": "appear",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 237000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 237375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 237750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 238125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 238500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 238875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 239250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 239625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 240000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 240375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 240750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 241125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 241500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 241875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 242250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 242625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 243000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 243375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 243750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 244125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 244500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 244875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 245250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 245625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 246000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 246375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 246750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 247125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 247500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 247875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 248250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 248625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 249000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 249375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 249750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 250125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 250500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 250875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 251250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 251625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 252000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 252375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 252750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 253125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 253500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 253875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 254250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 254625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 255000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 255375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 255750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 256125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 256500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 256687.5,
+		"values": {
+			"VALUE_1": "glitch",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 256687.5,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 256734.375,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 256781.25,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "MajinWindowGlitchThing",
+		"time": 256828.125,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 256875,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 257250,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 257625,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 258000,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 258375,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 258750,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 259125,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 259500,
+		"values": {
+			"VALUE_1": "0.045",
+			"VALUE_2": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 259875,
+		"values": {
+			"VALUE_1": "0.035",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 260250,
+		"values": {
+			"VALUE_1": "0.025",
+			"VALUE_2": "0.02"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 260625,
+		"values": {
+			"VALUE_1": "glitch",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 261000,
+		"values": {
+			"VALUE_1": "glitchLoop",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "setNoteskin",
+		"time": 266400,
+		"values": {
+			"VALUE_1": "NOTE_assets",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 272700,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "ChangeBG",
+		"time": 272700,
+		"values": {
+			"VALUE_1": "rewrite",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 272700,
+		"values": {
+			"VALUE_1": "Dad",
+			"VALUE_2": "Sonic"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 272700,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "Bfsonic"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 273900,
+		"values": {
+			"VALUE_1": " ",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "setCheckpointTime",
+		"time": 277425,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 277500,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Change Scroll Speed",
+		"time": 277500,
+		"values": {
+			"VALUE_1": "0.8",
+			"VALUE_2": "1"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 277500,
+		"values": {
+			"VALUE_1": "SONIC",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 284700,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 287100,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 289500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 291900,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 292650,
+		"values": {
+			"VALUE_1": "wave",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 294300,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 295050,
+		"values": {
+			"VALUE_1": "yeah",
+			"VALUE_2": "Bf"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 296700,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 296700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 297600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 297900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 298200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 299100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 300000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 300300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 300600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 301500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 302400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 302700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 303000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 303300,
+		"values": {
+			"VALUE_1": "iamgod",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 303300,
+		"values": {
+			"VALUE_1": "I",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 303600,
+		"values": {
+			"VALUE_1": "I am",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 303900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 303900,
+		"values": {
+			"VALUE_1": "I am god!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 304800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 305100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 305400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "WindowTitle",
+		"time": 305700,
+		"values": {
+			"VALUE_1": "SONIC",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 306300,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 306300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 307200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 307500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 307800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 308700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 309600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 309900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 310200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 311100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 312000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 312300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 312600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 313500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 314400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 314700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 315000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 315900,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 315900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 316800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 317100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 317400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 318300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 319200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 319500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 319800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 320700,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 320700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 321600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 321900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 322200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 323100,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 323100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 324000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 324300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 324600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 325500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 325500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 326400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 326700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 327000,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 327900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 328800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 329100,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 329400,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 330300,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 330300,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 331200,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 331500,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 331800,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 332700,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 332700,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 333600,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 333900,
+		"values": {
+			"VALUE_1": "0.050",
+			"VALUE_2": "0.03"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 335100,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SlowZoom",
+		"time": 335100,
+		"values": {
+			"VALUE_1": "0.9",
+			"VALUE_2": "5,4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 337500,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 339900,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 339900,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 340757.142857143,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 341042.857142857,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 342185.714285714,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 342185.714285714,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 342757.142857143,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 343328.571428571,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 343757.142857143,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 344185.714285714,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 344471.428571429,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Change Scroll Speed",
+		"time": 344471.428571429,
+		"values": {
+			"VALUE_1": "1.2",
+			"VALUE_2": "4"
+		}
+	},
+	{
+		"tag": "SlowZoom",
+		"time": 344471.428571429,
+		"values": {
+			"VALUE_1": "1.7",
+			"VALUE_2": "23,13"
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 344471.428571429,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 344993.167701863,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 345514.906832298,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 345906.211180124,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 346297.51552795,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 346558.385093168,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 346558.385093168,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 347080.124223602,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 347601.863354037,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 347993.167701863,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 348384.472049689,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 348645.341614907,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 348645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 349145.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 349645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 350020.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 350395.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 350645.341614907,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 350645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 351145.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 351645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 352020.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 352395.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 352645.341614907,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 352645.341614907,
+		"values": {
+			"VALUE_1": "15, 0.002",
+			"VALUE_2": "15, 0.002"
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 352645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 353106.880076445,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 353568.418537984,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 353914.572384138,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 354260.726230291,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 354491.495461061,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 354491.495461061,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 354953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 355414.572384138,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 355760.726230291,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 356106.880076445,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 356337.649307215,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 356337.649307215,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 356799.187768753,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 357260.726230291,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 357606.880076445,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 357953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 358183.803153368,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 358183.803153368,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 358645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 359106.880076445,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 359453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 359799.187768753,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 360029.956999522,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 360029.956999522,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 360491.495461061,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 360953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 361299.187768753,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 361645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 361876.110845676,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 361876.110845676,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 362337.649307215,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 362799.187768753,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 363145.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 363491.495461061,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 363722.26469183,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 363722.26469183,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 364183.803153368,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 364645.341614907,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 364991.495461061,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 365337.649307215,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 365568.418537984,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 365568.418537984,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 366029.956999522,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 366491.495461061,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 366837.649307215,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 367068.418537984,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 367414.572384138,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "Cambump",
+		"time": 367414.572384138,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 368337.649307215,
+		"values": {
+			"VALUE_1": "laugh",
+			"VALUE_2": "Dad"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 369260.726230292,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"tag": "AnimatedSprite",
+		"time": 369260.726230292,
+		"values": {
+			"VALUE_1": "Stomp",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 389453.033922599,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": "sonicFall"
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389546.783922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389640.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389734.283922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389828.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 389921.783922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390015.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390109.283922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390296.783922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390390.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390484.283922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390578.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390671.783922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390765.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390812.408922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390859.283922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390906.158922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 390953.033922599,
+		"values": {
+			"VALUE_1": "in",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "introGlitch",
+		"time": 390953.033922599,
+		"values": {
+			"VALUE_1": "hide",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 391093.658922599,
+		"values": {
+			"VALUE_1": "in a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 391328.033922599,
+		"values": {
+			"VALUE_1": "in a lu",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 391515.533922599,
+		"values": {
+			"VALUE_1": "in a lucid",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 391703.033922599,
+		"values": {
+			"VALUE_1": "in a lucid pa",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 391890.533922599,
+		"values": {
+			"VALUE_1": "in a lucid para",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 392078.033922599,
+		"values": {
+			"VALUE_1": "in a lucid paradise",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 392453.033922599,
+		"values": {
+			"VALUE_1": "you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 392640.533922599,
+		"values": {
+			"VALUE_1": "you come",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 392828.033922599,
+		"values": {
+			"VALUE_1": "you come here",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 393015.533922599,
+		"values": {
+			"VALUE_1": "you come here to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 393203.033922599,
+		"values": {
+			"VALUE_1": "you come here to break",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 393390.533922599,
+		"values": {
+			"VALUE_1": "you come here to break the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 393578.033922599,
+		"values": {
+			"VALUE_1": "you come here to break the time",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 393953.033922599,
+		"values": {
+			"VALUE_1": "i'll",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 394140.533922599,
+		"values": {
+			"VALUE_1": "i'll make",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 394328.033922599,
+		"values": {
+			"VALUE_1": "i'll make you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 394515.533922599,
+		"values": {
+			"VALUE_1": "i'll make you pro",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 394703.033922599,
+		"values": {
+			"VALUE_1": "i'll make you protag",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 394890.533922599,
+		"values": {
+			"VALUE_1": "i'll make you protago",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 395078.033922599,
+		"values": {
+			"VALUE_1": "i'll make you protagonist",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 395453.033922599,
+		"values": {
+			"VALUE_1": "af",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 395640.533922599,
+		"values": {
+			"VALUE_1": "after",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 395828.033922599,
+		"values": {
+			"VALUE_1": "after we",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396015.533922599,
+		"values": {
+			"VALUE_1": "after we play",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 396109.283922599,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": "sonicWurugashikai"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396203.033922599,
+		"values": {
+			"VALUE_1": "after we play hide",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396390.533922599,
+		"values": {
+			"VALUE_1": "after we play hide and",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396578.033922599,
+		"values": {
+			"VALUE_1": "after we play hide and se",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396671.783922599,
+		"values": {
+			"VALUE_1": "after we play hide and se-e",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396765.533922599,
+		"values": {
+			"VALUE_1": "after we play hide and se-e-e",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396859.283922599,
+		"values": {
+			"VALUE_1": "after we play hide and seek",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 396953.033922599,
+		"values": {
+			"VALUE_1": "leave",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 397140.533922599,
+		"values": {
+			"VALUE_1": "leave your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 397328.033922599,
+		"values": {
+			"VALUE_1": "leave your so",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 397515.533922599,
+		"values": {
+			"VALUE_1": "leave your sorrows",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 397703.033922599,
+		"values": {
+			"VALUE_1": "leave your sorrows by",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 397890.533922599,
+		"values": {
+			"VALUE_1": "leave your sorrows by the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 398078.033922599,
+		"values": {
+			"VALUE_1": "leave your sorrows by the en",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 398265.533922599,
+		"values": {
+			"VALUE_1": "leave your sorrows by the entrance",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 398453.033922599,
+		"values": {
+			"VALUE_1": "you're",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 398640.533922599,
+		"values": {
+			"VALUE_1": "you're al",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 398828.033922599,
+		"values": {
+			"VALUE_1": "you're alre",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399015.533922599,
+		"values": {
+			"VALUE_1": "you're already",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399203.033922599,
+		"values": {
+			"VALUE_1": "you're already on",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399390.533922599,
+		"values": {
+			"VALUE_1": "you're already on the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399578.033922599,
+		"values": {
+			"VALUE_1": "you're already on the ex",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399765.533922599,
+		"values": {
+			"VALUE_1": "you're already on the exit",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 399953.033922599,
+		"values": {
+			"VALUE_1": "rocks",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 400140.533922599,
+		"values": {
+			"VALUE_1": "rocks are",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 400328.033922599,
+		"values": {
+			"VALUE_1": "rocks are fall",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 400515.533922599,
+		"values": {
+			"VALUE_1": "rocks are falling",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 400703.033922599,
+		"values": {
+			"VALUE_1": "rocks are falling from",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 400890.533922599,
+		"values": {
+			"VALUE_1": "rocks are falling from the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 401078.033922599,
+		"values": {
+			"VALUE_1": "rocks are falling from the sky",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 401453.033922599,
+		"values": {
+			"VALUE_1": "all",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 401640.533922599,
+		"values": {
+			"VALUE_1": "all you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 401828.033922599,
+		"values": {
+			"VALUE_1": "all you can",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 402015.533922599,
+		"values": {
+			"VALUE_1": "all you can feel",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 402203.033922599,
+		"values": {
+			"VALUE_1": "all you can feel is",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 402390.533922599,
+		"values": {
+			"VALUE_1": "all you can feel is sun",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 402578.033922599,
+		"values": {
+			"VALUE_1": "all you can feel is sunshine",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 402953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 408953.033922599,
+		"values": {
+			"VALUE_1": "wel",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 409140.533922599,
+		"values": {
+			"VALUE_1": "welcome",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 409328.033922599,
+		"values": {
+			"VALUE_1": "welcome to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 409515.533922599,
+		"values": {
+			"VALUE_1": "welcome to my",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 409890.533922599,
+		"values": {
+			"VALUE_1": "welcome to my back",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 410078.033922599,
+		"values": {
+			"VALUE_1": "welcome to my backdoor",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 410453.033922599,
+		"values": {
+			"VALUE_1": "this",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 410640.533922599,
+		"values": {
+			"VALUE_1": "this place",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 410828.033922599,
+		"values": {
+			"VALUE_1": "this place is",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 411015.533922599,
+		"values": {
+			"VALUE_1": "this place is built",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 411390.533922599,
+		"values": {
+			"VALUE_1": "this place is built for",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 411578.033922599,
+		"values": {
+			"VALUE_1": "this place is built for you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 411953.033922599,
+		"values": {
+			"VALUE_1": "who's",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 412140.533922599,
+		"values": {
+			"VALUE_1": "who's al",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 412328.033922599,
+		"values": {
+			"VALUE_1": "who's always",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 412515.533922599,
+		"values": {
+			"VALUE_1": "who's always hun",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 412703.033922599,
+		"values": {
+			"VALUE_1": "who's always hungry",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 412890.533922599,
+		"values": {
+			"VALUE_1": "who's always hungry for",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 413078.033922599,
+		"values": {
+			"VALUE_1": "who's always hungry for more",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 413453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "thats"
+		}
+	},
+	{
+		"tag": "Change Scroll Speed",
+		"time": 413453.033922599,
+		"values": {
+			"VALUE_1": "1.35",
+			"VALUE_2": "0.2"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 413640.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "why"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 413828.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "this"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 414015.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "is"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 414203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "round"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 414390.533922599,
+		"values": {
+			"VALUE_1": "BF",
+			"VALUE_2": "wireframeBF"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 414578.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "round2"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 414953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 426953.033922599,
+		"values": {
+			"VALUE_1": "your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 427140.533922599,
+		"values": {
+			"VALUE_1": "your world's",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 427328.033922599,
+		"values": {
+			"VALUE_1": "your world's a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 427515.533922599,
+		"values": {
+			"VALUE_1": "your world's a mir",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 427890.533922599,
+		"values": {
+			"VALUE_1": "your world's a mirror",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 428265.533922599,
+		"values": {
+			"VALUE_1": "your world's a mirror of",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 428640.533922599,
+		"values": {
+			"VALUE_1": "your world's a mirror of your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 429015.533922599,
+		"values": {
+			"VALUE_1": "your world's a mirror of yourself",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 429578.033922599,
+		"values": {
+			"VALUE_1": "and",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 429765.533922599,
+		"values": {
+			"VALUE_1": "and ne",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 429953.033922599,
+		"values": {
+			"VALUE_1": "and never",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 430140.533922599,
+		"values": {
+			"VALUE_1": "and never the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 430328.033922599,
+		"values": {
+			"VALUE_1": "and never the oth",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 430515.533922599,
+		"values": {
+			"VALUE_1": "and never the other",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 430703.033922599,
+		"values": {
+			"VALUE_1": "and never the other way",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 430984.283922599,
+		"values": {
+			"VALUE_1": "and never the other way a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 431265.533922599,
+		"values": {
+			"VALUE_1": "and never the other way around!",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 432203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Hide Taskbar",
+		"time": 432765.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 432906.158922599,
+		"values": {
+			"VALUE_1": "in",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 432953.033922599,
+		"values": {
+			"VALUE_1": "yeah",
+			"VALUE_2": "bf"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 433093.658922599,
+		"values": {
+			"VALUE_1": "in your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 433281.158922599,
+		"values": {
+			"VALUE_1": "in your hands",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 433468.658922599,
+		"values": {
+			"VALUE_1": "in your hands lays",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 433890.533922599,
+		"values": {
+			"VALUE_1": "in your hands lays all",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 434265.533922599,
+		"values": {
+			"VALUE_1": "in your hands lays all of",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 434640.533922599,
+		"values": {
+			"VALUE_1": "in your hands lays all of their",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 435015.533922599,
+		"values": {
+			"VALUE_1": "in your hands lays all of their cries",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 435953.033922599,
+		"values": {
+			"VALUE_1": "free",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 436140.533922599,
+		"values": {
+			"VALUE_1": "free will",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 436328.033922599,
+		"values": {
+			"VALUE_1": "free will al",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 436515.533922599,
+		"values": {
+			"VALUE_1": "free will always",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 436703.033922599,
+		"values": {
+			"VALUE_1": "free will always has",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 436984.283922599,
+		"values": {
+			"VALUE_1": "free will always has a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 437265.533922599,
+		"values": {
+			"VALUE_1": "free will always has a  p r i c e  !",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 438203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 438953.033922599,
+		"values": {
+			"VALUE_1": "i'll",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 439140.533922599,
+		"values": {
+			"VALUE_1": "i'll make",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 439234.283922599,
+		"values": {
+			"VALUE_1": "i'll make you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 439515.533922599,
+		"values": {
+			"VALUE_1": "i'll make you a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 439703.033922599,
+		"values": {
+			"VALUE_1": "i'll make you a part",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 439890.533922599,
+		"values": {
+			"VALUE_1": "i'll make you a part of",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 440078.033922599,
+		"values": {
+			"VALUE_1": "i'll make you a part of me",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 440453.033922599,
+		"values": {
+			"VALUE_1": "e",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 440546.783922599,
+		"values": {
+			"VALUE_1": "even",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 440734.283922599,
+		"values": {
+			"VALUE_1": "even though",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441015.533922599,
+		"values": {
+			"VALUE_1": "even though you're",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441109.283922599,
+		"values": {
+			"VALUE_1": "even though you're a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441203.033922599,
+		"values": {
+			"VALUE_1": "even though you're ano",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441390.533922599,
+		"values": {
+			"VALUE_1": "even though you're another",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441578.033922599,
+		"values": {
+			"VALUE_1": "even though you're another piece",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 441953.033922599,
+		"values": {
+			"VALUE_1": "puff",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442046.783922599,
+		"values": {
+			"VALUE_1": "puffing",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442140.533922599,
+		"values": {
+			"VALUE_1": "puffing out",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442234.283922599,
+		"values": {
+			"VALUE_1": "puffing out your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442328.033922599,
+		"values": {
+			"VALUE_1": "puffing out your chest",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442515.533922599,
+		"values": {
+			"VALUE_1": "with",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442609.283922599,
+		"values": {
+			"VALUE_1": "with the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442703.033922599,
+		"values": {
+			"VALUE_1": "with the sky",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442843.658922599,
+		"values": {
+			"VALUE_1": "with the sky a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442890.533922599,
+		"values": {
+			"VALUE_1": "with the sky above",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 442984.283922599,
+		"values": {
+			"VALUE_1": "with the sky above your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443078.033922599,
+		"values": {
+			"VALUE_1": "with the sky above your head",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443265.533922599,
+		"values": {
+			"VALUE_1": "hold",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443359.283922599,
+		"values": {
+			"VALUE_1": "holding",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443453.033922599,
+		"values": {
+			"VALUE_1": "holding hands",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443609.283922599,
+		"values": {
+			"VALUE_1": "holding hands with",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443734.283922599,
+		"values": {
+			"VALUE_1": "holding hands with the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 443828.033922599,
+		"values": {
+			"VALUE_1": "holding hands with death",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444015.533922599,
+		"values": {
+			"VALUE_1": "fall",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444109.283922599,
+		"values": {
+			"VALUE_1": "falling",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444203.033922599,
+		"values": {
+			"VALUE_1": "falling to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444296.783922599,
+		"values": {
+			"VALUE_1": "falling to the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444390.533922599,
+		"values": {
+			"VALUE_1": "falling to the next",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444578.033922599,
+		"values": {
+			"VALUE_1": "falling to the next step",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444765.533922599,
+		"values": {
+			"VALUE_1": "but",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444859.283922599,
+		"values": {
+			"VALUE_1": "but the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 444953.033922599,
+		"values": {
+			"VALUE_1": "but the scythe",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445140.533922599,
+		"values": {
+			"VALUE_1": "but the scythe did",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445234.283922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445328.033922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445421.783922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445515.533922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the gen",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445609.283922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the geno",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445703.033922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the genocide",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 445890.533922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the genocide its",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446078.033922599,
+		"values": {
+			"VALUE_1": "but the scythe didn't make the genocide itself",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446265.533922599,
+		"values": {
+			"VALUE_1": "and",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446359.283922599,
+		"values": {
+			"VALUE_1": "and it's",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446453.033922599,
+		"values": {
+			"VALUE_1": "and it's still",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446546.783922599,
+		"values": {
+			"VALUE_1": "and it's still the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446640.533922599,
+		"values": {
+			"VALUE_1": "and it's still the one",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446734.283922599,
+		"values": {
+			"VALUE_1": "and it's still the one you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 446828.033922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447015.533922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame when",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447109.283922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame when you",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447203.033922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame when you go",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447390.533922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame when you go to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447578.033922599,
+		"values": {
+			"VALUE_1": "and it's still the one you blame when you go to hell",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447765.533922599,
+		"values": {
+			"VALUE_1": "in",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 447765.533922599,
+		"values": {
+			"VALUE_1": "ringCollect",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447859.283922599,
+		"values": {
+			"VALUE_1": "in the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 447953.033922599,
+		"values": {
+			"VALUE_1": "in the end",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448140.533922599,
+		"values": {
+			"VALUE_1": "in the end you're",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448234.283922599,
+		"values": {
+			"VALUE_1": "in the end you're the",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448328.033922599,
+		"values": {
+			"VALUE_1": "in the end you're the one",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448421.783922599,
+		"values": {
+			"VALUE_1": "in the end you're the one who",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448515.533922599,
+		"values": {
+			"VALUE_1": "in the end you're the one who raised",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448609.283922599,
+		"values": {
+			"VALUE_1": "in the end you're the one who raised their",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448703.033922599,
+		"values": {
+			"VALUE_1": "in the end you're the one who raised their hand",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448890.533922599,
+		"values": {
+			"VALUE_1": "i",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 448984.283922599,
+		"values": {
+			"VALUE_1": "i just",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449078.033922599,
+		"values": {
+			"VALUE_1": "i just got",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449171.783922599,
+		"values": {
+			"VALUE_1": "i just got rid",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449265.533922599,
+		"values": {
+			"VALUE_1": "i just got rid of",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449359.283922599,
+		"values": {
+			"VALUE_1": "i just got rid of your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449453.033922599,
+		"values": {
+			"VALUE_1": "i just got rid of your chains",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449640.533922599,
+		"values": {
+			"VALUE_1": "thanks",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449734.283922599,
+		"values": {
+			"VALUE_1": "thanks for",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449828.033922599,
+		"values": {
+			"VALUE_1": "thanks for giv",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 449921.783922599,
+		"values": {
+			"VALUE_1": "thanks for giving",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450015.533922599,
+		"values": {
+			"VALUE_1": "thanks for giving me",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450109.283922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450203.033922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a chance",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450390.533922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a chance to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450578.033922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a chance to meet",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450765.533922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a chance to meet your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 450765.533922599,
+		"values": {
+			"VALUE_1": "transform",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 450953.033922599,
+		"values": {
+			"VALUE_1": "thanks for giving me a chance to meet your soul",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 450953.033922599,
+		"values": {
+			"VALUE_1": "im",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 450953.033922599,
+		"values": {
+			"VALUE_1": "gf",
+			"VALUE_2": "sonicKyokaiDark"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 450953.033922599,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": "sonicKyokai"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 451140.533922599,
+		"values": {
+			"VALUE_1": "al",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 451328.033922599,
+		"values": {
+			"VALUE_1": "already",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 451703.033922599,
+		"values": {
+			"VALUE_1": "in",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 451703.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 451890.533922599,
+		"values": {
+			"VALUE_1": "your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 452078.033922599,
+		"values": {
+			"VALUE_1": "mind",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 452453.033922599,
+		"values": {
+			"VALUE_1": "to",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 452640.533922599,
+		"values": {
+			"VALUE_1": "toge",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 452828.033922599,
+		"values": {
+			"VALUE_1": "together",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 453015.533922599,
+		"values": {
+			"VALUE_1": "were",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 453203.033922599,
+		"values": {
+			"VALUE_1": "gon",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 453390.533922599,
+		"values": {
+			"VALUE_1": "gonna",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 453578.033922599,
+		"values": {
+			"VALUE_1": "die",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 453953.033922599,
+		"values": {
+			"VALUE_1": "when",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 454140.533922599,
+		"values": {
+			"VALUE_1": "we",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 454328.033922599,
+		"values": {
+			"VALUE_1": "seek",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 454515.533922599,
+		"values": {
+			"VALUE_1": "we-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 454703.033922599,
+		"values": {
+			"VALUE_1": "al-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 454890.533922599,
+		"values": {
+			"VALUE_1": "always",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 455078.033922599,
+		"values": {
+			"VALUE_1": "find",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 455265.533922599,
+		"values": {
+			"VALUE_1": "no",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 455453.033922599,
+		"values": {
+			"VALUE_1": "mat",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 455640.533922599,
+		"values": {
+			"VALUE_1": "matter",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 455828.033922599,
+		"values": {
+			"VALUE_1": "if",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 456015.533922599,
+		"values": {
+			"VALUE_1": "we-3",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 456203.033922599,
+		"values": {
+			"VALUE_1": "waste",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 456390.533922599,
+		"values": {
+			"VALUE_1": "some",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 456578.033922599,
+		"values": {
+			"VALUE_1": "tries",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 456953.033922599,
+		"values": {
+			"VALUE_1": "im",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 457140.533922599,
+		"values": {
+			"VALUE_1": "al",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 457328.033922599,
+		"values": {
+			"VALUE_1": "already",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 457703.033922599,
+		"values": {
+			"VALUE_1": "in",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 457890.533922599,
+		"values": {
+			"VALUE_1": "your",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 458078.033922599,
+		"values": {
+			"VALUE_1": "mind",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 458453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 459578.033922599,
+		"values": {
+			"VALUE_1": "gf",
+			"VALUE_2": "sonicWurugashikaiDark"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 459578.033922599,
+		"values": {
+			"VALUE_1": "dad",
+			"VALUE_2": "sonicWurugashikai"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 459953.033922599,
+		"values": {
+			"VALUE_1": "when-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 459953.033922599,
+		"values": {
+			"VALUE_1": "exeswap",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 460140.533922599,
+		"values": {
+			"VALUE_1": "we-4",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 460328.033922599,
+		"values": {
+			"VALUE_1": "seek-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 460515.533922599,
+		"values": {
+			"VALUE_1": "we-5",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 460703.033922599,
+		"values": {
+			"VALUE_1": "al-3",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 460890.533922599,
+		"values": {
+			"VALUE_1": "always-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 461078.033922599,
+		"values": {
+			"VALUE_1": "find-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 461265.533922599,
+		"values": {
+			"VALUE_1": "no-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 461453.033922599,
+		"values": {
+			"VALUE_1": "mat-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 461640.533922599,
+		"values": {
+			"VALUE_1": "matter-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 461828.033922599,
+		"values": {
+			"VALUE_1": "if-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 462015.533922599,
+		"values": {
+			"VALUE_1": "we-6",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 462203.033922599,
+		"values": {
+			"VALUE_1": "waste-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 462390.533922599,
+		"values": {
+			"VALUE_1": "some-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 462578.033922599,
+		"values": {
+			"VALUE_1": "tries-2",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 462953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "let"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 463140.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "your"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 463328.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "spi"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 463515.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "spirit"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 463703.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "leave"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 463890.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "your-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 464078.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "bo"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 464265.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "body"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 464453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "i"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 464640.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "am"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 464828.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "god"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465015.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "and"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "youre"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465390.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "no"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465578.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "nobo"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465765.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "nobody"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 465953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "i-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 466140.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "will"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 466281.158922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "take"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 466515.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "you"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 466703.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "to"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 466890.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "my"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 467078.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "world"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 467453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "then"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 467640.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "ill"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 467828.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "leave-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 468015.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "you-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 468203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "with"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 468390.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "without"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 468578.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "word"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 468953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "hide"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 469140.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "and-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 469328.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "seek"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 469703.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "cant"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 469890.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "you-3"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 470078.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "see"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 470453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 471953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "youre-2"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 471953.033922599,
+		"values": {
+			"VALUE_1": "urTheOne",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 472140.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "the"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 472328.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "one"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 472515.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "im"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 472703.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "look"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 472890.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "looking"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 473078.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "for"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 473453.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "through"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 473640.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "the-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 473828.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "screen"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 474015.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "i-3"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 474203.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "can"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 474390.533922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "see-2"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 474578.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": "more"
+		}
+	},
+	{
+		"tag": "imageLyrics",
+		"time": 474953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 474953.033922599,
+		"values": {
+			"VALUE_1": "la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 474953.033922599,
+		"values": {
+			"VALUE_1": "lalala",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 475328.033922599,
+		"values": {
+			"VALUE_1": "la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 475703.033922599,
+		"values": {
+			"VALUE_1": "la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 475890.533922599,
+		"values": {
+			"VALUE_1": "la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 476078.033922599,
+		"values": {
+			"VALUE_1": "la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 476265.533922599,
+		"values": {
+			"VALUE_1": "la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 476453.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 476828.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 477203.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 477578.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 477953.033922599,
+		"values": {
+			"VALUE_1": "la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 478328.033922599,
+		"values": {
+			"VALUE_1": "la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 478703.033922599,
+		"values": {
+			"VALUE_1": "la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 478890.533922599,
+		"values": {
+			"VALUE_1": "la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 479078.033922599,
+		"values": {
+			"VALUE_1": "la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 479265.533922599,
+		"values": {
+			"VALUE_1": "la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 479453.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 479828.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 480203.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 480578.033922599,
+		"values": {
+			"VALUE_1": "la la la la la la la la la la",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "lyrics",
+		"time": 480953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 483296.783922599,
+		"values": {
+			"VALUE_1": "ring",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 483953.033922599,
+		"values": {
+			"VALUE_1": "shootIdle",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 485453.033922599,
+		"values": {
+			"VALUE_1": "shoot",
+			"VALUE_2": "dad"
+		}
+	},
+	{
+		"tag": "Restore Taskbar",
+		"time": 486953.033922599,
+		"values": {
+			"VALUE_1": "",
+			"VALUE_2": ""
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 265500,
+		"values": {
+			"bpm": 100,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 339900,
+		"values": {
+			"bpm": 105,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 344471.428571429,
+		"values": {
+			"bpm": 115,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 348645.341614907,
+		"values": {
+			"bpm": 120,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 352645.341614907,
+		"values": {
+			"bpm": 130,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 372953.033922599,
+		"values": {
+			"bpm": 160,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	}
+]

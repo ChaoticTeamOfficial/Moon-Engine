@@ -1,7 +1,7 @@
 package moon.game.obj.dialogue.effects;
 
 /**
- * Sinusoidal vertical offset, synced globally for consistency across characters.
+ * Sinusoidal vertical offset.
  */
 class WaveEffect extends TextEffect {
     override public function applyDynamic(sprite:FlxText, elapsed:Float, globalTime:Float, localTime:Float):Void

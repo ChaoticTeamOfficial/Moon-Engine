@@ -120,7 +120,7 @@ class MoonSettings
     {
         categories.set("Video Settings",
         [
-            new Setting("Screen Mode", SELECTOR, "Set your screen mode. (Borderless is not working atm! Sorry!)", ["Windowed", "Fullscreen", "Borderless Fullscreen"], "Windowed"),
+            new Setting("Screen Mode", SELECTOR, "Set your screen mode.", ["Windowed", "Fullscreen", "Borderless Fullscreen"], "Windowed"),
 
             new Setting("Window Resolution", SELECTOR, "Change your window resolution. (ONLY APPLIED IF ON WINDOWED!)", 
             ["800x600", "1024x768", "1280x720", "1280x800", "1366x768", "1440x900", 

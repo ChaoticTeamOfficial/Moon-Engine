@@ -27,31 +27,15 @@ class JudgementSprite extends MoonSprite
      */
     function showJudgement(judgement:String = 'sick', animate:Bool = true, fade:Bool = true)
     {
-        if(this.alpha <= 1) this.alpha = 1;
-        this.loadGraphic(Paths.image('ingame/UI/judgements_combo/$skin/$judgement'));
-        this.antialiasing = data?.antialiasing ?? true;
-        this.scale.set(data?.judgementScale ?? 1, data?.judgementScale ?? 1);
-        this.updateHitbox();
 
-        MoonUtils.cancelActiveTwn(fadeTwn);
-        MoonUtils.cancelActiveTwn(yTwn);
-
-        if(animate)
-        {
-            this.y -= 25;
-            yTwn = FlxTween.tween(this, {y:this.y + 25}, 0.24, {ease: FlxEase.quadOut});
-        }
-
-        if(fade)
-            fadeTwn = FlxTween.tween(this, {alpha: 0}, 0.4, {startDelay: 0.6});
     }
 
     @:noCompletion public function set_skin(skin:String):String
     {
         this.skin = skin;
 
-        if(Paths.exists('assets/images/ingame/UI/judgements_combo/$skin/config.json'))
-            data = Paths.JSON('ingame/UI/judgements_combo/$skin/config');
+        if(Paths.exists('images/ingame/UI/judgements_combo/$skin/config.json'))
+            data = Paths.JSON('images/ingame/UI/judgements_combo/$skin/config');
 
         return this.skin;
     }

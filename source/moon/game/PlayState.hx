@@ -303,6 +303,7 @@ class PlayState extends FlxState
 			SongData.saveData(song, difficulty, mix, stat.score, stat.misses, stat.accuracy);
 
 		Global.clearScriptList();
+		instance = null;
 		FlxG.switchState(() -> new ResultsState(stat));
 	}
 

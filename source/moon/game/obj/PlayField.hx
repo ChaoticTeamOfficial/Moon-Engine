@@ -39,8 +39,8 @@ class PlayField extends FlxGroup
 
     var healthBar:HealthBar;
     
-    //var p1Judgements:JudgementSprite;
-    //var p1Combo:ComboNumbers;
+    var p1Judgements:JudgementSprite;
+    var p1Combo:ComboNumbers;
     var stats:FlxText;
 
     // -- CALLBACKS -- //
@@ -107,17 +107,17 @@ class PlayField extends FlxGroup
         //< -- COMBO SETUP -- >//
         //TODO: Refactor and do an overhaul on this system.
         //TODO: Its currently VERY terrible on optimization :P
-        /*p1Judgements = new JudgementSprite();
+        p1Judgements = new JudgementSprite();
         p1Judgements.alpha = 0.0001;
         //just for preloading :p
         
         for(judgement => judgementVals in Timings.judgementsMap)
             p1Judgements.showJudgement(judgement, true, true);
 
-        add(p1Judgements);*/
+        add(p1Judgements);
 
-        //p1Combo = new ComboNumbers();
-        //add(p1Combo);
+        p1Combo = new ComboNumbers();
+        add(p1Combo);
 
         //< -- HEALTHBAR SETUP -- >//
         healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
@@ -165,7 +165,8 @@ class PlayField extends FlxGroup
             inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
             inputHandler.onGhostTap = (keyDir) -> if(onGhostTap != null) onGhostTap(keyDir);
 
-            //p1Judgements.skin = p1Combo.skin = strumline.members[0].judgementsSkin;
+            //Todo. ^^
+            p1Judgements.skin = p1Combo.skin = 'moon-engine';
         }
 
         // Little text for testing out the accuracy.
@@ -332,7 +333,7 @@ class PlayField extends FlxGroup
         {
             // update stats
             updateP1Stats('miss');
-            //p1Combo.comboRoll(0, 2, true);
+            p1Combo.comboRoll(0, 2, true);
 
             // and do a lil cool thing to the stats
             setStatsColor(FlxColor.RED);
@@ -362,7 +363,7 @@ class PlayField extends FlxGroup
         ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
         : stats.x = sx - (stats.width / 2);
 
-        /*if(!statsOnly)
+        if(!statsOnly)
         {
             if(judgement != null)
             {
@@ -378,7 +379,7 @@ class PlayField extends FlxGroup
             p1Combo.displayCombo(true, true);
             p1Combo.numsColor = p1Judgements.color;
             p1Combo.screenCenter();
-        }*/
+        }
     }
 
     var statsColor:FlxTween;

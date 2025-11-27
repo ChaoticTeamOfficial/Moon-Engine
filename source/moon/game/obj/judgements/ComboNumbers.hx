@@ -40,33 +40,6 @@ class ComboNumbers extends FlxSpriteGroup
      */
     function displayCombo(animate:Bool = true, fade:Bool = true)
     {
-        this.clear();
-        var comboString:String = Std.string(combo);
-		var stringArray:Array<String> = comboString.split("");
-        xSep = 0;
-
-		for (i in 0...stringArray.length)
-		{
-			var numbe = recycle(MoonSprite);
-            numbe.y = 0;
-            numbe.x = xSep;
-            numbe.loadGraphic(Paths.image('ingame/UI/judgements_combo/$skin/numbers/${Std.parseInt(stringArray[i])}'));
-            numbe.scale.set(data?.numberScale ?? 1, data?.numberScale ?? 1);
-            numbe.antialiasing = data?.antialiasing ?? true;
-            numbe.updateHitbox();
-			this.add(numbe);
-
-            xSep += numbe.width + data?.numberSpacing ?? 0;
-            
-            if(animate)
-            {
-                numbe.y += 25;
-                FlxTween.tween(numbe, {y:numbe.y - 25}, 0.24, {ease: FlxEase.quadOut});
-            }
-
-            if(fade)
-                FlxTween.tween(numbe, {alpha: 0}, 0.4, {startDelay: 0.6 + (0.04 * i)});
-		}
     }
 
     /**
@@ -77,62 +50,14 @@ class ComboNumbers extends FlxSpriteGroup
      */
     function comboRoll(toNumber:Int = 0, ?totalRolls:Int = 5, fadeOut:Bool = false)
     {
-        // just so we get the correct amount of numbers, ehehe
-        displayCombo(false, false);
-        this.combo = toNumber;
-
-        //then we update their graphic
-        if(Paths.exists('assets/images/ingame/UI/judgements_combo/$skin/numbers/roll.png'))
-        {
-            for (number in this.members)
-            {
-                //casting it so vsc sees the variables lol
-                var num = cast(number, MoonSprite);
-                num.graphic = null;
-                num.frames = Paths.getSparrowAtlas('ingame/UI/judgements_combo/$skin/numbers/roll');
-                num.centerAnimations = true;
-                num.color = numsColor;
-
-                num.animation.addByPrefix('roll', 'roll', 24, false);
-                num.x += data?.rollOffsets[0] ?? 0;
-                num.y += data?.rollOffsets[1] ?? 0;
-                num.playAnim('roll', true);
-                num.ID = 0;
-
-                final pos = [num.x, num.y];
-
-                //then, the callbacks
-                num.animation.onFinish.add((anim) -> 
-                {
-                    num.ID++;
-                    (num.ID >= totalRolls) ? {
-                        displayCombo(true, fadeOut);
-                        if(toNumber == 0)
-                        {
-                            numsColor = Timings.getParameters('miss')[4];
-
-                            if(MoonSettings.callSetting('Flashing Lights')) FlxFlicker.flicker(this, 0.5, 0.04, true);
-                        }
-                    } : num.playAnim('roll', true);
-                });
-
-                num.animation.onFrameChange.add((anim, framenum, framind) -> 
-                {
-                    //little shaking-like effect :P
-                    num.x = pos[0] + FlxG.random.float(-6, 6);
-                    num.y = pos[1] + FlxG.random.float(-6, 6);
-                });
-            }
-        }
-        else displayCombo(true, fadeOut);
     }
 
     @:noCompletion public function set_skin(skin:String):String
     {
         this.skin = skin;
 
-        if(Paths.exists('assets/images/ingame/UI/judgements_combo/$skin/config.json'))
-            data = Paths.JSON('ingame/UI/judgements_combo/$skin/config');
+        if(Paths.exists('images/ingame/UI/judgements_combo/$skin/config.json'))
+            data = Paths.JSON('images/ingame/UI/judgements_combo/$skin/config');
         else throw 'The data .JSON file for the combo and judgements were not found!';
 
         return this.skin;
@@ -141,7 +66,7 @@ class ComboNumbers extends FlxSpriteGroup
     @:noCompletion public function set_numsColor(color:FlxColor):FlxColor
     {
         this.numsColor = color;
-        for(num in this.members)num.color = this.numsColor;
+        
         return this.numsColor;    
     }
 }

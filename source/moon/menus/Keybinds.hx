@@ -15,6 +15,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.FlxSprite;
 import flixel.input.FlxInput.FlxInputState;
 import moon.dependency.user.MoonInput.MoonKeys;
+import moon.game.*;
 
 using StringTools;
 
@@ -109,7 +110,7 @@ class Keybinds extends FlxSubState
             if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
             else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
             if (MoonInput.justPressed(ACCEPT)) openRebindMode();
-            else if (MoonInput.justPressed(BACK)) close();
+            else if (MoonInput.justPressed(BACK)) FlxG.state.openSubState(new Settings(PlayState.instance != null));
             else if (FlxG.keys.justPressed.TAB)
             {
                 showKeyboard = !showKeyboard;

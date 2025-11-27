@@ -40,7 +40,8 @@ class Character extends MoonSprite
         super(x, y);
         this.conductor = conductor;
         this.character = character;
-        conductor.onBeat.add(checkDance);
+
+        if(conductor != null) conductor.onBeat.add(checkDance);
     }
     
     public function flipLeftRight():Void 
@@ -72,8 +73,8 @@ class Character extends MoonSprite
     }
         
     override public function update(elapsed:Float)
-    {        
-        if (animationHold >= conductor.stepCrochet * 3) 
+    {
+        if (conductor != null && animationHold >= conductor.stepCrochet * 3) 
         {
             dance(true);
             animationHold = 0;
@@ -132,7 +133,8 @@ class Character extends MoonSprite
 
         animation.onFinish.add((anim)->
         {
-            if(anim == 'comboBreak' || anim == 'combo50' || anim == 'combo200') dance(true);
+            //TODO: 'Softcode' this :3
+            if(conductor != null && (anim == 'comboBreak' || anim == 'combo50' || anim == 'combo200')) dance(true);
         });
 		
 		this.flipX = data?.flipX ?? false;

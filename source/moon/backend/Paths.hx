@@ -156,6 +156,7 @@ class Paths
         var graphicRelative:String = isMod ? key.substr(7) : key;
         if (!isMod && graphicRelative.endsWith('.png'))
             graphicRelative = graphicRelative.substring(0, graphicRelative.lastIndexOf('.png'));
+
         var imagePath:String = isMod ? graphicRelative + '.png' : '$from/$graphicRelative.png';
         if (!renderedGraphics.exists(cacheKey))
         {
@@ -169,9 +170,8 @@ class Paths
             {
                 var bytes:Bytes = getFileBytes(imagePath, library, true);
                 if (bytes == null)
-                {
                     return null;
-                }
+                
                 bitmap = BitmapData.fromBytes(bytes);
             }
             else
@@ -183,6 +183,8 @@ class Paths
                 bitmap = Assets.getBitmapData(fsPath, false);
                 #end
             }
+            //hmmm doesnt seem to do anything different xd im crying
+            bitmap.disposeImage();
             var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
             renderedGraphics.set(cacheKey, newGraphic);
         }

@@ -1,121 +1,59 @@
 package moon.toolkit.level_editor;
 
-import flixel.tweens.FlxTween;
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.util.FlxColor;
 import flixel.math.FlxMath;
-import flixel.group.FlxSpriteGroup;
-import flixel.group.FlxSpriteContainer;
-import flixel.addons.display.FlxGridOverlay;
+import flixel.group.*;
 import flixel.addons.display.FlxTiledSprite;
-import openfl.geom.ColorTransform;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+import flixel.graphics.FlxGraphic;
+import openfl.geom.Rectangle;
 import moon.toolkit.ui.*;
-import moon.toolkit.level_editor.EditorActions;
-
 import moon.game.obj.Song;
-import moon.game.obj.notes.*;
-import moon.backend.data.Chart.NoteStruct;
-
-enum GridTypes {
-    NOTES;
-    EVENTS;
-    CHARACTERS;
-    SOUNDS;
-    GIMMICKS;
-}
-
-/**
- * TODO LIST:
- * REMOVE HAXEUI, AND BUILD UP MY OWN UI FRAMEWORK FOR ALL THE TOOLKIT*.
- * FINISH ALL EVENT ICONS (Luna's Task)
- * SUSTAIN RESIZING
- * NOTE/EVENT SELECTING
- * CHART CONFIG
- * MINIPLAYER???
- * ICON TO DISPLAY WHO'S WHO
- * WAVEFORMS
- * HITSOUNDS
- * DRAG N DROP STUFF
- * EXPORT CHART TO OTHER ENGINES
- * blegh
- **/
+import moon.backend.data.Chart;
+import moon.game.obj.notes.Note;
 
 class LevelEditor extends FlxState
 {
-    // ----------------------- //
-    // Setup
     public var chart:Chart;
     public var conductor:Conductor;
     public var playback:Song;
-
-    //public var miniPlayer:Miniplayer;
-
     private var camBACK:MoonCamera = new MoonCamera();
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
 
-    public static var isMetronomeActive:Bool = false;
+    final LANE_WIDTH:Int = 40;
+    final LANE_HEIGHT:Int = 40;
+    var NUM_LANES:Int = 8;
+    final initialGridY:Float = 0;
 
-    // ----------------------- //
-    // Grid Stuff
-    public var allTypes:Array<GridTypes> = [NOTES, EVENTS, CHARACTERS, SOUNDS, GIMMICKS];
-    public var curGrid(default, set):Int = 0;
-    public var gridSize:Int = 64;
-    public var laneCount:Int = 2;
-    public var snapDiv:Int = 1;
-
-    // ----------------------- //
-    // Grid Sprites & Groups
-    public var strumline:MoonSprite;
-    public var strumArrows:FlxSpriteContainer;
-    public var laneLines:FlxTypedSpriteGroup<MoonSprite>;
-    public var gridContainer:FlxSpriteContainer;
-    public var gridBG:FlxTiledSprite;
-    var snapCursor:MoonSprite;
-
-    public var notes:Array<Note> = [];
-    public var noteData:Array<NoteStruct> = [];
-    public var noteStructs:Map<Note, NoteStruct> = new Map();
-    public var sustainSprites:Map<Note, MoonSprite> = new Map();
-
-    // ----------------------- //
-    // uhhh misc?
-    public var selectedNotes:Array<Note> = [];
-    public var sustainHandles:Map<Note, MoonSprite> = new Map();
-    var selectionRect:MoonSprite;
-    var selecting:Bool = false;
-    var adjustingSustain:Bool = false;
-    var dragStartX:Float = 0;
-    var dragStartY:Float = 0;
-    var startDurations:Map<Note, Float> = new Map();
-
-    var editorActions:EditorActions;
-
-    var tabGroup:FlxSpriteGroup;
+    var gridGroup:FlxSpriteGroup;
+    var sectionTexts:FlxSpriteGroup;
+    var noteGroup:FlxSpriteGroup;
+    var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
+    var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
+    var changeIndex:Int = 1;
+    var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
     override public function create()
     {
-        //TODO: get actual song selected by user.
-        final song = 'tko2';
+        // --- SETUP BACKEND STUFF --- //
+        final song = 'bittersweet sunset';
         final diff = 'hard';
-        final mix = 'bf';
+        final mix = 'luna';
 
         camBACK.bgColor = 0x00000000;
         camMID.bgColor = 0x00000000;
         camFRONT.bgColor = 0x00000000;
 
-        FlxG.mouse.visible = true;
-
+        FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
         FlxG.cameras.add(camBACK, true);
         FlxG.cameras.add(camMID, false);
         FlxG.cameras.add(camFRONT, false);
 
         chart = new Chart(song, diff, mix);
+        NUM_LANES = 4 * chart.content.meta.lanes.length;
 
-        conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[0]);
-        conductor.onBeat.add(beatHit);
-        
+        conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
         playback = new Song(
             song,
             mix,
@@ -123,726 +61,196 @@ class LevelEditor extends FlxState
             conductor
         );
 
+        // --- GENERATE OBJECTSS --- //
         var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(30, 29, 31));
         add(bg);
 
-        //miniPlayer = new Miniplayer(this);
-        //miniPlayer.camera = camMID;
-        //add(miniPlayer);
+        // Collects BPM and time signature changes
+        // TODO: Make... the... added events also push to this?
+        // got lost writing that lol
+        changes = [
+            {time: 0, bpm: chart.content.meta.bpm, numerator: chart.content.meta.timeSignature[0], denominator: chart.content.meta.timeSignature[1]}
+        ];
+        for (e in chart.events)
+        {
+            if (e.tag == 'ChangeBPM')
+            {
+                changes.push({
+                    time: e.time,
+                    bpm: e.values.bpm,
+                    numerator: e.values.timeSignature[0],
+                    denominator: e.values.timeSignature[1]
+                });
+            }
+        }
+        changes.sort((a, b) -> Std.int(a.time - b.time));
 
-        
-        gridContainer = new FlxSpriteContainer();
-        add(gridContainer);
-        
-        laneLines = new FlxTypedSpriteGroup<MoonSprite>();
+        gridGroup = new FlxSpriteGroup(FlxG.width / 2 + 64, initialGridY);
+        sectionTexts = new FlxSpriteGroup();
+        gridGroup.add(sectionTexts);
 
-        drawGrid(playback.fullLength);
-        
-        gridContainer.add(laneLines);
+        final gridWidth:Int = LANE_WIDTH * NUM_LANES;
+        var currentY:Float = 0;
+        var sectionNum:Int = 0;
+        var tempConductor:Conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
+
+        //make grid!
+        for (i in 0...changes.length)
+        {
+            var ch = changes[i];
+            tempConductor.time = ch.time;
+            tempConductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
+
+            final nextTime:Float = (i < changes.length - 1) ? changes[i + 1].time : playback.fullLength;
+            if (nextTime - ch.time <= 0) continue;
+
+            final segSteps:Float = (nextTime - ch.time) / tempConductor.stepCrochet;
+            final segHeight:Int = Std.int(Math.ceil(segSteps * LANE_HEIGHT));
+            final stepsPerSection = ch.numerator * ch.denominator;
+            final beatHeight:Int = Std.int(ch.numerator * LANE_HEIGHT);
+            final sectionHeight:Int = Std.int(stepsPerSection * LANE_HEIGHT);
+
+            var tileGraphic:FlxGraphic;
+            final cacheKey = ch.numerator + "," + ch.denominator;
+            if (!graphicCache.exists(cacheKey))
+            {
+                //why not make a tile myself?! >:3
+                // its fun actuallyy
+                // I like openfl renctangless,,
+                // RECTANGLES WOOOOO
+                var tileSprite = new MoonSprite().makeGraphic(gridWidth, sectionHeight, FlxColor.TRANSPARENT);
+
+                for (b in 0...Std.int(ch.denominator))
+                    tileSprite.pixels.fillRect(new Rectangle(0, b * beatHeight, gridWidth, beatHeight), (b % 2 == 0) ? FlxColor.fromRGB(100, 100, 100) : FlxColor.fromRGB(80, 80, 80));
+
+                for (s in 0...Std.int(stepsPerSection) + 1)
+                    tileSprite.pixels.fillRect(new Rectangle(0, s * LANE_HEIGHT, gridWidth, 1), FlxColor.GRAY);
+
+                tileSprite.pixels.fillRect(new Rectangle(0, 0, gridWidth, 2), FlxColor.WHITE);
+
+                for (l in 0...NUM_LANES + 1)
+                    tileSprite.pixels.fillRect(new Rectangle(l * LANE_WIDTH, 0, 1, sectionHeight), FlxColor.BLACK);
+
+                tileSprite.pixels.fillRect(new Rectangle(4 * LANE_WIDTH - 1, 0, 3, sectionHeight), FlxColor.BLACK);
+                tileSprite.dirty = true;
+                graphicCache.set(cacheKey, tileSprite.graphic);
+            }
+
+            tileGraphic = graphicCache.get(cacheKey);
+            var segBG:FlxTiledSprite = new FlxTiledSprite(tileGraphic, gridWidth, segHeight, false, true);
+            segBG.antialiasing = false;
+            segBG.y = currentY;
+            gridGroup.add(segBG);
+
+            // Add section texts
+            // Because I enjoy having them
+            // It's also a nice help :P
+            final numSectionsSeg = Math.ceil(segSteps / stepsPerSection);
+            for (sec in 0...numSectionsSeg)
+            {
+                var txt:FlxText = new FlxText(0, 0, 100, '${sectionNum + sec + 1}', 16);
+                txt.setFormat(Paths.font('KodeMono-Bold.ttf'), 28, RIGHT);
+                txt.updateHitbox();
+                txt.setPosition(-16, currentY + (sec * sectionHeight) - (txt.height / 2));
+                sectionTexts.add(txt);
+                txt.x -= txt.width;
+            }
+
+            segments.push({startTime: ch.time, startY: currentY, stepCrochet: tempConductor.stepCrochet});
+            sectionNum += numSectionsSeg;
+            currentY += segHeight;
+        }
+        add(gridGroup);
+
+        // Add notes to the grid
+        noteGroup = new FlxSpriteGroup();
+        gridGroup.add(noteGroup);
 
         for (n in chart.content.notes)
         {
-            final laneIndex = chart.content.meta.lanes.indexOf(n.lane);
-            if (laneIndex >= 0)
-                addNote(n, laneIndex);
+            var note = new Note(n.data, n.time, n.type, "v-slice", n.duration, conductor);
+            note.state = CHART_EDITOR;
+            note.active = false; //doesnt need updates, so!
+            note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
+            note.updateHitbox();
+
+            //TODO: update this once we have p2 support.
+            final laneIndex = (n.lane == "p1") ? 4 : 0;
+            note.x = (laneIndex + n.data) * LANE_WIDTH;
+            note.y = timeToY(n.time);
+
+            note.x += (LANE_WIDTH - note.width) / 2;
+
+            noteGroup.add(note);
         }
-
-        //TODO: change x pos
-        gridContainer.x = (FlxG.width - gridContainer.width) / 2;
-        gridContainer.y = 0;
-
-        snapCursor = new MoonSprite().makeGraphic(gridSize, gridSize, FlxColor.WHITE);
-        snapCursor.alpha = 0.4;
-        snapCursor.camera = camMID;
-        add(snapCursor);
-
-        strumline = new MoonSprite().makeGraphic(Std.int(gridContainer.width), 5, FlxColor.WHITE);
-        strumline.x = gridContainer.x;
-        strumline.y = 120;
-        strumline.alpha = 0.3;
-        strumline.camera = camMID;
-        add(strumline);
-
-        strumArrows = new FlxSpriteContainer();
-        for(a in 0...laneCount)
-        {
-            for(i in 0...4)
-                {
-                    var ok = new MoonSprite().loadGraphic(Paths.image('toolkit/level-editor/strumline'), true, 32, 32);
-                    ok.animation.add('a', [i], 1, true);
-                    ok.animation.play('a');
-                    strumArrows.add(ok);
-
-                ok.setGraphicSize(gridSize, gridSize);
-                ok.antialiasing = false;
-                ok.updateHitbox();
-
-                ok.x = strumline.x + ((a * 4 + i) * gridSize);
-                ok.y = strumline.y;
-
-                ok.color = getColor(i);
-                ok.alpha = 0.0001;
-                ok.blend = ADD;
-
-                ok.ID = i;
-                ok.strID = chart.content.meta.lanes[a];
-                //trace('${chart.content.meta.lanes[a]} & $i', "DEBUG");
-            }
-        }
-
-        strumArrows.camera = camMID;
-        add(strumArrows);
-
-        playback.state = PAUSE;
-
-        isFullscreen = false;
-        changeTab(0);
-
-        selectionRect = new MoonSprite();
-        selectionRect.makeGraphic(1, 1, FlxColor.fromRGB(0, 0, 255, 100));
-        add(selectionRect);
-        selectionRect.visible = false;
-        
-        editorActions = new EditorActions();
-        
-        tabGroup = new FlxSpriteGroup();
-        tabGroup.camera = camFRONT;
-        add(tabGroup);
-        camFRONT.scroll.x = -500;
-        for (i in 0...allTypes.length)
-        {
-            var type = allTypes[i];
-            var tab = new MoonSprite(300, 528 + i * 196);
-            final str:String = '$type';
-            tab.loadGraphic(Paths.image('toolkit/level-editor/button-${str.toLowerCase()}'));
-            tab.ID = i;
-            tab.scale.set(6, 6);
-            tab.updateHitbox();
-            tab.antialiasing = false;
-            tabGroup.add(tab);
-        }
-
-        updateGridAppearance();
     }
 
-    var isFullscreen(default, set):Bool = false;
     override public function update(elapsed:Float)
     {
-        conductor.time = playback.time;
-        strumline.alpha = FlxMath.lerp(strumline.alpha, 0.3, elapsed * 2);
-
         super.update(elapsed);
 
-        if(FlxG.keys.justPressed.F)
-            isFullscreen = !isFullscreen;
+        // ----- Input Stuff ----- //
+        if (FlxG.keys.justPressed.SPACE)
+            playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
 
-        if(FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.Z)
-            editorActions.undo(this);
+        final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
+        final advanceSecs = conductor.stepCrochet * 2 * addition;
 
-        if(FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.Y)
-            editorActions.redo(this);
+        if(MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
+        else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
 
-        if(!isFullscreen)
+        if (FlxG.mouse.wheel != 0)
+            playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * addition;
+
+        // this should HOPEFULLY reduce update calls and draw calls :3
+        // update: YEAHH IT DID nice.
+        for(yeah in sectionTexts.members)
         {
-            // ----- DATA ------ //
-            final localX = FlxG.mouse.x - gridContainer.x;
-            final localY = FlxG.mouse.y - gridContainer.y; //idk it seems wrong
-
-            final col = Math.floor(localX / gridSize);
-            final laneIndex = Math.floor(col / 4);
-            final data = col % 4;
-            final snappedTime = getSnappedTime(localY);
-
-            final addition = (FlxG.keys.pressed.SHIFT) ? 3 : 1;
-            final advanceSecs = 500 * addition;
-
-            // ----- Input Stuff ----- //
-            if(FlxG.keys.justPressed.SPACE) playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
-
-            if(MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
-            else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
-
-            if (FlxG.keys.justPressed.TAB) changeTab(1);
-
-            for (tab in tabGroup.members)
-            {
-                if (FlxG.mouse.overlaps(tab, camFRONT) && FlxG.mouse.justPressed)
-                {
-                    curGrid = tab.ID;
-                }
-            }
-
-            if (curGrid == 0)
-            {
-                if (FlxG.keys.pressed.CONTROL && FlxG.mouse.justPressed && !adjustingSustain)
-                {
-                    selecting = true;
-                    dragStartX = FlxG.mouse.x;
-                    dragStartY = FlxG.mouse.y;
-                    selectionRect.visible = true;
-                }
-
-                if (selecting)
-                {
-                    if (FlxG.mouse.pressed)
-                    {
-                        var minX = Math.min(dragStartX, FlxG.mouse.x);
-                        var minY = Math.min(dragStartY, FlxG.mouse.y);
-                        var w = Math.abs(FlxG.mouse.x - dragStartX);
-                        var h = Math.abs(FlxG.mouse.y - dragStartY);
-                        selectionRect.setPosition(minX, minY);
-                        selectionRect.setGraphicSize(Std.int(w), Std.int(h));
-                        selectionRect.updateHitbox();
-                    }
-                    else
-                    {
-                        selecting = false;
-                        selectionRect.visible = false;
-                        deselectAll();
-                        for (n in notes)
-                            if (selectionRect.overlaps(n))
-                                selectNote(n);
-                    }
-                }
-
-                if (FlxG.keys.justPressed.DELETE && selectedNotes.length > 0)
-                {
-                    var toRemove:Array<{ns:NoteStruct, li:Int}> = [];
-                    for (n in selectedNotes) {
-                        var ns = noteStructs.get(n);
-                        var li = chart.content.meta.lanes.indexOf(n.lane);
-                        toRemove.push({ns: cloneNoteStruct(ns), li: li});
-                    }
-                    editorActions.push(new RemoveNotesAction(toRemove));
-
-                    for (n in selectedNotes.copy())
-                        removeNote(n);
-
-                    deselectAll();
-                }
-
-                // Handle right-click deletion for single note
-                if (FlxG.mouse.justPressedRight)
-                {
-                    final hoveredNote = getHoveredNote();
-                    if (hoveredNote != null)
-                    {
-                        var ns = noteStructs.get(hoveredNote);
-                        var li = chart.content.meta.lanes.indexOf(hoveredNote.lane);
-                        var toRemove = [{ns: cloneNoteStruct(ns), li: li}];
-                        editorActions.push(new RemoveNotesAction(toRemove));
-
-                        removeNote(hoveredNote);
-                        if (selectedNotes.contains(hoveredNote))
-                            deselectNote(hoveredNote);
-                    }
-                }
-
-                // Handle sustain adjusting or note selection/placement
-                if (!selecting && !adjustingSustain && FlxG.mouse.justPressed && FlxG.mouse.viewY > strumline.y)
-                {
-                    final hoveredHandle = getHoveredHandle();
-                    if (hoveredHandle != null)
-                    {
-                        adjustingSustain = true;
-                        if (!selectedNotes.contains(hoveredHandle))
-                        {
-                            deselectAll();
-                            selectNote(hoveredHandle);
-                        }
-                        dragStartY = FlxG.mouse.y;
-                        startDurations = new Map();
-                        for (n in selectedNotes)
-                        {
-                            startDurations.set(n, n.duration);
-                            if (n.duration > 0 && !sustainSprites.exists(n))
-                                drawSustain(n);
-                        }
-                    }
-                    else
-                    {
-                        var hoveredNote = getHoveredNote();
-                        var hoveredSustain = getHoveredSustain();
-                        
-                        if (hoveredNote != null || hoveredSustain != null)
-                        {
-                            // Use the note from either the note itself or the sustain
-                            var targetNote = (hoveredNote != null) ? hoveredNote : hoveredSustain;
-                            
-                            if (!FlxG.keys.pressed.CONTROL)
-                            {
-                                deselectAll();
-                                selectNote(targetNote);
-                            }
-                            else
-                            {
-                                if (selectedNotes.contains(targetNote))
-                                    deselectNote(targetNote);
-                                else
-                                    selectNote(targetNote);
-                            }
-                        }
-                        else
-                            placeNote(col, localY);
-                    }
-                }
-
-                // Handle adjusting sustains
-                if (adjustingSustain && FlxG.mouse.pressed)
-                {
-                    final currentLocalY = FlxG.mouse.y - gridContainer.y;
-                    final startLocalY = dragStartY - gridContainer.y;
-                    final deltaTime = getSnappedTime(currentLocalY) - getSnappedTime(startLocalY);
-
-                    for (n in selectedNotes)
-                    {
-                        var newDur = startDurations.get(n) + deltaTime;
-                        if (newDur < 0) newDur = 0;
-                        n.duration = newDur;
-                        noteStructs.get(n).duration = newDur;
-
-                        if (newDur > 0)
-                        {
-                            var susHeight = Math.max(8, getTimePos(n.time + newDur) - getTimePos(n.time));
-                            var sus = sustainSprites.get(n);
-                            if (sus == null)
-                                drawSustain(n);
-                            else
-                            {
-                                sus.makeGraphic(gridSize - 4, Std.int(susHeight), getColor(n.direction));
-                                final capHeight = Math.min(16, susHeight);
-                                sus.pixels.fillRect(new openfl.geom.Rectangle(0, susHeight - capHeight, sus.width, capHeight), FlxColor.WHITE);
-                            }
-                            final sus = sustainSprites.get(n);
-                            // Center the sustain properly
-                            sus.x = n.x + 2; // Small padding from grid edge
-                            sus.y = n.y + gridSize;
-                        }
-                        else if (sustainSprites.exists(n))
-                        {
-                            gridContainer.remove(sustainSprites.get(n));
-                            sustainSprites.get(n).destroy();
-                            sustainSprites.remove(n);
-                        }
-
-                        updateHandlePos(n);
-                    }
-                }
-                else if (adjustingSustain)
-                {
-                    adjustingSustain = false;
-
-                    var changes:Array<{key:NoteKey, oldDur:Float, newDur:Float}> = [];
-                    for (n in selectedNotes) {
-                        var newDur = n.duration;
-                        var oldDur = startDurations.get(n);
-                        if (newDur != oldDur) {
-                            var key:NoteKey = {time: n.time, lane: n.lane, data: n.direction, type: n.type};
-                            changes.push({key: key, oldDur: oldDur, newDur: newDur});
-                        }
-                    }
-                    if (changes.length > 0) {
-                        editorActions.push(new ChangeDurationsAction(changes));
-                    }
-                }
-            }
-
-            // ----- Upon note hit ----- //
-            for (n in notes)
-            {
-                // If not hit yet, and time has passed, and the song is playing
-                if (n.strID != 'h' && conductor.time >= n.time && playback.state == PLAY)
-                {
-                    n.strID = 'h';
-                    for(i in 0...strumArrows.members.length)
-                    {
-                        final s = cast(strumArrows.members[i], MoonSprite);
-                        
-                        if (s.strID.toLowerCase() == n.lane.toLowerCase() && s.ID == n.direction)
-                        {
-                            s.alpha = 1;
-                            s.scale.set(1, 1);
-                            //trace('${s.strID.toLowerCase()} to ${n.lane.toLowerCase()}', "DEBUG");
-                        }
-                    }
-                }
-
-                if (n.strID == 'h' && conductor.time < n.time)
-                    n.strID = 'a';
-            }
-
-            // ----- Other ----- //
-            for(s in strumArrows.members)
-            {
-                s.alpha = FlxMath.lerp(s.alpha, 0.0001, elapsed * 6);
-                s.scale.x = s.scale.y = FlxMath.lerp(s.scale.x, 1.6, elapsed * 9);
-            }
-
-            FlxG.mouse.enabled = FlxG.mouse.visible = true;
-
-            snapCursor.visible = (col >= 0 && col < chart.content.meta.lanes.length * 4);
-            if (snapCursor.visible)
-            {
-                snapCursor.x = (laneIndex * 4 + data) * gridSize + gridContainer.x;
-                snapCursor.y = getTimePos(snappedTime) + gridContainer.y;
-            }
-
-            gridContainer.y = strumline.y - getTimePos(playback.time);
-
-            for (obj in notes)
-                obj.active = obj.visible = obj.isOnScreen();
+            final spr = cast(yeah, FlxSprite);
+            spr.active = spr.visible = spr.isOnScreen();
         }
-        else
-            FlxG.mouse.enabled = FlxG.mouse.visible = false;
-    }
 
-    function drawGrid(songLength:Float):Void
-    {
-        //---- grid ----//
-
-        if (gridBG != null) gridContainer.remove(gridBG);
-
-        final totalHeight = Math.ceil((songLength / conductor.stepCrochet) * gridSize);
-        var base = FlxGridOverlay.create(gridSize, gridSize, gridSize * laneCount, gridSize * 2, true, 0xFF2a2a2c, 0xFF373639);
-
-        final totalCols = chart.content.meta.lanes.length * 4;
-
-        gridBG = new FlxTiledSprite(null, gridSize * totalCols, gridSize);
-        gridBG.loadGraphic(base.graphic);
-        gridBG.height = totalHeight;
-        gridContainer.add(gridBG);
-
-        //---- lines ----//
-
-        if(laneLines.members.length > 0) laneLines.clear();
-
-        final lineWidth = gridSize * totalCols;
-        final beatCount = Math.ceil(songLength / conductor.crochet);
-
-        for (i in 0...beatCount)
+        // Do the same for notes to optimize
+        for(yeah in noteGroup.members)
         {
-            var line = new MoonSprite().makeGraphic(lineWidth, 2, (i % conductor.numerator == 0) ? 0xFF777777 : FlxColor.BLACK);
-            line.x = 0;
-            line.y = getTimePos(i * conductor.crochet);
-
-            laneLines.add(line);
+            final spr = cast(yeah, FlxSprite);
+            spr.active = spr.visible = spr.isOnScreen();
         }
 
-        for (i in 0...chart.content.meta.lanes.length + 1)
+        playback.update(elapsed);
+
+        // update grid pos stuff
+        while (changeIndex < changes.length && conductor.time >= changes[changeIndex].time)
         {
-            var line = new MoonSprite().makeGraphic(2, Std.int(totalHeight), FlxColor.BLACK);
-            line.x = i * 4 * gridSize;
-            line.y = 0;
-            laneLines.add(line);
+            final ch = changes[changeIndex];
+            conductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
+            changeIndex++;
         }
+        conductor.time = playback.time;
+
+        gridGroup.y = initialGridY - timeToY(conductor.time);
     }
 
-    public function placeNote(col, y):Void
+    function timeToY(time:Float):Float
     {
-        if (col < 0 || col >= chart.content.meta.lanes.length * 4) return;
-
-        final laneIndex = Math.floor(col / 4);
-        final snappedTime = getSnappedTime(y);
-
-        var ns:NoteStruct = {
-            lane: chart.content.meta.lanes[laneIndex],
-            data: col % 4,
-            time: snappedTime,
-            type: "normal",
-            duration: 0
-        };
-
-        noteData.push(ns);
-        final note = addNote(ns, laneIndex);
-
-        var toAdd = [{ns: cloneNoteStruct(ns), li: laneIndex}];
-        editorActions.push(new AddNotesAction(toAdd));
-
-        deselectAll();
-        selectNote(note);
-        sfx('addNote-${FlxG.random.int(1, 6)}');
-    }
-
-    public function addNote(data:NoteStruct, laneIndex:Int):Note
-    {
-        var note = new Note(data.data, data.time, data.type, 'mooncharter', data.duration, conductor);
-        note.state = CHART_EDITOR;
-        note.setGraphicSize(gridSize, gridSize);
-        note.updateHitbox();
-        note.lane = data.lane;
-
-        note.x = (laneIndex * 4 + data.data) * gridSize;
-        note.y = getTimePos(data.time);
-        note.strID = 'a';
-
-        gridContainer.add(note);
-
-        if (note.duration > 0)
-            drawSustain(note);
-
-        noteStructs.set(note, data);
-        notes.push(note);
-        return note;
-    }
-
-    public function drawSustain(note:Note)
-    {
-        var susHeight = Math.max(8, getTimePos(note.time + note.duration) - getTimePos(note.time));
-        var sus = new MoonSprite().makeGraphic(gridSize - 4, Std.int(susHeight), getColor(note.direction));
-
-        sus.x = note.x + 2;
-        sus.y = note.y + gridSize;
-        
-        var capHeight = Math.min(8, susHeight);
-        sus.pixels.fillRect(new openfl.geom.Rectangle(0, susHeight - capHeight, sus.width, capHeight), FlxColor.WHITE);
-        gridContainer.add(sus);
-        sustainSprites.set(note, sus);
-    }
-
-    public function updateSustain(note:Note):Void
-    {
-        if (note.duration > 0) {
-            var susHeight = Math.max(8, getTimePos(note.time + note.duration) - getTimePos(note.time));
-            var sus = sustainSprites.get(note);
-            if (sus == null) {
-                drawSustain(note);
-            } else {
-                sus.makeGraphic(gridSize - 4, Std.int(susHeight), getColor(note.direction));
-                var capHeight = Math.min(8, susHeight);
-                sus.pixels.fillRect(new openfl.geom.Rectangle(0, susHeight - capHeight, sus.width, capHeight), FlxColor.WHITE);
-                sus.x = note.x + 2;
-                sus.y = note.y + gridSize;
-            }
-        } else if (sustainSprites.exists(note)) {
-            gridContainer.remove(sustainSprites.get(note));
-            sustainSprites.get(note).destroy();
-            sustainSprites.remove(note);
-        }
-    }
-
-    public function beatHit(curBeat:Float)
-    {
-        if(curBeat % conductor.numerator == 0)
+        if (time <= 0) return 0;
+        for (i in 0...segments.length)
         {
-            strumline.alpha = 1;
+            final seg = segments[i];
+            final nextStart = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
+            if (time < nextStart)
+                return seg.startY + ((time - seg.startTime) / seg.stepCrochet * LANE_HEIGHT);
         }
+        final last = segments[segments.length - 1];
+        return last.startY + ((time - last.startTime) / last.stepCrochet * LANE_HEIGHT);
     }
 
-    function getTimePos(time:Float):Float
-        return FlxMath.remapToRange(time, 0, playback.fullLength, 0, (playback.fullLength / conductor.stepCrochet) * gridSize);
-
-    function getSnappedTime(localY:Float):Float
-    {
-        final snapLen = conductor.stepCrochet / snapDiv;
-        final rawTime = localY / gridSize * conductor.stepCrochet;
-        return Math.round(rawTime / snapLen) * snapLen;
-    }
-
-    function getColor(data:Int):FlxColor
-    {
-        final colors = [0xFF7f16ff, 0xFF37a5ff, 0xFF61d041, 0xFFff3f3f];
-        return colors[data % colors.length];
-    }
+    function durationToHeight(startTime:Float, duration:Float):Float
+        return timeToY(startTime + duration) - timeToY(startTime);
 
     public function sfx(p:String)
     {
-        if(playback.state != PLAY)
+        if (playback.state != PLAY)
             Paths.playSFX('toolkit/level-editor/$p.ogg');
-    }
-
-    function changeTab(change:Int = 0):Void
-        curGrid = flixel.math.FlxMath.wrap(curGrid + change, 0, allTypes.length - 1);
-
-    @:noCompletion function set_curGrid(curGrid:Int):Int
-    {
-        this.curGrid = curGrid;
-
-        final strType = '${allTypes[curGrid]}';
-        sfx(strType.toLowerCase() + 'Tab');
-
-        updateGridAppearance();
-
-        return this.curGrid;
-    }
-
-    function updateGridAppearance():Void
-    {
-        var isNotes = (curGrid == 0);
-
-        for (n in notes)
-        {
-            if (!selectedNotes.contains(n))
-                n.color = isNotes ? FlxColor.WHITE : FlxColor.GRAY;
-        }
-
-        for (n => s in sustainSprites)
-        {
-            s.alpha = isNotes ? 1 : 0.3;
-        }
-
-        for (s in strumArrows.members)
-        {
-            s.color = isNotes ? getColor(s.ID) : FlxColor.GRAY;
-        }
-
-        try{
-            for (tab in tabGroup.members)
-                tab.alpha = (tab.ID == curGrid) ? 1 : 0.5;
-        } catch(e){}
-    }
-
-    @:noCompletion function set_isFullscreen(isFS:Bool):Bool
-    {
-        this.isFullscreen = isFS;
-
-        if(!isFullscreen)
-        {
-            camFRONT.zoom = 0.25;
-            camFRONT.setPosition(-400, -170);
-        }
-        else
-        {
-            camFRONT.zoom = 1;
-            camFRONT.setPosition();
-        }
-
-        return this.isFullscreen;
-    }
-
-    public function getHoveredNote():Note
-    {
-        for (n in notes)
-            if (FlxG.mouse.overlaps(n) && curGrid == 0)
-                return n;
-        return null;
-    }
-
-    public function getHoveredSustain():Note
-    {
-        for (n => s in sustainSprites)
-            if (FlxG.mouse.overlaps(s) && curGrid == 0)
-                return n;
-        return null;
-    }
-
-    public function getHoveredHandle():Note
-    {
-        for (n => h in sustainHandles)
-            if (FlxG.mouse.overlaps(h) && curGrid == 0)
-                return n;
-        return null;
-    }
-
-    public function selectNote(note:Note):Void
-    {
-        if (!selectedNotes.contains(note))
-        {
-            selectedNotes.push(note);
-            note.color = FlxColor.GRAY;
-            createHandle(note);
-        }
-    }
-
-    public function deselectNote(note:Note):Void
-    {
-        selectedNotes.remove(note);
-        note.color = curGrid == 0 ? FlxColor.WHITE : FlxColor.GRAY;
-        if (sustainHandles.exists(note))
-        {
-            gridContainer.remove(sustainHandles.get(note));
-            sustainHandles.get(note).destroy();
-            sustainHandles.remove(note);
-        }
-    }
-
-    public function deselectAll():Void
-    {
-        for (n in selectedNotes)
-        {
-            n.color = curGrid == 0 ? FlxColor.WHITE : FlxColor.GRAY;
-            if (sustainHandles.exists(n))
-            {
-                gridContainer.remove(sustainHandles.get(n));
-                sustainHandles.get(n).destroy();
-                sustainHandles.remove(n);
-            }
-        }
-        selectedNotes = [];
-    }
-
-    public function createHandle(note:Note):Void
-    {
-        if (!sustainHandles.exists(note))
-        {
-            var handle = new MoonSprite().makeGraphic(Std.int(gridSize), Std.int(gridSize / 2), FlxColor.YELLOW);
-            gridContainer.add(handle);
-            sustainHandles.set(note, handle);
-            updateHandlePos(note);
-        }
-    }
-
-    public function updateHandlePos(note:Note):Void
-    {
-        if (sustainHandles.exists(note))
-        {
-            final h = sustainHandles.get(note);
-            if (note.duration == 0)
-            {
-                h.visible = true;
-                h.alpha = 0.6;
-                h.x = note.x + (note.width - h.width) / 2;
-                h.y = note.y + (note.height / 2 - h.height / 2);
-            }
-            else
-            {
-                h.visible = false;
-                updateSustain(note);
-            }
-        }
-    }
-
-    public function findNote(time:Float, lane:String, data:Int, type:String):Note
-    {
-        for (n in notes)
-            if (n.time == time && n.lane == lane && n.direction == data && n.type == type)
-                return n;
-
-        return null;
-    }
-
-    public static function cloneNoteStruct(ns:NoteStruct):NoteStruct
-    {
-        return {
-            lane: ns.lane,
-            data: ns.data,
-            time: ns.time,
-            type: ns.type,
-            duration: ns.duration
-        };
-    }
-
-    public function removeNote(note:Note):Void
-    {
-        notes.remove(note);
-        final ns = noteStructs.get(note);
-        noteData.remove(ns);
-        noteStructs.remove(note);
-
-        if (sustainSprites.exists(note))
-        {
-            gridContainer.remove(sustainSprites.get(note));
-            sustainSprites.get(note).destroy();
-            sustainSprites.remove(note);
-        }
-
-        if (sustainHandles.exists(note))
-        {
-            gridContainer.remove(sustainHandles.get(note));
-            sustainHandles.get(note).destroy();
-            sustainHandles.remove(note);
-        }
-
-        gridContainer.remove(note);
-        note.destroy();
     }
 }

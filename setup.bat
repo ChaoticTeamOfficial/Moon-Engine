@@ -24,9 +24,9 @@ echo.
 
 haxelib install flixel 6.1.0
 
-haxelib install lime 8.2.2
+haxelib install lime 8.3.0
 
-haxelib install openfl 9.4.1
+haxelib install openfl 9.5.0
 
 haxelib install flixel-addons 3.3.0
 
@@ -48,8 +48,8 @@ haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib git funkin.visfix https://github.com/toffeecaramel/funkVis-GrigFIX
 
 haxelib set flixel 6.1.0
-haxelib set lime 8.2.2
-haxelib set openfl 9.4.1
+haxelib set lime 8.3.0
+haxelib set openfl 9.5.0
 haxelib set flixel-addons 3.3.0
 haxelib set flixel-tools 1.5.1
 haxelib set flixel-text-input 2.0.2

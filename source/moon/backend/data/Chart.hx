@@ -94,7 +94,8 @@ class Chart
         'psych',
         'codename',
         'v-slice',
-        'osu'
+        'osu',
+        'fps-plus'
     ];
 
     /**
@@ -143,6 +144,7 @@ class Chart
             case 'codename': new FNFVSlice().fromFormat(new FNFCodename().fromFile(path, metaPath, difficulty));
             case 'legacy': new FNFVSlice().fromFormat(new FNFLegacy().fromFile(path, null, difficulty));
             case 'osu': new FNFVSlice().fromFormat(new OsuMania().fromFile(path, null, difficulty));
+            case 'fps-plus': new FNFVSlice().fromFormat(new FNFFpsPlus().fromFile(path, null, difficulty));
             default: new FNFVSlice().fromFile(path, metaPath, difficulty);
         };
 

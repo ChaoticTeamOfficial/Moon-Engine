@@ -3,6 +3,7 @@ package moon;
 import moon.menus.*;
 import moon.game.*;
 import moon.toolkit.level_editor.LevelEditor;
+import moon.toolkit.offset.OffsetEditor;
 import flixel.FlxState;
 
 @:publicFields
@@ -17,5 +18,5 @@ class Constants
 	static final SETTINGS_SAVE_BIND:String = 'ME-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'ME-SongData';
 
-    static final INITIAL_STATE:Class<FlxState> = TestState;
+    static final INITIAL_STATE:Class<FlxState> = LevelEditor;
 }

@@ -7,6 +7,7 @@ function createReceptor(direction)
 {
     //trace("Hello there! From noteskin~", "DEBUG");
 
+    judgementsSkin = 'moon-engine';
     final p = 'ingame/UI/notes/v-slice/'; // just the path so I dont need to do crazy copy pasting
 
     // <SETUP STRUMNOTE> //
