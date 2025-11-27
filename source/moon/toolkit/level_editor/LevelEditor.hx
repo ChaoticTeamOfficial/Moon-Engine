@@ -21,8 +21,8 @@ class LevelEditor extends FlxState
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
 
-    final LANE_WIDTH:Int = 40;
-    final LANE_HEIGHT:Int = 40;
+    public static final LANE_WIDTH:Int = 40;
+    public static final LANE_HEIGHT:Int = 40;
     var NUM_LANES:Int = 8;
     final initialGridY:Float = 0;
 
@@ -31,6 +31,7 @@ class LevelEditor extends FlxState
     var noteGroup:FlxSpriteGroup;
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
+    var sectionStarts:Array<{num:Int, y:Float}> = [];
     var changeIndex:Int = 1;
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
@@ -151,9 +152,12 @@ class LevelEditor extends FlxState
                 var txt:FlxText = new FlxText(0, 0, 100, '${sectionNum + sec + 1}', 16);
                 txt.setFormat(Paths.font('KodeMono-Bold.ttf'), 28, RIGHT);
                 txt.updateHitbox();
-                txt.setPosition(-16, currentY + (sec * sectionHeight) - (txt.height / 2));
-                sectionTexts.add(txt);
+                var secY:Float = currentY + (sec * sectionHeight);
+                txt.setPosition(-16, secY - (txt.height / 2));
                 txt.x -= txt.width;
+                sectionTexts.add(txt);
+
+                sectionStarts.push({num: sectionNum + sec + 1, y: secY});
             }
 
             segments.push({startTime: ch.time, startY: currentY, stepCrochet: tempConductor.stepCrochet});
@@ -183,6 +187,10 @@ class LevelEditor extends FlxState
 
             noteGroup.add(note);
         }
+
+        var scrollbar = new ScrollBar(sectionStarts, currentY, conductor, segments, playback);
+        add(scrollbar);
+        scrollbar.setPosition(FlxG.width - scrollbar.width + 128, 0);
     }
 
     override public function update(elapsed:Float)
