@@ -20,11 +20,17 @@ class LevelEditor extends FlxState
     private var camBACK:MoonCamera = new MoonCamera();
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
+    
+    var cursor:FlxSprite;
+    var debugTxt:FlxText;
 
     public static final LANE_WIDTH:Int = 40;
     public static final LANE_HEIGHT:Int = 40;
     var NUM_LANES:Int = 8;
+    var snapIndex:Int = 1;
+    var curSnap:Int = 4;
     final initialGridY:Float = 0;
+    final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
 
     var gridGroup:FlxSpriteGroup;
     var sectionTexts:FlxSpriteGroup;
@@ -35,11 +41,12 @@ class LevelEditor extends FlxState
     var changeIndex:Int = 1;
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
+
     override public function create()
     {
         // --- SETUP BACKEND STUFF --- //
-        final song = 'nacreous-snowmelt';
-        final diff = 'hard';
+        final song = 'satin panties';
+        final diff = 'erect';
         final mix = 'bf';
 
         camBACK.bgColor = 0x00000000;
@@ -191,6 +198,18 @@ class LevelEditor extends FlxState
         var scrollbar = new ScrollBar(sectionStarts, currentY, conductor, segments, playback);
         add(scrollbar);
         scrollbar.setPosition(FlxG.width - scrollbar.width + 128, 0);
+
+        debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
+        debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
+        add(debugTxt);
+        updatedebugTxt();
+
+        cursor = new MoonSprite();
+        cursor.makeGraphic(LANE_WIDTH, LANE_HEIGHT, FlxColor.WHITE);
+        cursor.antialiasing = false;
+        cursor.alpha = 0.5;
+        cursor.visible = false;
+        add(cursor);
     }
 
     override public function update(elapsed:Float)
@@ -198,17 +217,30 @@ class LevelEditor extends FlxState
         super.update(elapsed);
 
         // ----- Input Stuff ----- //
+        if (FlxG.keys.pressed.CONTROL)
+        {
+            // snapping!!
+            if (MoonInput.justPressed(UI_LEFT) || MoonInput.justPressed(UI_RIGHT))
+            {
+                snapIndex = (MoonInput.justPressed(UI_LEFT) ? snapIndex - 1 + snaps.length : snapIndex + 1 ) % snaps.length;
+                curSnap = snaps[snapIndex];
+                updatedebugTxt();
+            }
+        }
+        else
+        {
+            final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
+            final advanceSecs = conductor.stepCrochet * 2 * addition;
+
+            if (MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
+            else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
+        }
+
         if (FlxG.keys.justPressed.SPACE)
             playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
 
-        final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
-        final advanceSecs = conductor.stepCrochet * 2 * addition;
-
-        if(MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
-        else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
-
         if (FlxG.mouse.wheel != 0)
-            playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * addition;
+            playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
 
         // this should HOPEFULLY reduce update calls and draw calls :3
         // update: YEAHH IT DID nice.
@@ -238,6 +270,47 @@ class LevelEditor extends FlxState
         conductor.time = playback.time;
 
         gridGroup.y = FlxMath.lerp(gridGroup.y, initialGridY - timeToY(conductor.time), elapsed * 28);
+
+        // Update cursor position
+        updateCursor();
+    }
+
+    private function updatedebugTxt():Void
+        debugTxt.text = (curSnap == 0) ? "Snap: None" : 'Snap: 1/$curSnap';
+
+    // this snaps the square cursor thing
+    // ... I really should documment this code more. Before it turns into a giant mess of code...
+    private function updateCursor():Void
+    {
+        final relX = FlxG.mouse.x - gridGroup.x;
+        final relY = FlxG.mouse.y - gridGroup.y;
+
+        if (relX < 0 || relX >= LANE_WIDTH * NUM_LANES || relY < 0)
+        {
+            cursor.visible = false;
+            return;
+        }
+
+        cursor.visible = true;
+
+        // snap its lane
+        cursor.x = gridGroup.x + Math.floor(relX / LANE_WIDTH) * LANE_WIDTH;
+
+        // and snap its timee
+        final unsnappedTime:Float = yToTime(relY);
+        var snappedTime = unsnappedTime;
+
+        if (curSnap != 0)
+        {
+            final seg = getSegmentForTime(unsnappedTime);
+            final lc = seg.stepCrochet * 4;
+            final localTime = unsnappedTime - seg.startTime;
+            final localBeat = localTime / lc;
+            final snappedBeat = Math.round(localBeat * curSnap) / curSnap;
+            snappedTime = seg.startTime + snappedBeat * lc;
+        }
+
+        cursor.y = gridGroup.y + timeToY(snappedTime);
     }
 
     function timeToY(time:Float):Float
@@ -246,12 +319,38 @@ class LevelEditor extends FlxState
         for (i in 0...segments.length)
         {
             final seg = segments[i];
-            final nextStart = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
+            final nextStart:Float = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
             if (time < nextStart)
                 return seg.startY + ((time - seg.startTime) / seg.stepCrochet * LANE_HEIGHT);
         }
         final last = segments[segments.length - 1];
         return last.startY + ((time - last.startTime) / last.stepCrochet * LANE_HEIGHT);
+    }
+
+    function yToTime(y:Float):Float
+    {
+        if (y <= 0) return 0;
+        for (i in 0...segments.length)
+        {
+            final seg = segments[i];
+            final nextY:Float = (i < segments.length - 1) ? segments[i + 1].startY : Math.POSITIVE_INFINITY;
+            if (y < nextY)
+                return seg.startTime + ((y - seg.startY) / LANE_HEIGHT * seg.stepCrochet);
+        }
+        final last = segments[segments.length - 1];
+        return last.startTime + ((y - last.startY) / LANE_HEIGHT * last.stepCrochet);
+    }
+
+    function getSegmentForTime(time:Float):{startTime:Float, startY:Float, stepCrochet:Float}
+    {
+        for (i in 0...segments.length)
+        {
+            final seg = segments[i];
+            final nextStart:Float = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
+            if (time < nextStart)
+                return seg;
+        }
+        return segments[segments.length - 1];
     }
 
     function durationToHeight(startTime:Float, duration:Float):Float
