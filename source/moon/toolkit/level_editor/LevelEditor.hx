@@ -38,9 +38,9 @@ class LevelEditor extends FlxState
     override public function create()
     {
         // --- SETUP BACKEND STUFF --- //
-        final song = 'bittersweet sunset';
+        final song = 'nacreous-snowmelt';
         final diff = 'hard';
-        final mix = 'luna';
+        final mix = 'bf';
 
         camBACK.bgColor = 0x00000000;
         camMID.bgColor = 0x00000000;
@@ -122,7 +122,7 @@ class LevelEditor extends FlxState
                 var tileSprite = new MoonSprite().makeGraphic(gridWidth, sectionHeight, FlxColor.TRANSPARENT);
 
                 for (b in 0...Std.int(ch.denominator))
-                    tileSprite.pixels.fillRect(new Rectangle(0, b * beatHeight, gridWidth, beatHeight), (b % 2 == 0) ? FlxColor.fromRGB(100, 100, 100) : FlxColor.fromRGB(80, 80, 80));
+                    tileSprite.pixels.fillRect(new Rectangle(0, b * beatHeight, gridWidth, beatHeight), (b % 2 == 0) ? 0xFF2a2a2c : 0xFF373739);
 
                 for (s in 0...Std.int(stepsPerSection) + 1)
                     tileSprite.pixels.fillRect(new Rectangle(0, s * LANE_HEIGHT, gridWidth, 1), FlxColor.GRAY);
@@ -236,7 +236,7 @@ class LevelEditor extends FlxState
         }
         conductor.time = playback.time;
 
-        gridGroup.y = initialGridY - timeToY(conductor.time);
+        gridGroup.y = FlxMath.lerp(gridGroup.y, initialGridY - timeToY(conductor.time), elapsed * 28);
     }
 
     function timeToY(time:Float):Float

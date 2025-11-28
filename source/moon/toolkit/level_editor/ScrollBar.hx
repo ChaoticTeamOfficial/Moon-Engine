@@ -59,32 +59,43 @@ class ScrollBar extends FlxSpriteGroup
 
         indicator.y = indY - (indicator.height / 2);
 
-        final currentSection = Std.int(conductor.curMeasure) + 1;
+        final currentSection = getCurrentSection();
         final str = 'Section ${currentSection}';
         if(sectionText.text != str) sectionText.text = str;
         sectionText.y = indY - (sectionText.height / 2);
 
-        final mousePos = FlxG.mouse.getPositionInCameraView(camera);
-        if (FlxG.mouse.justPressed && bar.overlapsPoint(mousePos))
+        if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(bar, this.camera))
         {
             isDragging = true;
-            updateTimeFromMouse(mousePos.y);
+            updateTimeFromMouse(FlxG.mouse.viewY);
         }
 
         if (isDragging)
         {
-            if (FlxG.mouse.pressed) updateTimeFromMouse(mousePos.y);
+            if (FlxG.mouse.pressed) updateTimeFromMouse(FlxG.mouse.viewY);
             else isDragging = false;
         }
+
+        sectionText.alpha = FlxMath.lerp(sectionText.alpha, (FlxG.mouse.overlaps(bar, this.camera) || isDragging) ? 1 : 0, elapsed * 6);
+    }
+
+    private function getCurrentSection():Int
+    {
+        final currentY:Float = timeToY(conductor.time);
+
+        for (i in 0...sections.length - 1)
+        {
+            if (currentY >= sections[i].y && currentY < sections[i + 1].y)
+                return sections[i].num;
+        }
+
+        return sections[sections.length - 1].num;
     }
 
     function updateTimeFromMouse(mouseY:Float)
     {
-        var clampedY = FlxMath.bound(mouseY, bar.y, bar.y + bar.height);
-        var normPos = (clampedY - bar.y) / bar.height;
-        var targetY = normPos * totalHeight;
-        var targetTime = yToTime(targetY);
-        playback.time = targetTime;
+        final normPos = (FlxMath.bound(mouseY, bar.y, bar.y + bar.height) - bar.y) / bar.height;
+        playback.time = yToTime(normPos * totalHeight);
     }
 
     function timeToY(time:Float):Float
