@@ -219,6 +219,7 @@ class LevelEditor extends FlxState
         }
 
         // Do the same for notes to optimize
+        // I should make this a function...ol
         for(yeah in noteGroup.members)
         {
             final spr = cast(yeah, FlxSprite);
