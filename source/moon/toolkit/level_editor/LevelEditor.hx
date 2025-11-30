@@ -51,9 +51,9 @@ class LevelEditor extends FlxState
         //SELF NOTE; 
         // umm I should look into note rendering or sum shit
         // memory usage at start is... terrible, woah.
-        // maybe I can do... recycling and only add them when on screen?
-        // kinda like how it works in-game... hmmm
-        // I'll consider these options later.
+
+        // NOTE 2:
+        // It isn't the notes, it's the tiled grid sprite!!! I gotta fix it ;v;
 
         // --- SETUP BACKEND STUFF --- //
         final song = 'darnell';
@@ -292,6 +292,10 @@ class LevelEditor extends FlxState
             {
                 n.strID = 'h';
                 strum.onHit(n);
+
+                //TOOD: make themmmm separate flxsoundses
+                // so I cann like... what was I sayign?
+                // oh yeah, so they can be stopped before playign to prvevent overlapping
                 Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
             }
 
@@ -304,8 +308,8 @@ class LevelEditor extends FlxState
     // ... I really should documment this code more. Before it turns into a giant mess of code...
     private function updateCursor():Void
     {
-        final relX = FlxG.mouse.x - gridGroup.x;
-        final relY = FlxG.mouse.y - gridGroup.y;
+        final relX = FlxG.mouse.viewX - gridGroup.x;
+        final relY = FlxG.mouse.viewY - gridGroup.y;
 
         if (relX < 0 || relX >= LANE_WIDTH * NUM_LANES || relY < 0)
         {
@@ -315,8 +319,10 @@ class LevelEditor extends FlxState
 
         cursor.visible = true;
 
+        final laneNum:Int = Math.floor(relX / LANE_WIDTH);
+
         // snap its lane
-        cursor.x = gridGroup.x + Math.floor(relX / LANE_WIDTH) * LANE_WIDTH;
+        cursor.x = gridGroup.x + laneNum * LANE_WIDTH;
 
         // and snap its timee
         final unsnappedTime:Float = yToTime(relY);
@@ -324,7 +330,7 @@ class LevelEditor extends FlxState
 
         if (curSnap != 0)
         {
-            final seg = getSegmentForTime(unsnappedTime);
+            final seg = getTimeSeg(unsnappedTime);
             final lc = seg.stepCrochet * 4;
             final localTime = unsnappedTime - seg.startTime;
             final localBeat = localTime / lc;
@@ -333,6 +339,23 @@ class LevelEditor extends FlxState
         }
 
         cursor.y = gridGroup.y + timeToY(snappedTime);
+
+        //TODO: there's a... wild exploit to put a note inside another
+        // if you hover outside the box the mouse won't be overlapping the note anymore, allowing you to put another
+        // I know the issue, it's due to how the box is snapped (which seems to just be snapping incorrectly)
+        // but for now idk how to fix it... I might steal funkin code if I don't have an idea... lol..
+        // me being a dumbass as always of course!
+        if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(noteGroup))
+        {
+            createNote({
+                time: snappedTime,
+                data: laneNum % 4,
+                lane: (laneNum < 4) ? "opponent" : "p1",
+                type: 'default', //TODO: get current note type
+                duration: 0
+            });
+            sfx('place-${FlxG.random.int(1, 6)}');
+        }
     }
 
     function createNote(n:NoteStruct)
@@ -382,7 +405,7 @@ class LevelEditor extends FlxState
         return last.startTime + ((y - last.startY) / LANE_HEIGHT * last.stepCrochet);
     }
 
-    function getSegmentForTime(time:Float):{startTime:Float, startY:Float, stepCrochet:Float}
+    function getTimeSeg(time:Float):{startTime:Float, startY:Float, stepCrochet:Float}
     {
         for (i in 0...segments.length)
         {

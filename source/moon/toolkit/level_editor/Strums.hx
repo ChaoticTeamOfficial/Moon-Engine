@@ -13,7 +13,7 @@ class Strums extends FlxSpriteGroup
 		var line = new MoonSprite().makeGraphic(Std.int(LevelEditor.LANE_WIDTH * (LevelEditor.NUM_LANES + 1)), 2, color);
 		add(line);
 
-		var circle = new FlxShapeCircle(0, 0, 8, {thickness: 4, color: color}, color);
+		var circle = new FlxShapeCircle(0, 0, 4, {thickness: 4, color: color}, color);
 		add(circle);
 		circle.antialiasing = false;
 		circle.y = line.y + line.height / 2 - circle.height / 2;
@@ -58,7 +58,7 @@ class Strums extends FlxSpriteGroup
             if (s.strID.toLowerCase() == n.lane.toLowerCase() && s.ID == n.direction)
             {
                 s.alpha = 1;
-                s.scale.set(1.3, 1.3);
+                s.scale.set(1.5, 1.5);
                 //trace('${s.strID.toLowerCase()} to ${n.lane.toLowerCase()}', "DEBUG");
             }
         }
@@ -70,8 +70,8 @@ class Strums extends FlxSpriteGroup
 
 		for(s in arrows)
 		{
-			s.scale.x = s.scale.y = FlxMath.lerp(s.scale.x, 1, elapsed * 5);
-			s.alpha = FlxMath.lerp(s.alpha, 0.00001, elapsed * 4);
+			s.scale.x = s.scale.y = FlxMath.lerp(s.scale.x, 1, elapsed * 8);
+			s.alpha = FlxMath.lerp(s.alpha, 0.00001, elapsed * 6);
 		}
 	}
 }
