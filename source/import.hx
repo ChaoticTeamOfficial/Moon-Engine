@@ -5,6 +5,7 @@ import flixel.text.*;
 import flixel.util.*;
 import flixel.tweens.*;
 import flixel.math.*;
+import flixel.group.*;
 
 import moon.backend.*;
 import moon.dependency.*;

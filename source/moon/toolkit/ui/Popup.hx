@@ -26,6 +26,8 @@ class Popup extends FlxSpriteGroup
     {
         super();
         
+        //LOL i made this a flxspritegroup but didn't really add anything else to it XD
+        //I'll leave it like this until I decide what I'm going to do.
         final slice9:Array<Int> = [32, 32, 96, 96];
         windowBg = new FlxUI9SliceSprite(0, 0, Paths.image('toolkit/ui/popup'), new Rectangle(0, 0, 128, 128), slice9);
         add(windowBg);

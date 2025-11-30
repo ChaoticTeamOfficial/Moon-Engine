@@ -53,9 +53,9 @@ class ScrollBar extends FlxSpriteGroup
     {
         super.update(elapsed);
 
-        var normPos = timeToY(conductor.time) / totalHeight;
-        var barHeight = FlxG.height - 100;
-        var indY = 50 + normPos * barHeight;
+        final normPos = timeToY(conductor.time) / totalHeight;
+        final barHeight = FlxG.height - 100;
+        final indY = 50 + normPos * barHeight;
 
         indicator.y = indY - (indicator.height / 2);
 

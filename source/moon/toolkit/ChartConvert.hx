@@ -82,7 +82,8 @@ class ChartConvert extends FlxState
                 {
                     difficulty = difficulties[_curSelection];
                     // Check if metadata is needed for this format
-                    if (format == 'codename' || format == 'v-slice')
+                    //TODO: MAKE THIS BETTER CAUSE THIS SUCKSSSS
+                    if (format == 'codename' || format == 'v-slice' || format == 'fps-plus')
                     {
                         state = MetaFileSelect;
                         updateStateText();

@@ -8,12 +8,13 @@ import flixel.util.FlxColor;
 import flixel.graphics.FlxGraphic;
 import openfl.geom.Rectangle;
 import moon.toolkit.ui.*;
-import moon.game.obj.Song;
-import moon.backend.data.Chart;
-import moon.game.obj.notes.Note;
+import moon.game.obj.*;
+import moon.game.obj.notes.*;
+import moon.backend.data.Chart.NoteStruct;
 
 class LevelEditor extends FlxState
 {
+    // --- OBJECTS --- //
     public var chart:Chart;
     public var conductor:Conductor;
     public var playback:Song;
@@ -22,34 +23,43 @@ class LevelEditor extends FlxState
     private var camFRONT:MoonCamera = new MoonCamera();
     
     var cursor:FlxSprite;
-    var debugTxt:FlxText;
 
+    private var gridGroup:FlxSpriteGroup;
+    //private var sectionTexts:FlxSpriteGroup;
+    private var noteGroup:FlxSpriteGroup;
+
+    // --- NUMBER VARIABLES --- //
     public static final LANE_WIDTH:Int = 40;
     public static final LANE_HEIGHT:Int = 40;
-    var NUM_LANES:Int = 8;
+    public static final initialGridY:Float = 128;
+
+    public static var NUM_LANES:Int = 8;
+
     var snapIndex:Int = 1;
     var curSnap:Int = 4;
-    final initialGridY:Float = 0;
     final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
 
-    var gridGroup:FlxSpriteGroup;
-    var sectionTexts:FlxSpriteGroup;
-    var noteGroup:FlxSpriteGroup;
+    // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
     var sectionStarts:Array<{num:Int, y:Float}> = [];
-    var changeIndex:Int = 1;
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
-
 
     override public function create()
     {
-        // --- SETUP BACKEND STUFF --- //
-        final song = 'satin panties';
-        final diff = 'erect';
-        final mix = 'bf';
+        //SELF NOTE; 
+        // umm I should look into note rendering or sum shit
+        // memory usage at start is... terrible, woah.
+        // maybe I can do... recycling and only add them when on screen?
+        // kinda like how it works in-game... hmmm
+        // I'll consider these options later.
 
-        camBACK.bgColor = 0x00000000;
+        // --- SETUP BACKEND STUFF --- //
+        final song = 'senpai';
+        final diff = 'hard';
+        final mix = 'noimix';
+
+        camBACK.bgColor = 0xFF1e1d1f;
         camMID.bgColor = 0x00000000;
         camFRONT.bgColor = 0x00000000;
 
@@ -70,8 +80,6 @@ class LevelEditor extends FlxState
         );
 
         // --- GENERATE OBJECTSS --- //
-        var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(30, 29, 31));
-        add(bg);
 
         // Collects BPM and time signature changes
         // TODO: Make... the... added events also push to this?
@@ -94,18 +102,18 @@ class LevelEditor extends FlxState
         changes.sort((a, b) -> Std.int(a.time - b.time));
 
         gridGroup = new FlxSpriteGroup(FlxG.width / 2 + 64, initialGridY);
-        sectionTexts = new FlxSpriteGroup();
-        gridGroup.add(sectionTexts);
+        //sectionTexts = new FlxSpriteGroup();
+        //gridGroup.add(sectionTexts);
 
         final gridWidth:Int = LANE_WIDTH * NUM_LANES;
         var currentY:Float = 0;
-        var sectionNum:Int = 0;
+        //var sectionNum:Int = 0;
         var tempConductor:Conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
 
         //make grid!
         for (i in 0...changes.length)
         {
-            var ch = changes[i];
+            final ch = changes[i];
             tempConductor.time = ch.time;
             tempConductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
 
@@ -153,7 +161,10 @@ class LevelEditor extends FlxState
             // Add section texts
             // Because I enjoy having them
             // It's also a nice help :P
-            final numSectionsSeg = Math.ceil(segSteps / stepsPerSection);
+
+            // well UHH!! New design removes em!
+            // soo bye bye section indicators...
+            /*final numSectionsSeg = Math.ceil(segSteps / stepsPerSection);
             for (sec in 0...numSectionsSeg)
             {
                 var txt:FlxText = new FlxText(0, 0, 100, '${sectionNum + sec + 1}', 16);
@@ -165,10 +176,10 @@ class LevelEditor extends FlxState
                 sectionTexts.add(txt);
 
                 sectionStarts.push({num: sectionNum + sec + 1, y: secY});
-            }
+            }*/
 
             segments.push({startTime: ch.time, startY: currentY, stepCrochet: tempConductor.stepCrochet});
-            sectionNum += numSectionsSeg;
+            //sectionNum += numSectionsSeg;
             currentY += segHeight;
         }
         add(gridGroup);
@@ -177,32 +188,16 @@ class LevelEditor extends FlxState
         noteGroup = new FlxSpriteGroup();
         gridGroup.add(noteGroup);
 
-        for (n in chart.content.notes)
-        {
-            var note = new Note(n.data, n.time, n.type, "v-slice", n.duration, conductor);
-            note.state = CHART_EDITOR;
-            note.active = false; //doesnt need updates, so!
-            note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
-            note.updateHitbox();
+        for (nData in chart.content.notes)
+            createNote(nData);
 
-            //TODO: update this once we have p2 support.
-            final laneIndex = (n.lane == "p1") ? 4 : 0;
-            note.x = (laneIndex + n.data) * LANE_WIDTH;
-            note.y = timeToY(n.time);
+        //var scrollbar = new ScrollBar(sectionStarts, currentY, conductor, segments, playback);
+        //add(scrollbar);
+        //scrollbar.setPosition(FlxG.width - scrollbar.width + 128, 0);
 
-            note.x += (LANE_WIDTH - note.width) / 2;
-
-            noteGroup.add(note);
-        }
-
-        var scrollbar = new ScrollBar(sectionStarts, currentY, conductor, segments, playback);
-        add(scrollbar);
-        scrollbar.setPosition(FlxG.width - scrollbar.width + 128, 0);
-
-        debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
-        debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
-        add(debugTxt);
-        updatedebugTxt();
+        //debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
+        //debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
+        //add(debugTxt);
 
         cursor = new MoonSprite();
         cursor.makeGraphic(LANE_WIDTH, LANE_HEIGHT, FlxColor.WHITE);
@@ -210,8 +205,30 @@ class LevelEditor extends FlxState
         cursor.alpha = 0.5;
         cursor.visible = false;
         add(cursor);
+
+        // lol
+        final ogC = 0xFF1e1d1f;
+        var colors = [ogC];
+        for(i in 0...10)
+            colors.push(FlxColor.TRANSPARENT);
+        colors.push(ogC);
+
+        var gradient = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, colors);
+        gradient.camera = camMID;
+        add(gradient);
+
+        var strum = new Strums(gridGroup.x, initialGridY);
+        add(strum);
+
+        /*
+        var ye = new FlxSprite().makeGraphic(100, 100, FlxColor.TRANSPARENT);
+        ye.camera = camFRONT;
+        FlxSpriteUtil.drawRoundRect(ye, 10, 10, 80, 80, 15, 15, FlxColor.BLUE);
+        add(ye);
+        */
     }
 
+    var changeIndex:Int = 1;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
@@ -224,7 +241,7 @@ class LevelEditor extends FlxState
             {
                 snapIndex = (MoonInput.justPressed(UI_LEFT) ? snapIndex - 1 + snaps.length : snapIndex + 1 ) % snaps.length;
                 curSnap = snaps[snapIndex];
-                updatedebugTxt();
+                //updatedebugTxt();
             }
         }
         else
@@ -244,14 +261,6 @@ class LevelEditor extends FlxState
 
         // this should HOPEFULLY reduce update calls and draw calls :3
         // update: YEAHH IT DID nice.
-        for(yeah in sectionTexts.members)
-        {
-            final spr = cast(yeah, FlxSprite);
-            spr.active = spr.visible = spr.isOnScreen();
-        }
-
-        // Do the same for notes to optimize
-        // I should make this a function...lol
         for(yeah in noteGroup.members)
         {
             final spr = cast(yeah, FlxSprite);
@@ -274,9 +283,6 @@ class LevelEditor extends FlxState
         // Update cursor position
         updateCursor();
     }
-
-    private function updatedebugTxt():Void
-        debugTxt.text = (curSnap == 0) ? "Snap: None" : 'Snap: 1/$curSnap';
 
     // this snaps the square cursor thing
     // ... I really should documment this code more. Before it turns into a giant mess of code...
@@ -311,6 +317,24 @@ class LevelEditor extends FlxState
         }
 
         cursor.y = gridGroup.y + timeToY(snappedTime);
+    }
+
+    function createNote(n:NoteStruct)
+    {
+        var note = new Note(n.data, n.time, n.type, "v-slice", n.duration, conductor);
+        note.state = CHART_EDITOR;
+        note.active = false; //doesnt need updates, so!
+        note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
+        note.updateHitbox();
+
+        //TODO: update this once we have p2 support.
+        final laneIndex = (n.lane == "p1") ? 4 : 0;
+        note.x = (laneIndex + n.data) * LANE_WIDTH;
+        note.y = timeToY(n.time);
+
+        note.x += (LANE_WIDTH - note.width) / 2;
+
+        noteGroup.add(note);
     }
 
     function timeToY(time:Float):Float
