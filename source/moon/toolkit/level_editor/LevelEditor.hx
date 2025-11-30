@@ -15,13 +15,14 @@ import moon.backend.data.Chart.NoteStruct;
 class LevelEditor extends FlxState
 {
     // --- OBJECTS --- //
-    public var chart:Chart;
+    public static var chart:Chart;
     public var conductor:Conductor;
     public var playback:Song;
     private var camBACK:MoonCamera = new MoonCamera();
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
     
+    var strum:Strums;
     var cursor:FlxSprite;
 
     private var gridGroup:FlxSpriteGroup;
@@ -55,9 +56,9 @@ class LevelEditor extends FlxState
         // I'll consider these options later.
 
         // --- SETUP BACKEND STUFF --- //
-        final song = 'senpai';
+        final song = 'darnell';
         final diff = 'hard';
-        final mix = 'noimix';
+        final mix = 'bf';
 
         camBACK.bgColor = 0xFF1e1d1f;
         camMID.bgColor = 0x00000000;
@@ -217,7 +218,7 @@ class LevelEditor extends FlxState
         gradient.camera = camMID;
         add(gradient);
 
-        var strum = new Strums(gridGroup.x, initialGridY);
+        strum = new Strums(gridGroup.x, initialGridY);
         add(strum);
 
         /*
@@ -234,6 +235,7 @@ class LevelEditor extends FlxState
         super.update(elapsed);
 
         // ----- Input Stuff ----- //
+        updateCursor();
         if (FlxG.keys.pressed.CONTROL)
         {
             // snapping!!
@@ -280,8 +282,22 @@ class LevelEditor extends FlxState
 
         gridGroup.y = FlxMath.lerp(gridGroup.y, initialGridY - timeToY(conductor.time), elapsed * 28);
 
-        // Update cursor position
-        updateCursor();
+        // ----- Upon "note hit" ----- //
+        for (note in noteGroup)
+        {
+            //TODO: toggle for both theese
+            final n = cast(note, Note);
+
+            if (n.strID != 'h' && conductor.time >= n.time && playback.state == PLAY)
+            {
+                n.strID = 'h';
+                strum.onHit(n);
+                Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
+            }
+
+            if (n.strID == 'h' && conductor.time < n.time)
+                n.strID = 'a';
+        }
     }
 
     // this snaps the square cursor thing
@@ -326,6 +342,7 @@ class LevelEditor extends FlxState
         note.active = false; //doesnt need updates, so!
         note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
         note.updateHitbox();
+        note.lane = n.lane;
 
         //TODO: update this once we have p2 support.
         final laneIndex = (n.lane == "p1") ? 4 : 0;
@@ -382,7 +399,8 @@ class LevelEditor extends FlxState
 
     public function sfx(p:String)
     {
+        //TODO: CONVERT ALL SFX TO WAV
         if (playback.state != PLAY)
-            Paths.playSFX('toolkit/level-editor/$p.ogg');
+            Paths.playSFX('toolkit/level-editor/$p.wav');
     }
 }

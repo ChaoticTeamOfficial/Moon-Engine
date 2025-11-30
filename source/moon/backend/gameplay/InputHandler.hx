@@ -5,6 +5,7 @@ import moon.game.obj.Character;
 import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
 import moon.backend.gameplay.Timings;
+import lime.system.System;
 
 /**
  * Class meant to handle note inputs in a gameplay scene.
@@ -92,6 +93,8 @@ class InputHandler
      */
     public var released:Array<Bool> = [];
 
+    private var _lastFrameTimer:Float = 0;
+
     /**
      * Creates input handler instance, all this does is handling inputs for a player you choose.
      * @param thisNotes The notes array that it will read.
@@ -110,15 +113,14 @@ class InputHandler
 
     public function update():Void
     {
-        if(!CPUMode)
-            processInputs();
-        else
-            processCPUInputs();
+        (!CPUMode) ? processInputs() : processCPUInputs();
 
         checkSustains();
         onLateMiss();
 
         stats.health = FlxMath.bound(stats.health, 0, 101);
+
+        _lastFrameTimer = System.getTimer();
     }
 
     private function processCPUInputs():Void
@@ -239,6 +241,7 @@ class InputHandler
         stats.combo++;
         strumline.members[note.direction].onNoteHit(note, timing, isSustain);
         stats.updtAccuracy();
+        //trace(timing);
         
         // little workaround if it doesnt despawn, which may happen sometimes...
         if(!isSustain) strumline.members[note.direction].sustainSplash.despawn((CPUMode));
@@ -334,7 +337,7 @@ class InputHandler
      */
     private function checkTiming(note:Note):String
     {
-        final timeDifference = Math.abs(note.time - conductor.time);
+        final timeDifference = Math.abs(note.time - conductor.time + System.getTimer() - _lastFrameTimer);
         for (jt in Timings.values)
             if (timeDifference <= Timings.getParameters(jt)[1])
                 return jt;

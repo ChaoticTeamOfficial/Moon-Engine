@@ -35,7 +35,8 @@ class Freeplay extends FlxSubState
         'shitno' => 'bf',
         'silly billy' => 'bf',
         'nacreous-snowmelt' => 'bf',
-		'finale' => 'bf'
+		'finale' => 'bf',
+        'lit-up' => 'bf'
     ];
     var texts:Array<FlxText> = [];
     
