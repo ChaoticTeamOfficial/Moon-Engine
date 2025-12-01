@@ -11,6 +11,7 @@ import moon.toolkit.ui.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
 import moon.backend.data.Chart.NoteStruct;
+import flixel.math.FlxRect;
 
 class LevelEditor extends FlxState
 {
@@ -32,7 +33,7 @@ class LevelEditor extends FlxState
     // --- NUMBER VARIABLES --- //
     public static final LANE_WIDTH:Int = 40;
     public static final LANE_HEIGHT:Int = 40;
-    public static final initialGridY:Float = 128;
+    public static final initialGridY:Float = 48;
 
     public static var NUM_LANES:Int = 8;
 
@@ -54,6 +55,9 @@ class LevelEditor extends FlxState
 
         // NOTE 2:
         // It isn't the notes, it's the tiled grid sprite!!! I gotta fix it ;v;
+
+        // NOTE 3:
+        // Fixed it ;D
 
         // --- SETUP BACKEND STUFF --- //
         final song = 'darnell';
@@ -122,10 +126,9 @@ class LevelEditor extends FlxState
             if (nextTime - ch.time <= 0) continue;
 
             final segSteps:Float = (nextTime - ch.time) / tempConductor.stepCrochet;
-            final segHeight:Int = Std.int(Math.ceil(segSteps * LANE_HEIGHT));
             final stepsPerSection = ch.numerator * ch.denominator;
-            final beatHeight:Int = Std.int(ch.numerator * LANE_HEIGHT);
             final sectionHeight:Int = Std.int(stepsPerSection * LANE_HEIGHT);
+            final beatHeight:Int = Std.int(ch.numerator * LANE_HEIGHT);
 
             var tileGraphic:FlxGraphic;
             final cacheKey = ch.numerator + "," + ch.denominator;
@@ -154,10 +157,31 @@ class LevelEditor extends FlxState
             }
 
             tileGraphic = graphicCache.get(cacheKey);
-            var segBG:FlxTiledSprite = new FlxTiledSprite(tileGraphic, gridWidth, segHeight, false, true);
-            segBG.antialiasing = false;
-            segBG.y = currentY;
-            gridGroup.add(segBG);
+
+            // break the segment into per-section sprites
+            final numFullSections:Int = Std.int(Math.floor(segSteps / stepsPerSection));
+            var secY:Float = currentY;
+            for (sec in 0...numFullSections)
+            {
+                var secSprite = new MoonSprite(0, secY).loadGraphic(tileGraphic);
+                secSprite.antialiasing = false;
+                secSprite.active = false;
+                gridGroup.add(secSprite);
+                secY += sectionHeight;
+            } 
+            final remainderSteps:Float = segSteps - (numFullSections * stepsPerSection);
+            if (remainderSteps > 0)
+            {
+                final remainderHeight:Float = remainderSteps * LANE_HEIGHT;
+                var lastSprite = new MoonSprite(0, secY).loadGraphic(tileGraphic);
+                lastSprite.antialiasing = false;
+                lastSprite.active = false;
+                lastSprite.clipRect = new FlxRect(0, 0, gridWidth, remainderHeight);
+                lastSprite.height = remainderHeight;
+                lastSprite.updateHitbox();
+                gridGroup.add(lastSprite);
+                secY += remainderHeight;
+            }
 
             // Add section texts
             // Because I enjoy having them
@@ -181,7 +205,7 @@ class LevelEditor extends FlxState
 
             segments.push({startTime: ch.time, startY: currentY, stepCrochet: tempConductor.stepCrochet});
             //sectionNum += numSectionsSeg;
-            currentY += segHeight;
+            currentY = secY;
         }
         add(gridGroup);
 
@@ -192,9 +216,10 @@ class LevelEditor extends FlxState
         for (nData in chart.content.notes)
             createNote(nData);
 
-        //var scrollbar = new ScrollBar(sectionStarts, currentY, conductor, segments, playback);
-        //add(scrollbar);
-        //scrollbar.setPosition(FlxG.width - scrollbar.width + 128, 0);
+        var scrollbar = new ScrollBar(currentY, conductor, segments, playback);
+        add(scrollbar);
+        scrollbar.screenCenter(Y);
+        scrollbar.x = gridGroup.x + gridGroup.width + 16;
 
         //debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
         //debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
@@ -267,6 +292,16 @@ class LevelEditor extends FlxState
         {
             final spr = cast(yeah, FlxSprite);
             spr.active = spr.visible = spr.isOnScreen();
+        }
+
+        for (member in gridGroup.members)
+        {
+            if (Std.isOfType(member, FlxSprite) && !Std.isOfType(member, FlxSpriteGroup))
+            {
+                final spr:FlxSprite = cast member;
+                if (spr != cursor && spr != strum && !noteGroup.members.contains(spr))
+                    spr.visible = spr.isOnScreen();
+            }
         }
 
         playback.update(elapsed);

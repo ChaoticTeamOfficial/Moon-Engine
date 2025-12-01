@@ -13,10 +13,10 @@ import moon.game.obj.Song;
 import moon.backend.data.Chart;
 import moon.game.obj.notes.Note;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxSpriteUtil;
 
 class ScrollBar extends FlxSpriteGroup
 {
-    var sections:Array<{num:Int, y:Float}>;
     var totalHeight:Float;
     var conductor:Conductor;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>;
@@ -27,26 +27,26 @@ class ScrollBar extends FlxSpriteGroup
     var sectionText:FlxText;
 
     var isDragging:Bool = false;
+    final barSize:Int = FlxG.height - 116;
 
-    public function new(sections:Array<{num:Int, y:Float}>, totalHeight:Float, conductor:Conductor, segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>, playback:Song)
+    public function new(totalHeight:Float, conductor:Conductor, segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>, playback:Song)
     {
         super();
-        this.sections = sections;
         this.totalHeight = totalHeight;
         this.conductor = conductor;
         this.segments = segments;
         this.playback = playback;
 
-        bar = new FlxSprite(0, 50).makeGraphic(24, FlxG.height - 100, FlxColor.GRAY);
+        final round = 8;
+        final w = 5;
+
+        bar = new FlxSprite().makeGraphic(w, barSize, FlxColor.TRANSPARENT);
+        FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, round, round, FlxColor.BLACK);
         add(bar);
-
-        indicator = new FlxSprite(0, 0).makeGraphic(24, 20, FlxColor.WHITE);
+        
+        indicator = new FlxSprite().makeGraphic(w, 30, FlxColor.TRANSPARENT);
+        FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, round, round, FlxColor.GRAY);
         add(indicator);
-
-        sectionText = new FlxText(0, 0, 0, "Section 100");
-        sectionText.setFormat(Paths.font('KodeMono-Bold.ttf'), 20);
-        sectionText.x = -sectionText.width - 5;
-        add(sectionText);
     }
 
     override public function update(elapsed:Float)
@@ -54,15 +54,8 @@ class ScrollBar extends FlxSpriteGroup
         super.update(elapsed);
 
         final normPos = timeToY(conductor.time) / totalHeight;
-        final barHeight = FlxG.height - 100;
-        final indY = 50 + normPos * barHeight;
 
-        indicator.y = indY - (indicator.height / 2);
-
-        final currentSection = getCurrentSection();
-        final str = 'Section ${currentSection}';
-        if(sectionText.text != str) sectionText.text = str;
-        sectionText.y = indY - (sectionText.height / 2);
+        indicator.y = bar.y + normPos * (barSize - indicator.height);
 
         if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(bar, this.camera))
         {
@@ -75,26 +68,14 @@ class ScrollBar extends FlxSpriteGroup
             if (FlxG.mouse.pressed) updateTimeFromMouse(FlxG.mouse.viewY);
             else isDragging = false;
         }
-
-        sectionText.alpha = FlxMath.lerp(sectionText.alpha, (FlxG.mouse.overlaps(bar, this.camera) || isDragging) ? 1 : 0, elapsed * 6);
-    }
-
-    private function getCurrentSection():Int
-    {
-        final currentY:Float = timeToY(conductor.time);
-
-        for (i in 0...sections.length - 1)
-        {
-            if (currentY >= sections[i].y && currentY < sections[i + 1].y)
-                return sections[i].num;
-        }
-
-        return sections[sections.length - 1].num;
     }
 
     function updateTimeFromMouse(mouseY:Float)
     {
-        final normPos = (FlxMath.bound(mouseY, bar.y, bar.y + bar.height) - bar.y) / bar.height;
+        var normPos = (FlxMath.bound(mouseY, bar.y, bar.y + bar.height) - bar.y) / bar.height;
+        // Adjust for indicator height to center the click
+        normPos = (mouseY - bar.y - (indicator.height / 2)) / (barSize - indicator.height);
+        normPos = FlxMath.bound(normPos, 0, 1);
         playback.time = yToTime(normPos * totalHeight);
     }
 
