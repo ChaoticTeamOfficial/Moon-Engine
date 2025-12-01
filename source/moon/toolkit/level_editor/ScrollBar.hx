@@ -27,7 +27,7 @@ class ScrollBar extends FlxSpriteGroup
     var sectionText:FlxText;
 
     var isDragging:Bool = false;
-    final barSize:Int = FlxG.height - 116;
+    final barSize:Int = FlxG.height - 78;
 
     public function new(totalHeight:Float, conductor:Conductor, segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>, playback:Song)
     {
@@ -37,15 +37,14 @@ class ScrollBar extends FlxSpriteGroup
         this.segments = segments;
         this.playback = playback;
 
-        final round = 8;
         final w = 5;
 
         bar = new FlxSprite().makeGraphic(w, barSize, FlxColor.TRANSPARENT);
-        FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, round, round, FlxColor.BLACK);
+        FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, w, w, FlxColor.BLACK);
         add(bar);
         
         indicator = new FlxSprite().makeGraphic(w, 30, FlxColor.TRANSPARENT);
-        FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, round, round, FlxColor.GRAY);
+        FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, w, w, FlxColor.GRAY);
         add(indicator);
     }
 
@@ -68,6 +67,18 @@ class ScrollBar extends FlxSpriteGroup
             if (FlxG.mouse.pressed) updateTimeFromMouse(FlxG.mouse.viewY);
             else isDragging = false;
         }
+    }
+
+    public function addBookmark(time:Float, color:FlxColor)
+    {
+        final w = 5;
+        final normPos = timeToY(time) / totalHeight;
+        var marker = new MoonSprite().makeGraphic(w, 2, color);
+        marker.antialiasing = false;
+        marker.x = 0;
+        marker.y = normPos * barSize;
+        marker.active = false;
+        add(marker);
     }
 
     function updateTimeFromMouse(mouseY:Float)

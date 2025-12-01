@@ -23,12 +23,14 @@ class LevelEditor extends FlxState
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
     
+    var scrollbar:ScrollBar;
     var strum:Strums;
     var cursor:FlxSprite;
 
     private var gridGroup:FlxSpriteGroup;
     //private var sectionTexts:FlxSpriteGroup;
     private var noteGroup:FlxSpriteGroup;
+    private var miscGroup:FlxSpriteGroup;
 
     // --- NUMBER VARIABLES --- //
     public static final LANE_WIDTH:Int = 40;
@@ -60,7 +62,7 @@ class LevelEditor extends FlxState
         // Fixed it ;D
 
         // --- SETUP BACKEND STUFF --- //
-        final song = 'darnell';
+        final song = 'lit-up';
         final diff = 'hard';
         final mix = 'bf';
 
@@ -110,7 +112,8 @@ class LevelEditor extends FlxState
         //sectionTexts = new FlxSpriteGroup();
         //gridGroup.add(sectionTexts);
 
-        final gridWidth:Int = LANE_WIDTH * NUM_LANES;
+        final TOTAL_LANES:Int = NUM_LANES + 1;
+        final gridWidth:Int = LANE_WIDTH * TOTAL_LANES;
         var currentY:Float = 0;
         //var sectionNum:Int = 0;
         var tempConductor:Conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
@@ -142,16 +145,18 @@ class LevelEditor extends FlxState
 
                 for (b in 0...Std.int(ch.denominator))
                     tileSprite.pixels.fillRect(new Rectangle(0, b * beatHeight, gridWidth, beatHeight), (b % 2 == 0) ? 0xFF2a2a2c : 0xFF373739);
+                tileSprite.pixels.fillRect(new Rectangle(NUM_LANES * LANE_WIDTH, 0, LANE_WIDTH, sectionHeight), FlxColor.BLACK);
 
                 for (s in 0...Std.int(stepsPerSection) + 1)
                     tileSprite.pixels.fillRect(new Rectangle(0, s * LANE_HEIGHT, gridWidth, 1), FlxColor.GRAY);
 
                 tileSprite.pixels.fillRect(new Rectangle(0, 0, gridWidth, 2), FlxColor.WHITE);
 
-                for (l in 0...NUM_LANES + 1)
+                for (l in 0...TOTAL_LANES + 1)
                     tileSprite.pixels.fillRect(new Rectangle(l * LANE_WIDTH, 0, 1, sectionHeight), FlxColor.BLACK);
 
                 tileSprite.pixels.fillRect(new Rectangle(4 * LANE_WIDTH - 1, 0, 3, sectionHeight), FlxColor.BLACK);
+
                 tileSprite.dirty = true;
                 graphicCache.set(cacheKey, tileSprite.graphic);
             }
@@ -216,10 +221,13 @@ class LevelEditor extends FlxState
         for (nData in chart.content.notes)
             createNote(nData);
 
-        var scrollbar = new ScrollBar(currentY, conductor, segments, playback);
+        miscGroup = new FlxSpriteGroup();
+        gridGroup.add(miscGroup);
+
+        scrollbar = new ScrollBar(currentY, conductor, segments, playback);
         add(scrollbar);
-        scrollbar.screenCenter(Y);
-        scrollbar.x = gridGroup.x + gridGroup.width + 16;
+        scrollbar.y = initialGridY + 8;
+        scrollbar.x = gridGroup.x + gridWidth + 16;
 
         //debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
         //debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
@@ -343,10 +351,11 @@ class LevelEditor extends FlxState
     // ... I really should documment this code more. Before it turns into a giant mess of code...
     private function updateCursor():Void
     {
+        final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
         final relY = FlxG.mouse.viewY - gridGroup.y;
 
-        if (relX < 0 || relX >= LANE_WIDTH * NUM_LANES || relY < 0)
+        if (relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0)
         {
             cursor.visible = false;
             return;
@@ -382,14 +391,24 @@ class LevelEditor extends FlxState
         // me being a dumbass as always of course!
         if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(noteGroup))
         {
-            createNote({
-                time: snappedTime,
-                data: laneNum % 4,
-                lane: (laneNum < 4) ? "opponent" : "p1",
-                type: 'default', //TODO: get current note type
-                duration: 0
-            });
-            sfx('place-${FlxG.random.int(1, 6)}');
+            if(laneNum < NUM_LANES)
+            {
+                createNote({
+                    time: snappedTime,
+                    data: laneNum % 4,
+                    lane: (laneNum < 4) ? "opponent" : "p1",
+                    type: 'default', //TODO: get current note type
+                    duration: 0
+                });
+                sfx('place-${FlxG.random.int(1, 6)}');
+            }
+            else
+            {
+                var bm = new Bookmark(laneNum * LANE_WIDTH, timeToY(snappedTime), Std.int(LANE_HEIGHT / 2));
+                miscGroup.add(bm);
+                scrollbar.addBookmark(snappedTime, bm.col);
+                bm.active = false;
+            }
         }
     }
 

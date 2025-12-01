@@ -1,9 +1,5 @@
 package moon.toolkit.level_editor;
 
-import flixel.tweens.FlxTween;
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxSpriteContainer;
