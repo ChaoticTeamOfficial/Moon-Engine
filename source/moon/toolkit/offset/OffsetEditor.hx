@@ -9,7 +9,6 @@ import flixel.addons.display.FlxTiledSprite;
 import openfl.geom.ColorTransform;
 
 import moon.toolkit.ui.*;
-import moon.toolkit.level_editor.EditorActions;
 import moon.game.obj.*;
 import moon.game.*;
 import moon.game.obj.notes.*;

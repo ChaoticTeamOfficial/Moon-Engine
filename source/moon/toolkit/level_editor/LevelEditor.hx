@@ -11,7 +11,17 @@ import moon.toolkit.ui.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
 import moon.backend.data.Chart.NoteStruct;
+import moon.backend.data.Chart.ChartStruct;
+import openfl.filters.ColorMatrixFilter;
 import flixel.math.FlxRect;
+
+enum GridType {
+    NOTES;
+    EVENTS;
+    CHARACTERS;
+    GIMMICKS;
+    SOUNDS;
+}
 
 class LevelEditor extends FlxState
 {
@@ -39,15 +49,25 @@ class LevelEditor extends FlxState
 
     public static var NUM_LANES:Int = 8;
 
+    // --- GRID STUFF --- //
     var snapIndex:Int = 1;
     var curSnap:Int = 4;
     final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
+    final allTypes:Array<GridType> = [NOTES, EVENTS, CHARACTERS, GIMMICKS, SOUNDS];
+    var curType(default, set):GridType = NOTES;
+    var gridIndex:Int = 0;
+
+    // --- CHART-RELATED VARIABLES --- //
+    private var _internalChart:ChartStruct;
 
     // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
     var sectionStarts:Array<{num:Int, y:Float}> = [];
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
+
+    //lol got this from haxeflixel demos :P
+    var grayscaleFilter:GrayscaleShader = new GrayscaleShader();
 
     override public function create()
     {
@@ -62,7 +82,7 @@ class LevelEditor extends FlxState
         // Fixed it ;D
 
         // --- SETUP BACKEND STUFF --- //
-        final song = 'lit-up';
+        final song = 'darnell';
         final diff = 'hard';
         final mix = 'bf';
 
@@ -76,6 +96,7 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camFRONT, false);
 
         chart = new Chart(song, diff, mix);
+        _internalChart = chart.content;
         NUM_LANES = 4 * chart.content.meta.lanes.length;
 
         conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
@@ -125,10 +146,10 @@ class LevelEditor extends FlxState
             tempConductor.time = ch.time;
             tempConductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
 
-            final nextTime:Float = (i < changes.length - 1) ? changes[i + 1].time : playback.fullLength;
+            final nextTime = (i < changes.length - 1) ? changes[i + 1].time : playback.fullLength;
             if (nextTime - ch.time <= 0) continue;
 
-            final segSteps:Float = (nextTime - ch.time) / tempConductor.stepCrochet;
+            final segSteps = (nextTime - ch.time) / tempConductor.stepCrochet;
             final stepsPerSection = ch.numerator * ch.denominator;
             final sectionHeight:Int = Std.int(stepsPerSection * LANE_HEIGHT);
             final beatHeight:Int = Std.int(ch.numerator * LANE_HEIGHT);
@@ -174,10 +195,10 @@ class LevelEditor extends FlxState
                 gridGroup.add(secSprite);
                 secY += sectionHeight;
             } 
-            final remainderSteps:Float = segSteps - (numFullSections * stepsPerSection);
+            final remainderSteps = segSteps - (numFullSections * stepsPerSection);
             if (remainderSteps > 0)
             {
-                final remainderHeight:Float = remainderSteps * LANE_HEIGHT;
+                final remainderHeight = remainderSteps * LANE_HEIGHT;
                 var lastSprite = new MoonSprite(0, secY).loadGraphic(tileGraphic);
                 lastSprite.antialiasing = false;
                 lastSprite.active = false;
@@ -247,12 +268,16 @@ class LevelEditor extends FlxState
             colors.push(FlxColor.TRANSPARENT);
         colors.push(ogC);
 
-        var gradient = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, colors);
-        gradient.camera = camMID;
-        add(gradient);
+        add(FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, colors));
 
         strum = new Strums(gridGroup.x, initialGridY);
         add(strum);
+
+        var leftpanel = new LeftPanel();
+        leftpanel.camera = camMID;
+        add(leftpanel);
+
+        playback.state = PAUSE;
 
         /*
         var ye = new FlxSprite().makeGraphic(100, 100, FlxColor.TRANSPARENT);
@@ -293,6 +318,8 @@ class LevelEditor extends FlxState
 
         if (FlxG.mouse.wheel != 0)
             playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
+
+        if(FlxG.keys.justPressed.G)changeGrid(1);
 
         // this should HOPEFULLY reduce update calls and draw calls :3
         // update: YEAHH IT DID nice.
@@ -353,7 +380,7 @@ class LevelEditor extends FlxState
     {
         final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
-        final relY = FlxG.mouse.viewY - gridGroup.y;
+        final relY = FlxG.mouse.viewY - gridGroup.y - 24;
 
         if (relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0)
         {
@@ -384,30 +411,42 @@ class LevelEditor extends FlxState
 
         cursor.y = gridGroup.y + timeToY(snappedTime);
 
-        //TODO: there's a... wild exploit to put a note inside another
-        // if you hover outside the box the mouse won't be overlapping the note anymore, allowing you to put another
-        // I know the issue, it's due to how the box is snapped (which seems to just be snapping incorrectly)
-        // but for now idk how to fix it... I might steal funkin code if I don't have an idea... lol..
-        // me being a dumbass as always of course!
+        /// --- ON CLICK STUFFIES! --- ///
+        //TODO: uhm, fix this?
+        // "overlaps(noteGroup)" kinda sucks.
         if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(noteGroup))
         {
             if(laneNum < NUM_LANES)
             {
-                createNote({
+                final n = {
                     time: snappedTime,
                     data: laneNum % 4,
                     lane: (laneNum < 4) ? "opponent" : "p1",
                     type: 'default', //TODO: get current note type
-                    duration: 0
-                });
+                    duration: 0.0 //mf wants a float .`  _ .
+                };
+
+                createNote(n);
+                _internalChart.notes.push(n);
                 sfx('place-${FlxG.random.int(1, 6)}');
             }
             else
             {
-                var bm = new Bookmark(laneNum * LANE_WIDTH, timeToY(snappedTime), Std.int(LANE_HEIGHT / 2));
-                miscGroup.add(bm);
-                scrollbar.addBookmark(snappedTime, bm.col);
-                bm.active = false;
+                if(!FlxG.mouse.overlaps(miscGroup))
+                {
+                    //trace('adding bookmark');
+                    var bm = new Bookmark(laneNum * LANE_WIDTH, timeToY(snappedTime), LANE_HEIGHT);
+                    miscGroup.add(bm);
+
+                    scrollbar.addBookmark(snappedTime, bm.col);
+                    bm.active = false;
+
+                    if(_internalChart.bookmarks == null) _internalChart.bookmarks = [];
+                    _internalChart.bookmarks.push({
+                        text: bm.text,
+                        time: snappedTime
+                    });
+                }
             }
         }
     }
@@ -479,5 +518,28 @@ class LevelEditor extends FlxState
         //TODO: CONVERT ALL SFX TO WAV
         if (playback.state != PLAY)
             Paths.playSFX('toolkit/level-editor/$p.wav');
+    }
+
+    function changeGrid(change:Int = 0):Void
+    {
+        gridIndex = FlxMath.wrap(gridIndex + change, 0, allTypes.length - 1);
+        curType = allTypes[gridIndex];
+    }
+
+    function set_curType(curType:GridType):GridType
+    {
+        this.curType = curType;
+
+        final typeStr:String = '$curType';
+        sfx('${typeStr.toLowerCase()}Tab');
+
+        for (member in noteGroup.members)
+        {
+            var note:Note = cast member;
+            note.shader = (curType != NOTES) ? grayscaleFilter : null;
+            note.alpha = (curType != NOTES) ? 0.25 : 1;
+        }
+
+        return curType;
     }
 }

@@ -58,7 +58,7 @@ class PlayState extends FlxState
 	public var difficulty:String;
 	public var mix:String;
 
-	public function new(?song:String = 'roses', ?difficulty:String = 'nightmare', ?mix:String = 'bf')
+	public function new(?song:String = 'beach episode', ?difficulty:String = 'erect', ?mix:String = 'bf')
 	{
 		super();
 		this.song = song;

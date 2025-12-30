@@ -26,8 +26,11 @@ class ScrollBar extends FlxSpriteGroup
     var indicator:FlxSprite;
     var sectionText:FlxText;
 
+    var bookmarks:Array<{time:Float, color:FlxColor}> = [];
+
     var isDragging:Bool = false;
     final barSize:Int = FlxG.height - 78;
+    final w = 10;
 
     public function new(totalHeight:Float, conductor:Conductor, segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>, playback:Song)
     {
@@ -37,14 +40,13 @@ class ScrollBar extends FlxSpriteGroup
         this.segments = segments;
         this.playback = playback;
 
-        final w = 5;
-
         bar = new FlxSprite().makeGraphic(w, barSize, FlxColor.TRANSPARENT);
         FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, w, w, FlxColor.BLACK);
         add(bar);
         
         indicator = new FlxSprite().makeGraphic(w, 30, FlxColor.TRANSPARENT);
-        FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, w, w, FlxColor.GRAY);
+        FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, w, w, FlxColor.WHITE);
+        indicator.alpha = 0.5;
         add(indicator);
     }
 
@@ -71,20 +73,32 @@ class ScrollBar extends FlxSpriteGroup
 
     public function addBookmark(time:Float, color:FlxColor)
     {
-        final w = 5;
-        final normPos = timeToY(time) / totalHeight;
-        var marker = new MoonSprite().makeGraphic(w, 2, color);
-        marker.antialiasing = false;
-        marker.x = 0;
-        marker.y = normPos * barSize;
-        marker.active = false;
-        add(marker);
+        bookmarks.push({time: time, color: color});
+        redrawBar();
+    }
+
+    public function removeBookmark(time:Float)
+    {
+        final oldLength = bookmarks.length;
+        bookmarks = [for (b in bookmarks) if (b.time != time) b];
+        if (bookmarks.length < oldLength)
+            redrawBar();
+    }
+
+    function redrawBar()
+    {
+        FlxSpriteUtil.fill(bar, FlxColor.TRANSPARENT);
+        FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, w, w, FlxColor.BLACK);
+        for (bm in bookmarks)
+        {
+            final bookmarkY = Math.floor(timeToY(bm.time) / totalHeight * barSize);
+            FlxSpriteUtil.drawRect(bar, 0, bookmarkY, w, 2, bm.color);
+        }
     }
 
     function updateTimeFromMouse(mouseY:Float)
     {
         var normPos = (FlxMath.bound(mouseY, bar.y, bar.y + bar.height) - bar.y) / bar.height;
-        // Adjust for indicator height to center the click
         normPos = (mouseY - bar.y - (indicator.height / 2)) / (barSize - indicator.height);
         normPos = FlxMath.bound(normPos, 0, 1);
         playback.time = yToTime(normPos * totalHeight);

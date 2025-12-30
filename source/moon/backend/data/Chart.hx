@@ -34,6 +34,16 @@ typedef EventStruct =
 };
 
 /**
+ * Struct for a bookmark.
+ * Only visible in the chart editor.
+ */
+typedef BookmarkStruct = 
+{
+    var text:String;
+    var time:Float;
+};
+
+/**
  * Structure for the Chart's metadata.
  */
 typedef MetadataStruct =
@@ -62,21 +72,13 @@ typedef MetadataStruct =
 };
 
 /**
- * Structure for the result of a conversion.
- */
-typedef ConvertResult =
-{
-    var chartJson:String;
-    var eventsJson:String;
-};
-
-/**
  * Structure for the entire Chart.
  */
 typedef ChartStruct =
 {
     var meta:MetadataStruct;
     var notes:Array<NoteStruct>;
+    var ?bookmarks:Array<BookmarkStruct>;
 };
 
 /**
@@ -278,3 +280,12 @@ class Chart
         #end
     }
 }
+
+/**
+ * Structure for the result of a conversion.
+ */
+typedef ConvertResult =
+{
+    var chartJson:String;
+    var eventsJson:String;
+};

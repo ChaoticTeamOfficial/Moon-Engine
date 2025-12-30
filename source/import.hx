@@ -14,4 +14,5 @@ import moon.backend.data.*;
 import moon.*;
 import moon.game.obj.dialogue.*;
 import moon.game.obj.dialogue.effects.*;
+import moon.hardcoded_shaders.*;
 #end
