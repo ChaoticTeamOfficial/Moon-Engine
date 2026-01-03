@@ -127,10 +127,6 @@ class PlayField extends FlxGroup
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
-
-        final xVal = (FlxG.width * 0.5);
-        final xAddition = (FlxG.width * 0.25);
-        final strumXs = [-xAddition, xAddition];
 		
         final playerIDs = ["opponent", "p1"];
         final isCPUPlayers = [true, false];
@@ -141,7 +137,7 @@ class PlayField extends FlxGroup
             add(strumBG);
             strumsBG.push(strumBG);
             //TODO: Skins lol
-            var strumline = new Strumline(xVal + strumXs[i], 68, 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
+            var strumline = new Strumline(0, 68, 'pixel', isCPUPlayers[i], playerIDs[i], conductor);
             add(strumline);
 
             strumBG.makeGraphic(Std.int(strumline.width + 64), Std.int(FlxG.height) + 32, FlxColor.BLACK);
@@ -205,10 +201,16 @@ class PlayField extends FlxGroup
 
         for (strum in strumlines)
         {
-            if(strum.playerID == 'p1')
-                playerStrum = strum;
-
             strum.y = (!downscroll) ? 80 : FlxG.height - strum.height - 80;
+
+            final mid = (FlxG.width * 0.5);
+            final xAddition = (FlxG.width * 0.25);
+            final strumXs = [-xAddition, xAddition];
+
+            //TODO: Fix opp notes appearing
+            playerStrum.x = (MoonSettings.callSetting('Middlescroll')) ? mid : mid + strumXs[1];
+            oppStrum.x = mid + strumXs[0];
+            oppStrum.visible = !MoonSettings.callSetting('Middlescroll');
         }
         
         for(strumBG in strumsBG)
@@ -253,7 +255,6 @@ class PlayField extends FlxGroup
 
         setupNotes();
         updateP1Stats(null);
-
 
         if(onSongRestart != null) onSongRestart();
         inCountdown = true;

@@ -164,7 +164,6 @@ class MoonSettings
 
         categories.set("Interface Settings",
         [
-            new Setting("Noteskin", SELECTOR, "Toggles your noteskins.", ["DEFAULT", "MOON"], "DEFAULT"),
             new Setting("Healthbar Visibility", SELECTOR, "Toggles whether the health bar should be visible or not.", ["On", "Below 100%", "Off"], "On"),
             new Setting("Show Accuracy", SELECTOR, "Toggles accuracy stat on the in-game HUD.", ["Off", "Approximate", "Full"], "Full"),
             new Setting("Stats Position", SELECTOR, "Changes the position of your stats HUD (misses, score, etc).", ["On HP-Bar", "On Player Lane"], "On HP-Bar"),
@@ -182,7 +181,7 @@ class MoonSettings
 
         // A category that's not visible on the settings, it's mostly just for internal use
         categories.set("Internal", [
-            new Setting("Game Character", SELECTOR, "Currently selected game character", ['bf'], 'bf')
+            new Setting("Game Character", SELECTOR, "", ['bf'], 'bf')
         ]);
     }
 

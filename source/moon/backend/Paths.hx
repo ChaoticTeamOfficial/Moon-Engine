@@ -82,9 +82,8 @@ class Paths
         if (isMod)
         {
             if (!Global.currentModFiles.exists(path))
-            {
                 return null;
-            }
+
             return Global.currentModFiles.get(path);
         }
         else
@@ -92,15 +91,13 @@ class Paths
             var fsPath:String = getPath(path, library);
             #if desktop
             if (!FileSystem.exists(fsPath))
-            {
                 return null;
-            }
+
             return File.getBytes(fsPath);
             #else
             if (!Assets.exists(fsPath))
-            {
                 return null;
-            }
+
             return Assets.getBytes(fsPath);
             #end
         }
@@ -108,16 +105,15 @@ class Paths
     
     public static function exists(filePath:String, ?library:String):Bool
     {
-        var isMod = filePath.startsWith('curMod/');
-        var checkPath = isMod ? filePath.substr(7) : filePath;
-        return fileExists(checkPath, library, isMod);
+        final isMod = filePath.startsWith('curMod/');
+        return fileExists(isMod ? filePath.substr(7) : filePath, library, isMod);
     }
     
     public static function getSound(key:String, ?library:String):Sound
     {
         var cacheKey:String = key;
-        var isMod = key.startsWith('curMod/');
-        var soundRelative:String = isMod ? key.substr(7) : key;
+        final isMod = key.startsWith('curMod/');
+        final soundRelative:String = isMod ? key.substr(7) : key;
         if (!renderedSounds.exists(cacheKey))
         {
             if (!fileExists(soundRelative, library, isMod))
@@ -151,13 +147,16 @@ class Paths
 
     public static function getGraphic(key:String, from:String = 'images', ?library:String):FlxGraphic
     {
-        var cacheKey:String = key;
-        var isMod = key.startsWith('curMod/');
+        // mod support is fun guys trust me!!!
+        // augh this is killing me.
+        final cacheKey:String = key;
+        final isMod = key.startsWith('curMod/');
         var graphicRelative:String = isMod ? key.substr(7) : key;
+
         if (!isMod && graphicRelative.endsWith('.png'))
             graphicRelative = graphicRelative.substring(0, graphicRelative.lastIndexOf('.png'));
 
-        var imagePath:String = isMod ? graphicRelative + '.png' : '$from/$graphicRelative.png';
+        final imagePath:String = isMod ? graphicRelative + '.png' : '$from/$graphicRelative.png';
         if (!renderedGraphics.exists(cacheKey))
         {
             if (!fileExists(imagePath, library, isMod))
@@ -165,6 +164,7 @@ class Paths
                 trace('$imagePath does not exist!${isMod ? " in mod" : ""}', "ERROR");
                 return null;
             }
+
             var bitmap:BitmapData;
             if (isMod)
             {
@@ -183,7 +183,8 @@ class Paths
                 bitmap = Assets.getBitmapData(fsPath, false);
                 #end
             }
-            //hmmm doesnt seem to do anything different xd im crying
+
+            //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
             var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
             renderedGraphics.set(cacheKey, newGraphic);
@@ -197,6 +198,7 @@ class Paths
     public static var dumpExclusions:Array<String> = [
         "menus/alphabet.png"
     ];
+    
     public static function clearMemory()
     {   
         // sprite caching
@@ -309,9 +311,8 @@ class Paths
 
     public static function text(key:String, ?library:String):String
     {
-        var isMod = key.startsWith('curMod/');
-        var txtPath = isMod ? key.substr(7) + '.txt' : '$key.txt';
-        return getFileContent(txtPath, library, isMod).trim();
+        final isMod = key.startsWith('curMod/');
+        return getFileContent(isMod ? key.substr(7) + '.txt' : '$key.txt', library, isMod).trim();
     }
 
     public static function getFileContent(path:String, ?library:String, isMod:Bool = false):String
@@ -390,10 +391,9 @@ class Paths
         
     public static function readDir(dir:String, ?typeArr:Array<String>, ?removeType:Bool = true, ?library:String):Array<String>
     {
-        var isMod = dir.startsWith('curMod/');
-        if (isMod)
+        if (dir.startsWith('curMod/'))
         {
-            var modDir:String = dir.substr(7);
+            final modDir:String = dir.substr(7);
             var swagList:Array<String> = [];
             var seen:Map<String, Bool> = new Map<String, Bool>();
             for (k in Global.currentModFiles.keys())
@@ -424,10 +424,7 @@ class Paths
                             }
                             if (added) continue;
                         }
-                        else
-                        {
-                            swagList.push(file);
-                        }
+                        else swagList.push(file);
                     }
                 }
             }
@@ -498,6 +495,7 @@ class Paths
 
 /**
  * An typedef for animation data, useful for spritesheets with jsons.
+ * (I will most likely move this to somewhere else.)
  */
 typedef AnimationData = {
     var name:String;

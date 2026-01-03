@@ -66,7 +66,6 @@ class LevelEditor extends FlxState
     var sectionStarts:Array<{num:Int, y:Float}> = [];
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
-    //lol got this from haxeflixel demos :P
     var grayscaleFilter:GrayscaleShader = new GrayscaleShader();
 
     override public function create()
@@ -257,7 +256,7 @@ class LevelEditor extends FlxState
         cursor = new MoonSprite();
         cursor.makeGraphic(LANE_WIDTH, LANE_HEIGHT, FlxColor.WHITE);
         cursor.antialiasing = false;
-        cursor.alpha = 0.5;
+        cursor.alpha = 0.55;
         cursor.visible = false;
         add(cursor);
 
