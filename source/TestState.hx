@@ -25,6 +25,7 @@ import moon.game.obj.dialogue.*;
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
 import moon.toolkit.*;
+import flixel.util.FlxSpriteUtil;
 
 using StringTools;
 
@@ -89,7 +90,27 @@ class TestState extends FlxState
         //displayIcon.playAnim('select', true);
         //trace();
         //testMod();
-        testParser();
+        //testParser();
+        add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
+
+        // i'm so relieved to find out they batch.
+        /*for(i in 0...2000)
+        {
+            var indicator = new FlxSprite(0.3 * i).makeGraphic(10, 10, FlxColor.TRANSPARENT);
+            FlxSpriteUtil.drawRoundRect(indicator, 0, 0, 10, 10, 5, 5, FlxColor.BLACK);
+            add(indicator);
+            indicator.alpha = 0.3;
+            indicator.active = false;
+        }*/
+
+        Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
+        for(i in 0...100)
+        {
+            final a = new InvertColor();
+            var thing = new IconButton(0.3 * i, 20, 64, 64, 'speed');
+            thing.invertShader = a;
+            add(thing);
+        }
     }
 
     //helper 'w'
@@ -149,8 +170,6 @@ class TestState extends FlxState
         typer.defaultColor = 0xFFFFFFFF;
         typer.lineHeight = 48;
         add(typer);*/
-
-        add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
 
         var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
         add(box.portraitsGrp);

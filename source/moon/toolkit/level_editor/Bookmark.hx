@@ -20,9 +20,13 @@ class Bookmark extends FlxSpriteGroup
         
         var circle = new FlxShapeCircle(0, 0, actSize, {thickness: 1, color: col}, col);
         add(circle);
+        circle.active = false;
         circle.antialiasing = true;
 
-        var cutie = new MoonSprite().loadGraphic(Paths.image('toolkit/level-editor/bookmark'));
+        var cutie = new MoonSprite();
+        cutie.frames = Tilemap.getAtlasFrames("btnIcons");
+        cutie.frame = Tilemap.getFrame('bookmark', 'btnIcons');
+        cutie.active = false;
         cutie.setGraphicSize(actSize, actSize);
         cutie.updateHitbox();
         add(cutie);

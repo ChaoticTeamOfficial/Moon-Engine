@@ -187,6 +187,7 @@ class Paths
             //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
             var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
+            newGraphic.persist = true;
             renderedGraphics.set(cacheKey, newGraphic);
         }
         return renderedGraphics.get(cacheKey);
@@ -198,7 +199,7 @@ class Paths
     public static var dumpExclusions:Array<String> = [
         "menus/alphabet.png"
     ];
-    
+
     public static function clearMemory()
     {   
         // sprite caching

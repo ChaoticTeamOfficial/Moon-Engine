@@ -54,11 +54,13 @@ class LevelEditor extends FlxState
     var curSnap:Int = 4;
     final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
     final allTypes:Array<GridType> = [NOTES, EVENTS, CHARACTERS, GIMMICKS, SOUNDS];
-    var curType(default, set):GridType = NOTES;
-    var gridIndex:Int = 0;
+    var curType(default, set):GridType;
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
+    public var song:String = 'darnell';
+    public var diff:String = 'hard';
+    public var mix:String = 'bf';
 
     // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
@@ -66,7 +68,8 @@ class LevelEditor extends FlxState
     var sectionStarts:Array<{num:Int, y:Float}> = [];
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
-    var grayscaleFilter:GrayscaleShader = new GrayscaleShader();
+    public var grayscale:GrayscaleShader = new GrayscaleShader();
+    public var invertColors:InvertColor = new InvertColor();
 
     override public function create()
     {
@@ -81,10 +84,6 @@ class LevelEditor extends FlxState
         // Fixed it ;D
 
         // --- SETUP BACKEND STUFF --- //
-        final song = 'darnell';
-        final diff = 'hard';
-        final mix = 'bf';
-
         camBACK.bgColor = 0xFF1e1d1f;
         camMID.bgColor = 0x00000000;
         camFRONT.bgColor = 0x00000000;
@@ -93,6 +92,9 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camBACK, true);
         FlxG.cameras.add(camMID, false);
         FlxG.cameras.add(camFRONT, false);
+
+        Tilemap.addAtlas('MELE-buttons', 'toolkit/level-editor/icons/gridTypes');
+        Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
 
         chart = new Chart(song, diff, mix);
         _internalChart = chart.content;
@@ -272,11 +274,40 @@ class LevelEditor extends FlxState
         strum = new Strums(gridGroup.x, initialGridY);
         add(strum);
 
-        var leftpanel = new LeftPanel();
+        for(i in 0...allTypes.length)
+        {
+            final gType = allTypes[i];
+            final s:String = '$gType'.toLowerCase();
+
+            var button = new MoonSprite(0, -16);
+            button.frames = Tilemap.getAtlasFrames('MELE-buttons');
+            button.animation.addByPrefix('idle', 'type-$s-normal-', 1, false);
+            button.animation.addByPrefix('click', 'type-$s-click-', 1, false);
+            //button.shader = invertColors; HELL YEAH IT WORKS
+            add(button);
+            button.centerAnimations = true;
+
+            button.scale.set(0.65, 0.65);
+            button.updateHitbox();
+            button.antialiasing = true;
+
+            button.x = gridGroup.x - button.width;
+            button.y += (button.height + 52 * i);
+
+            button.animation.play('idle');
+            button.active = false; // I think we wont need it active?
+            typeButtons.set(gType, button);
+        }
+
+        var leftpanel = new LeftPanel(this);
         leftpanel.camera = camMID;
         add(leftpanel);
 
+        //me when I debug
+        FlxG.watch.addMouse();
+
         playback.state = PAUSE;
+        curType = NOTES;
 
         /*
         var ye = new FlxSprite().makeGraphic(100, 100, FlxColor.TRANSPARENT);
@@ -287,6 +318,7 @@ class LevelEditor extends FlxState
     }
 
     var changeIndex:Int = 1;
+    var typeButtons:Map<GridType, MoonSprite> = [];
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
@@ -318,7 +350,18 @@ class LevelEditor extends FlxState
         if (FlxG.mouse.wheel != 0)
             playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
 
-        if(FlxG.keys.justPressed.G)changeGrid(1);
+        for(type => button in typeButtons)
+            if(FlxG.mouse.overlaps(button, button.camera) && FlxG.mouse.justPressed)
+                curType = type;
+
+        // I should make this better...
+        if(FlxG.keys.justPressed.ONE) curType = NOTES;
+        else if(FlxG.keys.justPressed.TWO) curType = EVENTS;
+        else if(FlxG.keys.justPressed.THREE) curType = CHARACTERS;
+        else if(FlxG.keys.justPressed.FOUR) curType = GIMMICKS;
+        else if(FlxG.keys.justPressed.FIVE) curType = SOUNDS;
+
+        //////////////////////////////////
 
         // this should HOPEFULLY reduce update calls and draw calls :3
         // update: YEAHH IT DID nice.
@@ -413,21 +456,33 @@ class LevelEditor extends FlxState
         /// --- ON CLICK STUFFIES! --- ///
         //TODO: uhm, fix this?
         // "overlaps(noteGroup)" kinda sucks.
-        if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(noteGroup))
+
+        // NOTE: THANKS TO GOATMYRIA (Luna) WE HAVE A DIFFERENT MODE FOR SELECTION
+        //WOHOOOOO NO MORE THINKING ABOUT OVERLAPPING SHIT!!!
+        if(FlxG.mouse.justPressed)
         {
             if(laneNum < NUM_LANES)
             {
-                final n = {
-                    time: snappedTime,
-                    data: laneNum % 4,
-                    lane: (laneNum < 4) ? "opponent" : "p1",
-                    type: 'default', //TODO: get current note type
-                    duration: 0.0 //mf wants a float .`  _ .
-                };
+                switch(curType)
+                {
+                    case NOTES:
+                        final n = {
+                            time: snappedTime,
+                            data: laneNum % 4,
+                            lane: (laneNum < 4) ? "opponent" : "p1",
+                            type: 'default', //TODO: get current note type
+                            duration: 0.0 //mf wants a float .`  _ .
+                        };
 
-                createNote(n);
-                _internalChart.notes.push(n);
-                sfx('place-${FlxG.random.int(1, 6)}');
+                        createNote(n);
+                        _internalChart.notes.push(n);
+                        sfx('place-${FlxG.random.int(1, 6)}');
+
+                    case EVENTS: trace('(place event)', "DEBUG");
+                    case CHARACTERS: trace('(place character event)', "DEBUG");
+                    case GIMMICKS: trace('(place gimmick event)', "DEBUG");
+                    case SOUNDS: trace('(place sound event)', "DEBUG");
+                }
             }
             else
             {
@@ -519,12 +574,6 @@ class LevelEditor extends FlxState
             Paths.playSFX('toolkit/level-editor/$p.wav');
     }
 
-    function changeGrid(change:Int = 0):Void
-    {
-        gridIndex = FlxMath.wrap(gridIndex + change, 0, allTypes.length - 1);
-        curType = allTypes[gridIndex];
-    }
-
     function set_curType(curType:GridType):GridType
     {
         this.curType = curType;
@@ -535,9 +584,12 @@ class LevelEditor extends FlxState
         for (member in noteGroup.members)
         {
             var note:Note = cast member;
-            note.shader = (curType != NOTES) ? grayscaleFilter : null;
-            note.alpha = (curType != NOTES) ? 0.25 : 1;
+            note.shader = (curType != NOTES) ? grayscale : null;
+            note.alpha = (curType != NOTES) ? 0.20 : 1;
         }
+
+        for(type => button in typeButtons)
+            button.playAnim(type == curType ? 'click' : 'idle', true);
 
         return curType;
     }
