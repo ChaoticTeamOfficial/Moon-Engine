@@ -192,8 +192,7 @@ class MoonSettings
     {
         FlxG.sound.volume = callSetting("Master Volume") / 100;
 
-        if(FlxG.sound.music != null)
-        FlxG.sound.music.volume = callSetting('Music Volume') / 100;
+        if(FlxG.sound.music != null) FlxG.sound.music.volume = callSetting('Music Volume') / 100;
 
         if (Main.fps != null) Main.fps.visible = callSetting("Show FPS");
         //FlxG.updateFramerate = FlxG.drawFramerate = (!callSetting('V-Sync')) ? callSetting('FPS Cap') : 999;
@@ -209,9 +208,6 @@ class MoonSettings
 
         //Resolutions depending on the current, this is the best way I could think of.
         // yea biggie map
-
-        // uhh also, todo
-        // not allow the user to go to a bigger resolution than the monitor's.
         final resolutions:Map<String, Array<Int>> = [
             "800x600"     => [800, 600],
             "1024x768"    => [1024, 768],
@@ -225,6 +221,18 @@ class MoonSettings
             "2560x1440"   => [2560, 1440],
             "3840x2160"   => [3840, 2160]
         ];
+
+        var curRes = callSetting("Window Resolution");
+        var resArr = resolutions.get(curRes);
+        final screenW = Capabilities.screenResolutionX;
+        final screenH = Capabilities.screenResolutionY;
+        if (resArr[0] > screenW || resArr[1] > screenH)
+        {
+            trace('Selected resolution ${resArr[0]}x${resArr[1]} exceeds monitor resolution ${screenW}x${screenH}. Resetting to 800x600.', "DEBUG");
+            setSetting("Window Resolution", "800x600");
+            curRes = "800x600";
+            resArr = resolutions.get(curRes);
+        }
 
         // very neat borderless fullscreen workaround by tracedinpurple (A.K.A Tiago.hx, thanks man!!)
         final window = Application.current.window;
@@ -242,8 +250,8 @@ class MoonSettings
             window.height = Std.int(bounds.height + 1);
         }
 
-        final curWidth = resolutions.get(callSetting("Window Resolution"))[0];
-        final curHeight = resolutions.get(callSetting("Window Resolution"))[1];
+        final curWidth = resArr[0];
+        final curHeight = resArr[1];
         if(callSetting('Screen Mode') == "Windowed")
         {
             window.width = curWidth;
@@ -251,7 +259,6 @@ class MoonSettings
             window.x = Std.int((Capabilities.screenResolutionX - curWidth) / 2);
             window.y = Std.int((Capabilities.screenResolutionY - curHeight) / 2);
         }
-
     }
 
     /**

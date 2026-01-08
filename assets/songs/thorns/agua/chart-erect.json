@@ -26,6 +26,7 @@
 		"spectators": [
 			"gf-pixel"
 		],
+		"noteskin":"pixel",
 		"stage": "weeb-erect",
 		"version": "2.2.2"
 	},

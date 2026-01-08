@@ -24,7 +24,7 @@ class BarsVisualizer extends FlxSpriteGroup
 
 		for (i in 0...barCount)
 		{
-			var spr = new FlxSprite((i / barCount) * FlxG.width, 0).makeGraphic(Std.int((1 / barCount) * FlxG.width) - 4, FlxG.height, 0xffffffff);
+			var spr = new MoonSprite((i / barCount) * FlxG.width, 0).makeGraphic(Std.int((1 / barCount) * FlxG.width) - 4, FlxG.height, 0xffffffff);
             spr.origin.set(0, FlxG.height);
             spr.blend = ADD;
             spr.alpha = 0.6;

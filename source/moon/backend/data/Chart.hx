@@ -57,6 +57,7 @@ typedef MetadataStruct =
     var players:Array<String>;
     var spectators:Array<String>;
     var opponents:Array<String>;
+    var noteskin:String;
 
     // Other data
     var displayName:String;
@@ -258,6 +259,7 @@ class Chart
             players: [metadata.playData.characters.player],
             spectators: [metadata.playData.characters.girlfriend],
             opponents: [metadata.playData.characters.opponent],
+            noteskin: 'v-slice',
 
             displayName: metadata.songName,
             album: metadata.playData.album,

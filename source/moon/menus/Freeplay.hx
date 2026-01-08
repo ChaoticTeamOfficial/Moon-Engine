@@ -115,8 +115,14 @@ class Freeplay extends FlxSubState
         
         if(MoonInput.justPressed(ACCEPT))
         {
+            //for(song => mix in s)
+            //    if(texts[curSelected].text == '$song-$mix') FlxG.switchState(()->new PlayState(song, 'hard', mix));
+
             for(song => mix in s)
-                if(texts[curSelected].text == '$song-$mix') FlxG.switchState(()->new PlayState(song, 'hard', mix));
+                if(texts[curSelected].text == '$song-$mix')
+                    PlayState.songData = {song: song, difficulty: 'hard', mix: mix};
+            
+            FlxG.switchState(()->new LoadingScreen());
         }
         
         if(mainBG.script.exists('onUpdate')) mainBG.script.get('onUpdate')(elapsed);

@@ -6,6 +6,8 @@ import flixel.util.*;
 import flixel.tweens.*;
 import flixel.math.*;
 import flixel.group.*;
+import flixel.effects.*;
+import flixel.addons.transition.*;
 
 import moon.backend.*;
 import moon.dependency.*;

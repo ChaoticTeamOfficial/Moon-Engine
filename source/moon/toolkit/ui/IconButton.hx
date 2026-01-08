@@ -1,7 +1,5 @@
 package moon.toolkit.ui;
 
-import flixel.group.FlxSpriteGroup;
-
 class IconButton extends FlxSpriteGroup
 {
     public var callback:Void->Void;

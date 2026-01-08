@@ -94,7 +94,8 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camFRONT, false);
 
         Tilemap.addAtlas('MELE-buttons', 'toolkit/level-editor/icons/gridTypes');
-        Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
+        Tilemap.addAtlas('btnIcons', 'toolkit/ui/googleIcons');
+        Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
 
         chart = new Chart(song, diff, mix);
         _internalChart = chart.content;
@@ -299,13 +300,21 @@ class LevelEditor extends FlxState
             typeButtons.set(gType, button);
         }
 
+        var library = new Library();
+        library.camera = camMID;
+        add(library);
+
         var leftpanel = new LeftPanel(this);
         leftpanel.camera = camMID;
         add(leftpanel);
 
+        //final stuff = {title: 'Welcome to the Editor!', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', button1: 'Show me around.', button2: 'Okay.'};
+        //openSubState(new EditorPopup(NOTICE, stuff));
+
         //me when I debug
         FlxG.watch.addMouse();
 
+        FlxG.autoPause = false;
         playback.state = PAUSE;
         curType = NOTES;
 
@@ -567,11 +576,11 @@ class LevelEditor extends FlxState
     function durationToHeight(startTime:Float, duration:Float):Float
         return timeToY(startTime + duration) - timeToY(startTime);
 
-    public function sfx(p:String)
+    public function sfx(p:String, general:Bool = false)
     {
         //TODO: CONVERT ALL SFX TO WAV
         if (playback.state != PLAY)
-            Paths.playSFX('toolkit/level-editor/$p.wav');
+            FlxG.sound.play(Paths.sound((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', 'sounds'), MoonSettings.callSetting('Editor Sounds') / 100);
     }
 
     function set_curType(curType:GridType):GridType

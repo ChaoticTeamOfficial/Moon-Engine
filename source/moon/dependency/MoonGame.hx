@@ -11,7 +11,11 @@ class MoonGame extends FlxGame
         ?initialState:Null<flixel.util.typeLimit.NextState.InitialState>, ?updateFramerate:Int, ?drawFramerate:Int, 
         ?skipSplash:Bool, ?startFullscreen:Bool)
     {
-    	FlxG.signals.preStateCreate.add(_ -> Paths.clearMemory());
+    	FlxG.signals.preStateCreate.add(_ -> {
+    		if(!Paths.skipNextCleanup) Paths.clearMemory();
+    		Paths.skipNextCleanup = false;
+    	});
+
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         
 		MoonSettings.init();
@@ -21,6 +25,7 @@ class MoonGame extends FlxGame
         FlxG.stage.addEventListener(openfl.events.KeyboardEvent.KEY_DOWN, (e) ->
 		{
             final kc = e.keyCode;
+
 			// prevents keyboard presses when going on fullscreen
             // got from FE, by crowplexus and nebulazorua
 			if (kc == FlxKey.ENTER && e.altKey)

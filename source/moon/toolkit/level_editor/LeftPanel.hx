@@ -95,6 +95,8 @@ class LeftPanel extends FlxSpriteGroup
                     selectButton(btn, kb.action);
             }
         }
+
+        if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this, this.camera)) close();
     }
 
     public function selectButton(selected:IconButton, name:String):Void
@@ -107,10 +109,19 @@ class LeftPanel extends FlxSpriteGroup
         {
         	case 'openFolder':
         		new FlxTimer().start(0.1, _-> selected.isPressed = false);
+        		editor.sfx('popupSMALL', true);
         		System.openFile('${System.applicationDirectory}assets/songs/${editor.song}/${editor.mix}');
         }
 
         //TODO FOR WHEN I HAVE THE  MENUS WORKING: IT SHOULD CLOSE ONE BEFORE OPENING ANOTHER!
         // and dont forget to editor.updates = false or smth
+    }
+
+    public function close()
+    {
+        for (btn in buttons)
+            btn.isPressed = false;
+
+        //TODO!!!!!
     }
 }

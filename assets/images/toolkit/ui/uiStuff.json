@@ -1,0 +1,19 @@
+{
+	"frames": [
+		{
+            "name": "popupBox",
+            "pos": [0, 0],
+            "size": [645, 344]
+        },
+		{
+            "name": "button-selected",
+            "pos": [0, 352],
+            "size": [240, 60]
+        },
+		{
+            "name": "button-regular",
+            "pos": [253, 362],
+            "size": [223, 37]
+        }
+	]
+}

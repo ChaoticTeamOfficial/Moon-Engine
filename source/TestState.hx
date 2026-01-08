@@ -103,14 +103,15 @@ class TestState extends FlxState
             indicator.active = false;
         }*/
 
-        Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
+        /*Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
         for(i in 0...100)
         {
             final a = new InvertColor();
             var thing = new IconButton(0.3 * i, 20, 64, 64, 'speed');
             thing.invertShader = a;
             add(thing);
-        }
+        }*/
+        
     }
 
     //helper 'w'

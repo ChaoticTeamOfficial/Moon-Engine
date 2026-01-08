@@ -31,6 +31,12 @@ class Paths
     public static var renderedGraphics:Map<String, FlxGraphic> = [];
     public static var renderedSounds:Map<String, Sound> = [];
 
+    /**
+     * Whether or not should the game skip the next memory cleanup.
+     * Used for the loading screen. 
+     */
+    public static var skipNextCleanup:Bool = false;
+
     // idk
     public static function getPath(key:String, ?library:String):String
     {
@@ -396,10 +402,12 @@ class Paths
         {
             final modDir:String = dir.substr(7);
             var swagList:Array<String> = [];
-            var seen:Map<String, Bool> = new Map<String, Bool>();
+            var seen:Map<String, Bool> = [];
+
             for (k in Global.currentModFiles.keys())
             {
-                var prefixLen = modDir.length + (modDir.length > 0 ? 1 : 0);
+                final prefixLen = modDir.length + (modDir.length > 0 ? 1 : 0);
+
                 if (StringTools.startsWith(k, modDir + (modDir == "" ? "" : "/")))
                 {
                     var remaining:String = k.substr(prefixLen);

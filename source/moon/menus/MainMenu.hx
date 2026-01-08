@@ -1,12 +1,8 @@
 package moon.menus;
-import flixel.util.FlxColor;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.FlxG;
-import flixel.FlxState;
+
 import moon.menus.obj.main.*;
 
-class MainMenu extends FlxState
+class MainMenu extends FlxTransitionableState
 {
     final opt:Array<String> = ['story mode', 'freeplay', 'mods', 'toolbox', 'settings', 'exit'];
     var buttons:Array<MenuItem> = [];
@@ -16,6 +12,10 @@ class MainMenu extends FlxState
     override public function create()
     {
         super.create();
+        
+        var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+        add(bg);
+
         for (i in 0...opt.length)
         {
             var btn = new MenuItem(20, 128 + 64 * i, opt[i].toUpperCase());

@@ -17,8 +17,12 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.FlxState;
 import moon.global_obj.Alphabet;
+import flixel.graphics.FlxGraphic;
 
-class Title extends FlxState
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
+
+class Title extends FlxTransitionableState
 {
     var grid1:FlxBackdrop;
     var grid2:FlxBackdrop;
@@ -37,10 +41,12 @@ class Title extends FlxState
     override public function create():Void
     {
         super.create();
+
+        setupTransition();
         
         // -- CREATE BG ELEMENTS
         var backVis = new BarsVisualizer(16);
-        backVis.alpha = 0.2;
+        backVis.alpha = 0.7;
         add(backVis);
         objects.push(backVis);
 
@@ -111,12 +117,12 @@ class Title extends FlxState
 
         //GlobalMusic.song = 'menus/freakyMenu';
         //GlobalMusic.start(true);
-        MoonUtils.playGlobalMusic('menus/freakierMenu', true);
-        var songMeta = Paths.JSON('music/menus/freakierMenu-metadata');
+        MoonUtils.playGlobalMusic('menus/indieCross', true);
+        var songMeta = Paths.JSON('music/menus/indieCross-metadata');
 
         if(songMeta != null)
         {
-            conductor = new Conductor(songMeta.bpm ?? 0, songMeta.timeSignature[0] ?? 4, songMeta.timeSignature[1] ?? 4);
+            conductor = new Conductor(songMeta?.bpm ?? 102, songMeta?.timeSignature[0] ?? 4, songMeta?.timeSignature[1] ?? 4);
             FlxG.sound.music.looped = songMeta.looped;
         }
         
@@ -191,11 +197,11 @@ class Title extends FlxState
 
         //GlobalMusic.update();
         if(MoonInput.justPressed(ACCEPT))
-        {
             (!onTitle) ? endIntro() : {
-                //nothing cause we dont have a menu yet :[
+                FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
+                FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
+                Paths.playSFX('ui/confirmMenu.ogg');
             }
-        }
 
         if(onTitle)
         {
@@ -247,5 +253,28 @@ class Title extends FlxState
         var lines = [];
         for (i in allTxts) lines.push(i.split('--'));
         randomText = FlxG.random.getObject(lines);
+    }
+
+    private function setupTransition()
+    {
+        final transitionDuration = 0.6;
+
+        // Initialize the transition stuff!
+        var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
+        diamond.persist = true;
+        diamond.destroyOnNoUse = false;
+
+        FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, transitionDuration, 
+            new FlxPoint(-2, -1), {asset: diamond, width: 32, height: 32},
+            new FlxRect(-1, 0, FlxG.width, FlxG.height));
+        FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, transitionDuration, 
+            new FlxPoint(2, -1), {asset: diamond, width: 32, height: 32}, 
+            new FlxRect(-1, 0, FlxG.width, FlxG.height));
+            
+        FlxTransitionableState.defaultTransIn.cameraMode = NEW;
+        FlxTransitionableState.defaultTransOut.cameraMode = NEW;
+
+        transIn = FlxTransitionableState.defaultTransIn;
+        transOut = FlxTransitionableState.defaultTransOut;
     }
 }

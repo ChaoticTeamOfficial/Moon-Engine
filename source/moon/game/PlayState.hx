@@ -22,7 +22,7 @@ import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.toolkit.level_editor.LevelEditor;
 
-class PlayState extends FlxState
+class PlayState extends FlxTransitionableState
 {	
 	// Just a variable for the current instance so you can get all the vars.
 	public static var instance:PlayState;
@@ -54,16 +54,11 @@ class PlayState extends FlxState
 	// If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch.
 	public static var VALID_SCORE:Bool = true;
 
-	public var song:String;
-	public var difficulty:String;
-	public var mix:String;
+	public static var songData:{song:String, difficulty:String, mix:String};
 
-	public function new(?song:String = 'beach episode', ?difficulty:String = 'erect', ?mix:String = 'bf')
+	public function new()
 	{
 		super();
-		this.song = song;
-		this.difficulty = difficulty;
-		this.mix = mix;
 		Global.allowInputs = true;
 	}
 	
@@ -74,7 +69,7 @@ class PlayState extends FlxState
 		instance = this;
 
 		Global.registerScript("songScript", songScript);
-		songScript.load('songs/$song/$mix/script.hx');
+		songScript.load('songs/${songData.song}/${songData.mix}/script.hx');
 		
 		this.persistentUpdate = false;
 		//this.persistentDraw = false;
@@ -93,7 +88,7 @@ class PlayState extends FlxState
 		camGAME.focusOn(camFollower.getPosition());
 		
 		//< -- PLAYFIELD SETUP -- >//
-		playField = new PlayField(song, difficulty, mix);
+		playField = new PlayField(songData.song, songData.difficulty, songData.mix);
 		playField.camera = camHUD;
 		playField.conductor.onBeat.add(beatHit);
 		add(playField);
@@ -149,6 +144,9 @@ class PlayState extends FlxState
 		playField.playback.onFinish.add(()->endSong());
 
 		//trace(SongData.retrieveData(song, difficulty, mix));
+
+		//alright.
+		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 	}
 	
 	/**
@@ -300,7 +298,7 @@ class PlayState extends FlxState
 		Global.scriptCall('onSongEnd');
 		final stat = playField.inputHandlers.get('p1').stats;
 		if(VALID_SCORE)
-			SongData.saveData(song, difficulty, mix, stat.score, stat.misses, stat.accuracy);
+			SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
 
 		Global.clearScriptList();
 		instance = null;
