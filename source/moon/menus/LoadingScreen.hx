@@ -112,6 +112,7 @@ class LoadingScreen extends FlxTransitionableState
 
     var tracker:Float = 0;
     var trackerB:Bool = false;
+    var transitioning = false;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
@@ -125,8 +126,9 @@ class LoadingScreen extends FlxTransitionableState
             loadDisplay.y += trackerB ? 5 : -5; 
         }
 
-        if(loadComplete && MoonInput.justPressed(ACCEPT))
+        if(loadComplete && MoonInput.justPressed(ACCEPT) && !transitioning)
         {
+            transitioning = true;
             Paths.playSFX('ui/confirmMenu.ogg');
             if(FlxG.sound.music != null) FlxG.sound.music.stop();
 

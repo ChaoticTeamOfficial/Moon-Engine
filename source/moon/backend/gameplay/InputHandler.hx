@@ -184,10 +184,7 @@ class InputHandler
                     strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
                     if(!MoonSettings.callSetting('Ghost Tapping')){
                         if(attachedChar != null) 
-                        {
                             attachedChar.playAnim('sing${MoonUtils.intToDir(i).toUpperCase()}-miss', true);
-                            attachedChar.animationHold = 0;
-                        }
                         onMiss(null);
                     }
                 }
@@ -247,10 +244,7 @@ class InputHandler
         if(!isSustain) strumline.members[note.direction].sustainSplash.despawn((CPUMode));
         
         if(attachedChar != null) 
-        {
             attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
-            attachedChar.animationHold = 0;
-        }
 
         (timing != 'miss' && onNoteHit != null) ? onNoteHit(note, timing, isSustain) : (timing == 'miss') ? onMiss(note) : null;
     }
@@ -263,10 +257,7 @@ class InputHandler
             note.visible = note.active = false;
 
             if(attachedChar != null) 
-            {
                 attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction).toUpperCase()}-miss', true);
-                attachedChar.animationHold = 0;
-            }
         }
         
         stats.accuracyCount += Timings.getParameters('miss')[0];

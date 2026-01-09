@@ -1,6 +1,5 @@
 package moon.backend.data;
 
-import moonchart.formats.fnf.legacy.FNFLegacy;
 import moon.dependency.scripting.MoonEvent;
 import haxe.Json;
 #if sys
@@ -98,6 +97,7 @@ class Chart
         'codename',
         'v-slice',
         'osu',
+        'kade',
         'fps-plus'
     ];
 
@@ -148,6 +148,7 @@ class Chart
             case 'legacy': new FNFVSlice().fromFormat(new FNFLegacy().fromFile(path, null, difficulty));
             case 'osu': new FNFVSlice().fromFormat(new OsuMania().fromFile(path, null, difficulty));
             case 'fps-plus': new FNFVSlice().fromFormat(new FNFFpsPlus().fromFile(path, null, difficulty));
+            case 'kade': new FNFVSlice().fromFormat(new FNFKade().fromFile(path, null, difficulty));
             default: new FNFVSlice().fromFile(path, metaPath, difficulty);
         };
 

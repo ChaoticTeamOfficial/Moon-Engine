@@ -306,7 +306,10 @@ class PlayField extends FlxGroup
         // uhhmmm yeah stats scaling thats p much all
         stats.scale.x = stats.scale.y = FlxMath.lerp(stats.scale.x, 1, dt * 12);
 		
-		if(FlxG.keys.justPressed.ONE) FlxG.resetState();
+		if(FlxG.keys.justPressed.F5){
+            Global.clearScriptList();
+            FlxG.resetState();
+        }
     }
 
     function onHit(playerID:String, note:Note, timing:String, isSustain:Bool)

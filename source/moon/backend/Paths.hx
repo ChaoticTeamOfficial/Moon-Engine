@@ -514,4 +514,5 @@ typedef AnimationData = {
     var ?y:Float;
     var ?fps:Int;
     var ?looped:Bool;
+    var ?finishAnim:String;
 }

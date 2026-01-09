@@ -4,6 +4,8 @@ import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxSprite;
 
+using StringTools;
+
 /**
  * A Sprite class with more compatibility over animated sprites.
  * With functions for centering offsets, adding offsets for animations, etc.
@@ -26,6 +28,13 @@ class MoonSprite extends FlxSprite
 	 */
 	public var strID:String;
 
+	/**
+	 * An array of animation group names (e.g., "idle", "singAnims") that should override normal behavior.
+	 * Animations matching these groups will play fully without interruption until finished.
+	 * Assumes these animations are non-looped; looped animations may not behave as expected.
+	 */
+	public var overrideAnims:Array<String> = [];
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
@@ -33,9 +42,37 @@ class MoonSprite extends FlxSprite
 		animOffsets = new Map<String, Array<Dynamic>>();
 	}
 
+	/**
+	 * Checks if the given animation name belongs to an override group.
+	 * @param name The animation name to check.
+	 * @return True if it's an override animation.
+	 */
+	private function isOverrideAnim(name:String):Bool
+	{
+		if (name == null) return false;
+		var lowerName = name.toLowerCase();
+		for (group in overrideAnims)
+		{
+			switch (group.toLowerCase())
+			{
+				case "singanims":
+					if (lowerName.startsWith("sing")) return true;
+				default:
+					if (lowerName.startsWith(group.toLowerCase())) return true;
+			}
+		}
+		return false;
+	}
+
 	@:inheritDoc(flixel.animation.FlxAnimationController.play)
 	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0):Void
 	{
+		// Prevent playing a new animation if the current one is an override and hasn't finished
+		if (animation.curAnim != null && isOverrideAnim(animation.curAnim.name) && !animation.curAnim.finished)
+		{
+			return;
+		}
+
 		animation.play(animName, force, reversed, frame);
 
 		final daOffset = animOffsets.get(animName);
@@ -70,7 +107,6 @@ class MoonSprite extends FlxSprite
 
 	override public function destroy()
 	{
-		//TODO: check why when reloading a sprite with frames it breaks
 		super.destroy();
 	}
 }

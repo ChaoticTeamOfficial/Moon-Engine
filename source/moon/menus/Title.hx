@@ -190,6 +190,7 @@ class Title extends FlxTransitionableState
     }
 
     final orbitDistance:Float = 130 * 2;
+    var transitioning = false;
     override public function update(elapsed:Float):Void
     {
         if(FlxG.sound.music != null)
@@ -198,9 +199,13 @@ class Title extends FlxTransitionableState
         //GlobalMusic.update();
         if(MoonInput.justPressed(ACCEPT))
             (!onTitle) ? endIntro() : {
-                FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
-                FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
-                Paths.playSFX('ui/confirmMenu.ogg');
+                if(!transitioning)
+                {
+                    transitioning = true;
+                    FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
+                    FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
+                    Paths.playSFX('ui/confirmMenu.ogg');
+                }
             }
 
         if(onTitle)

@@ -1,0 +1,23 @@
+{
+    "antialiasing": true,
+    "scale": 1,
+    "flipX": false,
+    "camOffsets": [-565, -15],
+    "healthbarColors": [49, 176, 209],
+    "danceFrequency": 2,
+    "animations": [
+        {"name": "idle-0", "prefix": "BF idle dance instance 1", "x": -5, "y": 0, "fps": 24},
+        {"name": "singRIGHT", "prefix": "BF NOTE RIGHT instance 1", "x": -48, "y": 4, "fps": 24},
+        {"name": "singDOWN", "prefix": "BF NOTE DOWN instance 1", "x": -20, "y": -40, "fps": 24},
+        {"name": "singUP", "prefix": "BF NOTE UP instance 1", "x": -51, "y": 57, "fps": 24},
+        {"name": "singLEFT", "prefix": "BF NOTE LEFT instance 1", "x": 32, "y": 3, "fps": 24},
+        {"name": "singRIGHT-miss", "prefix": "BF NOTE RIGHT MISS instance 1", "x": -29, "y":25, "fps": 24},
+        {"name": "singDOWN-miss", "prefix": "BF NOTE DOWN MISS instance 1"," x": -31, "y": -19, "fps": 24},
+        {"name": "singUP-miss", "prefix": "BF NOTE UP MISS instance 1", "x": -49, "y":17, "fps": 24},
+        {"name": "singLEFT-miss", "prefix": "BF NOTE LEFT MISS instance 1", "x": -58, "y": 24, "fps": 24},
+		{"name": "attack", "prefix": "0BF attack instance 1", "x": 1095, "y": -12, "fps": 24, "finishAnim": "idle-0"},
+		{"name": "hurt", "prefix": "BF hit instance 1", "x": 40, "y": 50, "fps": 24, "finishAnim": "idle-0"},
+		{"name": "dodge", "prefix": "boyfriend dodge instance 1", "x": -20, "y": -10, "fps": 24, "finishAnim": "idle-0"}
+    ],
+	"overrideAnims": ["attack", "dodge", "hurt"]
+}

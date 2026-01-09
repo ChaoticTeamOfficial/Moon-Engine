@@ -38,7 +38,7 @@ haxelib install hxcpp-debugger
 haxelib install hxcpp-debug-server 1.2.4
 haxelib install hxp
 
-haxelib install moonchart 0.5.0
+haxelib install moonchart 0.5.1
 haxelib install hxvlc 2.1.4
 haxelib install hscript-iris
 haxelib install flixel-waveform
@@ -54,7 +54,7 @@ haxelib set flixel-addons 3.3.0
 haxelib set flixel-tools 1.5.1
 haxelib set flixel-text-input 2.0.2
 haxelib set hxcpp-debug-server 1.2.4
-haxelib set moonchart 0.5.0
+haxelib set moonchart 0.5.1
 haxelib set hxvlc 2.1.4
 haxelib set flixel-animate 1.1.0
 haxelib run lime setup

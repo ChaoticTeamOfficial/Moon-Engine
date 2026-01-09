@@ -24,19 +24,7 @@ class Freeplay extends FlxSubState
     // placeholder song list >:3
     // song => mi
     var s:Map<String, String> = [
-        'gerson' => 'gerson',
-        'amusia' => 'bf',
-        'blammed' => 'pico',
-        'darnell' => 'bf',
-        'monochrome' => 'bf',
-        'senpai' => 'noimix',
-        'roses' => 'noimix',
-        'thorns' => 'noimix',
-        'shitno' => 'bf',
-        'silly billy' => 'bf',
-        'nacreous-snowmelt' => 'bf',
-		'finale' => 'bf',
-        'lit-up' => 'bf'
+        'knockout' => 'bf'
     ];
     var texts:Array<FlxText> = [];
     

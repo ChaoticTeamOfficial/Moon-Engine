@@ -82,10 +82,6 @@ class PlayState extends FlxTransitionableState
 		FlxG.cameras.add(camGAME, true);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camALT, false);
-
-		camFollower.setPosition(0, 0);
-		camGAME.follow(camFollower, LOCKON, 1);
-		camGAME.focusOn(camFollower.getPosition());
 		
 		//< -- PLAYFIELD SETUP -- >//
 		playField = new PlayField(songData.song, songData.difficulty, songData.mix);
@@ -147,6 +143,10 @@ class PlayState extends FlxTransitionableState
 
 		//alright.
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
+		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
+		camGAME.follow(camFollower, LOCKON, 1);
+		camGAME.focusOn(camFollower.getPosition());
+		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
 	}
 	
 	/**
