@@ -66,9 +66,9 @@ class SongData
         if (shouldSave)
         {
             songs.set('($mix)$songName-$difficulty', {
-                score: score > old.score ? score : old?.score ?? 0,
-                misses: misses < old.misses ? misses : old?.misses ?? 0,
-                accuracy: accuracy > old.accuracy ? accuracy : old?.accuracy ?? 0
+                score: score > old?.score ? score : old?.score ?? 0,
+                misses: misses < old?.misses ? misses : old?.misses ?? 0,
+                accuracy: accuracy > old?.accuracy ? accuracy : old?.accuracy ?? 0
             });
 
             trace('Saving data for song ($mix)${songName}-${difficulty}"', "DEBUG");

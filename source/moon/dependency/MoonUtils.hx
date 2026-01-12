@@ -54,4 +54,101 @@ class MoonUtils
             if (fade) FlxG.sound.music.fadeIn(140, 0, MoonSettings.callSetting('Music Volume'));
         }
     }
+
+    /**
+     * Starts the appear animation and chains to disappear. Don't use it on sprites with offsets, as this messes with them.
+     * @param sprite The sprite to animate.
+     * @param anim The appear animation type (e.g. 'jump-in').
+     * @param outAnim The disappear animation type (e.g. 'fade').
+     * @param setTween A function that updates the caller's tween reference.
+     */
+    static function doSpriteAnim(sprite:MoonSprite, anim:String, outAnim:String, setTween:FlxTween->Void)
+    {
+        var tween:FlxTween = null;
+        final duration = 0.32;
+        sprite.skew.set(0, 0);
+        switch(anim)
+        {
+            case 'jump-in', 'jump-out':
+                sprite.offset.y = (anim == 'jump-in') ? -14 : 14;
+                tween = FlxTween.tween(sprite, {"offset.y": 0}, duration, {
+                    ease: FlxEase.expoOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            case 'scale', 'pulse':
+                final resizeTo = anim == 'pulse' ? 1.25 : 0.75;
+                final ogScaleX = sprite.scale.x;
+                final ogScaleY = sprite.scale.y;
+
+                sprite.scale.set(ogScaleX * resizeTo, ogScaleY * resizeTo);
+
+                tween = FlxTween.tween(sprite.scale, {x: ogScaleX, y: ogScaleY}, duration, {
+                    ease: FlxEase.expoOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            case 'skewX', 'skewY', 'skewBoth':
+                final n = (FlxG.random.bool(50)) ? -24 : 24;
+                sprite.skew.set((anim == 'skewX' || anim == 'skewBoth') ? n : 0, (anim == 'skewY' || anim == 'skewBoth') ? n : 0);
+                tween = FlxTween.tween(sprite.skew, {x: 0, y: 0}, duration, {
+                    ease: FlxEase.circOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            case 'slide', 'slide&skew':
+                final ogOffset = sprite.offset.x;
+                sprite.offset.x = ogOffset + 20;
+                if(anim.contains('skew')) sprite.skew.x = 22;
+                tween = FlxTween.tween(sprite, {"offset.x": ogOffset, "skew.x": 0}, duration + 0.3, {
+                    ease: FlxEase.expoOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            default:
+                trace('Unknown appear anim: $anim', "ERROR");
+                getOutAnim(sprite, outAnim, setTween);
+        }
+
+        setTween(tween);
+    }
+
+    /**
+     * Starts the disappear animation.
+     * @param sprite The sprite to animate.
+     * @param anim The disappear animation type.
+     * @param setTween A function that updates the caller's tween reference.
+     */
+    static function getOutAnim(sprite:MoonSprite, anim:String, setTween:FlxTween->Void)
+    {
+        final duration = 0.8;
+        final delay = 0.2;
+
+        var tween:FlxTween = null;
+        switch(anim)
+        {
+            case 'fade':
+                tween = FlxTween.tween(sprite, {alpha: 0.0001}, duration, {startDelay: delay});
+
+            case 'scale':
+                tween = FlxTween.tween(sprite.scale, {x: 0, y: 0}, duration, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
+
+            case 'skewX', 'skewY', 'skewBoth', 'skewX&fade', 'skewY&fade', 'skewBoth&fade':
+                tween = FlxTween.tween(sprite, {
+                    "skew.x": (anim.contains('skewX') || anim.contains('skewBoth')) ? 100 : 0, 
+                    "skew.y": (anim.contains('skewY') || anim.contains('skewBoth')) ? 100 : 0,
+                    alpha: (anim.contains('fade')) ? 0.0001 : 1
+                    }, duration, {
+                    ease: FlxEase.expoIn,
+                    startDelay: delay,
+                    onComplete: _-> sprite.alpha = 0.0001
+                });
+
+            default:
+                trace('Unknown disappear anim: $anim', "ERROR");
+                sprite.alpha = 0.0001;
+        }
+
+        setTween(tween);
+    }
 }

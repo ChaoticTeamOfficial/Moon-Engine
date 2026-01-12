@@ -25,7 +25,10 @@ class Freeplay extends FlxSubState
     // song => mi
     var s:Map<String, String> = [
         'knockout' => 'bf',
-        'earworm' => 'bf'
+        'earworm' => 'bf',
+        'machina' => 'bf',
+        'soda groove' => 'bf',
+        'ukiyo' => 'bf'
     ];
     var texts:Array<FlxText> = [];
     

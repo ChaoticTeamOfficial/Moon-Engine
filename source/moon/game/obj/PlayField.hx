@@ -37,6 +37,7 @@ class PlayField extends FlxGroup
     var playerStrum:Strumline;
     var oppStrum:Strumline;
 
+    var judgements:JudgementSprite;
     var healthBar:HealthBar;
     var stats:FlxText;
 
@@ -108,6 +109,9 @@ class PlayField extends FlxGroup
         add(healthBar);
         healthBar.setPosition(0, 0);
         healthBar.screenCenter(X);
+
+        judgements = new JudgementSprite('moon-engine');
+        add(judgements);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
@@ -352,7 +356,7 @@ class PlayField extends FlxGroup
         {
             if(judgement != null)
             {
-                //judgements
+                judgements.pop(judgement);
             }
 
             // combo

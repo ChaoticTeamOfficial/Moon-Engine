@@ -1,0 +1,13 @@
+{
+	"judgementAnims": {
+		"appear": "slide&skew",
+		"disappear": "skewX&fade"
+	},
+	"comboAnims": {
+		"appear": "jump-in",
+		"disappear": "scale"
+	},
+	"comboRolls": true,
+	"antialiasing": true,
+	"size": 0.6
+}
