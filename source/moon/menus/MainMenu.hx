@@ -1,10 +1,14 @@
 package moon.menus;
 
 import moon.menus.obj.main.*;
+import moon.toolkit.ChartConvert;
+import moon.dependency.scripting.MoonEvent;
+import moon.game.submenus.PauseScreen;
+import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['story mode', 'freeplay', 'mods', 'toolbox', 'settings', 'exit'];
+    final opt:Array<String> = ['story mode', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit'];
     var buttons:Array<MenuItem> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -46,6 +50,7 @@ class MainMenu extends FlxTransitionableState
 			{
 				case 'freeplay': openSubState(new Freeplay('bf'));
                 case 'settings': openSubState(new Settings());
+                case 'convert chart yeah': FlxG.switchState(()->new ChartConvert());
 			}
         }
 

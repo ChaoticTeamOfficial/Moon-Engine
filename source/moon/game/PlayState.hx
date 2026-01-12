@@ -87,6 +87,7 @@ class PlayState extends FlxTransitionableState
 		playField = new PlayField(songData.song, songData.difficulty, songData.mix);
 		playField.camera = camHUD;
 		playField.conductor.onBeat.add(beatHit);
+		playField.conductor.onStep.add(stepHit);
 		add(playField);
 		this.conductor = playField.conductor;
 		
@@ -291,6 +292,11 @@ class PlayState extends FlxTransitionableState
 			//camGAME.zoom += 0.010;
 			camHUD.zoom += 0.020;
 		}
+	}
+
+	public function stepHit(curStep:Float)
+	{
+		Global.scriptCall('onStep', [curStep]);
 	}
 
 	public function endSong()

@@ -1,0 +1,15 @@
+{
+    "antialiasing": true,
+    "scale": 1,
+    "flipX": false,
+    "camOffsets": [210, -60],
+    "healthbarColors": [69, 85, 200],
+    "danceFrequency": 2,
+    "animations": [
+        {"name": "idle-0", "prefix": "cassettegirl idle", "x": 0, "y": 0, "fps": 24},
+        {"name": "singLEFT", "prefix": "cassettegirl left", "x": -2, "y": 0, "fps": 24},
+        {"name": "singDOWN", "prefix": "cassettegirl down", "x": 2, "y": -1, "fps": 24},
+        {"name": "singUP", "prefix": "cassettegirl up", "x": 0, "y": 0, "fps": 24},
+        {"name": "singRIGHT", "prefix": "cassettegirl right", "x": -2, "y": 0, "fps": 24}
+    ]
+}

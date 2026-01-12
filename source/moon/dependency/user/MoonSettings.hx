@@ -141,7 +141,8 @@ class MoonSettings
         categories.set("Gameplay Settings",
         [
             new Setting("Keybinds...", SELECTABLE, "Change your gameplay/menus keybinds.", null, null),
-            new Setting("Note Offset", UNCAP_SLIDER, "Changes the delay of the notes. Negative: Late, Positive: Early (MUST RESTART SONG TO APPLY!)", null, 0),
+            new Setting("Note Offset", UNCAP_SLIDER, "Changes the delay of the notes. Negative: Late, Positive: Early", null, 0),
+            new Setting("Calculate Offset...", SELECTABLE, "Calculate your offset by pressing in the beat.", null, null),
             new Setting("Downscroll", CHECKMARK, "Places the judgement line at the bottom of the screen. Notes will descend into it.", null, false),
             new Setting("Middlescroll", CHECKMARK, "Positions the judgement line at the middle of the screen, hiding opponent notes.", null, false),
             new Setting("Note Splashes", CHECKMARK, "Toggles the visibility of the note splashes.", null, true),

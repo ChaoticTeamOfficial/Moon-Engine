@@ -113,8 +113,10 @@ class Note extends MoonSprite
         if (!sharedScripts.exists(curSkin))
         {
             var wawa = new MoonScript();
-            wawa.load('images/ingame/UI/notes/$curSkin/noteskin.hx');
+            wawa.load('images/notes/$curSkin/noteskin.hx');
             sharedScripts.set(curSkin, wawa);
+
+            if(!Global.scripts.exists(curSkin)) Global.registerScript(curSkin, wawa);
         }
 
         script = sharedScripts.get(curSkin);

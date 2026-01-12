@@ -684,7 +684,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 23492.6470588235,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 3,
@@ -880,7 +880,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 27463.2352941176,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 1,
@@ -901,7 +901,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 27904.4117647059,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -992,7 +992,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 29889.7058823529,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 1,
@@ -3204,7 +3204,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 72132.3529411765,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -3799,7 +3799,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 83272.0588235294,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 3,
@@ -3848,7 +3848,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 84485.2941176471,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 1,
@@ -3960,7 +3960,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 86360.2941176471,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 1,
@@ -6151,7 +6151,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 128492.647058823,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -6809,7 +6809,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 142830.882352941,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 0,
@@ -6893,7 +6893,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 144154.411764706,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -7187,21 +7187,21 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 148014.705882353,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 0,
 			"duration": 0,
 			"lane": "p1",
 			"time": 148088.235294118,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 3,
 			"duration": 0,
 			"lane": "p1",
 			"time": 148161.764705883,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 3,
@@ -8825,7 +8825,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 174263,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 0,
@@ -8937,7 +8937,7 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 175919,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -8958,14 +8958,14 @@
 			"duration": 0,
 			"lane": "p1",
 			"time": 176139,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
 			"duration": 0,
 			"lane": "p1",
 			"time": 176250,
-			"type": "normal"
+			"type": "parry"
 		},
 		{
 			"data": 2,
@@ -9001,7 +9001,7 @@
 			"opponent",
 			"p1"
 		],
-		"noteskin": "v-slice",
+		"noteskin": "cup",
 		"opponents": [
 			"cuphead"
 		],

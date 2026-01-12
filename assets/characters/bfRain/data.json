@@ -2,7 +2,7 @@
     "antialiasing": true,
     "scale": 1,
     "flipX": false,
-    "camOffsets": [-565, -15],
+    "camOffsets": [-800, -255],
     "healthbarColors": [49, 176, 209],
     "danceFrequency": 2,
     "animations": [
@@ -17,7 +17,7 @@
         {"name": "singLEFT-miss", "prefix": "BF NOTE LEFT MISS instance 1", "x": -58, "y": 24, "fps": 24},
 		{"name": "attack", "prefix": "0BF attack instance 1", "x": 1095, "y": -12, "fps": 24, "finishAnim": "idle-0"},
 		{"name": "hurt", "prefix": "BF hit instance 1", "x": 40, "y": 50, "fps": 24, "finishAnim": "idle-0"},
-		{"name": "dodge", "prefix": "boyfriend dodge instance 1", "x": -20, "y": -10, "fps": 24, "finishAnim": "idle-0"}
+		{"name": "dodge", "prefix": "boyfriend dodge instance 1", "x": -20, "y": -10, "fps": 22, "finishAnim": "idle-0"}
     ],
 	"overrideAnims": ["attack", "dodge", "hurt"]
 }

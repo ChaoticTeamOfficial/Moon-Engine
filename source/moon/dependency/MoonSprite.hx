@@ -27,6 +27,14 @@ class MoonSprite extends FlxSprite
 	 * An ID but it uses a string instead of an int.
 	 */
 	public var strID:String;
+	
+	/**
+	 * The suffix used for animations.
+	 * Let's say you have an "`idle`" animation, then, you set the suffix to "`alt`".
+	 * Then, the sprite will attempt to play "idle-alt".
+	 * If there's no animation with the suffix, it'll try to play the animation without the suffix.
+	 */
+	public var animationSuffix:String = "";
 
 	/**
 	 * An array of animation group names (e.g., "idle", "singAnims") that should override normal behavior.
@@ -69,17 +77,36 @@ class MoonSprite extends FlxSprite
 	{
 		// Prevent playing a new animation if the current one is an override and hasn't finished
 		if (animation.curAnim != null && isOverrideAnim(animation.curAnim.name) && !animation.curAnim.finished)
-		{
 			return;
-		}
 
-		animation.play(animName, force, reversed, frame);
+		doAnimThingy(animName, force, reversed, frame);
+	}
 
-		final daOffset = animOffsets.get(animName);
-		if (animOffsets.exists(animName))
-			offset.set(daOffset[0], daOffset[1]);
-		else
-			offset.set(0, 0);
+	/**
+	 * Forcefully plays an animation, interrupting and stopping any current animation
+	 * (including overrides) to ensure the new one starts immediately.
+	 * @param animName The name of the animation to play.
+	 * @param force Whether to force-restart the animation if it's already playing (defaults to true for forceful behavior).
+	 * @param reversed Whether to play the animation in reverse.
+	 * @param frame The frame to start the animation from.
+	 */
+	public function forcePlayAnim(animName:String, force:Bool = true, reversed:Bool = false, frame:Int = 0):Void
+		doAnimThingy(animName, force, reversed, frame);
+
+	private function doAnimThingy(animName:String, force:Bool, reversed:Bool, frame:Int)
+	{
+		var playName:String = animName;
+		if (animationSuffix != "" && animation.exists('$animName-$animationSuffix'))
+			playName = '$animName-$animationSuffix';
+
+		animation.play(playName, force, reversed, frame);
+
+		var offsetKey:String = playName;
+		if (!animOffsets.exists(offsetKey))
+			offsetKey = animName;
+
+		final daOffset = animOffsets.get(offsetKey);
+		(animOffsets.exists(offsetKey)) ? offset.set(daOffset[0], daOffset[1]) : offset.set(0, 0);
 
 		if (centerAnimations)
 		{

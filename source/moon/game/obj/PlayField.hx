@@ -38,9 +38,6 @@ class PlayField extends FlxGroup
     var oppStrum:Strumline;
 
     var healthBar:HealthBar;
-    
-    var p1Judgements:JudgementSprite;
-    var p1Combo:ComboNumbers;
     var stats:FlxText;
 
     // -- CALLBACKS -- //
@@ -105,19 +102,6 @@ class PlayField extends FlxGroup
         playback.state = PAUSE;
 
         //< -- COMBO SETUP -- >//
-        //TODO: Refactor and do an overhaul on this system.
-        //TODO: Its currently VERY terrible on optimization :P
-        p1Judgements = new JudgementSprite();
-        p1Judgements.alpha = 0.0001;
-        //just for preloading :p
-        
-        for(judgement => judgementVals in Timings.judgementsMap)
-            p1Judgements.showJudgement(judgement, true, true);
-
-        add(p1Judgements);
-
-        p1Combo = new ComboNumbers();
-        add(p1Combo);
 
         //< -- HEALTHBAR SETUP -- >//
         healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
@@ -160,9 +144,6 @@ class PlayField extends FlxGroup
             inputHandler.onNoteHit = (note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain);
             inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
             inputHandler.onGhostTap = (keyDir) -> if(onGhostTap != null) onGhostTap(keyDir);
-
-            //Todo. ^^
-            p1Judgements.skin = p1Combo.skin = 'moon-engine';
         }
 
         // Little text for testing out the accuracy.
@@ -337,7 +318,7 @@ class PlayField extends FlxGroup
         {
             // update stats
             updateP1Stats('miss');
-            p1Combo.comboRoll(0, 2, true);
+            //p1Combo.comboRoll(0, 2, true);
 
             // and do a lil cool thing to the stats
             setStatsColor(FlxColor.RED);
@@ -371,18 +352,10 @@ class PlayField extends FlxGroup
         {
             if(judgement != null)
             {
-                p1Judgements.color = Timings.getParameters(judgement)[4];
-                
-                p1Judgements.screenCenter();
-                p1Judgements.y -= 60;
-                p1Judgements.showJudgement(judgement, true, true);
+                //judgements
             }
-            
-            //TODO: custom positioning
-            p1Combo.combo = stat.combo;
-            p1Combo.displayCombo(true, true);
-            p1Combo.numsColor = p1Judgements.color;
-            p1Combo.screenCenter();
+
+            // combo
         }
     }
 
@@ -406,8 +379,8 @@ class PlayField extends FlxGroup
                     playback.state = PLAY;
                     inCountdown = false;
                     if(onSongStart != null) onSongStart();
-                case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
-                default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
+                case -1: //FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
+                default: //if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
             }
 
             if(onSongCountdown != null) onSongCountdown(Std.int(beat));

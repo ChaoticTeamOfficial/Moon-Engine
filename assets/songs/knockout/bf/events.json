@@ -221,50 +221,6 @@
 	},
 	{
 		"tag": "SetCameraFocus",
-		"time": 93529.4117647059,
-		"values": {
-			"character": "opponent",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 95294.1176470588,
-		"values": {
-			"character": "player",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 97058.8235294117,
-		"values": {
-			"character": "opponent",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 98823.5294117647,
-		"values": {
-			"character": "player",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
 		"time": 100588.235294118,
 		"values": {
 			"character": "opponent",
@@ -321,50 +277,6 @@
 	{
 		"tag": "SetCameraFocus",
 		"time": 120000,
-		"values": {
-			"character": "player",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 121764.705882353,
-		"values": {
-			"character": "opponent",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 123529.411764706,
-		"values": {
-			"character": "player",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 125294.117647059,
-		"values": {
-			"character": "opponent",
-			"duration": 26,
-			"ease": "expoOut",
-			"x": 0,
-			"y": 0
-		}
-	},
-	{
-		"tag": "SetCameraFocus",
-		"time": 127058.823529412,
 		"values": {
 			"character": "player",
 			"duration": 26,

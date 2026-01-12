@@ -31,8 +31,8 @@ function onCreate()
 	fg.antialiasing = trees.antialiasing = bg.antialiasing = true;
 	background.add(fg);
 	
-	background.add(background.players);
 	background.add(background.opponents);
+	background.add(background.players);
 	
 	var rain = new MoonSprite();
 	rain.frames = Paths.getSparrowAtlas('ingame/stages/rain/NewRAINLayer01');
@@ -65,9 +65,14 @@ function onPostCreate()
 {
 	background.cameraSettings = {
 		zoom: 0.60,
-        startX: 300,
-        startY: 500
+        startX: 550,
+        startY: 400
 	};
 	
-	background.opponents.setPosition(-500, -100);
+	background.opponents.setPosition(-100, 490);
+	background.players.setPosition(900, 470);
+	
+	final ye = {hue: -5, saturation: -30, brightness: -10, contrast: 25};
+	background.adjustGroupColor(background.players, ye);
+	background.adjustGroupColor(background.opponents, ye);
 }

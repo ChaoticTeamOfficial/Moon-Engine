@@ -1,0 +1,27 @@
+{
+    "antialiasing": true,
+    "scale": 1.7,
+    "flipX": false,
+    "camOffsets": [100, -265],
+    "healthbarColors": [171, 22, 74],
+    "danceFrequency": 2,
+    "animations": [
+        {"name": "idle-0", "prefix": "1 instance 1", "x": 0, "y": 0, "looped": true, "fps": 24},
+        {"name": "singRIGHT", "prefix": "Right instance 1", "x": -30, "y": 30, "fps": 24},
+        {"name": "singDOWN", "prefix": "Down instance 1", "x": -31, "y": -40, "fps": 24},
+        {"name": "singUP", "prefix": "Up instance 1", "x": 35, "y": 125, "fps": 24},
+        {"name": "singLEFT", "prefix": "Left instance 1", "x": 120, "y": -10, "fps": 24},
+
+		{"name": "attack1", "prefix": "DIE BITCH instance 1", "x": 0, "y": -13, "fps": 24, "looped": true},
+		{"name": "attack2", "prefix": "Hadoken!! instance 1", "x": 350, "y": 270, "fps": 22, "finishAnim": "idle-0"},
+		{"name": "hit", "prefix": "Ouch instance 1", "x": 110, "y": -20, "fps": 24, "finishAnim": "idle-0"},
+		{"name": "roundAttack", "prefix": "roundAttack", "x": 21, "y": 0, "fps": 24, "finishAnim": "idle-0"},
+		{"name": "regret", "prefix": "Phase 2 starts instance 1", "indices": [0], "x": -30, "y": -35, "fps": 24},
+		
+		{"name": "singRIGHT-pew", "prefix": "PewRight instance 1", "x": -29, "y": 26, "fps": 24},
+        {"name": "singDOWN-pew", "prefix": "pewdown instance 1", "x": -30, "y": -35, "fps": 24},
+        {"name": "singUP-pew", "prefix": "PewUp instance 1", "x": 50, "y": 80, "fps": 24},
+        {"name": "singLEFT-pew", "prefix": "Pewleft instance 1", "x": 112, "y": -38, "fps": 24}
+    ],
+	"overrideAnims": ["attack1", "attack2", "hit", "roundAttack", "regret"]
+}
