@@ -8,38 +8,44 @@ import flixel.FlxG;
 import flixel.tweens.FlxTween;
 import flixel.group.FlxSpriteGroup;
 
+using StringTools;
 @:publicFields
 class ComboNumbers extends FlxSpriteGroup
 {
-    /**
-     * The combo's numbers. Always remember to update this before displaying it.
-     */
-    var combo:Int = 0;
+    var skin(default, set):String;
 
-    /**
-     * The combo's skin display.
-     */
-    var skin(default, set):String = '';
+    var data:JudgementsCombo;
 
-    /**
-     * All the data for this.
-     */
-    var data:JudgementsJSON;
-
-    /**
-     * The color for all the alive numbers;
-     */
-    var numsColor(default, set):FlxColor;
-
-    var xSep:Float = 0;
-
-    /**
-     * Displays the combo numbers on screen
-     * @param animate Whether it should do a 'jump' animation or not.
-     * @param fade Whether it should do a fade out or not.
-     */
-    function displayCombo(animate:Bool = true, fade:Bool = true)
+    public function new(skin:String)
     {
+        super();
+        this.skin = skin;
+    }
+
+    function displayCombo(comboStr:String, color:FlxColor)
+    {
+        if(this.members.length > 0) clear();
+
+        for (i in 0...comboStr.length)
+        {
+            final digit = comboStr.charAt(i);
+            final number = retrieveComboGraphic();
+
+            number.playAnim(digit);
+            number.antialiasing = data?.antialiasing ?? true;
+            number.scale.set(data?.comboSize ?? 1, data?.comboSize ?? 1);
+            number.updateHitbox();
+            number.color = color;
+            add(number);
+
+            var thisTwn:FlxTween = null;
+
+            number.setPosition(this.x + (number.width * i), this.y);
+
+            final appear = data?.comboAnims?.appear ?? 'jump-in';
+            final disappear = data?.comboAnims?.disappear ?? 'fade';
+            MoonUtils.doSpriteAnim(number, appear, disappear, function(t) thisTwn = t);
+        }
     }
 
     /**
@@ -52,21 +58,34 @@ class ComboNumbers extends FlxSpriteGroup
     {
     }
 
-    @:noCompletion public function set_skin(skin:String):String
+    function retrieveComboGraphic():MoonSprite
+    {
+        var newSpr = new MoonSprite();
+
+        for(file in Paths.readDir('images/combo_judgements/$skin'))
+            if(file.startsWith('combo'))
+            {
+                final resolution = file.split('-')[1].split('x');
+                newSpr.loadGraphic(Paths.image('combo_judgements/$skin/${file.split(".png")[0]}'), true, Std.parseInt(resolution[0]), Std.parseInt(resolution[1]));
+
+                final wow = ['-', 'x', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+                for(i in 0...wow.length)
+                    newSpr.animation.add(wow[i], [i], 0, false);
+
+                final rolls = data?.comboRolls ?? false;
+                if(rolls)
+                    newSpr.animation.add('roll', [13, 14, 15], 8, true);
+            }
+
+        return newSpr;
+    }
+
+    function set_skin(skin:String):String
     {
         this.skin = skin;
 
-        if(Paths.exists('images/ingame/UI/judgements_combo/$skin/config.json'))
-            data = Paths.JSON('images/ingame/UI/judgements_combo/$skin/config');
-        else throw 'The data .JSON file for the combo and judgements were not found!';
+        data = JudgementsCombo.getData(skin);
 
         return this.skin;
-    }
-
-    @:noCompletion public function set_numsColor(color:FlxColor):FlxColor
-    {
-        this.numsColor = color;
-        
-        return this.numsColor;    
     }
 }

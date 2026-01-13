@@ -6,7 +6,8 @@ typedef JudgementsComboFile = {
 
     var comboRolls:Bool;
     var antialiasing:Bool;
-    var size:Float;
+    var judgementsSize:Float;
+    var comboSize:Float;
 }
 
 typedef PopAnimations = {

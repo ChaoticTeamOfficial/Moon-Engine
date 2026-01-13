@@ -246,6 +246,8 @@ class InputHandler
         if(attachedChar != null) 
             attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
 
+        if((timing == 'good' || timing == 'bad' || timing == 'shit' || timing == 'miss') && stats.isGold) stats.isGold = false;
+
         (timing != 'miss' && onNoteHit != null) ? onNoteHit(note, timing, isSustain) : (timing == 'miss') ? onMiss(note) : null;
     }
 
@@ -260,6 +262,7 @@ class InputHandler
                 attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction).toUpperCase()}-miss', true);
         }
         
+        stats.isGold = false;
         stats.accuracyCount += Timings.getParameters('miss')[0];
         stats.score += Timings.getParameters('miss')[2];
         stats.health += Timings.getParameters('miss')[3];

@@ -1,13 +1,15 @@
 {
 	"judgementAnims": {
-		"appear": "slide&skew",
-		"disappear": "skewX&fade"
+		"appear": "light",
+		"disappear": "squishY"
 	},
 	"comboAnims": {
-		"appear": "jump-in",
-		"disappear": "scale"
+		"appear": "pulse",
+		"disappear": "bounce&fade"
 	},
 	"comboRolls": true,
 	"antialiasing": true,
-	"size": 0.6
+
+	"judgementsSize": 0.6,
+	"comboSize": 0.45
 }

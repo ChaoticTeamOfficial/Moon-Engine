@@ -70,6 +70,8 @@ class PlayerStats
         'miss' => 0
     ];
 
+    var isGold:Bool = true;
+
     /**
      * Creates states for a specific player
      * @param playerID The player ID that'll be used. (e.g. `p1, opponent[...]`)
@@ -94,6 +96,7 @@ class PlayerStats
         accuracyCount = totalNotes = 0;
         accuracy = misses = score = combo = highestCombo = noSustainCombo = noSustainHighestCombo = 0;
         health = 50;
+        isGold = true;
 
         for(judge => counter in judgementsCounter)
             judgementsCounter.set(judge, 0);

@@ -32,12 +32,12 @@ class PlayField extends FlxGroup
     var difficulty:String;
 
     var inputHandlers:Map<String, InputHandler> = [];
-    var strumsBG:Array<MoonSprite> = [];
     var strumlines:Array<Strumline> = [];
     var playerStrum:Strumline;
     var oppStrum:Strumline;
 
     var judgements:JudgementSprite;
+    var combo:ComboNumbers;
     var healthBar:HealthBar;
     var stats:FlxText;
 
@@ -110,8 +110,13 @@ class PlayField extends FlxGroup
         healthBar.setPosition(0, 0);
         healthBar.screenCenter(X);
 
+        //< -- COMBO AND JUDGEMENTS SETUP -- >//
         judgements = new JudgementSprite('moon-engine');
         add(judgements);
+        add(judgements.extra);
+
+        combo = new ComboNumbers('moon-engine');
+        add(combo);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
@@ -121,15 +126,8 @@ class PlayField extends FlxGroup
 
         for (i in 0...playerIDs.length)
         {
-            var strumBG = new MoonSprite();
-            add(strumBG);
-            strumsBG.push(strumBG);
-        
             var strumline = new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
             add(strumline);
-
-            strumBG.makeGraphic(Std.int(strumline.width + 64), Std.int(FlxG.height) + 32, FlxColor.BLACK);
-            strumBG.setPosition(strumline.members[0].x - 32, 0);
 
             for(receptor in strumline.members)
             {
@@ -197,9 +195,6 @@ class PlayField extends FlxGroup
             oppStrum.x = mid + strumXs[0];
             oppStrum.visible = !MoonSettings.callSetting('Middlescroll');
         }
-        
-        for(strumBG in strumsBG)
-            strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
 
         healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;
 
@@ -355,11 +350,11 @@ class PlayField extends FlxGroup
         if(!statsOnly)
         {
             if(judgement != null)
-            {
-                judgements.pop(judgement);
-            }
+                judgements.pop(judgement, stat.isGold);
 
-            // combo
+            combo.displayCombo('x${stat.combo}', judgements.color);
+            combo.screenCenter();
+            combo.y += 64;
         }
     }
 

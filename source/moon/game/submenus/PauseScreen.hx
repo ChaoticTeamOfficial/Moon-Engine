@@ -268,6 +268,7 @@ class PauseScreen extends FlxSubState
 
     override public function close()
     {
+        game.activeTweens(true);
         super.close();
     }
 

@@ -6,31 +6,52 @@ using StringTools;
 
 @:publicFields
 class JudgementSprite extends MoonSprite
-{
+{   
+    var extra:MoonSprite;
     var skin(default, set):String;
     var data:JudgementsCombo;
-
-    var thisTwn:FlxTween;
 
     public function new(skin:String)
     {
         super();
         this.skin = skin;
         alpha = 0.00001;
+        extra.visible = false;
+        extra.blend = ADD;
     }
 
-    function pop(judgement:String = 'sick')
+    var thisTwn:FlxTween;
+    var xtraTwn:FlxTween;
+    function pop(judgement:String = 'sick', isGold:Bool = false)
     {
         if (judgement == null) return;
 
         MoonUtils.cancelActiveTwn(thisTwn);
 
         playAnim(judgement, true);
-        this.color = Timings.getParameters(judgement)[4];
-        scale.set(data?.size ?? 1, data?.size ?? 1);
+        extra.playAnim(judgement, true);
+
+        //TODO: REMOVE SCREEN CENTER ONCE WE HAVE CUSTOM POSITIONS
+
+        this.color = (isGold) ? 0xFFfeae34 : Timings.getParameters(judgement)[4];
+        scale.set(data?.judgementsSize ?? 1, data?.judgementsSize ?? 1);
         updateHitbox();
         alpha = 1;
         screenCenter();
+
+        if(data?.judgementAnims?.appear == 'light')
+        {
+            MoonUtils.cancelActiveTwn(xtraTwn);
+
+            if(!extra.visible) extra.visible = true;
+            extra.color = this.color;
+            extra.scale.set((data?.judgementsSize ?? 1) * 0.95, (data?.judgementsSize ?? 1) * 0.95);
+            extra.updateHitbox();
+            extra.alpha = 1;
+            extra.screenCenter();
+
+            xtraTwn = FlxTween.tween(extra, {"scale.x": extra.scale.x * 1.35, "scale.y": extra.scale.y * 1.35, alpha: 0}, 0.8, {ease: FlxEase.expoOut});
+        }
 
         final appear = data?.judgementAnims?.appear ?? 'jump-in';
         final disappear = data?.judgementAnims?.disappear ?? 'fade';
@@ -55,6 +76,9 @@ class JudgementSprite extends MoonSprite
                 for(i in 0...wow.length)
                     animation.add(wow[i], [i], 0, false);
             }
+
+        extra = new MoonSprite();
+        extra.loadGraphicFromSprite(this);
 
         return skin;
     }

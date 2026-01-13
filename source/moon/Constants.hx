@@ -18,5 +18,5 @@ class Constants
 	static final SETTINGS_SAVE_BIND:String = 'ME-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'ME-SongData';
 
-    static final INITIAL_STATE:Class<FlxState> = Title;
+    static final INITIAL_STATE:Class<FlxState> = PlayState;
 }

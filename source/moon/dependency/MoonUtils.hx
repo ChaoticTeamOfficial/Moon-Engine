@@ -55,6 +55,8 @@ class MoonUtils
         }
     }
 
+    ////////////////////////////////////////////
+
     /**
      * Starts the appear animation and chains to disappear. Don't use it on sprites with offsets, as this messes with them.
      * @param sprite The sprite to animate.
@@ -70,8 +72,9 @@ class MoonUtils
         switch(anim)
         {
             case 'jump-in', 'jump-out':
+                final ogOffset = sprite.offset.y;
                 sprite.offset.y = (anim == 'jump-in') ? -14 : 14;
-                tween = FlxTween.tween(sprite, {"offset.y": 0}, duration, {
+                tween = FlxTween.tween(sprite, {"offset.y": ogOffset}, duration, {
                     ease: FlxEase.expoOut,
                     onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
                 });
@@ -105,6 +108,31 @@ class MoonUtils
                     onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
                 });
 
+            case 'light':
+                final ogScaleX = sprite.scale.x;
+                final ogScaleY = sprite.scale.y;
+
+                sprite.scale.set(ogScaleX * 0.85, ogScaleY * 0.85);
+
+                tween = FlxTween.tween(sprite.scale, {x: ogScaleX, y: ogScaleY}, duration, {
+                    ease: FlxEase.expoOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            case 'angle':
+                sprite.angle = FlxG.random.int(-15, 15);
+                tween = FlxTween.tween(sprite, {angle: 0}, duration, {
+                    ease: FlxEase.expoOut,
+                    onComplete: _ -> getOutAnim(sprite, outAnim, setTween)
+                });
+
+            case 'laser':
+                final ogCol = sprite.color;
+                tween = FlxTween.color(sprite, duration, FlxColor.WHITE, ogCol, {ease: FlxEase.circOut, onComplete: _-> getOutAnim(sprite,outAnim,setTween)});
+
+            case 'shake':
+                tween = FlxTween.shake(sprite, 0.03, duration - 0.16, XY, {ease: FlxEase.expoOut, onComplete: _ -> getOutAnim(sprite,outAnim,setTween)});
+
             default:
                 trace('Unknown appear anim: $anim', "ERROR");
                 getOutAnim(sprite, outAnim, setTween);
@@ -130,8 +158,11 @@ class MoonUtils
             case 'fade':
                 tween = FlxTween.tween(sprite, {alpha: 0.0001}, duration, {startDelay: delay});
 
-            case 'scale':
-                tween = FlxTween.tween(sprite.scale, {x: 0, y: 0}, duration, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
+            case 'scale', 'scale&fade':
+                tween = FlxTween.tween(sprite, {"scale.x": 0, "scale.y": 0, alpha: anim.contains('fade') ? 0.0001 : 1}, duration, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
+
+            case 'bounce', 'bounce&fade':
+                tween = FlxTween.tween(sprite, {"scale.x": sprite.scale.x * 1.6, "scale.y": sprite.scale.y * 1.6, alpha: (anim.contains('fade')) ? 0.0001 : 1}, duration, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
 
             case 'skewX', 'skewY', 'skewBoth', 'skewX&fade', 'skewY&fade', 'skewBoth&fade':
                 tween = FlxTween.tween(sprite, {
@@ -143,6 +174,12 @@ class MoonUtils
                     startDelay: delay,
                     onComplete: _-> sprite.alpha = 0.0001
                 });
+
+            case 'squishX', 'squishY':
+                final curScale = sprite.scale;
+                final squishX = (anim == 'squishX') ? sprite.scale.x * 1.4 : 0;
+                final squishY = (anim == 'squishY') ? sprite.scale.y * 1.4 : 0;
+                tween = FlxTween.tween(sprite.scale, {x: squishX, y: squishY}, duration - 0.3, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
 
             default:
                 trace('Unknown disappear anim: $anim', "ERROR");

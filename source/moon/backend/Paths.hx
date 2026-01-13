@@ -437,7 +437,7 @@ class Paths
                     }
                 }
             }
-            trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at mod $modDir', "DEBUG");
+            //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at mod $modDir', "DEBUG");
             return swagList;
         }
         else
@@ -466,7 +466,7 @@ class Paths
                 #end
             } catch(e) {}
             
-            trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at ${getPath(dir, library)}', "DEBUG");
+            //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at ${getPath(dir, library)}', "DEBUG");
             return swagList;
         }
     }

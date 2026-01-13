@@ -54,7 +54,11 @@ class PlayState extends FlxTransitionableState
 	// If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch.
 	public static var VALID_SCORE:Bool = true;
 
-	public static var songData:{song:String, difficulty:String, mix:String};
+	public static var songData:{song:String, difficulty:String, mix:String} = {
+		song: 'machina',
+		difficulty: 'hard',
+		mix: 'bf'
+	};
 
 	public function new()
 	{
@@ -65,6 +69,7 @@ class PlayState extends FlxTransitionableState
 	override public function create()
 	{
 		super.create();
+		activeTweens(true);
 		//Paths.clearStoredMemory();
 		instance = this;
 
@@ -75,7 +80,7 @@ class PlayState extends FlxTransitionableState
 		//this.persistentDraw = false;
 		
 		//< -- CAMERAS SETUP -- >//
-		camGAME.bgColor = 0xFF000000;
+		camGAME.bgColor = FlxColor.GRAY;
 		camHUD.bgColor = 0x00000000;
 		camALT.bgColor = 0x00000000;
 
@@ -150,6 +155,12 @@ class PlayState extends FlxTransitionableState
 		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
 	}
 	
+	public function activeTweens(isActive:Bool)
+	{
+		FlxTimer.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
+        FlxTween.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
+	}
+
 	/**
 	 * Calls a field in the script if it exists.
 	 * @param field The field's name.
@@ -205,6 +216,7 @@ class PlayState extends FlxTransitionableState
 
 		if(MoonInput.justPressed(PAUSE))
 		{
+			activeTweens(false);
 			openSubState(new PauseScreen(camALT));
 			playField.playback.state = PAUSE;
 		}
