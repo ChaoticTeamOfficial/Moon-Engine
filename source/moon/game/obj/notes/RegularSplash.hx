@@ -25,7 +25,7 @@ class RegularSplash extends MoonSprite
     {
         playAnim((playRandom) ? 'splash' + FlxG.random.int(1, this.animation.getAnimationList().length - 1) : 'splash', true);
         if(this.alpha <= 0.1) alpha = 1;
-        visible = active = true;
+        active = true;
 		onSpawn.dispatch();
     }
 
@@ -38,7 +38,7 @@ class RegularSplash extends MoonSprite
 
     private function _updtGraphics()
     {
-        animation.onFinish.add((anim) -> visible = active = false);
+        animation.onFinish.add((anim) -> {active = false; alpha = 0.0001;});
         alpha = 0.0001;
         centerAnimations = true;
     }

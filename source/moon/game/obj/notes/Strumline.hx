@@ -54,6 +54,7 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
         super.update(elapsed);
     }
 
+    public var strumBG:MoonSprite = new MoonSprite().makeGraphic(0, 0);
     @:noCompletion public function set_skin(skin:String):String
     {
         this.skin = skin;
@@ -74,6 +75,8 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
                 return receptor;
             });
         }
+
+        strumBG.makeGraphic(Std.int(this.width), FlxG.height, FlxColor.BLACK);
         
         return skin;
     }

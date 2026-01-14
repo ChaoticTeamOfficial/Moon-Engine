@@ -122,11 +122,12 @@ class PlayField extends FlxGroup
         strumlines = [];
 		
         final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, false];
+        final isCPUPlayers = [true, true];
 
         for (i in 0...playerIDs.length)
         {
             var strumline = new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
+            add(strumline.strumBG);
             add(strumline);
 
             for(receptor in strumline.members)
@@ -193,7 +194,12 @@ class PlayField extends FlxGroup
             //TODO: Fix opp notes appearing
             playerStrum.x = (MoonSettings.callSetting('Middlescroll')) ? mid : mid + strumXs[1];
             oppStrum.x = mid + strumXs[0];
-            oppStrum.visible = !MoonSettings.callSetting('Middlescroll');
+            oppStrum.visible = oppStrum.strumBG.visible = !MoonSettings.callSetting('Middlescroll');
+
+            strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
+            strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
+
+            for(receptor in strum.members) receptor.updateSettings();
         }
 
         healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;
@@ -341,11 +347,8 @@ class PlayField extends FlxGroup
         stats.text = 'Score: ${stat.score} // Misses: ${stat.misses} // Accuracy: ${stat.accuracy}% (${rankData.short})';
         stats.color = rankData.color;
 
-        // set stats X based on what setting it is.
-        final sx = playerStrum.x + playerStrum.width / 2;
-
         ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
-        : stats.x = sx - (stats.width / 2);
+        : stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
 
         if(!statsOnly)
         {

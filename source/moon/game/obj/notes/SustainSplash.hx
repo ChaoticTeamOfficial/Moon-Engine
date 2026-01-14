@@ -20,6 +20,11 @@ class SustainSplash extends MoonSprite
         this.data = data;
         this.skin = skin;
         this.alpha = 0.0001;
+
+        animation.onFinish.add(anim -> {
+            if(anim == '${MoonUtils.intToDir(data)}-end')
+                alpha = 0.0001;
+        });
     }
 
     @:noCompletion public function set_skin(skn:String):String
@@ -52,7 +57,7 @@ class SustainSplash extends MoonSprite
         {
             isOnLoop = true;
             if (this.alpha < 0.1) this.alpha = 1;
-            this.visible = this.active = true;
+            this.active = true;
             this.playAnim('pre', true);
         }
     }
@@ -66,7 +71,7 @@ class SustainSplash extends MoonSprite
         if(isOnLoop)
         {
             isOnLoop = false;
-            if(insta) this.active = this.visible = false;
+            if(insta){ this.active = false; this.alpha = 0.0001;}
             else this.playAnim('${MoonUtils.intToDir(data)}-end', true);
         }
     }

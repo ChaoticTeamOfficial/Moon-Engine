@@ -192,4 +192,10 @@ class Receptor extends FlxSpriteGroup
             sustainSplash.spawn();
         }
     }
+
+    public function updateSettings()
+    {
+        sustainSplash.visible = MoonSettings.callSetting('Hold Note Splashes');
+        splash.visible = MoonSettings.callSetting('Note Splashes');
+    }
 }
