@@ -22,6 +22,7 @@ import openfl.events.ProgressEvent;
 import moon.global_obj.PixelIcon;
 import moon.backend.data.Dialogue.DialogueParser;
 import moon.game.obj.dialogue.*;
+import moon.game.obj.notes.*;
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
 import moon.toolkit.*;
@@ -33,6 +34,8 @@ class TestState extends FlxState
 {
     var waveform:FlxWaveform;
     var playfield:PlayField;
+    var note:Note;
+    var sustain:NoteSustain;
     override public function create():Void
     {
         super.create();
@@ -111,7 +114,14 @@ class TestState extends FlxState
             thing.invertShader = a;
             add(thing);
         }*/
-        
+
+        note = new Note(0,0,"default", "v-slice", 0, null);
+        note.state = CHART_EDITOR;
+
+        sustain = new NoteSustain(note);
+
+        add(sustain);
+        add(note);
     }
 
     //helper 'w'
@@ -187,5 +197,8 @@ class TestState extends FlxState
     {
         super.update(elapsed);
         //if(FlxG.keys.justPressed.R) FlxG.resetState();
+
+        if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
+        else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
     }
 }

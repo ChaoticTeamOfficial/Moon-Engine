@@ -15,6 +15,7 @@ import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 
 import moon.menus.*;
+import moon.game.submenus.*;
 import moon.game.obj.Stage;
 import moon.game.obj.PlayField;
 import moon.toolkit.ChartConvert;
@@ -55,7 +56,7 @@ class PlayState extends FlxTransitionableState
 	public static var VALID_SCORE:Bool = true;
 
 	public static var songData:{song:String, difficulty:String, mix:String} = {
-		song: 'machina',
+		song: 'earworm',
 		difficulty: 'hard',
 		mix: 'bf'
 	};
@@ -80,7 +81,7 @@ class PlayState extends FlxTransitionableState
 		//this.persistentDraw = false;
 		
 		//< -- CAMERAS SETUP -- >//
-		camGAME.bgColor = FlxColor.GRAY;
+		camGAME.bgColor = 0x00000000;
 		camHUD.bgColor = 0x00000000;
 		camALT.bgColor = 0x00000000;
 
@@ -104,12 +105,11 @@ class PlayState extends FlxTransitionableState
 		for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
-
-		setEvents();
 		
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostCreate');
+		setEvents();
 
 		playField.onSongRestart = () -> {
 			events = [];
@@ -149,10 +149,8 @@ class PlayState extends FlxTransitionableState
 
 		//alright.
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
-		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
-		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
 	}
 	
 	public function activeTweens(isActive:Bool)
@@ -191,8 +189,13 @@ class PlayState extends FlxTransitionableState
 			ev.time = event.time;
 			events.push(ev);
 		}
+
+		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
+		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
+		isDead = false;
 	}
 
+	var isDead:Bool = false;
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -219,6 +222,18 @@ class PlayState extends FlxTransitionableState
 			activeTweens(false);
 			openSubState(new PauseScreen(camALT));
 			playField.playback.state = PAUSE;
+		}
+
+		if(playField.healthBar.health <= 0 && !isDead)
+		{
+			playField.inCutscene = isDead = true;
+
+			playField.playback.state = STOP;
+			setCameraFocus('player', [], 0.7, {ease: FlxEase.circOut, startDelay: 0.01});
+			setCameraZoom(camGAME.zoom * 2, 0.5, {startDelay: 0.25, ease: FlxEase.expoIn, onComplete: _->{
+				//trace('yup.');
+				openSubState(new Gameover());
+			}});
 		}
 
 		//TODO: REMOVE, THIS IS DEBUGGIN

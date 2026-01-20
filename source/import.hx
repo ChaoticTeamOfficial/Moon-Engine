@@ -15,6 +15,8 @@ import moon.dependency.user.*;
 import moon.backend.data.*;
 import moon.backend.misc.*;
 import moon.*;
+import moon.ui.*;
+import moon.ui.StickerTransition.StickerSubState;
 import moon.game.obj.dialogue.*;
 import moon.game.obj.dialogue.effects.*;
 import moon.hardcoded_shaders.*;

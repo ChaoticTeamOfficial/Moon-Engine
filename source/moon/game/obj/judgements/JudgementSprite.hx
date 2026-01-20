@@ -22,7 +22,7 @@ class JudgementSprite extends MoonSprite
 
     var thisTwn:FlxTween;
     var xtraTwn:FlxTween;
-    function pop(judgement:String = 'sick', isGold:Bool = false)
+    function pop(judgement:String = 'sick', isGold:Bool = false, notAnimated:Bool = false)
     {
         if (judgement == null) return;
 
@@ -31,14 +31,13 @@ class JudgementSprite extends MoonSprite
         playAnim(judgement, true);
         extra.playAnim(judgement, true);
 
-        //TODO: REMOVE SCREEN CENTER ONCE WE HAVE CUSTOM POSITIONS
-
         this.color = (isGold) ? 0xFFfeae34 : Timings.getParameters(judgement)[4];
         scale.set(data?.judgementsSize ?? 1, data?.judgementsSize ?? 1);
         updateHitbox();
         alpha = 1;
-        screenCenter();
+        //screenCenter();
 
+        if(notAnimated) return;
         if(data?.judgementAnims?.appear == 'light')
         {
             MoonUtils.cancelActiveTwn(xtraTwn);

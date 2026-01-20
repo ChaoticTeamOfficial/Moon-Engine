@@ -117,12 +117,21 @@ class PlayField extends FlxGroup
 
         combo = new ComboNumbers('moon-engine');
         add(combo);
+
+        // Little text for testing out the accuracy.
+        // oh lol it doesn't even show accuracy anymore LMFAO
+        // fym it does now
+        stats = new FlxText(0, 0);
+        stats.setFormat(Paths.font('phantomuff/PhantomMuff Full Letters 1.1.5.ttf'), 20, FlxColor.WHITE, CENTER);
+        stats.antialiasing = true;
+        stats.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+        add(stats);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
 		
         final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, true];
+        final isCPUPlayers = [true, false];
 
         for (i in 0...playerIDs.length)
         {
@@ -148,16 +157,6 @@ class PlayField extends FlxGroup
             inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
             inputHandler.onGhostTap = (keyDir) -> if(onGhostTap != null) onGhostTap(keyDir);
         }
-
-        // Little text for testing out the accuracy.
-        // oh lol it doesn't even show accuracy anymore LMFAO
-        // fym it does now
-        stats = new FlxText(0, 0);
-        stats.setFormat(Paths.font('CRIKEY SQUATS REGULAR.TTF'), 20, FlxColor.WHITE, CENTER);
-        stats.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
-        stats.textField.antiAliasType = ADVANCED;
-        stats.textField.sharpness = 400;
-        add(stats);
 
         setupNotes();
         settingsUpdate();
@@ -355,7 +354,7 @@ class PlayField extends FlxGroup
             if(judgement != null)
                 judgements.pop(judgement, stat.isGold);
 
-            combo.displayCombo('x${stat.combo}', judgements.color);
+            combo.pop('x${stat.combo}', judgements.color);
             combo.screenCenter();
             combo.y += 64;
         }

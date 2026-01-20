@@ -22,7 +22,7 @@ class ComboNumbers extends FlxSpriteGroup
         this.skin = skin;
     }
 
-    function displayCombo(comboStr:String, color:FlxColor)
+    function pop(comboStr:String, color:FlxColor, notAnimated:Bool = false)
     {
         if(this.members.length > 0) clear();
 
@@ -39,12 +39,15 @@ class ComboNumbers extends FlxSpriteGroup
             add(number);
 
             var thisTwn:FlxTween = null;
+            final spacing = data?.comboSpacing ?? 0;
+            number.setPosition(this.x + (number.width + spacing * i), this.y);
 
-            number.setPosition(this.x + (number.width * i), this.y);
-
-            final appear = data?.comboAnims?.appear ?? 'jump-in';
-            final disappear = data?.comboAnims?.disappear ?? 'fade';
-            MoonUtils.doSpriteAnim(number, appear, disappear, function(t) thisTwn = t);
+            if(!notAnimated)
+            {
+                final appear = data?.comboAnims?.appear ?? 'jump-in';
+                final disappear = data?.comboAnims?.disappear ?? 'fade';
+                MoonUtils.doSpriteAnim(number, appear, disappear, function(t) thisTwn = t);
+            }
         }
     }
 
@@ -74,9 +77,10 @@ class ComboNumbers extends FlxSpriteGroup
 
                 final rolls = data?.comboRolls ?? false;
                 if(rolls)
-                    newSpr.animation.add('roll', [13, 14, 15], 8, true);
+                    newSpr.animation.add('roll', [12, 13, 14], 8, true);
             }
 
+        newSpr.centerAnimations = true;
         return newSpr;
     }
 
