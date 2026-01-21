@@ -3,15 +3,6 @@ package moon.menus;
 import flixel.util.FlxGradient;
 import moon.game.submenus.PauseScreen;
 import moon.game.PlayState;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.math.FlxMath;
-import flixel.group.FlxSpriteGroup;
-import flixel.FlxG;
-import flixel.FlxSubState;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
 import moon.menus.obj.settings.OptionObject;
 import moon.dependency.user.MoonSettings;
 import moon.dependency.user.MoonSettings.Setting;
@@ -19,38 +10,35 @@ import moon.dependency.user.MoonSettings.Setting;
 class Settings extends FlxSubState
 {
     //TODO: doccument thisssss
-    public static final textSharpness:Int = 200;
-    public var isPlayState:Bool;
-    var curSelected:Int = 0;
+    static var curSelected:Int = 0;
     var yPos:Float = 0;
     
-    var optionFollower:FlxSprite;
+    var optionFollower:MoonSprite;
     var navOptions:Array<OptionObject> = new Array<OptionObject>();
     var optionsContainer:FlxSpriteGroup = new FlxSpriteGroup();
     var optionDesc:FlxText;
 
-    public function new(isPlayState:Bool = false)
+    public function new(skipTransition:Bool = false)
     {
-        this.isPlayState = isPlayState;
         super();
         
-        if(isPlayState)this.camera = PlayState.instance.camALT;
-        Paths.playSFX('menus/settings/configEnter.ogg');
+        if(PlayState.instance != null) this.camera = PlayState.instance.camALT;
+        if(!skipTransition)Paths.playSFX('menus/settings/configEnter.ogg');
 
-        var back = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLUE);
+        var back = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLUE);
         back.blend = ADD;
         back.alpha = 0.0001;
         add(back);
-        FlxTween.tween(back, {alpha: 0.5}, 1.8);
+        FlxTween.tween(back, {alpha: 0.5}, (skipTransition) ? 0.0000001 : 1.8);
             
-        var itsjoever = new FlxSprite().makeGraphic(FlxG.width + 15, FlxG.height, FlxColor.BLACK);
+        var itsjoever = new MoonSprite().makeGraphic(FlxG.width + 15, FlxG.height, FlxColor.BLACK);
         itsjoever.screenCenter();
         itsjoever.scale.x = 0;
         itsjoever.alpha = 0.4;
         add(itsjoever);
-        FlxTween.tween(itsjoever, {"scale.x": 1}, 1, {ease: FlxEase.circOut, startDelay: 0.2});
+        FlxTween.tween(itsjoever, {"scale.x": 1}, (skipTransition) ? 0.0000001 : 1, {ease: FlxEase.circOut});
 
-        optionFollower = new FlxSprite(0, 1000).makeGraphic(880, 30, 0xFF3850cd);
+        optionFollower = new MoonSprite(0, 1000).makeGraphic(880, 30, 0xFF3850cd);
         add(optionFollower);
         optionFollower.screenCenter(X);
         FlxTween.tween(optionFollower, {alpha: 0.5}, 5, {type: PINGPONG, ease: FlxEase.quadIn});
@@ -61,8 +49,6 @@ class Settings extends FlxSubState
         sttDisplay.text = 'SETTINGS';
         sttDisplay.setFormat(Paths.font('vcr.ttf'), 48, CENTER);
         sttDisplay.screenCenter(X);
-        sttDisplay.textField.antiAliasType = ADVANCED;
-        sttDisplay.textField.sharpness = textSharpness;
         sttDisplay.antialiasing = false;
         optionsContainer.add(sttDisplay);
         yPos += sttDisplay.height + 15;
@@ -70,8 +56,13 @@ class Settings extends FlxSubState
         for(i in 0...MoonSettings.categoryOrder.length)
             createCategory(MoonSettings.categoryOrder[i]);
 
-        optionsContainer.y += 1000;
-        
+        //optionsContainer.y += 1000;
+        if(!skipTransition)
+        {
+            optionsContainer.alpha = 0.00001;
+            FlxTween.tween(optionsContainer, {alpha: 1}, 0.5);
+        }
+
         var backGradient = FlxGradient.createGradientFlxSprite(FlxG.width + 10, FlxG.height + 10, 
         [0x00000000, 0x00000000, 0x00000000, 0xFF000000], 2, 90);
         backGradient.alpha = 0;
@@ -80,27 +71,28 @@ class Settings extends FlxSubState
         optionDesc = new FlxText();
         optionDesc.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.GRAY, RIGHT);
         optionDesc.text = '';
-        optionDesc.textField.antiAliasType = ADVANCED;
-        optionDesc.textField.sharpness = textSharpness;
         optionDesc.antialiasing = false;
         optionDesc.alpha = 0;
         add(optionDesc);
         optionDesc.y = (FlxG.height - optionDesc.height) - 12;
         
         for (obj in [backGradient, optionDesc])
-            FlxTween.tween(obj, {alpha: 1}, 1);
+            FlxTween.tween(obj, {alpha: 1}, (skipTransition) ? 0.0000001 : 1);
         
         var info = new FlxText(-600);
         info.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.GRAY, LEFT);
         info.text = '[ESC] - Leave.\n[TAB] - Go to Next Category.';
-        info.textField.antiAliasType = ADVANCED;
         info.antialiasing = false;
-        info.textField.sharpness = textSharpness;
         add(info);
         
         info.y = (FlxG.height - info.height) - 12;
         FlxTween.tween(info, {x: 12}, 1, {ease: FlxEase.circOut});
         changeSelection(0);
+
+        final cur = navOptions[curSelected];
+        final targetY:Float = FlxG.height / 2 - (cur.y + cur.height / 2 - optionsContainer.y);
+        optionsContainer.y = targetY;
+        optionFollower.y = cur.y;
     }
 
     public function createCategory(category:String):Void
@@ -108,15 +100,13 @@ class Settings extends FlxSubState
         final separation = 10;
         var categoryTxt:FlxText = new FlxText(190, yPos, -1, category);
         categoryTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.YELLOW, CENTER);
-        categoryTxt.textField.antiAliasType = ADVANCED;
         categoryTxt.antialiasing = false;
-        categoryTxt.textField.sharpness = textSharpness;
         optionsContainer.add(categoryTxt);
 
         final fixedEndX = 550 * 2;
         final sepStartX = categoryTxt.x + categoryTxt.width + separation;
 
-        var categorySep = new FlxSprite(sepStartX, yPos + 15).makeGraphic(Std.int(fixedEndX - sepStartX), 8, FlxColor.YELLOW);
+        var categorySep = new MoonSprite(sepStartX, yPos + 15).makeGraphic(Std.int(fixedEndX - sepStartX), 8, FlxColor.YELLOW);
         optionsContainer.add(categorySep);
     
         yPos += categoryTxt.height + separation;
@@ -157,7 +147,7 @@ class Settings extends FlxSubState
         {
             Paths.playSFX('menus/settings/configExit.ogg');
             close();
-            if(isPlayState) PlayState.instance.openSubState(new PauseScreen(PlayState.instance.camALT));
+            if(PlayState.instance != null) PlayState.instance.openSubState(new PauseScreen(PlayState.instance.camALT));
         }
     }
 

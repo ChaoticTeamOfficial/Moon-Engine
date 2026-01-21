@@ -15,8 +15,8 @@ class Constants
 	static final SKIP_SPLASH:Bool = true;
 	static final TRACE_DEBUG_INFO:Bool = true;
 
-	static final SETTINGS_SAVE_BIND:String = 'ME-Settings';
-	static final SONGDATA_SAVE_BIND:String = 'ME-SongData';
+	static final SETTINGS_SAVE_BIND:String = 'MoonEngine-Settings';
+	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
 
     static final INITIAL_STATE:Class<FlxState> = MainMenu;
 }

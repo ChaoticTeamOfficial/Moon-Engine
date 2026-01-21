@@ -31,6 +31,7 @@ class StickerSubState extends FlxSubState
 
         transition.createStickers();
         transition.startInAnimation(this);
+		Global.allowInputs = false;
     }
 
     public function onInComplete():Void
@@ -38,12 +39,13 @@ class StickerSubState extends FlxSubState
         switchingState = true;
         FlxG.switchState(() -> nextState);
         FlxG.signals.postStateSwitch.addOnce(() -> transition.startOutAnimation(this));
+		Global.allowInputs = true;
     }
 
     public function onOutComplete():Void
     {
         switchingState = false;
-        Lib.application.window.resizable = true;
+        //Lib.application.window.resizable = true;
         destroy();
     }
 
@@ -68,7 +70,7 @@ class StickerTransition extends Sprite
     var inCompleteCount:Int = 0;
     var outCompleteCount:Int = 0;
     var stickerKeys:Array<String> = [];
-    var spacingFactor:Float = 0.66;
+    final spacingFactor:Float = 0.62;
 
     var globalScale:Float;
     var offsetX:Float;
@@ -148,9 +150,7 @@ class StickerTransition extends Sprite
             while (xPos <= FlxG.width + offscreen + extraX)
             {
                 final key = FlxG.random.getObject(stickerKeys);
-                final screenX = xPos * globalScale + offsetX;
-                final screenY = yPos * globalScale + offsetY;
-                final sticker = createSticker(key, screenX, screenY);
+                final sticker = createSticker(key, xPos * globalScale + offsetX, yPos * globalScale + offsetY);
                 if (sticker == null) continue;
 
                 addChild(sticker);
@@ -178,7 +178,8 @@ class StickerTransition extends Sprite
     public function startInAnimation(sub:StickerSubState):Void
     {
         // just to guarantee that people wont see how crappy this code is...
-        Lib.application.window.resizable = false;
+		// nvm it kinda fucks up the window
+        //Lib.application.window.resizable = false;
 
         for (i in 0...stickers.length)
         {
@@ -187,16 +188,15 @@ class StickerTransition extends Sprite
                 catch (e:Dynamic){}
 
                 FlxTween.tween(stickers[i], {
-                    scaleX: 1.2 * globalScale, 
-                    scaleY: 1.2 * globalScale, 
+                    scaleX: globalScale, 
+                    scaleY: globalScale, 
                     alpha: 1, 
                     rotation: (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0
-                    }, 0.1, {ease: FlxEase.backOut, onComplete: (_) -> {
+                    }, 0.05, {ease: FlxEase.backOut, onComplete: (_) -> {
                     inCompleteCount++;
                     if (inCompleteCount >= stickers.length)
                         sub.onInComplete();
                 }});
-                FlxTween.tween(stickers[i], {scaleX: globalScale, scaleY: globalScale}, 0.1, {startDelay: 0.2, ease: FlxEase.backIn});
             });
         }
     }
@@ -209,7 +209,7 @@ class StickerTransition extends Sprite
                 scaleX: 0, scaleY: 0, 
                 alpha: 0, 
                 rotation: (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0
-                }, 0.3, {ease: FlxEase.backIn, startDelay: Math.random() * 0.5, onComplete: (_) -> {
+                }, 0.13, {ease: FlxEase.backIn, startDelay: Math.random() * 0.5, onComplete: (_) -> {
                 outCompleteCount++;
                 if (outCompleteCount >= stickers.length)
                     sub.onOutComplete();
@@ -221,7 +221,7 @@ class StickerTransition extends Sprite
     {
         while (stickers.length > 0)
         {
-            var sticker = stickers.pop();
+            final sticker = stickers.pop();
             if (sticker.parent != null)
                 sticker.parent.removeChild(sticker);
         }

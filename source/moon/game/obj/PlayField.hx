@@ -102,8 +102,6 @@ class PlayField extends FlxGroup
         );
         playback.state = PAUSE;
 
-        //< -- COMBO SETUP -- >//
-
         //< -- HEALTHBAR SETUP -- >//
         healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
         add(healthBar);
@@ -122,9 +120,9 @@ class PlayField extends FlxGroup
         // oh lol it doesn't even show accuracy anymore LMFAO
         // fym it does now
         stats = new FlxText(0, 0);
-        stats.setFormat(Paths.font('phantomuff/PhantomMuff Full Letters 1.1.5.ttf'), 20, FlxColor.WHITE, CENTER);
+        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
         stats.antialiasing = true;
-        stats.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 2);
         add(stats);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
@@ -197,8 +195,6 @@ class PlayField extends FlxGroup
 
             strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
             strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
-
-            for(receptor in strum.members) receptor.updateSettings();
         }
 
         healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;
@@ -207,7 +203,7 @@ class PlayField extends FlxGroup
         stats.y = (MoonSettings.callSetting('Stats Position') == 'On Player Lane')
         ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
         : healthBar.y + stats.height + 8;
-        updateP1Stats(null, false);
+        //updateP1Stats(null, false);
 
         playback.updateVolume();
     }
@@ -290,9 +286,19 @@ class PlayField extends FlxGroup
 
         // uhhmmm yeah stats scaling thats p much all
         stats.scale.x = stats.scale.y = FlxMath.lerp(stats.scale.x, 1, dt * 12);
+
+        final stat = inputHandlers.get('p1').stats;
+        final rankData = Timings.getRank(stat.accuracy);
+        stats.color = rankData.color;
+        stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
+
+        ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
+        : stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
 		
 		if(FlxG.keys.justPressed.F5){
             Global.clearScriptList();
+            Paths.clearMemory();
+            Paths.clearUnusedAssets();
             FlxG.resetState();
         }
     }
@@ -342,12 +348,6 @@ class PlayField extends FlxGroup
     {
         // get the stat and update them
         final stat = inputHandlers.get('p1').stats;
-        final rankData = Timings.getRank(stat.accuracy);
-        stats.text = 'Score: ${stat.score} // Misses: ${stat.misses} // Accuracy: ${stat.accuracy}% (${rankData.short})';
-        stats.color = rankData.color;
-
-        ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
-        : stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
 
         if(!statsOnly)
         {
@@ -355,8 +355,6 @@ class PlayField extends FlxGroup
                 judgements.pop(judgement, stat.isGold);
 
             combo.pop('x${stat.combo}', judgements.color);
-            combo.screenCenter();
-            combo.y += 64;
         }
     }
 
@@ -380,8 +378,8 @@ class PlayField extends FlxGroup
                     playback.state = PLAY;
                     inCountdown = false;
                     if(onSongStart != null) onSongStart();
-                case -1: //FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
-                default: //if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
+                case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
+                default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
             }
 
             if(onSongCountdown != null) onSongCountdown(Std.int(beat));

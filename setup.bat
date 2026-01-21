@@ -43,6 +43,7 @@ haxelib install hxvlc 2.1.4
 haxelib install hscript-iris
 haxelib install flixel-waveform
 haxelib install flixel-animate 1.1.0 
+haxelib install customtitlebar 1.0.2 
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib git funkin.visfix https://github.com/toffeecaramel/funkVis-GrigFIX
@@ -57,6 +58,7 @@ haxelib set hxcpp-debug-server 1.2.4
 haxelib set moonchart 0.5.1
 haxelib set hxvlc 2.1.4
 haxelib set flixel-animate 1.1.0
+haxelib set customtitlebar 1.0.2
 haxelib run lime setup
 
 cls

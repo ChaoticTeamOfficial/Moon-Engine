@@ -225,8 +225,11 @@ class Paths
             graphic.destroy();
         }
 
-        trace('cleared $clearCount', "DEBUG");
-        trace('cleared ${clearCount.length} assets', "DEBUG");
+        if(clearCount.length > 0)
+        {
+            trace('cleared $clearCount', "DEBUG");
+            trace('cleared ${clearCount.length} assets', "DEBUG");
+        }
 
         // uhhhh
         @:privateAccess
@@ -303,8 +306,8 @@ class Paths
             }
         }
 
-        trace('cleared graphics $clearedGraphics', "DEBUG");
-        trace('cleared sounds $clearedSounds', "DEBUG");
+        if(clearedGraphics.length > 0) trace('cleared graphics $clearedGraphics', "DEBUG");
+        if(clearedSounds.length > 0) trace('cleared sounds $clearedSounds', "DEBUG");
     }
     
     public static function sound(key:String, from:String = 'music', ?library:String):Sound

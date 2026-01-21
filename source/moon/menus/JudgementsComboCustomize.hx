@@ -19,10 +19,12 @@ class JudgementsComboCustomize extends FlxSubState
 		super();
 
 		if(PlayState.instance != null)
-			this.camera = PlayState.instance.camHUD;
+			this.camera = PlayState.instance.camALT;
 
 		var bg = new MoonSprite().loadGraphic(Paths.image('menus/background'));
 		add(bg);
+		bg.alpha = 0.0001;
+		FlxTween.tween(bg, {alpha: 1}, 0.9);
 
        	judgements = new JudgementSprite('moon-engine');
        	add(judgements);
@@ -59,9 +61,9 @@ class JudgementsComboCustomize extends FlxSubState
        	judgements.pop('sick', true, true);
        	combo.pop('x${FlxG.random.int(10, 99999)}', judgements.color, true);
 
-       	judgements.screenCenter();
-       	combo.screenCenter();
-       	combo.y += 64;
+       	//judgements.screenCenter();
+       	//combo.screenCenter();
+       	//combo.y += 64;
 
         updateStrums();
 	}
@@ -86,8 +88,6 @@ class JudgementsComboCustomize extends FlxSubState
 
             strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
             strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
-
-            for(receptor in strum.members) receptor.updateSettings();
         }
 
         healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;
@@ -105,7 +105,16 @@ class JudgementsComboCustomize extends FlxSubState
 		if(currentDragOBJ != null)
 			currentDragOBJ.setPosition(FlxG.mouse.x - objOffset.x, FlxG.mouse.y - objOffset.y);
 
-		if(FlxG.mouse.justReleased) currentDragOBJ = null;
+		if(FlxG.mouse.justReleased && currentDragOBJ != null){
+			final dr = (currentDragOBJ == judgements) ? 'Judge' : 'Combo';
+			MoonSettings.setSetting('${dr}Pos', [currentDragOBJ.x, currentDragOBJ.y]);
+			currentDragOBJ = null;
+		}
+
+		if(MoonInput.justPressed(BACK)) {
+			FlxG.state.openSubState(new Settings(true));
+			Paths.clearUnusedAssets();
+		}
 	}
 
 	function updateTo(sprite:FlxObject)

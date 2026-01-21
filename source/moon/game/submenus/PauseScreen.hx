@@ -1,6 +1,6 @@
 package moon.game.submenus;
 
-import moon.menus.Settings;
+import moon.menus.*;
 import flixel.effects.FlxFlicker;
 import flixel.util.FlxTimer;
 import moon.global_obj.PixelIcon;
@@ -145,6 +145,8 @@ class PauseScreen extends FlxSubState
             else prepareToClose(true);
         }
 
+        super.update(elapsed);
+
         if(MoonInput.justPressed(ACCEPT) && canMove)
         {
             switch(pauseItems.members[curSelected].text.toLowerCase())
@@ -155,18 +157,19 @@ class PauseScreen extends FlxSubState
                 case 'restart': 
                     //TODO: This isn't actually visible due to how fast it resets lol
                     // so uhhh... get it to be shown!!
-                    paused.loadGraphic(Paths.image('menus/pause/reset.ogg'));
+                    paused.loadGraphic(Paths.image('menus/pause/reset'));
                     pf.restartSong();
                     close();
                 case 'settings': 
                     close();
-                    game.openSubState(new Settings(true));
+                    FlxG.state.openSubState(new Settings());
                 case 'accessibility settings': regenItems(ACCESSIBILITY_ITEMS);
                 case 'back': regenItems(DEFAULT_ITEMS);
+				case 'exit': 
+                    //PlayState.instance.destroy();
+                    PlayState.instance.exit();
             }
         }
-
-        super.update(elapsed);
 
         if(pauseItems.members.length > 0)
         {

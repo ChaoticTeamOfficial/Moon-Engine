@@ -30,16 +30,12 @@ class OptionObject extends FlxSpriteGroup
 
         name = new FlxText(0, 0, halfWidth, setting.name);
         name.setFormat(Paths.font("vcr.ttf"), fontSize, FlxColor.WHITE, LEFT);
-        name.textField.antiAliasType = ADVANCED;
         name.antialiasing = false;
-        name.textField.sharpness = Settings.textSharpness;
         add(name);
 
         value = new FlxText(halfWidth, 0, halfWidth, (setting.type != SELECTABLE) ? Std.string(setting.value) : '');
         value.setFormat(Paths.font("vcr.ttf"), fontSize, FlxColor.WHITE, RIGHT);
-        value.textField.antiAliasType = ADVANCED;
         value.antialiasing = false;
-        value.textField.sharpness = Settings.textSharpness;
         add(value);
 
         changeValue(0);
@@ -86,7 +82,8 @@ class OptionObject extends FlxSpriteGroup
             // IF YOUR OPTION IS SELECTABLE YOU MUST ADD WHAT IT DOES HERE!@!@
             switch(setting.name)
             {
-                case 'Keybinds...': FlxG.state.openSubState(new Keybinds(this.camera));
+                case 'Keybinds...': FlxG.state.openSubState(new Keybinds());
+                case 'HUD Customization...': FlxG.state.openSubState(new JudgementsComboCustomize());
             }
         } 
     }

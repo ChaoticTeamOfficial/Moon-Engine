@@ -43,10 +43,10 @@ class Keybinds extends FlxSubState
     private var rightItems:Array<FlxText> = [];
     private var lineItems:Array<FlxSprite> = [];
 
-    public function new(camera:FlxCamera):Void
+    public function new():Void
     {
         super();
-        this.camera = camera;
+        this.camera = PlayState?.instance?.camALT ?? FlxG.camera;
 
         menuContainer = new FlxSpriteGroup();
         add(menuContainer);
@@ -110,7 +110,7 @@ class Keybinds extends FlxSubState
             if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
             else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
             if (MoonInput.justPressed(ACCEPT)) openRebindMode();
-            else if (MoonInput.justPressed(BACK)) FlxG.state.openSubState(new Settings(PlayState.instance != null));
+            else if (MoonInput.justPressed(BACK)) FlxG.state.openSubState(new Settings(true));
             else if (FlxG.keys.justPressed.TAB)
             {
                 showKeyboard = !showKeyboard;

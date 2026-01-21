@@ -8,6 +8,8 @@ import flixel.addons.effects.FlxSkewedSprite;
 import flixel.FlxG;
 import flixel.FlxSubState;
 
+using StringTools;
+
 enum FreeplayTransition
 {
     FADE;
@@ -24,11 +26,14 @@ class Freeplay extends FlxSubState
     // placeholder song list >:3
     // song => mi
     var s:Map<String, String> = [
-        'knockout' => 'bf',
-        'earworm' => 'bf',
-        'machina' => 'bf',
-        'soda groove' => 'bf',
-        'ukiyo' => 'bf'
+        'knockout' => 'bf-hard',
+        'earworm' => 'bf-hard',
+        'machina' => 'bf-hard',
+        'soda groove' => 'bf-hard',
+        'ukiyo' => 'bf-hard',
+        'senpai' => 'pico-hard',
+        'cocoa' => 'bf-nightmare',
+        'eggnog' => 'bf-nightmare'
     ];
     var texts:Array<FlxText> = [];
     
@@ -111,8 +116,11 @@ class Freeplay extends FlxSubState
             //    if(texts[curSelected].text == '$song-$mix') FlxG.switchState(()->new PlayState(song, 'hard', mix));
 
             for(song => mix in s)
-                if(texts[curSelected].text == '$song-$mix')
-                    PlayState.songData = {song: song, difficulty: 'hard', mix: mix};
+            {
+                final spl = mix.split('-');
+                if(texts[curSelected].text == '$song-${spl[0]}-${spl[1]}')
+                    PlayState.songData = {song: song, difficulty: spl[1], mix: spl[0]};
+            }
             
             FlxG.switchState(()->new LoadingScreen());
         }

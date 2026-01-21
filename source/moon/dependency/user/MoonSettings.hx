@@ -145,6 +145,7 @@ class MoonSettings
             new Setting("Calculate Offset...", SELECTABLE, "Calculate your offset by pressing in the beat.", null, null),
             new Setting("Downscroll", CHECKMARK, "Places the judgement line at the bottom of the screen. Notes will descend into it.", null, false),
             new Setting("Middlescroll", CHECKMARK, "Positions the judgement line at the middle of the screen, hiding opponent notes.", null, false),
+            new Setting("HUD Customization...", SELECTABLE, "Enter customization screen.", null, null),
             new Setting("Note Splashes", CHECKMARK, "Toggles the visibility of the note splashes.", null, true),
             new Setting("Hold Note Splashes", CHECKMARK,"Toggles the visibility of the hold note splashes.", null, true),
             new Setting("Lane Background Visibility", SELECTOR, "Adds a lane behind your strumlines.", [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], 0),
@@ -182,7 +183,9 @@ class MoonSettings
 
         // A category that's not visible on the settings, it's mostly just for internal use
         categories.set("Internal", [
-            new Setting("Game Character", SELECTOR, "", ['bf'], 'bf')
+            new Setting("Game Character", SELECTOR, "", ['bf'], 'bf'),
+            new Setting("JudgePos", SELECTOR, "", [], [500, 270]),
+            new Setting("ComboPos", SELECTOR, "", [], [500, 340])
         ]);
     }
 

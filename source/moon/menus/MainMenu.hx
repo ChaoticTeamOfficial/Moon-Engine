@@ -4,6 +4,7 @@ import moon.menus.obj.main.*;
 import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
+import moon.game.*;
 import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
@@ -36,6 +37,8 @@ class MainMenu extends FlxTransitionableState
             var sc = btn.targetScale;
             btn.scale.set(sc, sc);
         }
+        
+        if(PlayState.instance != null) PlayState.instance.destroy();
     }
 
     override public function update(elapsed:Float)

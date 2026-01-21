@@ -185,7 +185,7 @@ class Receptor extends FlxSpriteGroup
         }
         
         // splash for sustains
-        if (isSustain && note.duration > 80
+        if (isSustain && note.duration > 90
             && sustainSplash.animation.getAnimationList().length > 0)
         {
             sustainSplash.setPosition(cx - sustainSplash.width / 2, cy - sustainSplash.height / 2);
@@ -193,9 +193,10 @@ class Receptor extends FlxSpriteGroup
         }
     }
 
-    public function updateSettings()
+    override public function update(elapsed:Float)
     {
         sustainSplash.visible = MoonSettings.callSetting('Hold Note Splashes');
         splash.visible = MoonSettings.callSetting('Note Splashes');
+        super.update(elapsed);
     }
 }

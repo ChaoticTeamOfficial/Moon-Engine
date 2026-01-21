@@ -22,6 +22,28 @@ class MoonUtils
     }
 
     /**
+     * Formats a number's decimals. (E.G. 1000 -> 1.000)
+     * @param num The number to be formatted.
+     */
+    inline static function formatNumber(num:Int):String
+    {
+        final str:String = '$num';
+        var formatted:String = "";
+        var i:Int = str.length - 1;
+        var count:Int = 0;
+        while (i >= 0)
+        {
+            formatted = str.charAt(i) + formatted;
+            count++;
+            if (count % 3 == 0 && i > 0)
+                formatted = "." + formatted;
+            
+            i--;
+        }
+        return formatted;
+    }
+
+    /**
      * Returns an array from a file, which breaks per line.
      * @param path the file path.
      */

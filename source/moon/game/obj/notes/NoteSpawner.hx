@@ -17,7 +17,22 @@ class NoteSpawner extends FlxGroup
     public var spawnThreshold:Float = 700;
 
     var _noteOffset:Float = 0;
+    public var noteOffset(get, set):Float;
+
     var _downscroll:Bool = false;
+
+    function get_noteOffset():Float return _noteOffset;
+
+    function set_noteOffset(value:Float):Float
+    {
+        final diff = value - _noteOffset;
+        _noteOffset = value;
+
+        for (note in _notes)
+            note.time += diff;
+
+        return value;
+    }
 
     public function new(noteStructs:Array<NoteStruct>, strumlines:Array<Strumline>, conductor:Conductor)
     {
@@ -56,7 +71,7 @@ class NoteSpawner extends FlxGroup
 
     inline function updateCachedSettings():Void
     {
-        _noteOffset = MoonSettings.callSetting('Note Offset');
+        noteOffset = MoonSettings.callSetting('Note Offset');
         _downscroll = MoonSettings.callSetting('Downscroll');
     }
 
@@ -107,7 +122,7 @@ class NoteSpawner extends FlxGroup
 
         final note = new Note(
             struct.data,
-            struct.time - _noteOffset,
+            struct.time + _noteOffset,
             struct.type,
             strum.members[struct.data].skin,
             struct.duration,

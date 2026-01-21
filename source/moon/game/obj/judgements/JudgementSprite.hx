@@ -36,9 +36,11 @@ class JudgementSprite extends MoonSprite
         updateHitbox();
         alpha = 1;
         //screenCenter();
+        final st = MoonSettings.callSetting('JudgePos');
+        this.setPosition(st[0], st[1]);
 
         if(notAnimated) return;
-        if(data?.judgementAnims?.appear == 'light')
+        if(data?.judgementAnims?.appear == 'light' && !notAnimated)
         {
             MoonUtils.cancelActiveTwn(xtraTwn);
 
@@ -47,7 +49,7 @@ class JudgementSprite extends MoonSprite
             extra.scale.set((data?.judgementsSize ?? 1) * 0.95, (data?.judgementsSize ?? 1) * 0.95);
             extra.updateHitbox();
             extra.alpha = 1;
-            extra.screenCenter();
+            extra.setPosition(this.x + this.width / 2 - extra.width / 2, this.y + this.height / 2 - extra.height / 2);
 
             xtraTwn = FlxTween.tween(extra, {"scale.x": extra.scale.x * 1.35, "scale.y": extra.scale.y * 1.35, alpha: 0}, 0.8, {ease: FlxEase.expoOut});
         }

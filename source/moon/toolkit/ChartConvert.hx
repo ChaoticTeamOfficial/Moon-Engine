@@ -13,6 +13,7 @@ using StringTools;
 // document this. idk. this code is shit.
 // maybe I will maybe not.
 // but I'll most likely not. :P
+// yea no I'll get rid of this class when the charter is done
 class ChartConvert extends FlxState
 {
     private var _text:FlxText;

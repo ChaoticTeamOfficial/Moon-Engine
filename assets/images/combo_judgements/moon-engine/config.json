@@ -11,6 +11,5 @@
 	"antialiasing": true,
 
 	"judgementsSize": 0.6,
-	"comboSize": 0.45,
-	"comboSpacing": 42
+	"comboSize": 0.45
 }

@@ -12,7 +12,11 @@ class MoonGame extends FlxGame
         ?skipSplash:Bool, ?startFullscreen:Bool)
     {
     	FlxG.signals.preStateCreate.add(_ -> {
-    		if(!Paths.skipNextCleanup) Paths.clearMemory();
+    		if(!Paths.skipNextCleanup){
+    			Paths.clearMemory();
+    			Paths.clearUnusedAssets();
+    		}
+			
     		Paths.skipNextCleanup = false;
     	});
 
@@ -21,6 +25,9 @@ class MoonGame extends FlxGame
 		MoonSettings.init();
         Alphabet.init();
         SongData.init();
+
+        MoonSettings.updateGlobalSettings();
+        MoonSettings.updateWindow();
 
         FlxG.stage.addEventListener(openfl.events.KeyboardEvent.KEY_DOWN, (e) ->
 		{

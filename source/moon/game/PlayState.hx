@@ -81,7 +81,7 @@ class PlayState extends FlxTransitionableState
 		//this.persistentDraw = false;
 		
 		//< -- CAMERAS SETUP -- >//
-		camGAME.bgColor = 0x00000000;
+		camGAME.bgColor = FlxColor.GRAY;
 		camHUD.bgColor = 0x00000000;
 		camALT.bgColor = 0x00000000;
 
@@ -333,13 +333,28 @@ class PlayState extends FlxTransitionableState
 		if(VALID_SCORE)
 			SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
 
-		Global.clearScriptList();
-		instance = null;
-		FlxG.switchState(() -> new ResultsState(stat));
+		exit();
+		//FlxG.switchState(() -> new ResultsState(stat));
 	}
 
 	override function closeSubState()
 	{
 		super.closeSubState();
+	}
+
+	public function exit()
+	{
+		// jus to make sure
+		Paths.skipNextCleanup = false;
+		Global.clearScriptList();
+		openSubState(new StickerSubState(new MainMenu()));
+	}
+
+	override function destroy()
+	{
+		super.destroy();
+		instance = null;
+		playField.destroy();
+		stage.destroy();
 	}
 }

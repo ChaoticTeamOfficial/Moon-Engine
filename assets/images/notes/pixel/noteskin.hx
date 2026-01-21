@@ -28,6 +28,7 @@ function createReceptor(direction)
     // regular splash
     splash.frames = Paths.getSparrowAtlas(p + 'splash');
     splash.animation.addByPrefix('splash', direction + '0', 48, false);
+	splash.animation.onFrameChange.add(_ -> splash.alpha = 0.8);
 	splash.playRandom = false;
     splash.scale.set(scale + 0.2, scale + 0.2);
     //splash.blend = 0;
@@ -51,7 +52,7 @@ function createReceptor(direction)
 
 function createStaticNote(skin, direction)
 {
-    staticNote.frames = Paths.getSparrowAtlas('ingame/UI/notes/pixel/staticNotes');
+    staticNote.frames = Paths.getSparrowAtlas('notes/pixel/staticNotes');
 
     staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
     staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
@@ -61,21 +62,6 @@ function createStaticNote(skin, direction)
     staticNote.updateHitbox();
 }
 
-var arrTwn:FlxTween;
 function onNoteHit(playerID, note, timing, isSustain)
 {
-    if(timing == 'sick' && !isSustain && playerID != 'opponent')
-        splash.alpha = 0.8;
-
-    final strumNote = note.receptor;
-    MoonUtils.cancelActiveTwn(arrTwn);
-    
-    strumNote.scale.set(scale + 1.2, scale + 1.2);
-    arrTwn = FlxTween.tween(strumNote, {"scale.x": scale, "scale.y": scale}, 0.5, {ease: FlxEase.expoOut});
-    
-    final strumCenterX = strumNote.x + strumNote.width / 2;
-    final strumCenterY = strumNote.y + strumNote.height / 2;
-
-    //gotta reposition cause offset FUCK
-    sustainSplash.setPosition(strumCenterX - sustainSplash.width / 2, strumCenterY - sustainSplash.height / 2 - 20);
 }

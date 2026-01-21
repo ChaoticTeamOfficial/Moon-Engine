@@ -100,6 +100,9 @@ class HealthBar extends FlxSpriteGroup
     {
         playerIcon.icon = player;
         oppIcon.icon = opponent;
+
+        playerIcon.antialiasing = getData(player)?.antialiasing ?? true;
+        oppIcon.antialiasing = getData(opponent)?.antialiasing ?? true;
     }
 
     public function bump()
@@ -110,9 +113,14 @@ class HealthBar extends FlxSpriteGroup
 
     public function getRGBData(character:String)
     {
-        var data:Character.CharacterData = (Paths.exists('characters/${character}/data.json')) ? Paths.JSON('characters/${character}/data') : null;
+        final data:Character.CharacterData = getData(character);
         final c = (data != null) ? data.healthbarColors : [80, 80, 80];
         return FlxColor.fromRGB(c[0], c[1], c[2]);
+    }
+
+    public function getData(character:String):Character.CharacterData
+    {
+        return (Paths.exists('characters/${character}/data.json')) ? Paths.JSON('characters/${character}/data') : null;
     }
 
     @:noCompletion public function set_opponent(val:String)

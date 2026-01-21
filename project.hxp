@@ -37,7 +37,7 @@ class Project extends HXProject
 	static final HAXELIBS:Array<String> = [
 		"lime", "openfl", "flixel", "flixel-addons",
 		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate", 
-		"funkin.visfix", "flixel-waveform"
+		"funkin.visfix", "flixel-waveform" #if !hl , "customtitlebar" #end
 	];
 
     public function new()

@@ -39,8 +39,7 @@ class ComboNumbers extends FlxSpriteGroup
             add(number);
 
             var thisTwn:FlxTween = null;
-            final spacing = data?.comboSpacing ?? 0;
-            number.setPosition(this.x + (number.width + spacing * i), this.y);
+            number.setPosition(this.x + (number.width * i), this.y);
 
             if(!notAnimated)
             {
@@ -49,6 +48,9 @@ class ComboNumbers extends FlxSpriteGroup
                 MoonUtils.doSpriteAnim(number, appear, disappear, function(t) thisTwn = t);
             }
         }
+
+        final st = MoonSettings.callSetting('ComboPos');
+        this.setPosition(st[0], st[1]);
     }
 
     /**
@@ -59,6 +61,7 @@ class ComboNumbers extends FlxSpriteGroup
      */
     function comboRoll(toNumber:Int = 0, ?totalRolls:Int = 5, fadeOut:Bool = false)
     {
+        //TODO
     }
 
     function retrieveComboGraphic():MoonSprite
