@@ -1,8 +1,6 @@
 package moon.dependency;
 
-import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
 
 using StringTools;
@@ -43,6 +41,8 @@ class MoonSprite extends FlxSprite
 	 * Assumes these animations are non-looped; looped animations may not behave as expected.
 	 */
 	public var overrideAnims:Array<String> = [];
+
+	public var extraOffset:FlxPoint = FlxPoint.get();
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
@@ -132,7 +132,7 @@ class MoonSprite extends FlxSprite
 	 */
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
 		animOffsets[name] = [x, y];
-
+		
 	// ---- SKEW STUFF ---- //
 
     /**

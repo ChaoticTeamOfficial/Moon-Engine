@@ -95,7 +95,6 @@ class LevelEditor extends FlxState
 
         Tilemap.addAtlas('MELE-buttons', 'toolkit/level-editor/icons/gridTypes');
         Tilemap.addAtlas('btnIcons', 'toolkit/ui/googleIcons');
-        Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
 
         chart = new Chart(song, diff, mix);
         _internalChart = chart.content;

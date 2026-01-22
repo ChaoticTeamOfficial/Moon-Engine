@@ -93,8 +93,6 @@ class InputHandler
      */
     public var released:Array<Bool> = [];
 
-    private var _lastFrameTimer:Float = 0;
-
     /**
      * Creates input handler instance, all this does is handling inputs for a player you choose.
      * @param thisNotes The notes array that it will read.
@@ -119,8 +117,6 @@ class InputHandler
         onLateMiss();
 
         stats.health = FlxMath.bound(stats.health, 0, 101);
-
-        _lastFrameTimer = System.getTimer();
     }
 
     private function processCPUInputs():Void
@@ -331,7 +327,7 @@ class InputHandler
      */
     private function checkTiming(note:Note):String
     {
-        final timeDifference = Math.abs(note.time - conductor.time + System.getTimer() - _lastFrameTimer);
+        final timeDifference = Math.abs(note.time - conductor.time);
         for (jt in Timings.values)
             if (timeDifference <= Timings.getParameters(jt)[1])
                 return jt;

@@ -4533,10 +4533,10 @@
 	"meta": {
 		"stage": "mallXmasErect",
 		"players": [
-			"bf-christmas"
+			"bf"
 		],
 		"opponents": [
-			"parents-christmas"
+			"cg"
 		],
 		"artist": "Saster",
 		"charter": "fabs + Spazkid",

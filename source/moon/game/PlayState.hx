@@ -137,6 +137,7 @@ class PlayState extends FlxTransitionableState
 			
 			Global.scriptCall('onNoteMiss', [playerID, note]);
 		};
+		
 		playField.onSongCountdown = (number) -> Global.scriptCall('onSongCountdown', [number]);
 
 		playField.onSongStart = () -> Global.scriptCall('onSongStart');

@@ -180,7 +180,7 @@ class Receptor extends FlxSpriteGroup
         if (judgement == 'sick' && !isCPU && !isSustain
             && splash.animation.getAnimationList().length > 0)
         {
-            splash.setPosition(cx - splash.width / 2, cy - splash.height / 2);
+            splash.setPosition((cx - splash.width / 2) + splash.extraOffset.x, (cy - splash.height / 2) + splash.extraOffset.y);
             splash.spawn();
         }
         
@@ -188,7 +188,7 @@ class Receptor extends FlxSpriteGroup
         if (isSustain && note.duration > 90
             && sustainSplash.animation.getAnimationList().length > 0)
         {
-            sustainSplash.setPosition(cx - sustainSplash.width / 2, cy - sustainSplash.height / 2);
+            sustainSplash.setPosition((cx - sustainSplash.width / 2) + sustainSplash.extraOffset.x, (cy - sustainSplash.height / 2) + sustainSplash.extraOffset.y);
             sustainSplash.spawn();
         }
     }

@@ -7,13 +7,13 @@
         },
 		{
             "name": "button-selected",
-            "pos": [0, 352],
-            "size": [240, 60]
+            "pos": [0, 351],
+            "size": [242, 67]
         },
 		{
             "name": "button-regular",
-            "pos": [253, 362],
-            "size": [223, 37]
+            "pos": [243, 351],
+            "size": [242, 67]
         }
 	]
 }

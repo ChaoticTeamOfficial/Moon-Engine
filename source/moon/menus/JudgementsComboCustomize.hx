@@ -59,7 +59,8 @@ class JudgementsComboCustomize extends FlxSubState
        	dragGraphic.alpha = 0.00001;
 
        	judgements.pop('sick', true, true);
-       	combo.pop('x${FlxG.random.int(10, 99999)}', judgements.color, true);
+       	final neg = FlxG.random.bool(50) ? '-' : 'x';
+       	combo.pop('${neg}${FlxG.random.int(100, 9999)}', judgements.color, true);
 
        	//judgements.screenCenter();
        	//combo.screenCenter();

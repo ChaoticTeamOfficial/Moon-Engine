@@ -31,6 +31,8 @@ class PlayField extends FlxGroup
     var mix:String;
     var difficulty:String;
 
+    var previousRank:String = "";
+
     var inputHandlers:Map<String, InputHandler> = [];
     var strumlines:Array<Strumline> = [];
     var playerStrum:Strumline;
@@ -40,6 +42,8 @@ class PlayField extends FlxGroup
     var combo:ComboNumbers;
     var healthBar:HealthBar;
     var stats:FlxText;
+
+    static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
 
     // -- CALLBACKS -- //
 
@@ -109,6 +113,7 @@ class PlayField extends FlxGroup
         healthBar.screenCenter(X);
 
         //< -- COMBO AND JUDGEMENTS SETUP -- >//
+        // TODO: skins dammit
         judgements = new JudgementSprite('moon-engine');
         add(judgements);
         add(judgements.extra);
@@ -122,18 +127,18 @@ class PlayField extends FlxGroup
         stats = new FlxText(0, 0);
         stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
         stats.antialiasing = true;
-        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 2);
+        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
         add(stats);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
-		
+        
         final playerIDs = ["opponent", "p1"];
         final isCPUPlayers = [true, false];
 
         for (i in 0...playerIDs.length)
         {
-            var strumline = new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
+            var strumline = new Strumline(0, 68, /*chart.content?.meta?.noteskin ?? 'v-slice'*/ 'moon-engine', isCPUPlayers[i], playerIDs[i], conductor);
             add(strumline.strumBG);
             add(strumline);
 
@@ -148,7 +153,7 @@ class PlayField extends FlxGroup
             (playerIDs[i]=='opponent') ? oppStrum = strumline : playerStrum = strumline; 
 
             var inputHandler = new InputHandler(null, playerIDs[i], strumline, conductor);
-			inputHandler.CPUMode = isCPUPlayers[i];
+            inputHandler.CPUMode = isCPUPlayers[i];
             inputHandlers.set(playerIDs[i], inputHandler);
 
             inputHandler.onNoteHit = (note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain);
@@ -159,6 +164,9 @@ class PlayField extends FlxGroup
         setupNotes();
         settingsUpdate();
         updateP1Stats(null, true);
+
+        // obv loss, but whatev
+        previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
         conductor.time = -(conductor.crochet * 6);
     }
@@ -237,6 +245,8 @@ class PlayField extends FlxGroup
         setupNotes();
         updateP1Stats(null);
 
+        previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
+
         if(onSongRestart != null) onSongRestart();
         inCountdown = true;
     }
@@ -252,8 +262,8 @@ class PlayField extends FlxGroup
 
         // set the input keys.
         for (handler in inputHandlers.iterator())
-		{
-			handler.justPressed = [
+        {
+            handler.justPressed = [
                 MoonInput.justPressed(LEFT),
                 MoonInput.justPressed(DOWN),
                 MoonInput.justPressed(UP),
@@ -274,7 +284,7 @@ class PlayField extends FlxGroup
                 MoonInput.released(RIGHT)
             ];
             handler.update();
-		}
+        }
 
         //TODO: REMOVE, PLACEHOLDER.
         if(FlxG.keys.justPressed.I) playback.pitch -= 0.05;
@@ -289,13 +299,34 @@ class PlayField extends FlxGroup
 
         final stat = inputHandlers.get('p1').stats;
         final rankData = Timings.getRank(stat.accuracy);
+
+        if(stats.color != rankData.color)
+        {
+            final curRank = Timings.getRank(stat.accuracy).rank;
+            if (curRank != previousRank)
+            {
+                final oldIndex = rankLevels.indexOf(previousRank);
+                final newIndex = rankLevels.indexOf(curRank);
+
+                if(MoonSettings.callSetting('Ranking Sound'))
+                {
+                    if (newIndex > oldIndex)
+                        Paths.playSFX('game/ratingRaise.wav');
+                    else if (newIndex < oldIndex)
+                        Paths.playSFX('game/ratingLower.wav');
+                }
+
+                previousRank = curRank;
+            }
+        }
+
         stats.color = rankData.color;
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
 
         ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
         : stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
-		
-		if(FlxG.keys.justPressed.F5){
+        
+        if(FlxG.keys.justPressed.F5){
             Global.clearScriptList();
             Paths.clearMemory();
             Paths.clearUnusedAssets();
@@ -378,8 +409,8 @@ class PlayField extends FlxGroup
                     playback.state = PLAY;
                     inCountdown = false;
                     if(onSongStart != null) onSongStart();
-                case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
-                default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
+                //case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
+                //default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
             }
 
             if(onSongCountdown != null) onSongCountdown(Std.int(beat));

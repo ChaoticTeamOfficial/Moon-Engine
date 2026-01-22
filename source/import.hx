@@ -21,4 +21,5 @@ import moon.game.obj.dialogue.*;
 import moon.game.obj.dialogue.effects.*;
 import moon.hardcoded_shaders.*;
 import moon.toolkit.ui.*;
+import moon.global_obj.*;
 #end

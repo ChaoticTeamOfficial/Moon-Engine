@@ -9,8 +9,8 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['story mode', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit', 'blabla'];
-    var buttons:Array<MenuItem> = [];
+    final opt:Array<String> = ['story mode', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit', 'blabla', 'as you know, YOU are welcome here.'];
+    var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
 
@@ -23,20 +23,12 @@ class MainMenu extends FlxTransitionableState
 
         for (i in 0...opt.length)
         {
-            var btn = new MenuItem(20, 128 + 64 * i, opt[i].toUpperCase());
+            var btn = new UIButton(20, 128 + 64 * i, opt[i].toUpperCase());
             add(btn);
             buttons.push(btn);
         }
+
         changeSelection(0);
-        calculateTargets();
-        for (btn in buttons)
-        {
-            btn.x = btn.targetX;
-            btn.y = btn.targetY;
-            btn.alpha = btn.targetAlpha;
-            var sc = btn.targetScale;
-            btn.scale.set(sc, sc);
-        }
         
         if(PlayState.instance != null) PlayState.instance.destroy();
     }
@@ -63,69 +55,14 @@ class MainMenu extends FlxTransitionableState
             //test out sticker transition
             openSubState(new StickerSubState(new MainMenu()));
         }
-
-        final lerpSpeed = 10;
-        for (btn in buttons)
-        {
-            btn.x += (btn.targetX - btn.x) * lerpSpeed * elapsed;
-            btn.y += (btn.targetY - btn.y) * lerpSpeed * elapsed;
-            btn.alpha += (btn.targetAlpha - btn.alpha) * lerpSpeed * elapsed;
-            var targetSc = btn.targetScale;
-            btn.scale.x += (targetSc - btn.scale.x) * lerpSpeed * elapsed;
-            btn.scale.y += (targetSc - btn.scale.y) * lerpSpeed * elapsed;
-        }
     }
 
     function changeSelection(change:Int = 0):Void
     {
         curSelected = FlxMath.wrap(curSelected + change, 0, opt.length - 1);
         Paths.playSFX('ui/scrollMenu.ogg');
-        calculateTargets();
-    }
-
-    function calculateTargets():Void
-    {
-        final total = opt.length;
-        final centerX = 78;
-        final centerY = FlxG.height / 2;
-        final radiusX = 300;
-        final radiusY = 200;
-
-        for (i in 0...total)
-        {
-            var diff:Float = (i - curSelected) % total;
-            if (diff < 0) diff += total;
-            if (diff > total / 2) diff -= total;
-
-            final absDiff:Float = Math.abs(diff);
-            final btn = buttons[i];
-            btn.selected = (absDiff == 0);
-
-            var targetAlpha:Float = 1.0;
-            var targetScale:Float = 1.0;
-            var angle:Float = 0.0;
-
-            if (absDiff <= maxVisible)
-            {
-                angle = diff * (Math.PI / 2 / maxVisible);
-                targetScale = Math.cos(angle) * 0.4 + 0.6;
-            }
-            else
-            {
-                targetAlpha = 0.0;
-                targetScale = 0.5;
-                btn.targetX = -btn.width - 10;
-                btn.targetY = centerY + diff * radiusY;
-                btn.targetAlpha = targetAlpha;
-                btn.targetScale = targetScale;
-                continue;
-            }
-
-            // position calculations
-            btn.targetX = centerX + (Math.cos(angle) - 1) * radiusX;
-            btn.targetY = centerY + Math.sin(angle) * radiusY;
-            btn.targetAlpha = targetAlpha;
-            btn.targetScale = targetScale;
-        }
+        
+        for(i in 0...buttons.length)
+            buttons[i].selected = i == curSelected;
     }
 }

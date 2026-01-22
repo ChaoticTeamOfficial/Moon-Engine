@@ -33,7 +33,10 @@ class Freeplay extends FlxSubState
         'ukiyo' => 'bf-hard',
         'senpai' => 'pico-hard',
         'cocoa' => 'bf-nightmare',
-        'eggnog' => 'bf-nightmare'
+        'eggnog' => 'bf-nightmare',
+        'last course' => 'bf-hard',
+        'unbeatable' => 'bf-hard',
+        'overdue' => 'pico-hard'
     ];
     var texts:Array<FlxText> = [];
     

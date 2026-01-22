@@ -1,0 +1,10487 @@
+[
+	{
+		"tag": "SetCameraFocus",
+		"time": 0,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 1678.32167832168,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "-1"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 1835.66433566434,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 2255.24475524476,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 2727.27272727273,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "nin;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 2989.51048951049,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ninten;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 3356.64335664336,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "nintendo;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 4090.90909090909,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 5034.96503496503,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ul;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 5297.2027972028,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ulti;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 5454.54545454545,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ultimate;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 5874.12587412587,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ultimate;game"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 6293.70629370629,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ultimate;game;sys"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 6555.94405594406,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ultimate;game;system"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 7552.44755244755,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 8391.60839160839,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 8863.63636363636,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cha;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 9073.42657342657,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "challenge;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 9545.45454545455,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "all;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 9965.03496503497,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "play;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 10174.8251748252,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "players;"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 10895.979020979,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 10909.0909090909,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 11748.2517482517,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 12167.8321678322,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 12377.6223776224,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 12587.4125874126,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 13006.993006993,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 13426.5734265734,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 13426.5734265734,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 13430.9440559441,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.5"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 13435.3146853147,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 16783.2167832168,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 20139.8601398601,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 26848.7762237762,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 26853.1468531468,
+		"values": {
+			"VALUE_2": "64, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 33566.4335664336,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 40279.7202797203,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 46993.006993007,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 53706.2937062937,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 53706.2937062937,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 54125.8741258741,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 54335.6643356643,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 54545.4545454545,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 54965.034965035,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 55384.6153846154,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 55594.4055944056,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 55804.1958041958,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 56013.986013986,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 56223.7762237762,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 56643.3566433566,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;nintendo"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 57010.4895104895,
+		"values": {
+			"VALUE_2": "75, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 57062.937062937,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 57272.7272727273,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 57482.5174825175,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 57692.3076923077,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 57902.0979020979,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 58321.6783216783,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot beat;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 58741.2587412587,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 60419.5804195804,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 67132.8671328671,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 73846.1538461538,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 80559.4405594405,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 88951.0489510489,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 90603.1468531468,
+		"values": {
+			"VALUE_2": "8, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 90629.3706293706,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 90629.3706293706,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 91048.951048951,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 91258.7412587412,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 91468.5314685315,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 91888.1118881119,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 92307.6923076923,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 92727.2727272727,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 92937.0629370629,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 93146.8531468531,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 93566.4335664335,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 93986.013986014,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 93986.013986014,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 97237.7622377622,
+		"values": {
+			"VALUE_2": "8, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 97342.6573426573,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 97342.6573426573,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 97762.2377622377,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 97972.027972028,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 98181.8181818182,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 98601.3986013986,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 99020.979020979,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 99440.5594405594,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 99650.3496503496,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 99860.1398601398,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 100279.72027972,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 100699.300699301,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 100699.300699301,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 103951.048951049,
+		"values": {
+			"VALUE_2": "8, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 104055.944055944,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 104055.944055944,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 104475.524475524,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 104685.314685315,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 104895.104895105,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 105314.685314685,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 105734.265734266,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 106153.846153846,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 106363.636363636,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 106573.426573427,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 106993.006993007,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 107412.587412587,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 107412.587412587,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 110664.335664336,
+		"values": {
+			"VALUE_2": "8, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 110769.230769231,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 110769.230769231,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 111188.811188811,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 111398.601398601,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 111608.391608392,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 112027.972027972,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 112447.552447552,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 112867.132867133,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 113076.923076923,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 113286.713286713,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 113706.293706294,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 114125.874125874,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 114125.874125874,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 120839.160839161,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 127552.447552448,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 134265.734265734,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 140979.020979021,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 141083.916083916,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 141398.601398601,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 141713.286713287,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 142132.867132867,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 142395.104895105,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 142657.342657343,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 142661.177013171,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "9"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143025.440816852,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143209.489896607,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143393.538976361,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143577.588056116,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143761.63713587,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 143945.686215625,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 144037.710755502,
+		"values": {
+			"VALUE_2": "48, 1",
+			"VALUE_1": "0.03, 0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 144129.73529538,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 145598.293577588,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 145602.127933416,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 147070.686215625,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 147074.520571453,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 148539.244497833,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 148543.078853662,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 148546.91320949,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 148915.011368999,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 149283.109528508,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 149651.207688018,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 150011.63713587,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 150015.471491699,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 150019.305847527,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 150019.305847527,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 150387.404007036,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 150755.502166545,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 151123.600326054,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dont  miss"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 151487.864129735,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 154436.483761637,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 154804.581921146,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 154988.631000901,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 155172.680080656,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 155540.778240165,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 155905.042043846,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 155908.876399674,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 156276.974559183,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 156645.072718692,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 156829.121798447,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 157013.170878202,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 158853.661675748,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 159221.759835257,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 159589.857994766,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 159773.907074521,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 159957.956154275,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 161794.612595993,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 161798.446951821,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 161798.446951821,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 161802.281307649,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 162342.925479429,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 162346.759835257,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 162350.594191085,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 162898.907074521,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 162902.741430349,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 163178.815049981,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": "0.03, 0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 163270.839589858,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 164739.397872067,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 164743.232227895,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 164747.066583723,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 165291.54511133,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 165295.379467159,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 165299.213822987,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 165847.526706422,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 165851.361062251,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 166123.600326054,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": "0.03, 0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 166215.624865932,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 167684.18314814,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 167688.017503968,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 167688.017503968,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 167691.851859797,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 168236.330387404,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 168240.164743232,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 168243.99909906,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 168792.311982496,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 168796.146338324,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 169068.385602128,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": "0.03, 0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 169160.410142005,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 170628.968424214,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 170632.802780042,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 170636.63713587,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 171181.115663478,
+		"values": {
+			"VALUE_2": "6",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 171184.950019306,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 171188.784375134,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 171737.09725857,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 171740.931614398,
+		"values": {
+			"VALUE_2": "0.09",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 172013.170878202,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": "0.03, 0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 172105.195418079,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 173573.753700287,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 173577.588056116,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "10"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 173581.958685486,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 175151.014629542,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 175255.909734437,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim;"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 175255.909734437,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 175990.175468703,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 176462.203440731,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zap"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 176619.546098074,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zapper"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 176881.783860311,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zapper gun"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 176934.231412759,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "2"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 177773.39225192,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 178402.76288129,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 178717.448195976,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 179032.133510661,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 179346.818825346,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 180286.504140032,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 180290.874769402,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 180295.245398773,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 182808.357286885,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 183647.518126046,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 183647.518126046,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 186165.000643528,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 186584.581063109,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 187004.161482689,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 187004.161482689,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 187109.056587584,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.95"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 190360.804839333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 193717.448195976,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 197074.091552619,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 200011.154489682,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 200430.734909263,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 207144.021622549,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 213857.308335836,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 220570.595049123,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 220570.595049123,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 220780.385258913,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 220990.175468703,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 220994.546098074,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 221199.965678494,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 221204.336307864,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 221409.755888284,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 221829.336307864,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 221833.706937235,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 222248.916727445,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 222458.706937235,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 222668.497147025,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 222672.867776396,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 222878.287356815,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 222882.657986186,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 223088.077566606,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 223507.657986186,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 223512.028615557,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 223927.238405766,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 224137.028615557,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 224346.818825347,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 224351.189454717,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 224556.609035137,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 224560.979664508,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 224766.399244927,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 225185.979664508,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 225190.350293878,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 225605.560084088,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 225815.350293878,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 226025.140503669,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 226029.511133039,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 226234.930713459,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 226239.301342829,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 226444.720923249,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 226864.301342829,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 226868.6719722,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 227283.88176241,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 227283.88176241,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 227703.46218199,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 227913.25239178,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 228542.623021151,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 229381.783860312,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 229591.574070102,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 230220.944699473,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 230225.315328843,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 230430.734909263,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 230640.525119053,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 230640.525119053,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 230850.315328843,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat us"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 231060.105538634,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 231269.895748424,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 231274.266377794,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 231899.266377794,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 231903.637007165,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 232109.056587585,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 232318.846797375,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 232528.637007165,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 232738.427216955,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 232948.217426745,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 232952.588056116,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 233577.588056116,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 233997.168475697,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 234416.748895277,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 234626.539105067,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 235255.909734438,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 236095.070573599,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 236304.860783389,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 236934.23141276,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 237353.81183234,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 237773.39225192,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 237983.182461711,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 238612.553091081,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 239451.713930242,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 239661.504140032,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 240710.455188983,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 242388.776867305,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 243437.727916256,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 243647.518126046,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 244067.098545627,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 244171.993650522,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.95"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 244486.678965207,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 245325.839804368,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 246165.000643529,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 247004.16148269,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 247423.74190227,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 247423.74190227,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 247843.322321851,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 248682.483161011,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 249521.644000172,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 250780.385258913,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 251199.965678494,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 251409.755888284,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 252039.126517655,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 252878.287356816,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 253088.077566606,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 253717.448195976,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 254137.028615557,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 254556.609035137,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 254766.399244927,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 255395.769874298,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 256234.930713459,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 256444.720923249,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 257074.09155262,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 257493.6719722,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 257913.252391781,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 258123.042601571,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 258752.413230942,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 259591.574070102,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 259801.364279893,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 260430.734909263,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 260850.315328844,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 261269.895748424,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 261479.685958214,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 262109.056587585,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 262948.217426746,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 263158.007636536,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 263787.378265907,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 264206.958685487,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 264626.539105067,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 264836.329314858,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 265465.699944228,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 266304.860783389,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 266514.650993179,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 267144.02162255,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 267563.60204213,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 267983.182461711,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 268192.972671501,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 268822.343300872,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 269661.504140032,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 269871.294349823,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 270500.664979193,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 270920.245398774,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 270920.245398774,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 274276.888755417,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 277633.532112061,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 280990.175468704,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 284346.818825347,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 287703.462181991,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 291060.105538634,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 294416.748895277,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 297773.392251921,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 298192.972671501,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 298612.553091082,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 298822.343300872,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 299032.133510662,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 299241.923720452,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 299346.818825347,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 299451.713930243,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 299766.399244928,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 299976.189454718,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 300081.084559613,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 300185.979664508,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 300815.350293879,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 301025.140503669,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 301444.72092325,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 301654.51113304,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 301759.406237935,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 301864.30134283,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 302493.671972201,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 302703.462181991,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 302808.357286886,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 303123.042601571,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 303332.832811361,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 303437.727916257,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 303542.623021152,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 304171.993650522,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 304381.783860312,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 304801.364279893,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 305011.154489683,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 305116.049594578,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 305220.944699473,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 305850.315328844,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 306060.105538634,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 306165.000643529,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 306479.685958215,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 306689.476168005,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 306794.3712729,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 306899.266377795,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 307528.637007166,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 307738.427216956,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 308158.007636536,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 308367.797846326,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 308472.692951222,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 308577.588056117,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 309206.958685487,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 309416.748895278,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 309521.644000173,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 309836.329314858,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 310046.119524648,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 310151.014629543,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 310255.909734438,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 310885.280363809,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 311095.070573599,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 311514.65099318,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 311724.44120297,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 311829.336307865,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 311934.23141276,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Unbeatable",
+		"time": 312248.916727445,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 312458.706937236,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 312773.392251921,
+		"values": {
+			"VALUE_2": "8",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 312878.287356816,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 312878.287356816,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 312882.657986187,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 313192.972671501,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 313297.867776396,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 313402.762881292,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 313507.657986187,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 313512.028615557,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 313612.553091082,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 313717.448195977,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 313721.818825348,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 314137.028615557,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 314141.399244928,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 314241.923720452,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 314451.713930243,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 314556.609035138,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "29"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 314766.399244928,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 314871.294349823,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 314976.189454718,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315081.084559613,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 315085.455188984,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315185.979664508,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315290.874769403,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 315395.769874299,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315400.140503669,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 315815.350293879,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315819.72092325,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 315920.245398774,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 316130.035608564,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 316234.930713459,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 316549.616028145,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 316654.51113304,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 316759.406237935,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 316864.30134283,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 316868.671972201,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 316969.196447725,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 317074.09155262,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 317078.462181991,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 317493.671972201,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 317498.042601571,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 317598.567077096,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 317808.357286886,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 318123.042601571,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 318227.937706466,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 318332.832811362,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 318437.727916257,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 318542.623021152,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 318546.993650522,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 318647.518126047,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 318752.413230942,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 318756.783860313,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 319171.993650522,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 319176.364279893,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 319276.888755417,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 319486.678965208,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 319591.574070103,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 319591.574070103,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 319906.259384788,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 320011.154489683,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320116.049594578,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320220.944699473,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 320225.315328844,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320325.839804369,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 320430.734909264,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320435.105538634,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 320850.315328844,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320854.685958215,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 320955.210433739,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 321165.000643529,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 321479.685958215,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 321584.58106311,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 321689.476168005,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 321794.3712729,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 321899.266377795,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 321903.637007166,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 322004.16148269,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 322109.056587585,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 322113.427216956,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 322528.637007166,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 322533.007636536,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 322633.532112061,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 322843.322321851,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 322948.217426746,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 322948.217426746,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 323262.902741432,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 323367.797846327,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 323472.692951222,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 323577.588056117,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 323581.958685487,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 323682.483161012,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 323787.378265907,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 323791.748895278,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 324206.958685487,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 324211.329314858,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 324311.853790383,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 324521.644000173,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 324626.539105068,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 324941.224419753,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 325046.119524648,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325151.014629543,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325255.909734439,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 325260.280363809,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325360.804839334,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 325465.699944229,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325470.070573599,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 325885.280363809,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325889.65099318,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 325990.175468704,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 326199.965678494,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 326296.119524648,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 326300.490154019,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 326304.86078339,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 326304.86078339,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 326514.65099318,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "11"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 327091.574070103,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dis"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 327353.811832341,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "disco"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 327406.259384788,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "11"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 327463.077566606,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 327720.944699474,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "11"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 327773.392251921,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover new"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 328035.630014159,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "11"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 328297.867776397,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover new;worlds"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 329137.028615557,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 329661.504140033,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 329665.874769404,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "11"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 330290.874769404,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 330500.664979194,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 331077.588056117,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 331339.825818355,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "12"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 331654.51113304,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 332598.567077096,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 333013.776867306,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 333018.147496676,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "13"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 333022.518126047,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 336374.79085332,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 336374.79085332,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 338053.112531641,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 338472.692951222,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 338892.273370802,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 339311.853790383,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 339626.539105068,
+		"values": {
+			"VALUE_2": "8, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 339727.063580593,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.8"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 339731.434209963,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 339731.434209963,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 346339.825818355,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 346444.72092325,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 346444.72092325,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "21"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 346864.30134283,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 347703.462181991,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 348542.623021152,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 349381.783860313,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 350220.944699474,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 351060.105538635,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 351899.266377795,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 352738.427216956,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 353158.007636537,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 353158.007636537,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 353577.588056117,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 353581.958685488,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 353787.378265907,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 353997.168475698,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 354416.748895278,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 354421.119524649,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 354836.329314858,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 355255.909734439,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 356095.0705736,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 356514.65099318,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 356514.65099318,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 356934.23141276,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 356938.602042131,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 357144.021622551,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 357353.811832341,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 357773.392251921,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 357777.762881292,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 358192.972671502,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 358612.553091082,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 358616.923720453,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 358822.343300872,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 359032.133510663,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 359451.713930243,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 359456.084559614,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 359871.294349823,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 359871.294349823,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 360290.874769404,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 361130.035608565,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 361969.196447726,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 362808.357286886,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 363227.937706467,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 363647.518126047,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 364486.678965208,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 365325.839804369,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 366165.00064353,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 366584.58106311,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 367004.161482691,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 367843.322321851,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 368682.483161012,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 369521.644000173,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 369941.224419754,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 370360.804839334,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 371199.965678495,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 372039.126517656,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 372878.287356817,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 373297.867776397,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 374556.609035138,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 376234.93071346,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 377913.252391782,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 379171.993650523,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 379486.678965208,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 379801.364279894,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 380011.154489684,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 381269.895748425,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 382948.217426747,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 384626.539105068,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 385885.28036381,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 386199.965678495,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 386514.65099318,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 386724.441202971,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 387144.021622551,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 387983.182461712,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 388717.448195978,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 389241.923720453,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 389661.504140033,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 390500.664979194,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 391339.825818355,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 392178.986657516,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 393018.147496677,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 393437.727916257,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 393857.308335838,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 394696.469174999,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 395535.630014159,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 395955.21043374,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 396374.79085332,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 397213.951692481,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 398053.112531642,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 398892.273370803,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 400151.014629544,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "22"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 400151.014629544,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 400155.385258915,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 400885.28036381,
+		"values": {
+			"VALUE_2": "64, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 400990.175468705,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 401199.965678495,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 402039.126517656,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 402878.287356817,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 403717.448195978,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 404556.609035139,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 405185.979664509,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 405395.769874299,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 406234.93071346,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 406864.301342831,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 407283.881762411,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 407703.462181992,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 407913.252391782,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 408542.623021153,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 408752.413230943,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 409591.574070104,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 410430.734909264,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 411269.895748425,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 411899.266377796,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 412109.056587586,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 412948.217426747,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 413577.588056118,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 413997.168475698,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 414412.378265908,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 414416.748895278,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 414421.119524649,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 414626.539105069,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 414836.329314859,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 415046.119524649,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 415255.909734439,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 415465.69994423,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 415675.49015402,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 416304.86078339,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 416309.231412761,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 416514.650993181,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 416724.441202971,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 416934.231412761,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 417144.021622551,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 417353.811832341,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 417773.392251922,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 417983.182461712,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 418192.972671502,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 418402.762881292,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 418612.553091083,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 418822.343300873,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 419032.133510663,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 419661.504140034,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 419665.874769404,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 419871.294349824,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 420081.084559614,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 420290.874769404,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 420295.245398775,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 420710.455188985,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 420714.825818355,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 421130.035608565,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 421134.406237936,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 421339.825818355,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 421549.616028146,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 421759.406237936,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 421969.196447726,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 421969.196447726,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 422178.986657516,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 422388.776867306,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 423018.147496677,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 423022.518126048,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 423227.937706467,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 423437.727916258,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 423647.518126048,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 423857.308335838,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 424067.098545628,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 424486.678965209,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 424696.469174999,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 424906.259384789,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 425116.049594579,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 425325.839804369,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 425535.63001416,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 425745.42022395,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 426374.790853321,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "31"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 426584.581063111,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 426794.371272901,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 427004.161482691,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 427004.161482691,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 427318.846797376,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 427838.951692481,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 427843.322321852,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 427847.692951223,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 428053.112531642,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 428472.692951223,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 428892.273370803,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 429311.853790383,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 429416.748895279,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 429517.273370803,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 429521.644000174,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 429831.958685488,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 429836.329314859,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 430146.644000174,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 430151.014629544,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 430360.804839335,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 430365.175468705,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 430671.119524649,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 430675.49015402,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 430985.804839335,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 430990.175468705,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 431199.965678495,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 431409.755888286,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 431619.546098076,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 431829.336307866,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 432248.916727446,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 432458.706937237,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 432668.497147027,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 432873.916727446,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 432878.287356817,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 432882.657986188,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 433188.602042132,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 433192.972671502,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 433503.287356817,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 433507.657986188,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 433717.448195978,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 433721.818825349,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 434027.762881293,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 434032.133510663,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 434342.448195978,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 434346.818825349,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 434552.238405768,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 434556.609035139,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 434766.399244929,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 435185.979664509,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 435395.7698743,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 435605.56008409,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 436025.14050367,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 436230.56008409,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 436234.93071346,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 436239.301342831,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 436545.245398775,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 436549.616028146,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 436859.93071346,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 436864.301342831,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 437074.091552621,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 437078.462181992,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 437384.406237936,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 437388.776867307,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 437699.091552621,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 437703.462181992,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 437913.252391782,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 438123.042601572,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 438332.832811363,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 438542.623021153,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 438962.203440733,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 439171.993650523,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 439381.783860314,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 439587.203440733,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 439591.574070104,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 439595.944699474,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 439901.888755418,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 439906.259384789,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 440216.574070104,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 440220.944699474,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 440430.734909265,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 440435.105538635,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 440741.049594579,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 440745.42022395,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 441055.734909265,
+		"values": {
+			"VALUE_2": "0.03",
+			"VALUE_1": "0.015"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 441060.105538635,
+		"values": {
+			"VALUE_2": "9",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 441064.476168006,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "32"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 441165.00064353,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 441269.895748426,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 441689.476168006,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 441899.266377796,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 442109.056587586,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 442109.056587586,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 442113.427216957,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 442528.637007167,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 442533.007636537,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 443158.007636537,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 443367.797846328,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 443577.588056118,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 443787.378265908,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 443791.748895279,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 444206.958685488,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 444211.329314859,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 444626.539105069,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 445046.119524649,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 445255.90973444,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 445465.69994423,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 445470.0705736,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 445885.28036381,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 445889.650993181,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 446514.650993181,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 446724.441202971,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 446934.231412761,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 447144.021622551,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 447148.392251922,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 447563.602042132,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 447567.972671503,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 447978.811832342,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 447983.182461712,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "14"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 447987.553091083,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 447991.923720454,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 454696.469174999,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 454700.83980437,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 455116.049594579,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 455325.83980437,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 455535.63001416,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 455955.21043374,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 456584.581063111,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 456588.951692482,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 456794.371272901,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 457004.161482691,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 457213.951692482,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 457633.532112062,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 458053.112531642,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 458057.483161013,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 458472.692951223,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 458682.483161013,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 458892.273370803,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 459311.853790384,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 459727.063580594,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 459731.434209964,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "24"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 459737.99015402,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 461409.755888286,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 473158.007636538,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1.05"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 474311.853790384,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1.1"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 474836.329314859,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 488262.902741433,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "16"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 488265.088056118,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.8"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 489102.063580594,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 490380.472671503,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 490462.148807866,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "27"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 490465.69994423,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 490833.798103739,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 491017.847183494,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 491201.896263249,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 491569.994422758,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 491934.258226439,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "27"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 491938.092582267,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 492306.190741776,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 492490.239821531,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 492674.288901285,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 493042.387060795,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 493406.650864475,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "27"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 493410.485220304,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 493778.583379813,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 493962.632459568,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 494146.681539322,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 494514.779698831,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 494879.043502512,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "27"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 494882.877858341,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 495250.97601785,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 495435.025097604,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 495619.074177359,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 495987.172336868,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 496347.601784721,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 496351.436140549,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "17"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 496355.270496377,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 496723.368655887,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 496907.417735641,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 497091.466815396,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 497459.564974905,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 497463.399330733,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "17"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 497735.638594537,
+		"values": {
+			"VALUE_2": "131, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 497823.828778586,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "17"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 497827.663134414,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 497831.497490242,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 497835.331846071,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 497919.687674291,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.95"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 500772.448410488,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 503717.233686561,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 506662.018962635,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 506938.092582267,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 507214.166201899,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 507490.239821531,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 507766.313441163,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we are;nintendo"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 508134.411600672,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 508134.411600672,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 508410.485220304,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 508686.558839936,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 508962.632459567,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 509238.706079199,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 509422.755158954,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "gfkmdlsg;awplwedoe"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 509514.779698831,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "fvbmklbd;ierfdsks"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 509599.135527052,
+		"values": {
+			"VALUE_2": "7",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 509602.96988288,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 509606.804238709,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 509974.902398218,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 510158.951477972,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 510343.000557727,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 510711.098717236,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us       "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 511263.2459565,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 511447.295036255,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 511631.344116009,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 511815.393195764,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 512183.491355273,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 512551.589514782,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 512919.687674291,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 513103.736754046,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 513287.785833801,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 513655.88399331,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us       "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 514208.031232574,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 514392.080312328,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 514576.129392083,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 514760.178471837,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 515128.276631347,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       us"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 515496.374790856,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 515496.374790856,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you   you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 515864.472950365,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can   can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 516048.52203012,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not   not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 516232.571109874,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat  beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 516600.669269383,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us    us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 517152.816508647,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you   you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 517336.865588402,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can   can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 517520.914668156,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not   not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 517704.963747911,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat  beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 518073.06190742,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us    us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 518441.160066929,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "you   you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 518809.258226439,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can   can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 518993.307306193,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not   not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 519177.356385948,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat  beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 519545.454545457,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us    us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 520281.650864475,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can   can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 520465.69994423,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not   not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 520649.749023985,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat  beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 521017.847183494,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 521382.110987175,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 521385.466048524,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 521385.945343003,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 521385.945343003,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "6"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 521389.779698831,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 527275.51589515,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat      "
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 527275.51589515,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 527551.589514782,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 528011.712214169,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 528563.859453433,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "not       "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 528747.908533187,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 528931.957612942,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 529484.104852206,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 530036.252091469,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      cant"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 530220.301171224,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 530404.350250979,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 530956.497490242,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 531508.644729506,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cant      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 531692.693809261,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 531876.742889016,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us       "
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 533073.061907421,
+		"values": {
+			"VALUE_2": "8",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 533165.086447298,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 533165.086447298,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 533168.920803126,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 533533.184606807,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 533717.233686562,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 533901.282766316,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 534269.380925825,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 534821.528165089,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 535005.577244844,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 535189.626324598,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 535373.675404353,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 536109.871723372,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 536477.969882881,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 536662.018962635,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 536846.06804239,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 537214.166201899,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 537766.313441163,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 537950.362520918,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 538134.411600672,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 538318.460680427,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 538686.558839936,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 539054.656999445,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 539054.656999445,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 539422.755158955,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 539606.804238709,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 539790.853318464,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 540158.951477973,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 540711.098717237,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 540895.147796991,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 541079.196876746,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 541263.245956501,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 541631.34411601,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 541999.442275519,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 542367.540435028,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 542551.589514783,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 542735.638594537,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 543103.736754047,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 543839.933073065,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 544023.98215282,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 544208.031232574,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 544576.129392084,
+		"values": {
+			"VALUE_2": "4",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 544852.203011715,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 544940.393195765,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 544944.227551593,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 544944.227551593,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "7"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 544948.061907421,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 546048.52203012,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "beat      "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 546232.571109875,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 546416.62018963,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 546420.454545458,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 546692.693809262,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 546968.767428893,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 547152.816508648,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 547428.89012828,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 547520.914668157,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can       "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 547704.963747912,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       not"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 547708.79810374,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 547796.988287789,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 547889.012827666,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 548809.258226439,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can       "
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 548993.307306194,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 549177.356385949,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "can       not"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 549361.405465703,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 549365.239821532,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 549637.479085335,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 549913.552704967,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 550097.601784722,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 550281.650864476,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "cant      "
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 550461.865588403,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 550465.699944231,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "      beat"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 550645.914668157,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 550649.749023986,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "us       "
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 550741.773563863,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 550833.79810374,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 550833.79810374,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 552306.190741777,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 552582.264361409,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 552858.337981041,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 553042.387060795,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 553318.460680427,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 553594.534300059,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 553686.558839937,
+		"values": {
+			"VALUE_2": "4, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 555250.976017851,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 555527.049637483,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 555803.123257115,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 555987.172336869,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 556263.245956501,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 556539.319576133,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 556631.34411601,
+		"values": {
+			"VALUE_2": "9",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 556715.699944231,
+		"values": {
+			"VALUE_2": "32, 1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 556719.534300059,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 556723.368655888,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 556723.368655888,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 557091.466815397,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 557275.515895151,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 557459.564974906,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 557827.663134415,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 558379.810373679,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 558563.859453434,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 558747.908533188,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 558931.957612943,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 559300.055772452,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 559668.153931961,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 560036.252091471,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 560220.301171225,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 560404.35025098,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 560772.448410489,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 561324.595649753,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 561508.644729508,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 561692.693809262,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 561876.742889017,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 562244.841048526,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 562612.939208035,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 562612.939208035,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 562981.037367544,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 563165.086447299,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 563349.135527053,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 563717.233686563,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 564269.380925827,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 564453.430005581,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 564637.479085336,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 564821.52816509,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 565189.6263246,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 565557.724484109,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 565925.822643618,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 566109.871723373,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 566293.920803127,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 566662.018962636,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 567398.215281655,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 567582.264361409,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 567766.313441164,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 568134.411600673,
+		"values": {
+			"VALUE_2": "5",
+			"VALUE_1": "cannot;beat us"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 568498.675404354,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 568502.509760183,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "28"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 568506.344116011,
+		"values": {
+			"VALUE_2": "0, 0",
+			"VALUE_1": "18"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 568510.178471839,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "19"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 580281.650864478,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 586171.221416625,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.85"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 586175.055772453,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 587643.614054662,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 589116.006692699,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 589852.203011717,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 590588.399330736,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.8"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 590592.233686564,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 591324.595649754,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.9"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 591324.595649754,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 591508.644729509,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 591692.693809263,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 591876.742889018,
+		"values": {
+			"VALUE_2": "0.05",
+			"VALUE_1": "0.03"
+		}
+	},
+	{
+		"tag": "Camera Zoom Chain",
+		"time": 591968.767428895,
+		"values": {
+			"VALUE_2": "96, 1",
+			"VALUE_1": "0.03, 0.04"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 592053.123257116,
+		"values": {
+			"VALUE_2": "0.03, 1",
+			"VALUE_1": "18"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 592056.957612944,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "20"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 592060.791968772,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "30"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 592060.791968772,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 592064.626324601,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 597946.528165092,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 597950.36252092,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "6"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 603836.098717239,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 603839.933073067,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "6"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 609725.669269387,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 609729.503625215,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "7"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 615615.239821534,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 615619.074177362,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 615622.90853319,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "20"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 615987.172336872,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 616355.270496381,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zap"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 616539.319576135,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zapper"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 616723.36865589,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "aim your;zapper gun"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 617083.798103743,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 617087.632459571,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "23"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 617091.466815399,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 617095.301171227,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 617459.564974908,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 617643.614054663,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 617827.663134417,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 618195.761293927,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 618556.19074178,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 618560.025097608,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 618563.859453436,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ev"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 618567.693809264,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "20"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 618747.908533191,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 618931.957612945,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 619116.0066927,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with;your"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 619300.055772454,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with;your ro"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 619484.104852209,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with;your robot;"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 619668.153931964,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with;your robot;part"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 619852.203011718,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "even with;your robot;partner"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 620032.417735645,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 620036.252091473,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 620040.086447301,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "23"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 620404.350250982,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 620588.399330737,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 620772.448410491,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 621140.54657,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 621504.810373681,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 621508.64472951,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "dis"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 621512.479085338,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "20"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 621876.742889019,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discov"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 622060.791968773,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 622244.841048528,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover;new"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 622612.939208037,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "discover;new worlds"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 622977.203011718,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 622981.037367547,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 622984.871723375,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "23"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 623349.135527056,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 623533.18460681,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 623717.233686565,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 624085.331846074,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 624447.678471841,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 624449.595649755,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 624453.430005583,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "score"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 624821.528165093,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "26"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 625918.153931964,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 625921.988287792,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "23"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 625925.82264362,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 625929.656999449,
+		"values": {
+			"VALUE_2": "3",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 626293.92080313,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 626477.969882884,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 626662.018962639,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 627030.117122148,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "you cannot;beat us"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 627390.546570001,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 627394.380925829,
+		"values": {
+			"VALUE_2": "1",
+			"VALUE_1": "20"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 627398.215281657,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "we       "
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 627402.049637485,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "33"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 627766.313441166,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "       are"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 627950.362520921,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "nin;nin;nin;nin"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 628134.411600676,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ninten;ninten;ninten;ninten"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 628502.509760185,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "nintendo;nintendo;nintendo;nintendo"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 628870.607919694,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "you;you;you;you"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 629238.706079203,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "you can;you can;you can;you can"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 629422.755158958,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "you cannot;you cannot;you cannot;you cannot"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 629606.804238712,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "cannot beat;cannot beat;beat;cannot beat;cannot beat"
+		}
+	},
+	{
+		"tag": "ycbu text",
+		"time": 629974.902398222,
+		"values": {
+			"VALUE_2": "2",
+			"VALUE_1": "beat us;beat us;beat us;beat us"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 630343.000557731,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 630343.000557731,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "25"
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 142657.342657343,
+		"values": {
+			"bpm": 163,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 173577.588056116,
+		"values": {
+			"bpm": 143,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 487423.741902272,
+		"values": {
+			"bpm": 286,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 489102.063580594,
+		"values": {
+			"bpm": 176,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	},
+	{
+		"tag": "ChangeBPM",
+		"time": 490465.69994423,
+		"values": {
+			"bpm": 163,
+			"timeSignature": [
+				4,
+				4
+			]
+		}
+	}
+]

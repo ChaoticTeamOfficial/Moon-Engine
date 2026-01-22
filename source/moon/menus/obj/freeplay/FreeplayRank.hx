@@ -1,39 +1,33 @@
 package moon.menus.obj.freeplay;
 
-import flixel.util.FlxColor;
-import flixel.group.FlxSpriteGroup;
-import moon.backend.Paths;
 
-class FreeplayRank extends FlxSpriteGroup
+class FreeplayRank extends MoonSprite
 {
-    public var rankSprite:MoonSprite;
     public var rank:String;
     
     public function new(?x:Float = 410, ?y:Float = 42)
     {
         super(x, y);
-        rankSprite = new MoonSprite(0, 0);
-        rankSprite.frames = Paths.getSparrowAtlas("menus/freeplay/rankbadges");
+        frames = Paths.getSparrowAtlas("menus/freeplay/rankbadges");
 
-        rankSprite.animation.addByPrefix("loss", "LOSS rank0", 24, false);
-        rankSprite.animation.addByPrefix("good", "GOOD rank0", 24, false);
-        rankSprite.animation.addByPrefix("great", "GREAT rank0", 24, false);
-        rankSprite.animation.addByPrefix("excellent", "EXCELLENT rank0", 24, false);
-        rankSprite.animation.addByPrefix("perfect", "PERFECT rank0", 24, false);
-        rankSprite.animation.addByPrefix("perfectGold", "PERFECT rank GOLD0", 24, false);
+        animation.addByPrefix("LOSS", "LOSS rank0", 24, false);
+        animation.addByPrefix("GOOD", "GOOD rank0", 24, false);
+        animation.addByPrefix("GREAT", "GREAT rank0", 24, false);
+        animation.addByPrefix("EXCELLENT", "EXCELLENT rank0", 24, false);
+        animation.addByPrefix("PERFECT", "PERFECT rank0", 24, false);
+        animation.addByPrefix("PERFECT-GOLD", "PERFECT rank GOLD0", 24, false);
 
-        rankSprite.addOffset("loss", -3, 4);
-        rankSprite.addOffset("good", 0, 4);
-        rankSprite.addOffset("great", 0, 4);
-        rankSprite.addOffset("excellent", -2, 4);
-        rankSprite.addOffset("perfect", 0, 2);
-        rankSprite.addOffset("perfectGold", 0, 2);
-        rankSprite.playAnim("perfectGold");
+        /*addOffset("loss", -3, 4);
+        addOffset("good", 0, 4);
+        addOffset("great", 0, 4);
+        addOffset("excellent", -2, 4);
+        addOffset("perfect", 0, 2);
+        addOffset("perfectGold", 0, 2);*/
+        centerAnimations = true;
+        playAnim("perfectGold");
+        updateHitbox();
 
-        rankSprite.visible = false;
-        rankSprite.antialiasing = true;
-
-        add(rankSprite);
+        antialiasing = true;
     }
 
     public function getRankColor():FlxColor
@@ -54,7 +48,7 @@ class FreeplayRank extends FlxSpriteGroup
     public function setRank(rank:String, force:Bool = false):Void
     {
         this.rank = rank;
-        rankSprite.playAnim(rank, force);
-        rankSprite.visible = true;
+        playAnim(rank, force);
+        visible = true;
     }
 }

@@ -1,4 +1,4 @@
-package moon.backend.gameplay;
+    package moon.backend.gameplay;
 
 import flixel.util.FlxColor;
 

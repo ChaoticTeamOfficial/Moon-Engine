@@ -35,7 +35,7 @@ class Keybinds extends FlxSubState
     private static inline var MAX_BINDS:Int = 5;
     private static inline var INITIAL_REMOVE_DELAY:Float = 0.5;
     private static inline var REPEAT_REMOVE_DELAY:Float = 0.05;
-    private static inline var LINE_SPACING:Float = 60;
+    private static inline var LINE_SPACING:Float = 100;
     private static inline var EXTRA_CATEGORY_SPACING:Float = 90;
 
     private var menuContainer:FlxSpriteGroup;
@@ -110,6 +110,7 @@ class Keybinds extends FlxSubState
             if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
             else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
             if (MoonInput.justPressed(ACCEPT)) openRebindMode();
+
             else if (MoonInput.justPressed(BACK)) FlxG.state.openSubState(new Settings(true));
             else if (FlxG.keys.justPressed.TAB)
             {
@@ -148,7 +149,7 @@ class Keybinds extends FlxSubState
 
     private function openRebindMode():Void
     {
-        new FlxTimer().start(0.1, (_) -> {
+        new FlxTimer().start(0.05, (_) -> {
             rebindMode = true;
             removeHoldTime = 0;
         });
@@ -188,6 +189,7 @@ class Keybinds extends FlxSubState
                 if (keyList.length > 0) keyList.pop();
                 removeHoldTime -= REPEAT_REMOVE_DELAY;
             }
+
             refreshList();
             MoonInput.saveControls();
         }

@@ -20,6 +20,8 @@ class MoonGame extends FlxGame
     		Paths.skipNextCleanup = false;
     	});
 
+    	Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
+
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         
 		MoonSettings.init();

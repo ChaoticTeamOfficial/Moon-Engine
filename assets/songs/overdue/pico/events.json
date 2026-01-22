@@ -1,0 +1,1730 @@
+[
+	{
+		"tag": "SetCameraFocus",
+		"time": 0,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 5052.63157894737,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 10105.2631578947,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 15157.8947368421,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 20210.5263157895,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "2"
+		}
+	},
+	{
+		"tag": "Ocultar HUD",
+		"time": 20213.8157894737,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 21394.7368421053,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 21473.6842105263,
+		"values": {
+			"VALUE_2": "picodiag",
+			"VALUE_1": "BF"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 21473.6842105263,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 21473.685,
+		"values": {
+			"VALUE_2": "BF",
+			"VALUE_1": "dialog2"
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 21552.6315789474,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.2, 0.01"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 21710.5263157895,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 22026.3157894737,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 22263.1578947368,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 22398.0263157895,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "What the FUCK is that thing!?"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 22500,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 22736.8421052632,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 22736.8421052632,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 22973.6842105263,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 23210.5263157895,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 23447.3684210526,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 23684.2105263158,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Hey"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 23990.1315789474,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "350, 450"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 23993.4210526316,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "0.4"
+		}
+	},
+	{
+		"tag": "Ocultar HUD",
+		"time": 23996.7105263158,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "2"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 24000,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "900, 550"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 24000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 24003.2894736842,
+		"values": {
+			"VALUE_2": "luigi-toolate",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 24006.5789473684,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 24009.8684210526,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.5"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 24013.1578947368,
+		"values": {
+			"VALUE_2": "0.005",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 24078.9473684211,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 24236.8421052632,
+		"values": {
+			"VALUE_2": "pico",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Show Song",
+		"time": 26526.3157894737,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 29052.6315789474,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 34105.2631578947,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 34578.9473684211,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 35052.6315789474,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 35842.1052631579,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 36315.7894736842,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 37105.2631578947,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 37578.9473684211,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 38368.4210526316,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 38842.1052631579,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 39157.8947368421,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 39631.5789473684,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 40105.2631578947,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 40894.7368421053,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 41368.4210526316,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 42157.8947368421,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 42631.5789473684,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 42947.3684210526,
+		"values": {
+			"VALUE_2": "picodiag",
+			"VALUE_1": "BF"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 42950.6578947368,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "Die Motherfucker!"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 42953.947368421,
+		"values": {
+			"VALUE_2": "BF",
+			"VALUE_1": "dialog1"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 44131.5789473684,
+		"values": {
+			"VALUE_2": "pico",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 44210.5263157895,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 44210.5263157895,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 45473.6842105263,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "10"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 54315.7894736842,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 64421.0526315789,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 64736.8421052631,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 66000,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 67263.1578947368,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 68526.3157894736,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 69789.4736842105,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 71052.6315789473,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 72315.7894736842,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 73578.947368421,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 74526.3157894736,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 74842.1052631578,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 76105.2631578947,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 77368.4210526315,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 78552.6315789473,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 79894.7368421052,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 81157.894736842,
+		"values": {
+			"VALUE_2": "0.5",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 82578.947368421,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "0"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 83365.1315789473,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "14"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 83368.4210526315,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "675, 600"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 83371.7105263157,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.45"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 83447.3684210526,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "0.35"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 84315.7894736841,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "3"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 84631.5789473683,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "900, 500"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 84631.5789473683,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Screen Shake",
+		"time": 84634.8684210526,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "0.2, 0.01"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 84710.5263157894,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "4"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 84789.4736842104,
+		"values": {
+			"VALUE_2": "dad",
+			"VALUE_1": "300, 300"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 89684.2105263157,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 94736.8421052631,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 97263.1578947367,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 101052.631578947,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 106105.263157895,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 109894.736842105,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "15"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 109894.736842105,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 114947.368421052,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 120000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 125052.631578947,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 130105.263157895,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 130736.842105263,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "16"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 135157.894736842,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "5"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 136421.052631579,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 140921.052631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 141000,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 142500,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 142578.947368421,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 142657.894736842,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 143447.368421053,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 143526.315789474,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 143605.263157895,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 143921.052631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 144710.526315789,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 144789.473684211,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 148500,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 148578.947368421,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 149131.578947368,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 149210.526315789,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 150315.789473684,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 150631.578947368,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 150710.526315789,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 150789.473684211,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 150868.421052632,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 150947.368421053,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151026.315789474,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151105.263157895,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151184.210526316,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151263.157894737,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151342.105263158,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151421.052631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 151500,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 160421.052631579,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 161684.210526316,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "6"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 162710.52631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 162789.473684211,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 162868.421052632,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 162947.368421053,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 163026.315789474,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 163973.684210526,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 164052.631578948,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 164131.578947369,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 164289.473684211,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 164368.421052632,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 164447.368421053,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 165236.842105263,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 165315.789473684,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 165394.736842105,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 165710.52631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 165789.473684211,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 166342.105263158,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 166421.052631579,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singRIGHT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 169894.736842105,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170052.631578948,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singLEFT"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170210.52631579,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170368.421052632,
+		"values": {
+			"VALUE_2": "gf",
+			"VALUE_1": "singDOWN"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170519.736842105,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 170526.315789474,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170526.315789474,
+		"values": {
+			"VALUE_2": "GF",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170605.263157895,
+		"values": {
+			"VALUE_2": "GF",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Change Character",
+		"time": 170644.736842105,
+		"values": {
+			"VALUE_2": "picodiag",
+			"VALUE_1": "BF"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170648.02631579,
+		"values": {
+			"VALUE_2": "BF",
+			"VALUE_1": "dialog3"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170684.210526316,
+		"values": {
+			"VALUE_2": "GF",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170763.157894737,
+		"values": {
+			"VALUE_2": "GF",
+			"VALUE_1": "singUP"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 170802.631578948,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "Son of a bitch!"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170842.105263158,
+		"values": {
+			"VALUE_2": "GF",
+			"VALUE_1": "fade"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 170861.842105263,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "13"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 170960.52631579,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 171226.973684211,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 171552.631578948,
+		"values": {
+			"VALUE_2": "Dad",
+			"VALUE_1": "Laugh"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 171710.52631579,
+		"values": {
+			"VALUE_2": "0.0175",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Screen Shake Chain",
+		"time": 171717.105263158,
+		"values": {
+			"VALUE_2": "61",
+			"VALUE_1": "0.003, 0.002"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 171786.184210527,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 171789.473684211,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "7"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 176842.105263158,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 181894.736842106,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 186947.368421053,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 190736.842105264,
+		"values": {
+			"VALUE_2": "0.02",
+			"VALUE_1": "0.02"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 190740.131578948,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.6"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 191210.52631579,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.04"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 191213.815789474,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.7"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 191684.210526316,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.04"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 191687.5,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.8"
+		}
+	},
+	{
+		"tag": "Screen Shake Chain",
+		"time": 191921.052631579,
+		"values": {
+			"VALUE_2": "64",
+			"VALUE_1": "0.003, 0.002"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 192000,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.5"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 192000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 202105.263157895,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 210947.368421053,
+		"values": {
+			"VALUE_2": "0.02",
+			"VALUE_1": "0.02"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211421.05263158,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.04"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 211894.736842106,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.04"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 212131.578947369,
+		"values": {
+			"VALUE_2": "0",
+			"VALUE_1": "1"
+		}
+	},
+	{
+		"tag": "Add Camera Zoom",
+		"time": 212210.52631579,
+		"values": {
+			"VALUE_2": "0.04",
+			"VALUE_1": "0.04"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 212210.52631579,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 212213.815789474,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "8"
+		}
+	},
+	{
+		"tag": "Set Cam Zoom",
+		"time": 212368.421052632,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "0.65"
+		}
+	},
+	{
+		"tag": "Set Cam Pos",
+		"time": 212447.368421053,
+		"values": {
+			"VALUE_2": "bf",
+			"VALUE_1": "1100, 600"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 213473.684210527,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Play Animation",
+		"time": 213907.894736843,
+		"values": {
+			"VALUE_2": "BF",
+			"VALUE_1": "dialog1"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 213911.184210527,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "ASSHOLE!"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 214736.842105264,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Add Subtitle",
+		"time": 214736.842105264,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": ""
+		}
+	},
+	{
+		"tag": "Triggers Universal",
+		"time": 214740.131578948,
+		"values": {
+			"VALUE_2": "",
+			"VALUE_1": "9"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 217263.157894738,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 222315.789473685,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "SetCameraFocus",
+		"time": 223578.947368422,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	}
+]

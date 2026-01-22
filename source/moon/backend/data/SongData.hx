@@ -1,13 +1,12 @@
 package moon.backend.data;
 
-import flixel.FlxG;
 import flixel.util.FlxSave;
-import haxe.Json;
+import haxe.ds.StringMap;
 
 typedef SongScoreData = {
-    var score:Int;
-    var misses:Int;
-    var accuracy:Float;
+    score:Int,
+    misses:Int,
+    accuracy:Float
 }
 
 @:publicFields
@@ -21,7 +20,7 @@ class SongData
     /**
      * A map containing all the songs and each data.
      */
-    static var songs:Map<String, SongScoreData> = [];
+    static var songs:StringMap<SongScoreData> = new StringMap<SongScoreData>();
 
     static function init()
     {
@@ -35,7 +34,18 @@ class SongData
     static function load()
     {
         if (save.data.songs != null)
-            songs = save.data.songs;
+        {
+            var data:Dynamic = save.data.songs;
+            for (field in Reflect.fields(data))
+            {
+                var val:Dynamic = Reflect.field(data, field);
+                songs.set(field, {
+                    score: val.score,
+                    misses: val.misses,
+                    accuracy: val.accuracy
+                });
+            }
+        }
     }
 
     /**
@@ -49,35 +59,45 @@ class SongData
      */
     static function saveData(songName:String, difficulty:String, mix:String, score:Int, misses:Int, accuracy:Float)
     {
-        final old = songs.get('($mix)$songName-$difficulty');
+        var key:String = '(${mix})' + '${songName}-${difficulty}';
+        var old:SongScoreData = songs.get(key);
 
-        var shouldSave = false;
+        var shouldSave:Bool = false;
 
         if (old == null)
             shouldSave = true;
         else
         {
-            shouldSave = 
-                score > old.score ||
-                misses < old.misses ||
-                accuracy > old.accuracy;
+            if (score > old.score)
+                shouldSave = true;
+            else if (score == old.score && misses < old.misses)
+                shouldSave = true;
+            else if (score == old.score && misses == old.misses && accuracy > old.accuracy)
+                shouldSave = true;
         }
 
         if (shouldSave)
         {
-            songs.set('($mix)$songName-$difficulty', {
-                score: score > old?.score ? score : old?.score ?? 0,
-                misses: misses < old?.misses ? misses : old?.misses ?? 0,
-                accuracy: accuracy > old?.accuracy ? accuracy : old?.accuracy ?? 0
+            songs.set(key, {
+                score: score,
+                misses: misses,
+                accuracy: accuracy
             });
 
-            trace('Saving data for song ($mix)${songName}-${difficulty}"', "DEBUG");
+            trace('Saving data for $key');
 
-            save.data.songs = songs;
+            var saveData:Dynamic = {};
+            for (k in songs.keys())
+                Reflect.setField(saveData, k, songs.get(k));
+
+            save.data.songs = saveData;
             save.flush();
         }
     }
 
     static function retrieveData(songName:String, difficulty:String, mix:String):SongScoreData
-        return songs.get('($mix)$songName-$difficulty');
+    {
+        var key:String = '(${mix})' + '${songName}-${difficulty}';
+        return songs.get(key);
+    }
 }

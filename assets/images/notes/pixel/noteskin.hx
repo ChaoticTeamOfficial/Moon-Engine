@@ -46,6 +46,7 @@ function createReceptor(direction)
     });
     sustainSplash.scale.set(scale, scale);
     sustainSplash.updateHitbox();
+	sustainSplash.extraOffset.y = -16;
 
     splash.antialiasing = strumNote.antialiasing = sustainSplash.antialiasing = false;
 }

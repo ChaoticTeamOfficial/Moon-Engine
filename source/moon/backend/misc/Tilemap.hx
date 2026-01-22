@@ -35,6 +35,9 @@ class Tilemap
             return;
         }
 
+        if(!Paths.dumpExclusions.contains('$atlasName.png'))
+            Paths.dumpExclusions.push('$atlasName.png');
+
         final graphic:FlxGraphic = Paths.image(atlasName, folder);
         if (graphic == null)
         {
