@@ -70,7 +70,7 @@ class StickerTransition extends Sprite
     var inCompleteCount:Int = 0;
     var outCompleteCount:Int = 0;
     var stickerKeys:Array<String> = [];
-    final spacingFactor:Float = 0.62;
+    final spacingFactor:Float = 0.6;
 
     var globalScale:Float;
     var offsetX:Float;
@@ -191,7 +191,7 @@ class StickerTransition extends Sprite
                     scaleX: globalScale, 
                     scaleY: globalScale, 
                     alpha: 1, 
-                    rotation: (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0
+                    rotation: try{ (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0;} catch(e) {0;}
                     }, 0.05, {ease: FlxEase.backOut, onComplete: (_) -> {
                     inCompleteCount++;
                     if (inCompleteCount >= stickers.length)

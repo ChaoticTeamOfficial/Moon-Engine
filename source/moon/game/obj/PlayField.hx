@@ -211,6 +211,7 @@ class PlayField extends FlxGroup
         stats.y = (MoonSettings.callSetting('Stats Position') == 'On Player Lane')
         ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
         : healthBar.y + stats.height + 8;
+		centerText();
         //updateP1Stats(null, false);
 
         playback.updateVolume();
@@ -322,9 +323,7 @@ class PlayField extends FlxGroup
 
         stats.color = rankData.color;
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
-
-        ((MoonSettings.callSetting('Stats Position') != 'On Player Lane')) ? stats.screenCenter(X)
-        : stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
+		centerText();
         
         if(FlxG.keys.justPressed.F5){
             Global.clearScriptList();
@@ -395,6 +394,13 @@ class PlayField extends FlxGroup
         MoonUtils.cancelActiveTwn(statsColor);
         statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {startDelay: 0.05});
     }
+	
+	function centerText()
+	{
+		if(MoonSettings.callSetting('Stats Position') != 'On Player Lane' || MoonSettings.callSetting('Middlescroll'))
+			stats.screenCenter(X);
+		else stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
+	}
 
     function beatHit(beat:Float):Void
     {

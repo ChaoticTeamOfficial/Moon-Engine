@@ -1,0 +1,4980 @@
+{
+	"notes": [
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 5246.63677130045,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 5515.69506726457,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 5784.7533632287,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 5919.28251121076,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 6188.34080717489,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 6860.9865470852,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 6995.51569506726,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 7130.04484304933,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 7399.10313901345,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 7668.16143497758,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 7937.2197309417,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 8071.74887892377,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 8340.80717488789,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 9013.4529147982,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 9147.98206278027,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 9282.51121076233,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 9551.5695067265,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 9820.6278026906,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 10089.6860986547,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 10224.2152466368,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 10493.2735426009,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 11434.9775784753,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 11569.5067264574,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 11704.0358744395,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 269.058295964126,
+			"lane": "p1",
+			"time": 11838.5650224215,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 12376.6816143498,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 12914.798206278,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 13721.9730941704,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 13856.5022421525,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 14125.5605381166,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 14394.6188340807,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 14529.1479820628,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 14529.1479820628,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 14798.2062780269,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 15470.8520179372,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 15605.3811659193,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 15739.9103139013,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 16008.9686098655,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 16278.0269058296,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 16547.0852017937,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 16681.6143497758,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 16950.6726457399,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 17757.8475336323,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 17892.3766816143,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 18161.4349775785,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 18430.4932735426,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 18699.5515695067,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 18834.0807174888,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 19103.1390134529,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 20044.8430493274,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 20179.3721973094,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 20313.9013452915,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 20448.4304932735,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 20986.5470852018,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 21524.66367713,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 22600.8968609865,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 22869.9551569507,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 23139.0134529148,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 23408.0717488789,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 23677.130044843,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 23677.130044843,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 23946.1883408072,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 605.381165919282,
+			"lane": "p1",
+			"time": 24215.2466367713,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 25291.4798206278,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 25560.5381165919,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 25829.596412556,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 25829.596412556,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 26098.6547085202,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 26367.7130044843,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 26636.7713004484,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 26905.8295964126,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 26905.8295964126,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 27174.8878923767,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 27443.9461883408,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 27713.0044843049,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 27982.0627802691,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 27982.0627802691,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 28251.1210762332,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 470.85201793722,
+			"lane": "p1",
+			"time": 28520.1793721973,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29327.3542600897,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29327.3542600897,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29596.4125560538,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29596.4125560538,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29865.4708520179,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 29865.4708520179,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 30672.6457399103,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 31210.7623318386,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 31479.8206278027,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 31748.8789237668,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 31748.8789237668,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 32017.9372197309,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 32286.9955156951,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 32286.9955156951,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 32556.0538116592,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 538.116591928247,
+			"lane": "p1",
+			"time": 32825.1121076233,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 33901.3452914798,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 34170.4035874439,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 34439.4618834081,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 34439.4618834081,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 34708.5201793722,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 34977.5784753363,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 35246.6367713004,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 35515.6950672646,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 35515.6950672646,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 35784.7533632287,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 36053.8116591928,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 36053.8116591928,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 36322.8699551569,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 36591.9282511211,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 36591.9282511211,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 37130.0448430493,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 37130.0448430493,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 37668.1614349776,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 37668.1614349776,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 39282.5112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 39417.0403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 39417.0403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 39686.0986547085,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 39955.1569506726,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 40224.2152466368,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 40358.7443946188,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 40358.7443946188,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 40627.802690583,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 41434.9775784753,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 41434.9775784753,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 41569.5067264574,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 41838.5650224215,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 42107.6233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 42376.6816143498,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 42511.2107623318,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 42780.269058296,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43049.3273542601,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43049.3273542601,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43587.4439461884,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43587.4439461884,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43721.9730941704,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 43991.0313901345,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 44260.0896860986,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 44529.1479820628,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 44663.6771300449,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 44663.6771300449,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 44932.735426009,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 45470.8520179372,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 45605.3811659193,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 45739.9103139014,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 46278.0269058296,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 46412.5560538117,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 46547.0852017937,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 46681.6143497758,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 46816.1434977579,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 47892.3766816143,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 47892.3766816144,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48026.9058295964,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48295.9641255605,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48565.0224215247,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48834.0807174888,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48968.6098654708,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 48968.6098654708,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 49237.668161435,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50044.8430493273,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50044.8430493273,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50448.4304932735,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50448.4304932735,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50717.6233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 50986.6816143498,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 51121.0762331838,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 51121.0762331838,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 51390.134529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 51659.1928251121,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 51659.3273542601,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 52197.4439461883,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 52331.9730941704,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 52601.0313901345,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 52870.0896860987,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 53139.1479820628,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 53273.6771300448,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 53273.6771300448,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 53542.735426009,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 54080.8520179372,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 54215.3811659193,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 54349.7757847533,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 54888.0269058296,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 55022.5560538117,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 55157.0852017937,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 55291.6143497758,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 55426.0089686098,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 55964.1255605381,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 56367.7130044843,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 56771.3004484305,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57040.3587443946,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57040.3587443946,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57309.4170403587,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57309.4170403587,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57578.4753363229,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57578.4753363229,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57847.533632287,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 57847.533632287,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 58116.5919282511,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 58520.1793721973,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 58923.7668161435,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59192.8251121076,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59192.8251121076,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59461.8834080717,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59461.8834080717,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59730.9417040359,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 59730.9417040359,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 60269.0582959641,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 60672.6457399103,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61076.2331838565,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61345.2914798206,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61345.2914798206,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61614.3497757848,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61614.3497757848,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61883.4080717489,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 61883.4080717489,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 62152.466367713,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 62152.466367713,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 62690.5829596413,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 62825.1121076233,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 62959.6412556054,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 63497.7578475336,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 63632.2869955157,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 63766.8161434978,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 63901.3452914798,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 64035.8744394619,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 64843.0313452915,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 65515.6770852018,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 65784.7353811659,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 66053.79367713,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 66188.3228251121,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 66188.3228251121,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 66457.3811210762,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 66995.4977130045,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 67130.0268609865,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 67399.0851569507,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 67668.1614349776,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 67937.2197309417,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 68206.260044843,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 68340.7891928251,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 68340.8071748879,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 68609.865470852,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 69147.9640807175,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 69417.0223766816,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 69820.6278026906,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70089.6681165919,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70358.7443946188,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70493.2555605381,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70493.2735426009,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70762.3138565022,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 70964.1255605381,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71031.3721524664,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71300.4484304933,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71434.9775784753,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71569.4887443946,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71569.4887443946,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71838.5470403587,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 71973.0761883408,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72242.1524663677,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72511.2107623318,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72645.7219282511,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72645.7219282511,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72914.7802242152,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 72914.798206278,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73183.8565022421,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73318.3856502242,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73452.9147982063,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73587.4439461883,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73721.9730941704,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73721.9730941704,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 73991.0313901345,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 74125.5605381166,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 74394.6188340807,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 74663.6771300448,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 74798.2062780269,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 74798.2062780269,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 75067.2421524664,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 75201.7937219731,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 75336.3228699552,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 75605.3811659193,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 75739.9103139013,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 75874.4394618834,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76008.9686098655,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76143.4977578475,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76278.0269058296,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76278.0269058296,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 76547.0852017937,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76816.1434977578,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76950.6726457399,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 76950.6726457399,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 77488.7892376682,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 77757.8475336323,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 77892.3766816143,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78161.4349775785,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78295.9641255605,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78430.4932735426,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78565.0224215247,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78699.5515695067,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78834.0807174888,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 78968.6098654708,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79103.1390134529,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79103.1390134529,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79372.197309417,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79506.7264573991,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79506.7264573991,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 79775.7847533632,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80044.8430493273,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80179.3721973094,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80179.3721973094,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80448.4304932735,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80582.9596412556,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 80852.0179372197,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81121.0762331838,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81255.6053811659,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81255.6053811659,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81524.66367713,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81793.7219730942,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 81793.7219730942,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 82331.8385650224,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 82466.3677130045,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 82735.4260089686,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83004.4843049327,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83273.2152466368,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83407.7443946188,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83407.7443946188,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83676.8026905829,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83811.6591928251,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 83946.1883408072,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84215.2466367713,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84484.3049327354,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84484.3049327354,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84618.8340807175,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84753.3632286995,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 84887.8699551569,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 85156.9282511211,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 85426.0089686099,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 85560.5381165919,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 85560.5381165919,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 269.058295964126,
+			"lane": "p1",
+			"time": 85829.596412556,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 86502.2421524664,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 86636.7713004484,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 86636.7713004484,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 86771.3004484305,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87040.0313901345,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87309.4170403587,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87578.4753363229,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87713.0044843049,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87713.0044843049,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 87982.062780269,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88116.5919282511,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 88251.1210762332,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88520.1793721973,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88654.7085201794,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88789.2376681614,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88789.2376681614,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 88923.7668161435,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89058.2959641256,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89192.8251121076,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89461.8834080717,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89730.9417040359,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89865.4708520179,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 89865.4708520179,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 90134.5291479821,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 90672.6457399103,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 90807.1748878924,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 90941.7040358744,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 90941.7040358744,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 91076.2331838565,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 91210.7623318386,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 91345.2914798206,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 91614.3497757848,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 91883.4080717489,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92017.9372197309,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92017.9372197309,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92152.466367713,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92286.9955156951,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92421.5246636771,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92690.5829596413,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 92959.6412556054,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93094.1704035874,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93094.1704035874,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93228.6995515695,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93363.2286995516,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93497.7578475336,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 93766.8161434978,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 94035.8744394619,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 94103.1390134529,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 94170.4035874439,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 94439.4618834081,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 94977.5784753363,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95112.1076233184,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95246.6367713004,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95246.6367713004,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95381.1659192825,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95515.6950672646,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95650.2242152466,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 95919.2825112108,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96188.3408071749,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96322.8699551569,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96322.8699551569,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96457.399103139,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96591.9282511211,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96726.4573991031,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 96995.5156950673,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97264.5739910314,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97399.1031390134,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97399.1031390134,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97533.6322869955,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97668.1614349776,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97735.4260089686,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 97802.6905829596,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 98071.7488789238,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 98340.8071748879,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 98475.3363228699,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 98475.3363228699,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 98609.865470852,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 99013.4259735426,
+			"type": "sakura-bf2"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 99080.6905475336,
+			"type": "sakura-bf1"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 99820.6278026906,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 99955.1569506726,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 100224.215246637,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 100493.273542601,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 100627.802690583,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 100896.860986547,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 101434.977578475,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 101434.977578475,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 101704.035874439,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 101838.565022422,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102107.623318386,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102107.623318386,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102376.68161435,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102645.739910314,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102780.269058296,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 102914.798206278,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 103049.32735426,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 103721.97309417,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 103856.502242152,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 103991.031390135,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 104260.089686099,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 104529.147982063,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 104798.206278027,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 104932.735426009,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 105201.793721973,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 106143.497757847,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 106278.02690583,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 269.058295964126,
+			"lane": "p1",
+			"time": 106547.085201794,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 107085.201793722,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 107623.31838565,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 108430.493273543,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 108565.022421525,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 108834.080717489,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 109103.139013453,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 109237.668161435,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 109237.668161435,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 109506.726457399,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 110313.901345291,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 110448.430493273,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 110582.959641256,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 110717.488789238,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 110986.547085202,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 111255.605381166,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 111390.134529148,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 111390.134529148,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 111659.192825112,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 112331.838565022,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 112466.367713004,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 112600.896860986,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 112869.955156951,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 113139.013452915,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 113139.013452915,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 113408.071748879,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 201.793721973094,
+			"lane": "p1",
+			"time": 113542.600896861,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 113811.659192825,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 114753.3632287,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 114887.892376682,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 115022.421524664,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 336.322869955203,
+			"lane": "p1",
+			"time": 115156.950672646,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 115695.067264574,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 116233.183856502,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 117309.417040359,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 117578.475336323,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 117578.475336323,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 117847.533632287,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 118116.591928251,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 118385.650224215,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 118386.130044843,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 118654.708520179,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 672.645739910314,
+			"lane": "p1",
+			"time": 118923.766816143,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 120000,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 120269.058295964,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 120538.116591928,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 120538.596412556,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 120807.174887892,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 121076.233183856,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 121345.291479821,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 121614.349775785,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 121614.349775785,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 121883.408071749,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 122152.466367713,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 122421.524663677,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 122691.062780269,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 122691.062780269,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 122960.121076233,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 470.85201793722,
+			"lane": "p1",
+			"time": 123229.179372197,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124035.874439462,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124035.874439462,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124304.932735426,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124304.932735426,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124573.99103139,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 124573.99103139,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 125381.165919283,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 125919.282511211,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126188.340807175,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126457.399103139,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126457.399103139,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126726.457399103,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126995.515695067,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 126995.995515695,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 127265.053811659,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 538.116591928251,
+			"lane": "p1",
+			"time": 127533.632286996,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 128609.865470852,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 128879.403587444,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 129147.98206278,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 129148.461883408,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 129417.040358744,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 129686.098654709,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 129955.156950673,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 130224.215246637,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 130224.695067265,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 130493.273542601,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 130762.331838565,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 130762.811659193,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 131031.390134529,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 131300.448430493,
+			"type": null
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 131300.448430493,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 131838.565022422,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 131838.565022422,
+			"type": null
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 132376.68161435,
+			"type": null
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 132377.161434978,
+			"type": null
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 133991.031390135,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 134125.560538117,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 134125.560538117,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 134394.618834081,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 134663.677130045,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 134932.735426009,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 135067.264573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 135067.264573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 135336.322869955,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 136143.497757848,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 136143.497757848,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 136278.02690583,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 136547.085201794,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 136816.143497758,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 137085.201793722,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 137219.730941704,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 137488.789237668,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 137757.847533632,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 137757.847533632,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 138295.964125561,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 138295.964125561,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 138430.493273543,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 138699.551569507,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 138968.609865471,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 139237.668161435,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 139372.197309417,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 139372.197309417,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 139641.255605381,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 140179.372197309,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 140313.901345291,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 140448.430493274,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 140986.547085202,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 141121.076233184,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 141255.605381166,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 141390.134529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 141524.66367713,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 142600.896860986,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 142600.896860987,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 142735.426008969,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143004.484304933,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143273.542600897,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143542.600896861,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143677.130044843,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143677.130044843,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 143946.188340807,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 144753.3632287,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 144753.3632287,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145156.950672646,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145156.950672646,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145426.143497758,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145695.201793722,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145829.596412556,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 145829.596412556,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 146098.65470852,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 146367.713004484,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 146367.847533632,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 146905.96412556,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147040.493273543,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147309.551569507,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147578.609865471,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147847.668161435,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147982.197309417,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 147982.197309417,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 148251.255605381,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 148789.372197309,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 148923.901345291,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 149058.295964126,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 149596.547085202,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 149731.076233184,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 149865.605381166,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 150000.134529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 150134.529147982,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 150672.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 150672.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151076.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151076.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151479.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151479.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151748.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 151748.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152017.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152017.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152286.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152286.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152556.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152556.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152825.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 152825.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153228.69955157,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153228.69955157,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153632.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153632.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153901.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 153901.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154170.403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154170.403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154439.461883408,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154439.461883408,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154977.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 154977.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 155381.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 155381.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 155784.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 155784.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156053.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156053.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156322.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156322.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156591.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156591.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156861.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 156861.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 157399.582959641,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 157534.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 157668.161434978,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 158206.757847534,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 158341.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 158475.816143498,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 158610.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 158744.394618834,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 159282.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 159282.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 159686.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 159686.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160089.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160089.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160358.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160358.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160627.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160627.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160896.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 160896.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161166.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161166.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161435.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161435.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161838.69955157,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 161838.69955157,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162242.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162242.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162511.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162511.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162780.403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 162780.403587444,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163049.461883408,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163049.461883408,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163587.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163587.64573991,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163991.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 163991.233183857,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164394.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164394.820627803,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164663.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164663.878923767,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164932.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 164932.937219731,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 0,
+			"lane": "p1",
+			"time": 165201.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 1,
+			"duration": 0,
+			"lane": "p1",
+			"time": 165201.995515695,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 165471.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 165471.053811659,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 166009.582959641,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 166144.112107623,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 166278.161434978,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 166816.757847534,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 166951.286995516,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 3,
+			"duration": 0,
+			"lane": "p1",
+			"time": 167085.816143498,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 0,
+			"duration": 0,
+			"lane": "p1",
+			"time": 167220.34529148,
+			"type": "sakura-joint"
+		},
+		{
+			"data": 2,
+			"duration": 336.322869955157,
+			"lane": "p1",
+			"time": 167354.394618834,
+			"type": "sakura-joint"
+		}
+	],
+	"meta": {
+		"album": "spaghetti",
+		"artist": "LE SSERAFIM (feat. j-hope)",
+		"bpm": 111.5,
+		"charter": "fabs + Spazkid",
+		"diffRating": 5,
+		"displayName": "SPAGHETTI (feat. j-hope of BTS) (Clean ver.)",
+		"generatedBy": "Friday Night Funkin' - v0.7.5 (spaghetti-collab:cb68f9d) PROTOTYPE",
+		"lanes": [
+			"opponent",
+			"p1"
+		],
+		"noteskin": "v-slice",
+		"opponents": [
+			"kpop"
+		],
+		"players": [
+			"bf"
+		],
+		"preview": [
+			0,
+			15000
+		],
+		"scrollSpd": 2.7,
+		"spectators": [
+			"sserafim-gf"
+		],
+		"stage": "sserafim",
+		"timeSignature": [
+			4,
+			4
+		],
+		"version": "2.2.4"
+	}
+}

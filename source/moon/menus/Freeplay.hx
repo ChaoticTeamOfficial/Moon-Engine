@@ -23,21 +23,6 @@ class Freeplay extends FlxSubState
 {
     public static var appearType:FreeplayTransition = NONE;
 
-    // placeholder song list >:3
-    // song => mi
-    var s:Map<String, String> = [
-        'knockout' => 'bf-hard',
-        'earworm' => 'bf-hard',
-        'machina' => 'bf-hard',
-        'soda groove' => 'bf-hard',
-        'ukiyo' => 'bf-hard',
-        'senpai' => 'pico-hard',
-        'cocoa' => 'bf-nightmare',
-        'eggnog' => 'bf-nightmare',
-        'last course' => 'bf-hard',
-        'unbeatable' => 'bf-hard',
-        'overdue' => 'pico-hard'
-    ];
     var texts:Array<FlxText> = [];
     
     public var character:String;
@@ -48,8 +33,8 @@ class Freeplay extends FlxSubState
     public var mainBG:FreeplayBG;
     public var weekBG:FlxSkewedSprite;
     public var thisDJ:FreeplayDJ;
-    var curSelected:Int = 0;
-
+    static var curSelected:Int = 0;
+	var songList:Array<{song:String, mix:String, difficulty:String}> = [];
     public function new(character:String = 'bf')
     {
         //TODO: make animations for entering the freeplay
@@ -88,12 +73,35 @@ class Freeplay extends FlxSubState
         });
 
         add(mainBG.foreground);
+		
+        for (song in Paths.readDir('songs/'))
+        {
+            for (mix in Paths.readDir('songs/$song/'))
+            {
+                if (mix == 'events' || !Paths.exists('songs/$song/$mix/', null)) continue;
+
+                for (chart in Paths.readDir('songs/$song/$mix/', ['.json'], true))
+                {
+                    if (chart.startsWith('chart-'))
+                        songList.push({song: song, mix: mix, difficulty: chart.substr(6)});
+                }
+            }
+        }
+
+
+        songList.sort(function(a, b) {
+            final aLower = a.song.toLowerCase();
+            final bLower = b.song.toLowerCase();
+            return (aLower < bLower) ? -1 : (aLower > bLower) ? 1 : 0;
+        });
 
         var yPos = 0.0;
-        for (song => mix in s)
+        for (entry in songList)
         {
-            var text = new FlxText(0, yPos, 0, '$song-$mix', 32);
-            text.font = Paths.font('vcr.ttf');
+            var displayName = '(${entry.mix.toUpperCase()}) •-- ${entry.song}-${entry.difficulty}';
+            var text = new FlxText(0, yPos, 0, displayName, 24);
+            text.font = Paths.font('phantomuff/full.ttf');
+			text.antialiasing = true;
             texts.push(text);
             text.screenCenter(X);
             text.x += 64;
@@ -115,17 +123,13 @@ class Freeplay extends FlxSubState
         
         if(MoonInput.justPressed(ACCEPT))
         {
-            //for(song => mix in s)
-            //    if(texts[curSelected].text == '$song-$mix') FlxG.switchState(()->new PlayState(song, 'hard', mix));
-
-            for(song => mix in s)
+            // Get the selected entry directly
+            final selectedEntry = songList[curSelected];
+            if (selectedEntry != null)
             {
-                final spl = mix.split('-');
-                if(texts[curSelected].text == '$song-${spl[0]}-${spl[1]}')
-                    PlayState.songData = {song: song, difficulty: spl[1], mix: spl[0]};
+                PlayState.songData = {song: selectedEntry.song, difficulty: selectedEntry.difficulty, mix: selectedEntry.mix};
+                FlxG.switchState(()->new LoadingScreen());
             }
-            
-            FlxG.switchState(()->new LoadingScreen());
         }
         
         if(mainBG.script.exists('onUpdate')) mainBG.script.get('onUpdate')(elapsed);

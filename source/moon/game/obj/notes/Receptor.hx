@@ -195,8 +195,24 @@ class Receptor extends FlxSpriteGroup
 
     override public function update(elapsed:Float)
     {
-        sustainSplash.visible = MoonSettings.callSetting('Hold Note Splashes');
-        splash.visible = MoonSettings.callSetting('Note Splashes');
+		if(this.visible)
+		{
+			sustainSplash.visible = MoonSettings.callSetting('Hold Note Splashes');
+			splash.visible = MoonSettings.callSetting('Note Splashes');
+		}
+		else
+			sustainSplash.visible = splash.visible = false;
+		
         super.update(elapsed);
     }
+	
+	override public function set_visible(visible:Bool):Bool
+	{
+		this.visible = visible;
+		
+		splash.visible = sustainSplash.visible = splashGroup.visible = visible;
+		notesGroup.visible = sustainsGroup.visible = this.visible;
+		
+		return this.visible;
+	}
 }

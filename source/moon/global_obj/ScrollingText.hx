@@ -62,7 +62,7 @@ class ScrollingText extends MoonSprite
     
     public function updateScrollState():Void
     {
-        needsScroll = textField.width > displayWidth;
+        needsScroll = textField.width > displayWidth - 19;
         
         if (!needsScroll)
             scrollOffset = 0;

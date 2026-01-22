@@ -65,5 +65,7 @@ class Main extends Sprite
 
 		fps = new FPS(10, 10);
 		addChild(fps);
+		
+		Global.allowInputs = true;
 	}
 }
