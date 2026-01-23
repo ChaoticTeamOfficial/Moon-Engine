@@ -38,10 +38,10 @@ class PlayField extends FlxGroup
     var playerStrum:Strumline;
     var oppStrum:Strumline;
 
-    var judgements:JudgementSprite;
-    var combo:ComboNumbers;
     var healthBar:HealthBar;
     var stats:FlxText;
+    var judgements:JudgementSprite;
+    var combo:ComboNumbers;
 
     static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
 
@@ -117,18 +117,10 @@ class PlayField extends FlxGroup
         judgements = new JudgementSprite('moon-engine');
         add(judgements);
         add(judgements.extra);
+        add(judgements.sparkle);
 
         combo = new ComboNumbers('moon-engine');
         add(combo);
-
-        // Little text for testing out the accuracy.
-        // oh lol it doesn't even show accuracy anymore LMFAO
-        // fym it does now
-        stats = new FlxText(0, 0);
-        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
-        stats.antialiasing = true;
-        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
-        add(stats);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
@@ -160,6 +152,15 @@ class PlayField extends FlxGroup
             inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
             inputHandler.onGhostTap = (keyDir) -> if(onGhostTap != null) onGhostTap(keyDir);
         }
+
+        // Little text for testing out the accuracy.
+        // oh lol it doesn't even show accuracy anymore LMFAO
+        // fym it does now
+        stats = new FlxText(0, 0);
+        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
+        stats.antialiasing = true;
+        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
+        add(stats);
 
         setupNotes();
         settingsUpdate();
@@ -328,7 +329,6 @@ class PlayField extends FlxGroup
         if(FlxG.keys.justPressed.F5){
             Global.clearScriptList();
             Paths.clearMemory();
-            Paths.clearUnusedAssets();
             FlxG.resetState();
         }
     }

@@ -60,7 +60,6 @@ function createStaticNote(skin, direction)
     staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
     staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
     staticNote.animation.addByPrefix(direction + '-holdEnd', direction +'-holdend0', 24, true);
-    staticNote.scale.set(scale, scale);
     staticNote.antialiasing = true;
 }
 

@@ -58,12 +58,16 @@ class NoteSustain extends TiledSprite
 
     private function _updtGraphics()
     {
-        final dir:String = MoonUtils.intToDir(parent.direction);
-
         this.centerAnimations = true;
         this.frames = parent.frames;
         this.animation.copyFrom(parent.animation);
 
+        updateOther();
+    }
+
+    public function updateOther()
+    {
+        final dir:String = MoonUtils.intToDir(parent.direction);
         this.playAnim('$dir-hold', true);
         this.setTail('$dir-holdEnd');
 

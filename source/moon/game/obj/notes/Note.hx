@@ -79,7 +79,7 @@ class Note extends MoonSprite
     /**
      * The receptor in which the note will go to.
      */
-    public var receptor:Receptor;
+    public var receptor(default, set):Receptor;
 
     /**
      * This note's sustain.
@@ -145,7 +145,7 @@ class Note extends MoonSprite
         {
             visible = active = true;
 
-            var timeDiff = (time - conductor.time);
+            final timeDiff = (time - conductor.time);
             var ypos = receptor.y + timeDiff * speed;
 
             if (MoonSettings.callSetting('Downscroll')) ypos = receptor.y - timeDiff * speed;
@@ -155,6 +155,16 @@ class Note extends MoonSprite
 
             if (child != null) child.downscroll = MoonSettings.callSetting('Downscroll');
         }
+    }
+
+    function set_receptor(receptor:Receptor):Receptor
+    {
+        this.receptor = receptor;
+        scale.set(receptor.strumNote.scale.x, receptor.strumNote.scale.y);
+        updateHitbox();
+
+        if(child!=null)child.updateOther();
+        return this.receptor;
     }
 
     override function destroy():Void {

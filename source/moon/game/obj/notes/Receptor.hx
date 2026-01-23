@@ -204,6 +204,7 @@ class Receptor extends FlxSpriteGroup
 			sustainSplash.visible = splash.visible = false;
 		
         super.update(elapsed);
+        notesGroup.alpha = sustainsGroup.alpha = (visible) ? 1 : 0.00001;
     }
 	
 	override public function set_visible(visible:Bool):Bool
@@ -211,7 +212,7 @@ class Receptor extends FlxSpriteGroup
 		this.visible = visible;
 		
 		splash.visible = sustainSplash.visible = splashGroup.visible = visible;
-		notesGroup.visible = sustainsGroup.visible = this.visible;
+		notesGroup.visible = sustainsGroup.visible = visible;
 		
 		return this.visible;
 	}

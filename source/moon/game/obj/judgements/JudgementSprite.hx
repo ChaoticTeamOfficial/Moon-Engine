@@ -8,6 +8,7 @@ using StringTools;
 class JudgementSprite extends MoonSprite
 {   
     var extra:MoonSprite;
+    var sparkle:MoonSprite;
     var skin(default, set):String;
     var data:JudgementsCombo;
 
@@ -16,8 +17,8 @@ class JudgementSprite extends MoonSprite
         super();
         this.skin = skin;
         alpha = 0.00001;
-        extra.visible = false;
-        extra.blend = ADD;
+        extra.visible = sparkle.visible = false;
+        extra.blend = sparkle.blend = ADD;
     }
 
     var thisTwn:FlxTween;
@@ -40,7 +41,7 @@ class JudgementSprite extends MoonSprite
         this.setPosition(st[0], st[1]);
 
         if(notAnimated) return;
-        if(data?.judgementAnims?.appear == 'light' && !notAnimated)
+        if(data?.judgementAnims?.appear == 'light')
         {
             MoonUtils.cancelActiveTwn(xtraTwn);
 
@@ -52,6 +53,13 @@ class JudgementSprite extends MoonSprite
             extra.setPosition(this.x + this.width / 2 - extra.width / 2, this.y + this.height / 2 - extra.height / 2);
 
             xtraTwn = FlxTween.tween(extra, {"scale.x": extra.scale.x * 1.35, "scale.y": extra.scale.y * 1.35, alpha: 0}, 0.8, {ease: FlxEase.expoOut});
+        }
+
+        if(isGold)
+        {
+            sparkle.playAnim('sparkle', true);
+            sparkle.visible = true;
+            sparkle.setPosition(this.x + FlxG.random.float(-96, this.width - 96), this.y - 64 + FlxG.random.float(0, this.width / 2));
         }
 
         final appear = data?.judgementAnims?.appear ?? 'jump-in';
@@ -80,6 +88,12 @@ class JudgementSprite extends MoonSprite
 
         extra = new MoonSprite();
         extra.loadGraphicFromSprite(this);
+
+        sparkle = new MoonSprite();
+        sparkle.frames = Paths.getSparrowAtlas('ingame/UI/sparkle');
+        sparkle.centerAnimations = true;
+        sparkle.animation.addByPrefix('sparkle', 'sparkleFrame', 24, false);
+        sparkle.animation.onFinish.add(_ -> sparkle.visible = false);
 
         return skin;
     }

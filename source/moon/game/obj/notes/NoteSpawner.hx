@@ -21,19 +21,6 @@ class NoteSpawner extends FlxGroup
 
     var _downscroll:Bool = false;
 
-    function get_noteOffset():Float return _noteOffset;
-
-    function set_noteOffset(value:Float):Float
-    {
-        final diff = value - _noteOffset;
-        _noteOffset = value;
-
-        for (note in _notes)
-            note.time += diff;
-
-        return value;
-    }
-
     public function new(noteStructs:Array<NoteStruct>, strumlines:Array<Strumline>, conductor:Conductor)
     {
         super();
@@ -133,8 +120,16 @@ class NoteSpawner extends FlxGroup
         return note; 
     }
 
+    public function updateNoteScroll()
+    {
+        for (note in _notes)
+            note.updateNotePos();
+    }
+
     // === GETTERS === //
     inline function get_notes():Array<Note> return _notes;
+
+    function get_noteOffset():Float return _noteOffset;
 
     // === SETTERS === //
     function set_scrollSpeed(sp:Float):Float
@@ -143,5 +138,16 @@ class NoteSpawner extends FlxGroup
         for (note in _notes)
             note.speed = scrollSpeed;
         return scrollSpeed;
+    }
+
+    function set_noteOffset(value:Float):Float
+    {
+        final diff = value - _noteOffset;
+        _noteOffset = value;
+
+        for (note in _notes)
+            note.time += diff;
+
+        return value;
     }
 }

@@ -70,7 +70,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
         {
-            trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg". Loading default...', "ERROR");
+            trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg". Loading default...', "WARNING");
             stg = 'void';
         }
 

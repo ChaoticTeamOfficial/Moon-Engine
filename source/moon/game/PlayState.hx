@@ -222,7 +222,8 @@ class PlayState extends FlxTransitionableState
 		{
 			activeTweens(false);
 			openSubState(new PauseScreen(camALT));
-			playField.playback.state = PAUSE;
+			if(playField.playback.state == PLAY)
+				playField.playback.state = PAUSE;
 		}
 
 		if(playField.healthBar.health <= 0 && !isDead)
