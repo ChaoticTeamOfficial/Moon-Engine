@@ -56,8 +56,9 @@ class SongData
      * @param score The score.
      * @param misses The misses.
      * @param accuracy The accuracy.
+     * returns if the data got saved or not.
      */
-    static function saveData(songName:String, difficulty:String, mix:String, score:Int, misses:Int, accuracy:Float)
+    static function saveData(songName:String, difficulty:String, mix:String, score:Int, misses:Int, accuracy:Float):Bool
     {
         var key:String = '(${mix})' + '${songName}-${difficulty}';
         var old:SongScoreData = songs.get(key);
@@ -92,7 +93,10 @@ class SongData
 
             save.data.songs = saveData;
             save.flush();
+            return true;
         }
+
+        return false;
     }
 
     static function retrieveData(songName:String, difficulty:String, mix:String):SongScoreData

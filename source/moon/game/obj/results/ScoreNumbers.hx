@@ -1,91 +1,200 @@
 package moon.game.obj.results;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxSpriteGroup;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
+import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 
-class ScoreNumbers extends FlxSpriteGroup
+using StringTools;
+
+//just stole from funkin crew cause my attempts weren't quite working... :P
+class ScoreNumbers extends FlxTypedSpriteGroup<ScoreNum>
 {
-	public var digits:Array<MoonSprite> = [];
+  public var scoreShit(default, set):Int = 0;
 
-	public function new(x:Float = 0, y:Float = 0)
-	{
-		super(x, y);
+  public var scoreStart:Int = 0;
 
-		var currentX:Float = 0;
-		for (i in 0...10)
-		{
-			var numSpr = new MoonSprite(currentX, 0);
-			numSpr.frames = Paths.getSparrowAtlas('ingame/results/UI/score-digital-numbers');
+  function set_scoreShit(val):Int
+  {
+    if (group == null || group.members == null) return val;
+    var loopNum:Int = group.members.length - 1;
+    var dumbNumb = Std.parseInt(Std.string(val));
+    var prevNum:ScoreNum;
 
-			final yea = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
-			for (j in 0...10)
-				numSpr.animation.addByPrefix('$j', '${yea[j]} DIGITAL', 24, false);
+    dumbNumb = Std.int(Math.min(dumbNumb, Math.pow(10, group.members.length) - 1));
 
-			numSpr.animation.addByPrefix('disabled', 'DISABLED');
-			numSpr.centerAnimations = true;
-			numSpr.playAnim('disabled');
-			numSpr.antialiasing = true;
+    while (dumbNumb > 0)
+    {
+      scoreStart += 1;
+      group.members[loopNum].finalDigit = dumbNumb % 10;
 
-			add(numSpr);
-			digits.push(numSpr);
+      // var funnyNum = group.members[loopNum];
+      // prevNum = group.members[loopNum + 1];
 
-			currentX += numSpr.width - 32;
-		}
-	}
+      // if (prevNum != null)
+      // {
+      // funnyNum.x = prevNum.x - (funnyNum.width * 0.7);
+      // }
 
-	public function setScore(score:Int, skipAnims:Bool = false):Void
-	{
-		var correctDigits:Array<Int> = [for (_ in 0...10) -1];
-		var tempScore:Int = score;
-		var pos:Int = 9;
+      // funnyNum.y = (funnyNum.baseY - (funnyNum.height / 2)) + 73;
+      // funnyNum.x = (funnyNum.baseX - (funnyNum.width / 2)) + 450; // this plus value is hand picked lol!
 
-		while (true)
-		{
-			correctDigits[pos] = tempScore % 10;
-			tempScore = Std.int(tempScore / 10);
-			if (tempScore <= 0) break;
+      dumbNumb = Math.floor(dumbNumb / 10);
+      loopNum--;
+    }
 
-			pos--;
-			if (pos < 0) break;
-		}
+    while (loopNum > 0)
+    {
+      group.members[loopNum].digit = 10;
+      loopNum--;
+    }
 
-		var scrambleTimers:Map<MoonSprite, FlxTimer> = [];
+    return val;
+  }
 
-		for (digSpr in digits)
-			scrambleTimers.set(digSpr, new FlxTimer().start( (skipAnims) ? 0.00001 : 0.04, _ -> digSpr.playAnim('${FlxG.random.int(0, 9)}', true), 0));
+  public function animateNumbers():Void
+  {
+    for (i in group.members.length - scoreStart...group.members.length)
+    {
+      // if(i.finalDigit == 10) continue;
 
-		new FlxTimer().start((skipAnims) ? 0.00001 : 1.4, _ ->
-		{
-			var delay:Float = 0;
-			var step:Float = (skipAnims) ? 0.00001 : 0.05;
+      new FlxTimer().start((i - 1) / 24, _ -> {
+        group.members[i].finalDelay = scoreStart - (i - 1);
+        group.members[i].playAnim();
+        group.members[i].shuffle();
+      });
+    }
+  }
 
-			for (i in 0...10)
-			{
-				new FlxTimer().start(delay, _ ->
-				{
-					final spr = digits[i];
+  public function new(x:Float, y:Float, digitCount:Int, scoreShit:Int = 100)
+  {
+    super(x, y);
 
-					if (scrambleTimers.exists(spr))
-					{
-						scrambleTimers[spr].cancel();
-						scrambleTimers.remove(spr);
-					}
+    for (i in 0...digitCount)
+    {
+      add(new ScoreNum(x + (65 * i), y));
+    }
 
-					spr.playAnim((correctDigits[i] == -1) ? "disabled" : '${correctDigits[i]}');
+    this.scoreShit = scoreShit;
+  }
 
-					if(!skipAnims)
-					{	
-						spr.y -= 12;
-						FlxTween.tween(spr, {y: spr.y + 12}, 0.2, {ease: FlxEase.expoOut});
-					}
-				});
+  public function updateScore(scoreNew:Int)
+  {
+    scoreShit = scoreNew;
+  }
+}
 
-				delay += step;
-			}
-		});
-	}
+class ScoreNum extends FlxSprite
+{
+  public var digit(default, set):Int = 10;
+  public var finalDigit(default, set):Int = 10;
+  public var glow:Bool = true;
+
+  function set_finalDigit(val):Int
+  {
+    animation.play('GONE', true, false, 0);
+
+    return finalDigit = val;
+  }
+
+  function set_digit(val):Int
+  {
+    if (val >= 0 && animation.curAnim != null && animation.curAnim.name != numToString[val])
+    {
+      if (glow)
+      {
+        animation.play(numToString[val], true, false, 0);
+        glow = false;
+      }
+      else
+      {
+        animation.play(numToString[val], true, false, 4);
+      }
+      updateHitbox();
+
+      centerOffsets(false);
+    }
+
+    return digit = val;
+  }
+
+  public function playAnim():Void
+  {
+    animation.play(numToString[digit], true, false, 0);
+  }
+
+  public var shuffleTimer:FlxTimer;
+  public var finalTween:FlxTween;
+  public var finalDelay:Float = 0;
+
+  public var baseY:Float = 0;
+  public var baseX:Float = 0;
+
+  var numToString:Array<String> = [
+    "ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "DISABLED"
+  ];
+
+  function finishShuffleTween():Void
+  {
+    var tweenFunction = function(x) {
+      var digitRounded = Math.floor(x);
+      // if(digitRounded == finalDigit) glow = true;
+      digit = digitRounded;
+    };
+
+    finalTween = FlxTween.num(0.0, finalDigit, 23 / 24,
+      {
+        ease: FlxEase.quadOut,
+        onComplete: function(input) {
+          new FlxTimer().start((finalDelay) / 24, _ -> {
+            animation.play(animation.curAnim.name, true, false, 0);
+          });
+          // fuck
+        }
+      }, tweenFunction);
+  }
+
+  function shuffleProgress(shuffleTimer:FlxTimer):Void
+  {
+    var tempDigit:Int = digit;
+    tempDigit += 1;
+    if (tempDigit > 9) tempDigit = 0;
+    if (tempDigit < 0) tempDigit = 0;
+    digit = tempDigit;
+
+    if (shuffleTimer.loops > 0 && shuffleTimer.loopsLeft == 0)
+    {
+      // digit = finalDigit;
+      finishShuffleTween();
+    }
+  }
+
+  public function shuffle():Void
+  {
+    var duration:Float = 41 / 24;
+    var interval:Float = 1 / 24;
+    shuffleTimer = new FlxTimer().start(interval, shuffleProgress, Std.int(duration / interval));
+  }
+
+  public function new(x:Float, y:Float)
+  {
+    super(x, y);
+
+    baseY = y;
+    baseX = x;
+
+    frames = Paths.getSparrowAtlas('ingame/results/UI/score-digital-numbers');
+
+    for (i in 0...10)
+    {
+      final stringNum:String = numToString[i];
+      animation.addByPrefix(stringNum, '$stringNum DIGITAL', 24, false);
+    }
+
+    animation.addByPrefix('DISABLED', 'DISABLED', 24, false);
+    animation.addByPrefix('GONE', 'GONE', 24, false);
+
+    this.digit = 10;
+
+    animation.play(numToString[digit], true);
+
+    updateHitbox();
+  }
 }

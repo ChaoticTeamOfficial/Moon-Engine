@@ -333,10 +333,11 @@ class PlayState extends FlxTransitionableState
 	{
 		Global.scriptCall('onSongEnd');
 		final stat = playField.inputHandlers.get('p1').stats;
+		var saved:Bool = false;
 		if(VALID_SCORE)
-			SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
+			saved = SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
 
-		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false));
+		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
 		setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
 	}
 
@@ -345,22 +346,14 @@ class PlayState extends FlxTransitionableState
 		super.closeSubState();
 	}
 
-	public function exit(toMenu:Bool = true)
+	public function exit(toMenu:Bool = true, savedData:Bool = false)
 	{
 		// jus to make sure
 		Paths.skipNextCleanup = false;
 		Global.clearScriptList();
-
-		if(toMenu)
-			openSubState(new StickerSubState(new MainMenu()));
-		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats));
-	}
-
-	override function destroy()
-	{
-		super.destroy();
 		instance = null;
-		playField.destroy();
-		stage.destroy();
+
+		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
+		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
 }

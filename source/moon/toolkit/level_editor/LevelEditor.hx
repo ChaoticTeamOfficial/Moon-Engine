@@ -58,9 +58,9 @@ class LevelEditor extends FlxState
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
-    public var song:String = 'darnell';
+    public var song:String = 'a beach encounter';
     public var diff:String = 'hard';
-    public var mix:String = 'bf';
+    public var mix:String = 'nep';
 
     // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
@@ -416,7 +416,7 @@ class LevelEditor extends FlxState
                 //TOOD: make themmmm separate flxsoundses
                 // so I cann like... what was I sayign?
                 // oh yeah, so they can be stopped before playign to prvevent overlapping
-                Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
+                //Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
             }
 
             if (n.strID == 'h' && conductor.time < n.time)
