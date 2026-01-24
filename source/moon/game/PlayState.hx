@@ -231,6 +231,7 @@ class PlayState extends FlxTransitionableState
 			playField.inCutscene = isDead = true;
 
 			playField.playback.state = STOP;
+
 			setCameraFocus('player', [], 0.7, {ease: FlxEase.circOut, startDelay: 0.01});
 			setCameraZoom(camGAME.zoom * 2, 0.5, {startDelay: 0.25, ease: FlxEase.expoIn, onComplete: _->{
 				//trace('yup.');
@@ -335,8 +336,8 @@ class PlayState extends FlxTransitionableState
 		if(VALID_SCORE)
 			SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
 
-		exit();
-		//FlxG.switchState(() -> new ResultsState(stat));
+		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false));
+		setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
 	}
 
 	override function closeSubState()
@@ -344,12 +345,15 @@ class PlayState extends FlxTransitionableState
 		super.closeSubState();
 	}
 
-	public function exit()
+	public function exit(toMenu:Bool = true)
 	{
 		// jus to make sure
 		Paths.skipNextCleanup = false;
 		Global.clearScriptList();
-		openSubState(new StickerSubState(new MainMenu()));
+
+		if(toMenu)
+			openSubState(new StickerSubState(new MainMenu()));
+		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats));
 	}
 
 	override function destroy()

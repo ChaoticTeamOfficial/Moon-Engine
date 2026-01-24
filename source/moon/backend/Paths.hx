@@ -16,6 +16,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import haxe.io.Bytes;
+import openfl.system.System;
 
 using StringTools;
 
@@ -202,58 +203,87 @@ class Paths
     /*  add .png at the end for images
     *   add .ogg at the end for sounds
     */
-    public static var dumpExclusions:Array<String> = [
-        "menus/alphabet.png"
-    ];
+    public static var dumpExclusions:Array<String> = [];
 
-    public static function clearMemory()
-    {   
-        // sprite caching
-        var clearCount:Array<String> = [];
-        for(key => graphic in renderedGraphics)
-        {
-            if(dumpExclusions.contains(key + '.png')) continue;
+	public static function clearMemory()
+	{   
+		// Clear graphics
+		var clearCount:Array<String> = [];
+		for(key => graphic in renderedGraphics)
+		{
+			if(dumpExclusions.contains(key + '.png')) continue;
 
-            clearCount.push(key);
-            
-            renderedGraphics.remove(key);
-            
-            FlxG.bitmap.remove(graphic);
-            #if (flixel < "6.0.0")
-            graphic.dump();
-            #end
-            graphic.destroy();
-        }
+			clearCount.push(key);
+			
+			renderedGraphics.remove(key);
+			
+			graphic.persist = false;
+			FlxG.bitmap.remove(graphic);
+			
+			if(graphic.bitmap != null)
+			{
+				graphic.bitmap.dispose();
+				graphic.bitmap.disposeImage();
+			}
+			
+			#if (flixel < "6.0.0")
+			graphic.dump();
+			#end
+			graphic.destroy();
+		}
 
-        if(clearCount.length > 0)
-        {
-            trace('cleared $clearCount', "DEBUG");
-            trace('cleared ${clearCount.length} assets', "DEBUG");
-        }
+		if(clearCount.length > 0)
+		{
+			trace('cleared $clearCount', "DEBUG");
+			trace('cleared ${clearCount.length} assets', "DEBUG");
+		}
 
-        // uhhhh
-        @:privateAccess
-        for(key in FlxG.bitmap._cache.keys())
-        {
-            var obj = FlxG.bitmap._cache.get(key);
-            if(obj != null && !renderedGraphics.exists(key))
-            {
-                FlxG.bitmap._cache.remove(key);
-                #if (flixel < "6.0.0")
-                obj.dump();
-                #end
-                obj.destroy();
-            }
-        }
-        
-        // sound clearing
-        for (key => sound in renderedSounds)
-        {
-            if(dumpExclusions.contains(key + '.ogg')) continue;
-            
-            renderedSounds.remove(key);
-        }
-    }
+		// uhhhh
+		@:privateAccess
+		for(key in FlxG.bitmap._cache.keys())
+		{
+			var obj = FlxG.bitmap._cache.get(key);
+			if(obj != null && !renderedGraphics.exists(key))
+			{
+				obj.persist = false;
+				
+				if(obj.bitmap != null)
+				{
+					obj.bitmap.dispose();
+					obj.bitmap.disposeImage();
+				}
+				
+				FlxG.bitmap._cache.remove(key);
+				#if (flixel < "6.0.0")
+				obj.dump();
+				#end
+				obj.destroy();
+			}
+		}
+		
+		// sound clearing
+		for (key => sound in renderedSounds)
+		{
+			if(dumpExclusions.contains(key + '.ogg')) continue;
+			
+			sound.close();
+			renderedSounds.remove(key);
+		}
+
+		renderedGraphics.clear();
+		renderedSounds.clear();
+
+		#if cpp
+		cpp.vm.Gc.run(true);
+		cpp.vm.Gc.compact();
+		#end
+		
+		System.gc();
+		
+		#if hl
+		hl.Gc.major();
+		#end
+	}
 
     public static function clearUnusedAssets()
     {
@@ -266,6 +296,8 @@ class Paths
 
             clearedGraphics.push(key);
             renderedGraphics.remove(key);
+			
+			graphic.persist = false;
             FlxG.bitmap.remove(graphic);
             #if (flixel < "6.0.0")
             graphic.dump();
@@ -302,6 +334,7 @@ class Paths
             if (!isUsed)
             {
                 clearedSounds.push(key);
+                sound.close();
                 renderedSounds.remove(key);
             }
         }
@@ -349,34 +382,22 @@ class Paths
     // sparrow (.xml) sheets
     public static function getSparrowAtlas(key:String, from:String = 'images', ?library:String)
     {
-        var isMod = key.startsWith('curMod/');
-        var graphic = getGraphic(key, from, library);
-        var xmlRelativePath = isMod ? key.substr(7) : '$from/$key';
-        var xmlPath = xmlRelativePath + '.xml';
-        var xmlContent = getFileContent(xmlPath, library, isMod);
-        return FlxAtlasFrames.fromSparrow(graphic, xmlContent);
+        final isMod = key.startsWith('curMod/');
+        return FlxAtlasFrames.fromSparrow(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.xml', library, isMod));
     }
     
     // packer (.txt) sheets
     public static function getPackerAtlas(key:String, from:String = 'images', ?library:String)
     {
-        var isMod = key.startsWith('curMod/');
-        var graphic = getGraphic(key, from, library);
-        var txtRelativePath = isMod ? key.substr(7) : '$from/$key';
-        var txtPath = txtRelativePath + '.txt';
-        var txtContent = getFileContent(txtPath, library, isMod);
-        return FlxAtlasFrames.fromSpriteSheetPacker(graphic, txtContent);
+        final isMod = key.startsWith('curMod/');
+        return FlxAtlasFrames.fromSpriteSheetPacker(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.txt', library, isMod));
     }
 
     // aseprite (.json) sheets
     public static function getAsepriteAtlas(key:String, from:String = 'images', ?library:String)
     {
-        var isMod = key.startsWith('curMod/');
-        var graphic = getGraphic(key, from, library);
-        var jsonRelativePath = isMod ? key.substr(7) : '$from/$key';
-        var jsonPath = jsonRelativePath + '.json';
-        var jsonContent = getFileContent(jsonPath, library, isMod);
-        return FlxAtlasFrames.fromAseprite(graphic, jsonContent);
+        final isMod = key.startsWith('curMod/');
+        return FlxAtlasFrames.fromAseprite(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.json', library, isMod));
     }
 
     // sparrow (.xml) sheets but split into multiple graphics

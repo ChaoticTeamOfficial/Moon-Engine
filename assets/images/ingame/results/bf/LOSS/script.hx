@@ -11,9 +11,10 @@ function onPostCreate()
 
     fuckers.visible = false;
     fuckers.anim.addBySymbol("intro", "LOSS Animation", 24, false);
-    fuckers.anim.onFinish.add(() -> fuckers.anim.play("LOSS Animation", true, false, 160));
+    fuckers.anim.onFinish.add(() -> fuckers.anim.play("intro", true, false, 160));
 	
 	FlxG.sound.playMusic(Paths.sound('results/bf/LOSS-intro.ogg', 'music'), 1, false);
+	fuckers.antialiasing = true;
 	
 	FlxG.sound.music.onComplete = () -> {
 		FlxG.sound.playMusic(Paths.sound('results/bf/LOSS.ogg', 'music'));
@@ -25,5 +26,5 @@ function onIntroEnd()
 	fuckers.visible = true;
 	fuckers.anim.play("intro", true);
 	//fuckers.screenCenter();
-	fuckers.setPosition(670, 410);
+	fuckers.setPosition(600, -386);
 }

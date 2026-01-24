@@ -21,9 +21,10 @@ function onPostCreate()
     results.background.add(bf);
     
     bf.anim.addBySymbol("intro", "Boyfriend Good Anim", 24, false);
-    bf.anim.onFinish.add(() -> bf.anim.play("Boyfriend Good Anim", true, false, 14));
+    bf.anim.onFinish.add(() -> bf.anim.play("intro", true, false, 14));
 	
 	bf.visible = gf.visible = false;
+	bf.antialiasing = gf.antialiasing = true;
 	
 	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
 }
@@ -31,9 +32,9 @@ function onPostCreate()
 function onIntroEnd()
 {
 	gf.playAnim("appear", true);
-	gf.setPosition(629, 323);
+	gf.setPosition(616, 296);
 	
 	bf.anim.play("intro", true);
-	bf.setPosition(662, 361);
+	bf.setPosition(662, -200);
 	bf.visible = gf.visible = true;
 }

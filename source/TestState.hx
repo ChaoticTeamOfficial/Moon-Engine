@@ -40,7 +40,7 @@ class TestState extends FlxState
     {
         super.create();
         FlxG.mouse.useSystemCursor = true;
-        //FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
+        FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
         // addons file test
         /*var files = new Map<String, Bytes>();
         files.set("nya/text.txt", Bytes.ofString("Hello world! I am here to spread an important message.\nI got created by code.\nYes.\nThat's right.\n\n\nIsn't that cool?"));

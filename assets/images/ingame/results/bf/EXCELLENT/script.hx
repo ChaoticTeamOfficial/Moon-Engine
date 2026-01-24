@@ -10,14 +10,12 @@ function onPostCreate()
     results.background.add(fuckers);
 
     fuckers.visible = false;
-    fuckers.anim.addBySymbol("intro", "boyfriend perfect rank", 24, false);
-    fuckers.anim.onFinish.add(() -> fuckers.anim.play("bf results excellent", true, false, 29));
-	
-	FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT-intro.ogg', 'music'), 1, false);
-	
-	FlxG.sound.music.onComplete = () -> {
-		FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT.ogg', 'music'));
-	}
+    fuckers.anim.addBySymbol("intro", "bf results excellent", 24, false);
+    fuckers.anim.onFinish.add(() -> fuckers.anim.play("intro", true, false, 29));
+	fuckers.antialiasing = true;
+
+	FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT-intro.ogg', 'music'), 1, false);	
+	FlxG.sound.music.onComplete = () -> FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT.ogg', 'music'));
 }
 
 function onIntroEnd()
@@ -25,5 +23,5 @@ function onIntroEnd()
 	fuckers.visible = true;
 	fuckers.anim.play("intro", true);
 	//fuckers.screenCenter();
-	fuckers.setPosition(1329, 429);
+	fuckers.setPosition(540, -490);
 }
