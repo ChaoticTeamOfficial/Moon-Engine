@@ -258,7 +258,6 @@ class ResultsState extends FlxState
                             t.visible = true;
                         }
 
-
                         FlxTween.tween(textInfo, {y: bb.y + bb.height - 64}, 1, {ease: FlxEase.backOut});
                         textInfo.setText('${diff.toUpperCase()} • ${stats.accuracy}% • ${chartMeta.displayName} by ${chartMeta.artist}');
 

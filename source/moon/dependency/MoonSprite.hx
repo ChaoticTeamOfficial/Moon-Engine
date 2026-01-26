@@ -51,6 +51,8 @@ class MoonSprite extends FlxSprite
 		animOffsets = new Map<String, Array<Dynamic>>();
 	}
 
+	public var twn:FlxTween;
+
 	/**
 	 * Checks if the given animation name belongs to an override group.
 	 * @param name The animation name to check.

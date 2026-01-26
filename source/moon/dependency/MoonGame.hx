@@ -21,6 +21,7 @@ class MoonGame extends FlxGame
     	});
 
     	Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
+    	FlxSprite.defaultAntialiasing = true;
 
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         

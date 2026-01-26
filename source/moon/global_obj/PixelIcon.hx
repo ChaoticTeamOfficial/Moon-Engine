@@ -1,6 +1,6 @@
 package moon.global_obj;
 
-class PixelIcon extends MoonSprite
+class PixelIcon extends FilteredSprite
 {
     public var character(default, set):String;
 
@@ -20,6 +20,8 @@ class PixelIcon extends MoonSprite
     {
         this.origin.x = 100;
         this.scale.set(2, 2);
+
+        this.antialiasing = false;
 
         final actualIcon = (Paths.exists('characters/$iconName/ui_icon.png')) ? iconName : 'dummy';
         this.character = actualIcon;
