@@ -13,9 +13,10 @@ class CharSelect extends FlxState
     ];
 
     var conductor:Conductor;
-
     var cursor:Cursor;
     var grid:CharGrid;
+
+    public var background:FlxGroup = new FlxGroup();
 
     public var isLightsOff:Bool = false;
 
@@ -40,12 +41,22 @@ class CharSelect extends FlxState
 
         scrollSnd = new MoonSound().loadEmbedded(Paths.sound('menus/charSelect/CS_select.ogg', 'sounds'));
         scrollSnd.volume = MoonSettings.callSetting('SFX Volume') / 100;
+
+        var nametag = new Nametag(0, 0, 'bf');
+        add(nametag);
         grid.onChange.add((dir)->{
             if(scrollSnd.playing) scrollSnd.stop();
             if(dir != 0) scrollSnd.play();
 
             final song = 'stayFunky-${CharGrid.curChar.toLowerCase()}'; 
             playlist.focusSong = playlist.sounds.exists(song) ? song : 'stayFunky';
+
+            nametag.character = CharGrid.curChar;
+            nametag.scale.set(0.5, 0.5);
+            nametag.updateHitbox();
+            nametag.screenCenter(X);
+            nametag.x += 400;
+            nametag.y = barThing.y + barThing.height / 2 - nametag.height / 2;
 
             if(CharGrid.curChar.toLowerCase() == 'locked' && !isLightsOff)
             {
@@ -71,26 +82,33 @@ class CharSelect extends FlxState
         grid.scroll(0);
         conductor.onBeat.add(beatHit);
         playlist.play();
+        playlist.volume = MoonSettings.callSetting("Music Volume") / 100;
+
+        FlxG.camera.fade(FlxColor.BLACK, 1.5, true);
+        FlxG.camera.scroll.y = -800;
+        FlxG.camera.zoom = 7; //siete
+        FlxTween.tween(FlxG.camera.scroll, {y: 0}, 2.8, {ease: FlxEase.circOut});
 	}
 
     var back:MoonSprite;
     var crowd:MoonSprite;
     var stage:MoonSprite;
     var d2:MoonSprite;
+    var barThing:MoonSprite;
+    var speakers:MoonSprite;
 	private function generateBackground():Void
     {
         back = new MoonSprite(-150, -160).loadGraphic(Paths.image('menus/charSelect/BG'));
-        back.scale.set(1.2, 1.2);
-        back.scrollFactor.set(0.2, 0.2);
+        back.scale.set(1.4, 1.4);
+        back.scrollFactor.set(0.8, 0.8);
         add(back);
         back.active = false;
 
-        crowd = new MoonSprite(-75, FlxG.height / 2 - 130);
+        crowd = new MoonSprite(-75, FlxG.height / 2 - 140);
         crowd.frames = Paths.getSparrowAtlas('menus/charSelect/crowd');
-        crowd.scale.set(0.8, 0.8);
+        crowd.scale.set(0.9, 0.9);
         crowd.animation.addByPrefix('crowd', 'crowd', 24, true);
         crowd.animation.play('crowd');
-        crowd.scrollFactor.set(0.5, 0.5);
         add(crowd);
 
         stage = new MoonSprite(-20, FlxG.height / 2 + 20);
@@ -98,6 +116,15 @@ class CharSelect extends FlxState
         stage.animation.addByPrefix('loopy', 'stage full instance 1', 16, true);
         stage.animation.play('loopy');
         add(stage);
+
+        add(background);
+
+        barThing = new MoonSprite(0, 50).makeGraphic(FlxG.width + 100, 100, 0xFF848214);
+        barThing.alpha = 0.5;
+        barThing.screenCenter(X);
+        barThing.blend = SUBTRACT;
+        barThing.active = false;
+        add(barThing);
 
         var d1 = new MoonSprite();
         d1.centerAnimations = true;
@@ -117,9 +144,20 @@ class CharSelect extends FlxState
 
         var d3 = new MoonSprite().loadGraphic(Paths.image('menus/charSelect/chooseDipshit'));
         d3.screenCenter();
+        d3.active = false;
         add(d3);
+
+        speakers = new MoonSprite();
+        speakers.centerAnimations = true;
+        speakers.frames = Paths.getSparrowAtlas('menus/charSelect/speakers');
+        speakers.animation.addByPrefix('bump', 'Speakers ALL', 24, false);
+        add(speakers);
+        speakers.screenCenter();
+        speakers.y += 200;
     }
 
+    var transitioning:Bool = false;
+    var songTween:FlxTween;
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
@@ -139,10 +177,52 @@ class CharSelect extends FlxState
         	playlist.focusSong = 'stayFunky-locked';*/
 
         // not the best way to do this, but whatever,,
-        if(MoonInput.justPressed(UI_LEFT)) grid.scroll(-1);
-        if(MoonInput.justPressed(UI_RIGHT)) grid.scroll(1);
-        if(MoonInput.justPressed(UI_UP)) grid.scroll(-grid.columns);
-        if(MoonInput.justPressed(UI_DOWN)) grid.scroll(grid.columns);
+
+        if(!transitioning)
+        {
+            if(MoonInput.justPressed(UI_LEFT)) grid.scroll(-1);
+            if(MoonInput.justPressed(UI_RIGHT)) grid.scroll(1);
+            if(MoonInput.justPressed(UI_UP)) grid.scroll(-grid.columns);
+            if(MoonInput.justPressed(UI_DOWN)) grid.scroll(grid.columns);
+            if(MoonInput.justPressed(ACCEPT) && !transitioning)
+            {
+                if(CharGrid.curChar.toLowerCase() == 'locked')
+                {
+                    FlxG.camera.shake(0.004, 0.2);
+                    Paths.playSFX('menus/charSelect/CS_locked.ogg');
+                }
+                else
+                {
+                    transitioning = true;
+                    Paths.playSFX('menus/charSelect/CS_confirm.ogg');
+                    cast(grid.members[CharGrid.curSelected], PixelIcon).playAnim('select', true);
+
+                    MoonUtils.cancelActiveTwn(songTween);
+                    songTween = FlxTween.tween(playlist, {pitch: 0}, 1.3, {ease: FlxEase.quadInOut, onComplete: _ ->{
+                        playlist.volume = 0;
+                        Global.allowInputs = false;
+
+                        FlxG.camera.fade(FlxColor.BLACK, 0.9, false);
+                        FlxTween.tween(FlxG.camera.scroll, {y: -800}, 1, {ease: FlxEase.circIn, onComplete: _->{
+                            Global.allowInputs = true;
+                            FlxG.switchState(()-> new MainMenu());
+                        }});
+                    }});
+                }
+            }
+        }
+
+        if(MoonInput.justPressed(BACK) && transitioning)
+        {
+            transitioning = false;
+
+            final ico = cast(grid.members[CharGrid.curSelected], PixelIcon);
+            ico.playAnim('select', true, true);
+            ico.animation.onFinish.addOnce(_ -> ico.playAnim('idle', true));
+
+            MoonUtils.cancelActiveTwn(songTween);
+            songTween = FlxTween.tween(playlist, {pitch: 1}, 0.6, {ease: FlxEase.quadInOut});
+        }
 
         final sel = grid.members[CharGrid.curSelected];
         cursor.follow(sel.x + sel.width / 2, sel.y + sel.height / 2, elapsed);
@@ -158,6 +238,9 @@ class CharSelect extends FlxState
             FlxG.camera.zoom += 0.008;
 
         if(beat % 2 == 0)
+        {
+            speakers.playAnim('bump', true);
             d2.scale.set(1.02, 1.02);
+        }
     }
 }

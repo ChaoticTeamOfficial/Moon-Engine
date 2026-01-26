@@ -14,6 +14,7 @@ class SyncPlaylist
 	public var sounds:StringMap<MoonSound> = new StringMap<MoonSound>();
 	public var focusSong(default, set):String = null;
 	public var volume(default, set):Float = 1.0;
+	@:isVar public var pitch(default, set):Float = 1.0;
 	public var time(get, set):Float;
 
 	public var fadeDuration:Float = 0.4;
@@ -96,10 +97,20 @@ class SyncPlaylist
 
 	function set_time(t:Float):Float
 	{
+
 		for (s in sounds)
 			s.time = (s.length > 0) ? t % s.length : t;
 		
 		return t;
+	}
+
+	function set_pitch(p:Float):Float
+	{
+		this.pitch = p;
+		for (s in sounds)
+			s.pitch = p;
+		
+		return p;
 	}
 
 	public function play()
