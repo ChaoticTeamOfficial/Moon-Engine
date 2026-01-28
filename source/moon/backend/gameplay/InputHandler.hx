@@ -22,11 +22,11 @@ class InputHandler
      * The player ID, used for many things, but mainly note reading.
      */
     public var playerID:String;
-	
-	/**
-	 * Wheter is a CPU or not, used for checking inputs.
-	 */
-	public var CPUMode:Bool = false;
+    
+    /**
+     * Wheter is a CPU or not, used for checking inputs.
+     */
+    public var CPUMode:Bool = false;
 
     /**
      * The strumline, used for triggering animations and maybe more.
@@ -131,10 +131,6 @@ class InputHandler
                 note.state == NONE)
             );
 
-            // sort them bc why not :P
-            //possibleNotes.sort((a, b) -> Std.int(a.time - b.time));
-            // we dont need sorting for cpu dumbass
-
             // then call onhit
             if (possibleNotes.length > 0)
                 onHit(possibleNotes[0], i, 'sick', true);
@@ -201,7 +197,7 @@ class InputHandler
                 // shh emoji
                 if (heldSustains.exists(i))
                 {
-                    strumline.members[i].sustainSplash.despawn(true);
+                    strumline.members[i].sustainSplash.despawn(CPUMode);
                     final heldNote = heldSustains.get(i);
                     heldSustains.remove(i);
 
@@ -271,12 +267,13 @@ class InputHandler
     }
 
     // Map for tracking the last conductor step a sustain note was hit on.
-     private var lastSustainStep:Map<Int, Float> = new Map<Int, Float>();
+    private var lastSustainStep:Map<Int, Float> = new Map<Int, Float>();
     private function checkSustains():Void
     {
         for (direction in heldSustains.keys())
         {
             final heldNote = heldSustains.get(direction);
+            
             // on hold note hit
             if (heldNote != null && heldNote.state == GOT_HIT && heldNote.child != null && heldNote.child.active)
             {
@@ -290,16 +287,20 @@ class InputHandler
                 if (conductor.time >= heldNote.time + heldNote.duration)
                 {
                     heldNote.child.visible = heldNote.child.active = false;
+                    
+                    strumline.members[direction].sustainSplash.despawn(CPUMode);
+                    if (onSustainComplete != null) 
+                        onSustainComplete(heldNote);
+
                     heldSustains.remove(direction);
                     lastSustainStep.remove(direction);
                 }
             }
-            // on sustain note complete, basically, when you hold it till the end.
             else
             {
                 heldSustains.remove(direction);
-                strumline.members[heldNote.direction].sustainSplash.despawn((CPUMode));
-                if(onSustainComplete != null) onSustainComplete(heldNote);
+                if (heldNote != null)
+                    strumline.members[direction].sustainSplash.despawn(CPUMode);
             }
         }
     }
@@ -307,7 +308,7 @@ class InputHandler
     private function onLateMiss():Void
         // iterates through all notes and checks if they're too late.
         for (note in thisNotes)
-            if (note.state != GOT_HIT && note.state != NoteState.TOO_LATE && note.lane == playerID &&
+            if (note.state != GOT_HIT && note.state != TOO_LATE && note.lane == playerID &&
                 conductor.time > note.time + Timings.getParameters('miss')[1])
                 onMiss(note);
 

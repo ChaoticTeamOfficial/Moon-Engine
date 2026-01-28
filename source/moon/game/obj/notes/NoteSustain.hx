@@ -29,29 +29,32 @@ class NoteSustain extends TiledSprite
     {
         this.visible = parent.visible;
 
-        var expectedHeight:Float = 0;
-        
-        // FIX: Use the pre-calculated editorHeight when in chart editor mode
-        if (parent.state == CHART_EDITOR)
+        if(parent.state == TOO_LATE)
         {
-            expectedHeight = editorHeight;
+            parent.duration = 0;
+            this.height = 0;
+            this.active = this.visible = false;
+            return;
         }
+
+        var expectedHeight:Float = 0;
+        if (parent.state == CHART_EDITOR)
+            expectedHeight = editorHeight;
         else
         {
             final tailHeight:Float = (_tailFrame != null ? tailHeight() : tileHeight());
-            expectedHeight = parent.duration;
-            expectedHeight *= parent.speed;
-            expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
 
-            if(parent.state == GOT_HIT)
+            if (parent.state == GOT_HIT)
             {
                 this.visible = true;
-                var timeSinceHit:Float = parent.receptor.conductor.time - parent.time;
-                var remainingDuration:Float = Math.max(parent.duration - timeSinceHit, 0);
-                expectedHeight = remainingDuration;
+                // yes we actually take care of the
+                expectedHeight = Math.max(parent.duration - (parent.receptor.conductor.time - parent.time), 0) * parent.speed;
+            }
+            else
+            {
+                expectedHeight = parent.duration;
                 expectedHeight *= parent.speed;
                 expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
-                if(remainingDuration <= 0) this.visible = this.active = false;
             }
         }
 
@@ -59,19 +62,20 @@ class NoteSustain extends TiledSprite
 
         final obj = ((!parent.active && parent.receptor != null) ? parent.receptor : parent);
 
-        if(obj!=null)
+        if (obj != null)
         {
             this.setPosition(obj.x + (parent.width - this.width) * 0.5, obj.y + parent.height * 0.5);
             this.visible = obj.visible;
         }
-        else this.visible = false;
+        else
+            this.visible = false;
 
-        if(downscroll)
+        if (downscroll)
             this.y -= height;
 
         this.flipY = downscroll;
 
-        if (animation.curAnim.frameRate > 0 && animation.curAnim.frames.length > 1)
+        if (animation.curAnim != null && animation.curAnim.frameRate > 0 && animation.curAnim.frames.length > 1)
             animation.update(dt);
 
         super.update(dt);
