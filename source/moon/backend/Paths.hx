@@ -327,21 +327,15 @@ class Paths
     
     // sparrow (.xml) sheets
     public static function getSparrowAtlas(key:String, from:String = 'images', ?library:String)
-    {
         return FlxAtlasFrames.fromSparrow(getGraphic(key, from, library), getFileContent(('$from/$key.xml'), library));
-    }
     
     // packer (.txt) sheets
     public static function getPackerAtlas(key:String, from:String = 'images', ?library:String)
-    {
         return FlxAtlasFrames.fromSpriteSheetPacker(getGraphic(key, from, library), getFileContent('$from/$key.txt', library));
-    }
 
     // aseprite (.json) sheets
     public static function getAsepriteAtlas(key:String, from:String = 'images', ?library:String)
-    {
         return FlxAtlasFrames.fromAseprite(getGraphic(key, from, library), getFileContent('$from/$key.json', library));
-    }
 
     // sparrow (.xml) sheets but split into multiple graphics
     public static function getMultiSparrowAtlas(baseSheet:String, from:String = 'images', otherSheets:Array<String>, ?library:String) {

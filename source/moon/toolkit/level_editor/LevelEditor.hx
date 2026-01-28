@@ -1,11 +1,8 @@
 package moon.toolkit.level_editor;
 
-import flixel.math.FlxMath;
-import flixel.group.*;
 import flixel.addons.display.FlxTiledSprite;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
 import flixel.graphics.FlxGraphic;
+import flixel.graphics.atlas.FlxAtlas;
 import openfl.geom.Rectangle;
 import moon.toolkit.ui.*;
 import moon.game.obj.*;
@@ -13,7 +10,6 @@ import moon.game.obj.notes.*;
 import moon.backend.data.Chart.NoteStruct;
 import moon.backend.data.Chart.ChartStruct;
 import openfl.filters.ColorMatrixFilter;
-import flixel.math.FlxRect;
 
 enum abstract GridType(String) {
     var NOTES = 'Notes';
@@ -47,6 +43,7 @@ class LevelEditor extends FlxState
     var scrollbar:ScrollBar;
     var strum:Strums;
     var cursor:FlxSprite;
+    public var eventAtlas:FlxAtlas;
 
     private var gridGroup:FlxSpriteGroup;
     //private var sectionTexts:FlxSpriteGroup;
@@ -107,6 +104,21 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camBACK, true);
         FlxG.cameras.add(camMID, false);
         FlxG.cameras.add(camFRONT, false);
+
+        // Thanks rapper for letting me know about FlxAtlas!
+        // nice lil thing we can use to batch events.
+        eventAtlas = new FlxAtlas("eventAtlas");
+        for(dir in ['CHARACTERS', 'EVENTS', 'GIMMICKS', 'NOTES', 'SOUNDS'])
+        {
+            for(file in Paths.readDir('images/toolkit/level-editor/icons/_$dir', ['.png']))
+            {
+                //trace(file);
+                // its actually very good that readDir returns only the file name by default
+                // cool!
+                // that actually makes it easier to register stuff in the atlas.
+                eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/_$dir/$file').bitmap, file);
+            }
+        }
 
         Tilemap.addAtlas('MELE-buttons', 'toolkit/level-editor/icons/gridTypes');
         Tilemap.addAtlas('btnIcons', 'toolkit/ui/googleIcons');
@@ -324,6 +336,15 @@ class LevelEditor extends FlxState
         var leftpanel = new LeftPanel(this);
         leftpanel.camera = camMID;
         add(leftpanel);
+
+        for(i in 0...60)
+        {
+            var atlasTest = new MoonSprite(16 * i, 16 * i);
+            atlasTest.frames = eventAtlas.getAtlasFrames();
+            atlasTest.animation.frameName = "Change Layer Parallax";
+            add(atlasTest);
+            atlasTest.antialiasing = false;
+        }
 
         //final stuff = {title: 'Welcome to the Editor!', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', button1: 'Show me around.', button2: 'Okay.'};
         //openSubState(new EditorPopup(NOTICE, stuff));
