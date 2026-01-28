@@ -15,16 +15,26 @@ import moon.backend.data.Chart.ChartStruct;
 import openfl.filters.ColorMatrixFilter;
 import flixel.math.FlxRect;
 
-enum GridType {
-    NOTES;
-    EVENTS;
-    CHARACTERS;
-    GIMMICKS;
-    SOUNDS;
+enum abstract GridType(String) {
+    var NOTES = 'Notes';
+    var EVENTS = 'Events';
+    var CHARACTERS = 'Characters';
+    var GIMMICKS = 'Gimmicks';
+    var SOUNDS = 'Sounds';
+}
+
+enum abstract PlacementMode(String) {
+    /**A mode where you place notes/events.**/
+    var PLACE = 'Placing';
+
+    /**A mode where you select & edit notes/events.**/
+    var EDIT = 'Editing';
 }
 
 class LevelEditor extends FlxState
 {
+    public static var instance:LevelEditor;
+
     // --- OBJECTS --- //
     public static var chart:Chart;
     public var conductor:Conductor;
@@ -33,6 +43,7 @@ class LevelEditor extends FlxState
     private var camMID:MoonCamera = new MoonCamera();
     private var camFRONT:MoonCamera = new MoonCamera();
     
+    var library:Library;
     var scrollbar:ScrollBar;
     var strum:Strums;
     var cursor:FlxSprite;
@@ -41,10 +52,11 @@ class LevelEditor extends FlxState
     //private var sectionTexts:FlxSpriteGroup;
     private var noteGroup:FlxSpriteGroup;
     private var miscGroup:FlxSpriteGroup;
+    private var eventsGroup:FlxSpriteGroup;
 
     // --- NUMBER VARIABLES --- //
-    public static final LANE_WIDTH:Int = 40;
-    public static final LANE_HEIGHT:Int = 40;
+    public static final LANE_WIDTH:Int = 32;
+    public static final LANE_HEIGHT:Int = 32;
     public static final initialGridY:Float = 48;
 
     public static var NUM_LANES:Int = 8;
@@ -54,7 +66,9 @@ class LevelEditor extends FlxState
     var curSnap:Int = 4;
     final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
     final allTypes:Array<GridType> = [NOTES, EVENTS, CHARACTERS, GIMMICKS, SOUNDS];
-    var curType(default, set):GridType;
+
+    public var curType(default, set):GridType;
+    public var curPlacementMode:PlacementMode = PLACE;
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
@@ -84,6 +98,7 @@ class LevelEditor extends FlxState
         // Fixed it ;D
 
         // --- SETUP BACKEND STUFF --- //
+        instance = this;
         camBACK.bgColor = 0xFF1e1d1f;
         camMID.bgColor = 0x00000000;
         camFRONT.bgColor = 0x00000000;
@@ -130,7 +145,7 @@ class LevelEditor extends FlxState
         }
         changes.sort((a, b) -> Std.int(a.time - b.time));
 
-        gridGroup = new FlxSpriteGroup(FlxG.width / 2 + 64, initialGridY);
+        gridGroup = new FlxSpriteGroup(FlxG.width / 2 + 132, initialGridY);
         //sectionTexts = new FlxSpriteGroup();
         //gridGroup.add(sectionTexts);
 
@@ -243,6 +258,9 @@ class LevelEditor extends FlxState
         for (nData in chart.content.notes)
             createNote(nData);
 
+        eventsGroup = new FlxSpriteGroup();
+        gridGroup.add(eventsGroup);
+
         miscGroup = new FlxSpriteGroup();
         gridGroup.add(miscGroup);
 
@@ -299,7 +317,7 @@ class LevelEditor extends FlxState
             typeButtons.set(gType, button);
         }
 
-        var library = new Library();
+        library = new Library();
         library.camera = camMID;
         add(library);
 
@@ -405,22 +423,25 @@ class LevelEditor extends FlxState
         // ----- Upon "note hit" ----- //
         for (note in noteGroup)
         {
-            //TODO: toggle for both theese
-            final n = cast(note, Note);
-
-            if (n.strID != 'h' && conductor.time >= n.time && playback.state == PLAY)
+            if(Std.isOfType(note, Note))
             {
-                n.strID = 'h';
-                strum.onHit(n);
+                //TODO: toggle for both theese
+                final n = cast(note, Note);
 
-                //TOOD: make themmmm separate flxsoundses
-                // so I cann like... what was I sayign?
-                // oh yeah, so they can be stopped before playign to prvevent overlapping
-                //Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
+                if (n.strID != 'h' && conductor.time >= n.time && playback.state == PLAY)
+                {
+                    n.strID = 'h';
+                    strum.onHit(n);
+
+                    //TOOD: make themmmm separate flxsoundses
+                    // so I cann like... what was I sayign?
+                    // oh yeah, so they can be stopped before playign to prvevent overlapping
+                    //Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
+                }
+
+                if (n.strID == 'h' && conductor.time < n.time)
+                    n.strID = 'a';
             }
-
-            if (n.strID == 'h' && conductor.time < n.time)
-                n.strID = 'a';
         }
     }
 
@@ -467,24 +488,44 @@ class LevelEditor extends FlxState
 
         // NOTE: THANKS TO GOATMYRIA (Luna) WE HAVE A DIFFERENT MODE FOR SELECTION
         //WOHOOOOO NO MORE THINKING ABOUT OVERLAPPING SHIT!!!
-        if(FlxG.mouse.justPressed)
+        if(FlxG.mouse.justPressed && curPlacementMode == PLACE)
         {
             if(laneNum < NUM_LANES)
             {
                 switch(curType)
                 {
                     case NOTES:
-                        final n = {
-                            time: snappedTime,
-                            data: laneNum % 4,
-                            lane: (laneNum < 4) ? "opponent" : "p1",
-                            type: 'default', //TODO: get current note type
-                            duration: 0.0 //mf wants a float .`  _ .
-                        };
+                        final noteData = laneNum % 4;
+                        final noteLane = (laneNum < 4) ? "opponent" : "p1";
+                        
+                        // check if a note already exists at this position
+                        var noteExists = false;
+                        for (existingNote in _internalChart.notes)
+                        {
+                            if (existingNote.time == snappedTime && 
+                                existingNote.data == noteData && 
+                                existingNote.lane == noteLane)
+                            {
+                                noteExists = true;
+                                break;
+                            }
+                        }
+                        
+                        // only create the note if it doesn't already exist
+                        if (!noteExists)
+                        {
+                            final n = {
+                                time: snappedTime,
+                                data: noteData,
+                                lane: noteLane,
+                                type: 'default', //TODO: get current note type
+                                duration: 0.0 //mf wants a float .`  _ .
+                            };
 
-                        createNote(n);
-                        _internalChart.notes.push(n);
-                        sfx('place-${FlxG.random.int(1, 6)}');
+                            createNote(n);
+                            _internalChart.notes.push(n);
+                            sfx('place-${FlxG.random.int(1, 6)}');
+                        }
 
                     case EVENTS: trace('(place event)', "DEBUG");
                     case CHARACTERS: trace('(place character event)', "DEBUG");
@@ -515,7 +556,7 @@ class LevelEditor extends FlxState
 
     function createNote(n:NoteStruct)
     {
-        var note = new Note(n.data, n.time, n.type, "v-slice", n.duration, conductor);
+        var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
         note.state = CHART_EDITOR;
         note.active = false; //doesnt need updates, so!
         note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
@@ -528,6 +569,13 @@ class LevelEditor extends FlxState
         note.y = timeToY(n.time);
 
         note.x += (LANE_WIDTH - note.width) / 2;
+
+        if(note.duration > 0)
+        {
+            var sus = new NoteSustain(note);
+            sus.editorHeight = durationToHeight(n.time, n.duration);
+            noteGroup.add(sus);
+        }
 
         noteGroup.add(note);
     }
@@ -587,17 +635,18 @@ class LevelEditor extends FlxState
         this.curType = curType;
 
         final typeStr:String = '$curType';
-        sfx('${typeStr.toLowerCase()}Tab');
 
         for (member in noteGroup.members)
         {
-            var note:Note = cast member;
-            note.shader = (curType != NOTES) ? grayscale : null;
-            note.alpha = (curType != NOTES) ? 0.20 : 1;
+            member.shader = (curType != NOTES) ? grayscale : null;
+            member.alpha = (curType != NOTES) ? 0.20 : 1;
         }
 
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);
+
+        library.updateTab();
+        sfx('${typeStr.toLowerCase()}Tab');
 
         return curType;
     }

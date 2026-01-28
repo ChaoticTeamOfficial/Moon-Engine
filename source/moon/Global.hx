@@ -83,11 +83,4 @@ class Global
         for(name => script in scripts)
             unregisterScript(name);
     }
-
-    // ------ MODDING STUFF ------ //
-
-    /**
-     * A Map containing files from the currently loaded mod (.mzip contents).
-     */
-    static var currentModFiles:Map<String, Bytes> = new Map<String, Bytes>();
 }

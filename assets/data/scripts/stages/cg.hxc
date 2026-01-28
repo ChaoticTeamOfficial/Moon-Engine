@@ -1,0 +1,26 @@
+import moon.game.obj.Stage;
+
+class Cg extends Stage
+{
+    public function new(conductor)
+    {
+        super();
+		this.stageName = "cg";
+        trace('sexo');
+    }
+	
+	public function onCreate()
+    {
+        trace("Forest stage loaded!");
+        // populate background, banners, etc.
+    }
+	
+	public function beatHit()
+    {
+        // react to beat
+        trace("Forest beat hit!");
+    }
+    
+    public function update(elapsed:Float)
+    {}
+}

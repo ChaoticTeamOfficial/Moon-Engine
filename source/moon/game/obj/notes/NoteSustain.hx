@@ -11,6 +11,11 @@ class NoteSustain extends TiledSprite
     public var downscroll:Bool = false;
     
     /**
+     * Height to use when in chart editor mode (set externally by LevelEditor)
+     */
+    public var editorHeight:Float = 0;
+    
+    /**
      * Creates a new sustain note.
      * @param parent The parent note for this sustain, needed for data, graphics and such.
      */
@@ -24,26 +29,42 @@ class NoteSustain extends TiledSprite
     {
         this.visible = parent.visible;
 
-        final tailHeight:Float = (_tailFrame != null ? tailHeight() : tileHeight());
-        var expectedHeight:Float = parent.duration;
-        expectedHeight *= parent.speed;
-        expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
-
-        if(parent.state == GOT_HIT)
+        var expectedHeight:Float = 0;
+        
+        // FIX: Use the pre-calculated editorHeight when in chart editor mode
+        if (parent.state == CHART_EDITOR)
         {
-            this.visible = true;
-            var timeSinceHit:Float = parent.receptor.conductor.time - parent.time;
-            var remainingDuration:Float = Math.max(parent.duration - timeSinceHit, 0);
-            expectedHeight = remainingDuration;
+            expectedHeight = editorHeight;
+        }
+        else
+        {
+            final tailHeight:Float = (_tailFrame != null ? tailHeight() : tileHeight());
+            expectedHeight = parent.duration;
             expectedHeight *= parent.speed;
             expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
-            if(remainingDuration <= 0) this.visible = this.active = false;
+
+            if(parent.state == GOT_HIT)
+            {
+                this.visible = true;
+                var timeSinceHit:Float = parent.receptor.conductor.time - parent.time;
+                var remainingDuration:Float = Math.max(parent.duration - timeSinceHit, 0);
+                expectedHeight = remainingDuration;
+                expectedHeight *= parent.speed;
+                expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
+                if(remainingDuration <= 0) this.visible = this.active = false;
+            }
         }
 
         this.height = Math.max(expectedHeight, 0);
 
-        final obj = ((!parent.active) ? parent.receptor : parent);
-        this.setPosition(obj.x + (parent.width - this.width) * 0.5, obj.y + parent.height * 0.5);
+        final obj = ((!parent.active && parent.receptor != null) ? parent.receptor : parent);
+
+        if(obj!=null)
+        {
+            this.setPosition(obj.x + (parent.width - this.width) * 0.5, obj.y + parent.height * 0.5);
+            this.visible = obj.visible;
+        }
+        else this.visible = false;
 
         if(downscroll)
             this.y -= height;

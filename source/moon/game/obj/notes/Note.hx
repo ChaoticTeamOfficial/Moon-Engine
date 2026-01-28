@@ -1,6 +1,7 @@
 package moon.game.obj.notes;
 
 import moon.dependency.scripting.MoonScript;
+import openfl.filters.ColorMatrixFilter;
 
 /**
  * The state of a note in the game.
@@ -89,6 +90,11 @@ class Note extends MoonSprite
     public var conductor:Conductor;
     public var script:MoonScript;
 
+    /**
+     * Brightness adjustment for feedback in editor
+     */
+    public var brightness(default, set):Float = 0;
+
     private static var sharedScripts:Map<String, MoonScript> = new Map();
 
     public function new(direction:Int, time:Float, ?type:String = "default", ?skinName:String = "v-slice", 
@@ -131,6 +137,15 @@ class Note extends MoonSprite
         this.skin = skinName;
         _updateGraphics();
         return skinName;
+    }
+
+    @:noCompletion public function set_brightness(value:Float):Float
+    {
+        this.brightness = value;
+        
+        FlxSpriteUtil.setBrightness(this, value);
+        
+        return value;
     }
 
     override public function update(dt:Float):Void

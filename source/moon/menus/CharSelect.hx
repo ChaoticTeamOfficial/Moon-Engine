@@ -153,7 +153,7 @@ class CharSelect extends FlxState
         speakers.animation.addByPrefix('bump', 'Speakers ALL', 24, false);
         add(speakers);
         speakers.screenCenter();
-        speakers.y += 200;
+        speakers.y += 232;
     }
 
     var transitioning:Bool = false;

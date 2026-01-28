@@ -4,6 +4,7 @@ import moon.global_obj.Alphabet;
 import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
 import flixel.FlxGame;
+import polymod.*;
 
 class MoonGame extends FlxGame
 {
@@ -19,6 +20,18 @@ class MoonGame extends FlxGame
 			
     		Paths.skipNextCleanup = false;
     	});
+		
+		Polymod.init({
+			modRoot: "./mods/",
+			dirs:["mymod"],
+
+			errorCallback: (error) -> {
+				//TODO: Maybe some in-game error handling? depending on which error ofc!
+				// there's some neat stuff using the error code
+				
+				trace('[POLYMOD] ${error.message}', (error.severity == NOTICE) ? 'INFO' : '${error.severity}');
+			}
+		});
 
     	Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
     	FlxSprite.defaultAntialiasing = true;

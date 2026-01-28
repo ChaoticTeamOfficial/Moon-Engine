@@ -1,0 +1,14 @@
+{
+	"title":"My Cool Test Mod!!",
+	"description":"Tests out polymod!",
+	"homepage": "https://example.com/dragons",
+	"contributors": [
+		{
+			"name": "Toffee C.",
+			"role": "Developer"
+		}
+	],
+	"api_version":"1.0.0",
+	"mod_version":"1.0.0",
+	"license":"CC BY 4.0,MIT"
+}

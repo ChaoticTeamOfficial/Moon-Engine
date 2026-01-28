@@ -46,7 +46,11 @@ haxelib install flixel-animate 1.1.0
 haxelib install customtitlebar 1.0.2 
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-haxelib git funkin.visfix https://github.com/toffeecaramel/funkVis-GrigFIX
+haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
+haxelib git grig.audio https://github.com/FunkinCrew/grig.audio
+haxelib git polymod https://github.com/larsiusprime/polymod
+haxelib git thx.core https://github.com/fponticelli/thx.core
+haxelib git thx.semver https://github.com/fponticelli/thx.semver
 
 haxelib set flixel 6.1.2
 haxelib set lime 8.3.0

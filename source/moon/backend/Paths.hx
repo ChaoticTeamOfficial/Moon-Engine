@@ -67,86 +67,52 @@ class Paths
             return 'assets/$library/$key';
     }
 
-    private static function fileExists(path:String, ?library:String, isMod:Bool = false):Bool
+    private static function fileExists(path:String, ?library:String):Bool
     {
-        if (isMod)
-        {
-            return Global.currentModFiles.exists(path);
-        }
-        else
-        {
-            var fsPath:String = getPath(path, library);
-            #if desktop
-            return FileSystem.exists(fsPath);
-            #else
-            return Assets.exists(fsPath);
-            #end
-        }
+        var fsPath:String = getPath(path, library);
+        #if desktop
+        return FileSystem.exists(fsPath);
+        #else
+        return Assets.exists(fsPath);
+        #end
     }
 
-    private static function getFileBytes(path:String, ?library:String, isMod:Bool = false):Bytes
+    private static function getFileBytes(path:String, ?library:String):Bytes
     {
-        if (isMod)
-        {
-            if (!Global.currentModFiles.exists(path))
-                return null;
+		var fsPath:String = getPath(path, library);
+		#if desktop
+		if (!FileSystem.exists(fsPath))
+			return null;
 
-            return Global.currentModFiles.get(path);
-        }
-        else
-        {
-            var fsPath:String = getPath(path, library);
-            #if desktop
-            if (!FileSystem.exists(fsPath))
-                return null;
+		return File.getBytes(fsPath);
+		#else
+		if (!Assets.exists(fsPath))
+			return null;
 
-            return File.getBytes(fsPath);
-            #else
-            if (!Assets.exists(fsPath))
-                return null;
-
-            return Assets.getBytes(fsPath);
-            #end
-        }
+		return Assets.getBytes(fsPath);
+		#end
     }
     
     public static function exists(filePath:String, ?library:String):Bool
-    {
-        final isMod = filePath.startsWith('curMod/');
-        return fileExists(isMod ? filePath.substr(7) : filePath, library, isMod);
-    }
+        return fileExists(filePath, library);
     
     public static function getSound(key:String, ?library:String):Sound
     {
         var cacheKey:String = key;
-        final isMod = key.startsWith('curMod/');
-        final soundRelative:String = isMod ? key.substr(7) : key;
         if (!renderedSounds.exists(cacheKey))
         {
-            if (!fileExists(soundRelative, library, isMod))
+            if (!fileExists(key, library))
             {
-                trace('$soundRelative doesnt exist!${isMod ? " in mod" : ""}', "ERROR");
+                trace('$key doesnt exist!', "ERROR");
                 return null;
             }
             var sound:Sound;
-            if (isMod)
-            {
-                var bytes:Bytes = getFileBytes(soundRelative, library, true);
-                if (bytes == null)
-                {
-                    return null;
-                }
-                var buffer:AudioBuffer = AudioBuffer.fromBytes(bytes);
-                sound = Sound.fromAudioBuffer(buffer);
-            }
-            else
-            {
-                #if desktop
-                sound = Sound.fromFile(getPath(soundRelative, library));
-                #else
-                sound = Assets.getSound(getPath(soundRelative, library), false);
-                #end
-            }
+			#if desktop
+			sound = Sound.fromFile(getPath(key, library));
+			#else
+			sound = Assets.getSound(getPath(key, library), false);
+			#end
+			
             renderedSounds.set(cacheKey, sound);
         }
         return renderedSounds.get(cacheKey);
@@ -154,42 +120,27 @@ class Paths
 
     public static function getGraphic(key:String, from:String = 'images', ?library:String):FlxGraphic
     {
-        // mod support is fun guys trust me!!!
-        // augh this is killing me.
         final cacheKey:String = key;
-        final isMod = key.startsWith('curMod/');
-        var graphicRelative:String = isMod ? key.substr(7) : key;
 
-        if (!isMod && graphicRelative.endsWith('.png'))
-            graphicRelative = graphicRelative.substring(0, graphicRelative.lastIndexOf('.png'));
+        if (key.endsWith('.png'))
+            key = key.substring(0, key.lastIndexOf('.png'));
 
-        final imagePath:String = isMod ? graphicRelative + '.png' : '$from/$graphicRelative.png';
+        final imagePath:String = '$from/$key.png';
         if (!renderedGraphics.exists(cacheKey))
         {
-            if (!fileExists(imagePath, library, isMod))
+            if (!fileExists(imagePath, library))
             {
-                trace('$imagePath does not exist!${isMod ? " in mod" : ""}', "ERROR");
+                trace('$imagePath does not exist!', "ERROR");
                 return null;
             }
 
             var bitmap:BitmapData;
-            if (isMod)
-            {
-                var bytes:Bytes = getFileBytes(imagePath, library, true);
-                if (bytes == null)
-                    return null;
-                
-                bitmap = BitmapData.fromBytes(bytes);
-            }
-            else
-            {
-                var fsPath = getPath(imagePath, library);
-                #if desktop
-                bitmap = BitmapData.fromFile(fsPath);
-                #else
-                bitmap = Assets.getBitmapData(fsPath, false);
-                #end
-            }
+			var fsPath = getPath(imagePath, library);
+			#if desktop
+			bitmap = BitmapData.fromFile(fsPath);
+			#else
+			bitmap = Assets.getBitmapData(fsPath, false);
+			#end
 
             //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
@@ -353,17 +304,14 @@ class Paths
         return getPath('fonts/$key', library);
 
     public static function text(key:String, ?library:String):String
-    {
-        final isMod = key.startsWith('curMod/');
-        return getFileContent(isMod ? key.substr(7) + '.txt' : '$key.txt', library, isMod).trim();
-    }
+        return getFileContent('$key.txt', library).trim();
 
-    public static function getFileContent(path:String, ?library:String, isMod:Bool = false):String
+    public static function getFileContent(path:String, ?library:String):String
     {
-        var bytes:Bytes = getFileBytes(path, library, isMod);
+        var bytes:Bytes = getFileBytes(path, library);
         if (bytes == null)
         {
-            trace('$path doesnt exist!${isMod ? " in mod" : ""}', "ERROR");
+            trace('$path doesnt exist!', "ERROR");
             return "";
         }
         return bytes.toString();
@@ -371,9 +319,7 @@ class Paths
 
     public static function JSON(key:String, ?library:String):Dynamic
     {
-        final isMod = key.startsWith('curMod/');
-        final jsonPath = isMod ? key.substr(7) + '.json' : '$key.json';
-        return haxe.Json.parse(getFileContent(jsonPath, library, isMod).trim());
+        return haxe.Json.parse(getFileContent('$key.json', library).trim());
     }
 
     public static function video(key:String, ?library:String):String
@@ -382,22 +328,19 @@ class Paths
     // sparrow (.xml) sheets
     public static function getSparrowAtlas(key:String, from:String = 'images', ?library:String)
     {
-        final isMod = key.startsWith('curMod/');
-        return FlxAtlasFrames.fromSparrow(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.xml', library, isMod));
+        return FlxAtlasFrames.fromSparrow(getGraphic(key, from, library), getFileContent(('$from/$key.xml'), library));
     }
     
     // packer (.txt) sheets
     public static function getPackerAtlas(key:String, from:String = 'images', ?library:String)
     {
-        final isMod = key.startsWith('curMod/');
-        return FlxAtlasFrames.fromSpriteSheetPacker(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.txt', library, isMod));
+        return FlxAtlasFrames.fromSpriteSheetPacker(getGraphic(key, from, library), getFileContent('$from/$key.txt', library));
     }
 
     // aseprite (.json) sheets
     public static function getAsepriteAtlas(key:String, from:String = 'images', ?library:String)
     {
-        final isMod = key.startsWith('curMod/');
-        return FlxAtlasFrames.fromAseprite(getGraphic(key, from, library), getFileContent((isMod ? key.substr(7) : '$from/$key') + '.json', library, isMod));
+        return FlxAtlasFrames.fromAseprite(getGraphic(key, from, library), getFileContent('$from/$key.json', library));
     }
 
     // sparrow (.xml) sheets but split into multiple graphics
@@ -422,77 +365,32 @@ class Paths
         
     public static function readDir(dir:String, ?typeArr:Array<String>, ?removeType:Bool = true, ?library:String):Array<String>
     {
-        if (dir.startsWith('curMod/'))
-        {
-            final modDir:String = dir.substr(7);
-            var swagList:Array<String> = [];
-            var seen:Map<String, Bool> = [];
-
-            for (k in Global.currentModFiles.keys())
+        var swagList:Array<String> = [];
+        
+        try {
+            #if desktop
+            var rawList = FileSystem.readDirectory(getPath(dir, library));
+            for(i in 0...rawList.length)
             {
-                final prefixLen = modDir.length + (modDir.length > 0 ? 1 : 0);
-
-                if (StringTools.startsWith(k, modDir + (modDir == "" ? "" : "/")))
+                if(typeArr?.length > 0)
                 {
-                    var remaining:String = k.substr(prefixLen);
-                    if (remaining == "") continue;
-                    var file:String = remaining.split('/')[0];
-                    if (file != '' && !seen.exists(file))
-                    {
-                        seen.set(file, true);
-                        var isFile:Bool = !remaining.contains('/');
-                        if (typeArr != null && typeArr.length > 0 && isFile)
-                        {
-                            var added = false;
-                            for (type in typeArr)
-                            {
-                                if (remaining.endsWith(type))
-                                {
-                                    if (removeType)
-                                        file = file.substr(0, file.length - type.length);
-                                    swagList.push(file);
-                                    added = true;
-                                    break;
-                                }
-                            }
-                            if (added) continue;
+                    for(type in typeArr) {
+                        if(rawList[i].endsWith(type)) {
+                            // cleans it
+                            if(removeType)
+                                rawList[i] = rawList[i].replace(type, "");
+                            swagList.push(rawList[i]);
                         }
-                        else swagList.push(file);
                     }
                 }
+                else
+                    swagList.push(rawList[i]);
             }
-            //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at mod $modDir', "DEBUG");
-            return swagList;
-        }
-        else
-        {
-            var swagList:Array<String> = [];
-            
-            try {
-                #if desktop
-                var rawList = FileSystem.readDirectory(getPath(dir, library));
-                for(i in 0...rawList.length)
-                {
-                    if(typeArr?.length > 0)
-                    {
-                        for(type in typeArr) {
-                            if(rawList[i].endsWith(type)) {
-                                // cleans it
-                                if(removeType)
-                                    rawList[i] = rawList[i].replace(type, "");
-                                swagList.push(rawList[i]);
-                            }
-                        }
-                    }
-                    else
-                        swagList.push(rawList[i]);
-                }
-                #end
-            } catch(e) {}
-            
-            //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at ${getPath(dir, library)}', "DEBUG");
-            return swagList;
-        }
+            #end
+        } catch(e) {}
+        
+        //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at ${getPath(dir, library)}', "DEBUG");
+        return swagList;
     }
 
     public static function preloadGraphic(key:String, from:String = 'images', ?library:String)

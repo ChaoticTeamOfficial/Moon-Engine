@@ -20,6 +20,7 @@ typedef NoteStruct =
     var lane:String;
     var type:String;
     var duration:Float;
+    var ?values:Dynamic;
 };
 
 /**
@@ -175,7 +176,8 @@ class Chart
                     data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
                     lane:  (note.d > 3) ? 'opponent' : 'p1',
                     type: (note.k == '') ? null : note.k,
-                    duration: note.l
+                    duration: note.l,
+                    values: {}
                 };
                 convertedChart.notes.push(note);
             }
