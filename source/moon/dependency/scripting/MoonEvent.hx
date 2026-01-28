@@ -1,6 +1,6 @@
 package moon.dependency.scripting;
 
-import flixel.group.FlxGroup;
+import moon.toolkit.level_editor.LevelEditor.GridType;
 
 /**
  * A class for handling in-game events.
@@ -30,7 +30,7 @@ class MoonEvent extends MoonScript
     /**
      * A list of hardcoded events (by tag) that won't be handled from a script, but by code instead.
      */
-    public var HARDCODED_EVENTS:Array<String> = ['SetCameraFocus', 'SetCameraZoom', 'ChangeBPM'];
+    public var HARDCODED_EVENTS:Array<String> = ['Move Camera', 'Set Zoom', 'Change BPM'];
 
     /**
      * Whenever the event is valid as a script.
@@ -50,33 +50,15 @@ class MoonEvent extends MoonScript
     public function exec()
         if(valid) call('onExecute', [values]);
 
-    public function getCamFocusValues(charFocus:String, duration:Float, ease:String)
+    public function preloadEditor():{name:String, description:String, category:GridType}
     {
-        this.tag = 'SetCameraFocus';
-
-        this.values = {
-            character: charFocus,
-            duration: duration,
-            ease: ease
-        };
-        
-        this.time = 0;
-        return this;
-    }
-
-    public function getCamZoomValues(zoom:Float, duration:Float, ease:String)
-    {
-        this.tag = 'SetCameraZoom';
-
-        this.values = {
-            zoom: zoom,
-            duration: duration,
-            ease: ease,
-            mode: 'stage'
-        };
-
-        this.time = 0;
-        return this;
+        if(valid) return (exists('editorData')) ? code.get('editorData') : {name: 'Unknown', description: 'Unknown event data.', category: VISUALS};
+        else return switch(tag){
+            case 'Move Camera': {name: 'Move Camera', description: "Move the camera to wherever you want.", category: VISUALS};
+            case 'Set Zoom': {name: 'Set Zoom', description: "Set a zoom in the game's camera.", category: VISUALS};
+            case 'Change BPM': {name: 'Change BPM', description: "Change the song's BPM or Time signature.", category: SOUNDS};
+            default: {name: '($tag) Not Found', description: "If you're reading this, report this error to toffee.caramel on discord.", category: VISUALS};
+        }
     }
 
     @:noCompletion public function set_PRESET_VARIABLES(vars)

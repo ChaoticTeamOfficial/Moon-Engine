@@ -9,7 +9,7 @@ import moon.game.obj.notes.*;
 // Heavily inspired at Doido Engine's loading screen!
 class LoadingScreen extends FlxTransitionableState
 {
-    var mutex = new sys.thread.Mutex();
+    //var mutex = new sys.thread.Mutex();
     var preloadGrp = new FlxGroup();
 
     private var loadingBar:FlxBar;
@@ -51,9 +51,9 @@ class LoadingScreen extends FlxTransitionableState
         // We begin preloading here!!!
         new FlxTimer().start(0.4, function(_)
         {
-            sys.thread.Thread.create(() ->
+            new lime.app.Future(() ->
             {
-                mutex.acquire();
+                //mutex.acquire();
 
                 loadText.text = 'Preloading song...';
 
@@ -105,8 +105,8 @@ class LoadingScreen extends FlxTransitionableState
                 loadComplete = true;
 
                 FlxTween.tween(loadText, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
-                mutex.release();
-            });
+                //mutex.release();
+            }, true);
         });
     }
 

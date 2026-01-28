@@ -4,14 +4,14 @@ import moon.dependency.MoonSprite;
 
 function onCreate()
 {
-	var bg = new MoonSprite();
+	/*var bg = new MoonSprite();
 	bg.frames = Paths.getSparrowAtlas('ingame/stages/cg/CGBG');
 	bg.animation.addByPrefix('new', 'new', 24, true);
 	bg.playAnim('new');
 	background.add(bg);
 	bg.updateHitbox();
 	bg.screenCenter();
-	bg.antialiasing = true;
+	bg.antialiasing = true;*/
 	
 	background.add(background.spectators);
 	background.add(background.opponents);
@@ -26,7 +26,7 @@ function onPostCreate()
         startY: 400
 	};
 	
-	var weh = new MoonSprite().loadGraphic(Paths.image('ingame/stages/cg/52'));
+	/*var weh = new MoonSprite().loadGraphic(Paths.image('ingame/stages/cg/52'));
 	background.add(weh);
 	weh.camera = game.camHUD;
 	weh.updateHitbox();
@@ -34,6 +34,7 @@ function onPostCreate()
 	weh.antialiasing = true;
 	weh.blend = 0;
 	weh.alpha = 0.4;
+	*/
 	
 	background.opponents.setPosition(-50, 240);
 	background.spectators.setPosition(310, 140);

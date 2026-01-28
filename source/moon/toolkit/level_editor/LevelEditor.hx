@@ -7,13 +7,15 @@ import openfl.geom.Rectangle;
 import moon.toolkit.ui.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
+import moon.dependency.scripting.*;
 import moon.backend.data.Chart.NoteStruct;
 import moon.backend.data.Chart.ChartStruct;
+import moon.backend.data.Chart.EventStruct;
 import openfl.filters.ColorMatrixFilter;
 
 enum abstract GridType(String) {
     var NOTES = 'Notes';
-    var EVENTS = 'Events';
+    var VISUALS = 'Visuals';
     var CHARACTERS = 'Characters';
     var GIMMICKS = 'Gimmicks';
     var SOUNDS = 'Sounds';
@@ -62,22 +64,29 @@ class LevelEditor extends FlxState
     var snapIndex:Int = 1;
     var curSnap:Int = 4;
     final snaps:Array<Int> = [0, 4, 8, 12, 16, 20, 24, 32, 48, 64, 96, 192];
-    final allTypes:Array<GridType> = [NOTES, EVENTS, CHARACTERS, GIMMICKS, SOUNDS];
+    final allTypes:Array<GridType> = [NOTES, VISUALS, CHARACTERS, GIMMICKS, SOUNDS];
 
     public var curType(default, set):GridType;
     public var curPlacementMode:PlacementMode = PLACE;
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
-    public var song:String = 'a beach encounter';
+    public var song:String = 'green skies';
     public var diff:String = 'hard';
-    public var mix:String = 'nep';
+    public var mix:String = 'bf';
 
     // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
     var sectionStarts:Array<{num:Int, y:Float}> = [];
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
+    public var loadedEvents:Map<GridType, Array<{name:String, description:String, category:GridType}>> = [
+        NOTES => [],
+        VISUALS => [],
+        SOUNDS => [],
+        CHARACTERS => [],
+        GIMMICKS => []
+    ];
 
     public var grayscale:GrayscaleShader = new GrayscaleShader();
     public var invertColors:InvertColor = new InvertColor();
@@ -108,7 +117,7 @@ class LevelEditor extends FlxState
         // Thanks rapper for letting me know about FlxAtlas!
         // nice lil thing we can use to batch events.
         eventAtlas = new FlxAtlas("eventAtlas");
-        for(dir in ['CHARACTERS', 'EVENTS', 'GIMMICKS', 'NOTES', 'SOUNDS'])
+        for(dir in ['CHARACTERS', 'VISUALS', 'GIMMICKS', 'NOTES', 'SOUNDS'])
         {
             for(file in Paths.readDir('images/toolkit/level-editor/icons/_$dir', ['.png']))
             {
@@ -119,6 +128,40 @@ class LevelEditor extends FlxState
                 eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/_$dir/$file').bitmap, file);
             }
         }
+
+        //first we'll preload hardcoded events (not really preload, we just get their data.)
+        var dummyEvent = new MoonEvent(null, null);
+        for(event in dummyEvent.HARDCODED_EVENTS)
+        {
+            var preloadEvent = new MoonEvent(event, null);
+            final evData = preloadEvent.preloadEditor();
+            //trace(evData, "DEBUG");
+            loadedEvents.get(evData.category).push(evData);
+        }
+
+        // and now for softcoded ones!
+        final dir = Paths.readDir('data/events', ['.hx']);
+        if(dir.length > 0)
+        {
+            for(file in dir)
+            {
+                var preloadEvent = new MoonEvent(file, null);
+                final evData = preloadEvent.preloadEditor();
+                //trace(evData, "DEBUG");
+                loadedEvents.get(evData.category).push(evData); 
+            }
+        }
+
+        for(type => arr in loadedEvents)
+        {
+            arr.sort((a, b) -> {
+                final aLower = a.name.toLowerCase();
+                final bLower = b.name.toLowerCase();
+                return (aLower < bLower) ? -1 : (aLower > bLower) ? 1 : 0;
+            });
+        }
+
+        //trace(loadedEvents, "DEBUG");
 
         Tilemap.addAtlas('MELE-buttons', 'toolkit/level-editor/icons/gridTypes');
         Tilemap.addAtlas('btnIcons', 'toolkit/ui/googleIcons');
@@ -273,6 +316,9 @@ class LevelEditor extends FlxState
         eventsGroup = new FlxSpriteGroup();
         gridGroup.add(eventsGroup);
 
+        for(event in chart.events)
+            createEvent(event);
+
         miscGroup = new FlxSpriteGroup();
         gridGroup.add(miscGroup);
 
@@ -337,14 +383,14 @@ class LevelEditor extends FlxState
         leftpanel.camera = camMID;
         add(leftpanel);
 
-        for(i in 0...60)
+        /*for(i in 0...60)
         {
             var atlasTest = new MoonSprite(16 * i, 16 * i);
             atlasTest.frames = eventAtlas.getAtlasFrames();
             atlasTest.animation.frameName = "Change Layer Parallax";
             add(atlasTest);
             atlasTest.antialiasing = false;
-        }
+        }*/
 
         //final stuff = {title: 'Welcome to the Editor!', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', button1: 'Show me around.', button2: 'Okay.'};
         //openSubState(new EditorPopup(NOTICE, stuff));
@@ -403,7 +449,7 @@ class LevelEditor extends FlxState
 
         // I should make this better...
         if(FlxG.keys.justPressed.ONE) curType = NOTES;
-        else if(FlxG.keys.justPressed.TWO) curType = EVENTS;
+        else if(FlxG.keys.justPressed.TWO) curType = VISUALS;
         else if(FlxG.keys.justPressed.THREE) curType = CHARACTERS;
         else if(FlxG.keys.justPressed.FOUR) curType = GIMMICKS;
         else if(FlxG.keys.justPressed.FIVE) curType = SOUNDS;
@@ -548,7 +594,7 @@ class LevelEditor extends FlxState
                             sfx('place-${FlxG.random.int(1, 6)}');
                         }
 
-                    case EVENTS: trace('(place event)', "DEBUG");
+                    case VISUALS: trace('(place VISUALS)', "DEBUG");
                     case CHARACTERS: trace('(place character event)', "DEBUG");
                     case GIMMICKS: trace('(place gimmick event)', "DEBUG");
                     case SOUNDS: trace('(place sound event)', "DEBUG");
@@ -599,6 +645,11 @@ class LevelEditor extends FlxState
         }
 
         noteGroup.add(note);
+    }
+
+    function createEvent(ev:EventStruct)
+    {
+        //var spr = new EventSpr()
     }
 
     function timeToY(time:Float):Float

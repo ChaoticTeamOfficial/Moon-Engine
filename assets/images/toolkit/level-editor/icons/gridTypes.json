@@ -23,12 +23,12 @@
         },
 		
 		{
-            "name": "type-events-normal-0",
+            "name": "type-visuals-normal-0",
             "pos": [0, 88],
             "size": [88, 88]
         },
 		{
-            "name": "type-events-click-0",
+            "name": "type-visuals-click-0",
             "pos": [88, 88],
             "size": [88, 88]
         },

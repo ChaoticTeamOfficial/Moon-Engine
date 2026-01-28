@@ -1,23 +1,16 @@
 package moon.game;
 
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 import moon.dependency.scripting.MoonScript;
-import flixel.FlxObject;
 import openfl.filters.ShaderFilter;
 import moon.game.obj.Character;
-import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.math.FlxRect;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-import flixel.math.FlxPoint;
 
 import moon.menus.*;
 import moon.game.submenus.*;
-import moon.game.obj.Stage;
-import moon.game.obj.PlayField;
+import moon.game.obj.*;
+
 import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
@@ -252,27 +245,32 @@ class PlayState extends FlxTransitionableState
 	{
 		switch(event.tag)
 		{
-			case 'SetCameraFocus': setCameraFocus(
-				event.values.character, 
-				[event.values?.x ?? 0, event.values?.y ?? 0],
-				conductor.stepCrochet / 1000 * event.values.duration,
-				{ease: Reflect.field(FlxEase, event.values.ease)},
-				event.values.ease == 'INSTANT'
-			);
+			case 'Move Camera': 
+				setCameraFocus(
+					event.values.character,
+					[event?.values?.x ?? 0, event?.values?.y ?? 0],
+					conductor.stepCrochet / 1000 * event.values.duration,
+					{ease: resolveEase(event.values.ease)},
+					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
+				);
 			
-			case 'SetCameraZoom':/*setCameraZoom(
-				event.values?.zoom ?? 0, 
-				(event.values.ease != 'INSTANT' || event.values.duration != 0) ? conductor.stepCrochet / 1000 * event.values.duration: 0.001, 
-				{ease: Reflect.field(FlxEase, event.values.ease)}
-			);*/
-			// TODO: fix this lol
+			case 'Set Zoom':
+				final baseZoom = stage?.cameraSettings?.zoom ?? 1;
+				var targetZoom:Float = baseZoom;
+				targetZoom = (event.values.mode == 'stage') ? baseZoom + (event?.values?.zoom ?? 0) : event?.values?.zoom;
+
+				setCameraZoom(
+					targetZoom,
+					conductor.stepCrochet / 1000 * event.values.duration,
+					{ease: resolveEase(event.values.ease)},
+					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
+				);
 			
 			case 'ChangeBPM': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
 		}
 	}
 
-	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, 
-		?options:Null<TweenOptions>, ?isInstant:Bool = false)
+	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
 		MoonUtils.cancelActiveTwn(camMov);
 		final charPos = getCamPos(char);
@@ -284,11 +282,13 @@ class PlayState extends FlxTransitionableState
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));
 	}
 
-	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>)
+	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
 		MoonUtils.cancelActiveTwn(camZoom);
-		camZoom = FlxTween.tween(camGAME, {zoom: zoom}, 
-		duration, options);
+
+		if(!isInstant)
+			camZoom = FlxTween.tween(camGAME, {zoom: zoom}, duration, options);
+		else camGAME.zoom = zoom;
 	}
 
 	var awa:Character;
@@ -355,5 +355,37 @@ class PlayState extends FlxTransitionableState
 
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
+	}
+
+	// this is ugly but whatever
+	private function resolveEase(easeName:String):EaseFunction
+	{
+		//btw this is just because of how vslice handle tween easings.
+
+		if(easeName == null || easeName == "" || easeName.toLowerCase() == 'linear')
+			return FlxEase.linear; //safechecks are nice!
+
+		var name:String = easeName;
+		switch(name.toLowerCase())
+		{
+			case "instant": return null;
+			default: 
+				if(!StringTools.endsWith(name, "In") || !StringTools.endsWith(name, "Out") || !StringTools.endsWith(name, "InOut"))
+					name += "InOut";
+
+			var func = Reflect.field(FlxEase, name);
+
+			//just some last failsafes
+			if(func == null)
+			{
+				name = StringTools.replace(name, "InOut", "Out");
+				func = Reflect.field(FlxEase, name);
+			}
+
+			if(func == null)
+				func = FlxEase.expoInOut;
+
+			return func;
+		}
 	}
 }

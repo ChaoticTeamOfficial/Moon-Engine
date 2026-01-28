@@ -17,7 +17,7 @@ using StringTools;
 
 class StickerSubState extends FlxSubState
 {
-    var nextState:FlxState;
+    public var nextState:FlxState;
     var transition:StickerTransition;
     var switchingState:Bool = false;
 

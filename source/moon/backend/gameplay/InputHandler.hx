@@ -111,7 +111,10 @@ class InputHandler
 
     public function update():Void
     {
-        (!CPUMode) ? processInputs() : processCPUInputs();
+        (!CPUMode) ? processInputs() : {
+            processCPUInputs();
+            stats.health = 100;
+        }
 
         checkSustains();
         onLateMiss();

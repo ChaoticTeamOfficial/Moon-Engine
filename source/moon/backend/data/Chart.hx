@@ -31,6 +31,7 @@ typedef EventStruct =
     var tag:String;
     var values:Dynamic;
     var time:Float;
+    var ?lane:Int;
 };
 
 /**
@@ -194,13 +195,14 @@ class Chart
                 case 'FocusCamera':
                     final camVent:EventStruct = //mogus
                     {
-                        tag: 'SetCameraFocus',
+                        tag: 'Move Camera',
                         values: {
-                            character: (event.v.char == 1) ? 'opponent' : 'player', 
-                            duration: (event.v.ease == 'CLASSIC') ? 26 : event.v.duration ?? 26,
-                            ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : event.v.ease ?? 'expoOut',
+                            character: (event.v.char == 1) ? 'opponent' : (event.v.char == 2) ? 'spectator' : (event.v.char == -1) ? 'none' : 'player', 
+                            duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
+                            ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
                             x: event.v.x ?? 0,
-                            y: event.v.y ?? 0
+                            y: event.v.y ?? 0,
+                            lane: 0
                         },
                         time: event.t
                     };
@@ -208,12 +210,13 @@ class Chart
 
                 case 'ZoomCamera':
                     final camZoomVent:EventStruct = {
-                        tag: 'SetCameraZoom',
+                        tag: 'Set Zoom',
                         values: {
-                            zoom: event.v.zoom,
-                            duration: event.v.duration,
-                            ease: event.v.ease,
-                            mode: 'absolute'
+                            zoom: event?.v?.zoom ?? 1,
+                            duration: event?.v?.duration ?? 8,
+                            ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+                            mode: event?.v?.mode ?? 'absolute',
+                            lane:1
                         },
                         time: event.t                    
                     };
@@ -223,7 +226,8 @@ class Chart
 					final ev:EventStruct = {
 						tag: event.e,
 						values: event.v,
-						time: event.t
+						time: event.t,
+                        lane: FlxG.random.int(0, 7)
 					};
 				convertedEvents.push(ev);
             }
@@ -237,7 +241,7 @@ class Chart
             if(i != 0)
             {
                 final event:EventStruct = {
-                    tag: 'ChangeBPM',
+                    tag: 'Change BPM',
                     values: {
                         bpm: tChanges[i].bpm,
                         timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]

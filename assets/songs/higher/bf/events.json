@@ -1,0 +1,278 @@
+[
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 0
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 240
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 480
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 720
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 960
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 1200
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 1440
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 1680
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 1920
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 2760
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 3360
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 3840
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 11520
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 19200
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 26880
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 34560
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 42240
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 49920
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 57600
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 65280
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 72960
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 90240
+	},
+	{
+		"tag": "Move Camera",
+		"values": {
+			"character": "opponent",
+			"duration": 9,
+			"ease": "expoOut",
+			"lane": 0,
+			"x": 0,
+			"y": 0
+		},
+		"time": 92160
+	}
+]
