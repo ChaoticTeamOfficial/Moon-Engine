@@ -288,6 +288,7 @@ class PauseScreen extends FlxSubState
                     pf.playback.resync();
                 }
 
+                game.activeTweens(true);
                 close();
             }
             else
@@ -306,7 +307,6 @@ class PauseScreen extends FlxSubState
 
     override public function close()
     {
-        game.activeTweens(true);
         super.close();
     }
 

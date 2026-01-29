@@ -124,6 +124,9 @@ class Chart
         final modifier = (difficulty == 'erect' || difficulty == 'nightmare') ? '-erect' : '';
         events = (Paths.exists('songs/$song/$mix/events$modifier.json')) ? Paths.JSON('songs/$song/$mix/events$modifier') : [];
         content = Paths.JSON('songs/$song/$mix/chart-$difficulty');
+
+        content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+        events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
     }
 
     /**
@@ -184,6 +187,8 @@ class Chart
             }
         }
 
+        convertedChart.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
         trace('converting events', "DEBUG");
 
         // time to convert some basic events (such as camera and stuff)
@@ -202,8 +207,8 @@ class Chart
                             ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
                             x: event.v.x ?? 0,
                             y: event.v.y ?? 0,
-                            lane: 0
                         },
+                        lane: 0,
                         time: event.t
                     };
                 convertedEvents.push(camVent);
@@ -212,12 +217,12 @@ class Chart
                     final camZoomVent:EventStruct = {
                         tag: 'Set Zoom',
                         values: {
-                            zoom: event?.v?.zoom ?? 1,
+                            zoom: event.v.zoom,
                             duration: event?.v?.duration ?? 8,
                             ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
                             mode: event?.v?.mode ?? 'absolute',
-                            lane:1
                         },
+                        lane:1,
                         time: event.t                    
                     };
                 convertedEvents.push(camZoomVent);
@@ -241,7 +246,7 @@ class Chart
             if(i != 0)
             {
                 final event:EventStruct = {
-                    tag: 'Change BPM',
+                    tag: 'Change Playback Settings',
                     values: {
                         bpm: tChanges[i].bpm,
                         timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]
@@ -252,6 +257,8 @@ class Chart
                 convertedEvents.push(event);
             }
         }
+
+        convertedEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
 
         trace('converting metadata', "DEBUG");
 

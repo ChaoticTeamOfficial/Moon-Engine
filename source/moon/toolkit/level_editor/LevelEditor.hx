@@ -12,6 +12,8 @@ import moon.backend.data.Chart.NoteStruct;
 import moon.backend.data.Chart.ChartStruct;
 import moon.backend.data.Chart.EventStruct;
 import openfl.filters.ColorMatrixFilter;
+import openfl.ui.Mouse;
+import openfl.ui.MouseCursor;
 
 enum abstract GridType(String) {
     var NOTES = 'Notes';
@@ -125,7 +127,7 @@ class LevelEditor extends FlxState
                 // its actually very good that readDir returns only the file name by default
                 // cool!
                 // that actually makes it easier to register stuff in the atlas.
-                eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/_$dir/$file').bitmap, file);
+                eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/_$dir/$file').bitmap, '$dir-$file');
             }
         }
 
@@ -464,6 +466,9 @@ class LevelEditor extends FlxState
             spr.active = spr.visible = spr.isOnScreen();
         }
 
+        for(event in eventsGroup)
+            event.visible = event.isOnScreen() && cast(event, EventSpr).category == curType;
+
         for (member in gridGroup.members)
         {
             if (Std.isOfType(member, FlxSprite) && !Std.isOfType(member, FlxSpriteGroup))
@@ -523,10 +528,17 @@ class LevelEditor extends FlxState
         if (relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0)
         {
             cursor.visible = false;
+            Mouse.cursor = MouseCursor.ARROW;
             return;
         }
 
         cursor.visible = true;
+
+        // dev notes c:
+        // HAND shows the thingy when you're dragging smth
+        // IBEAM is when typing
+        // and BUTTON is clickable!
+        Mouse.cursor = MouseCursor.BUTTON;
 
         final laneNum:Int = Math.floor(relX / LANE_WIDTH);
 
@@ -649,7 +661,24 @@ class LevelEditor extends FlxState
 
     function createEvent(ev:EventStruct)
     {
-        //var spr = new EventSpr()
+        var category:GridType = VISUALS;
+
+        for(cat => sht in loadedEvents)
+            for(evt in sht)
+                if(evt.name == ev.tag)
+                    category = cat;
+
+        var spr = new EventSpr(ev.tag, category);
+        spr.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
+        spr.updateHitbox();
+
+        spr.x = ev.lane * LANE_WIDTH;
+        spr.y = timeToY(ev.time);
+
+        spr.x += (LANE_WIDTH - spr.width) / 2;
+        spr.active = false;
+
+        eventsGroup.add(spr);
     }
 
     function timeToY(time:Float):Float

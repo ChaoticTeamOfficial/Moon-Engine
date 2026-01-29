@@ -30,7 +30,9 @@ class MoonEvent extends MoonScript
     /**
      * A list of hardcoded events (by tag) that won't be handled from a script, but by code instead.
      */
-    public var HARDCODED_EVENTS:Array<String> = ['Move Camera', 'Set Zoom', 'Change BPM'];
+    public var HARDCODED_EVENTS:Array<String> = [
+        'Move Camera', 'Set Zoom', 'Change Playback Settings'
+    ];
 
     /**
      * Whenever the event is valid as a script.
@@ -54,9 +56,12 @@ class MoonEvent extends MoonScript
     {
         if(valid) return (exists('editorData')) ? code.get('editorData') : {name: 'Unknown', description: 'Unknown event data.', category: VISUALS};
         else return switch(tag){
+            // VISUALS
             case 'Move Camera': {name: 'Move Camera', description: "Move the camera to wherever you want.", category: VISUALS};
             case 'Set Zoom': {name: 'Set Zoom', description: "Set a zoom in the game's camera.", category: VISUALS};
-            case 'Change BPM': {name: 'Change BPM', description: "Change the song's BPM or Time signature.", category: SOUNDS};
+
+            //SOUNDS
+            case 'Change Playback Settings': {name: 'Change Playback Settings', description: "Allows you to change the BPM and Time Signature.", category: SOUNDS};
             default: {name: '($tag) Not Found', description: "If you're reading this, report this error to toffee.caramel on discord.", category: VISUALS};
         }
     }

@@ -4,13 +4,26 @@ class EventSpr extends MoonSprite
 {
 	public var category:LevelEditor.GridType;
 	public var event:String;
-	public function new(?x:Float = 0, ?y:Float = 0, event:String, category:LevelEditor.GridType = NOTES)
+	public function new(event:String, category:LevelEditor.GridType = NOTES)
 	{
-		super(x, y);
+		super();
 		this.event = event;
 		this.category = category;
 
 		frames = LevelEditor.instance.eventAtlas.getAtlasFrames();
-        atlasTest.animation.frameName = event;
+
+		final catStr:String = '$category';
+		final desiredName = '${catStr.toUpperCase()}-$event';
+		final animFrame = frames.getByName(desiredName);
+
+		if(animFrame != null)
+        	animation.frameName = desiredName;
+        else
+        {
+        	//trace('Event frame not found: $desiredName', "WARNING");
+        	animation.frameName = '${catStr.toUpperCase()}-None';
+        }
+        
+        antialiasing = false;
 	}
 }

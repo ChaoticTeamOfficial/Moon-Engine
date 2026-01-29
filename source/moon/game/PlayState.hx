@@ -66,6 +66,7 @@ class PlayState extends FlxTransitionableState
 		activeTweens(true);
 		//Paths.clearStoredMemory();
 		instance = this;
+		events = [];
 
 		Global.registerScript("songScript", songScript);
 		songScript.load('songs/${songData.song}/${songData.mix}/script.hx');
@@ -184,6 +185,8 @@ class PlayState extends FlxTransitionableState
 			events.push(ev);
 		}
 
+		events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
 		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
 		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
 		isDead = false;
@@ -266,7 +269,7 @@ class PlayState extends FlxTransitionableState
 					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
 				);
 			
-			case 'ChangeBPM': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
+			case 'Change Playback Settings': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
 		}
 	}
 
@@ -370,8 +373,9 @@ class PlayState extends FlxTransitionableState
 		{
 			case "instant": return null;
 			default: 
-				if(!StringTools.endsWith(name, "In") || !StringTools.endsWith(name, "Out") || !StringTools.endsWith(name, "InOut"))
+				if(!StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
 					name += "InOut";
+
 
 			var func = Reflect.field(FlxEase, name);
 

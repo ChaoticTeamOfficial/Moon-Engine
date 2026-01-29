@@ -238,7 +238,7 @@ class InputHandler
         // little workaround if it doesnt despawn, which may happen sometimes...
         if(!isSustain) strumline.members[note.direction].sustainSplash.despawn((CPUMode));
         
-        if(attachedChar != null) 
+        if(attachedChar != null && (note.type != "noanim" || note.type != "No Animation Note")) 
             attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
 
         if((timing == 'good' || timing == 'bad' || timing == 'shit' || timing == 'miss') && stats.isGold) stats.isGold = false;
