@@ -195,11 +195,9 @@ class Chart
         final events:Array<Dynamic> = data.events;
         for(event in events)
         {
-            switch(event.e)
+            var convertedEvent:EventStruct = switch(event.e)
             {
-                case 'FocusCamera':
-                    final camVent:EventStruct = //mogus
-                    {
+                case 'FocusCamera': {
                         tag: 'Move Camera',
                         values: {
                             character: (event.v.char == 1) ? 'opponent' : (event.v.char == 2) ? 'spectator' : (event.v.char == -1) ? 'none' : 'player', 
@@ -208,13 +206,10 @@ class Chart
                             x: event.v.x ?? 0,
                             y: event.v.y ?? 0,
                         },
-                        lane: 0,
-                        time: event.t
+                        lane: 0, time: event.t
                     };
-                convertedEvents.push(camVent);
 
-                case 'ZoomCamera':
-                    final camZoomVent:EventStruct = {
+                case 'ZoomCamera': {
                         tag: 'Set Zoom',
                         values: {
                             zoom: event.v.zoom,
@@ -222,23 +217,26 @@ class Chart
                             ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
                             mode: event?.v?.mode ?? 'absolute',
                         },
-                        lane:1,
-                        time: event.t                    
+                        lane:1, time: event.t                    
                     };
-                convertedEvents.push(camZoomVent);
+
+                case 'SetCameraBop': {
+                        tag: 'Customized Pulse Timing',
+                        values: event.v,
+                        lane:2, time: event.t                    
+                    };
 				
-				default:
-					final ev:EventStruct = {
-						tag: event.e,
-						values: event.v,
-						time: event.t,
-                        lane: FlxG.random.int(0, 7)
+				default: {
+						tag: event.e, values: event.v,
+						time: event.t, lane: FlxG.random.int(0, 7)
 					};
-				convertedEvents.push(ev);
             }
+
+            convertedEvents.push(convertedEvent);
         }
 
         final tChanges = metadata.timeChanges;
+        
         // Convert time signature/bpm changes
         for (i in 0...tChanges.length)
         {

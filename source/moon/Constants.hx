@@ -18,5 +18,17 @@ class Constants
 	static final SETTINGS_SAVE_BIND:String = 'MoonEngine-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
 
-    static final INITIAL_STATE:Class<FlxState> = LevelEditor;
+    static final INITIAL_STATE:Class<FlxState> = MainMenu;
+
+    ////// ------- GAMEPLAY RELATED CONSTANTS
+
+    /**
+     * The default intensity multiplier for camera bops.
+     */
+    static final DEFAULT_BOP_INTENSITY:Float = 1.015;
+
+    /**
+     * The default rate for camera bops (in beats per bop).
+     */
+    static final DEFAULT_BOP_RATE:Int = 4;
 }

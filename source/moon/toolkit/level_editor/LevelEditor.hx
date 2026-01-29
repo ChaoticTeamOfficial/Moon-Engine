@@ -252,6 +252,7 @@ class LevelEditor extends FlxState
                 tileSprite.pixels.fillRect(new Rectangle(4 * LANE_WIDTH - 1, 0, 3, sectionHeight), FlxColor.BLACK);
 
                 tileSprite.dirty = true;
+                tileSprite.active = false;
                 graphicCache.set(cacheKey, tileSprite.graphic);
             }
 
@@ -463,11 +464,13 @@ class LevelEditor extends FlxState
         for(yeah in noteGroup.members)
         {
             final spr = cast(yeah, FlxSprite);
-            spr.active = spr.visible = spr.isOnScreen();
+            spr.visible = spr.active = spr.isOnScreen();
         }
 
         for(event in eventsGroup)
-            event.visible = event.isOnScreen() && cast(event, EventSpr).category == curType;
+            if(Std.isOfType(event, EventSpr))
+                event.visible = event.isOnScreen() && cast(event, EventSpr).category == curType;
+            else event.visible = event.isOnScreen() && cast(event, EventHold).category == curType;
 
         for (member in gridGroup.members)
         {
@@ -523,7 +526,7 @@ class LevelEditor extends FlxState
     {
         final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
-        final relY = FlxG.mouse.viewY - gridGroup.y - 24;
+        final relY = FlxG.mouse.viewY - gridGroup.y - 18;
 
         if (relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0)
         {
@@ -655,6 +658,7 @@ class LevelEditor extends FlxState
             sus.editorHeight = durationToHeight(n.time, n.duration);
             noteGroup.add(sus);
         }
+        note.active = false;
 
         noteGroup.add(note);
     }
@@ -677,6 +681,10 @@ class LevelEditor extends FlxState
 
         spr.x += (LANE_WIDTH - spr.width) / 2;
         spr.active = false;
+        if(ev.values.duration != null) spr.duration = stepsToHeight(ev.values.duration);
+
+        if(spr.duration > 0)
+            eventsGroup.add(new EventHold(spr));
 
         eventsGroup.add(spr);
     }
@@ -723,6 +731,9 @@ class LevelEditor extends FlxState
 
     function durationToHeight(startTime:Float, duration:Float):Float
         return timeToY(startTime + duration) - timeToY(startTime);
+
+    function stepsToHeight(steps:Float):Float
+        return steps * LANE_HEIGHT;
 
     public function sfx(p:String, general:Bool = false)
     {

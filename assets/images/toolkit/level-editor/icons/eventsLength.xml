@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="eventsLength.png">
+	<SubTexture name="NOTES-middle0000" x="0" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="NOTES-middle0001" x="0" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="NOTES-tail0000" x="26" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="NOTES-tail0001" x="26" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="SOUNDS-middle0000" x="52" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="SOUNDS-middle0001" x="52" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="SOUNDS-tail0000" x="78" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="SOUNDS-tail0001" x="78" y="0" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="VISUALS-middle0000" x="0" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="VISUALS-middle0001" x="0" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="VISUALS-tail0000" x="26" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="VISUALS-tail0001" x="26" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="CHARACTERS-middle0000" x="52" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="CHARACTERS-middle0001" x="52" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="CHARACTERS-tail0000" x="78" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="CHARACTERS-tail0001" x="78" y="16" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="GIMMICKS-middle0000" x="0" y="32" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="GIMMICKS-middle0001" x="0" y="32" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="GIMMICKS-tail0000" x="26" y="32" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+	<SubTexture name="GIMMICKS-tail0001" x="26" y="32" width="26" height="16" frameX="-3" frameY="0" frameWidth="32" frameHeight="16" />
+</TextureAtlas>

@@ -4,6 +4,7 @@ class EventSpr extends MoonSprite
 {
 	public var category:LevelEditor.GridType;
 	public var event:String;
+	public var duration:Float = 0;
 	public function new(event:String, category:LevelEditor.GridType = NOTES)
 	{
 		super();
@@ -20,6 +21,7 @@ class EventSpr extends MoonSprite
         	animation.frameName = desiredName;
         else
         {
+        	// decided to remove, it shows too much on the console lol
         	//trace('Event frame not found: $desiredName', "WARNING");
         	animation.frameName = '${catStr.toUpperCase()}-None';
         }

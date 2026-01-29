@@ -268,6 +268,10 @@ class PlayState extends FlxTransitionableState
 					{ease: resolveEase(event.values.ease)},
 					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
 				);
+
+			case "Customized Pulse Timing":
+				bopRate = event?.values?.rate ?? Constants.DEFAULT_BOP_RATE;
+				bopIntensity = (Constants.DEFAULT_BOP_INTENSITY - 1) * (event?.values?.intensity ?? 1) * 2;
 			
 			case 'Change Playback Settings': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
 		}
@@ -317,13 +321,15 @@ class PlayState extends FlxTransitionableState
 		return [0, 0];
 	}
 
+	public var bopRate:Int = Constants.DEFAULT_BOP_RATE - 1;
+	public var bopIntensity:Float = Constants.DEFAULT_BOP_INTENSITY - 1;
 	public function beatHit(curBeat:Float)
 	{
 		Global.scriptCall('onBeat', [curBeat]);
-		if (((curBeat % playField.conductor.numerator) == 0) && !playField.inCountdown)
+		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
 			//camGAME.zoom += 0.010;
-			camHUD.zoom += 0.020;
+			camHUD.zoom += bopIntensity;
 		}
 	}
 

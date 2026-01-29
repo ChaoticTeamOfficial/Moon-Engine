@@ -59,6 +59,7 @@ class MoonEvent extends MoonScript
             // VISUALS
             case 'Move Camera': {name: 'Move Camera', description: "Move the camera to wherever you want.", category: VISUALS};
             case 'Set Zoom': {name: 'Set Zoom', description: "Set a zoom in the game's camera.", category: VISUALS};
+            case 'Customized Pulse Timing': {name: 'Customized Pulse Timing', description: "Switches settings for the default camera pulse.", category: VISUALS};
 
             //SOUNDS
             case 'Change Playback Settings': {name: 'Change Playback Settings', description: "Allows you to change the BPM and Time Signature.", category: SOUNDS};

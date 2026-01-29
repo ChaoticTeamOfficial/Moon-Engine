@@ -1,39 +1,39 @@
 [
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 0,
 		"values": {
 			"character": "spectator",
 			"duration": 26,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": 0,
 			"y": -2500
-		},
-		"time": 0
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 0,
 		"values": {
 			"character": "spectator",
 			"duration": 112,
 			"ease": "sineOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 0
+		}
 	},
 	{
-		"lane": 0,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 100,
 		"values": {
 			"intensity": 0
 		}
 	},
 	{
-		"lane": 0,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 11900,
 		"values": {
 			"rate": 1,
@@ -41,8 +41,8 @@
 		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 12300,
 		"values": {
 			"rate": 1,
@@ -50,8 +50,8 @@
 		}
 	},
 	{
-		"lane": 5,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 12700,
 		"values": {
 			"rate": 2,
@@ -60,54 +60,54 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 12800,
 		"values": {
 			"character": "opponent",
 			"duration": 0,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 12800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 17600,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.6
-		},
-		"time": 17600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 19200,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 19200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 19200,
 		"values": {
 			"duration": 16,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.5
-		},
-		"time": 19200
+		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 23900,
 		"values": {
 			"rate": 1,
@@ -116,19 +116,19 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 24000,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.6
-		},
-		"time": 24000
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 25500,
 		"values": {
 			"rate": 2,
@@ -137,245 +137,245 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 25600,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 25600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 25600,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 25600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 26800,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 26800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 27000,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 27000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 27400,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 27400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 27400,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 27400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 28400,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 28400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 28600,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 28600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 28900,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 28900
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 28900,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 28900
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 30500,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 30500
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 31200,
 		"values": {
 			"duration": 12,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 31200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 32200,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 32200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 33200,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 33200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 33400,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 33400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 33800,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 33800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 33800,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 33800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 34800,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 34800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 35000,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 35000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 35300,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 35300
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 35300,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 35300
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 36700,
 		"values": {
 			"rate": 1,
@@ -384,20 +384,20 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 36900,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 36900
+		}
 	},
 	{
-		"lane": 5,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 37500,
 		"values": {
 			"rate": 1,
@@ -406,19 +406,19 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 37800,
 		"values": {
 			"duration": 12,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 37800
+		}
 	},
 	{
-		"lane": 7,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 38300,
 		"values": {
 			"rate": 4,
@@ -427,54 +427,54 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 38400,
 		"values": {
 			"character": "spectator",
 			"duration": 64,
 			"ease": "INSTANTInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 400
-		},
-		"time": 38400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 38400,
 		"values": {
 			"duration": 64,
 			"ease": "INSTANTInOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 1.5
-		},
-		"time": 38400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 38400,
 		"values": {
 			"duration": 128,
 			"ease": "smootherStepOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.35
-		},
-		"time": 38400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 38400,
 		"values": {
 			"character": "spectator",
 			"duration": 128,
 			"ease": "smootherStepOut",
-			"lane": 0,
 			"x": 0,
 			"y": -250
-		},
-		"time": 38400
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 38500,
 		"values": {
 			"rate": 69,
@@ -483,8 +483,8 @@
 		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 51100,
 		"values": {
 			"rate": 1,
@@ -493,31 +493,31 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 51200,
 		"values": {
 			"duration": 176,
 			"ease": "smootherStepInOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.6
-		},
-		"time": 51200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 51200,
 		"values": {
 			"character": "player",
 			"duration": 176,
 			"ease": "smootherStepInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 51200
+		}
 	},
 	{
-		"lane": 3,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 57500,
 		"values": {
 			"rate": 1,
@@ -526,31 +526,31 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 57600,
 		"values": {
 			"duration": 72,
 			"ease": "smootherStepOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.6
-		},
-		"time": 57600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 57600,
 		"values": {
 			"character": "player",
 			"duration": 72,
 			"ease": "smootherStepOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 57600
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 60700,
 		"values": {
 			"rate": 1,
@@ -559,31 +559,31 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 62400,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 100,
 			"y": 100
-		},
-		"time": 62400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 62400,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.65
-		},
-		"time": 62400
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 62500,
 		"values": {
 			"rate": 21,
@@ -592,41 +592,41 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 62800,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 62800
-	},
-	{
-		"tag": "Set Zoom",
-		"values": {
-			"duration": 8,
-			"ease": "cubeOut",
-			"lane": 1,
-			"mode": "absolute",
-			"zoom": 0.75
-		},
-		"time": 63200
-	},
-	{
-		"tag": "Set Zoom",
-		"values": {
-			"duration": 8,
-			"ease": "cubeOut",
-			"lane": 1,
-			"mode": "absolute",
-			"zoom": 0.8
-		},
-		"time": 63600
+		}
 	},
 	{
 		"lane": 1,
-		"tag": "SetCameraBop",
+		"tag": "Set Zoom",
+		"time": 63200,
+		"values": {
+			"duration": 8,
+			"ease": "cubeOut",
+			"mode": "absolute",
+			"zoom": 0.75
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 63600,
+		"values": {
+			"duration": 8,
+			"ease": "cubeOut",
+			"mode": "absolute",
+			"zoom": 0.8
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 63900,
 		"values": {
 			"rate": 2,
@@ -635,78 +635,78 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 64000,
 		"values": {
 			"character": "opponent",
 			"duration": 26,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 64000
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 64000,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.5
-		},
-		"time": 64000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 67200,
 		"values": {
 			"character": "player",
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 67200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 70400,
 		"values": {
 			"character": "opponent",
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 70400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 73600,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 73600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 73600,
 		"values": {
 			"character": "player",
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 73600
+		}
 	},
 	{
-		"lane": 5,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 75100,
 		"values": {
 			"rate": 2,
@@ -715,19 +715,19 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 75200,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 75200
+		}
 	},
 	{
-		"lane": 5,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 76700,
 		"values": {
 			"rate": 2,
@@ -736,66 +736,66 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 76800,
 		"values": {
 			"character": "spectator",
 			"duration": 26,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 76800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 76800,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.35
-		},
-		"time": 76800
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 76800,
 		"values": {
 			"character": "spectator",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": -250
-		},
-		"time": 76800
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 86400,
 		"values": {
 			"character": "spectator",
 			"duration": 32,
 			"ease": "sineIn",
-			"lane": 0,
 			"x": 0,
 			"y": 100
-		},
-		"time": 86400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 86400,
 		"values": {
 			"duration": 32,
 			"ease": "sineIn",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.75
-		},
-		"time": 86400
+		}
 	},
 	{
-		"lane": 7,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 87900,
 		"values": {
 			"rate": 2,
@@ -804,8 +804,8 @@
 		}
 	},
 	{
-		"lane": 1,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 89500,
 		"values": {
 			"rate": 2,
@@ -814,65 +814,65 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 89600,
 		"values": {
 			"duration": 4,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 89600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 89600,
 		"values": {
 			"character": "opponent",
 			"duration": 26,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 89600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 94400,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 94400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 96000,
 		"values": {
 			"duration": 16,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 96000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 96000,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "cubeOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 96000
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 100700,
 		"values": {
 			"rate": 2,
@@ -881,19 +881,19 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 100800,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 100800
+		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 102300,
 		"values": {
 			"rate": 1,
@@ -902,31 +902,31 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 102400,
 		"values": {
 			"character": "player",
 			"duration": 12,
 			"ease": "linearOut",
-			"lane": 0,
 			"x": 250,
 			"y": 100
-		},
-		"time": 102400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 102400,
 		"values": {
 			"duration": 12,
 			"ease": "linearOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 1
-		},
-		"time": 102400
+		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 102500,
 		"values": {
 			"rate": 420,
@@ -935,32 +935,32 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 105600,
 		"values": {
 			"character": "spectator",
 			"duration": 26,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": 500,
 			"y": -2500
-		},
-		"time": 105600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 105600,
 		"values": {
 			"character": "spectator",
 			"duration": 128,
 			"ease": "linear",
-			"lane": 0,
 			"x": -500,
 			"y": -2500
-		},
-		"time": 105600
+		}
 	},
 	{
-		"lane": 1,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 118300,
 		"values": {
 			"rate": 2,
@@ -969,134 +969,134 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 118400,
 		"values": {
 			"duration": 8,
 			"ease": "sineOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 118400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 118400,
 		"values": {
 			"character": "opponent",
 			"duration": 26,
 			"ease": "INSTANT",
-			"lane": 0,
 			"x": -50,
 			"y": 50
-		},
-		"time": 118400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 124800,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "sineOut",
-			"lane": 0,
 			"x": 50,
 			"y": 50
-		},
-		"time": 124800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 128000,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.85
-		},
-		"time": 128000
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 131200,
 		"values": {
 			"duration": 16,
 			"ease": "sineOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 131200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 131200,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "sineOut",
-			"lane": 0,
 			"x": -50,
 			"y": 50
-		},
-		"time": 131200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 137600,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "sineOut",
-			"lane": 0,
 			"x": 50,
 			"y": 50
-		},
-		"time": 137600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 139000,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.85
-		},
-		"time": 139000
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 139800,
 		"values": {
 			"duration": 8,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.95
-		},
-		"time": 139800
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 142200,
 		"values": {
 			"duration": 12,
 			"ease": "sineOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 1.25
-		},
-		"time": 142200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 142200,
 		"values": {
 			"character": "player",
 			"duration": 12,
 			"ease": "sineOut",
-			"lane": 0,
 			"x": 150,
 			"y": 100
-		},
-		"time": 142200
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 142300,
 		"values": {
 			"rate": 2,
@@ -1105,8 +1105,8 @@
 		}
 	},
 	{
-		"lane": 7,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 143900,
 		"values": {
 			"rate": 4,
@@ -1115,53 +1115,53 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 144000,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.55
-		},
-		"time": 144000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 144000,
 		"values": {
 			"character": "opponent",
 			"duration": 4,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 144000
-	},
-	{
-		"tag": "Set Zoom",
-		"values": {
-			"duration": 8,
-			"ease": "elasticOut",
-			"lane": 1,
-			"mode": "absolute",
-			"zoom": 0.45
-		},
-		"time": 145600
-	},
-	{
-		"tag": "Set Zoom",
-		"values": {
-			"duration": 8,
-			"ease": "elasticOut",
-			"lane": 1,
-			"mode": "absolute",
-			"zoom": 0.35
-		},
-		"time": 147200
+		}
 	},
 	{
 		"lane": 1,
-		"tag": "SetCameraBop",
+		"tag": "Set Zoom",
+		"time": 145600,
+		"values": {
+			"duration": 8,
+			"ease": "elasticOut",
+			"mode": "absolute",
+			"zoom": 0.45
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 147200,
+		"values": {
+			"duration": 8,
+			"ease": "elasticOut",
+			"mode": "absolute",
+			"zoom": 0.35
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 147300,
 		"values": {
 			"rate": 4,
@@ -1170,8 +1170,8 @@
 		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 150300,
 		"values": {
 			"rate": 4,
@@ -1180,88 +1180,88 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 150400,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.45
-		},
-		"time": 150400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 150400,
 		"values": {
 			"character": "player",
 			"duration": 4,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 150400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 152000,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.55
-		},
-		"time": 152000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 152600,
 		"values": {
 			"character": "player",
 			"duration": 10,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 50,
 			"y": 50
-		},
-		"time": 152600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 152600,
 		"values": {
 			"duration": 8,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 152600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 153200,
 		"values": {
 			"duration": 6,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.85
-		},
-		"time": 153200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 153200,
 		"values": {
 			"character": "player",
 			"duration": 6,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 100,
 			"y": 100
-		},
-		"time": 153200
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 153500,
 		"values": {
 			"rate": 1,
@@ -1270,64 +1270,64 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 153600,
 		"values": {
 			"character": "spectator",
 			"duration": 26,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": 75,
 			"y": 50
-		},
-		"time": 153600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 153600,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.5
-		},
-		"time": 153600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 154000,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.55
-		},
-		"time": 154000
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 154400,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.6
-		},
-		"time": 154400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 154800,
 		"values": {
 			"duration": 8,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.65
-		},
-		"time": 154800
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 155100,
 		"values": {
 			"rate": 1,
@@ -1336,52 +1336,52 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 155200,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.7
-		},
-		"time": 155200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 155400,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.75
-		},
-		"time": 155400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 155600,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.8
-		},
-		"time": 155600
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 155800,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "absolute",
 			"zoom": 0.85
-		},
-		"time": 155800
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 155900,
 		"values": {
 			"rate": 1,
@@ -1390,31 +1390,31 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 156400,
 		"values": {
 			"character": "opponent",
 			"duration": 26,
 			"ease": "back",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 156400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 156400,
 		"values": {
 			"duration": 8,
 			"ease": "backIn",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 156400
+		}
 	},
 	{
-		"lane": 7,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 156700,
 		"values": {
 			"rate": 2,
@@ -1423,99 +1423,99 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 165400,
 		"values": {
 			"character": "opponent",
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": -25,
 			"y": 25
-		},
-		"time": 165400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 165400,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.55
-		},
-		"time": 165400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 165700,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 165700
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 165700,
 		"values": {
 			"character": "opponent",
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": -50,
 			"y": 50
-		},
-		"time": 165700
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 166000,
 		"values": {
 			"duration": 4,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.65
-		},
-		"time": 166000
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 166400,
 		"values": {
 			"character": "opponent",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 166400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 166400,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 166400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 168000,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 168000
+		}
 	},
 	{
-		"lane": 7,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 168700,
 		"values": {
 			"rate": 2,
@@ -1524,31 +1524,31 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 169200,
 		"values": {
 			"character": "player",
 			"duration": 4,
 			"ease": "backIn",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 169200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 169200,
 		"values": {
 			"duration": 4,
 			"ease": "backIn",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 169200
+		}
 	},
 	{
-		"lane": 3,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 169500,
 		"values": {
 			"rate": 2,
@@ -1557,8 +1557,8 @@
 		}
 	},
 	{
-		"lane": 6,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 172300,
 		"values": {
 			"rate": 2,
@@ -1567,8 +1567,8 @@
 		}
 	},
 	{
-		"lane": 3,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 172700,
 		"values": {
 			"rate": 2,
@@ -1577,54 +1577,54 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 178200,
 		"values": {
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.55
-		},
-		"time": 178200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 178200,
 		"values": {
 			"character": "player",
 			"duration": 2,
 			"ease": "elasticOut",
-			"lane": 0,
 			"x": 25,
 			"y": 25
-		},
-		"time": 178200
-	},
-	{
-		"tag": "Set Zoom",
-		"values": {
-			"duration": 2,
-			"ease": "elasticOut",
-			"lane": 1,
-			"mode": "direct",
-			"zoom": 0.6
-		},
-		"time": 178500
-	},
-	{
-		"tag": "Move Camera",
-		"values": {
-			"character": "player",
-			"duration": 2,
-			"ease": "elasticOut",
-			"lane": 0,
-			"x": 50,
-			"y": 50
-		},
-		"time": 178500
+		}
 	},
 	{
 		"lane": 1,
-		"tag": "SetCameraBop",
+		"tag": "Set Zoom",
+		"time": 178500,
+		"values": {
+			"duration": 2,
+			"ease": "elasticOut",
+			"mode": "direct",
+			"zoom": 0.6
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 178500,
+		"values": {
+			"character": "player",
+			"duration": 2,
+			"ease": "elasticOut",
+			"x": 50,
+			"y": 50
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 178700,
 		"values": {
 			"rate": 2,
@@ -1633,19 +1633,19 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 178800,
 		"values": {
 			"duration": 4,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.65
-		},
-		"time": 178800
+		}
 	},
 	{
-		"lane": 5,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 179100,
 		"values": {
 			"rate": 2,
@@ -1654,42 +1654,42 @@
 		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 179200,
 		"values": {
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 179200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 179200,
 		"values": {
 			"character": "player",
 			"duration": 16,
 			"ease": "expoOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 179200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 180800,
 		"values": {
 			"duration": 12,
 			"ease": "cubeOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.6
-		},
-		"time": 180800
+		}
 	},
 	{
 		"lane": 2,
-		"tag": "SetCameraBop",
+		"tag": "Customized Pulse Timing",
 		"time": 182300,
 		"values": {
 			"rate": 4,
@@ -1698,31 +1698,31 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 182400,
 		"values": {
 			"character": "opponent",
 			"duration": 24,
 			"ease": "smoothStepInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 182400
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 182400,
 		"values": {
 			"duration": 24,
 			"ease": "smoothStepInOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.5
-		},
-		"time": 182400
+		}
 	},
 	{
-		"lane": 4,
-		"tag": "SetCameraBop",
+		"lane": 2,
+		"tag": "Customized Pulse Timing",
 		"time": 182500,
 		"values": {
 			"rate": 420,
@@ -1731,85 +1731,85 @@
 		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 185400,
 		"values": {
 			"character": "player",
 			"duration": 24,
 			"ease": "smoothStepInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 185400
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 188600,
 		"values": {
 			"character": "opponent",
 			"duration": 24,
 			"ease": "smoothStepInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 188600
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 191800,
 		"values": {
 			"character": "player",
 			"duration": 24,
 			"ease": "smoothStepInOut",
-			"lane": 0,
 			"x": 0,
 			"y": 0
-		},
-		"time": 191800
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 193200,
 		"values": {
 			"character": "spectator",
 			"duration": 16,
 			"ease": "smoothStepOut",
-			"lane": 0,
 			"x": 0,
 			"y": -150
-		},
-		"time": 193200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 193200,
 		"values": {
 			"duration": 16,
 			"ease": "smoothStepOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.4
-		},
-		"time": 193200
+		}
 	},
 	{
+		"lane": 0,
 		"tag": "Move Camera",
+		"time": 195200,
 		"values": {
 			"character": "spectator",
 			"duration": 16,
 			"ease": "linearOut",
-			"lane": 0,
 			"x": 0,
 			"y": -250
-		},
-		"time": 195200
+		}
 	},
 	{
+		"lane": 1,
 		"tag": "Set Zoom",
+		"time": 195200,
 		"values": {
 			"duration": 16,
 			"ease": "linearOut",
-			"lane": 1,
 			"mode": "direct",
 			"zoom": 0.35
-		},
-		"time": 195200
+		}
 	}
 ]
