@@ -199,7 +199,7 @@ class PauseScreen extends FlxSubState
                     // so uhhh... get it to be shown!!
                     paused.loadGraphic(Paths.image('menus/pause/reset'));
                     pf.restartSong();
-                    close();
+                    resumeGame();
                 case 'settings': 
                     close();
                     FlxG.state.openSubState(new Settings());
@@ -287,9 +287,7 @@ class PauseScreen extends FlxSubState
                     pf.playback.state = PLAY;    
                     pf.playback.resync();
                 }
-
-                game.activeTweens(true);
-                close();
+                resumeGame();
             }
             else
             {
@@ -305,9 +303,10 @@ class PauseScreen extends FlxSubState
         }, 5);
     }
 
-    override public function close()
+    public function resumeGame()
     {
-        super.close();
+        game.activeTweens(true);
+        close();
     }
 
     @:noCompletion function get_game():PlayState

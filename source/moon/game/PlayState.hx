@@ -198,13 +198,16 @@ class PlayState extends FlxTransitionableState
 		super.update(elapsed);
 
 		// EVENTS CHECK
-		for (event in events)
+		if(events.length > 0)
 		{
-			if (event.time <= conductor.time)
+			for (event in events)
 			{
-				Global.scriptCall('onEvent', [event.tag]);
-				(event.valid) ? event.exec() : onHardcodedEvent(event);
-				events.remove(event);
+				if (event.time <= conductor.time)
+				{
+					Global.scriptCall('onEvent', [event.tag]);
+					(event.valid) ? event.exec() : onHardcodedEvent(event);
+					events.remove(event);
+				}
 			}
 		}
 		

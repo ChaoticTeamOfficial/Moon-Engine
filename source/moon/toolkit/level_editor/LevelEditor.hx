@@ -116,6 +116,12 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camMID, false);
         FlxG.cameras.add(camFRONT, false);
 
+        moon.game.PlayState.songData = {
+            song: song,
+            difficulty: diff,
+            mix: mix
+        };
+
         // Thanks rapper for letting me know about FlxAtlas!
         // nice lil thing we can use to batch events.
         eventAtlas = new FlxAtlas("eventAtlas");
@@ -400,6 +406,9 @@ class LevelEditor extends FlxState
 
         //me when I debug
         FlxG.watch.addMouse();
+
+        //var playstate = new moon.game.PlayState();
+        //add(playstate);
 
         FlxG.autoPause = false;
         playback.state = PAUSE;
