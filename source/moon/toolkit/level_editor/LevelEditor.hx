@@ -73,9 +73,9 @@ class LevelEditor extends FlxState
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
-    public var song:String = 'green skies';
-    public var diff:String = 'hard';
-    public var mix:String = 'bf';
+    public var song:String = '';
+    public var diff:String = '';
+    public var mix:String = '';
 
     // --- OTHER/MISC --- //
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
@@ -93,18 +93,16 @@ class LevelEditor extends FlxState
     public var grayscale:GrayscaleShader = new GrayscaleShader();
     public var invertColors:InvertColor = new InvertColor();
 
+    public function new(song:String = 'green skies', diff:String = 'hard', mix:String = 'bf')
+    {
+        this.song = song;
+        this.diff = diff;
+        this.mix = mix;
+        super();
+    }
+
     override public function create()
     {
-        //SELF NOTE; 
-        // umm I should look into note rendering or sum shit
-        // memory usage at start is... terrible, woah.
-
-        // NOTE 2:
-        // It isn't the notes, it's the tiled grid sprite!!! I gotta fix it ;v;
-
-        // NOTE 3:
-        // Fixed it ;D
-
         // --- SETUP BACKEND STUFF --- //
         instance = this;
         camBACK.bgColor = 0xFF1e1d1f;

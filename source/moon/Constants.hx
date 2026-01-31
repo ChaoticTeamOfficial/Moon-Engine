@@ -18,7 +18,7 @@ class Constants
 	static final SETTINGS_SAVE_BIND:String = 'MoonEngine-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
 
-    static final INITIAL_STATE:Class<FlxState> = LevelEditor;
+    static final INITIAL_STATE:Class<FlxState> = MainMenu;
 
     ////// ------- GAMEPLAY RELATED CONSTANTS
 

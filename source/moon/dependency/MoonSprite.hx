@@ -61,15 +61,13 @@ class MoonSprite extends FlxSprite
 	private function isOverrideAnim(name:String):Bool
 	{
 		if (name == null) return false;
-		var lowerName = name.toLowerCase();
+		final lowerName = name.toLowerCase();
 		for (group in overrideAnims)
 		{
 			switch (group.toLowerCase())
 			{
-				case "singanims":
-					if (lowerName.startsWith("sing")) return true;
-				default:
-					if (lowerName.startsWith(group.toLowerCase())) return true;
+				case "singanims": return lowerName.startsWith("sing");
+				default: return lowerName.startsWith(group.toLowerCase());
 			}
 		}
 		return false;

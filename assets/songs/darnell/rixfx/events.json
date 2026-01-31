@@ -478,12 +478,12 @@
 	},
 	{
 		"lane": 0,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 46968.75,
 		"values": {
 			"anim": "laugh",
 			"force": true,
-			"target": "dad"
+			"target": "opponent"
 		}
 	},
 	{
@@ -499,12 +499,12 @@
 	},
 	{
 		"lane": 5,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 47250,
 		"values": {
 			"anim": "laugh",
 			"force": true,
-			"target": "dad"
+			"target": "opponent"
 		}
 	},
 	{
@@ -520,12 +520,12 @@
 	},
 	{
 		"lane": 6,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 47531.25,
 		"values": {
 			"anim": "laugh",
 			"force": true,
-			"target": "dad"
+			"target": "opponent"
 		}
 	},
 	{
@@ -541,12 +541,12 @@
 	},
 	{
 		"lane": 4,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 47812.5,
 		"values": {
 			"anim": "laugh",
 			"force": true,
-			"target": "dad"
+			"target": "opponent"
 		}
 	},
 	{

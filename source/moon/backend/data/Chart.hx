@@ -198,38 +198,51 @@ class Chart
             var convertedEvent:EventStruct = switch(event.e)
             {
                 case 'FocusCamera': {
-                        tag: 'Move Camera',
-                        values: {
-                            character: (event.v.char == 1) ? 'opponent' : (event.v.char == 2) ? 'spectator' : (event.v.char == -1) ? 'none' : 'player', 
-                            duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
-                            ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
-                            x: event.v.x ?? 0,
-                            y: event.v.y ?? 0,
-                        },
-                        lane: 0, time: event.t
-                    };
+                    tag: 'Move Camera',
+                    values: {
+                        character: (event.v.char == 1) ? 'opponent' : (event.v.char == 2) ? 'spectator' : (event.v.char == -1) ? 'none' : 'player', 
+                        duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
+                        ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
+                        x: event.v.x ?? 0,
+                        y: event.v.y ?? 0,
+                    },
+                    lane: 0, time: event.t
+                };
 
                 case 'ZoomCamera': {
-                        tag: 'Set Zoom',
-                        values: {
-                            zoom: event.v.zoom,
-                            duration: event?.v?.duration ?? 8,
-                            ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
-                            mode: event?.v?.mode ?? 'absolute',
-                        },
-                        lane:1, time: event.t                    
-                    };
+                    tag: 'Set Zoom',
+                    values: {
+                        zoom: event.v.zoom,
+                        duration: event?.v?.duration ?? 8,
+                        ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+                        mode: event?.v?.mode ?? 'absolute',
+                    },
+                    lane:1, time: event.t                    
+                };
 
                 case 'SetCameraBop': {
-                        tag: 'Customized Pulse Timing',
-                        values: event.v,
-                        lane:2, time: event.t                    
-                    };
+                    tag: 'Customized Pulse Timing',
+                    values: event.v,
+                    lane:2, time: event.t                    
+                };
+
+                case 'PlayAnimation': {
+                    tag: 'Play Character Animation',
+                    time: event.t,
+                    values: {
+                        anim:event.v.anim,
+                        target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',
+                        force: event?.v?.force ?? true,
+                        forceOverride: true,
+                        reversed: false,
+                        frame: 0
+                    }
+                };
 				
 				default: {
-						tag: event.e, values: event.v,
-						time: event.t, lane: FlxG.random.int(0, 7)
-					};
+					tag: event.e, values: event.v,
+					time: event.t, lane: FlxG.random.int(0, 7)
+				};
             }
 
             convertedEvents.push(convertedEvent);

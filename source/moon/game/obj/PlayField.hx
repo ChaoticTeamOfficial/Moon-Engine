@@ -126,7 +126,7 @@ class PlayField extends FlxGroup
         strumlines = [];
         
         final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, false];
+        final isCPUPlayers = [true, true];
 
         for (i in 0...playerIDs.length)
         {
@@ -169,7 +169,7 @@ class PlayField extends FlxGroup
         // obv loss, but whatev
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
-        conductor.time = -(conductor.crochet * 6);
+        conductor.time = -(conductor.crochet * 5);
     }
 
     function setupNotes()
@@ -222,7 +222,7 @@ class PlayField extends FlxGroup
     {
         playback.time = 0;
         playback.state = PAUSE;
-        conductor.time = -(conductor.crochet * 6);
+        conductor.time = -(conductor.crochet * 5);
 
         for(strum in strumlines)
             for(receptor in strum.members)

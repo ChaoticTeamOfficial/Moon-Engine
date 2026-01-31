@@ -100,6 +100,9 @@ class PlayState extends FlxTransitionableState
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
 		
+		Countdown.init(conductor, playField);
+		Countdown.performCountdown();
+
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostCreate');
@@ -108,6 +111,7 @@ class PlayState extends FlxTransitionableState
 		playField.onSongRestart = () -> {
 			events = [];
 			setEvents();
+			Countdown.performCountdown();
 			Global.scriptCall('onSongRestart');
 		};
 		
@@ -215,7 +219,7 @@ class PlayState extends FlxTransitionableState
 		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
 		
 		if(FlxG.keys.justPressed.NINE) FlxG.switchState(()->new ChartConvert());
-		if(FlxG.keys.justPressed.SEVEN) FlxG.switchState(() -> new LevelEditor());
+		if(FlxG.keys.justPressed.SEVEN) FlxG.switchState(() -> new LevelEditor(songData.song, songData.difficulty, songData.mix));
 
 		if(MoonInput.justPressed(PAUSE))
 		{
@@ -225,7 +229,9 @@ class PlayState extends FlxTransitionableState
 				playField.playback.state = PAUSE;
 		}
 
-		if(playField.healthBar.health <= 0 && !isDead)
+		// gonna leave it commented for now
+		// it softlocks currently, and my skill issue won't help XD
+		/*if(playField.healthBar.health <= 0 && !isDead)
 		{
 			playField.inCutscene = isDead = true;
 
@@ -236,11 +242,14 @@ class PlayState extends FlxTransitionableState
 				//trace('yup.');
 				openSubState(new Gameover());
 			}});
-		}
+		}*/
 
 		//TODO: REMOVE, THIS IS DEBUGGIN
 		if(FlxG.keys.justPressed.EIGHT)
 			endSong();
+
+		//if(FlxG.keys.justPressed.FOUR)
+		//	Countdown.performCountdown();
 
 		Global.scriptCall('onUpdate', [elapsed]);
 	}
@@ -251,6 +260,7 @@ class PlayState extends FlxTransitionableState
 	{
 		switch(event.tag)
 		{
+			// -------- VISUALS
 			case 'Move Camera': 
 				setCameraFocus(
 					event.values.character,
@@ -276,6 +286,15 @@ class PlayState extends FlxTransitionableState
 				bopRate = event?.values?.rate ?? Constants.DEFAULT_BOP_RATE;
 				bopIntensity = (Constants.DEFAULT_BOP_INTENSITY - 1) * (event?.values?.intensity ?? 1) * 2;
 			
+			// ------------- CHARACTERS
+			case 'Play Character Animation':
+				//trace('Play animation: ${event.values.target} - ${event.values.anim}');
+				final char = getChar(event.values.target);
+
+				if(event.values.forceOverride) char.forcePlayAnim(event.values.anim, event?.values?.force ?? true, event?.values?.reversed ?? false, event?.values?.frame ?? 0);
+				else char.playAnim(event.values.anim, event?.values?.force ?? true, event?.values?.reversed ?? false, event?.values?.frame ?? 0);
+
+			// ------------- SOUNDS
 			case 'Change Playback Settings': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
 		}
 	}
@@ -301,27 +320,34 @@ class PlayState extends FlxTransitionableState
 		else camGAME.zoom = zoom;
 	}
 
-	var awa:Character;
-	function getCamPos(charName:String):Array<Float>
+	public function getCamPos(charName:String):Array<Float>
 	{
-		final chars = stage.chars;
-		for (c in chars)
+		final char = getChar(charName);
+		if(char != null)
+			return [char.getMidpoint().x + char.data.camOffsets[0], char.getMidpoint().y + char.data.camOffsets[1]];
+
+		return [0, 0];
+	}
+
+	public function getChar(charName:String):Character
+	{
+		for (c in stage.chars)
 		{
-			if (c.character + ('-${c.ID}') == charName)
-				return [c.getMidpoint().x + c.data.camOffsets[0], c.getMidpoint().y + c.data.camOffsets[1]];
+			if('${c.character}-${c.ID}' == charName)
+				return c;
 			else
 			{
-				//these are for mainly converted charts, since its the possibly best way to get them working haha :'3
 				switch(charName)
 				{
-					case 'opponent': awa = cast stage.opponents.members[0];
-					case 'spectator': awa = cast stage.spectators.members[0];
-					case 'player': awa = cast stage.players.members[0];
+					case 'opponent': return cast stage.opponents.members[0];
+					case 'spectator': return cast stage.spectators.members[0];
+					case 'player': return cast stage.players.members[0];
 				}
-				return [awa.getMidpoint().x + awa.data.camOffsets[0], awa.getMidpoint().y + awa.data.camOffsets[1]];
 			}
 		}
-		return [0, 0];
+
+		trace('Could not get character with name $charName', "WARNING");
+		return null;
 	}
 
 	public var bopRate:Int = Constants.DEFAULT_BOP_RATE - 1;

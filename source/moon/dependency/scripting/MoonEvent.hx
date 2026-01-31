@@ -31,7 +31,9 @@ class MoonEvent extends MoonScript
      * A list of hardcoded events (by tag) that won't be handled from a script, but by code instead.
      */
     public var HARDCODED_EVENTS:Array<String> = [
-        'Move Camera', 'Set Zoom', 'Change Playback Settings'
+        'Move Camera', 'Set Zoom', 'Change Playback Settings',
+
+        'Play Character Animation'
     ];
 
     /**
@@ -61,7 +63,10 @@ class MoonEvent extends MoonScript
             case 'Set Zoom': {name: 'Set Zoom', description: "Set a zoom in the game's camera.", category: VISUALS};
             case 'Customized Pulse Timing': {name: 'Customized Pulse Timing', description: "Switches settings for the default camera pulse.", category: VISUALS};
 
-            //SOUNDS
+            // CHARACTERS
+            case 'Play Character Animation': {name: 'Play Character Animation', description: "Plays a selected Character animation.", category: CHARACTERS};
+
+            // SOUNDS
             case 'Change Playback Settings': {name: 'Change Playback Settings', description: "Allows you to change the BPM and Time Signature.", category: SOUNDS};
             default: {name: '($tag) Not Found', description: "If you're reading this, report this error to toffee.caramel on discord.", category: VISUALS};
         }

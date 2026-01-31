@@ -10,6 +10,7 @@
         {"name": "singLEFT", "prefix": "Pose Left0", "x": 1, "y": 0, "fps": 24},
         {"name": "singDOWN", "prefix": "Pose Down0", "x": 0, "y": -3, "fps": 24},
         {"name": "singUP", "prefix": "Pose Up0", "x": 8, "y": 5, "fps": 24},
-        {"name": "singRIGHT", "prefix": "Pose Right0", "x": 4, "y": 3, "fps": 24}
+        {"name": "singRIGHT", "prefix": "Pose Right0", "x": 4, "y": 3, "fps": 24},
+		{"name": "laugh", "prefix": "Laugh", "x": 0, "y": 0, "fps": 24}
     ]
 }
