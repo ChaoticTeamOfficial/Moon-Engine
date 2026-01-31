@@ -54,7 +54,7 @@ class NoteSustain extends TiledSprite
             {
                 expectedHeight = parent.duration;
                 expectedHeight *= parent.speed;
-                expectedHeight += tailHeight + (parent.height * 0.5 - tailHeight);
+                expectedHeight += (parent.height * 0.5 - tailHeight);
             }
         }
 

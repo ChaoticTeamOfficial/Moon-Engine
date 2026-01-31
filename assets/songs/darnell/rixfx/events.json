@@ -833,14 +833,13 @@
 	},
 	{
 		"lane": 1,
-		"tag": "ScrollSpeed",
+		"tag": "Set Lane Scroll Speed",
 		"time": 71812.5,
 		"values": {
 			"duration": 4,
 			"strumline": "both",
 			"scroll": 1.1,
-			"ease": "elastic",
-			"easeDir": "InOut",
+			"ease": "elasticInOut",
 			"absolute": false
 		}
 	},
@@ -964,14 +963,13 @@
 	},
 	{
 		"lane": 2,
-		"tag": "ScrollSpeed",
+		"tag": "Set Lane Scroll Speed",
 		"time": 84000,
 		"values": {
 			"duration": 12,
 			"strumline": "both",
 			"scroll": 1,
-			"ease": "smoothStep",
-			"easeDir": "InOut",
+			"ease": "smoothStepInOut",
 			"absolute": false
 		}
 	},

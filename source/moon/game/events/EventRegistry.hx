@@ -26,7 +26,10 @@ class EventRegistry
             'Play Character Animation' => PlayCharacterAnimEvent,
             
             // SOUNDS
-            'Change Playback Settings' => ChangePlaybackSettingsEvent
+            'Change Playback Settings' => ChangePlaybackSettingsEvent,
+
+            // GIMMICKS
+            'Set Lane Scroll Speed' => SetScrollSpeedEvent
         ];
     }
 

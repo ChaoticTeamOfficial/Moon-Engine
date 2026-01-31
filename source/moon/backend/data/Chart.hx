@@ -239,6 +239,19 @@ class Chart
                         frame: 0
                     }
                 };
+
+                case 'ScrollSpeed': {
+                    tag: 'Set Lane Scroll Speed',
+                    time: event.t,
+                    lane: 1,
+                    values: {
+                        duration: event.v.duration,
+                        strumline: event.v.strumline,
+                        ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+                        scroll: event.v.scroll,
+                        absolute: event.v.absolute
+                    }
+                };
 				
 				default: {
 					tag: event.e, values: event.v,
