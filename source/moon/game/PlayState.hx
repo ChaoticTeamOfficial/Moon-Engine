@@ -271,10 +271,11 @@ class PlayState extends FlxTransitionableState
 				);
 			
 			case 'Set Zoom':
+
 				final baseZoom = stage?.cameraSettings?.zoom ?? 1;
 				var targetZoom:Float = baseZoom;
-				targetZoom = (event.values.mode == 'stage') ? baseZoom + (event?.values?.zoom ?? 0) : event?.values?.zoom;
-
+				targetZoom = (event.values.mode == 'stage') ? baseZoom + (event.values.zoom - 1) : event.values.zoom;
+				//trace(event.values.zoom, "DEBUG");
 				setCameraZoom(
 					targetZoom,
 					conductor.stepCrochet / 1000 * event.values.duration,
@@ -315,6 +316,7 @@ class PlayState extends FlxTransitionableState
 	{
 		MoonUtils.cancelActiveTwn(camZoom);
 
+		//trace('Setting zoom to $zoom in $duration', "DEBUG");
 		if(!isInstant)
 			camZoom = FlxTween.tween(camGAME, {zoom: zoom}, duration, options);
 		else camGAME.zoom = zoom;
@@ -408,9 +410,8 @@ class PlayState extends FlxTransitionableState
 		{
 			case "instant": return null;
 			default: 
-				if(!StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
+				if(name.toLowerCase() != "linear" && !StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
 					name += "InOut";
-
 
 			var func = Reflect.field(FlxEase, name);
 
@@ -423,6 +424,8 @@ class PlayState extends FlxTransitionableState
 
 			if(func == null)
 				func = FlxEase.expoInOut;
+
+			//trace('resolved ease: $name', "DEBUG");
 
 			return func;
 		}
