@@ -229,6 +229,7 @@ class Chart
                 case 'PlayAnimation': {
                     tag: 'Play Character Animation',
                     time: event.t,
+                    lane: 3,
                     values: {
                         anim:event.v.anim,
                         target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',

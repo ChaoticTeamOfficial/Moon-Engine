@@ -15,6 +15,7 @@ import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.toolkit.level_editor.LevelEditor;
+import moon.game.events.EventRegistry;
 
 class PlayState extends FlxTransitionableState
 {	
@@ -58,6 +59,8 @@ class PlayState extends FlxTransitionableState
 	{
 		super();
 		Global.allowInputs = true;
+		
+		EventRegistry.init();
 	}
 	
 	override public function create()
@@ -209,7 +212,10 @@ class PlayState extends FlxTransitionableState
 				if (event.time <= conductor.time)
 				{
 					Global.scriptCall('onEvent', [event.tag]);
-					(event.valid) ? event.exec() : onHardcodedEvent(event);
+					
+					if (event.valid) event.exec();
+					else EventRegistry.executeEvent(this, event);
+					
 					events.remove(event);
 				}
 			}
@@ -256,49 +262,6 @@ class PlayState extends FlxTransitionableState
 
 	var camMov:FlxTween;
 	var	camZoom:FlxTween;
-	public function onHardcodedEvent(event:MoonEvent)
-	{
-		switch(event.tag)
-		{
-			// -------- VISUALS
-			case 'Move Camera': 
-				setCameraFocus(
-					event.values.character,
-					[event?.values?.x ?? 0, event?.values?.y ?? 0],
-					conductor.stepCrochet / 1000 * event.values.duration,
-					{ease: resolveEase(event.values.ease)},
-					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
-				);
-			
-			case 'Set Zoom':
-
-				final baseZoom = stage?.cameraSettings?.zoom ?? 1;
-				var targetZoom:Float = baseZoom;
-				targetZoom = (event.values.mode == 'stage') ? baseZoom + (event.values.zoom - 1) : event.values.zoom;
-				//trace(event.values.zoom, "DEBUG");
-				setCameraZoom(
-					targetZoom,
-					conductor.stepCrochet / 1000 * event.values.duration,
-					{ease: resolveEase(event.values.ease)},
-					(event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
-				);
-
-			case "Customized Pulse Timing":
-				bopRate = event?.values?.rate ?? Constants.DEFAULT_BOP_RATE;
-				bopIntensity = (Constants.DEFAULT_BOP_INTENSITY - 1) * (event?.values?.intensity ?? 1) * 2;
-			
-			// ------------- CHARACTERS
-			case 'Play Character Animation':
-				//trace('Play animation: ${event.values.target} - ${event.values.anim}');
-				final char = getChar(event.values.target);
-
-				if(event.values.forceOverride) char.forcePlayAnim(event.values.anim, event?.values?.force ?? true, event?.values?.reversed ?? false, event?.values?.frame ?? 0);
-				else char.playAnim(event.values.anim, event?.values?.force ?? true, event?.values?.reversed ?? false, event?.values?.frame ?? 0);
-
-			// ------------- SOUNDS
-			case 'Change Playback Settings': conductor.changeBpmAt(event.time, event.values.bpm, event.values.timeSignature[0], event.values.timeSignature[1]);
-		}
-	}
 
 	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
@@ -398,7 +361,8 @@ class PlayState extends FlxTransitionableState
 	}
 
 	// this is ugly but whatever
-	private function resolveEase(easeName:String):EaseFunction
+	// Made public so event classes can access it
+	public function resolveEase(easeName:String):EaseFunction
 	{
 		//btw this is just because of how vslice handle tween easings.
 

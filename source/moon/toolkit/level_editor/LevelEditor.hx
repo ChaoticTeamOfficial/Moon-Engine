@@ -14,6 +14,7 @@ import moon.backend.data.Chart.EventStruct;
 import openfl.filters.ColorMatrixFilter;
 import openfl.ui.Mouse;
 import openfl.ui.MouseCursor;
+import moon.game.events.EventRegistry;
 
 enum abstract GridType(String) {
     var NOTES = 'Notes';
@@ -29,6 +30,12 @@ enum abstract PlacementMode(String) {
 
     /**A mode where you select & edit notes/events.**/
     var EDIT = 'Editing';
+}
+
+typedef EventInfo = {
+    var name:String;
+    var description:String;
+    var category:GridType;
 }
 
 class LevelEditor extends FlxState
@@ -120,6 +127,9 @@ class LevelEditor extends FlxState
             mix: mix
         };
 
+        // Initialize EventRegistry (important!)
+        EventRegistry.init();
+
         // Thanks rapper for letting me know about FlxAtlas!
         // nice lil thing we can use to batch events.
         eventAtlas = new FlxAtlas("eventAtlas");
@@ -135,29 +145,28 @@ class LevelEditor extends FlxState
             }
         }
 
-        //first we'll preload hardcoded events (not really preload, we just get their data.)
-        var dummyEvent = new MoonEvent(null, null);
-        for(event in dummyEvent.HARDCODED_EVENTS)
+        // preload hardcoded events
+        for(eventTag in EventRegistry.getHardcodedTags())
         {
-            var preloadEvent = new MoonEvent(event, null);
-            final evData = preloadEvent.preloadEditor();
-            //trace(evData, "DEBUG");
-            loadedEvents.get(evData.category).push(evData);
+            final evData = EventRegistry.getEditorData(eventTag);
+            if(evData != null)
+                loadedEvents.get(evData.category).push(evData);
         }
 
-        // and now for softcoded ones!
+        // and now for softcoded ones (script-based events)!
         final dir = Paths.readDir('data/events', ['.hx']);
         if(dir.length > 0)
         {
             for(file in dir)
             {
                 var preloadEvent = new MoonEvent(file, null);
-                final evData = preloadEvent.preloadEditor();
+                final evData = preloadEvent.retrieveEditorData();
                 //trace(evData, "DEBUG");
                 loadedEvents.get(evData.category).push(evData); 
             }
         }
 
+        // Sort events alphabetically within each category
         for(type => arr in loadedEvents)
         {
             arr.sort((a, b) -> {
@@ -194,7 +203,7 @@ class LevelEditor extends FlxState
         ];
         for (e in chart.events)
         {
-            if (e.tag == 'ChangeBPM')
+            if (e.tag == 'Change Playback Settings')
             {
                 changes.push({
                     time: e.time,
