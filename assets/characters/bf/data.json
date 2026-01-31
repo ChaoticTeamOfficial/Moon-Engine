@@ -7,6 +7,7 @@
     "danceFrequency": 2,
     "animations": [
         {"name": "idle-0", "prefix": "BF idle dance", "x": -5, "y": 0, "fps": 24},
+		{"name": "hey", "prefix": "BF HEY!!", "x": -5, "y": 0, "fps": 24, "finishAnim": "idle-0"},
         {"name": "singLEFT", "prefix": "BF NOTE LEFT0", "x": 12, "y": -6, "fps": 24},
         {"name": "singDOWN", "prefix": "BF NOTE DOWN0", "x": -10, "y": -50, "fps": 24},
         {"name": "singUP", "prefix": "BF NOTE UP0", "x": -29, "y": 27, "fps": 24},

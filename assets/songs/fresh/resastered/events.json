@@ -185,12 +185,12 @@
 	},
 	{
 		"lane": 3,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 15500,
 		"values": {
 			"anim": "hey",
 			"force": true,
-			"target": "boyfriend"
+			"target": "player"
 		}
 	},
 	{
@@ -584,12 +584,12 @@
 	},
 	{
 		"lane": 1,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 47500,
 		"values": {
 			"anim": "hey",
 			"force": true,
-			"target": "boyfriend"
+			"target": "player"
 		}
 	},
 	{
@@ -980,12 +980,12 @@
 	},
 	{
 		"lane": 2,
-		"tag": "PlayAnimation",
+		"tag": "Play Character Animation",
 		"time": 79562.5,
 		"values": {
 			"anim": "hey",
 			"force": false,
-			"target": "boyfriend"
+			"target": "player"
 		}
 	},
 	{
