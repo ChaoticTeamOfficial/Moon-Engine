@@ -106,6 +106,8 @@ class LevelEditor extends FlxState
         this.diff = diff;
         this.mix = mix;
         super();
+		
+		DiscordRPC.updatePresence(EDITOR, '', '', true);
     }
 
     override public function create()
@@ -431,9 +433,16 @@ class LevelEditor extends FlxState
 
     var changeIndex:Int = 1;
     var typeButtons:Map<GridType, MoonSprite> = [];
+	var rpcUpdateTmr:Float = 0;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+		rpcUpdateTmr += elapsed;
+		if(rpcUpdateTmr >= 0.6)
+		{
+			rpcUpdateTmr = 0;
+			DiscordRPC.updatePresence(EDITOR, 'Editing ${_internalChart.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
+		}
 
         // ----- Input Stuff ----- //
         updateCursor();

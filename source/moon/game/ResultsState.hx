@@ -77,6 +77,8 @@ class ResultsState extends FlxState
         }
         script.load('images/ingame/results/$character/$tryRank/script.hx');
         Global.scriptSet('results', this);
+		
+		DiscordRPC.updatePresence(OG, "At the Results Screen!", 'Rank: ${Std.int(stats.accuracy)}% ($rank)', false);
         
         var back = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, [0xFFFECD5C, 0xFFFF9D47]);
         add(back);

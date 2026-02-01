@@ -58,6 +58,8 @@ class Main extends Sprite
 		//Titlebar.setButtonFont(d.name, d.font, d.size);
 		Titlebar.initialize();
 		Titlebar.redrawWindow();
+
+		DiscordRPC.initialize("1297678826809200720");
 		#end
 
 		var game = new MoonGame(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, Constants.INITIAL_STATE, Constants.GAME_FRAMERATE, Constants.GAME_FRAMERATE, Constants.SKIP_SPLASH);

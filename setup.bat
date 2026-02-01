@@ -43,7 +43,8 @@ haxelib install hxvlc 2.1.4
 haxelib install hscript-iris
 haxelib install flixel-waveform
 haxelib install flixel-animate 1.1.0 
-haxelib install customtitlebar 1.0.2 
+haxelib install customtitlebar 1.0.2
+haxelib install hxdiscord_rpc
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib git funkin.vis https://github.com/FunkinCrew/funkVis

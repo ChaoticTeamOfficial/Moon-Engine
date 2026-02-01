@@ -172,6 +172,7 @@ class PauseScreen extends FlxSubState
             FlxTween.tween(ye, {x: 55}, tweenDur, {ease: FlxEase.expoOut});
 
         Paths.playSFX('game/pause/onPause${FlxG.random.bool(5) ? "-PVZ" : ""}.ogg');
+		DiscordRPC.updatePresence(AWAY, "Paused!", "Taking a break.", false);
     }
 
     override public function update(elapsed:Float)

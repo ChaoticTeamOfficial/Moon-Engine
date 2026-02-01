@@ -17,6 +17,7 @@ import moon.game.submenus.PauseScreen;
 import moon.toolkit.level_editor.LevelEditor;
 import moon.game.events.EventRegistry;
 
+using StringTools;
 class PlayState extends FlxTransitionableState
 {	
 	// Just a variable for the current instance so you can get all the vars.
@@ -63,6 +64,7 @@ class PlayState extends FlxTransitionableState
 		EventRegistry.init();
 	}
 	
+	var rpcString:String = "";
 	override public function create()
 	{
 		super.create();
@@ -115,6 +117,7 @@ class PlayState extends FlxTransitionableState
 			events = [];
 			setEvents();
 			Countdown.performCountdown();
+			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
 			Global.scriptCall('onSongRestart');
 		};
 		
@@ -148,6 +151,9 @@ class PlayState extends FlxTransitionableState
 		playField.playback.onFinish.add(()->endSong());
 
 		//trace(SongData.retrieveData(song, difficulty, mix));
+		
+		rpcString = 'Playing ${playField.chart.content.meta.displayName} on ${songData.difficulty.toUpperCase()}';
+		DiscordRPC.updatePresence(PLAYMODE, rpcString, "", true);
 
 		//alright.
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
@@ -319,12 +325,17 @@ class PlayState extends FlxTransitionableState
 	public var bopIntensity:Float = Constants.DEFAULT_BOP_INTENSITY - 1;
 	public function beatHit(curBeat:Float)
 	{
-		Global.scriptCall('onBeat', [curBeat]);
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
 			//camGAME.zoom += 0.010;
 			camHUD.zoom += bopIntensity;
 		}
+		
+		// updates less frequently..!
+		if(curBeat % 4 == 0)
+			DiscordRPC.updatePresence(PLAYMODE, rpcString, 'Accuracy: ${Std.int(playField.inputHandlers.get("p1").stats.accuracy)}%', false);
+			
+		Global.scriptCall('onBeat', [curBeat]);
 	}
 
 	public function stepHit(curStep:Float)
@@ -366,7 +377,7 @@ class PlayState extends FlxTransitionableState
 	{
 		//btw this is just because of how vslice handle tween easings.
 
-		if(easeName == null || easeName == "" || easeName.toLowerCase() == 'linear')
+		if(easeName == null || easeName == "" || easeName.toLowerCase().contains('linear'))
 			return FlxEase.linear; //safechecks are nice!
 
 		var name:String = easeName;
