@@ -1,10 +1,14 @@
 package moon.toolkit.level_editor;
 
+import moon.toolkit.level_editor.LevelEditor.EventInfo;
+
 class EventSpr extends MoonSprite
 {
 	public var category:LevelEditor.GridType;
 	public var event:String;
 	public var duration:Float = 0;
+	public var info:Null<EventInfo> = null;
+
 	public function new(event:String, category:LevelEditor.GridType = NOTES)
 	{
 		super();

@@ -102,9 +102,11 @@ class DiscordRPC
 	// these just exist so I dont need to do ifs for every damn call in here
 	public static function initialize(appId:String = ""):Void
 	{}
+	
 	public static function shutdown():Void
 	{}
-	public static function updatePresence(details:String, state:String, ?smallImageKey:String = "", ?smallImageText:String = "", ?startTimestamp:Int = 0, ?endTimestamp:Int = 0):Void
+
+	public static function updatePresence(?icoType:RPCIconType = OG, details:String, state:String, reset:Bool = false):Void
 	{}
 }
 #end

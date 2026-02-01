@@ -77,6 +77,7 @@ class LevelEditor extends FlxState
 
     public var curType(default, set):GridType;
     public var curPlacementMode:PlacementMode = PLACE;
+    public var libFocus:Bool = false;
 
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
@@ -89,7 +90,7 @@ class LevelEditor extends FlxState
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
     var sectionStarts:Array<{num:Int, y:Float}> = [];
     var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
-    public var loadedEvents:Map<GridType, Array<{name:String, description:String, category:GridType}>> = [
+    public var loadedEvents:Map<GridType, Array<EventInfo>> = [
         NOTES => [],
         VISUALS => [],
         SOUNDS => [],
@@ -437,6 +438,8 @@ class LevelEditor extends FlxState
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+        libFocus = FlxG.mouse.overlaps(library.bg2);
+
 		rpcUpdateTmr += elapsed;
 		if(rpcUpdateTmr >= 0.6)
 		{
@@ -468,7 +471,7 @@ class LevelEditor extends FlxState
         if (FlxG.keys.justPressed.SPACE)
             playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
 
-        if (FlxG.mouse.wheel != 0)
+        if (FlxG.mouse.wheel != 0 && !libFocus)
             playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
 
         for(type => button in typeButtons)
@@ -549,6 +552,7 @@ class LevelEditor extends FlxState
     // ... I really should documment this code more. Before it turns into a giant mess of code...
     private function updateCursor():Void
     {
+        if(libFocus) return;
         final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
         final relY = FlxG.mouse.viewY - gridGroup.y - 18;
@@ -782,7 +786,8 @@ class LevelEditor extends FlxState
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);
 
-        library.updateTab();
+        library.selectedInfo = null;
+        library.refreshLibrary();
         sfx('${typeStr.toLowerCase()}Tab');
 
         return curType;
