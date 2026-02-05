@@ -29,6 +29,7 @@ class Strums extends FlxSpriteGroup
                 var ok = new MoonSprite().loadGraphic(Paths.image('toolkit/level-editor/strumline'), true, 32, 32);
                 ok.animation.add('a', [i], 1, true);
                 ok.animation.play('a');
+                ok.active = false;
                 add(ok);
 
                 ok.setGraphicSize(LevelEditor.LANE_WIDTH, LevelEditor.LANE_HEIGHT);

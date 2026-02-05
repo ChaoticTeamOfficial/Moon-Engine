@@ -24,7 +24,6 @@ class FreeplayRank extends MoonSprite
         addOffset("perfect", 0, 2);
         addOffset("perfectGold", 0, 2);*/
         centerAnimations = true;
-        playAnim("perfectGold");
         updateHitbox();
 
         antialiasing = true;

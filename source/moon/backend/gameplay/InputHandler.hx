@@ -309,7 +309,7 @@ class InputHandler
     }
 
     private function onLateMiss():Void
-        // iterates through all notes and checks if they're too late.
+        // iterates through every notes and checks if they're too late.
         for (note in thisNotes)
             if (note.state != GOT_HIT && note.state != TOO_LATE && note.lane == playerID &&
                 conductor.time > note.time + Timings.getParameters('miss')[1])

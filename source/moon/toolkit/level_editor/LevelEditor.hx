@@ -54,6 +54,9 @@ class LevelEditor extends FlxState
     var scrollbar:ScrollBar;
     var strum:Strums;
     var cursor:FlxSprite;
+
+    var miniPlayer:MiniPlayer;
+
     public var eventAtlas:FlxAtlas;
 
     private var gridGroup:FlxSpriteGroup;
@@ -394,6 +397,12 @@ class LevelEditor extends FlxState
             typeButtons.set(gType, button);
         }
 
+        miniPlayer = new MiniPlayer(108, 48, chart, conductor, playback);
+        miniPlayer.camera = camMID;
+        add(miniPlayer);
+
+        EditorSync.miniPlayer = miniPlayer;
+
         library = new Library();
         library.camera = camMID;
         add(library);
@@ -478,6 +487,12 @@ class LevelEditor extends FlxState
             if(FlxG.mouse.overlaps(button, button.camera) && FlxG.mouse.justPressed)
                 curType = type;
 
+        if (FlxG.keys.justPressed.ESCAPE)
+        {
+            Global.clearScriptList();
+            EditorTransition.transitionToGameplay(this);
+        }
+
         // I should make this better...
         if(FlxG.keys.justPressed.ONE) curType = NOTES;
         else if(FlxG.keys.justPressed.TWO) curType = VISUALS;
@@ -517,6 +532,7 @@ class LevelEditor extends FlxState
         {
             final ch = changes[changeIndex];
             conductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
+            EditorSync.onBPMChange(ch.time, ch.bpm, ch.numerator, ch.denominator);
             changeIndex++;
         }
         conductor.time = playback.time;
@@ -545,6 +561,13 @@ class LevelEditor extends FlxState
                 if (n.strID == 'h' && conductor.time < n.time)
                     n.strID = 'a';
             }
+        }
+
+        // Miniplayerr :3
+        if (miniPlayer != null)
+        {
+            miniPlayer.visible = true;
+            miniPlayer.update(elapsed);
         }
     }
 
@@ -665,6 +688,15 @@ class LevelEditor extends FlxState
         }
     }
 
+    // ONCE I IMPLEMENT DELETE NOTE/DELETE EVENT
+    /**
+     * 
+    _internalChart.notes.remove(note);
+    EditorSync.onNoteDeleted(note);
+     EditorSync.onEventDeleted(event);
+    so i dont forget to call editor sync XD
+    */
+
     function createNote(n:NoteStruct)
     {
         var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
@@ -690,6 +722,7 @@ class LevelEditor extends FlxState
         note.active = false;
 
         noteGroup.add(note);
+        EditorSync.onNoteAdded(n);
     }
 
     function createEvent(ev:EventStruct)
@@ -716,6 +749,7 @@ class LevelEditor extends FlxState
             eventsGroup.add(new EventHold(spr));
 
         eventsGroup.add(spr);
+        EditorSync.onEventAdded(ev);
     }
 
     function timeToY(time:Float):Float

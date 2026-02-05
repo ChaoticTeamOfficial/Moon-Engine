@@ -1,5 +1,7 @@
 package moon.game.obj;
 
+import moon.dependency.scripting.*;
+
 using StringTools;
 
 typedef CharacterData =
@@ -22,6 +24,7 @@ class Character extends MoonSprite
     public var conductor:Conductor;
     public var character(default, set):String;
     public var animationHold:Float = 0;
+    public var script:MoonScript;
 
     var danceIndex:Int = 0;
     var lastDanceBeat:Int = -1;
@@ -37,7 +40,11 @@ class Character extends MoonSprite
     {
         super(x, y);
         this.conductor = conductor;
+
+        script = new MoonScript();
+
         this.character = character;
+
         if(conductor != null) conductor.onBeat.add(checkDance);
     }
    
@@ -108,6 +115,9 @@ class Character extends MoonSprite
 
     @:noCompletion public function set_character(char:String):String
     {
+        if(Global.scripts.exists(this.character))
+            Global.unregisterScript(this.character);
+
         if(!Paths.exists('characters/$char/data.json'))
         {
             trace('Specified character "$char" does not exist. Loading default...', "WARNING");
@@ -143,6 +153,13 @@ class Character extends MoonSprite
         this.scale.set(data?.scale ?? 0, data?.scale ?? 0);
         this.updateHitbox();
         this.playAnim("idle-0");
+
+        script.load('characters/${this.character}/script');
+        if(script.code != null)
+        {
+            script.set('char', this);
+            Global.registerScript('script-${this.character}', script);
+        }
 
         /*animation.onFinish.add((anim)->
         {

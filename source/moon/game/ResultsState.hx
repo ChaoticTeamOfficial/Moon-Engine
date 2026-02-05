@@ -99,12 +99,12 @@ class ResultsState extends FlxState
             dumb.visible = false;
         }
 
-        var textInfo = new ScrollingText(FlxG.width / 2 - 110, 0, FlxG.width / 2 + 110, 'wawa', 52);
-        textInfo.textField.font = Paths.font('CRIKEY SQUATS REGULAR.TTF');
+        var textInfo = new ScrollingText(FlxG.width / 2 - 114, 0, FlxG.width / 2 + 114, 'wawa', 52);
+        textInfo.textField.font = Paths.font('tardling/Solid/Tardling-Solid.ttf');
         textInfo.textField.color = 0xFFf9feb1;
         textInfo.antialiasing = true;
-        textInfo.angle = -3;
-        textInfo.textField.setBorderStyle(SHADOW, 0xFFf98862, 5);
+        textInfo.angle = -4;
+        textInfo.textField.setBorderStyle(OUTLINE, 0xFFf98862, 4);
         add(textInfo);
 
         var soundBooth = new FlxAnimate();
@@ -196,8 +196,8 @@ class ResultsState extends FlxState
                         final point = posOrder[i];
                         final text = textOrder[i];
 
-                        var t = new FlxText(point.x, point.y);
-                        t.setFormat(Paths.font('DynaPuff.ttf'), 48, (i > 1) ? Timings.getParameters(text)[4] : FlxColor.WHITE);
+                        var t = new FlxText(point.x, point.y + 16);
+                        t.setFormat(Paths.font('tardling/Solid/Tardling-Solid.ttf'), 56, (i > 1) ? Timings.getParameters(text)[4] : FlxColor.WHITE);
                         t.text = (i == 0) ? '${stats.totalNotes}' : (i == 1) ? '${stats.highestCombo}' : '${stats.judgementsCounter.get(text)}';
                         //t.textField.antiAliasType = ADVANCED;
                         //t.textField.sharpness = 400;
@@ -260,8 +260,8 @@ class ResultsState extends FlxState
                             t.visible = true;
                         }
 
-                        FlxTween.tween(textInfo, {y: bb.y + bb.height - 64}, 1, {ease: FlxEase.backOut});
-                        textInfo.setText('${diff.toUpperCase()} • ${stats.accuracy}% • ${chartMeta.displayName} by ${chartMeta.artist}');
+                        FlxTween.tween(textInfo, {y: bb.y + bb.height - 42}, 1, {ease: FlxEase.backOut});
+                        textInfo.setText('${diff.toUpperCase()}  //  ${stats.accuracy}%  //  ${chartMeta.displayName} by ${chartMeta.artist}');
 
                         Global.scriptCall('onIntroEnd');
                     }});

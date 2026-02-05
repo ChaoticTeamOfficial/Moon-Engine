@@ -176,6 +176,12 @@ class PlayField extends FlxGroup
     {
         //< -- NOTES SETUP -- >//
         // Add the note spawner.
+        if(noteSpawner != null){
+            noteSpawner.clear();
+            noteSpawner.killMembers();
+            remove(noteSpawner, true);
+        }
+        
         noteSpawner = new NoteSpawner(chart.content.notes, strumlines, conductor);
         noteSpawner.scrollSpeed = chart.content.meta.scrollSpd;
         add(noteSpawner);
@@ -212,13 +218,13 @@ class PlayField extends FlxGroup
         stats.y = (MoonSettings.callSetting('Stats Position') == 'On Player Lane')
         ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
         : healthBar.y + stats.height + 8;
-		centerText();
+        centerText();
         //updateP1Stats(null, false);
 
         playback.updateVolume();
     }
 
-    function restartSong()
+    public function restartSong()
     {
         playback.time = 0;
         playback.state = PAUSE;
@@ -238,9 +244,6 @@ class PlayField extends FlxGroup
             handler.heldSustains.clear();
         }
         
-        noteSpawner.clear();
-        noteSpawner.killMembers();
-        remove(noteSpawner, true);
         for (handler in inputHandlers.iterator())
             handler.stats.reset();
 
@@ -324,7 +327,7 @@ class PlayField extends FlxGroup
 
         stats.color = rankData.color;
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
-		centerText();
+        centerText();
         
         if(FlxG.keys.justPressed.F5){
             Global.clearScriptList();
@@ -394,13 +397,13 @@ class PlayField extends FlxGroup
         MoonUtils.cancelActiveTwn(statsColor);
         statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {startDelay: 0.05});
     }
-	
-	function centerText()
-	{
-		if(MoonSettings.callSetting('Stats Position') != 'On Player Lane' || MoonSettings.callSetting('Middlescroll'))
-			stats.screenCenter(X);
-		else stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
-	}
+    
+    function centerText()
+    {
+        if(MoonSettings.callSetting('Stats Position') != 'On Player Lane' || MoonSettings.callSetting('Middlescroll'))
+            stats.screenCenter(X);
+        else stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
+    }
 
     function beatHit(beat:Float):Void
     {
@@ -421,5 +424,13 @@ class PlayField extends FlxGroup
 
             if(onSongCountdown != null) onSongCountdown(Std.int(beat));
        }
+    }
+
+    public var botPlay(default, set):Bool = false;
+
+    function set_botPlay(value:Bool):Bool {
+        botPlay = value;
+        inputHandlers.get('p1').CPUMode = value;
+        return value;
     }
 }

@@ -2,7 +2,7 @@
     "antialiasing": true,
     "scale": 1,
     "flipX": false,
-    "camOffsets": [196, -110],
+    "camOffsets": [250, -110],
     "healthbarColors": [115, 94, 176],
     "danceFrequency": 4,
     "animations": [

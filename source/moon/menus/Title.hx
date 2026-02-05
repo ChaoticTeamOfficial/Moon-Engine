@@ -41,6 +41,9 @@ class Title extends FlxTransitionableState
     override public function create():Void
     {
         super.create();
+		
+		// otherwise it fucks up the bg bars lol
+		FlxG.autoPause = false;
 
         setupTransition();
         

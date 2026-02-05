@@ -47,7 +47,8 @@ haxelib install customtitlebar 1.0.2
 haxelib install hxdiscord_rpc
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-haxelib git funkin.vis https://github.com/FunkinCrew/funkVis
+haxelib git funkin.vis https://github.com/ACrazyTown/funkVis
+haxelib git hxdsp https://github.com/baioc/hxdsp
 haxelib git grig.audio https://github.com/FunkinCrew/grig.audio
 haxelib git polymod https://github.com/larsiusprime/polymod
 haxelib git thx.core https://github.com/fponticelli/thx.core

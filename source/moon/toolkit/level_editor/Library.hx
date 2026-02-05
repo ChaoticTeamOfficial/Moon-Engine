@@ -42,17 +42,20 @@ class Library extends FlxGroup
 		FlxSpriteUtil.drawRoundRect(bg, 0, 0, Std.int(bgSize.x), Std.int(bgSize.y), 24, 24, FlxColor.BLACK);
 		bg.antialiasing = true;
 		bg.alpha = 0.4;
+		bg.active = false;
 
 		bgCopy = new MoonSprite(bg.x, bg.y).makeGraphic(Std.int(bg.width), Std.int(bg.height), FlxColor.TRANSPARENT);
 		bgCopy.shader = new BorderGlowShader();
 		add(bgCopy);
 		bgCopy.blend = ADD;
+		bgCopy.active = false;
 
 		bg2 = new MoonSprite().makeGraphic(Std.int(bg.width - 32), Std.int(bg.height / 1.5 + 16), FlxColor.TRANSPARENT);
 		add(bg2);
 		FlxSpriteUtil.drawRoundRect(bg2, 0, 0, bg2.width, bg2.height, 24, 24, FlxColor.BLACK);
 		bg2.antialiasing = true;
 		bg2.alpha = 0.3;
+		bg2.active = false;
 
 		bg2.setPosition(bg.x + bg.width / 2 - bg2.width / 2, bg.y + bg.height / 2 - bg2.height / 2 + 16);
 

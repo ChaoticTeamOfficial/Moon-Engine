@@ -43,11 +43,13 @@ class ScrollBar extends FlxSpriteGroup
         bar = new FlxSprite().makeGraphic(w, barSize, FlxColor.TRANSPARENT);
         FlxSpriteUtil.drawRoundRect(bar, 0, 0, w, barSize, w, w, FlxColor.BLACK);
         add(bar);
+        bar.active = false;
         
         indicator = new FlxSprite().makeGraphic(w, 30, FlxColor.TRANSPARENT);
         FlxSpriteUtil.drawRoundRect(indicator, 0, 0, w, 30, w, w, FlxColor.WHITE);
         indicator.alpha = 0.5;
         add(indicator);
+        indicator.active = false;
     }
 
     override public function update(elapsed:Float)

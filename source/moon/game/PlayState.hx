@@ -14,7 +14,7 @@ import moon.game.obj.*;
 import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
-import moon.toolkit.level_editor.LevelEditor;
+import moon.toolkit.level_editor.*;
 import moon.game.events.EventRegistry;
 
 using StringTools;
@@ -201,8 +201,9 @@ class PlayState extends FlxTransitionableState
 		events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
 
 		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
-		camGAME.zoom = stage?.cameraSettings?.zoom ?? 1;
+		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
 		isDead = false;
+		allowGameBop = true;
 	}
 
 	var isDead:Bool = false;
@@ -227,11 +228,16 @@ class PlayState extends FlxTransitionableState
 			}
 		}
 		
-		//camGAME.zoom = FlxMath.lerp(camGAME.zoom, gameZoom, elapsed * 6);
+		if(allowGameBop)
+			camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom, elapsed * 6);
+
 		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
 		
 		if(FlxG.keys.justPressed.NINE) FlxG.switchState(()->new ChartConvert());
-		if(FlxG.keys.justPressed.SEVEN) FlxG.switchState(() -> new LevelEditor(songData.song, songData.difficulty, songData.mix));
+		if(FlxG.keys.justPressed.SEVEN){
+			Global.clearScriptList();
+			EditorTransition.transitionToEditor(this);
+		}
 
 		if(MoonInput.justPressed(PAUSE))
 		{
@@ -281,14 +287,25 @@ class PlayState extends FlxTransitionableState
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));
 	}
 
+	var lastZoom:Float;
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
 		MoonUtils.cancelActiveTwn(camZoom);
+		allowGameBop = false;
 
 		//trace('Setting zoom to $zoom in $duration', "DEBUG");
 		if(!isInstant)
+		{
 			camZoom = FlxTween.tween(camGAME, {zoom: zoom}, duration, options);
-		else camGAME.zoom = zoom;
+			camZoom.onComplete = _->{
+				lastZoom = camGAME.zoom;
+				allowGameBop = true;
+			};
+		}
+		else{
+			allowGameBop = true;
+			camGAME.zoom = lastZoom = zoom;
+		}
 	}
 
 	public function getCamPos(charName:String):Array<Float>
@@ -323,11 +340,15 @@ class PlayState extends FlxTransitionableState
 
 	public var bopRate:Int = Constants.DEFAULT_BOP_RATE - 1;
 	public var bopIntensity:Float = Constants.DEFAULT_BOP_INTENSITY - 1;
+
+	public var allowGameBop:Bool = false;
 	public function beatHit(curBeat:Float)
 	{
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
-			//camGAME.zoom += 0.010;
+			if(allowGameBop)
+				camGAME.zoom += bopIntensity * 1.5;
+
 			camHUD.zoom += bopIntensity;
 		}
 		

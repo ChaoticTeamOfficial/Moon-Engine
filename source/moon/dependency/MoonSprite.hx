@@ -100,6 +100,12 @@ class MoonSprite extends FlxSprite
 		if (animationSuffix != "" && animation.exists('$animName-$animationSuffix'))
 			playName = '$animName-$animationSuffix';
 
+		if(!animation.exists(playName))
+		{
+			trace('Tried to play animation $playName, but it doesn\'t exist!', "WARNING");
+			return;
+		}
+
 		animation.play(playName, force, reversed, frame);
 
 		var offsetKey:String = playName;

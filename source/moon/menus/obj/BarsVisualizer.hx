@@ -8,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import funkin.vis.dsp.SpectralAnalyzer;
+import funkin.vis.audioclip.frontends.LimeAudioClip;
 import lime.media.AudioSource;
 
 @:publicFields
@@ -33,10 +34,9 @@ class BarsVisualizer extends FlxSpriteGroup
             //peakLines.add(spr);
 		}
     }
-
-    function setAudioSource(audioSrc:AudioSource){
-        return analyzer = new SpectralAnalyzer(audioSrc, barCount + 1, 0.1, 10);
-    }
+	
+	public function setAudioSource(src:AudioSource)
+		analyzer = new SpectralAnalyzer(new LimeAudioClip(src), barCount + 1, 0.1, 10);
 
     @:generic
     static inline function min<T:Float>(x:T, y:T):T

@@ -30,6 +30,6 @@ class EventSpr extends MoonSprite
         	animation.frameName = '${catStr.toUpperCase()}-None';
         }
         
-        antialiasing = false;
+        antialiasing = active = false;
 	}
 }
