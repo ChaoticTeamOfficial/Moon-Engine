@@ -1,21 +1,13 @@
 package moon.menus;
 
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.text.FlxText;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxBasic;
 import flixel.util.FlxTimer;
 import moon.dependency.MoonSound.Metadata;
 import moon.menus.obj.BarsVisualizer;
-import flixel.math.FlxMath;
 import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.addons.display.FlxBackdrop;
-import flixel.util.FlxGradient;
-import flixel.FlxG;
-import flixel.util.FlxColor;
-import flixel.FlxState;
 import moon.global_obj.Alphabet;
 import flixel.graphics.FlxGraphic;
 

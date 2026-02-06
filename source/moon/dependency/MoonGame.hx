@@ -59,7 +59,6 @@ class MoonGame extends FlxGame
 			{
 				MoonSettings.setSetting("Master Volume", FlxG.sound.volume * 100);
 				MoonSettings.updateGlobalSettings();
-			
 			}
 		}, false, 100);
 		

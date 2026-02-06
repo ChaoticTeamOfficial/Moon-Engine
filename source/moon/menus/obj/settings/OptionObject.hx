@@ -82,6 +82,7 @@ class OptionObject extends FlxSpriteGroup
             {
                 case 'Keybinds...': FlxG.state.openSubState(new Keybinds());
                 case 'HUD Customization...': FlxG.state.openSubState(new JudgementsComboCustomize());
+                case "Calculate Offset...": FlxG.state.openSubState(new Offset());
             }
         } 
     }

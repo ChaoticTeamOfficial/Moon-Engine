@@ -56,6 +56,7 @@ class PlayState extends FlxTransitionableState
 		mix: 'bf'
 	};
 
+	public var paused:Bool = false;
 	public function new()
 	{
 		super();
@@ -386,10 +387,24 @@ class PlayState extends FlxTransitionableState
 
 	public function pauseGame()
 	{
+		if(paused) return;
+
+		paused = true;
 		activeTweens(false);
 		openSubState(new PauseScreen(camALT));
 		if(playField.playback.state == PLAY)
 			playField.playback.state = PAUSE;
+	}
+
+	public function resumeGame()
+	{
+		paused = false;
+		activeTweens(true);
+		if(!playField.inCountdown)
+		{
+			playField.playback.state = PLAY;    
+            playField.playback.resync();
+		}
 	}
 
 	public function exit(toMenu:Bool = true, savedData:Bool = false)
@@ -397,7 +412,8 @@ class PlayState extends FlxTransitionableState
 		// jus to make sure
 		Paths.skipNextCleanup = false;
 		Global.clearScriptList();
-		instance = playField.instance = null;
+		instance = null;
+		PlayField.instance = null;
 
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
