@@ -16,13 +16,18 @@ class ResultsState extends FlxState
     public var newScore:Bool;
 
     // The order for each text
-    var textOrder:Array<String> = ['totalNotes', 'maxCombo', 'sick', 'good', 'bad', 'shit', 'miss'];
+    final textOrder:Array<String> = ['totalNotes', 'maxCombo', 'sick', 'good', 'bad', 'shit', 'miss'];
     // Position for each text, representing the orders from the array above ^^
-    var posOrder:Array<FlxPoint> = [
+    final posOrder:Array<FlxPoint> = [
         FlxPoint.get(372, 130), FlxPoint.get(372, 198),
         FlxPoint.get(200, 255), FlxPoint.get(200, 312),
         FlxPoint.get(200, 368), FlxPoint.get(200, 426),
         FlxPoint.get(230, 478)
+    ];
+
+    final borderColors:Array<FlxColor> = [
+        0xFF000000, 0xFF000000, 0xFF251e6c, 0xFF1e5b28,
+        0xFF5a1638, 0xFF432d2d, 0xFF402217
     ];
 
     public var script:MoonScript = new MoonScript();
@@ -105,6 +110,7 @@ class ResultsState extends FlxState
         textInfo.antialiasing = true;
         textInfo.angle = -4;
         textInfo.textField.setBorderStyle(OUTLINE, 0xFFf98862, 4);
+        textInfo.scrollSpeed = 58;
         add(textInfo);
 
         var soundBooth = new FlxAnimate();
@@ -202,7 +208,7 @@ class ResultsState extends FlxState
                         //t.textField.antiAliasType = ADVANCED;
                         //t.textField.sharpness = 400;
                         t.antialiasing = true;
-                        t.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
+                        t.setBorderStyle(OUTLINE, borderColors[i], 4);
                         add(t);
                         t.alpha = 0.4;
 

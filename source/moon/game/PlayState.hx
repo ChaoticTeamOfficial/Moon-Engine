@@ -155,7 +155,7 @@ class PlayState extends FlxTransitionableState
 		rpcString = 'Playing ${playField.chart.content.meta.displayName} on ${songData.difficulty.toUpperCase()}';
 		DiscordRPC.updatePresence(PLAYMODE, rpcString, "", true);
 
-		FlxG.signals.focusLost.add(()->pauseGame());
+		//FlxG.signals.focusLost.add(()->pauseGame());
 
 		//alright.
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
@@ -378,6 +378,12 @@ class PlayState extends FlxTransitionableState
 		super.closeSubState();
 	}
 
+	override function onFocusLost()
+	{
+		super.onFocusLost();
+		pauseGame();
+	}
+
 	public function pauseGame()
 	{
 		activeTweens(false);
@@ -391,7 +397,7 @@ class PlayState extends FlxTransitionableState
 		// jus to make sure
 		Paths.skipNextCleanup = false;
 		Global.clearScriptList();
-		instance = null;
+		instance = playField.instance = null;
 
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
