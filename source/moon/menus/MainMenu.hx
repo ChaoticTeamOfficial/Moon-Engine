@@ -27,13 +27,7 @@ class MainMenu extends FlxTransitionableState
             add(btn);
             buttons.push(btn);
         }
-
-        var spr = new MoonSprite();
-        spr.frames = Paths.getSparrowAtlas('mods/modTest2/characters/modChar/charSelect/cuteStuff');
-        spr.animation.addByPrefix('foda', 'boyfriend', 24, true);
-        spr.playAnim('foda');
-        add(spr);
-
+        
         changeSelection(0);
         
         if(PlayState.instance != null) PlayState.instance.destroy();

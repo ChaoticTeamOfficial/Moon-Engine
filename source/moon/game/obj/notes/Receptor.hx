@@ -213,6 +213,8 @@ class Receptor extends FlxSpriteGroup
 		
 		splash.visible = sustainSplash.visible = splashGroup.visible = visible;
 		notesGroup.visible = sustainsGroup.visible = visible;
+
+        for(note in notesGroup.members) note.update(0);
 		
 		return this.visible;
 	}

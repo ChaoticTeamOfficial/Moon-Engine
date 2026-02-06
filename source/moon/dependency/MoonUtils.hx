@@ -43,6 +43,77 @@ class MoonUtils
         return formatted;
     }
 
+    private static var symbols:String = "!@#$%^&*()1234567890?";
+    private static var timer:FlxTimer;
+
+    /*
+     * Scrambles a FlxText, revealing all the characters in it 1 by 1.
+     * @param text The FlxText instance.
+     */
+    static function scrambleText(text:FlxText):Void
+    {
+        // You probably noticed at this point that I reaaaally like messing with strings hahahah
+        final original:String = text.text;
+        text.text = generateScramble(original);
+
+        var revealed:Array<Bool> = [for (i in 0...original.length) false];
+
+        if(timer != null && timer.active)
+        {
+            timer.cancel();
+            timer.destroy();
+        }
+
+        timer = new FlxTimer();
+        timer.start(0.05, function(t:FlxTimer)
+        {
+            var done:Bool = true;
+            var newText:String = "";
+
+            for (i in 0...original.length)
+            {
+                final c:String = original.charAt(i);
+                if (~/\s/.match(c))
+                {
+                    newText += c;
+                    revealed[i] = true;
+                }
+                else if (revealed[i])
+                    newText += c;
+                else
+                {
+                    if (Math.random() < 0.2) // probability to reveal!
+                    {
+                        newText += c;
+                        revealed[i] = true;
+                    }
+                    else
+                    {
+                        newText += symbols.charAt(Std.random(symbols.length));
+                        done = false;
+                    }
+                }
+            }
+
+            text.text = newText;
+
+            if (done)
+                t.cancel();
+        }, 0);
+    }
+
+    private static function generateScramble(original:String):String
+    {
+        var result:String = "";
+        for (i in 0...original.length)
+        {
+            final c:String = original.charAt(i);
+
+            result += (~/\s/.match(c)) ? c : symbols.charAt(Std.random(symbols.length));
+        }
+        return result;
+    }
+
     /**
      * Returns an array from a file, which breaks per line.
      * @param path the file path.

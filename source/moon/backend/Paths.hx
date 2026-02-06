@@ -213,13 +213,14 @@ class Paths
 		}
 		
 		// sound clearing
-		for (key => sound in renderedSounds)
+        // well uhm this kinda kills menu music :T
+		/*for (key => sound in renderedSounds)
 		{
 			if(dumpExclusions.contains(key + '.ogg')) continue;
 			
 			sound.close();
 			renderedSounds.remove(key);
-		}
+		}*/
 
 		renderedGraphics.clear();
 		renderedSounds.clear();

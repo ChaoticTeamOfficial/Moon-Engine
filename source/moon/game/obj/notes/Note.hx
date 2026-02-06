@@ -151,6 +151,8 @@ class Note extends MoonSprite
     override public function update(dt:Float):Void
     {
         super.update(dt);
+        if(state == GOT_HIT || state == MISSED || state == TOO_LATE)
+            visible = active = false;
         updateNotePos();
     }
 

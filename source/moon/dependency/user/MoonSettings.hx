@@ -132,8 +132,8 @@ class MoonSettings
             new Setting("Master Volume", SLIDER, "Changes the game's main volume (affects everything).", [0, 100], 100),
             new Setting("Instrumental Volume", SLIDER, "Changes the volume for in-game instrumentals.", [0, 100], 100),
             new Setting("Voices Volume", SLIDER, "Changes the volume for in-game vocals.", [0, 100], 100),
-            new Setting("Music Volume", SLIDER, "Changes the volume for menu music.", [0, 100], 100),
-            new Setting("SFX Volume", SLIDER, "Changes the volume for general sound effects.", [0, 100], 100),
+            new Setting("Music Volume", SLIDER, "Changes the volume for menu music.", [0, 100], 60),
+            new Setting("SFX Volume", SLIDER, "Changes the volume for general sound effects.", [0, 100], 80),
             new Setting("Editor Sounds", SLIDER, "Changes the volume for editor sound effects.", [0, 100], 100),
             new Setting("Ranking Sound", CHECKMARK, "Plays a sound when getting a higher or lower rank while playing a track.", null, false),
             new Setting("Mute Voices on Miss", CHECKMARK, "Toggles muting the vocals when you miss. Useful if you'd like to hear uninterrupted music.", null, true)

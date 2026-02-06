@@ -155,6 +155,8 @@ class PlayState extends FlxTransitionableState
 		rpcString = 'Playing ${playField.chart.content.meta.displayName} on ${songData.difficulty.toUpperCase()}';
 		DiscordRPC.updatePresence(PLAYMODE, rpcString, "", true);
 
+		FlxG.signals.focusLost.add(()->pauseGame());
+
 		//alright.
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
@@ -240,12 +242,7 @@ class PlayState extends FlxTransitionableState
 		}
 
 		if(MoonInput.justPressed(PAUSE))
-		{
-			activeTweens(false);
-			openSubState(new PauseScreen(camALT));
-			if(playField.playback.state == PLAY)
-				playField.playback.state = PAUSE;
-		}
+			pauseGame();
 
 		// gonna leave it commented for now
 		// it softlocks currently, and my skill issue won't help XD
@@ -338,7 +335,7 @@ class PlayState extends FlxTransitionableState
 		return null;
 	}
 
-	public var bopRate:Int = Constants.DEFAULT_BOP_RATE - 1;
+	public var bopRate:Int = Constants.DEFAULT_BOP_RATE;
 	public var bopIntensity:Float = Constants.DEFAULT_BOP_INTENSITY - 1;
 
 	public var allowGameBop:Bool = false;
@@ -379,6 +376,14 @@ class PlayState extends FlxTransitionableState
 	override function closeSubState()
 	{
 		super.closeSubState();
+	}
+
+	public function pauseGame()
+	{
+		activeTweens(false);
+		openSubState(new PauseScreen(camALT));
+		if(playField.playback.state == PLAY)
+			playField.playback.state = PAUSE;
 	}
 
 	public function exit(toMenu:Bool = true, savedData:Bool = false)

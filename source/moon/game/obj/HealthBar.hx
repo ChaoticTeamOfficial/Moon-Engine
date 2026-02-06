@@ -69,6 +69,9 @@ class HealthBar extends FlxSpriteGroup
         this.player = player;
 
         bar.createFilledBar(getRGBData(opponent), getRGBData(player));
+        health = bar.value = 50;
+        playerIcon.screenCenter(X);
+        oppIcon.screenCenter(X);
     }
 
     public var updateIconsPos:Bool = true;
@@ -83,7 +86,7 @@ class HealthBar extends FlxSpriteGroup
         if(updateIconsPos)
         {
             final percent = 1 - (health / 100);
-            lerpPercent = FlxMath.lerp(lerpPercent, percent, elapsed * 12);
+            lerpPercent = FlxMath.lerp(lerpPercent, percent, elapsed * 16);
             final iconOffset = 16;
 			
             playerIcon.x = bar.x + (bar.width * lerpPercent) + (150 * playerIcon.scale.x - 150) / 2 + iconOffset * 2;
