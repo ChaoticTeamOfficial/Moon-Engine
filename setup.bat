@@ -53,6 +53,7 @@ haxelib git grig.audio https://github.com/FunkinCrew/grig.audio
 haxelib git polymod https://github.com/larsiusprime/polymod
 haxelib git thx.core https://github.com/fponticelli/thx.core
 haxelib git thx.semver https://github.com/fponticelli/thx.semver
+haxelib git flixel-screenshot-plugin https://github.com/dotevie/flixel-screenshot-plugin
 
 haxelib set flixel 6.1.2
 haxelib set lime 8.3.0

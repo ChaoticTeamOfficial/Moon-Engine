@@ -62,6 +62,7 @@ class Main extends Sprite
 		DiscordRPC.initialize("1297678826809200720");
 		#end
 
+		// There's other stuffies that's initialized at MoonGame btw!
 		var game = new MoonGame(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, Constants.INITIAL_STATE, Constants.GAME_FRAMERATE, Constants.GAME_FRAMERATE, Constants.SKIP_SPLASH);
 		addChild(game);
 

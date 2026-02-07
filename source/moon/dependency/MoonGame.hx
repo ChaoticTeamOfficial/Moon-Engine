@@ -36,6 +36,7 @@ class MoonGame extends FlxGame
     	Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
     	FlxSprite.defaultAntialiasing = true;
 
+    	// AFTER game initializes...
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         
 		MoonSettings.init();
@@ -44,6 +45,10 @@ class MoonGame extends FlxGame
 
         MoonSettings.updateGlobalSettings();
         MoonSettings.updateWindow();
+
+        FlxG.plugins.addPlugin(new flixel.addons.plugin.ScreenShotPlugin());
+        flixel.addons.plugin.ScreenShotPlugin.screenshotKeys = [F3];
+        //screenshotplugin.ScreenShotPlugin.screenshotKey = F3;
 
         FlxG.stage.addEventListener(openfl.events.KeyboardEvent.KEY_DOWN, (e) ->
 		{

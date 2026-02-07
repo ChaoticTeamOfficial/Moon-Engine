@@ -117,3 +117,14 @@ class Stage extends FlxTypedGroup<FlxBasic>
         super.update(elapsed);
     }
 }
+
+typedef StageJSONStructure = {
+    var camSettings:{?zoom:Float, ?startX:Float, ?startY:Float};
+    var objects:Array<StageObject>;
+}
+
+typedef StageObject = {
+    var name:String;
+    var ?type:AtlasType;
+    var ?animations:Array<AnimationData>;
+}

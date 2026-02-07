@@ -10,6 +10,8 @@ import flixel.effects.*;
 import flixel.addons.transition.*;
 
 import moon.backend.*;
+import moon.backend.Paths.AnimationData;
+import moon.backend.Paths.AtlasType;
 import moon.dependency.*;
 import moon.dependency.user.*;
 import moon.backend.data.*;

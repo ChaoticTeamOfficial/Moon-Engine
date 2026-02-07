@@ -421,7 +421,6 @@ class Paths
 
 /**
  * An typedef for animation data, useful for spritesheets with jsons.
- * (I will most likely move this to somewhere else.)
  */
 typedef AnimationData = {
     var name:String;
@@ -432,4 +431,10 @@ typedef AnimationData = {
     var ?fps:Int;
     var ?looped:Bool;
     var ?finishAnim:String;
+}
+
+enum abstract AtlasType(String) {
+    var NONE = 'none';
+    var SPARROW = 'sparrow';
+    var PACKED = 'packed';
 }
