@@ -201,6 +201,7 @@ class PauseScreen extends FlxSubState
                     paused.loadGraphic(Paths.image('menus/pause/reset'));
                     pf.restartSong();
                     game.resumeGame();
+                    close();
                 case 'settings': 
                     close();
                     FlxG.state.openSubState(new Settings());
