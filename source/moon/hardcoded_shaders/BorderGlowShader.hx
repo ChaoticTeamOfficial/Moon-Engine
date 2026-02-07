@@ -1,7 +1,7 @@
 package moon.hardcoded_shaders;
 
 import flixel.system.FlxAssets.FlxShader;
-import Math.exp; // For Math.exp in update
+import Math.exp;
 
 class BorderGlowShader extends FlxShader
 {

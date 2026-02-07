@@ -1,15 +1,13 @@
 package moon.game.obj;
 
 import moon.backend.gameplay.InputHandler;
-import flixel.FlxSprite;
-import flixel.FlxBasic;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import openfl.display.BlendMode;
 import flixel.addons.display.FlxBackdrop;
-import flixel.util.FlxAxes;
-
 import moon.dependency.scripting.*;
+
+using StringTools;
 
 /**
  * The background for songs.
@@ -56,6 +54,34 @@ class Stage extends FlxTypedGroup<FlxBasic>
      */
     public var script:MoonScript;
 
+    public var json:StageJSONStructure;
+
+    var objMap:Map<String, MoonSprite> = [];
+    var dancingSprites:Array<MoonSprite> = [];
+
+    var opponentCharData:StageCharacter;
+    var playerCharData:StageCharacter;
+    var spectatorCharData:StageCharacter;
+
+    // sucks to be me
+    private var blendModes:Map<String, BlendMode> = [
+        "ADD" => ADD,
+        "ALPHA" => ALPHA,
+        "DARKEN" => DARKEN,
+        "DIFFERENCE" => DIFFERENCE,
+        "ERASE" => ERASE,
+        "HARDLIGHT" => HARDLIGHT,
+        "INVERT" => INVERT,
+        "LAYER" => LAYER,
+        "LIGHTEN" => LIGHTEN,
+        "MULTIPLY" => MULTIPLY,
+        "NORMAL" => NORMAL,
+        "OVERLAY" => OVERLAY,
+        "SCREEN" => SCREEN,
+        "SHADER" => SHADER,
+        "SUBTRACT" => SUBTRACT
+    ];
+
     public function new(stage:String = 'stage', conductor:Conductor)
     {
         super();
@@ -64,22 +90,118 @@ class Stage extends FlxTypedGroup<FlxBasic>
         script = new MoonScript();
         Global.registerScript('stageScript', script);
         this.stage = stage;
+
+        if(conductor != null) conductor.onBeat.add(onStageBeat);
     }
 
     @:noCompletion public function set_stage(stg:String):String
     {
         if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
-        {
-            trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg". Loading default...', "WARNING");
-            stg = 'void';
-        }
+            trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
 
         this.stage = stg;
         script.load('images/ingame/stages/$stg/script.hx');
         script.set("background", this);
+
+        if (Paths.exists('images/ingame/stages/$stg/data.json'))
+        {
+            json = cast Paths.JSON('images/ingame/stages/$stg/data');
+            cameraSettings = json.camSettings;
+
+            for (objData in json.objects)
+            {
+                var sprite = new MoonSprite(objData.position[0], objData.position[1]);
+                sprite.strID = objData.name;
+
+                final assetPath = '$stg/${objData.name}';
+                switch (objData.type)
+                {
+                    case SPARROW:
+                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
+                    case PACKED:
+                        sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
+                    default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
+                }
+
+                if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
+                if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
+
+                sprite.angle = objData?.angle ?? 0;
+                sprite.alpha = objData?.alpha ?? 1;
+                sprite.antialiasing = objData?.antialiasing ?? true;
+                sprite.flipX = objData?.flipX ?? false;
+                sprite.flipY = objData?.flipY ?? false;
+                if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
+
+                if(objData.animations != null && objData.animations.length > 0)
+                    sprite.idleAnims = sprite.loadAnimations(objData.animations);
+
+                if (objData.startAnim != null)
+                    sprite.playAnim(objData.startAnim);
+
+                if (objData.animBehavior != null && objData.type != NONE)
+                {
+                    switch (objData.animBehavior)
+                    {
+                        case ONBEAT: dancingSprites.push(sprite);
+                        case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
+                    }
+                }
+
+                add(sprite);
+                objMap.set(objData.name, sprite);
+            }
+        }
+
         script.call('onCreate');
 
         return stg;
+    }
+
+    public function updatePositioning()
+    {
+        for(character in json.characters)
+        {
+            switch(character.type)
+            {
+                case OPPONENTS:
+                    opponentCharData = character;
+                    addGroupAtLayer(opponents, opponentCharData, objMap);
+                    opponents.origin.set(opponents.width / 2, opponents.height);
+                case PLAYERS:
+                    playerCharData = character;
+                    addGroupAtLayer(players, playerCharData, objMap);
+                    players.origin.set(players.width / 2, players.height);
+                case SPECTATORS:
+                    spectatorCharData = character;
+                    addGroupAtLayer(spectators, spectatorCharData, objMap);
+                    spectators.origin.set(spectators.width / 2, spectators.height);
+            }
+        }
+    }
+
+    private function addGroupAtLayer(group:FlxSpriteGroup, charData:StageCharacter, objMap:Map<String, MoonSprite>)
+    {
+        if (charData == null) return;
+
+        group.x = charData?.position[0] ?? 0;
+        group.y = charData?.position[1] ?? 0;
+        group.angle = charData?.angle ?? 0;
+        if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
+
+        for(obj in group.members)
+            if(Std.isOfType(obj, Character))
+                if (charData.camOffsets != null) cast(obj, Character).camOffsets = charData.camOffsets;
+
+        var insertIndex:Int = length;
+        if (charData.objectBehind != null)
+        {
+            final behindSprite = objMap.get(charData.objectBehind);
+            if (behindSprite != null)
+                insertIndex = members.indexOf(behindSprite) + 1;
+        }
+        insert(insertIndex, group);
+        //add(group);
     }
 
     var index:Int = 0;
@@ -94,11 +216,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         group.recycle(Character, function():Character
         {
-            var char = new Character(0 + (900 * group.members.length), 0, charName, conductor);
+            var char = new Character(0, 0, charName, conductor);
             char.ID = index;
             chars.push(char);
             
             if(attachedInputs != null) attachedInputs.attachedChar = char;
+
             index++;
             return char;
         });
@@ -116,15 +239,61 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         super.update(elapsed);
     }
+
+    public function onStageBeat(curBeat:Float)
+    {
+        for (sprite in dancingSprites)
+        {
+            if (sprite.animation.curAnim == null) continue;
+
+            final beatInt = Std.int(curBeat);
+            if ((sprite.animation.curAnim.name.startsWith("idle") || sprite.animation.curAnim.name.startsWith("dance"))
+                && (beatInt % 2 == 0) && (beatInt != sprite.lastDanceBeat))
+            {
+                sprite.lastDanceBeat = beatInt;
+                sprite.dance(true);
+            }
+        }
+    }
 }
 
 typedef StageJSONStructure = {
     var camSettings:{?zoom:Float, ?startX:Float, ?startY:Float};
     var objects:Array<StageObject>;
+    var characters:Array<StageCharacter>;
 }
 
 typedef StageObject = {
+    //TODO: ADD A COLOR FIELD
+
     var name:String;
-    var ?type:AtlasType;
+    var position:Array<Float>;
+    var type:AtlasType;
+    var ?scale:Array<Float>;
+    var ?scroll:Array<Float>;
+    var ?angle:Float;
+    var ?alpha:Float;
+    var ?antialiasing:Bool;
+    var ?flipX:Bool;
+    var ?flipY:Bool;
+
+    var ?blend:String;
     var ?animations:Array<AnimationData>;
+    var ?animBehavior:AnimBehavior;
+    var ?startAnim:String;
+}
+
+typedef StageCharacter = {
+    var type:CharacterType;
+    var position:Array<Float>;
+    var objectBehind:String;
+    var ?camOffsets:Array<Float>;
+    var ?scale:Array<Float>;
+    var ?angle:Float;
+}
+
+enum abstract CharacterType(String) {
+    var OPPONENTS = 'opponents';
+    var PLAYERS = 'players';
+    var SPECTATORS = 'spectators';
 }

@@ -1,0 +1,52 @@
+{
+  "camSettings": {
+    "zoom": 0.68,
+    "startX": 550,
+    "startY": 400
+  },
+  "objects": [
+    {
+      "name": "CGBG",
+      "position": [-300, -900],
+      "type": "sparrow",
+      "animations": [
+        {
+          "name": "new", "prefix": "new0", "fps": 24, "looped": true, "x": 0, "y": 0
+        }
+      ],
+      "startAnim": "new",
+      "animBehavior": "ONCE",
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    },
+	{
+      "name": "52",
+      "position": [0, 0],
+      "type": "none",
+      "scale": [1.2, 1.2],
+      "scroll": [0, 0],
+      "angle": 0,
+	  "blend": "ADD"
+    }
+  ],
+  "characters": [
+    {
+	  "type": "opponents",
+      "position": [-50, 240],
+      "objectBehind": "CGBG",
+      "camOffsets": [2000, 0],
+	  "scale": [3, 3]
+    },
+    {
+	  "type": "players",
+      "position": [700, 550],
+      "objectBehind": "CGBG"
+    },
+    {
+	  "type": "spectators",
+      "position": [310, 140],
+      "objectBehind": "CGBG",
+	  "angle": 90
+    }
+  ]
+}

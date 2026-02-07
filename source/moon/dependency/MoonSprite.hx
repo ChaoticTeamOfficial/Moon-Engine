@@ -44,6 +44,10 @@ class MoonSprite extends FlxSprite
 
 	public var extraOffset:FlxPoint = FlxPoint.get();
 
+	public var idleAnims:Array<String> = null;
+	public var danceIndex:Int = 0;
+	public var lastDanceBeat:Int = -1;
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
@@ -138,6 +142,52 @@ class MoonSprite extends FlxSprite
 	 */
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
 		animOffsets[name] = [x, y];
+
+	/**
+	 * Automatically adds animations and offsets using an array of AnimationData. 
+	 * @param animations Array of AnimationDatas.
+	 * return array of idle anims, for chaining them.
+	 */
+	public function loadAnimations(animations:Array<Paths.AnimationData>):Array<String>
+	{
+		var idleAnims:Array<String> = [];
+		for (i in 0...animations.length)
+		{
+			final anim:Paths.AnimationData = animations[i];
+			(anim.indices != null)
+			? this.animation.addByIndices(anim.name, anim.prefix, anim.indices, '', anim.fps ?? 24, anim.looped ?? false)
+			: this.animation.addByPrefix(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
+			this.addOffset(anim.name, anim?.x ?? 0, anim?.y ?? 0);
+			//trace('added ' + animations);
+
+			if(anim.name.startsWith("idle-"))
+				idleAnims.push(anim.name);
+
+			if(anim.finishAnim != null)
+				animation.onFinish.add((animName) -> {
+					if(animation.curAnim != null && animation.curAnim.name == animations[i].name)
+						playAnim(animations[i].finishAnim, true); //compiler being ass moment
+				});
+		}
+		return idleAnims;
+	}
+
+	public function dance(?force:Bool = false)
+    {
+        if (idleAnims != null && idleAnims.length > 0)
+        {
+            playAnim(idleAnims[danceIndex], force);
+            danceIndex = (danceIndex + 1) % idleAnims.length;
+        }
+        else
+        {
+            if(animation.exists("idle-0"))
+            {
+                playAnim("idle-0", force);
+                danceIndex = 0;
+            }
+        }
+    }
 		
 	// ---- SKEW STUFF ---- //
 

@@ -38,7 +38,7 @@ class Project extends HXProject
 		"lime", "openfl", "flixel", "flixel-addons", "polymod",
 		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate", 
 		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin"
-		#if !hl , "customtitlebar", "hxdiscord_rpc" #end
+		#if !hl , "hxdiscord_rpc" #end
 	];
 
     public function new()

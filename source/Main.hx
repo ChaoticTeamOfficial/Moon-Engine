@@ -5,10 +5,6 @@ import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 
-#if !hl
-import titlebar.Titlebar;
-#end
-
 using StringTools;
 class Main extends Sprite
 {
@@ -49,16 +45,6 @@ class Main extends Sprite
 		FlxG.fixedTimestep = false;
 
 		#if !hl
-		Titlebar.setTitlebarColor(46, 27, 142);
-		Titlebar.setTitleFontColor(255, 255, 255);
-		Titlebar.setButtonFontColor(220, 220, 220);
-
-		final d = {name: "PhantomMuff FULL LETTERS 1.5", font: 'assets/fonts/phantomuff/full.ttf', size: 16};
-		Titlebar.setTitleFont(d.name, d.font, d.size);
-		//Titlebar.setButtonFont(d.name, d.font, d.size);
-		Titlebar.initialize();
-		Titlebar.redrawWindow();
-
 		DiscordRPC.initialize("1297678826809200720");
 		#end
 

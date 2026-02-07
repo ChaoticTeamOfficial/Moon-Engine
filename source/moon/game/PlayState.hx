@@ -18,6 +18,7 @@ import moon.toolkit.level_editor.*;
 import moon.game.events.EventRegistry;
 
 using StringTools;
+
 class PlayState extends FlxTransitionableState
 {	
 	// Just a variable for the current instance so you can get all the vars.
@@ -81,7 +82,7 @@ class PlayState extends FlxTransitionableState
 		//this.persistentDraw = false;
 		
 		//< -- CAMERAS SETUP -- >//
-		camGAME.bgColor = FlxColor.GRAY;
+		camGAME.bgColor = FlxColor.BLACK;
 		camHUD.bgColor = 0x00000000;
 		camALT.bgColor = 0x00000000;
 
@@ -105,6 +106,8 @@ class PlayState extends FlxTransitionableState
 		for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
+
+		stage.updatePositioning();
 		
 		Countdown.init(conductor, playField);
 		Countdown.performCountdown();
@@ -310,7 +313,7 @@ class PlayState extends FlxTransitionableState
 	{
 		final char = getChar(charName);
 		if(char != null)
-			return [char.getMidpoint().x + char.data.camOffsets[0], char.getMidpoint().y + char.data.camOffsets[1]];
+			return [char.getMidpoint().x + char.camOffsets[0], char.getMidpoint().y + char.camOffsets[1]];
 
 		return [0, 0];
 	}

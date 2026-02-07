@@ -329,9 +329,9 @@ class PlayField extends FlxGroup
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
         centerText();
         
-        if(FlxG.keys.justPressed.F5){
+        if(FlxG.keys.justPressed.F5) {
             Global.clearScriptList();
-            Paths.clearMemory();
+            Paths.clearUnusedAssets();
             FlxG.resetState();
         }
     }

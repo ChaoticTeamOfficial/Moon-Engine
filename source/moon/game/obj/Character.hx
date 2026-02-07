@@ -20,14 +20,13 @@ class Character extends MoonSprite
 {
     public var data:CharacterData;
 
-    public var idleAnims:Array<String>;
     public var conductor:Conductor;
     public var character(default, set):String;
     public var animationHold:Float = 0;
     public var script:MoonScript;
+    public var danceFrequency:Int = 2;
 
-    var danceIndex:Int = 0;
-    var lastDanceBeat:Int = -1;
+    public var camOffsets:Array<Float> = [];
 
     /**
      * Creates a character on the screen.
@@ -66,9 +65,10 @@ class Character extends MoonSprite
         if (animation.curAnim == null) return;
         if (animation.curAnim.name.startsWith('sing') || animation.curAnim.name.startsWith('miss'))
             animationHold += conductor.stepCrochet;
+
         final beatInt = Std.int(curBeat);
         if ((animation.curAnim.name.startsWith("idle") || animation.curAnim.name.startsWith("dance"))
-            && (beatInt % data.danceFrequency == 0) && (beatInt != lastDanceBeat))
+            && (beatInt % danceFrequency == 0) && (beatInt != lastDanceBeat))
         {
             lastDanceBeat = beatInt;
             this.dance(true);
@@ -83,23 +83,6 @@ class Character extends MoonSprite
             animationHold = 0;
         }
         super.update(elapsed);
-    }
-
-    public function dance(?force:Bool = false)
-    {
-        if (idleAnims != null && idleAnims.length > 0)
-        {
-            playAnim(idleAnims[danceIndex], force);
-            danceIndex = (danceIndex + 1) % idleAnims.length;
-        }
-        else
-        {
-            if(animation.exists("idle-0"))
-            {
-                playAnim("idle-0", force);
-                danceIndex = 0;
-            }
-        }
     }
 
     override public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0)
@@ -120,34 +103,18 @@ class Character extends MoonSprite
 
         if(!Paths.exists('characters/$char/data.json'))
         {
-            trace('Specified character "$char" does not exist. Loading default...', "WARNING");
+            trace('Specified character "$char" data does not exist. Loading default...', "WARNING");
             char = 'darnell';
         }
        
         this.character = char;
         data = cast Paths.JSON('characters/$character/data');
+        camOffsets = data.camOffsets;
         this.frames = Paths.getSparrowAtlas('$character/$character', 'characters');
-        idleAnims = [];
 
         overrideAnims = data?.overrideAnims ?? [];
-        for (i in 0...data.animations.length)
-        {
-            final anim:Paths.AnimationData = data.animations[i];
-            (anim.indices != null)
-            ? this.animation.addByIndices(anim.name, anim.prefix, anim.indices, '', anim.fps ?? 24, anim.looped ?? false)
-            : this.animation.addByPrefix(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
-            this.addOffset(anim.name, anim.x ?? 0, anim.y ?? 0);
-           
-            if(anim.name.startsWith("idle-"))
-                idleAnims.push(anim.name);
-
-            // aa
-            if(anim.finishAnim != null)
-                animation.onFinish.add((anim) -> {
-                    if(animation.curAnim != null && animation.curAnim.name == data.animations[i].name)
-                        playAnim(data.animations[i].finishAnim, true); //compiler being ass moment
-                });
-        }
+        idleAnims = loadAnimations(data.animations);
+        danceFrequency = data.danceFrequency;
 
         this.antialiasing = data?.antialiasing ?? true;
         this.scale.set(data?.scale ?? 0, data?.scale ?? 0);
@@ -169,6 +136,7 @@ class Character extends MoonSprite
         }); */
 
         this.flipX = data?.flipX ?? false;
+        origin.set(width / 2, height);
 
         return char;
     }

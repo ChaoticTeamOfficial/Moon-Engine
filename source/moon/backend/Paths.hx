@@ -438,3 +438,8 @@ enum abstract AtlasType(String) {
     var SPARROW = 'sparrow';
     var PACKED = 'packed';
 }
+
+enum abstract AnimBehavior(String) {
+    var ONBEAT = 'on-beat';
+    var ONCE = 'once';
+}
