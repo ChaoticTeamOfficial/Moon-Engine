@@ -95,10 +95,10 @@ class Conductor
 	**/
 	private var _beatTracker(default, null):Float = 0;
 	private var _measureTracker(default, null):Float = 0;
-	private var offsetTime(default, null):Float = 0;
-	private var stepOffset(default, null):Float = 0;
-	private var beatOffset(default, null):Float = 0;
-	private var measureOffset(default, null):Float = 0;
+	var offsetTime(default, null):Float = 0;
+	var stepOffset(default, null):Float = 0;
+	var beatOffset(default, null):Float = 0;
+	var measureOffset(default, null):Float = 0;
 
 	// - These are for time signature's steps/beats.
 	var numerator:Float = 4;
