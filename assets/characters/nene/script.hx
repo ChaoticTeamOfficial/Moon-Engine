@@ -24,7 +24,7 @@ function onPostStageCreate()
 	//system.shader = stereobg.shader = char.shader;
 }
 
-//lol
+//lol+
 function onSongStart()
 {
 	updateVis();
@@ -37,6 +37,8 @@ function onSongResume()
 	// SELF NOTE:
 	// I can just set it to null (the analyzer)
 	// and then re-call the create function.
+	
+	// okayyy acrazytown fixed ittt, awsome
 	//trace('Hello! You just killed Nenes Visualizer because I suck');
 	updateVis();
 }
@@ -44,6 +46,7 @@ function onSongResume()
 function onSongRestart()
 {
 	//updateVis();
+	aVisualizer.resetVis();
 }
 
 function updateVis()

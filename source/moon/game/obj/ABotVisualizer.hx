@@ -39,10 +39,11 @@ class ABotVisualizer extends FlxSpriteGroup
             spr.animation.addByPrefix('VIZ', 'viz${index}0', 0, false);
             spr.animation.play('VIZ');
             spr.animation.curAnim.curFrame = 5;
-            spr.visible = false;
             add(spr);
             currentLevels.push(0.0);
         }
+		
+		resetVis();
     }
 	
     public function setAudioSource(sound:MoonSound)
@@ -88,4 +89,17 @@ class ABotVisualizer extends FlxSpriteGroup
             members[i].visible = true;
         }
     }
+	
+	public function resetVis()
+	{
+		for(i in 0...members.length)
+		{
+			final spr = members[i];
+			spr.animation.curAnim.curFrame = 5;
+			
+			FlxTween.tween(spr.animation.curAnim, {curFrame: 0}, 0.1, {startDelay: 0.05 * i, onComplete:_->{
+				FlxTween.tween(spr.animation.curAnim, {curFrame: 5}, 0.1, {startDelay: 0.2});
+			}});
+		}
+	}
 }
