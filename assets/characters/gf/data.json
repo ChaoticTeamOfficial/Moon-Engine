@@ -2,8 +2,9 @@
     "antialiasing": true,
     "scale": 1,
     "flipX": false,
-    "camOffsets": [0, 0],
+    "camOffsets": [150, 0],
     "healthbarColors": [0, 0, 0],
+	"extraOffsets": [0, -316],
     "danceFrequency": 1,
     "animations": [
         {
@@ -24,5 +25,6 @@
         },
 		{"name": "comboBreak", "prefix": "gf sad", "x": 2, "y": -21, "fps": 24, "finishAnim": "idle-0"},
 		{"name": "combo50", "prefix": "GF Cheer", "x": 0, "y": 0, "fps": 24, "finishAnim": "idle-0"}
-    ]
+    ],
+	"overrideAnims": ["combo50"]
 }

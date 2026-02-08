@@ -1,0 +1,44 @@
+{
+  "camSettings": {
+    "zoom": 0.9,
+    "startX": 751.5,
+    "startY": 300
+  },
+  "objects": [
+	{
+      "name": "stageback",
+      "position": [-600, -200],
+      "scroll": [0.9, 0.9],
+      "angle": 0
+    },
+	{
+      "name": "stagefront",
+      "position": [-650, 600],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+      "name": "stagecurtains",
+      "position": [-500, -300],
+      "scroll": [1.3, 1.3],
+      "angle": 0
+    }
+  ],
+  "characters": [
+    {
+	  "type": "opponents",
+      "position": [64, 396],
+      "objectBehind": "stagefront"
+    },
+    {
+	  "type": "players",
+      "position": [916, 396],
+      "objectBehind": "stagefront"
+    },
+    {
+	  "type": "spectators",
+      "position": [370, 374],
+      "objectBehind": "stagefront"
+    }
+  ]
+}

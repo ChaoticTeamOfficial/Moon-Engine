@@ -86,7 +86,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         super();
         this.conductor = conductor;
-
+        
         script = new MoonScript();
         Global.registerScript('stageScript', script);
         this.stage = stage;
@@ -98,14 +98,22 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
             trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
+        else
+        {
+            script.load('images/ingame/stages/$stg/script.hx');
+            script.set("background", this);
+        }
 
         this.stage = stg;
-        script.load('images/ingame/stages/$stg/script.hx');
-        script.set("background", this);
 
         if (Paths.exists('images/ingame/stages/$stg/data.json'))
         {
-            json = cast Paths.JSON('images/ingame/stages/$stg/data');
+            try{
+                json = cast Paths.JSON('images/ingame/stages/$stg/data');
+            }
+            catch(e){
+                throw e;
+            }
             cameraSettings = json.camSettings;
 
             for (objData in json.objects)
@@ -153,6 +161,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
             }
         }
 
+        if(script != null && script.exists('onCreate'))
         script.call('onCreate');
 
         return stg;

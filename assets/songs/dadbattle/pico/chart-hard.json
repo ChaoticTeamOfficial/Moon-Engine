@@ -4207,7 +4207,7 @@
 		],
 		"noteskin": "v-slice",
 		"opponents": [
-			"cg"
+			"dad"
 		],
 		"players": [
 			"bf"
@@ -4220,7 +4220,7 @@
 		"spectators": [
 			"gf"
 		],
-		"stage": "cg",
+		"stage": "stage",
 		"timeSignature": [
 			4,
 			4

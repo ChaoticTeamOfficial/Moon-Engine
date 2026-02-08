@@ -154,7 +154,7 @@
 		"time": 31333.3333333333,
 		"values": {
 			"anim": "hey",
-			"force": false,
+			"force": true,
 			"forceOverride": true,
 			"frame": 0,
 			"reversed": false,
@@ -166,12 +166,12 @@
 		"tag": "Play Character Animation",
 		"time": 31666.6666666667,
 		"values": {
-			"anim": "cheer",
-			"force": false,
+			"anim": "combo50",
+			"force": true,
 			"forceOverride": true,
 			"frame": 0,
 			"reversed": false,
-			"target": "player"
+			"target": "spectator"
 		}
 	},
 	{

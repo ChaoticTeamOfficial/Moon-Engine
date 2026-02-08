@@ -16,5 +16,6 @@
         {"name": "singDOWN-miss","prefix": "BF NOTE DOWN MISS","x": -11, "y": -19, "fps": 24},
         {"name": "singUP-miss","prefix": "BF NOTE UP MISS","x": -29, "y":27, "fps": 24},
         {"name": "singRIGHT-miss","prefix": "BF NOTE RIGHT MISS","x": -30, "y":21, "fps": 24}
-    ]
+    ],
+	"overrideAnims": ["hey"]
 }
