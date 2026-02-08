@@ -345,7 +345,7 @@ class PlayField extends FlxGroup
             // actually its colored by judgement now so fuck
             //if(timing != null) setStatsColor(Timings.getParameters(timing)[4]);
             updateP1Stats(timing);
-            playback.muteStatus(false, Voices_Player);
+            playback.muteStatus(Voices_Player, false);
         }
 
         //final input = inputHandlers.get(playerID);
@@ -372,7 +372,7 @@ class PlayField extends FlxGroup
             // the good ol sfx ahaha
             Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}.ogg');
 
-            playback.muteStatus(MoonSettings.callSetting('Mute Voices on Miss'), Voices_Player);
+            playback.muteStatus(Voices_Player, MoonSettings.callSetting('Mute Voices on Miss'));
         }
         if(onNoteMiss != null) onNoteMiss(playerID, note);
     }

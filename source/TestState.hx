@@ -23,6 +23,7 @@ import moon.global_obj.PixelIcon;
 import moon.backend.data.Dialogue.DialogueParser;
 import moon.game.obj.dialogue.*;
 import moon.game.obj.notes.*;
+import moon.game.obj.*;
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
 import moon.toolkit.*;
@@ -40,7 +41,7 @@ class TestState extends FlxState
     {
         super.create();
         FlxG.mouse.useSystemCursor = true;
-        FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
+        //FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
         // addons file test
         /*var files = new Map<String, Bytes>();
         files.set("nya/text.txt", Bytes.ofString("Hello world! I am here to spread an important message.\nI got created by code.\nYes.\nThat's right.\n\n\nIsn't that cool?"));
@@ -115,13 +116,27 @@ class TestState extends FlxState
             add(thing);
         }*/
 
-        note = new Note(0,0,"default", "v-slice", 0, null);
-        note.state = CHART_EDITOR;
+        //note = new Note(0,0,"default", "v-slice", 0, null);
+        //note.state = CHART_EDITOR;
 
-        sustain = new NoteSustain(note);
+        //sustain = new NoteSustain(note);
 
-        add(sustain);
-        add(note);
+        //add(sustain);
+        //add(note);
+
+        //var vis = new ABotVisualizer();
+        //add(vis);
+        //vis.screenCenter();
+        
+        var conductor = new Conductor(160, 4, 4);
+        var song = new Song('thorns', 'noimix', false, conductor);
+        song.state = PLAY;
+
+        //FlxG.sound.music = ;
+        
+        vis.setAudioSource(song.inst[0]);
+        song.muteStatus(Voices_Opponent, true);
+        song.muteStatus(Voices_Player, true);
     }
 
     //helper 'w'
@@ -198,7 +213,7 @@ class TestState extends FlxState
         super.update(elapsed);
         //if(FlxG.keys.justPressed.R) FlxG.resetState();
 
-        if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
-        else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
+        //if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
+        //else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
     }
 }

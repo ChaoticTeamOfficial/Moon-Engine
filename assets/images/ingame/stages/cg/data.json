@@ -31,17 +31,17 @@
   ],
   "characters": [
     {
-	  "type": "opponents",
+	  "type": "opponent",
       "position": [-50, 240],
       "objectBehind": "CGBG"
     },
     {
-	  "type": "players",
+	  "type": "player",
       "position": [700, 550],
       "objectBehind": "CGBG"
     },
     {
-	  "type": "spectators",
+	  "type": "spectator",
       "position": [310, 140],
       "objectBehind": "CGBG"
     }

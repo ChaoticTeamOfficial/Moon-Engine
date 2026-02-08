@@ -118,6 +118,9 @@ class PlayState extends FlxTransitionableState
 		setEvents();
 
 		playField.onSongRestart = () -> {
+			FlxTween.cancelTweensOf(camGAME);
+			FlxTween.cancelTweensOf(camFollower);
+
 			events = [];
 			setEvents();
 			Countdown.performCountdown();
@@ -132,7 +135,8 @@ class PlayState extends FlxTransitionableState
 
 			if((playerID == 'p1') && (combo == 50 || combo == 200))
 				for(spectator in stage.spectators.members)
-					cast(spectator, Character).playAnim((combo == 50) ? 'combo50' : 'combo200',true);
+					if(Std.isOfType(spectator, Character))
+						cast(spectator, Character).playAnim((combo == 50) ? 'combo50' : 'combo200',true);
 
 			Global.scriptCall('onNoteHit', [playerID, note, timing, isSustain]);
 		};
@@ -141,7 +145,8 @@ class PlayState extends FlxTransitionableState
 		{
 			if(playerID == 'p1')
 				for(spectator in stage.spectators.members)
-					cast(spectator, Character).playAnim('comboBreak', true);
+					if(Std.isOfType(spectator, Character))
+						cast(spectator, Character).playAnim('comboBreak', true);
 			
 			Global.scriptCall('onNoteMiss', [playerID, note]);
 		};
@@ -286,6 +291,8 @@ class PlayState extends FlxTransitionableState
 			duration, options);
 		else
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));
+
+		Global.scriptCall('onCameraFocus', [getChar(char).type]);
 	}
 
 	var lastZoom:Float;
@@ -328,9 +335,9 @@ class PlayState extends FlxTransitionableState
 			{
 				switch(charName)
 				{
-					case 'opponent': return cast stage.opponents.members[0];
-					case 'spectator': return cast stage.spectators.members[0];
-					case 'player': return cast stage.players.members[0];
+					case 'opponent': for(opponent in stage.opponents.members) if(Std.isOfType(opponent, Character)) return cast opponent;
+					case 'spectator': for(spectator in stage.spectators.members) if(Std.isOfType(spectator, Character)) return cast spectator;
+					case 'player': for(player in stage.players.members) if(Std.isOfType(player, Character)) return cast player;
 				}
 			}
 		}
@@ -397,6 +404,8 @@ class PlayState extends FlxTransitionableState
 		openSubState(new PauseScreen(camALT));
 		if(playField.playback.state == PLAY)
 			playField.playback.state = PAUSE;
+
+		Global.scriptCall('onSongPause');
 	}
 
 	public function resumeGame()
@@ -408,6 +417,8 @@ class PlayState extends FlxTransitionableState
 			playField.playback.state = PLAY;    
             playField.playback.resync();
 		}
+
+		Global.scriptCall('onSongResume');
 	}
 
 	public function exit(toMenu:Bool = true, savedData:Bool = false)

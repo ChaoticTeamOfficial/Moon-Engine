@@ -51,72 +51,61 @@ class LoadingScreen extends FlxTransitionableState
         // We begin preloading here!!!
         new FlxTimer().start(0.4, function(_)
         {
-            try{
-                new lime.app.Future(() ->
-                {
-                    //mutex.acquire();
-                    loadText.text = 'Preloading song...';
-
-                    final d = PlayState.songData;
-                    var chart = new Chart(d.song, d.difficulty, d.mix);
-                    var conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
-
-                    loadProgress = 15;
-                    var playback = new Song(
-                        d.song,
-                        d.mix,
-                        (d.difficulty == 'erect' || d.difficulty == 'nightmare'),
-                        conductor
-                    );
-                    playback.state = STOP;
-                    loadProgress = 30;
-
-                    loadText.text = 'Preloading Graphics...';
-                    preload(new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]));
-                    loadProgress = 40;
-
-                    final thing = ['opponent', 'p1'];
-
-                    //TODO: Skins lol
-                    for(i in 0...thing.length)
-                        preload(new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', false, thing[i], conductor));
-                    loadProgress = 50;
-
-                    //TODO ONCE IMPLEMENTED: LOAD JUDGEMENTS N COMBO!
-                    var stage = new Stage(chart.content.meta.stage, conductor);
-                    
-                    final chartMeta = chart.content.meta;
-                    for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents);
-                    for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players);
-                    for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
-                    preload(stage);
-                    loadProgress = 70;
-
-                    // This is the part where it'll preload song events (like change stage and change character)
-                    // Once I have them implemented ofc lol
-                    // also, TODO, have a "preload" function for song scripts.
-                    loadText.text = 'Preloading events and such...';
-
-                    Paths.skipNextCleanup = true;
-                    Global.clearScriptList();
-
-                    loadText.text = 'Done! Press ACCEPT to continue.';
-                    loadProgress = 102;
-                    loadComplete = true;
-
-                    FlxTween.tween(loadText, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
-                    //mutex.release();
-                }, true);
-            }
-            catch(e)
+            new lime.app.Future(() ->
             {
-                loadText.text = 'An error has occurred: $e\n press ESC or ENTER to return.';
-                loadText.fieldWidth = Std.int(FlxG.width / 1.6);
-                loadText.color = FlxColor.RED;
-                loadText.screenCenter();
-                Paths.skipNextCleanup = false;
-                failed = true;
-            }
+                //mutex.acquire();
+                loadText.text = 'Preloading song...';
+
+                final d = PlayState.songData;
+                var chart = new Chart(d.song, d.difficulty, d.mix);
+                var conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
+
+                loadProgress = 15;
+                var playback = new Song(
+                    d.song,
+                    d.mix,
+                    (d.difficulty == 'erect' || d.difficulty == 'nightmare'),
+                    conductor
+                );
+                playback.state = STOP;
+                loadProgress = 30;
+
+                loadText.text = 'Preloading Graphics...';
+                preload(new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]));
+                loadProgress = 40;
+
+                final thing = ['opponent', 'p1'];
+
+                //TODO: Skins lol
+                for(i in 0...thing.length)
+                    preload(new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', false, thing[i], conductor));
+                loadProgress = 50;
+
+                //TODO ONCE IMPLEMENTED: LOAD JUDGEMENTS N COMBO!
+                var stage = new Stage(chart.content.meta.stage, conductor);
+                
+                final chartMeta = chart.content.meta;
+                for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents);
+                for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players);
+                for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
+                preload(stage);
+                loadProgress = 70;
+
+                // This is the part where it'll preload song events (like change stage and change character)
+                // Once I have them implemented ofc lol
+                // also, TODO, have a "preload" function for song scripts.
+                loadText.text = 'Preloading events and such...';
+
+                Paths.skipNextCleanup = true;
+                Global.clearScriptList();
+
+                loadText.text = 'Done! Press ACCEPT to continue.';
+                loadProgress = 102;
+                loadComplete = true;
+
+                FlxTween.tween(loadText, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
+                //mutex.release();
+            }, true);
         });
     }
 

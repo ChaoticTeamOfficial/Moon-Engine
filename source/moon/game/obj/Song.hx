@@ -92,10 +92,10 @@ class Song extends FlxTypedGroup<MoonSound>
 
     /**
      * Mutes/Unmutes certain audio types.
-     * @param mute Whether it should be mute or not
      * @param type The music type (e.g. Inst)
+     * @param mute Whether it should be mute or not
      */
-    public function muteStatus(mute:Bool, type:MusicType)
+    public function muteStatus(type:MusicType, mute:Bool)
     {
         for (aud in this.members)
             if(aud.type == type)

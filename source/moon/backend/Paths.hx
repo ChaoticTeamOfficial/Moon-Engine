@@ -319,9 +319,7 @@ class Paths
     }
 
     public static function JSON(key:String, ?library:String):Dynamic
-    {
         return haxe.Json.parse(getFileContent('$key.json', library).trim());
-    }
 
     public static function video(key:String, ?library:String):String
         return getPath('videos/$key.mp4', library);

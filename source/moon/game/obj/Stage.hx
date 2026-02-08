@@ -6,6 +6,7 @@ import flixel.group.FlxSpriteGroup;
 import openfl.display.BlendMode;
 import flixel.addons.display.FlxBackdrop;
 import moon.dependency.scripting.*;
+import moon.game.obj.Character.CharacterType;
 
 using StringTools;
 
@@ -94,6 +95,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
         if(conductor != null) conductor.onBeat.add(onStageBeat);
     }
 
+    private function setType(group:FlxSpriteGroup, type:CharacterType)
+    {
+        for(member in group.members)
+            if(Std.isOfType(member, Character))
+                cast(member, Character).type = type;
+    }
+
     @:noCompletion public function set_stage(stg:String):String
     {
         if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
@@ -173,18 +181,21 @@ class Stage extends FlxTypedGroup<FlxBasic>
         {
             switch(character.type)
             {
-                case OPPONENTS:
+                case OPPONENT:
                     opponentCharData = character;
                     addGroupAtLayer(opponents, opponentCharData, objMap);
                     opponents.origin.set(opponents.width / 2, opponents.height);
-                case PLAYERS:
+                    setType(opponents, OPPONENT);
+                case PLAYER:
                     playerCharData = character;
                     addGroupAtLayer(players, playerCharData, objMap);
                     players.origin.set(players.width / 2, players.height);
-                case SPECTATORS:
+                    setType(players, PLAYER);
+                case SPECTATOR:
                     spectatorCharData = character;
                     addGroupAtLayer(spectators, spectatorCharData, objMap);
                     spectators.origin.set(spectators.width / 2, spectators.height);
+                    setType(spectators, SPECTATOR);
             }
         }
     }
@@ -305,10 +316,4 @@ typedef StageCharacter = {
     var ?camOffsets:Array<Float>;
     var ?scale:Array<Float>;
     var ?angle:Float;
-}
-
-enum abstract CharacterType(String) {
-    var OPPONENTS = 'opponents';
-    var PLAYERS = 'players';
-    var SPECTATORS = 'spectators';
 }

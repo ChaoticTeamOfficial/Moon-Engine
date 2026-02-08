@@ -28,6 +28,7 @@ class Character extends MoonSprite
     public var danceFrequency:Int = 2;
 
     public var camOffsets:Array<Float> = [];
+    public var type:CharacterType;
 
     /**
      * Creates a character on the screen.
@@ -122,7 +123,7 @@ class Character extends MoonSprite
         this.updateHitbox();
         this.playAnim("idle-0");
 
-        script.load('characters/${this.character}/script');
+        script.load('characters/${this.character}/script.hx');
         if(script.code != null)
         {
             script.set('char', this);
@@ -141,4 +142,10 @@ class Character extends MoonSprite
 
         return char;
     }
+}
+
+enum abstract CharacterType(String) {
+    var OPPONENT = 'opponent';
+    var PLAYER = 'player';
+    var SPECTATOR = 'spectator';
 }
