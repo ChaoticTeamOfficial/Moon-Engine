@@ -10,6 +10,7 @@ typedef CharacterData =
     var ?scale:Float;
     var flipX:Bool;
     var camOffsets:Array<Float>;
+    var ?extraOffsets:Array<Float>;
     var healthbarColors:Array<Int>;
     var danceFrequency:Int;
     var animations:Array<Paths.AnimationData>;

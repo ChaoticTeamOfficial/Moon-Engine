@@ -4,6 +4,17 @@ import moon.toolkit.ChartConvert;
 import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.display.Sprite;
+import haxe.CallStack.StackItem;
+import haxe.CallStack;
+import haxe.io.Path;
+import openfl.Lib;
+import openfl.events.Event;
+import openfl.events.UncaughtErrorEvent;
+import lime.app.Application;
+
+import sys.FileSystem;
+import sys.io.File;
+import sys.io.Process;
 
 using StringTools;
 class Main extends Sprite
@@ -56,5 +67,50 @@ class Main extends Sprite
 		addChild(fps);
 		
 		Global.allowInputs = true;
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+	}
+
+	function onCrash(e:UncaughtErrorEvent):Void
+	{
+		#if sys
+		if (!FileSystem.exists("crash/"))
+			FileSystem.createDirectory("crash/");
+		#end
+
+		var message:String = "";
+		var path:String;
+		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+		var dateNow:String = Date.now().toString();
+
+		dateNow = StringTools.replace(dateNow, " ", "_");
+		dateNow = StringTools.replace(dateNow, ":", "'");
+
+		path = 'crash/ME_${dateNow}.txt';
+
+		message += 'Sorry, but an error has occurred.\n\n${e.error}\n\n';
+
+		for (stackItem in callStack)
+		{
+			switch (stackItem)
+			{
+				case FilePos(s, file, line, column):
+					message += '$file (Line: $line)\n';
+				default:
+					#if sys
+					Sys.println(stackItem);
+					#end
+			}
+		}
+
+		message += '\nReport this error at #playtesting-feedback\nONLY if you think this wasn\'t your mistake.';
+
+		#if sys
+		File.saveContent(path, message + "\n");
+		Sys.println(message);
+		Sys.println('Crash dump saved in ${Path.normalize(path)}');
+		Application.current.window.alert(message, "Error!");
+
+		Sys.exit(1);
+		#end
 	}
 }

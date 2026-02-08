@@ -33,9 +33,7 @@
     {
 	  "type": "opponents",
       "position": [-50, 240],
-      "objectBehind": "CGBG",
-      "camOffsets": [2000, 0],
-	  "scale": [3, 3]
+      "objectBehind": "CGBG"
     },
     {
 	  "type": "players",
@@ -45,8 +43,7 @@
     {
 	  "type": "spectators",
       "position": [310, 140],
-      "objectBehind": "CGBG",
-	  "angle": 90
+      "objectBehind": "CGBG"
     }
   ]
 }
