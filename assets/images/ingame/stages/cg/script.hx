@@ -3,14 +3,23 @@ import flixel.tweens.FlxEase;
 import moon.dependency.MoonSprite;
 import moon.hardcoded_shaders.DropShadowShader;
 
-function onCreate()
-{
-
-}
-
 function onPostCreate()
 {	
-	for(character in [background.players.members[0], background.opponents.members[0], background.spectators.members[0]])
+	for(character in background.opponents.members)
+		addShader(character);
+		
+	for(character in background.players.members)
+		addShader(character);
+	
+	for(character in background.spectators.members)
+		addShader(character);
+}
+
+function addShader(character:MoonSprite)
+{
+	if(character==null) return;
+	
+	if(Std.isOfType(character, MoonSprite))
 	{
 		var rim = new DropShadowShader();
 		rim.setAdjustColor(-46, -38, -25, -20);

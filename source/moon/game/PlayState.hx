@@ -106,7 +106,7 @@ class PlayState extends FlxTransitionableState
 		for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
-
+	
 		stage.updatePositioning();
 		
 		Countdown.init(conductor, playField);
@@ -114,6 +114,7 @@ class PlayState extends FlxTransitionableState
 
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
+		Global.scriptCall('onPostStageCreate');
 		Global.scriptCall('onPostCreate');
 		setEvents();
 

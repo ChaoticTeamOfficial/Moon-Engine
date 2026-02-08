@@ -2,21 +2,24 @@ import moon.dependency.MoonSprite;
 
 var aVisualizer:ABotVisualizer;
 var system:MoonSprite;
-function onPostCreate()
+function onPostStageCreate()
 {
 	final specs = game.stage.spectators;
 	
-	var stereobg = new MoonSprite(char.x - 348, char.y - 32).loadGraphic(Paths.image('abot/stereoBG', 'characters'));
+	var stereobg = new MoonSprite().loadGraphic(Paths.image('abot/stereoBG', 'characters'));
 	
-	system = new MoonSprite(char.x - 520, char.y - 66);
+	system = new MoonSprite();
 	system.frames = Paths.getSparrowAtlas('abot/system', 'characters');
 	system.animation.addByPrefix('bop', 'Abot System0', 24, false);
 	specs.insert(specs.members.indexOf(char), system);
 	specs.insert(specs.members.indexOf(system), stereobg);
+	system.x -= 24;
+	system.y -= 8;
 	
 	aVisualizer = new ABotVisualizer();
 	specs.insert(specs.members.indexOf(system), aVisualizer);
-	aVisualizer.setPosition(char.x + 58, char.y + 396);
+	aVisualizer.setPosition(char.x + 69, char.y + 388);
+	stereobg.setPosition(system.x + 148, system.y + 20);
 	
 	//system.shader = stereobg.shader = char.shader;
 }
@@ -31,8 +34,11 @@ function onSongResume()
 {
 	//it desyncs???
 	// btw I'm aware that the visualizer dies when pausing.
-	trace('Hello! You just killed Nenes Visualizer because I suck');
-	//updateVis();
+	// SELF NOTE:
+	// I can just set it to null (the analyzer)
+	// and then re-call the create function.
+	//trace('Hello! You just killed Nenes Visualizer because I suck');
+	updateVis();
 }
 
 function onSongRestart()
@@ -42,6 +48,7 @@ function onSongRestart()
 
 function updateVis()
 {
+	aVisualizer.analyzer = null;
 	aVisualizer.setAudioSource(game.playField.playback.inst[0]);
 }
 
