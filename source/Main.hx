@@ -12,9 +12,11 @@ import openfl.events.Event;
 import openfl.events.UncaughtErrorEvent;
 import lime.app.Application;
 
+#if sys
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
+#end
 
 using StringTools;
 class Main extends Sprite

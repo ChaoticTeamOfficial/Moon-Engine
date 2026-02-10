@@ -316,9 +316,15 @@ class PlayField extends FlxGroup
                 if(MoonSettings.callSetting('Ranking Sound'))
                 {
                     if (newIndex > oldIndex)
+					{
                         Paths.playSFX('game/ratingRaise.wav');
+						Global.scriptCall('onRatingRaise');
+					}
                     else if (newIndex < oldIndex)
+					{
                         Paths.playSFX('game/ratingLower.wav');
+						Global.scriptCall('onRatingLower');
+					}
                 }
 
                 previousRank = curRank;

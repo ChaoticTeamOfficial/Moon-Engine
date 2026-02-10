@@ -16,6 +16,7 @@ import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.toolkit.level_editor.*;
 import moon.game.events.EventRegistry;
+import moon.game.obj.Character.CharacterType;
 
 using StringTools;
 
@@ -254,9 +255,7 @@ class PlayState extends FlxTransitionableState
 		if(MoonInput.justPressed(PAUSE))
 			pauseGame();
 
-		// gonna leave it commented for now
-		// it softlocks currently, and my skill issue won't help XD
-		/*if(playField.healthBar.health <= 0 && !isDead)
+		if(playField.healthBar.health <= 0 && !isDead)
 		{
 			playField.inCutscene = isDead = true;
 
@@ -267,7 +266,7 @@ class PlayState extends FlxTransitionableState
 				//trace('yup.');
 				openSubState(new Gameover());
 			}});
-		}*/
+		}
 
 		//TODO: REMOVE, THIS IS DEBUGGIN
 		if(FlxG.keys.justPressed.EIGHT)
@@ -292,8 +291,8 @@ class PlayState extends FlxTransitionableState
 			duration, options);
 		else
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));
-
-		Global.scriptCall('onCameraFocus', [getChar(char).type]);
+	
+		Global.scriptCall('onCameraFocus', [getChar(char)?.type ?? CharacterType.OPPONENT]);
 	}
 
 	var lastZoom:Float;

@@ -77,21 +77,13 @@ class Paths
         #end
     }
 
-    private static function getFileBytes(path:String, ?library:String):Bytes
-    {
+	private static function getFileBytes(path:String, ?library:String):Bytes
+	{
 		var fsPath:String = getPath(path, library);
-		#if desktop
-		if (!FileSystem.exists(fsPath))
-			return null;
-
-		return File.getBytes(fsPath);
-		#else
 		if (!Assets.exists(fsPath))
 			return null;
-
 		return Assets.getBytes(fsPath);
-		#end
-    }
+	}
     
     public static function exists(filePath:String, ?library:String):Bool
         return fileExists(filePath, library);
@@ -106,13 +98,7 @@ class Paths
                 trace('$key doesnt exist!', "ERROR");
                 return null;
             }
-            var sound:Sound;
-			#if desktop
-			sound = Sound.fromFile(getPath(key, library));
-			#else
-			sound = Assets.getSound(getPath(key, library), false);
-			#end
-			
+            var sound:Sound = Assets.getSound(getPath(key, library), false);
             renderedSounds.set(cacheKey, sound);
         }
         return renderedSounds.get(cacheKey);
@@ -134,15 +120,8 @@ class Paths
                 return null;
             }
 
-            var bitmap:BitmapData;
-			var fsPath = getPath(imagePath, library);
-			#if desktop
-			bitmap = BitmapData.fromFile(fsPath);
-			#else
-			bitmap = Assets.getBitmapData(fsPath, false);
-			#end
+            var bitmap:BitmapData = Assets.getBitmapData(getPath(imagePath, library), false);
 
-            //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
             var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
             newGraphic.persist = true;

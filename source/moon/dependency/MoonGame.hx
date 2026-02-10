@@ -23,7 +23,7 @@ class MoonGame extends FlxGame
 		
 		Polymod.init({
 			modRoot: "./mods/",
-			dirs:["mymod"],
+			dirs:["mymod"], // lil test mod
 
 			errorCallback: (error) -> {
 				//TODO: Maybe some in-game error handling? depending on which error ofc!

@@ -177,6 +177,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
     public function updatePositioning()
     {
+        if (json == null) return;
         for(character in json.characters)
         {
             switch(character.type)
