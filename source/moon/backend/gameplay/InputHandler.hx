@@ -119,7 +119,7 @@ class InputHandler
         checkSustains();
         onLateMiss();
 
-        stats.health = FlxMath.bound(stats.health, 0, 101);
+        //stats.health = FlxMath.bound(stats.health, 0, 101);
     }
 
     private function processCPUInputs():Void
@@ -271,6 +271,7 @@ class InputHandler
 
     // Map for tracking the last conductor step a sustain note was hit on.
     private var lastSustainStep:Map<Int, Float> = new Map<Int, Float>();
+
     private function checkSustains():Void
     {
         for (direction in heldSustains.keys())

@@ -51,7 +51,7 @@ class PlayerStats
     /**
      * The total health by said player.
      */
-    var health:Float = 50;
+    var health(default, set):Float = 50;
 
     /**
      * The ID of this player.
@@ -113,6 +113,14 @@ class PlayerStats
     {
         totalNotes = value;
         updtAccuracy();
+        return value;
+    }
+
+    @:noCompletion function set_health(value:Float):Float
+    {
+        if(health <= 100)
+            health = value;
+
         return value;
     }
 

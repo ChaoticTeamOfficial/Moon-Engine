@@ -42,7 +42,7 @@ class HealthBar extends FlxSpriteGroup
         barBG.scale.set(0.9, 0.9);
         barBG.updateHitbox();
 
-        bar = new FlxBar(RIGHT_TO_LEFT, Std.int(barBG.width - 16), Std.int(barBG.height - 8));
+        bar = new FlxBar(RIGHT_TO_LEFT, Std.int(barBG.width - 16), Std.int(barBG.height - 8), null, null, 0, 100);
         bar.y = barBG.y + (barBG.height - bar.height) / 2;
         bar.x = barBG.x + (barBG.width - bar.width) / 2;
 

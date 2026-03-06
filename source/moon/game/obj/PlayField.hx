@@ -125,12 +125,13 @@ class PlayField extends FlxGroup
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
         
+        // btw these variables are placeholders!
         final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, true];
+        final isCPUPlayers = [true, false];
 
         for (i in 0...playerIDs.length)
         {
-            var strumline = new Strumline(0, 68, /*chart.content?.meta?.noteskin ?? 'v-slice'*/ 'moon-engine', isCPUPlayers[i], playerIDs[i], conductor);
+            var strumline = new Strumline(0, 68, chart?.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
             add(strumline.strumBG);
             add(strumline);
 

@@ -111,56 +111,81 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
         this.stage = stg;
 
-        try{
-            json = cast Paths.JSON('images/ingame/stages/$stg/data');
-        }
-        catch(e){
-            throw e;
-        }
+        // nice lil fallback if theres no json
+        json = cast Paths?.JSON('images/ingame/stages/$stg/data') ?? cast {
+            camSettings: {
+                zoom: 1,
+                startX: 751.5,
+                startY: 300
+            },
+            characters: [
+                {
+                    type: "opponent",
+                    position: [64.0, 396.0],
+                    objectBehind: null
+                },
+                {
+                    type: "player",
+                    position: [916.0, 396.0],
+                    objectBehind: null
+                },
+                {
+                    type: "spectator",
+                    position: [296.0, 374.0],
+                    objectBehind: null
+                }
+            ]
+        };
+
+        trace(json);
+
         cameraSettings = json.camSettings;
 
-        for (objData in json.objects)
+        if(json.objects != null && json.objects.length > 0)
         {
-            var sprite = new MoonSprite(objData.position[0], objData.position[1]);
-            sprite.strID = objData.name;
-
-            final assetPath = '$stg/${objData.name}';
-            switch (objData.type)
+            for (objData in json.objects)
             {
-                case SPARROW:
-                    sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
-                case PACKED:
-                    sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
-                default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
-            }
+                var sprite = new MoonSprite(objData.position[0], objData.position[1]);
+                sprite.strID = objData.name;
 
-            if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
-            if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
-
-            sprite.angle = objData?.angle ?? 0;
-            sprite.alpha = objData?.alpha ?? 1;
-            sprite.antialiasing = objData?.antialiasing ?? true;
-            sprite.flipX = objData?.flipX ?? false;
-            sprite.flipY = objData?.flipY ?? false;
-            if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
-
-            if(objData.animations != null && objData.animations.length > 0)
-                sprite.idleAnims = sprite.loadAnimations(objData.animations);
-
-            if (objData.startAnim != null)
-                sprite.playAnim(objData.startAnim);
-
-            if (objData.animBehavior != null && objData.type != NONE)
-            {
-                switch (objData.animBehavior)
+                final assetPath = '$stg/${objData.name}';
+                switch (objData.type)
                 {
-                    case ONBEAT: dancingSprites.push(sprite);
-                    case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
+                    case SPARROW:
+                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
+                    case PACKED:
+                        sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
+                    default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
                 }
-            }
 
-            add(sprite);
-            objMap.set(objData.name, sprite);
+                if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
+                if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
+
+                sprite.angle = objData?.angle ?? 0;
+                sprite.alpha = objData?.alpha ?? 1;
+                sprite.antialiasing = objData?.antialiasing ?? true;
+                sprite.flipX = objData?.flipX ?? false;
+                sprite.flipY = objData?.flipY ?? false;
+                if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
+
+                if(objData.animations != null && objData.animations.length > 0)
+                    sprite.idleAnims = sprite.loadAnimations(objData.animations);
+
+                if (objData.startAnim != null)
+                    sprite.playAnim(objData.startAnim);
+
+                if (objData.animBehavior != null && objData.type != NONE)
+                {
+                    switch (objData.animBehavior)
+                    {
+                        case ONBEAT: dancingSprites.push(sprite);
+                        case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
+                    }
+                }
+
+                add(sprite);
+                objMap.set(objData.name, sprite);
+            }
         }
 
         if(script != null && script.exists('onCreate'))
@@ -207,9 +232,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         if (charData == null) return;
 
-        group.x = charData?.position[0] ?? 0;
-        group.y = charData?.position[1] ?? 0;
-        group.angle = charData?.angle ?? 0;
+        group.x = charData?.position[0] ?? 0.0;
+        group.y = charData?.position[1] ?? 0.0;
+        group.angle = charData?.angle ?? 0.0;
         if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
 
         for(obj in group.members)
