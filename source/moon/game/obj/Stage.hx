@@ -104,75 +104,77 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
     @:noCompletion public function set_stage(stg:String):String
     {
-        if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
-            trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
-        else
-        {
-            script.load('images/ingame/stages/$stg/script.hx');
-            script.set("background", this);
-        }
+        //if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
+        //    trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
+        script.load('images/ingame/stages/$stg/script.hx');
+        script.set("background", this);
 
         this.stage = stg;
 
-        if (Paths.exists('images/ingame/stages/$stg/data.json'))
+        try{
+            json = cast Paths.JSON('images/ingame/stages/$stg/data');
+        }
+        catch(e){
+            throw e;
+        }
+        cameraSettings = json.camSettings;
+
+        for (objData in json.objects)
         {
-            try{
-                json = cast Paths.JSON('images/ingame/stages/$stg/data');
-            }
-            catch(e){
-                throw e;
-            }
-            cameraSettings = json.camSettings;
+            var sprite = new MoonSprite(objData.position[0], objData.position[1]);
+            sprite.strID = objData.name;
 
-            for (objData in json.objects)
+            final assetPath = '$stg/${objData.name}';
+            switch (objData.type)
             {
-                var sprite = new MoonSprite(objData.position[0], objData.position[1]);
-                sprite.strID = objData.name;
-
-                final assetPath = '$stg/${objData.name}';
-                switch (objData.type)
-                {
-                    case SPARROW:
-                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
-                    case PACKED:
-                        sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
-                    default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
-                }
-
-                if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
-                if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
-
-                sprite.angle = objData?.angle ?? 0;
-                sprite.alpha = objData?.alpha ?? 1;
-                sprite.antialiasing = objData?.antialiasing ?? true;
-                sprite.flipX = objData?.flipX ?? false;
-                sprite.flipY = objData?.flipY ?? false;
-                if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
-
-                if(objData.animations != null && objData.animations.length > 0)
-                    sprite.idleAnims = sprite.loadAnimations(objData.animations);
-
-                if (objData.startAnim != null)
-                    sprite.playAnim(objData.startAnim);
-
-                if (objData.animBehavior != null && objData.type != NONE)
-                {
-                    switch (objData.animBehavior)
-                    {
-                        case ONBEAT: dancingSprites.push(sprite);
-                        case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
-                    }
-                }
-
-                add(sprite);
-                objMap.set(objData.name, sprite);
+                case SPARROW:
+                    sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
+                case PACKED:
+                    sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
+                default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
             }
+
+            if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
+            if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
+
+            sprite.angle = objData?.angle ?? 0;
+            sprite.alpha = objData?.alpha ?? 1;
+            sprite.antialiasing = objData?.antialiasing ?? true;
+            sprite.flipX = objData?.flipX ?? false;
+            sprite.flipY = objData?.flipY ?? false;
+            if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
+
+            if(objData.animations != null && objData.animations.length > 0)
+                sprite.idleAnims = sprite.loadAnimations(objData.animations);
+
+            if (objData.startAnim != null)
+                sprite.playAnim(objData.startAnim);
+
+            if (objData.animBehavior != null && objData.type != NONE)
+            {
+                switch (objData.animBehavior)
+                {
+                    case ONBEAT: dancingSprites.push(sprite);
+                    case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
+                }
+            }
+
+            add(sprite);
+            objMap.set(objData.name, sprite);
         }
 
         if(script != null && script.exists('onCreate'))
         script.call('onCreate');
 
         return stg;
+    }
+
+    public function getObject(name:String):MoonSprite
+    {
+        if(objMap.exists(name)) return objMap.get(name);
+
+        trace('$name wasn\'t found in the stage objects!', "WARNING");
+        return null;
     }
 
     public function updatePositioning()

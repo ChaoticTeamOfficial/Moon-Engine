@@ -32,6 +32,7 @@ class MoonScript
 
         // Other stuff to be included.
         "FlxBackdrop" => flixel.addons.display.FlxBackdrop,
+        "MoonTrail" => moon.dependency.MoonTrail,
 
         "FlxEffectSprite" => flixel.addons.effects.chainable.FlxEffectSprite,
         "FlxWaveEffect" => flixel.addons.effects.chainable.FlxWaveEffect,

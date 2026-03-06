@@ -116,7 +116,7 @@ class TiledSprite extends MoonSprite
 
 	override function drawComplex(camera:FlxCamera):Void
 	{
-	    getScreenPosition(_point, camera).subtractPoint(offset);
+	    getScreenPosition(_point, camera).subtract(offset);
 		_point.add(origin.x, origin.y);
         
 		prepareMatrix(_frame, _matrix);

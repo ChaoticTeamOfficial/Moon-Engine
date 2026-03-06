@@ -77,13 +77,21 @@ class Paths
         #end
     }
 
-	private static function getFileBytes(path:String, ?library:String):Bytes
-	{
-		var fsPath:String = getPath(path, library);
-		if (!Assets.exists(fsPath))
-			return null;
-		return Assets.getBytes(fsPath);
-	}
+    private static function getFileBytes(path:String, ?library:String):Bytes
+    {
+        var fsPath:String = getPath(path, library);
+        #if desktop
+        if (!FileSystem.exists(fsPath))
+            return null;
+
+        return File.getBytes(fsPath);
+        #else
+        if (!Assets.exists(fsPath))
+            return null;
+
+        return Assets.getBytes(fsPath);
+        #end
+    }
     
     public static function exists(filePath:String, ?library:String):Bool
         return fileExists(filePath, library);
@@ -98,7 +106,13 @@ class Paths
                 trace('$key doesnt exist!', "ERROR");
                 return null;
             }
-            var sound:Sound = Assets.getSound(getPath(key, library), false);
+            var sound:Sound;
+            #if desktop
+            sound = Sound.fromFile(getPath(key, library));
+            #else
+            sound = Assets.getSound(getPath(key, library), false);
+            #end
+            
             renderedSounds.set(cacheKey, sound);
         }
         return renderedSounds.get(cacheKey);
@@ -120,8 +134,15 @@ class Paths
                 return null;
             }
 
-            var bitmap:BitmapData = Assets.getBitmapData(getPath(imagePath, library), false);
+            var bitmap:BitmapData;
+            var fsPath = getPath(imagePath, library);
+            #if desktop
+            bitmap = BitmapData.fromFile(fsPath);
+            #else
+            bitmap = Assets.getBitmapData(fsPath, false);
+            #end
 
+            //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
             var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
             newGraphic.persist = true;
@@ -135,86 +156,86 @@ class Paths
     */
     public static var dumpExclusions:Array<String> = [];
 
-	public static function clearMemory()
-	{   
-		// Clear graphics
-		var clearCount:Array<String> = [];
-		for(key => graphic in renderedGraphics)
-		{
-			if(dumpExclusions.contains(key + '.png')) continue;
+    public static function clearMemory()
+    {   
+        // Clear graphics
+        var clearCount:Array<String> = [];
+        for(key => graphic in renderedGraphics)
+        {
+            if(dumpExclusions.contains(key + '.png')) continue;
 
-			clearCount.push(key);
-			
-			renderedGraphics.remove(key);
-			
-			graphic.persist = false;
-			FlxG.bitmap.remove(graphic);
-			
-			if(graphic.bitmap != null)
-			{
-				graphic.bitmap.dispose();
-				graphic.bitmap.disposeImage();
-			}
-			
-			#if (flixel < "6.0.0")
-			graphic.dump();
-			#end
-			graphic.destroy();
-		}
+            clearCount.push(key);
+            
+            renderedGraphics.remove(key);
+            
+            graphic.persist = false;
+            FlxG.bitmap.remove(graphic);
+            
+            if(graphic.bitmap != null)
+            {
+                graphic.bitmap.dispose();
+                graphic.bitmap.disposeImage();
+            }
+            
+            #if (flixel < "6.0.0")
+            graphic.dump();
+            #end
+            graphic.destroy();
+        }
 
-		if(clearCount.length > 0)
-		{
-			trace('cleared $clearCount', "DEBUG");
-			trace('cleared ${clearCount.length} assets', "DEBUG");
-		}
+        if(clearCount.length > 0)
+        {
+            trace('cleared $clearCount', "DEBUG");
+            trace('cleared ${clearCount.length} assets', "DEBUG");
+        }
 
-		// uhhhh
-		@:privateAccess
-		for(key in FlxG.bitmap._cache.keys())
-		{
-			var obj = FlxG.bitmap._cache.get(key);
-			if(obj != null && !renderedGraphics.exists(key))
-			{
-				obj.persist = false;
-				
-				if(obj.bitmap != null)
-				{
-					obj.bitmap.dispose();
-					obj.bitmap.disposeImage();
-				}
-				
-				FlxG.bitmap._cache.remove(key);
-				#if (flixel < "6.0.0")
-				obj.dump();
-				#end
-				obj.destroy();
-			}
-		}
-		
-		// sound clearing
+        // uhhhh
+        @:privateAccess
+        for(key in FlxG.bitmap._cache.keys())
+        {
+            var obj = FlxG.bitmap._cache.get(key);
+            if(obj != null && !renderedGraphics.exists(key))
+            {
+                obj.persist = false;
+                
+                if(obj.bitmap != null)
+                {
+                    obj.bitmap.dispose();
+                    obj.bitmap.disposeImage();
+                }
+                
+                FlxG.bitmap._cache.remove(key);
+                #if (flixel < "6.0.0")
+                obj.dump();
+                #end
+                obj.destroy();
+            }
+        }
+        
+        // sound clearing
         // well uhm this kinda kills menu music :T
-		/*for (key => sound in renderedSounds)
-		{
-			if(dumpExclusions.contains(key + '.ogg')) continue;
-			
-			sound.close();
-			renderedSounds.remove(key);
-		}*/
+        /*for (key => sound in renderedSounds)
+        {
+            if(dumpExclusions.contains(key + '.ogg')) continue;
+            
+            sound.close();
+            renderedSounds.remove(key);
+        }*/
 
-		renderedGraphics.clear();
-		renderedSounds.clear();
+        renderedGraphics.clear();
+        renderedSounds.clear();
 
-		#if cpp
-		cpp.vm.Gc.run(true);
-		cpp.vm.Gc.compact();
-		#end
-		
-		System.gc();
-		
-		#if hl
-		hl.Gc.major();
-		#end
-	}
+        #if cpp
+        cpp.vm.Gc.run(true);
+        cpp.vm.Gc.compact();
+        #end
+        
+        System.gc();
+        
+        #if hl
+        hl.Gc.major();
+        #end
+    }
 
     public static function clearUnusedAssets()
     {
@@ -227,8 +248,8 @@ class Paths
 
             clearedGraphics.push(key);
             renderedGraphics.remove(key);
-			
-			graphic.persist = false;
+            
+            graphic.persist = false;
             FlxG.bitmap.remove(graphic);
             #if (flixel < "6.0.0")
             graphic.dump();

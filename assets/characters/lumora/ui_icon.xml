@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="ui_icon.png">
+	<SubTexture name="idle0000" x="0" y="0" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm0000" x="0" y="0" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm0001" x="45" y="0" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm0002" x="45" y="0" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm0003" x="0" y="29" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm0004" x="45" y="29" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm-hold0000" x="45" y="29" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+	<SubTexture name="confirm-hold0001" x="45" y="29" width="45" height="29" frameX="0" frameY="0" frameWidth="66" frameHeight="31" />
+</TextureAtlas>

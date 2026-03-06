@@ -74,16 +74,21 @@ class HealthBar extends FlxSpriteGroup
         oppIcon.screenCenter(X);
     }
 
+    public function performTransition(conductor:Conductor)
+    {
+        transitioning = true;
+    }
+
     public var updateIconsPos:Bool = true;
     public var lerpPercent:Float = 0;
-
+    public var transitioning:Bool = false;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
 
         bar.value = FlxMath.lerp(bar.value, health, elapsed * 8);
 
-        if(updateIconsPos)
+        if(updateIconsPos && MoonSettings.callSetting('Icons') == 'At Healthbar')
         {
             final percent = 1 - (health / 100);
             lerpPercent = FlxMath.lerp(lerpPercent, percent, elapsed * 16);
@@ -96,7 +101,12 @@ class HealthBar extends FlxSpriteGroup
             playerIcon.y = bar.y - (playerIcon.height * 0.5);
         }
         
-        oppIcon.scale.x = oppIcon.scale.y = playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale, elapsed * 12);
+        if(!transitioning)
+        {
+            final scaleSpeed = elapsed * 18;
+            oppIcon.scale.x = oppIcon.scale.y = FlxMath.lerp(oppIcon.scale.x, iconScale, scaleSpeed);
+            playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale, scaleSpeed);
+        }
     }
 
     public function updateBarStats()
@@ -110,8 +120,8 @@ class HealthBar extends FlxSpriteGroup
 
     public function bump()
     {
-        oppIcon.scale.set(iconScale + 0.1, iconScale + 0.1);
-        playerIcon.scale.set(iconScale + 0.1, iconScale + 0.1);
+        oppIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
+        playerIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
     }
 
     public function getRGBData(character:String)
@@ -122,9 +132,7 @@ class HealthBar extends FlxSpriteGroup
     }
 
     public function getData(character:String):Character.CharacterData
-    {
         return (Paths.exists('characters/${character}/data.json')) ? Paths.JSON('characters/${character}/data') : null;
-    }
 
     @:noCompletion public function set_opponent(val:String)
     {

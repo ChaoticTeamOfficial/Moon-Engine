@@ -34,7 +34,8 @@ class HealthIcon extends MoonSprite
 
         centerAnimations = true;
         
-        loadGraphic(Paths.image('$char/icon', 'characters'), true, 150, 150);
+        final graphic:FlxGraphic = Paths.image('$char/icon', 'characters');
+        loadGraphic(graphic, true, Std.int(graphic.width / 2), Std.int(graphic.height));
 
         animation.add('icon', [0, 1], 0, false);
 		playAnim('icon');

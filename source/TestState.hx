@@ -128,16 +128,22 @@ class TestState extends FlxState
         //add(vis);
         //vis.screenCenter();
         
-        var conductor = new Conductor(160, 4, 4);
-        var song = new Song('thorns', 'noimix', false, conductor);
-        song.state = PLAY;
+        //var conductor = new Conductor(160, 4, 4);
+        //var song = new Song('thorns', 'noimix', false, conductor);
+        //song.state = PLAY;
 
         //FlxG.sound.music = ;
         
-        vis.setAudioSource(song.inst[0]);
-        song.muteStatus(Voices_Opponent, true);
-        song.muteStatus(Voices_Player, true);
+        //vis.setAudioSource(song.inst[0]);
+        //song.muteStatus(Voices_Opponent, true);
+        //song.muteStatus(Voices_Player, true);
+
+        vinyl = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/placeholder'));
+        vinyl.screenCenter();
+        vinyl.shader = new VinylDiskShader();
+        add(vinyl);
     }
+    var vinyl:MoonSprite;
 
     //helper 'w'
     /*function formatFloat(val:Float, decimals:Int = 2):String
@@ -211,6 +217,7 @@ class TestState extends FlxState
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+        vinyl.angle += elapsed * 24;
         //if(FlxG.keys.justPressed.R) FlxG.resetState();
 
         //if(FlxG.keys.pressed.LEFT) note.duration += 0.5;

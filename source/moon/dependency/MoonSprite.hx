@@ -244,8 +244,8 @@ class MoonSprite extends FlxSprite
             _matrix.concat(_skewMatrix);
         }
 
-        getScreenPosition(_point, camera).subtractPoint(offset);
-        _point.addPoint(origin);
+        getScreenPosition(_point, camera).subtract(offset);
+        _point.add(origin);
 
         if (isPixelPerfectRender(camera))
             _point.floor();

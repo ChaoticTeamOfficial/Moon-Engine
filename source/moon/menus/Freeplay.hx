@@ -88,7 +88,6 @@ class Freeplay extends FlxSubState
             }
         }
 
-
         songList.sort(function(a, b) {
             final aLower = a.song.toLowerCase();
             final bLower = b.song.toLowerCase();

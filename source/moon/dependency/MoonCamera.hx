@@ -21,9 +21,9 @@ class MoonCamera extends FlxCamera
         {
             shakeTime += elapsed * (handheldVFX.speed ?? 3);
 
-            final val = handheldVFX.distance ?? 3;
-            final xIn = handheldVFX.xIntensity ?? 1.2;
-            final yIn = handheldVFX.yIntensity ?? 0.8;
+            final val = handheldVFX?.distance ?? 3;
+            final xIn = handheldVFX?.xIntensity ?? 1.2;
+            final yIn = handheldVFX?.yIntensity ?? 0.8;
             scroll.x += FlxMath.fastSin(shakeTime * xIn) * val;
             scroll.y += FlxMath.fastSin(shakeTime * yIn) * val;
         }

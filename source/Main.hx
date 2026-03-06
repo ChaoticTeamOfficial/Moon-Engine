@@ -70,6 +70,16 @@ class Main extends Sprite
 		
 		Global.allowInputs = true;
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		
+		#if sys
+		// idk who put this coconut image on the files but when I tried to delete it the game just wouldn't start.
+		// words cannot describe my fucking confusion.
+		if (!Paths.exists("data/importantdata-do-not-delete.png"))
+		{
+			Application.current.window.alert("Funkin' but at what cost...", "Put it back. Now.");
+			Sys.exit(1);
+		}
+		#end
 	}
 
 	function onCrash(e:UncaughtErrorEvent):Void

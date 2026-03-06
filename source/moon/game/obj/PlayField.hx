@@ -126,7 +126,7 @@ class PlayField extends FlxGroup
         strumlines = [];
         
         final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, false];
+        final isCPUPlayers = [true, true];
 
         for (i in 0...playerIDs.length)
         {
@@ -210,6 +210,8 @@ class PlayField extends FlxGroup
 
             strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
             strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
+
+            //oppStrum.visible = oppStrum.strumBG.visible = playerStrum.visible = playerStrum.strumBG.visible = false;
         }
 
         healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;

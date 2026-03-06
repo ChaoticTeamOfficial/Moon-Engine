@@ -99,7 +99,7 @@ class FilteredSprite extends MoonSprite
     {
       if (!camera.visible || !camera.exists || !isOnScreen(camera)) continue;
 
-      getScreenPosition(_point, camera).subtractPoint(offset);
+      getScreenPosition(_point, camera).subtract(offset);
 
       if (isSimpleRender(camera)) drawSimple(camera);
       else

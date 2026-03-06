@@ -24,11 +24,11 @@ echo.
 
 haxelib install flixel 6.1.2
 
-haxelib install lime 8.3.0
+haxelib install lime 8.3.1
 
-haxelib install openfl 9.5.0
+haxelib install openfl 9.5.1
 
-haxelib install flixel-addons 3.3.0
+haxelib install flixel-addons 4.0.1
 
 haxelib install flixel-tools 1.5.1
 
@@ -43,7 +43,6 @@ haxelib install hxvlc 2.1.4
 haxelib install hscript-iris
 haxelib install flixel-waveform
 haxelib install flixel-animate 1.1.0 
-haxelib install customtitlebar 1.0.2
 haxelib install hxdiscord_rpc
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc

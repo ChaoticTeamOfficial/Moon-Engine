@@ -1,0 +1,16 @@
+{
+    "antialiasing": true,
+    "scale": 1,
+    "flipX": false,
+    "camOffsets": [20, -160],
+	"extraOffsets": [18, -140],
+    "healthbarColors": [102, 204, 153],
+    "danceFrequency": 2,
+    "animations": [
+        {"name": "idle-0", "prefix": "idle", "x": 0, "y": 0, "looped":true, "fps": 12},
+        {"name": "singLEFT", "prefix": "left", "x": 90, "y": 20, "fps": 24},
+        {"name": "singDOWN", "prefix": "down", "x": -10, "y": -90, "fps": 24},
+        {"name": "singUP", "prefix": "up", "x": 0, "y": 80, "fps": 24},
+        {"name": "singRIGHT", "prefix": "right", "x": -90, "y": 0, "fps": 24}
+    ]
+}

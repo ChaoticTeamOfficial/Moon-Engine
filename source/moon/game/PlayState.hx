@@ -84,10 +84,11 @@ class PlayState extends FlxTransitionableState
 		
 		//< -- CAMERAS SETUP -- >//
 		camGAME.bgColor = FlxColor.BLACK;
-		camHUD.bgColor = 0x00000000;
-		camALT.bgColor = 0x00000000;
+		camGAME.bgColor.alpha = 1;
+		camHUD.bgColor.alpha = 0;
+		camALT.bgColor.alpha = 0;
 
-		FlxG.cameras.add(camGAME, true);
+		FlxG.cameras.reset(camGAME);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camALT, false);
 		
