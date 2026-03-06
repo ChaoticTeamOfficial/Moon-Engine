@@ -11,7 +11,7 @@ class SetZoomEvent extends BaseEvent
         game.setCameraZoom(
             targetZoom,
             game.conductor.stepCrochet / 1000 * event.values.duration,
-            {ease: game.resolveEase(event.values.ease)},
+            {ease: MoonUtils.resolveEase(event.values.ease)},
             (event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
         );
     }

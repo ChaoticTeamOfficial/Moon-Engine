@@ -433,39 +433,4 @@ class PlayState extends FlxTransitionableState
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
-
-	// this is ugly but whatever
-	// Made public so event classes can access it
-	public function resolveEase(easeName:String):EaseFunction
-	{
-		//btw this is just because of how vslice handle tween easings.
-
-		if(easeName == null || easeName == "" || easeName.toLowerCase().contains('linear'))
-			return FlxEase.linear; //safechecks are nice!
-
-		var name:String = easeName;
-		switch(name.toLowerCase())
-		{
-			case "instant": return null;
-			default: 
-				if(name.toLowerCase() != "linear" && !StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
-					name += "InOut";
-
-			var func = Reflect.field(FlxEase, name);
-
-			//just some last failsafes
-			if(func == null)
-			{
-				name = StringTools.replace(name, "InOut", "Out");
-				func = Reflect.field(FlxEase, name);
-			}
-
-			if(func == null)
-				func = FlxEase.expoInOut;
-
-			//trace('resolved ease: $name', "DEBUG");
-
-			return func;
-		}
-	}
 }

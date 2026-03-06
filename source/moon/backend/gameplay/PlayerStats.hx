@@ -118,7 +118,7 @@ class PlayerStats
 
     @:noCompletion function set_health(value:Float):Float
     {
-        if(health <= 100)
+        if(value <= 100)
             health = value;
 
         return value;

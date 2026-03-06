@@ -16,7 +16,7 @@ class SetScrollSpeedEvent extends BaseEvent
         	scroll *= game.playField.chart.content.meta.scrollSpd;
 
         if(event.values.ease.toLowerCase() == 'instant') spawner.scrollSpeed = scroll;
-        else scrollTween = FlxTween.tween(spawner, {scrollSpeed: scroll}, game.conductor.stepCrochet / 1000 * event.values.duration, {ease: game.resolveEase(event.values.ease)});
+        else scrollTween = FlxTween.tween(spawner, {scrollSpeed: scroll}, game.conductor.stepCrochet / 1000 * event.values.duration, {ease: MoonUtils.resolveEase(event.values.ease)});
 
         trace('Changing scroll speed to ${scroll}!', "DEBUG");
     }

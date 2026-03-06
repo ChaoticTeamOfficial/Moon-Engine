@@ -153,6 +153,10 @@ class Note extends MoonSprite
         super.update(dt);
         if(state == GOT_HIT || state == MISSED || state == TOO_LATE)
             visible = active = false;
+
+        if (receptor != null && state == NONE)
+            scale.copyFrom(receptor.strumNote.scale);
+
         updateNotePos();
     }
 

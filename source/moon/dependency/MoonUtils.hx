@@ -1,6 +1,9 @@
 package moon.dependency;
+
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.FlxG;
+
 using StringTools;
 
 @:publicFields
@@ -41,6 +44,43 @@ class MoonUtils
             i--;
         }
         return formatted;
+    }
+
+    /**
+     * Function that resolve an ease string to a FlxEase.
+     * @param easeName the ease name.
+     */
+    static function resolveEase(easeName:String):EaseFunction
+    {
+        //btw this is just because of how vslice handle tween easings.
+
+        if(easeName == null || easeName == "" || easeName.toLowerCase().contains('linear'))
+            return FlxEase.linear; //safechecks are nice!
+
+        var name:String = easeName;
+        switch(name.toLowerCase())
+        {
+            case "instant": return null;
+            default: 
+                if(name.toLowerCase() != "linear" && !StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
+                    name += "InOut";
+
+            var func = Reflect.field(FlxEase, name);
+
+            //just some last failsafes
+            if(func == null)
+            {
+                name = StringTools.replace(name, "InOut", "Out");
+                func = Reflect.field(FlxEase, name);
+            }
+
+            if(func == null)
+                func = FlxEase.expoInOut;
+
+            //trace('resolved ease: $name', "DEBUG");
+
+            return func;
+        }
     }
 
     private static var symbols:String = "!@#$%^&*()1234567890?";

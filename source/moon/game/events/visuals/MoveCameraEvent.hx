@@ -8,7 +8,7 @@ class MoveCameraEvent extends BaseEvent
             event.values.character,
             [event?.values?.x ?? 0, event?.values?.y ?? 0],
             game.conductor.stepCrochet / 1000 * event.values.duration,
-            {ease: game.resolveEase(event.values.ease)},
+            {ease: MoonUtils.resolveEase(event.values.ease)},
             (event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
         );
     }
