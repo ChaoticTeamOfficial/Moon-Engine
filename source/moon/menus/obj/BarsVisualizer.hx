@@ -36,7 +36,13 @@ class BarsVisualizer extends FlxSpriteGroup
     }
 	
 	public function setAudioSource(src:AudioSource)
+    {
 		analyzer = new SpectralAnalyzer(new LimeAudioClip(src), barCount + 1, 0.1, 10);
+
+        #if sys
+        analyzer.fftN = 256;
+        #end
+    }
 
     @:generic
     static inline function min<T:Float>(x:T, y:T):T

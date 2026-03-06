@@ -29,7 +29,7 @@ class Title extends FlxTransitionableState
     var randomText:Array<String> = [];
 
     var gridPos:Float = 0;
-    var onTitle:Bool = false; //For tracking when the alphabet isnt on screensies
+    var onTitle:Bool = false; //For tracking when the texts stuff are on screen
     override public function create():Void
     {
         super.create();
@@ -77,6 +77,7 @@ class Title extends FlxTransitionableState
         objects.push(grid2);
 
         add(circles);
+
         // create clock circles
         for(i in 0...3)
         {
@@ -167,6 +168,29 @@ class Title extends FlxTransitionableState
 
         getRandomTXT();
         trace('Text of the day: $randomText', "DEBUG");
+
+        trace('Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
+        new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
+            // now we get a random video.
+            final vidDir = Paths.readDir('videos/titleVideos', [".mp4"]);
+            final curVid = vidDir[FlxG.random.int(0, vidDir.length - 1)];
+            trace('AD has been chosen: $curVid', "DEBUG");
+
+            // we must cancel inputs here.
+            // I mean, not really, though I think it's nice to.
+            Global.allowInputs = false;
+            FlxG.sound.music.fadeOut(2.0, 0);
+
+            FlxG.camera.fade(FlxColor.BLACK, 2.0, false, ()->
+            {
+                //this.visible = this.active = false;
+                FlxG.sound.music.pause();
+                openSubState(new VideoSubState('videos/titleVideos/$curVid'));
+                //TODO: Make the fade-out only start when video's loaded.
+                // and make some other callbacks when closing too so it won't stay softlocked.
+                FlxG.camera.fade(FlxColor.BLACK, 1, true);
+            });
+        });
     }
 
     var txTwn:FlxTween;

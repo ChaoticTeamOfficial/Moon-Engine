@@ -304,6 +304,9 @@ class Paths
     public static function font(key:String, ?library:String):String
         return getPath('fonts/$key', library);
 
+    public static function mp4(key:String, ?library:String):String
+        return getPath('$key.mp4', library);
+
     public static function text(key:String, ?library:String):String
         return getFileContent('$key.txt', library).trim();
 

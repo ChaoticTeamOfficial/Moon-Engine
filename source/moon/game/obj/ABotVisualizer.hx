@@ -9,6 +9,8 @@ import funkin.vis.dsp.SpectralAnalyzer;
 import funkin.vis.audioclip.frontends.LimeAudioClip;
 import lime.media.AudioSource;
 
+//TODO: Softcode this?
+
 @:publicFields
 class ABotVisualizer extends FlxSpriteGroup
 {

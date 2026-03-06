@@ -18,7 +18,16 @@ class Constants
 	static final SETTINGS_SAVE_BIND:String = 'MoonEngine-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
 
-    static final INITIAL_STATE:Class<FlxState> = MainMenu;
+    static final INITIAL_STATE:Class<FlxState> = Title;
+
+    ////// ------- MENUS RELATED CONSTANTS
+
+    // - Title
+
+    /**
+     * Time it takes to play a video on TitleState.
+     */
+    static final TITLE_VIDEO_DELAY:Float = 27;
 
     ////// ------- GAMEPLAY RELATED CONSTANTS
 
