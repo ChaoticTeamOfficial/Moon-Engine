@@ -176,7 +176,7 @@ class Receptor extends FlxSpriteGroup
         
         strumNote.playAnim('$dir-confirm', true);
 
-        // splash for taps
+        // splash for taps (only sick non-sustains)
         if (judgement == 'sick' && !isCPU && !isSustain
             && splash.animation.getAnimationList().length > 0)
         {
@@ -184,8 +184,8 @@ class Receptor extends FlxSpriteGroup
             splash.spawn();
         }
         
-        // splash for sustains
-        if (note.duration > 90
+        // sustain splash
+        if (!isSustain && note != null && note.duration > 90
             && sustainSplash.animation.getAnimationList().length > 0)
         {
             sustainSplash.setPosition((cx - sustainSplash.width / 2) + sustainSplash.extraOffset.x, (cy - sustainSplash.height / 2) + sustainSplash.extraOffset.y);

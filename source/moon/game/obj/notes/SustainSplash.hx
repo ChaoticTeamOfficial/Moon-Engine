@@ -66,12 +66,16 @@ class SustainSplash extends MoonSprite
      * Despawns the note splash.
      * @param insta if true, it'll disappear instantly. Else, it'll play the end animation and then disappear
      */
-    public function despawn(insta:Bool)
+    public function despawn(instant:Bool)
     {
         if(isOnLoop)
         {
             isOnLoop = false;
-            if(insta){ this.active = false; this.alpha = 0.0001;}
+            if(instant)
+            {
+                this.active = false; 
+                this.alpha = 0.0001;
+            }
             else this.playAnim('${MoonUtils.intToDir(data)}-end', true);
         }
     }

@@ -142,6 +142,8 @@ class TestState extends FlxState
         vinyl.screenCenter();
         vinyl.shader = new VinylDiskShader();
         add(vinyl);
+
+        testParser();
     }
     var vinyl:MoonSprite;
 

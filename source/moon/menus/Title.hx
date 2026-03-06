@@ -180,6 +180,7 @@ class Title extends FlxTransitionableState
     var lastVidIndex:Int = 0;
     function prepareAD()
     {
+        #if !cpp return; #end
         trace('Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
         new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
             // now we get a random video.
@@ -212,7 +213,7 @@ class Title extends FlxTransitionableState
                         @:privateAccess backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
                     },
 
-                    infoText: "The Funkin' Crew is NOT affiliated with Chaotic Team."
+                    infoText: "Chaotic Team is NOT affiliated with The Funkin' Crew."
                 }));
             });
 

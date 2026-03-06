@@ -27,7 +27,7 @@ class Constants
     /**
      * Time it takes to play a video on TitleState.
      */
-    static final TITLE_VIDEO_DELAY:Float = 27;
+    static final TITLE_VIDEO_DELAY:Float = 27.5;
 
     ////// ------- GAMEPLAY RELATED CONSTANTS
 

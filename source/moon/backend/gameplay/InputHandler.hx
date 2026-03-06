@@ -191,16 +191,14 @@ class InputHandler
         {
             if(released[i])
             {
-                // call on release if a released key is detected (like that one vs hex song yes its defnitely a reference hahaha laugh now.)
+                // oh yeah I cleaned this bit a little
                 if (onKeyRelease != null) onKeyRelease(i);
                 strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-static', true);
 
-                // now all this does is check if a key got released early while holding a sustain
-                // then 'kill' it (not necessarily kill. we dont kill notes around here...)
-                // shh emoji
+                // yummy hold sustains
                 if (heldSustains.exists(i))
                 {
-                    strumline.members[i].sustainSplash.despawn(CPUMode);
+                    strumline.members[i].sustainSplash.despawn(true);
                     final heldNote = heldSustains.get(i);
                     heldSustains.remove(i);
 
@@ -234,9 +232,6 @@ class InputHandler
         strumline.members[note.direction].onNoteHit(note, timing, isSustain);
         stats.updtAccuracy();
         //trace(timing);
-        
-        // little workaround if it doesnt despawn, which may happen sometimes...
-        if(!isSustain) strumline.members[note.direction].sustainSplash.despawn((CPUMode));
         
         if(attachedChar != null && (note.type != "noanim" || note.type != "No Animation Note")) 
             attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
@@ -293,6 +288,7 @@ class InputHandler
                     heldNote.child.visible = heldNote.child.active = false;
                     
                     strumline.members[direction].sustainSplash.despawn(CPUMode);
+                    
                     if (onSustainComplete != null) 
                         onSustainComplete(heldNote);
 

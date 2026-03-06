@@ -135,7 +135,7 @@ class TextTyper extends FlxSpriteGroup
         for (c in line) maxH = Math.max(maxH, c.sprite.height);
         for (c in line)
         {
-            var diff = maxH - c.sprite.height;
+            final diff = maxH - c.sprite.height;
             c.sprite.y += diff;
             c.baseY += diff;
         }

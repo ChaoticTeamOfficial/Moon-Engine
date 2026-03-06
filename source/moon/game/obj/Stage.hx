@@ -137,7 +137,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
             ]
         };
 
-        trace(json);
+        //trace(json);
 
         cameraSettings = json.camSettings;
 

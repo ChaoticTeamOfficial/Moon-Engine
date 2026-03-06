@@ -1,5 +1,6 @@
 package moon.ui;
 
+#if cpp
 import hxvlc.flixel.FlxVideoSprite;
 
 class VideoSubState extends FlxSubState
@@ -22,6 +23,7 @@ class VideoSubState extends FlxSubState
         video.visible = false;
 
         // why ts so laggy on my trashy pc,...., augh
+        // note: it actually doesn't now wow
 
         video.bitmap.onFormatSetup.add(() ->
         {
@@ -64,6 +66,17 @@ class VideoSubState extends FlxSubState
         }
     }
 }
+#else
+class VideoSubState extends FlxSubState
+{
+    public function new(?params:VideoParams)
+    {
+        super();
+        trace("VIDEOS ARE ONLY SUPPORTED ON C++ TARGETS!", "WARNING");
+        close();
+    }
+}
+#end
 
 typedef VideoParams = {
     var path:String;
