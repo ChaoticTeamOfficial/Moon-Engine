@@ -18,6 +18,7 @@ class Prebuild
         "Mano mix is cool",
         "Mad Virus Attack is pawesome",
         "Cool Pokemon Mod is cool",
+        "Vee Mix is the coolest",
         "just add an random useless fact idk i cant think of anything :sob: -- zzshu",
         "The evoker can change the color of the wool of the blue sheeps",
         "Easier to assimilate than explain, anyway.",

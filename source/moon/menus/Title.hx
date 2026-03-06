@@ -16,6 +16,7 @@ import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 
 class Title extends FlxTransitionableState
 {
+    var backVis:BarsVisualizer;
     var grid1:FlxBackdrop;
     var grid2:FlxBackdrop;
     var logo:MoonSprite;
@@ -40,7 +41,7 @@ class Title extends FlxTransitionableState
         setupTransition();
         
         // -- CREATE BG ELEMENTS
-        var backVis = new BarsVisualizer(16);
+        backVis = new BarsVisualizer(16);
         backVis.alpha = 0.7;
         add(backVis);
         objects.push(backVis);
@@ -167,13 +168,25 @@ class Title extends FlxTransitionableState
         });
 
         getRandomTXT();
+
+        @:privateAccess
+        FlxG.sound.music.onComplete = () -> backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
+
         trace('Text of the day: $randomText', "DEBUG");
 
+        prepareAD();
+    }
+
+    var lastVidIndex:Int = 0;
+    function prepareAD()
+    {
         trace('Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
         new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
             // now we get a random video.
-            final vidDir = Paths.readDir('videos/titleVideos', [".mp4"]);
-            final curVid = vidDir[FlxG.random.int(0, vidDir.length - 1)];
+            final vidDir = Paths.readDir('videos/titleADs', [".mp4"]);
+            if(lastVidIndex >= vidDir.length) lastVidIndex = 0;
+
+            final curVid = vidDir[lastVidIndex];
             trace('AD has been chosen: $curVid', "DEBUG");
 
             // we must cancel inputs here.
@@ -185,11 +198,25 @@ class Title extends FlxTransitionableState
             {
                 //this.visible = this.active = false;
                 FlxG.sound.music.pause();
-                openSubState(new VideoSubState('videos/titleVideos/$curVid'));
-                //TODO: Make the fade-out only start when video's loaded.
-                // and make some other callbacks when closing too so it won't stay softlocked.
-                FlxG.camera.fade(FlxColor.BLACK, 1, true);
+                openSubState(new VideoSubState({
+                    path: Paths.mp4('videos/titleADs/$curVid'),
+                    onStart: () -> {
+                        FlxG.camera.fade(FlxColor.BLACK, 1, true);
+                        Global.allowInputs = true;
+                    },
+                    onComplete: () -> {
+                        prepareAD();
+                        FlxG.camera.fade(FlxColor.BLACK, 1, true);
+                        FlxG.sound.music.resume();
+                        FlxG.sound.music.fadeIn(140, 0, MoonSettings.callSetting('Music Volume'));
+                        @:privateAccess backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
+                    },
+
+                    infoText: "The Funkin' Crew is NOT affiliated with Chaotic Team."
+                }));
             });
+
+            lastVidIndex++;
         });
     }
 
@@ -220,7 +247,11 @@ class Title extends FlxTransitionableState
             (!onTitle) ? endIntro() : {
                 if(!transitioning)
                 {
+                    // gotta put it back to null, otherwise I think it'd crash the game on other states.
+                    // I'm not sure, but I gotta make sure hahah
+                    FlxG.sound.music.onComplete = null;
                     transitioning = true;
+
                     FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
                     FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
                     Paths.playSFX('ui/confirmMenu.ogg');

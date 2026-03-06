@@ -6,14 +6,16 @@ class VideoSubState extends FlxSubState
 {
     var video:FlxVideoSprite;
 
-    public function new(?path:String, ?camera:FlxCamera)
+    public function new(?params:VideoParams)
     {
         super();
         //TODO: Finish and document this class.
 
-        this.camera = camera ?? FlxG.camera;
+        this.camera = params.camera ?? FlxG.camera;
 
-        if(path == null) path = 'videos/titleVideos/boyfriendEverywhere';
+        //if(params.path == null) params.path = Paths.mp4('videos/titleVideos/boyfriendEverywhere');
+        var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        add(bg);
 
         video = new FlxVideoSprite(0, 0);
         video.antialiasing = true;
@@ -31,17 +33,47 @@ class VideoSubState extends FlxSubState
             }
         });
 
-        video.bitmap.onEndReached.add(() ->
-        {
-            close();
+        video.bitmap.onEndReached.add(() ->{ 
+            video.bitmap.dispose(); 
+            close(); 
+            if(params.onComplete != null) params.onComplete(); 
         });
+
+        video.bitmap.onPlaying.add(() -> if(params.onStart != null) params.onStart());
 
         add(video);
 
-        if (video.load(Paths.mp4(path)))
-            new FlxTimer().start(0.001, _ -> {
-            	video.visible = true;
-            	video.play();
-    		});
+        if (video.load(params.path))
+        {
+        	video.visible = true;
+        	video.play();
+		};
+
+        if(params.infoText != null)
+        {
+            var txt = new FlxText();
+            txt.setFormat(Paths.font('DynaPuff.ttf'), 18);
+            txt.antialiasing = true;
+            txt.text = params.infoText;
+            txt.blend = DIFFERENCE;
+            add(txt);
+            txt.alpha = 0.00001;
+            FlxTween.tween(txt, {alpha: 0.7}, 1);
+
+            txt.setPosition(16, FlxG.height - txt.height - 16);
+        }
     }
+}
+
+typedef VideoParams = {
+    var path:String;
+    var ?onStart:Void->Void;
+    var ?onComplete:Void->Void;
+    var ?camera:FlxCamera;
+    var ?uiType:VideoUIType;
+    var ?infoText:String;
+};
+
+enum abstract VideoUIType(String) {
+    var DEFAULT = 'default';
 }
