@@ -9,7 +9,7 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['story mode', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit', 'blabla', 'as you know, YOU are welcome here.'];
+    final opt:Array<String> = ['test replay', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit'];
     var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -30,6 +30,7 @@ class MainMenu extends FlxTransitionableState
         
         changeSelection(0);
 
+        // TODO: remove this and make the title state window dance stop there.
         MoonSettings.updateWindow();
         
         if(PlayState.instance != null) PlayState.instance.destroy();
@@ -45,6 +46,18 @@ class MainMenu extends FlxTransitionableState
         {
             switch(opt[curSelected].toLowerCase())
 			{
+                case 'test replay':
+                    PlayState.songData = {
+                        song: 'darnell',
+                        difficulty: 'nightmare',
+                        mix: 'pico'
+                    }
+
+                    final rep = PlayState.loadReplay('replays/darnell_nightmare_pico_1772948785000.mrp');
+                    if (rep != null)
+                        FlxG.switchState(() -> new PlayState(rep));
+                    FlxG.sound.music.stop();
+
 				case 'freeplay': openSubState(new Freeplay('bf'));
                 case 'settings': openSubState(new Settings());
                 case 'convert chart yeah': FlxG.switchState(()->new ChartConvert());

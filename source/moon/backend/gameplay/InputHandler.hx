@@ -6,6 +6,7 @@ import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
 import moon.backend.gameplay.Timings;
 import lime.system.System;
+import moon.backend.gameplay.Replay.ReplayInput;
 
 /**
  * Class meant to handle note inputs in a gameplay scene.
@@ -93,6 +94,38 @@ class InputHandler
      */
     public var released:Array<Bool> = [];
 
+    // -- REPLAY SYSTEM STUFF
+
+    /**
+     * Whether is on replay mode or not.
+     */
+    public var isReplay:Bool = false;
+
+    /**
+     * Whether is recording a replay or not.
+     */
+    public var recording:Bool = false;
+
+    /**
+     * An array of replay inputs.
+     */
+    public var replayInputs:Array<ReplayInput> = [];
+
+    /**
+     * An array of all recorded inputs for replays.
+     */
+    public var recordedInputs:Array<ReplayInput> = [];
+
+    /**
+     * The current replay index.
+     */
+    public var currentReplayIndex:Int = 0;
+
+    /**
+     * The state for all four keys.
+     */
+    public var replayKeyStates:Array<Bool> = [false, false, false, false];
+
     /**
      * Creates input handler instance, all this does is handling inputs for a player you choose.
      * @param thisNotes The notes array that it will read.
@@ -107,19 +140,75 @@ class InputHandler
         this.strumline = strumline;
         this.conductor = conductor;
         this.stats = new PlayerStats(playerID);
+
+        // it is always recording by default BUT maybe I'll make like...
+        // something that disables by default idk.
+        replayKeyStates = [false, false, false, false];
+        recording = true;
+    }
+
+    /**
+     * Loads a Replay.
+     * @param replay The replay class to be loaded.
+     */
+    public function loadReplay(replay:Replay)
+    {
+        isReplay = true;
+        replayInputs = replay.inputs.copy();
+
+        currentReplayIndex = 0;
+        replayKeyStates = [false, false, false, false];
+
+        recording = false;
+        stats.reset();
     }
 
     public function update():Void
     {
-        (!CPUMode) ? processInputs() : {
-            processCPUInputs();
-            stats.health = 100;
-        }
+        if (isReplay) processReplayInputs();
+        else if (!CPUMode) processInputs();
+        else processCPUInputs();
 
         checkSustains();
         onLateMiss();
 
         //stats.health = FlxMath.bound(stats.health, 0, 101);
+    }
+
+    private function processReplayInputs():Void
+    {
+        // clears every input so you cant press on replays.
+        for (i in 0...4)
+        {
+            justPressed[i] = false;
+            released[i] = false;
+        }
+
+        // process every input that should have happened by now
+        while (currentReplayIndex < replayInputs.length && replayInputs[currentReplayIndex].time <= conductor.time)
+        {
+            final input = replayInputs[currentReplayIndex];
+            final dir = input.dir;
+
+            if (input.press)
+            {
+                justPressed[dir] = true;
+                replayKeyStates[dir] = true;
+            }
+            else
+            {
+                released[dir] = true;
+                replayKeyStates[dir] = false;
+            }
+
+            currentReplayIndex++;
+        }
+
+        // keeps pressed state for holds/sustains
+        for (i in 0...4) pressed[i] = replayKeyStates[i];
+
+        // then process regular inputs.
+        processInputs();
     }
 
     private function processCPUInputs():Void
@@ -148,6 +237,9 @@ class InputHandler
             // iterates through the keys and checks if any of them got pressed.
             if (justPressed[i])
             {
+                // first lets save stuff for the replay
+                if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true});
+
                 // now filter through the possible notes to hit, matching its current time to the next available judgement
                 final possibleNotes = thisNotes.filter(note ->
                 return (note.direction == i &&
@@ -191,6 +283,9 @@ class InputHandler
         {
             if(released[i])
             {
+                // once again lets save replay stuff first.
+                if (recording) recordedInputs.push({time: conductor.time, dir: i, press: false});
+
                 // oh yeah I cleaned this bit a little
                 if (onKeyRelease != null) onKeyRelease(i);
                 strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-static', true);

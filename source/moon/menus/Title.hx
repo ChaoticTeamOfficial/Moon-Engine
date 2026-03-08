@@ -195,7 +195,7 @@ class Title extends FlxTransitionableState
         if(songMeta != null)
         {
             conductor.changeBpmAt(0, songMeta?.bpm ?? 102, songMeta?.timeSignature[0] ?? 4, songMeta?.timeSignature[1] ?? 4);
-            FlxG.sound.music.looped = songMeta.looped;
+            FlxG.sound.music.looped = songMeta?.looped ?? true;
         }
     }
 

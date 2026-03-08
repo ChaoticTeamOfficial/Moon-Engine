@@ -1,0 +1,38 @@
+package moon.backend.gameplay;
+
+/**
+ * A replay input event.
+ */
+typedef ReplayInput = {
+	/**
+	 * The song time the event happened.
+	 */
+    var time:Float;
+
+    /**
+     * The note direction.
+     */
+    var dir:Int;
+
+    /**
+     * Whether it's a press or a release.
+     */
+    var press:Bool;
+};
+
+/**
+ * A class that contains replay info.
+ */
+class Replay
+{
+    public var song:String;
+    public var difficulty:String;
+    public var mix:String;
+    public var inputs:Array<ReplayInput> = [];
+
+    public function new(song:String, difficulty:String, mix:String) {
+        this.song = song;
+        this.difficulty = difficulty;
+        this.mix = mix;
+    }
+}

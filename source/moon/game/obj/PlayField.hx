@@ -82,8 +82,9 @@ class PlayField extends FlxGroup
      * @param song        The song that'll be played on the directory.
      * @param difficulty  The song's difficulty.
      * @param mix         The song's mix (e.g. bf, pico)
+     * @param replay      (optional) A replay to be loaded.
      */
-    public function new(song:String, difficulty:String, mix:String)
+    public function new(song:String, difficulty:String, mix:String, ?replay:Replay = null)
     {
         super();
         this.song = song;
@@ -148,6 +149,9 @@ class PlayField extends FlxGroup
             var inputHandler = new InputHandler(null, playerIDs[i], strumline, conductor);
             inputHandler.CPUMode = isCPUPlayers[i];
             inputHandlers.set(playerIDs[i], inputHandler);
+
+            if (playerIDs[i] == 'p1' && replay != null)
+                inputHandler.loadReplay(replay);
 
             inputHandler.onNoteHit = (note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain);
             inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
@@ -227,6 +231,12 @@ class PlayField extends FlxGroup
         playback.updateVolume();
     }
 
+    public function startReplay(replay:Replay)
+    {
+        inputHandlers.get('p1').loadReplay(replay);
+        botPlay = false;
+    }
+
     public function restartSong()
     {
         playback.time = 0;
@@ -254,6 +264,14 @@ class PlayField extends FlxGroup
         updateP1Stats(null);
 
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
+
+        // reset replay stuff
+        final p1 = inputHandlers.get('p1');
+        if (p1.isReplay)
+        {
+            p1.currentReplayIndex = 0;
+            p1.replayKeyStates = [false, false, false, false];
+        }
 
         if(onSongRestart != null) onSongRestart();
         inCountdown = true;

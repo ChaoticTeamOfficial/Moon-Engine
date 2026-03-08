@@ -17,6 +17,7 @@ import moon.game.submenus.PauseScreen;
 import moon.toolkit.level_editor.*;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
+import moon.backend.gameplay.Replay;
 
 using StringTools;
 
@@ -52,6 +53,8 @@ class PlayState extends FlxTransitionableState
 	// If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch.
 	public static var VALID_SCORE:Bool = true;
 
+    public var loadedReplay:Replay = null;
+
 	public static var songData:{song:String, difficulty:String, mix:String} = {
 		song: 'earworm',
 		difficulty: 'hard',
@@ -59,12 +62,20 @@ class PlayState extends FlxTransitionableState
 	};
 
 	public var paused:Bool = false;
-	public function new()
+	public function new(?replay:Replay = null)
 	{
 		super();
 		Global.allowInputs = true;
 		
 		EventRegistry.init();
+
+		if (replay != null)
+		{
+			loadedReplay = replay;
+			songData.song = replay.song;
+			songData.difficulty = replay.difficulty;
+			songData.mix = replay.mix;
+		}
 	}
 	
 	var rpcString:String = "";
@@ -93,12 +104,15 @@ class PlayState extends FlxTransitionableState
 		FlxG.cameras.add(camALT, false);
 		
 		//< -- PLAYFIELD SETUP -- >//
-		playField = new PlayField(songData.song, songData.difficulty, songData.mix);
+		playField = new PlayField(songData.song, songData.difficulty, songData.mix, loadedReplay);
 		playField.camera = camHUD;
 		playField.conductor.onBeat.add(beatHit);
 		playField.conductor.onStep.add(stepHit);
 		add(playField);
 		this.conductor = playField.conductor;
+
+		if (playField.inputHandlers.get('p1').isReplay)
+            VALID_SCORE = false;
 		
 		//< -- BACKGROUND SETUP -- >//
 		stage = new Stage(playField.chart.content.meta.stage, conductor);
@@ -377,9 +391,19 @@ class PlayState extends FlxTransitionableState
 	{
 		Global.scriptCall('onSongEnd');
 		final stat = playField.inputHandlers.get('p1').stats;
+
 		var saved:Bool = false;
 		if(VALID_SCORE)
 			saved = SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
+
+		// saves replay stuff
+        final p1Handler = playField.inputHandlers.get('p1');
+        if (p1Handler.recording && p1Handler.recordedInputs.length > 0)
+        {
+            final rep = new Replay(songData.song, songData.difficulty, songData.mix);
+            rep.inputs = p1Handler.recordedInputs.copy();
+            saveReplay(rep);
+        }
 
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
 		setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
@@ -433,4 +457,44 @@ class PlayState extends FlxTransitionableState
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
+
+    private function saveReplay(replay:Replay)
+    {
+    	// not using Paths for now.
+    	// Maybe I'll change to it later? but for now I'm just lazyy :)
+        #if sys
+        final folder = 'replays';
+        if (!sys.FileSystem.exists(folder)) sys.FileSystem.createDirectory(folder);
+
+        final timestamp = Date.now().getTime();
+        final filename = '${replay.song}_${replay.difficulty}_${replay.mix}_$timestamp.mrp';
+        final path = '$folder/$filename';
+
+        final data = {
+            song: replay.song,
+            difficulty: replay.difficulty,
+            mix: replay.mix,
+            inputs: replay.inputs
+        };
+
+        sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
+        trace('Replay saved on $path');
+        #else
+        trace("Replay saving not supported on this platform");
+        #end
+    }
+
+    public static function loadReplay(path:String):Replay 
+    {
+        #if sys
+        if (sys.FileSystem.exists(path))
+        {
+            final json:Dynamic = haxe.Json.parse(sys.io.File.getContent(path));
+            final rep = new Replay(json.song, json.difficulty, json.mix);
+            rep.inputs = json.inputs;
+            return rep;
+        }
+        #end
+        return null;
+    }
 }
