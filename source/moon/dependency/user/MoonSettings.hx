@@ -2,8 +2,6 @@ package moon.dependency.user;
 
 import moon.menus.Settings;
 import openfl.system.Capabilities;
-import flixel.FlxG;
-import flixel.util.FlxSave;
 import lime.app.Application;
 
 using StringTools;

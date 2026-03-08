@@ -14,6 +14,36 @@
             "name": "button-regular",
             "pos": [243, 351],
             "size": [242, 67]
+        },
+		{
+            "name": "smallButton-regular",
+            "pos": [0, 432],
+            "size": [80, 96]
+        },
+		{
+            "name": "smallButton-selected",
+            "pos": [96, 432],
+            "size": [80, 96]
+        },
+		{
+            "name": "exit",
+            "pos": [224, 448],
+            "size": [48, 48]
+        },
+		{
+            "name": "restart",
+            "pos": [272, 448],
+            "size": [48, 48]
+        },
+		{
+            "name": "skip",
+            "pos": [320, 448],
+            "size": [48, 48]
+        },
+		{
+            "name": "resume",
+            "pos": [368, 448],
+            "size": [48, 48]
         }
 	]
 }

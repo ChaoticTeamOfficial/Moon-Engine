@@ -7,6 +7,7 @@ class VideoSubState extends FlxSubState
 {
     var video:FlxVideoSprite;
 
+    var ui:DefaultVideoUI = new DefaultVideoUI();
     public function new(?params:VideoParams)
     {
         super();
@@ -15,8 +16,10 @@ class VideoSubState extends FlxSubState
         this.camera = params.camera ?? FlxG.camera;
 
         //if(params.path == null) params.path = Paths.mp4('videos/titleVideos/boyfriendEverywhere');
-        var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-        add(bg);
+        //var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        //add(bg);
+        // actually lemme just
+        bgColor = FlxColor.BLACK;
 
         video = new FlxVideoSprite(0, 0);
         video.antialiasing = true;
@@ -41,14 +44,13 @@ class VideoSubState extends FlxSubState
             if(params.onComplete != null) params.onComplete(); 
         });
 
-        video.bitmap.onPlaying.add(() -> if(params.onStart != null) params.onStart());
-
         add(video);
 
         if (video.load(params.path))
         {
         	video.visible = true;
         	video.play();
+            if(params.onStart != null) params.onStart();
 		};
 
         if(params.infoText != null)
@@ -64,8 +66,28 @@ class VideoSubState extends FlxSubState
 
             txt.setPosition(16, FlxG.height - txt.height - 16);
         }
+
+        ui.camera = this.camera;
+        add(ui);
+    }
+
+    override public function update(elapsed:Float)
+    {
+        super.update(elapsed);
+
+        if(MoonInput.justPressed(PAUSE) && !ui.paused)
+        {
+            ui.paused = true;
+            video.pause();
+        }
+        else if (MoonInput.justPressed(BACK) && ui.paused)
+        {
+            ui.paused = false;
+            video.play();
+        }
     }
 }
+
 #else
 class VideoSubState extends FlxSubState
 {
@@ -73,6 +95,8 @@ class VideoSubState extends FlxSubState
     {
         super();
         trace("VIDEOS ARE ONLY SUPPORTED ON C++ TARGETS!", "WARNING");
+
+        if(params.onComplete != null) params.onComplete();
         close();
     }
 }
@@ -83,10 +107,5 @@ typedef VideoParams = {
     var ?onStart:Void->Void;
     var ?onComplete:Void->Void;
     var ?camera:FlxCamera;
-    var ?uiType:VideoUIType;
     var ?infoText:String;
 };
-
-enum abstract VideoUIType(String) {
-    var DEFAULT = 'default';
-}

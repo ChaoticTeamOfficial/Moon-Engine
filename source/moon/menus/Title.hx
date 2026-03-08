@@ -2,17 +2,20 @@ package moon.menus;
 
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxBasic;
-import flixel.util.FlxTimer;
+
 import moon.dependency.MoonSound.Metadata;
 import moon.menus.obj.BarsVisualizer;
+import moon.game.obj.Character;
+
 import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.addons.display.FlxBackdrop;
-import moon.global_obj.Alphabet;
 import flixel.graphics.FlxGraphic;
 
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
+
+import openfl.system.Capabilities;
+import lime.app.Application;
 
 class Title extends FlxTransitionableState
 {
@@ -21,6 +24,7 @@ class Title extends FlxTransitionableState
     var grid2:FlxBackdrop;
     var logo:MoonSprite;
     var ctlogo:MoonSprite;
+    var secretGF:Character;
     var circles:FlxTypedSpriteGroup<FlxShapeCircle> = new FlxTypedSpriteGroup<FlxShapeCircle>();
     var objects:Array<FlxBasic> = []; // the objects that are hidden on start
     var displayTxt:FlxText;
@@ -31,6 +35,8 @@ class Title extends FlxTransitionableState
 
     var gridPos:Float = 0;
     var onTitle:Bool = false; //For tracking when the texts stuff are on screen
+
+    var colorSH:ColorSwap = new ColorSwap();
     override public function create():Void
     {
         super.create();
@@ -39,6 +45,8 @@ class Title extends FlxTransitionableState
 		FlxG.autoPause = false;
 
         setupTransition();
+
+        conductor = new Conductor(0, 4, 4);
         
         // -- CREATE BG ELEMENTS
         backVis = new BarsVisualizer(16);
@@ -49,6 +57,7 @@ class Title extends FlxTransitionableState
         var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, 0xff121224);
         bg.alpha = 0.9;
         add(bg);
+        bg.shader = colorSH.shader;
         objects.push(bg);
         
         var gradient = FlxGradient.createGradientFlxSprite(
@@ -56,6 +65,7 @@ class Title extends FlxTransitionableState
             [0xff1022c1, FlxColor.TRANSPARENT, 0xffca15ac]
         );
         gradient.alpha = 0.2;
+        gradient.shader = colorSH.shader;
         add(gradient);
         objects.push(gradient);
 
@@ -76,6 +86,14 @@ class Title extends FlxTransitionableState
         grid2.y = grid1.y + grid1.height;
         add(grid2);
         objects.push(grid2);
+
+        secretGF = new Character(0,0,'gf', conductor);
+        secretGF.blend = ADD;
+        add(secretGF);
+        secretGF.shader = colorSH.shader;
+        secretGF.visible = false;
+        secretGF.screenCenter();
+        secretGF.x += 700;
 
         add(circles);
 
@@ -114,18 +132,12 @@ class Title extends FlxTransitionableState
 
         //GlobalMusic.song = 'menus/freakyMenu';
         //GlobalMusic.start(true);
-        MoonUtils.playGlobalMusic('menus/indieCross', true);
-        var songMeta = Paths.JSON('music/menus/indieCross-metadata');
 
-        if(songMeta != null)
-        {
-            conductor = new Conductor(songMeta?.bpm ?? 102, songMeta?.timeSignature[0] ?? 4, songMeta?.timeSignature[1] ?? 4);
-            FlxG.sound.music.looped = songMeta.looped;
-        }
-        
-        // (visualizer audio source stuff)
-        @:privateAccess
-        backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
+        //TODO: make a better handler for song metadatas
+        MoonUtils.playGlobalMusic('menus/freakyMenu', true);
+        updateConductor(Paths.JSON('music/menus/freakyMenu-metadata'));
+
+        updateVis();
 
         // -- ON CONDUCTOR'S BEAT HIT
         conductor.onBeat.add((beat) -> 
@@ -165,24 +177,35 @@ class Title extends FlxTransitionableState
                     case 16: endIntro();
                 }
             }
+
+            if (codeActive && beat % 2 == 0) colorSH.update(0.125);
         });
 
         getRandomTXT();
 
-        @:privateAccess
-        FlxG.sound.music.onComplete = () -> backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
+        FlxG.sound.music.onComplete = updateVis;
 
         trace('Text of the day: $randomText', "DEBUG");
 
         prepareAD();
     }
 
+    function updateConductor(songMeta:Dynamic)
+    {
+        if(songMeta != null)
+        {
+            conductor.changeBpmAt(0, songMeta?.bpm ?? 102, songMeta?.timeSignature[0] ?? 4, songMeta?.timeSignature[1] ?? 4);
+            FlxG.sound.music.looped = songMeta.looped;
+        }
+    }
+
     var lastVidIndex:Int = 0;
+    var vidTimer:FlxTimer;
     function prepareAD()
     {
         #if !cpp return; #end
         trace('Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
-        new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
+        vidTimer = new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
             // now we get a random video.
             final vidDir = Paths.readDir('videos/titleADs', [".mp4"]);
             if(lastVidIndex >= vidDir.length) lastVidIndex = 0;
@@ -237,6 +260,7 @@ class Title extends FlxTransitionableState
     }
 
     final orbitDistance:Float = 130 * 2;
+    var codeKeys:Array<Int> = [0x0001, 0x0010, 0x0001, 0x0010, 0x0100, 0x1000, 0x0100, 0x1000];
     var transitioning = false;
     override public function update(elapsed:Float):Void
     {
@@ -254,13 +278,19 @@ class Title extends FlxTransitionableState
                     transitioning = true;
 
                     FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
-                    FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
                     Paths.playSFX('ui/confirmMenu.ogg');
+                    FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker)->FlxG.switchState(() -> new MainMenu()));
                 }
             }
 
         if(onTitle)
         {
+            // stuff for that GF easter egg!
+            if(MoonInput.justPressed(UI_LEFT)) codePress(FlxDirectionFlags.LEFT.toInt());
+            if(MoonInput.justPressed(UI_RIGHT)) codePress(FlxDirectionFlags.RIGHT.toInt());
+            if(MoonInput.justPressed(UI_UP)) codePress(FlxDirectionFlags.UP.toInt());
+            if(MoonInput.justPressed(UI_DOWN)) codePress(FlxDirectionFlags.DOWN.toInt());
+
             grid1.x = FlxMath.lerp(grid1.x, gridPos, elapsed * 4);
             grid2.x = FlxMath.lerp(grid2.x, -gridPos, elapsed * 4);
             logo.scale.x = logo.scale.y = FlxMath.lerp(logo.scale.x, 1, elapsed * 10);
@@ -288,6 +318,59 @@ class Title extends FlxTransitionableState
             obj.visible = onTitle;
     }
 
+    var codePos:Int = 0;
+    var codeActive:Bool = false;
+    private function codePress(input:Int)
+    {
+        if(codeActive) return;
+        if (input == codeKeys[codePos])
+        {
+            codePos++;
+            if (codePos >= codeKeys.length)
+            {
+                // starts GF's easter egg if the key order matches.
+                codeActive = true;
+
+                if(FlxG.sound.music != null) FlxG.sound.music.stop();
+                if(vidTimer != null && vidTimer.active)
+                    vidTimer.cancel();
+
+                FlxG.fullscreen = false;
+
+                MoonUtils.playGlobalMusic('menus/girlfriendsRingtone');
+                updateConductor(Paths.JSON('music/menus/girlfriendsRingtone-metadata'));
+                FlxG.sound.music.onComplete = null;
+                FlxG.sound.music.onComplete = updateVis;
+
+                secretGF.visible = true;
+                secretGF.alpha = 0.4;
+
+                FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
+                Paths.playSFX('ui/confirmMenu.ogg');
+
+                trace('Enjoy!', "DEBUG");
+                backVis.alpha = 1;
+
+                updateVis();
+
+                final window = Application.current.window;
+                window.borderless = false;
+                window.width = Std.int(1280 / 2);
+                window.height = Std.int(720 / 2);
+                window.x = Std.int((Capabilities.screenResolutionX - window.width) / 2);
+                window.y = Std.int((Capabilities.screenResolutionY - window.height) / 2);
+                window.x -= 164;
+                window.y += 18;
+
+                FlxTween.tween(secretGF, {x: secretGF.x - 700 * 2}, conductor.crochet / 1000 * 4, {ease: FlxEase.quadInOut, type:PINGPONG});
+                FlxTween.tween(window, {x: window.x + 164 * 2}, conductor.crochet / 1000 * 4, {ease: FlxEase.quadInOut, type:PINGPONG});
+                FlxTween.tween(window, {y: window.y - 18 * 2}, conductor.crochet / 1000, {ease: FlxEase.quadInOut, type:PINGPONG});
+            }
+        }
+        else
+            codePos = 0;
+    }
+
     function endIntro()
     {
         if(ctlogo != null) ctlogo.destroy();
@@ -305,11 +388,13 @@ class Title extends FlxTransitionableState
 
     public function getRandomTXT()
     {
-        var allTxts = MoonUtils.getArrayFromFile('data/introTexts.txt');
         var lines = [];
-        for (i in allTxts) lines.push(i.split('--'));
+        for (i in MoonUtils.getArrayFromFile('data/introTexts.txt')) lines.push(i.split('--'));
         randomText = FlxG.random.getObject(lines);
     }
+
+    function updateVis()
+        @:privateAccess backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
 
     private function setupTransition()
     {

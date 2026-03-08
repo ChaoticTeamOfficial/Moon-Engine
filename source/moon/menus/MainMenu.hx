@@ -29,6 +29,8 @@ class MainMenu extends FlxTransitionableState
         }
         
         changeSelection(0);
+
+        MoonSettings.updateWindow();
         
         if(PlayState.instance != null) PlayState.instance.destroy();
     }

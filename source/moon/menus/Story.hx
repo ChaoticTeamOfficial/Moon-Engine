@@ -11,6 +11,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import moon.global_obj.Alphabet;
 
+//this been sitting around for way too long lol...
 class Story extends FlxState
 {
 	override public function create()
