@@ -321,9 +321,9 @@ class Paths
         return bytes.toString();
     }
 
-    public static function JSON(key:String, ?library:String):Dynamic
+    public static function JSON(key:String, ?format:String = 'json', ?library:String):Dynamic
     {
-        final content = getFileContent('$key.json', library);
+        final content = getFileContent('$key.$format', library);
         if(content == "" || content == null) return null;
         
         return haxe.Json.parse(content.trim());

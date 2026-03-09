@@ -115,10 +115,10 @@ class PlayState extends FlxTransitionableState
             VALID_SCORE = false;
 		
 		//< -- BACKGROUND SETUP -- >//
-		stage = new Stage(playField.chart.content.meta.stage, conductor);
+		stage = new Stage(Shortcuts.getChart().meta.stage, conductor);
 		add(stage);
 		
-		final chartMeta = playField.chart.content.meta;
+		final chartMeta = Shortcuts.getChart().meta;
 		for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
@@ -417,7 +417,9 @@ class PlayState extends FlxTransitionableState
 	override function onFocusLost()
 	{
 		super.onFocusLost();
-		pauseGame();
+
+		if (playField != null)
+			pauseGame();
 	}
 
 	public function pauseGame()
@@ -460,15 +462,14 @@ class PlayState extends FlxTransitionableState
 
     private function saveReplay(replay:Replay)
     {
-    	// not using Paths for now.
-    	// Maybe I'll change to it later? but for now I'm just lazyy :)
         #if sys
-        final folder = 'replays';
-        if (!sys.FileSystem.exists(folder)) sys.FileSystem.createDirectory(folder);
+        final folder = Paths.getPath('replays');
+        if (!sys.FileSystem.exists(folder))
+            sys.FileSystem.createDirectory(folder);
 
         final timestamp = Date.now().getTime();
         final filename = '${replay.song}_${replay.difficulty}_${replay.mix}_$timestamp.mrp';
-        final path = '$folder/$filename';
+        final path = Paths.getPath('replays/$filename');
 
         final data = {
             song: replay.song,
@@ -480,16 +481,19 @@ class PlayState extends FlxTransitionableState
         sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
         trace('Replay saved on $path');
         #else
-        trace("Replay saving not supported on this platform");
+        trace("Replay saving not supported on this platform", "ERROR");
         #end
     }
 
     public static function loadReplay(path:String):Replay 
     {
         #if sys
-        if (sys.FileSystem.exists(path))
+        if (Paths.exists(path))
         {
-            final json:Dynamic = haxe.Json.parse(sys.io.File.getContent(path));
+            final content = Paths.getFileContent(path);
+            if (content == "") return null;
+
+            final json:Dynamic = haxe.Json.parse(content);
             final rep = new Replay(json.song, json.difficulty, json.mix);
             rep.inputs = json.inputs;
             return rep;

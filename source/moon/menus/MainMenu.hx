@@ -47,7 +47,7 @@ class MainMenu extends FlxTransitionableState
             switch(opt[curSelected].toLowerCase())
 			{
                 case 'test replay':
-                    PlayState.songData = {
+                    /*PlayState.songData = {
                         song: 'darnell',
                         difficulty: 'nightmare',
                         mix: 'pico'
@@ -56,7 +56,8 @@ class MainMenu extends FlxTransitionableState
                     final rep = PlayState.loadReplay('replays/darnell_nightmare_pico_1772948785000.mrp');
                     if (rep != null)
                         FlxG.switchState(() -> new PlayState(rep));
-                    FlxG.sound.music.stop();
+                    FlxG.sound.music.stop();*/
+                    openSubState(new PlaceholderReplayMenu());
 
 				case 'freeplay': openSubState(new Freeplay('bf'));
                 case 'settings': openSubState(new Settings());

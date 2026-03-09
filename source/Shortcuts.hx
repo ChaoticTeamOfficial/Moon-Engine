@@ -1,0 +1,64 @@
+package;
+
+import moon.game.obj.*;
+import moon.game.*;
+
+@:publicFields
+
+/**
+ * A class which provides "shortcut" access to certain functions or variables
+ * across the game easily.
+ * For example, instead of doing:
+ * `PlayState.instance.stage.opponents.members[0]`
+ * You will now be able to:
+ * `Shortcuts.getOpponent(0)`
+ */
+class Shortcuts
+{
+	// --- GAMEPLAY RELATED SHORTCUTS
+
+	/**
+	 * Returns a opponent from the game's stage.
+	 * @param index The index value. 0 is the first member in it.
+	 */
+	static function getOpponent(index:Int = 0):Character
+	{
+		final char = PlayState.instance.stage.opponents.members[index];
+		if(Std.isOfType(char, Character)) return cast char;
+
+		trace('$index at opponents is not a Character!', "ERROR");
+		return null;
+	}
+
+	/**
+	 * Returns a player from the game's stage.
+	 * @param index The index value. 0 is the first member in it.
+	 */
+	static function getPlayer(index:Int = 0):Character
+	{
+		final char = PlayState.instance.stage.players.members[index];
+		if(Std.isOfType(char, Character)) return cast char;
+
+		trace('$index at players is not a Character!', "ERROR");
+		return null;
+	}
+
+	/**
+	 * Returns a spectator from the game's stage.
+	 * @param index The index value. 0 is the first member in it.
+	 */
+	static function getSpectator(index:Int = 0):Character
+	{
+		final char = PlayState.instance.stage.spectators.members[index];
+		if(Std.isOfType(char, Character)) return cast char;
+
+		trace('$index at spectators is not a Character!', "ERROR");
+		return null;
+	}
+
+	/**
+	 * Returns chart content from the game's PlayField.
+	 */
+	static function getChart():moon.backend.data.Chart.ChartStruct
+		return PlayField.instance.chart.content;
+}

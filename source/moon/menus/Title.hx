@@ -93,7 +93,7 @@ class Title extends FlxTransitionableState
         secretGF.shader = colorSH.shader;
         secretGF.visible = false;
         secretGF.screenCenter();
-        secretGF.x += 700;
+        secretGF.x += 464;
 
         add(circles);
 
@@ -183,7 +183,7 @@ class Title extends FlxTransitionableState
 
         getRandomTXT();
 
-        FlxG.sound.music.onComplete = updateVis;
+        //FlxG.sound.music.onComplete = updateVis;
 
         trace('Text of the day: $randomText', "DEBUG");
 
@@ -339,8 +339,7 @@ class Title extends FlxTransitionableState
 
                 MoonUtils.playGlobalMusic('menus/girlfriendsRingtone');
                 updateConductor(Paths.JSON('music/menus/girlfriendsRingtone-metadata'));
-                FlxG.sound.music.onComplete = null;
-                FlxG.sound.music.onComplete = updateVis;
+                //FlxG.sound.music.onComplete = updateVis;
 
                 secretGF.visible = true;
                 secretGF.alpha = 0.4;
@@ -362,13 +361,12 @@ class Title extends FlxTransitionableState
                 window.x -= 164;
                 window.y += 18;
 
-                FlxTween.tween(secretGF, {x: secretGF.x - 700 * 2}, conductor.crochet / 1000 * 4, {ease: FlxEase.quadInOut, type:PINGPONG});
+                FlxTween.tween(secretGF, {x: secretGF.x - 464 * 2}, conductor.crochet / 1000 * 4, {ease: FlxEase.quadInOut, type:PINGPONG});
                 FlxTween.tween(window, {x: window.x + 164 * 2}, conductor.crochet / 1000 * 4, {ease: FlxEase.quadInOut, type:PINGPONG});
                 FlxTween.tween(window, {y: window.y - 18 * 2}, conductor.crochet / 1000, {ease: FlxEase.quadInOut, type:PINGPONG});
             }
         }
-        else
-            codePos = 0;
+        else codePos = 0;
     }
 
     function endIntro()

@@ -9,6 +9,9 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
+import flixel.addons.display.FlxTiledSprite;
+import flixel.graphics.FlxGraphic;
+import flixel.graphics.atlas.FlxAtlas;
 
 /**
  * Text scroll Class, used for most of the menus! (They look pretty)
@@ -21,7 +24,7 @@ class TextScroll extends FlxSpriteGroup
     /**
      * The group for all the texts.
      */
-    var grpTexts:FlxTypedSpriteGroup<FlxText>;
+    var grpTexts:FlxTypedSpriteGroup<FlxSprite>;
 
     /**
      * The screen width.
@@ -44,11 +47,6 @@ class TextScroll extends FlxSpriteGroup
     public var text:String;
 
     /**
-     * The size of the texts.
-     */
-    public var size(default, set):Int = 48;
-
-    /**
      * Creates a scrolling text on the screen.
      * @param x X Position in which the texts will appear.
      * @param y Y Position in which the texts will appear.
@@ -64,17 +62,21 @@ class TextScroll extends FlxSpriteGroup
 
         this.widthShit = widthShit;
         this.text = text;
-        if (size != null) this.size = size;
 
-        grpTexts = new FlxTypedSpriteGroup<FlxText>();
+        grpTexts = new FlxTypedSpriteGroup<FlxSprite>();
         add(grpTexts);
 
-        var testText:FlxText = new FlxText(0, 0, 0, text, this.size);
+        var textAtlas = new FlxAtlas('$text Atlas');
+
+        var testText:FlxText = new FlxText(0, 0, 0, text, size);
         testText.font = Paths.font('5by7.ttf');
         testText.bold = bold;
         testText.alpha = 0.0001;
         testText.updateHitbox();
+        testText.active = false;
         grpTexts.add(testText);
+
+        textAtlas.addNode(testText.graphic.bitmap, 'mainText');
 
         var needed:Int = Math.ceil(widthShit / testText.frameWidth) + 5;
 
@@ -82,23 +84,14 @@ class TextScroll extends FlxSpriteGroup
         {
             var lmfao:Int = i + 1;
 
-            var coolText:FlxText = new FlxText((lmfao * testText.frameWidth) + (lmfao * 20), 0, 0, text, this.size);
-
-            coolText.font = Paths.font('5by7.ttf');
-            coolText.bold = bold;
-            coolText.updateHitbox();
+            var coolText:MoonSprite = new MoonSprite ((lmfao * testText.frameWidth) + (lmfao * 20));
+            coolText.frames = textAtlas.getAtlasFrames();
+            coolText.animation.frameName = "mainText";
+            coolText.active = false;
             coolText.alpha = 0.0001;
+
             grpTexts.add(coolText);
         }
-    }
-
-    function set_size(value:Int):Int
-    {
-        if (grpTexts != null)
-            grpTexts.forEach(function(txt:FlxText) {txt.size = value;});
-        
-        this.size = value;
-        return value;
     }
 
     override public function update(elapsed:Float)
