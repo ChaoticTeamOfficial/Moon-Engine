@@ -8,6 +8,7 @@ import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.frames.FlxFrame.FlxFrameType;
 import openfl.display.BitmapData;
+import openfl.display.BlendMode;
 import openfl.display.Shape;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
@@ -26,9 +27,30 @@ class RoundBar extends FlxBar
 
     private var drawShape:Shape;
 
+    private inline function drawFill(color:FlxColor, x:Float, y:Float, w:Float, h:Float):Void
+    {
+        if (color.alphaFloat <= 0) return; // nothing to draw
+
+        drawShape.graphics.clear();
+        drawShape.graphics.beginFill(color.rgb, color.alphaFloat);
+        drawShape.graphics.drawRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+        drawShape.graphics.endFill();
+        pixels.draw(drawShape);
+    }
+
+    private inline function drawOutline(color:FlxColor, x:Float, y:Float, w:Float, h:Float):Void
+    {
+        if (color.alphaFloat <= 0) return;
+
+        drawShape.graphics.clear();
+        drawShape.graphics.lineStyle(borderSize, color.rgb, color.alphaFloat);
+        drawShape.graphics.drawRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+        pixels.draw(drawShape);
+    }
+
     @:inheritDoc(FlxBar.new)
-    public function new(x:Float = 0, y:Float = 0, ?direction:FlxBarFillDirection, width:Int = 100, height:Int = 10, 
-        ?parentRef:Dynamic, variable:String = "", min:Float = 0, max:Float = 100, showBorder:Bool = false, 
+    public function new(x:Float = 0, y:Float = 0, ?direction:FlxBarFillDirection, width:Int = 100, height:Int = 10,
+        ?parentRef:Dynamic, variable:String = "", min:Float = 0, max:Float = 100, showBorder:Bool = false,
         cornerRadius:Float = 10.0, borderSize:Int = 1)
     {
         this.cornerRadius = cornerRadius;
@@ -43,9 +65,7 @@ class RoundBar extends FlxBar
         if (FlxG.renderTile)
             makeGraphic(barWidth, barHeight, FlxColor.TRANSPARENT, true);
 
-        var dummyBitmap = new BitmapData(1, 1, true, 0);
-        var dummyGraphic = FlxGraphic.fromBitmapData(dummyBitmap, false, "dummy");
-        _frontFrame = new FlxFrame(dummyGraphic);
+        _frontFrame = new FlxFrame(FlxGraphic.fromBitmapData(new BitmapData(1, 1, true, 0), false, "dummy"));
         _frontFrame.type = EMPTY;
     }
 
@@ -71,9 +91,8 @@ class RoundBar extends FlxBar
         if (fillAmount < 0) fillAmount = 0;
         if (fillAmount > 1) fillAmount = 1;
 
-        var fillWidth:Float = barWidth * fillAmount;
-        var fillHeight:Float = barHeight * fillAmount;
-
+        var fillWidth:Float  = barWidth;
+        var fillHeight:Float = barHeight;
         var fillX:Float = 0;
         var fillY:Float = 0;
 
@@ -120,39 +139,28 @@ class RoundBar extends FlxBar
                 fillY = (barHeight - fillHeight) / 2;
         }
 
-        drawShape.graphics.clear();
-        drawShape.graphics.beginFill(emptyColor);
-        drawShape.graphics.drawRoundRect(0, 0, barWidth, barHeight, cornerRadius, cornerRadius);
-        drawShape.graphics.endFill();
-        pixels.draw(drawShape);
+        drawFill(emptyColor, 0, 0, barWidth, barHeight);
 
         if (fillAmount > 0)
         {
-            drawShape.graphics.clear();
-            drawShape.graphics.beginFill(fillColor);
-            drawShape.graphics.drawRoundRect(fillX, fillY, _fillHorizontal ? fillWidth : barWidth, _fillHorizontal ? barHeight : fillHeight, cornerRadius, cornerRadius);
-            drawShape.graphics.endFill();
-            pixels.draw(drawShape);
+            var fw:Float = _fillHorizontal ? fillWidth  : barWidth;
+            var fh:Float = _fillHorizontal ? barHeight  : fillHeight;
+            drawFill(fillColor, fillX, fillY, fw, fh);
         }
 
         if (showBorder)
         {
-            drawShape.graphics.clear();
-            drawShape.graphics.lineStyle(borderSize, borderColor);
-            drawShape.graphics.drawRoundRect(0, 0, barWidth, barHeight, cornerRadius, cornerRadius);
-            pixels.draw(drawShape);
+            drawOutline(borderColor, 0, 0, barWidth, barHeight);
 
             if (fillAmount > 0)
             {
-                drawShape.graphics.clear();
-                drawShape.graphics.lineStyle(borderSize, borderColor);
-                drawShape.graphics.drawRoundRect(fillX, fillY, _fillHorizontal ? fillWidth : barWidth, _fillHorizontal ? barHeight : fillHeight, cornerRadius, cornerRadius);
-                pixels.draw(drawShape);
+                var fw:Float = _fillHorizontal ? fillWidth  : barWidth;
+                var fh:Float = _fillHorizontal ? barHeight  : fillHeight;
+                drawOutline(borderColor, fillX, fillY, fw, fh);
             }
         }
 
         pixels.unlock();
-
         dirty = false;
     }
 

@@ -65,6 +65,9 @@ class LevelEditor extends FlxState
     private var miscGroup:FlxSpriteGroup;
     private var eventsGroup:FlxSpriteGroup;
 
+    private var sustainLoopOpp:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainOpponent-hold.wav', 'sounds'), true, false);
+    private var sustainLoopP1:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainP1-hold.wav', 'sounds'), true, false);
+
     // --- NUMBER VARIABLES --- //
     public static final LANE_WIDTH:Int = 32;
     public static final LANE_HEIGHT:Int = 32;
@@ -131,6 +134,9 @@ class LevelEditor extends FlxState
         FlxG.cameras.add(camBACK, true);
         FlxG.cameras.add(camMID, false);
         FlxG.cameras.add(camFRONT, false);
+
+        FlxG.sound.list.add(sustainLoopOpp);
+        FlxG.sound.list.add(sustainLoopP1);
 
         moon.game.PlayState.songData = {
             song: song,
@@ -443,6 +449,8 @@ class LevelEditor extends FlxState
         FlxSpriteUtil.drawRoundRect(ye, 10, 10, 80, 80, 15, 15, FlxColor.BLUE);
         add(ye);
         */
+
+        Global.allowInputs = true;
     }
 
     var changeIndex:Int = 1;
@@ -483,7 +491,15 @@ class LevelEditor extends FlxState
         }
 
         if (FlxG.keys.justPressed.SPACE)
+        {
             playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
+
+            if(playback.state == PAUSE)
+            {
+                sustainLoopOpp.pause();
+                sustainLoopP1.pause();
+            }
+        }
 
         if (FlxG.mouse.wheel != 0 && !libFocus)
             playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
@@ -578,6 +594,21 @@ class LevelEditor extends FlxState
         }
 
         // ---- Sustain stuffs.
+        updateHoldSounds();
+        if(playback.state == PLAY)
+        {
+            for(note in noteGroup)
+            {
+                if(Std.isOfType(note, Note))
+                {
+                    final n:Note = cast note;
+                    if(n.duration > 0.0 && n.strID == 'h')
+                        if(conductor.time >= n.time && conductor.time < n.time + n.duration)
+                            strum.onHit(n);
+                }
+            }
+        }
+
         if (draggingNote != null)
         {
             if (FlxG.mouse.pressed)
@@ -587,12 +618,21 @@ class LevelEditor extends FlxState
                 final snappedTime = snapTime(unsnappedTime);
                 final newRefDur = Math.max(0.0, snappedTime - draggingNote.time);
 
+                final oldRefDur = draggingNote.duration; // remember before we change anything
+
                 // relative delta so other selected notes keep their length difference
                 final delta = newRefDur - dragOGlengths.get(draggingNote);
                 for (t in dragOGlengths.keys())
                 {
                     final targetNew = Math.max(0.0, dragOGlengths.get(t) + delta);
                     resizeNoteSustain(t, targetNew);
+                }
+
+                // plays the SFX thingy ONLY when the note ACTUALLY resized
+                if (Math.abs(newRefDur - oldRefDur) > 0.001)
+                {
+                    final isIncrease = newRefDur > oldRefDur;
+                    sfx(isIncrease ? 'sustainIncrease' : 'sustainDecrease', false, true);
                 }
             }
             else
@@ -611,11 +651,15 @@ class LevelEditor extends FlxState
                 {
                     for (t in selectedNotes)
                         resizeNoteSustain(t, t.duration + delta);
+
+                    sfx('sustainIncrease', false, true);
                 }
                 else if (FlxG.keys.justPressed.Q)
                 {
                     for (t in selectedNotes)
                         resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
+
+                    sfx('sustainDecrease', false, true);
                 }
             }
         }
@@ -625,6 +669,71 @@ class LevelEditor extends FlxState
         {
             miniPlayer.visible = true;
             miniPlayer.update(elapsed);
+        }
+    }
+
+    private function updateHoldSounds():Void
+    {
+        if(playback.state != PLAY)
+        {
+            if(sustainLoopP1 != null && sustainLoopP1.playing)
+                sustainLoopOpp.stop();
+
+            if(sustainLoopP1 != null && sustainLoopP1.playing)
+                sustainLoopOpp.stop();
+
+            return;
+        }
+
+        // which sides currently have an active hold
+        var activeOpp = false;
+        var activeP1 = false;
+
+        for (note in noteGroup)
+        {
+            if(Std.isOfType(note, Note))
+            {
+                final n:Note = cast note;
+
+                if(n.duration > 0.0)
+                {
+                    final endTime = n.time + n.duration;
+                    if(conductor.time >= n.time && conductor.time < endTime)
+                    {
+                        if(n.lane == 'opponent') activeOpp = true;
+                        else if (n.lane == "p1") activeP1 = true;
+                    }
+                }
+            }
+        }
+
+        //plays hold sfx for the opp side.
+        final wasOpp = sustainLoopOpp != null && sustainLoopOpp.playing;
+        if(activeOpp && !wasOpp)
+        {
+            //if (sustainLoopOpp.playing) sustainLoopOpp.stop();
+            sustainLoopOpp.volume = MoonSettings.callSetting('SFX Volume') / 100;
+            sustainLoopOpp.play();
+            //trace('holding');
+        }
+        else if (!activeOpp && wasOpp)
+        {
+            sustainLoopOpp.stop();
+            Paths.playSFX('toolkit/level-editor/sustainOpponent-release.wav', true);
+            //trace('released');
+        }
+
+        //plays hold sfx for the player
+        final wasP1 = sustainLoopP1 != null && sustainLoopP1.playing;
+        if(activeP1 && !wasP1)
+        {
+            sustainLoopP1.volume = MoonSettings.callSetting('SFX Volume') / 100;
+            sustainLoopP1.play();
+        }
+        else if (!activeP1 && wasP1)
+        {
+            sustainLoopP1.stop();
+            Paths.playSFX('toolkit/level-editor/sustainP1-release.wav', true);
         }
     }
 
@@ -650,8 +759,6 @@ class LevelEditor extends FlxState
         // HAND shows the thingy when you're dragging smth
         // IBEAM is when typing
         // and BUTTON is clickable!
-        if(draggingNote == null)
-            Mouse.cursor = MouseCursor.BUTTON;
 
         final laneNum:Int = Math.floor(relX / LANE_WIDTH);
 
@@ -672,6 +779,7 @@ class LevelEditor extends FlxState
                 final n:Note = cast yeah;
                 if (n.sustainHandle != null && n.sustainHandle.visible && FlxG.mouse.overlaps(n.sustainHandle))
                 {
+                    if(draggingNote == null) Mouse.cursor = MouseCursor.BUTTON;
                     if (FlxG.mouse.justPressed && curPlacementMode == PLACE && curType == NOTES)
                     {
                         final shouldDrag = (selectedNotes.length == 0 || selectedNotes.indexOf(n) != -1);
@@ -689,6 +797,9 @@ class LevelEditor extends FlxState
                         }
                     }
                     break;
+                }
+                else{
+                    if(draggingNote == null) Mouse.cursor = MouseCursor.ARROW;
                 }
             }
         }
@@ -998,8 +1109,10 @@ class LevelEditor extends FlxState
         }
     }
 
+    var tw:Map<Note, FlxTween> = [];
     private function updateSustainVis(n:Note, newDur:Float):Void
     {
+        MoonUtils.cancelActiveTwn(tw.get(n));
         n.duration = newDur;
 
         if (newDur > 0)
@@ -1007,12 +1120,10 @@ class LevelEditor extends FlxState
             if (n.child == null)
             {
                 final sus = new NoteSustain(n);
-                sus.editorHeight = durationToHeight(n.time, newDur);
                 noteGroup.add(sus);
                 n.child = sus;
             }
-            else
-                n.child.editorHeight = durationToHeight(n.time, newDur);
+            tw.set(n, FlxTween.tween(n.child, {editorHeight: durationToHeight(n.time, newDur)}, 0.3, {ease: FlxEase.expoOut}));
         }
         else if (n.child != null)
         {
@@ -1020,10 +1131,13 @@ class LevelEditor extends FlxState
             n.child.destroy();
             n.child = null;
         }
-    }
+}
 
     private function resizeNoteSustain(n:Note, newDur:Float):Void
     {
+        if (Math.abs(newDur - n.duration) < 0.001) 
+            return;
+
         updateNoteDurationData(n, newDur);
         updateSustainVis(n, newDur);
     }

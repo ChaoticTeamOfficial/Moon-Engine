@@ -163,6 +163,21 @@ class ResultsState extends FlxState
         scoreBump.active = false;
         scoreBump.blend = ADD;
 
+        var replay = new SaveReplayNotif(32, 32);
+        add(replay);
+        replay.onFinish.add(() -> {
+            replay.parameters = {
+                text: PlayState.replaysToSave.length == 1 ? 'Replay saved!\n"${PlayState.replaysToSave[0]}"' :
+                'Saved ${PlayState.replaysToSave.length} replays.',
+                color: 0xFFd98617,
+                duration: 5
+            }
+            PlayState.saveReplays();
+
+            replay.flash();
+            Paths.playSFX('ui/replaySaved.wav');
+        });
+
         //trace(newScore);
         if(newScore)
         {
@@ -223,6 +238,12 @@ class ResultsState extends FlxState
                 clear.setBorderStyle(SHADOW, FlxColor.BLACK, 12);
                 clear.antialiasing = true;
                 add(clear);
+
+                replay.parameters = {
+                    text: 'Hold [TAB] to save a replay!',
+                    color: 0xFF7117d5,
+                    duration: 5
+                }
 
                 //score.playAnim('boop', true);
                 //score.visible = true;

@@ -46,6 +46,11 @@
             "size": [48, 48]
         },
 		{
+            "name": "folder",
+            "pos": [416, 448],
+            "size": [48, 48]
+        },
+		{
             "name": "sustainHandle",
             "pos": [560, 384],
             "size": [32, 16]
