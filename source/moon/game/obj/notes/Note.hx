@@ -188,7 +188,46 @@ class Note extends MoonSprite
         return this.receptor;
     }
 
-    override function destroy():Void {
+    // Editor stuffies
+    public var sustainHandle:MoonSprite;
+
+    public function makeHandle():Void
+    {
+        if (sustainHandle != null) return;
+
+        sustainHandle = new MoonSprite();
+        sustainHandle.frames = Tilemap.getAtlasFrames("mainUI");
+        sustainHandle.frame = Tilemap.getFrame('sustainHandle', 'mainUI');
+        //sustainHandle.centerOffsets();
+        //sustainHandle.centerOrigin();
+        sustainHandle.antialiasing = false;
+        sustainHandle.blend = ADD;
+        sustainHandle.active = false;
+        sustainHandle.alpha = 0.28;
+
+        // gotta set width shit manually cause weirdo hitboxes
+        sustainHandle.width = 32;
+        sustainHandle.height = 16;
+    }
+
+    public function updateHandle():Void
+    {
+        if (sustainHandle == null) return;
+
+        final endY = (child != null) ? child.y + child.height : (y + height);
+
+        sustainHandle.x = x + (width - sustainHandle.width) * 0.5;
+        sustainHandle.y = endY - sustainHandle.height * 0.5;
+    }
+
+    override function destroy():Void
+    {
+        if (sustainHandle != null)
+        {
+            sustainHandle.destroy();
+            sustainHandle = null;
+        }
+
         child = null;
         super.destroy();
     }

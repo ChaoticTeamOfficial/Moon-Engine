@@ -82,6 +82,11 @@ class LevelEditor extends FlxState
     public var curPlacementMode:PlacementMode = PLACE;
     public var libFocus:Bool = false;
 
+    private var draggingNote:Note = null;
+
+    private var selectedNotes:Array<Note> = [];
+    private var dragOGlengths:Map<Note, Float> = null;
+
     // --- CHART-RELATED VARIABLES --- //
     private var _internalChart:ChartStruct;
     public var song:String = '';
@@ -110,8 +115,8 @@ class LevelEditor extends FlxState
         this.diff = diff;
         this.mix = mix;
         super();
-		
-		DiscordRPC.updatePresence(EDITOR, '', '', true);
+        
+        DiscordRPC.updatePresence(EDITOR, '', '', true);
     }
 
     override public function create()
@@ -133,7 +138,6 @@ class LevelEditor extends FlxState
             mix: mix
         };
 
-        // Initialize EventRegistry (important!)
         EventRegistry.init();
 
         // Thanks rapper for letting me know about FlxAtlas!
@@ -443,18 +447,19 @@ class LevelEditor extends FlxState
 
     var changeIndex:Int = 1;
     var typeButtons:Map<GridType, MoonSprite> = [];
-	var rpcUpdateTmr:Float = 0;
+    var rpcUpdateTmr:Float = 0;
+
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
         libFocus = FlxG.mouse.overlaps(library.bg2);
 
-		rpcUpdateTmr += elapsed;
-		if(rpcUpdateTmr >= 0.6)
-		{
-			rpcUpdateTmr = 0;
-			DiscordRPC.updatePresence(EDITOR, 'Editing ${_internalChart.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
-		}
+        rpcUpdateTmr += elapsed;
+        if(rpcUpdateTmr >= 0.6)
+        {
+            rpcUpdateTmr = 0;
+            DiscordRPC.updatePresence(EDITOR, 'Editing ${_internalChart.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
+        }
 
         // ----- Input Stuff ----- //
         updateCursor();
@@ -506,8 +511,17 @@ class LevelEditor extends FlxState
         // update: YEAHH IT DID nice.
         for(yeah in noteGroup.members)
         {
-            final spr = cast(yeah, FlxSprite);
-            spr.visible = spr.active = spr.isOnScreen();
+            if (Std.isOfType(yeah, Note))
+            {
+                final n = cast(yeah, Note);
+                n.updateHandle();
+                n.visible = n.active = n.isOnScreen();
+            }
+            else
+            {
+                final spr = cast(yeah, MoonSprite);
+                spr.visible = spr.active = spr.isOnScreen();
+            }
         }
 
         for(event in eventsGroup)
@@ -555,11 +569,54 @@ class LevelEditor extends FlxState
                     //TOOD: make themmmm separate flxsoundses
                     // so I cann like... what was I sayign?
                     // oh yeah, so they can be stopped before playign to prvevent overlapping
-                    //Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav');
+                    Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav', true);
                 }
 
                 if (n.strID == 'h' && conductor.time < n.time)
                     n.strID = 'a';
+            }
+        }
+
+        // ---- Sustain stuffs.
+        if (draggingNote != null)
+        {
+            if (FlxG.mouse.pressed)
+            {
+                final relY = FlxG.mouse.viewY - gridGroup.y - 18;
+                final unsnappedTime:Float = yToTime(relY);
+                final snappedTime = snapTime(unsnappedTime);
+                final newRefDur = Math.max(0.0, snappedTime - draggingNote.time);
+
+                // relative delta so other selected notes keep their length difference
+                final delta = newRefDur - dragOGlengths.get(draggingNote);
+                for (t in dragOGlengths.keys())
+                {
+                    final targetNew = Math.max(0.0, dragOGlengths.get(t) + delta);
+                    resizeNoteSustain(t, targetNew);
+                }
+            }
+            else
+            {
+                draggingNote = null;
+                if (dragOGlengths != null) dragOGlengths.clear();
+                Mouse.cursor = MouseCursor.BUTTON;
+            }
+        }
+        else
+        {
+            if (selectedNotes.length > 0)
+            {
+                final delta = getSnapStepTime();
+                if (FlxG.keys.justPressed.E)
+                {
+                    for (t in selectedNotes)
+                        resizeNoteSustain(t, t.duration + delta);
+                }
+                else if (FlxG.keys.justPressed.Q)
+                {
+                    for (t in selectedNotes)
+                        resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
+                }
             }
         }
 
@@ -580,7 +637,7 @@ class LevelEditor extends FlxState
         final relX = FlxG.mouse.viewX - gridGroup.x;
         final relY = FlxG.mouse.viewY - gridGroup.y - 18;
 
-        if (relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0)
+        if ((relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0) && draggingNote == null)
         {
             cursor.visible = false;
             Mouse.cursor = MouseCursor.ARROW;
@@ -593,7 +650,8 @@ class LevelEditor extends FlxState
         // HAND shows the thingy when you're dragging smth
         // IBEAM is when typing
         // and BUTTON is clickable!
-        Mouse.cursor = MouseCursor.BUTTON;
+        if(draggingNote == null)
+            Mouse.cursor = MouseCursor.BUTTON;
 
         final laneNum:Int = Math.floor(relX / LANE_WIDTH);
 
@@ -602,19 +660,38 @@ class LevelEditor extends FlxState
 
         // and snap its timee
         final unsnappedTime:Float = yToTime(relY);
-        var snappedTime = unsnappedTime;
-
-        if (curSnap != 0)
-        {
-            final seg = getTimeSeg(unsnappedTime);
-            final lc = seg.stepCrochet * 4;
-            final localTime = unsnappedTime - seg.startTime;
-            final localBeat = localTime / lc;
-            final snappedBeat = Math.round(localBeat * curSnap) / curSnap;
-            snappedTime = seg.startTime + snappedBeat * lc;
-        }
+        final snappedTime = snapTime(unsnappedTime);
 
         cursor.y = gridGroup.y + timeToY(snappedTime);
+
+        // check if we are hovering the flat gray square (handle)
+        for (yeah in noteGroup.members)
+        {
+            if (Std.isOfType(yeah, Note))
+            {
+                final n:Note = cast yeah;
+                if (n.sustainHandle != null && n.sustainHandle.visible && FlxG.mouse.overlaps(n.sustainHandle))
+                {
+                    if (FlxG.mouse.justPressed && curPlacementMode == PLACE && curType == NOTES)
+                    {
+                        final shouldDrag = (selectedNotes.length == 0 || selectedNotes.indexOf(n) != -1);
+                        if (shouldDrag)
+                        {
+                            draggingNote = n;
+                            Mouse.cursor = MouseCursor.HAND;
+
+                            // record original lengths for relative dragging (preserves differences)
+                            if (dragOGlengths == null) dragOGlengths = new Map();
+                            dragOGlengths.clear();
+                            final targets = selectedNotes.length > 0 ? selectedNotes : [n];
+                            for (t in targets)
+                                dragOGlengths.set(t, t.duration);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
 
         /// --- ON CLICK STUFFIES! --- ///
         //TODO: uhm, fix this?
@@ -622,8 +699,26 @@ class LevelEditor extends FlxState
 
         // NOTE: THANKS TO GOATMYRIA (Luna) WE HAVE A DIFFERENT MODE FOR SELECTION
         //WOHOOOOO NO MORE THINKING ABOUT OVERLAPPING SHIT!!!
-        if(FlxG.mouse.justPressed && curPlacementMode == PLACE)
+        if(FlxG.mouse.justPressed && curPlacementMode == PLACE && draggingNote == null)
         {
+            if (FlxG.keys.pressed.SHIFT && curType == NOTES)
+            {
+                // select note that matches the snapped cursor position
+                final noteAt = getNoteAtCursor(snappedTime, laneNum);
+                if (noteAt != null)
+                {
+                    if (selectedNotes.indexOf(noteAt) == -1)
+                    {
+                        selectedNotes.push(noteAt);
+                        noteAt.brightness = 0.4;
+                        refreshHandleVis();
+                    }
+                }
+                return;
+            }
+
+            deselectAll();
+
             if(laneNum < NUM_LANES)
             {
                 switch(curType)
@@ -713,15 +808,12 @@ class LevelEditor extends FlxState
 
         note.x += (LANE_WIDTH - note.width) / 2;
 
-        if(note.duration > 0)
-        {
-            var sus = new NoteSustain(note);
-            sus.editorHeight = durationToHeight(n.time, n.duration);
-            noteGroup.add(sus);
-        }
-        note.active = false;
-
         noteGroup.add(note);
+
+        note.makeHandle();
+        noteGroup.add(note.sustainHandle);
+        updateSustainVis(note, n.duration);
+
         EditorSync.onNoteAdded(n);
     }
 
@@ -792,17 +884,156 @@ class LevelEditor extends FlxState
         return segments[segments.length - 1];
     }
 
+    private function snapTime(rawTime:Float):Float
+    {
+        if (curSnap == 0) return rawTime;
+
+        final seg = getTimeSeg(rawTime);
+        final lc = seg.stepCrochet * 4;
+        final localTime = rawTime - seg.startTime;
+        final localBeat = localTime / lc;
+        final snappedBeat = Math.round(localBeat * curSnap) / curSnap;
+        return seg.startTime + snappedBeat * lc;
+    }
+
     function durationToHeight(startTime:Float, duration:Float):Float
         return timeToY(startTime + duration) - timeToY(startTime);
 
     function stepsToHeight(steps:Float):Float
         return steps * LANE_HEIGHT;
 
-    public function sfx(p:String, general:Bool = false)
+    private function getHoveredNote():Note
+    {
+        if (libFocus) return null;
+        final relX = FlxG.mouse.viewX - gridGroup.x;
+        final relY = FlxG.mouse.viewY - gridGroup.y - 18;
+        if (relX < 0 || relX >= LANE_WIDTH * (NUM_LANES + 1) || relY < 0) return null;
+
+        final laneNum:Int = Math.floor(relX / LANE_WIDTH);
+        if (laneNum >= NUM_LANES) return null;
+
+        final mouseTime:Float = yToTime(relY);
+        var closest:Note = null;
+        var minDist:Float = Math.POSITIVE_INFINITY;
+
+        for (m in noteGroup.members)
+        {
+            if (Std.isOfType(m, Note))
+            {
+                final n:Note = cast m;
+                final noteLane = (laneNum < 4) ? "opponent" : "p1";
+                if (n.lane == noteLane && n.direction == (laneNum % 4))
+                {
+                    final dist = Math.abs(n.time - mouseTime);
+                    if (dist < minDist && dist < (conductor.stepCrochet * 2))
+                    {
+                        minDist = dist;
+                        closest = n;
+                    }
+                }
+            }
+        }
+        return closest;
+    }
+
+    private function getNoteAtCursor(snappedTime:Float, laneNum:Int):Note
+    {
+        if (laneNum >= NUM_LANES) return null;
+
+        final targetLane = (laneNum < 4) ? "opponent" : "p1";
+        final targetData = laneNum % 4;
+
+        for (m in noteGroup.members)
+        {
+            if (Std.isOfType(m, Note))
+            {
+                final n:Note = cast m;
+                if (n.lane == targetLane && n.direction == targetData && Math.abs(n.time - snappedTime) < 0.01)
+                    return n;
+            }
+        }
+        return null;
+    }
+
+    private function deselectAll():Void
+    {
+        for (n in selectedNotes)
+            if (n != null) n.brightness = 0;
+        selectedNotes = [];
+        refreshHandleVis();
+    }
+
+    private function refreshHandleVis():Void
+    {
+        final hasSel = selectedNotes.length > 0;
+        for (yeah in noteGroup.members)
+        {
+            if (Std.isOfType(yeah, Note))
+            {
+                final n:Note = cast yeah;
+                if (n.sustainHandle != null)
+                    n.sustainHandle.visible = !hasSel || selectedNotes.indexOf(n) != -1;
+            }
+        }
+    }
+
+    private function getSnapStepTime():Float
+    {
+        if (curSnap == 0) return conductor.stepCrochet;
+        final lc = conductor.stepCrochet * 4;
+        return lc / curSnap;
+    }
+
+    private function updateNoteDurationData(n:Note, newDur:Float):Void
+    {
+        for (existing in _internalChart.notes)
+        {
+            if (Math.abs(existing.time - n.time) < 0.01 &&
+                existing.data == n.direction &&
+                existing.lane == n.lane)
+            {
+                existing.duration = newDur;
+                return;
+            }
+        }
+    }
+
+    private function updateSustainVis(n:Note, newDur:Float):Void
+    {
+        n.duration = newDur;
+
+        if (newDur > 0)
+        {
+            if (n.child == null)
+            {
+                final sus = new NoteSustain(n);
+                sus.editorHeight = durationToHeight(n.time, newDur);
+                noteGroup.add(sus);
+                n.child = sus;
+            }
+            else
+                n.child.editorHeight = durationToHeight(n.time, newDur);
+        }
+        else if (n.child != null)
+        {
+            noteGroup.remove(n.child, true);
+            n.child.destroy();
+            n.child = null;
+        }
+    }
+
+    private function resizeNoteSustain(n:Note, newDur:Float):Void
+    {
+        updateNoteDurationData(n, newDur);
+        updateSustainVis(n, newDur);
+    }
+
+    public function sfx(p:String, general:Bool = false, once = false)
     {
         //TODO: CONVERT ALL SFX TO WAV
         if (playback.state != PLAY)
-            FlxG.sound.play(Paths.sound((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', 'sounds'), MoonSettings.callSetting('Editor Sounds') / 100);
+            Paths.playSFX((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', once);
+            //FlxG.sound.play(Paths.sound((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', 'sounds'), MoonSettings.callSetting('Editor Sounds') / 100);
     }
 
     function set_curType(curType:GridType):GridType
@@ -814,8 +1045,9 @@ class LevelEditor extends FlxState
         for (member in noteGroup.members)
         {
             member.shader = (curType != NOTES) ? grayscale : null;
-            member.alpha = (curType != NOTES) ? 0.20 : 1;
+            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
         }
+        //FlxG.debugger.drawDebug = true;
 
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);

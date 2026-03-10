@@ -403,6 +403,7 @@ class Paths
         FlxG.state.add(what);
         FlxG.state.remove(what);
     }
+
     public static function preloadSound(key:String, from:String = 'music', ?library:String)
     {
         if(renderedSounds.exists(key)) return;
@@ -412,8 +413,27 @@ class Paths
         what.stop();
     }
 
-    public inline static function playSFX(key:String)
-        return FlxG.sound.play(sound('$key', 'sounds'), MoonSettings.callSetting('SFX Volume') / 100);
+    private static var sfxCache = new Map<Sound, FlxSound>();
+    public inline static function playSFX(key:String, once:Bool = false)
+    {
+        var snd:FlxSound;
+        final p:Sound = sound('$key', 'sounds');
+
+        if(!once)
+            return FlxG.sound.play(p, MoonSettings.callSetting('SFX Volume') / 100);
+
+        if (!sfxCache.exists(p))
+        {
+            snd = FlxG.sound.load(p, 1.0, false, null, false, false);
+            sfxCache.set(p, snd);
+        }
+        else snd = sfxCache.get(p);
+
+        if(snd.playing) snd.stop();
+
+        snd.volume = MoonSettings.callSetting('SFX Volume') / 100;
+        return snd.play(true);
+    }
 
     public static inline function spaceToDash(string:String):String
         return string.replace(" ", "-");

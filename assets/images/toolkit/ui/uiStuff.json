@@ -44,6 +44,11 @@
             "name": "resume",
             "pos": [368, 448],
             "size": [48, 48]
+        },
+		{
+            "name": "sustainHandle",
+            "pos": [560, 384],
+            "size": [32, 16]
         }
 	]
 }
