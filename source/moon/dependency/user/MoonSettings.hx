@@ -227,6 +227,8 @@ class MoonSettings
 
         var curRes = callSetting("Window Resolution");
         var resArr = resolutions.get(curRes);
+        final screenX = FlxG.stage.window.display.bounds.x;
+        final screenY = FlxG.stage.window.display.bounds.y;
         final screenW = Capabilities.screenResolutionX;
         final screenH = Capabilities.screenResolutionY;
         if (resArr[0] > screenW || resArr[1] > screenH)
@@ -247,8 +249,8 @@ class MoonSettings
         else
         {
             window.borderless = true;
-            window.x = Std.int(bounds.x);
-            window.y = Std.int(bounds.y);
+            window.x = Std.int(screenX + bounds.x);
+            window.y = Std.int(screenY + bounds.y);
             window.width = Std.int(bounds.width);
             window.height = Std.int(bounds.height + 1);
         }
@@ -259,8 +261,8 @@ class MoonSettings
         {
             window.width = curWidth;
             window.height = curHeight;
-            window.x = Std.int((Capabilities.screenResolutionX - curWidth) / 2);
-            window.y = Std.int((Capabilities.screenResolutionY - curHeight) / 2);
+            window.x = Std.int(screenX + (Capabilities.screenResolutionX - curWidth) / 2);
+            window.y = Std.int(screenY + (Capabilities.screenResolutionY - curHeight) / 2);
         }
     }
 
