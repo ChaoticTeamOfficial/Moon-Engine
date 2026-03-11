@@ -18,6 +18,11 @@ typedef ReplayInput = {
      * Whether it's a press or a release.
      */
     var press:Bool;
+
+    /**
+     * The judgement string at the time of the hit.
+     */
+    var judgement:Null<String>;
 };
 
 /**

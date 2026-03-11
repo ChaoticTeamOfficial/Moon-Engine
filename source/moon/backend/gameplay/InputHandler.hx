@@ -161,7 +161,10 @@ class InputHandler
 
         recording = false;
         stats.reset();
+        forcedJudgements = [];
     }
+
+    private var forcedJudgements:Map<Int, String> = [];
 
     public function update():Void
     {
@@ -194,6 +197,9 @@ class InputHandler
             {
                 justPressed[dir] = true;
                 replayKeyStates[dir] = true;
+
+                if (input.judgement != null)
+                    forcedJudgements.set(dir, input.judgement);
             }
             else
             {
@@ -231,46 +237,51 @@ class InputHandler
 
     private function processInputs():Void
     {
-        // now, since this is for player's inputs and needs to have timing, it'll be a lil more complex.
         for (i in 0...justPressed.length)
         {
-            // iterates through the keys and checks if any of them got pressed.
             if (justPressed[i])
             {
-                // first lets save stuff for the replay
-                if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true});
-
-                // now filter through the possible notes to hit, matching its current time to the next available judgement
                 final possibleNotes = thisNotes.filter(note ->
-                return (note.direction == i &&
-                    note.lane == playerID &&
-                    isWithinTiming(note) &&
-                    note.state == NONE)
+                    return (note.direction == i &&
+                        note.lane == playerID &&
+                        isWithinTiming(note, i) &&
+                        note.state == NONE)
                 );
 
-                // then sort through notes or else timings will act weird-ish
                 possibleNotes.sort((a, b) -> Std.int(a.time - b.time));
 
                 if (possibleNotes.length > 0)
                 {
-                    // and then finally call on hit for the notes
                     final note = possibleNotes[0];
-                    final timing = checkTiming(note);
+                    // use forced judgement when replaying, recalculates when live
+                    final timing = (isReplay && forcedJudgements.exists(i))
+                        ? forcedJudgements.get(i)
+                        : checkTiming(note);
+
+                    // clear the forced judgement slot now that it's been consumed
+                    // why that lowkey sounded funny lmao
+                    forcedJudgements.remove(i);
 
                     if (timing != null)
                     {
+                        // record AFTER we know the timing so we can store the judgement
+                        if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true, judgement: timing});
+
                         onHit(note, i, timing, false);
                         stats.totalNotes++;
                         stats.accuracyCount += Timings.getParameters(timing)[0];
                     }
                 }
-                else // and this is called when you ghost tap.
+                else
                 {
-                    if(onGhostTap != null) onGhostTap(i);
+                    if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true, judgement: null});
+                    forcedJudgements.remove(i);
 
+                    if (onGhostTap != null) onGhostTap(i);
                     strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
-                    if(!MoonSettings.callSetting('Ghost Tapping')){
-                        if(attachedChar != null) 
+                    if (!MoonSettings.callSetting('Ghost Tapping'))
+                    {
+                        if (attachedChar != null)
                             attachedChar.playAnim('sing${MoonUtils.intToDir(i).toUpperCase()}-miss', true);
                         onMiss(null);
                     }
@@ -278,19 +289,15 @@ class InputHandler
             }
         }
 
-        // iterate through every released key
         for (i in 0...released.length)
         {
-            if(released[i])
+            if (released[i])
             {
-                // once again lets save replay stuff first.
-                if (recording) recordedInputs.push({time: conductor.time, dir: i, press: false});
+                if (recording) recordedInputs.push({time: conductor.time, dir: i, press: false, judgement: null});
 
-                // oh yeah I cleaned this bit a little
                 if (onKeyRelease != null) onKeyRelease(i);
                 strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-static', true);
 
-                // yummy hold sustains
                 if (heldSustains.exists(i))
                 {
                     strumline.members[i].sustainSplash.despawn(true);
@@ -368,14 +375,24 @@ class InputHandler
         {
             final heldNote = heldSustains.get(direction);
             
-            // on hold note hit
             if (heldNote != null && heldNote.state == GOT_HIT && heldNote.child != null && heldNote.child.active)
             {
-                if (lastSustainStep.exists(direction) && conductor.curStep > lastSustainStep.get(direction))
+                if (lastSustainStep.exists(direction))
                 {
-                    onHit(heldNote, direction, null, (CPUMode), true);
-                    lastSustainStep.set(direction, conductor.curStep);
-                    stats.score += 2;
+                    final last = lastSustainStep.get(direction);
+
+                    // fire once per every step we may have skipped due to lag
+                    if (conductor.curStep > last)
+                    {
+                        var step = last + 1;
+                        while (step <= conductor.curStep)
+                        {
+                            onHit(heldNote, direction, null, CPUMode, true);
+                            stats.score += 2;
+                            step++;
+                        }
+                        lastSustainStep.set(direction, conductor.curStep);
+                    }
                 }
 
                 if (conductor.time >= heldNote.time + heldNote.duration)
@@ -413,8 +430,16 @@ class InputHandler
      * @return Bool
         return checkTiming(note) != null
      */
-    private function isWithinTiming(note:Note):Bool
+    private function isWithinTiming(note:Note, ?dir:Int = -1):Bool
+    {
+        // during replay, if a forced judgement is waiting for this direction, 
+        // always allow the note through regardless of current time.
+        // needed due to toffee's pc being trash and sometimes lag spiking.
+        if (isReplay && dir >= 0 && forcedJudgements.exists(dir))
+            return true;
+
         return checkTiming(note) != null;
+    }
 
     /**
      * Checks the timing for a note, then it'll return its appropriate judgement.

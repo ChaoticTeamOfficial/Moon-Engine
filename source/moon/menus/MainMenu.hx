@@ -33,6 +33,7 @@ class MainMenu extends FlxTransitionableState
         changeSelection(0);
 
         // TODO: remove this and make the title state window dance stop there.
+        // its here due to the gf easter egg being able to window dance.
         MoonSettings.updateWindow();
         
         PlayState.replaysToSave = [];

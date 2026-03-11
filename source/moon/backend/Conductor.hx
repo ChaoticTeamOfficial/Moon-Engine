@@ -35,39 +35,52 @@ class Conductor
 
 	function set_time(value:Float):Float
 	{
-		time = value;
+	    time = value;
+	    final calc = (time - offsetTime);
+	    _stepTracker = Math.ffloor(stepOffset + calc / stepCrochet);
+	    _beatTracker = Math.ffloor(beatOffset + calc / crochet);
+	    _measureTracker = Math.ffloor(measureOffset + calc / measureCrochet);
 
-		final calc = (time - offsetTime);
-		_stepTracker = Math.ffloor(stepOffset + calc / stepCrochet);
-		_beatTracker = Math.ffloor(beatOffset + calc / crochet);
-		_measureTracker = Math.ffloor(measureOffset + calc / measureCrochet);
+	    if (active)
+	    {
+	        if (curStep != _stepTracker)
+	        {
+	            final dir = (_stepTracker > curStep) ? 1 : -1;
+	            while (curStep != _stepTracker)
+	            {
+	                curStep += dir;
+	                onStep.dispatch(curStep);
+	            }
+	        }
 
-		if (active)
-        {
-			if (curStep != _stepTracker)
-			{
-				curStep = _stepTracker;
-				onStep.dispatch(curStep);
-			}
+	        if (curBeat != _beatTracker)
+	        {
+	            final dir = (_beatTracker > curBeat) ? 1 : -1;
+	            while (curBeat != _beatTracker)
+	            {
+	                curBeat += dir;
+	                onBeat.dispatch(curBeat);
+	            }
+	        }
 
-			if (curBeat != _beatTracker)
-			{
-				curBeat = _beatTracker;
-				onBeat.dispatch(curBeat);
-			}
+	        if (curMeasure != _measureTracker)
+	        {
+	            final dir = (_measureTracker > curMeasure) ? 1 : -1;
+	            while (curMeasure != _measureTracker)
+	            {
+	                curMeasure += dir;
+	                onMeasure.dispatch(curMeasure);
+	            }
+	        }
+	    }
+	    else
+	    {
+	        curStep = _stepTracker;
+	        curBeat = _beatTracker;
+	        curMeasure = _measureTracker;
+	    }
 
-			if (curMeasure != _measureTracker)
-			{
-				curMeasure = _measureTracker;
-				onMeasure.dispatch(curMeasure);
-			}
-		} else {
-			curStep = _stepTracker;
-			curBeat = _beatTracker;
-			curMeasure = _measureTracker;
-		}
-
-		return value;
+	    return value;
 	}
 
 	/**
