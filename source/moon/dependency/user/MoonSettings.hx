@@ -208,7 +208,6 @@ class MoonSettings
     static function updateWindow()
     {
         FlxG.fullscreen = (callSetting('Screen Mode') == 'Fullscreen');
-
         //Resolutions depending on the current, this is the best way I could think of.
         // yea biggie map
         final resolutions:Map<String, Array<Int>> = [
@@ -245,7 +244,10 @@ class MoonSettings
 
         isBF = callSetting('Screen Mode') == 'Borderless Fullscreen';
         if(!isBF)
+        {
+            FlxG.fullscreen = (callSetting('Screen Mode') == 'Fullscreen');
             window.borderless = false;
+        }
         else
         {
             window.borderless = true;

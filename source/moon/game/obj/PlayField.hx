@@ -175,6 +175,7 @@ class PlayField extends FlxGroup
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
         conductor.time = -(conductor.crochet * 5);
+        healthBar.performTransition(conductor);
     }
 
     function setupNotes()
@@ -202,7 +203,7 @@ class PlayField extends FlxGroup
 
         for (strum in strumlines)
         {
-            strum.y = (!downscroll) ? 80 : FlxG.height - strum.height - 80;
+            strum.y = (!downscroll) ? 46 : FlxG.height - strum.height - 46;
 
             final mid = (FlxG.width * 0.5);
             final xAddition = (FlxG.width * 0.25);
@@ -272,6 +273,8 @@ class PlayField extends FlxGroup
             p1.currentReplayIndex = 0;
             p1.replayKeyStates = [false, false, false, false];
         }
+
+        healthBar.performTransition(conductor);
 
         if(onSongRestart != null) onSongRestart();
         inCountdown = true;

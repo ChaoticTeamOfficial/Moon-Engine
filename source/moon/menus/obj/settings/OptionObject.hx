@@ -10,7 +10,7 @@ import flixel.group.FlxSpriteGroup;
 
 class OptionObject extends FlxSpriteGroup
 {
-    public static var separationWidth:Int = 596;
+    public static var separationWidth:Int = 614;
     public var setting:Setting;
     public var category:String;
     

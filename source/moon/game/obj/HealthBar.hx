@@ -74,9 +74,33 @@ class HealthBar extends FlxSpriteGroup
         oppIcon.screenCenter(X);
     }
 
+    var count:Int = 4;
     public function performTransition(conductor:Conductor)
     {
         transitioning = true;
+        count = 4;
+        bar.scale.set(0, 1);
+        barBG.scale.set(0, 1);
+        oppIcon.scale.x = oppIcon.scale.y = playerIcon.scale.x = playerIcon.scale.y = 0;
+
+        if(PlayField.instance.stats != null)
+            PlayField.instance.stats.visible = false;
+
+        new FlxTimer().start(conductor.crochet / 1000, _->
+        {
+            count--;
+
+            switch(count)
+            {
+                case 3, 2: FlxTween.tween((count == 3 ? barBG : bar).scale, {x: (count == 3) ? 0.9 : 1}, conductor.crochet / 1000, {ease: FlxEase.expoOut});
+                case 1: for(ico in [oppIcon, playerIcon]) FlxTween.tween(ico.scale, {x: iconScale, y: iconScale}, conductor.crochet / 1000, {ease: FlxEase.backOut});
+                case 0: if(PlayField.instance.stats != null){
+                        PlayField.instance.stats.scale.set(0, 0);
+                        PlayField.instance.stats.visible = true;
+                    }
+                case -1: transitioning = false;
+            }
+        }, 5);
     }
 
     public var updateIconsPos:Bool = true;
@@ -86,6 +110,7 @@ class HealthBar extends FlxSpriteGroup
     {
         super.update(elapsed);
 
+        if(health >= 100) health = 101;
         bar.value = FlxMath.lerp(bar.value, health, elapsed * 8);
 
         if(updateIconsPos && MoonSettings.callSetting('Icons') == 'At Healthbar')
@@ -120,6 +145,7 @@ class HealthBar extends FlxSpriteGroup
 
     public function bump()
     {
+        if(transitioning) return;
         oppIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
         playerIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
     }
