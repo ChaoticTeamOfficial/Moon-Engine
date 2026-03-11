@@ -175,6 +175,13 @@ class MoonUtils
         if (tween != null && tween.active) tween.cancel();
 
     /**
+     * Cancels a timer that's active, preventing overlapping timers if you're going to play another.
+     * @param timer The active timer.
+     */
+    static function cancelActiveTmr(timer:FlxTimer)
+        if (timer != null && timer.active) timer.cancel();
+
+    /**
      * Starts a song upon calling, does nothing if already playing.
      * @param song The song's path.
      * @param fade Whether or not should the song fade in.

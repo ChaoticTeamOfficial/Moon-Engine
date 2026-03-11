@@ -54,6 +54,7 @@ class PlayState extends FlxTransitionableState
 	public static var VALID_SCORE:Bool = true;
 
     public var loadedReplay:Replay = null;
+    public static var replaysToSave:Array<Replay> = [];
 
 	public static var songData:{song:String, difficulty:String, mix:String} = {
 		song: 'earworm',
@@ -402,7 +403,8 @@ class PlayState extends FlxTransitionableState
         {
             final rep = new Replay(songData.song, songData.difficulty, songData.mix);
             rep.inputs = p1Handler.recordedInputs.copy();
-            saveReplay(rep);
+            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${Date.now().getTime()}.mrp';
+            replaysToSave.push(rep);
         }
 
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
@@ -460,26 +462,27 @@ class PlayState extends FlxTransitionableState
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
 
-    private function saveReplay(replay:Replay)
+    static public function saveReplays()
     {
         #if sys
-        final folder = Paths.getPath('replays');
-        if (!sys.FileSystem.exists(folder))
-            sys.FileSystem.createDirectory(folder);
+        for(replay in replaysToSave)
+        {
+	        final folder = Paths.getPath('replays');
+	        if (!sys.FileSystem.exists(folder))
+	            sys.FileSystem.createDirectory(folder);
 
-        final timestamp = Date.now().getTime();
-        final filename = '${replay.song}_${replay.difficulty}_${replay.mix}_$timestamp.mrp';
-        final path = Paths.getPath('replays/$filename');
+	        final path = Paths.getPath('replays/${replay.filename}');
 
-        final data = {
-            song: replay.song,
-            difficulty: replay.difficulty,
-            mix: replay.mix,
-            inputs: replay.inputs
-        };
+	        final data = {
+	            song: replay.song,
+	            difficulty: replay.difficulty,
+	            mix: replay.mix,
+	            inputs: replay.inputs
+	        };
 
-        sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
-        trace('Replay saved on $path');
+	        sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
+	        trace('Replay saved on $path');
+        }
         #else
         trace("Replay saving not supported on this platform", "ERROR");
         #end

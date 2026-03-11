@@ -26,6 +26,11 @@ class MoonSprite extends FlxSprite
 	 * An ID but it uses a string instead of an int.
 	 */
 	public var strID:String;
+
+	/**
+	 * A brightness field that looks just like Adobe Animate's brightness.
+	 */
+	public var brightness(default, set):Float = 0;
 	
 	/**
 	 * The suffix used for animations.
@@ -187,6 +192,15 @@ class MoonSprite extends FlxSprite
                 danceIndex = 0;
             }
         }
+    }
+
+    @:noCompletion public function set_brightness(value:Float):Float
+    {
+        this.brightness = value;
+        
+        FlxSpriteUtil.setBrightness(this, value);
+        
+        return value;
     }
 		
 	// ---- SKEW STUFF ---- //

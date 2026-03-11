@@ -25,13 +25,6 @@ class MiniPlayer extends FlxGroup
     
     // Components
     public var background:FlxSprite;
-    public var stage:Stage;
-    //public var playField:PlayField;
-    
-    // References
-    public var conductor:Conductor;
-    public var playback:Song;
-    public var chart:Chart;
     
     // Position
     public var targetX:Float = 108;
@@ -44,34 +37,16 @@ class MiniPlayer extends FlxGroup
         super();
         instance = this;
         
-        this.chart = chart;
-        this.conductor = conductor;
-        this.playback = playback;
-        
         targetX = x;
         targetY = y;
 
         background = new FlxSprite(x - 4, y - 4);
-        background.makeGraphic(MINI_WIDTH + 8, MINI_HEIGHT + 8, 0xFF000000);
+        background.makeGraphic(MINI_WIDTH + 8, MINI_HEIGHT + 8, FlxColor.BLACK);
         add(background);
         
         _internalCam = new MoonCamera(Std.int(x), Std.int(y), MINI_WIDTH, MINI_HEIGHT);
         _internalCam.bgColor = FlxColor.GRAY;
         FlxG.cameras.add(_internalCam, false);
-        
-        stage = new Stage(chart.content.meta.stage, conductor);
-        stage.camera = _internalCam;
-        add(stage);
-        
-        // will leave it commented for now.
-        /*final chartMeta = chart.content.meta;
-        for (opp in chartMeta.opponents) 
-            stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
-        for (plyr in chartMeta.players) 
-            stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
-        for (spct in chartMeta.spectators) 
-            stage.addCharTo(spct, stage.spectators);
-        */
         
         _internalCam.scroll.set(0, 0);
         _internalCam.zoom = 0.5;
@@ -89,7 +64,6 @@ class MiniPlayer extends FlxGroup
     
     public function refreshChart():Void
     {
-        //playField.setupNotes();
     }
     
     override public function destroy():Void

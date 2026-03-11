@@ -17,6 +17,8 @@ class MainMenu extends FlxTransitionableState
     override public function create()
     {
         super.create();
+
+        Global.clearScriptList();
         
         var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
         add(bg);
@@ -33,6 +35,7 @@ class MainMenu extends FlxTransitionableState
         // TODO: remove this and make the title state window dance stop there.
         MoonSettings.updateWindow();
         
+        PlayState.replaysToSave = [];
         if(PlayState.instance != null) PlayState.instance.destroy();
     }
 

@@ -40,6 +40,7 @@ class Song extends FlxTypedGroup<MoonSound>
     public final onFinish = new FlxTypedSignal<Void->Void>();
 
     private var conductor:Conductor;
+    private var finished:Bool = false;
 
     /**
      * Creates a song insance, useful for gameplay Inst & Voices.
@@ -81,6 +82,7 @@ class Song extends FlxTypedGroup<MoonSound>
         }
 
         conductor.onStep.add(steps);
+        finished = false;
     }
 
     override public function update(dt:Float)
@@ -111,7 +113,11 @@ class Song extends FlxTypedGroup<MoonSound>
     function finish()
     {
         //trace("AAAAAAAAAAAA");
-        onFinish.dispatch();
+        if(!finished)
+        {
+            onFinish.dispatch();
+            finished = true;
+        }
     }
 
     final threshold = 30;

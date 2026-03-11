@@ -27,6 +27,7 @@ import moon.game.obj.*;
 import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
 import moon.toolkit.*;
+import moon.game.obj.results.*;
 import flixel.util.FlxSpriteUtil;
 
 using StringTools;
@@ -143,7 +144,23 @@ class TestState extends FlxState
         vinyl.shader = new VinylDiskShader();
         add(vinyl);
 
-        testParser();
+        //testParser();
+
+        var replay = new SaveReplayNotif(16, 16);
+        add(replay);
+        replay.parameters = {
+            text: 'Hold [TAB] to save a replay!',
+            color: 0xFF7117d5,
+            duration: 5
+        }
+
+        replay.onFinish.add(() -> {
+            replay.parameters = {
+                text: 'Replay saved!\n"replay_foda.mrp"',
+                color: 0xFFd98617,
+                duration: 5
+            }
+        });
     }
     var vinyl:MoonSprite;
 

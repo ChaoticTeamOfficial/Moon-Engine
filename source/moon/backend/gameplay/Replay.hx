@@ -29,10 +29,14 @@ class Replay
     public var difficulty:String;
     public var mix:String;
     public var inputs:Array<ReplayInput> = [];
+    public var filename:String = '';
 
     public function new(song:String, difficulty:String, mix:String) {
         this.song = song;
         this.difficulty = difficulty;
         this.mix = mix;
     }
+
+    public function toString():String
+        return '(${mix.toUpperCase()}) $song on ${difficulty.toUpperCase()}';
 }

@@ -90,11 +90,6 @@ class Note extends MoonSprite
     public var conductor:Conductor;
     public var script:MoonScript;
 
-    /**
-     * Brightness adjustment for feedback in editor
-     */
-    public var brightness(default, set):Float = 0;
-
     private static var sharedScripts:Map<String, MoonScript> = new Map();
 
     public function new(direction:Int, time:Float, ?type:String = "default", ?skinName:String = "v-slice", 
@@ -137,15 +132,6 @@ class Note extends MoonSprite
         this.skin = skinName;
         _updateGraphics();
         return skinName;
-    }
-
-    @:noCompletion public function set_brightness(value:Float):Float
-    {
-        this.brightness = value;
-        
-        FlxSpriteUtil.setBrightness(this, value);
-        
-        return value;
     }
 
     override public function update(dt:Float):Void
@@ -217,7 +203,7 @@ class Note extends MoonSprite
         final endY = (child != null) ? child.y + child.height : (y + height);
 
         sustainHandle.x = x + (width - sustainHandle.width) * 0.5;
-        sustainHandle.y = endY - sustainHandle.height * 0.5;
+        sustainHandle.y = (duration <= 0) ? y + (height - sustainHandle.height) * 0.5 : endY - sustainHandle.height * 0.5;
     }
 
     override function destroy():Void

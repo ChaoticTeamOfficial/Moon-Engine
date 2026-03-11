@@ -17,9 +17,6 @@ class EditorSync
     public static function onNoteAdded(note:NoteStruct):Void
     {
         if (miniPlayer == null) return;
-        miniPlayer.chart.content.notes.push(note);
-        miniPlayer.chart.content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-        miniPlayer.refreshChart();
     }
     
     /**
@@ -28,29 +25,16 @@ class EditorSync
     public static function onNoteDeleted(note:NoteStruct):Void
     {
         if (miniPlayer == null) return;
-        
-        miniPlayer.chart.content.notes.remove(note);
-        miniPlayer.refreshChart();
     }
     
     public static function onEventAdded(event:EventStruct):Void
     {
         if (miniPlayer == null) return;
-        
-        miniPlayer.chart.events.push(event);
-        miniPlayer.chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-        miniPlayer.refreshChart();
     }
     
     public static function onEventDeleted(event:EventStruct):Void
     {
         if (miniPlayer == null) return;
-        
-        // Remove the event from miniplayer's chart
-        miniPlayer.chart.events.remove(event);
-        
-        // Refresh
-        miniPlayer.refreshChart();
     }
     
     /**
@@ -58,9 +42,7 @@ class EditorSync
      */
     public static function onBPMChange(time:Float, newBPM:Float, numerator:Float, denominator:Float):Void
     {
-        if (miniPlayer == null || miniPlayer.conductor == null) return;
-        
-        miniPlayer.conductor.changeBpmAt(time, newBPM, numerator, denominator);
+        if (miniPlayer == null) return;
     }
     
     /**
