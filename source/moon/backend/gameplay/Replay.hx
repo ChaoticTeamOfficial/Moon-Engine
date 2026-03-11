@@ -38,5 +38,5 @@ class Replay
     }
 
     public function toString():String
-        return '(${mix.toUpperCase()}) $song';
+        return '(${mix.toUpperCase()}) $song on ${difficulty.toUpperCase()}';
 }
