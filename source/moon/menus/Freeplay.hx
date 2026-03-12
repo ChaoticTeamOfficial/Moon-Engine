@@ -1,12 +1,11 @@
 package moon.menus;
 
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
 import moon.game.PlayState;
 import moon.menus.obj.freeplay.*;
 import flixel.addons.effects.FlxSkewedSprite;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import moon.backend.data.Chart;
 
 using StringTools;
 
@@ -18,13 +17,11 @@ enum FreeplayTransition
     NONE;
 }
 
-//TODO: Doccument freeplay.
+// TODO: Document Freeplay.
 class Freeplay extends FlxSubState
 {
     public static var appearType:FreeplayTransition = NONE;
 
-    var texts:Array<FlxText> = [];
-    
     public var character:String;
 
     public var songVolume:Float = 1;
@@ -33,31 +30,33 @@ class Freeplay extends FlxSubState
     public var mainBG:FreeplayBG;
     public var weekBG:FlxSkewedSprite;
     public var thisDJ:FreeplayDJ;
+
     static var curSelected:Int = 0;
-	var songList:Array<{song:String, mix:String, difficulty:String}> = [];
+
+    var songList:Array<SongBase> = [];
+    var selector:FreeplaySongSelector;
+
     public function new(character:String = 'bf')
     {
-        //TODO: make animations for entering the freeplay
         super();
         this.character = character;
 
         mainBG = new FreeplayBG(character);
-
         add(mainBG.behindBG);
 
         thisDJ = new FreeplayDJ(character);
         add(thisDJ);
 
-        //TODO: Week based BG.
+        // TODO: Week-based BG.
         weekBG = new FlxSkewedSprite();
         weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/weekend1'));
         weekBG.scale.set(1.4, 1.4);
         weekBG.antialiasing = true;
         weekBG.updateHitbox();
         weekBG.skew.x = 5;
+        weekBG.x = FlxG.width - weekBG.width + 360;
         add(weekBG);
 
-        weekBG.x = FlxG.width - weekBG.width + 360;
         add(mainBG.frontBG);
 
         mainBG.script.set('freeplay', this);
@@ -67,13 +66,13 @@ class Freeplay extends FlxSubState
         conductor.onBeat.add(function(beat)
         {
             if ((beat % 2 == 0 || conductor.bpm < 120) && thisDJ.canDance)
-                thisDJ.anim.play("idle", true);
+                thisDJ.anim.play('idle', true);
 
-            if(mainBG.script.exists('onBeat')) mainBG.script.get('onBeat')(beat);
+            if (mainBG.script.exists('onBeat'))
+                mainBG.script.get('onBeat')(beat);
         });
 
         add(mainBG.foreground);
-		
         for (song in Paths.readDir('songs/'))
         {
             for (mix in Paths.readDir('songs/$song/'))
@@ -83,63 +82,69 @@ class Freeplay extends FlxSubState
                 for (chart in Paths.readDir('songs/$song/$mix/', ['.json'], true))
                 {
                     if (chart.startsWith('chart-'))
-                        songList.push({song: song, mix: mix, difficulty: chart.substr(6)});
+                    {
+                        final diff = chart.substr(6);
+                        final c = new Chart(song, diff, mix);
+
+                        // Your requested 0-20 difficulty rating (p1 lane notes only)
+                        final rating = Chart.calculateDifficultyRating(c.content?.notes ?? []);
+                        trace('Difficulty rating for ${song} (${mix}/${diff}): ${rating}/20');
+
+                        songList.push({
+                            song: song,
+                            mix: mix,
+                            difficulty: diff,
+                            displayName: c.content?.meta?.displayName ?? song
+                        });
+                    }
                 }
             }
         }
 
-        songList.sort(function(a, b) {
-            final aLower = a.song.toLowerCase();
-            final bLower = b.song.toLowerCase();
-            return (aLower < bLower) ? -1 : (aLower > bLower) ? 1 : 0;
+        songList.sort(function(a, b)
+        {
+            final aL = a.song.toLowerCase();
+            final bL = b.song.toLowerCase();
+            return (aL < bL) ? -1 : (aL > bL) ? 1 : 0;
         });
 
-        var yPos = 0.0;
-        for (entry in songList)
-        {
-            var displayName = '(${entry.mix.toUpperCase()}) •-- ${entry.song}-${entry.difficulty}';
-            var text = new FlxText(0, yPos, 0, displayName, 24);
-            text.font = Paths.font('phantomuff/full.ttf');
-			text.antialiasing = true;
-            texts.push(text);
-            text.screenCenter(X);
-            text.x += 64;
-            add(text);
-            yPos += text.height;
-        }
+        selector = new FreeplaySongSelector();
+        selector.loadSongs(songList, curSelected);
+        add(selector);
 
-        if(mainBG.script.exists('onCreate')) mainBG.script.call('onCreate');
-        
-        changeSelection(0);
+        if (mainBG.script.exists('onCreate'))
+            mainBG.script.call('onCreate');
+    }
+
+    function change(num:Int = 0)
+    {
+        curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
+        selector.changeSelection(num);
+        Paths.playSFX('ui/scrollMenu.ogg');
     }
 
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
-        
-        if(MoonInput.justPressed(UI_DOWN)) changeSelection(1);
-        if(MoonInput.justPressed(UI_UP)) changeSelection(-1);
-        
-        if(MoonInput.justPressed(ACCEPT))
+
+        if (MoonInput.justPressed(UI_DOWN)) change(1);
+        if (MoonInput.justPressed(UI_UP)) change(-1);       
+
+        if (MoonInput.justPressed(ACCEPT))
         {
-            // Get the selected entry directly
-            final selectedEntry = songList[curSelected];
-            if (selectedEntry != null)
+            final selected = selector.getSelected();
+            if (selected != null)
             {
-                PlayState.songData = {song: selectedEntry.song, difficulty: selectedEntry.difficulty, mix: selectedEntry.mix};
-                FlxG.switchState(()->new LoadingScreen());
+                PlayState.songData = {
+                    song: selected.song,
+                    difficulty: selected.difficulty,
+                    mix: selected.mix
+                };
+                FlxG.switchState(() -> new LoadingScreen());
             }
         }
-        
-        if(mainBG.script.exists('onUpdate')) mainBG.script.get('onUpdate')(elapsed);
-    }
-    
-    function changeSelection(change:Int = 0):Void
-    {
-        curSelected = flixel.math.FlxMath.wrap(curSelected + change, 0, texts.length - 1);
-        Paths.playSFX('ui/scrollMenu.ogg');
 
-        for(i in 0...texts.length)
-            texts[i].color = (i == curSelected) ? FlxColor.CYAN : FlxColor.WHITE;
+        if (mainBG.script.exists('onUpdate'))
+            mainBG.script.get('onUpdate')(elapsed);
     }
 }

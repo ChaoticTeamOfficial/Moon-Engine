@@ -60,10 +60,13 @@ class MoonGame extends FlxGame
 				e.stopImmediatePropagation();
 
             // update volume settings when the volume is changed.
-            if((kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) || (kc == FlxKey.MINUS || kc == FlxKey.NUMPADMINUS))
+            // TODO: fix the fact that when holding a key it fucks up.
+            if ((kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) || (kc == FlxKey.MINUS || kc == FlxKey.NUMPADMINUS))
 			{
-				MoonSettings.setSetting("Master Volume", FlxG.sound.volume * 100);
-				MoonSettings.updateGlobalSettings();
+			    final change:Float = (kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) ? 0.05 : -0.05;
+			    final newVol:Float = FlxMath.bound(FlxG.sound.volume + change, 0, 1);
+
+			    MoonSettings.setSetting("Master Volume", newVol * 100);
 			}
 		}, false, 100);
 		

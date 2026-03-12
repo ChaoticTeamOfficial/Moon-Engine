@@ -58,7 +58,6 @@ haxelib set hxcpp-debug-server 1.2.4
 haxelib set moonchart 0.5.1
 haxelib set hxvlc 2.2.5
 haxelib set flixel-animate 1.1.0
-haxelib set customtitlebar 1.0.2
 haxelib run lime setup
 
 cls

@@ -56,7 +56,7 @@ class PlayState extends FlxTransitionableState
     public var loadedReplay:Replay = null;
     public static var replaysToSave:Array<Replay> = [];
 
-	public static var songData:{song:String, difficulty:String, mix:String} = {
+	public static var songData:SongBase = {
 		song: 'earworm',
 		difficulty: 'hard',
 		mix: 'bf'

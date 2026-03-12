@@ -130,6 +130,91 @@ class Chart
     }
 
     /**
+     * Calculates a clean 0-20 difficulty rating based on NPS, chords, and jacks.
+     * @param notes The array containing all notes.
+     */
+    public static function calculateDifficultyRating(notes:Array<NoteStruct>):Int
+    {
+        if (notes == null || notes.length == 0) return 0;
+
+        var p1Notes:Array<NoteStruct> = [];
+        for (note in notes)
+            if (note.lane == "p1") p1Notes.push(note);
+
+        if (p1Notes.length == 0) return 0;
+
+        p1Notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+        final songDuration:Float = p1Notes[p1Notes.length - 1].time - p1Notes[0].time;
+        if (songDuration <= 0) return 0;
+
+        // first step is to do some sliding 1-second window NPS analysis
+        final WINDOW_MS:Float = 1000.0;
+        var npsValues:Array<Float> = [];
+        var windowStart:Int = 0;
+
+        for (i in 0...p1Notes.length)
+        {
+            while (p1Notes[i].time - p1Notes[windowStart].time > WINDOW_MS)
+                windowStart++;
+
+            // notes in the window = NPS (since window = 1s)
+            npsValues.push(i - windowStart + 1);
+        }
+
+        npsValues.sort((a, b) -> a < b ? -1 : a > b ? 1 : 0);
+
+        final peakNPS:Float = npsValues[npsValues.length - 1];
+        final p90NPS:Float = npsValues[Std.int(npsValues.length * 0.90)];
+        var avgNPS:Float = 0.0;
+        for (v in npsValues) avgNPS += v;
+        avgNPS /= npsValues.length;
+
+        // peak and sustained matter more than average
+        final blendedNPS:Float = (peakNPS * 0.35) + (p90NPS * 0.45) + (avgNPS * 0.20);
+
+        // now we go for the 2nd step, check for chord bonus (multiple notes at nearly the same time)
+        var chordNotes:Int = 0;
+        for (i in 1...p1Notes.length)
+        {
+            if (Math.abs(p1Notes[i].time - p1Notes[i - 1].time) < 15.0)
+                chordNotes++;
+        }
+
+        // up to 25% bonus for chord-heavy charts
+        final chordFactor:Float = 1.0 + (chordNotes / p1Notes.length) * 0.25;
+
+        // now for the 3rd step: jack factor! (same column hit twice quickly if u didnt know)
+        var jackNotes:Int = 0;
+        for (i in 1...p1Notes.length)
+        {
+            final gap:Float = p1Notes[i].time - p1Notes[i - 1].time;
+            if (p1Notes[i].data == p1Notes[i - 1].data && gap > 15.0 && gap < 250.0)
+                jackNotes++;
+        }
+
+        // up to +15% bonus for jack-heavy charts
+        final jackFactor:Float = 1.0 + (jackNotes / p1Notes.length) * 0.15;
+
+        // now the last step! map to 0-20 via tanh curve
+
+        // calibration with SCALE = 20:
+        // ~3 NPS blend -> ~6 (easy-ish)
+        // ~6 NPS blend -> ~11 (moderate)
+        // ~10 NPS blend -> ~15 (hard)
+        // ~18 NPS blend -> ~19 (extreme)
+        // -------------------------------------------------------
+        var adjustedNPS:Float = blendedNPS * chordFactor * jackFactor;
+
+        final SCALE:Float = 20.0;
+        final e2x:Float = Math.exp(2.0 * (adjustedNPS / SCALE));
+
+        var rating:Float  = 20.0 * (e2x - 1.0) / (e2x + 1.0);
+
+        return Std.int(Math.min(20, Math.max(0, Math.round(rating))));
+    }
+
+    /**
      * Converts a chart type to Moon Engine's chart type.
      * @param type The chart type you're converting from
      * @param path The chart's path
@@ -252,11 +337,11 @@ class Chart
                         absolute: event.v.absolute
                     }
                 };
-				
-				default: {
-					tag: event.e, values: event.v,
-					time: event.t, lane: FlxG.random.int(0, 7)
-				};
+                
+                default: {
+                    tag: event.e, values: event.v,
+                    time: event.t, lane: FlxG.random.int(0, 7)
+                };
             }
 
             convertedEvents.push(convertedEvent);
