@@ -2,7 +2,6 @@ package moon.menus;
 
 import moon.game.PlayState;
 import moon.menus.obj.freeplay.*;
-import flixel.addons.effects.FlxSkewedSprite;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import moon.backend.data.Chart;
@@ -28,7 +27,7 @@ class Freeplay extends FlxSubState
     private var conductor:Conductor;
 
     public var mainBG:FreeplayBG;
-    public var weekBG:FlxSkewedSprite;
+    public var weekBG:MoonSprite;
     public var thisDJ:FreeplayDJ;
 
     static var curSelected:Int = 0;
@@ -48,13 +47,14 @@ class Freeplay extends FlxSubState
         add(thisDJ);
 
         // TODO: Week-based BG.
-        weekBG = new FlxSkewedSprite();
+        weekBG = new MoonSprite();
         weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/weekend1'));
         weekBG.scale.set(1.4, 1.4);
         weekBG.antialiasing = true;
         weekBG.updateHitbox();
         weekBG.skew.x = 5;
         weekBG.x = FlxG.width - weekBG.width + 360;
+        weekBG.brightness = -0.45;
         add(weekBG);
 
         add(mainBG.frontBG);
@@ -86,8 +86,7 @@ class Freeplay extends FlxSubState
                         final diff = chart.substr(6);
                         final c = new Chart(song, diff, mix);
 
-                        // Your requested 0-20 difficulty rating (p1 lane notes only)
-                        final rating = Chart.calculateDifficultyRating(c.content?.notes ?? []);
+                        final rating = Chart.calculateDifficultyRating(c.content?.notes ?? [], c.content.meta.bpm);
                         trace('Difficulty rating for ${song} (${mix}/${diff}): ${rating}/20');
 
                         songList.push({

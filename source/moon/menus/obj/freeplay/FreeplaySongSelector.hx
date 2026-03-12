@@ -2,6 +2,9 @@ package moon.menus.obj.freeplay;
 
 import flixel.group.FlxGroup;
 import moon.backend.data.SongData;
+import openfl.filters.ShaderFilter;
+import openfl.filters.BitmapFilter;
+import openfl.filters.DropShadowFilter;
 
 using StringTools;
 
@@ -10,17 +13,15 @@ class FreeplaySongSelector extends FlxGroup
     public static var VISIBLE_RADIUS:Int = 2;
 
     static final Y_SPACING:Float = 95.0;
-
-    var scrollDelta:Float = 0;
-    static final SCROLL_LERP:Float = 14;
-
+    static final WIGGLE_SPEED = 1.2;
+    static final SCROLL_LERP:Float = 10;
     static final DEG_PER_SONG:Float = -25;
-    var diskTargetAngle:Float = 0;
-
     static final DOT_RADIUS:Int = 5;
     static final LINE_W:Int = 512;
     static final LINE_H:Int = 3;
 
+    var scrollDelta:Float = 0;
+    var diskTargetAngle:Float = 0;
     var selectPulse:Float = 0.0;
 
     var disk:MoonSprite;
@@ -52,9 +53,10 @@ class FreeplaySongSelector extends FlxGroup
     {
         super();
 
-        disk = new MoonSprite(600 - 330 / 2, 345 - 330 / 2).loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
+        disk = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
         diskShader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
         disk.shader = diskShader;
+        disk.screenCenter();
         disk.origin.set(disk.width / 2, disk.height / 2);
         add(disk);
 
@@ -80,10 +82,16 @@ class FreeplaySongSelector extends FlxGroup
 
             final item = new FreeplaySongItem();
             items.push(item);
+            add(item.bg);
             add(item.icon);
             add(item.scoreText);
             add(item.nameText);
         }
+
+        disk.scale.set(0, 0);
+        disk.updateHitbox();
+        disk.angle = -800;
+        FlxTween.tween(disk.scale, {x: 1, y: 1}, 1, {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox()});
     }
 
     public function loadSongs(songs:Array<SongBase>, selected:Int = 0):Void
@@ -109,32 +117,38 @@ class FreeplaySongSelector extends FlxGroup
         refreshItems(true);
     }
 
+    final selectedBizz:Array<BitmapFilter> = [
+        new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
+        new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
+    ];
+
     public function changeSelection(delta:Int):Void
     {
         if (songList.length == 0) return;
+
         curSelected = FlxMath.wrap(curSelected + delta, 0, songList.length - 1);
         scrollDelta += delta * Y_SPACING;
         diskTargetAngle += delta * DEG_PER_SONG;
+
         refreshItems();
     }
 
     public function getSelected():SongBase
         return songList[curSelected];
 
-
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
 
-        disk.angle   = FlxMath.lerp(disk.angle, diskTargetAngle, elapsed * SCROLL_LERP);
-        scrollDelta  = FlxMath.lerp(scrollDelta, 0, elapsed * SCROLL_LERP);
+        disk.angle = FlxMath.lerp(disk.angle, diskTargetAngle, elapsed * SCROLL_LERP);
+        scrollDelta = FlxMath.lerp(scrollDelta, 0, elapsed * SCROLL_LERP);
         selectPulse += elapsed * 6.0;
 
         for (i in 0...items.length)
         {
-            final relIdx  = i - VISIBLE_RADIUS;
+            final relIdx = i - VISIBLE_RADIUS;
             final songIdx = curSelected + relIdx;
-            final item    = items[i];
+            final item = items[i];
 
             if (songIdx < 0 || songIdx >= songList.length)
             {
@@ -142,6 +156,8 @@ class FreeplaySongSelector extends FlxGroup
                 item.alpha = 0;
                 item.hide();
                 dots[i].visible = false;
+                item.icon.filters = null;
+                item.bg.alpha = 0;
                 continue;
             }
 
@@ -152,7 +168,7 @@ class FreeplaySongSelector extends FlxGroup
             final baseY = slotBaseY[i] - item.icon.height * item.scale * 0.5 + scrollDelta;
             var itemY = baseY;
             if (relIdx == 0)
-                itemY += Math.sin(selectPulse * 2.5) * 3.5;
+                itemY += Math.sin(selectPulse * WIGGLE_SPEED) * 3.5;
 
             item.x = itemX;
             item.y = itemY;
@@ -164,16 +180,13 @@ class FreeplaySongSelector extends FlxGroup
             final dot = dots[i];
             if (!dot.visible) continue;
 
-            final item   = items[i];
+            final item = items[i];
             final iconCX = item.icon.x + item.icon.width  * 0.5;
             var iconCY = item.icon.y + item.icon.height * 0.5;
 
             final relIdx = i - VISIBLE_RADIUS;
             if (relIdx == 0)
-            {
-                final wiggle = Math.sin(selectPulse * 2.5) * 3.5;
-                iconCY -= wiggle;
-            }
+                iconCY -= Math.sin(selectPulse * WIGGLE_SPEED) * 3.5;
 
             final ang = Math.atan2(iconCY - diskCY, iconCX - diskCX);
 
@@ -222,7 +235,13 @@ class FreeplaySongSelector extends FlxGroup
     {
         if (songList.length == 0)
         {
-            for (item in items) { item.targetAlpha = 0; item.hide(); }
+            for (item in items) 
+            {
+                item.targetAlpha = 0; 
+                item.icon.filters = null;
+                item.bg.alpha = 0;
+                item.hide();
+            }
             for (dot  in dots)  dot.visible = false;
             for (line in lineSprites) line.visible = false;
             return;
@@ -240,6 +259,8 @@ class FreeplaySongSelector extends FlxGroup
                 item.targetAlpha = 0;
                 if (instant) { item.alpha = 0; item.hide(); }
                 dots[i].visible = false;
+                item.icon.filters = null;
+                item.bg.alpha = 0;
                 continue;
             }
 
@@ -258,6 +279,9 @@ class FreeplaySongSelector extends FlxGroup
 
             dots[i].visible = true;
             dots[i].alpha = item.targetAlpha;
+            item.icon.filters = (relIdx == 0) ? selectedBizz : null;
+            item.bg.alpha = (relIdx == 0) ? 0.9 : 0;
+            //item.icon.filters = (i == songIdx) ? selectedBizz : null;
 
             if (instant)
             {

@@ -21,12 +21,18 @@ class FreeplaySongItem
     public var alpha:Float = 0.0;
     public var scale:Float = 1.0;
 
+    public var bg:MoonSprite;
     public var icon:PixelIcon;
     public var nameText:ScrollingText;
     public var scoreText:FlxText;
 
     public function new()
     {
+        bg = new MoonSprite().makeGraphic(416, 84, FlxColor.TRANSPARENT);
+        FlxSpriteUtil.drawRoundRect(bg, 0, 0, bg.width, bg.height, 12, 12, 0xFF1d1d1d);
+        bg.antialiasing = true;
+        bg.active = false;
+
         icon = new PixelIcon(-9999, -9999, 'bf');
 
         nameText = new ScrollingText(-9999, -9999, TEXT_W, '', 22);
@@ -38,7 +44,7 @@ class FreeplaySongItem
         scoreText.font = Paths.font('phantomuff/full.ttf');
         scoreText.antialiasing = true;
         scoreText.color = 0xFFAAAAAA;
-        scoreText.visible = false;
+        scoreText.visible = scoreText.active = false;
         scoreText.alpha = 0.0001;
     }
 
@@ -55,7 +61,7 @@ class FreeplaySongItem
         scoreText.visible = selected;
         if (selected)
         {
-            scoreText.text = ((scoreVal >= 0) ? '${scoreVal} SCORE' : '-- SCORE')
+            scoreText.text = ((scoreVal >= 0) ? '${MoonUtils.formatNumber(scoreVal)} SCORE' : '-- SCORE')
             + '\n' + ((accPct >= 0) ? '${accPct}% ACCURACY' : '--% ACCURACY');
         }
     }
@@ -83,6 +89,10 @@ class FreeplaySongItem
         scoreText.scale.set(scale, scale);
         scoreText.setPosition(textX, nameText.y + 24 * scale);
         scoreText.alpha = alpha * 0.85;
+
+        bg.scale.set(scale, scale);
+        bg.updateHitbox();
+        bg.setPosition(icon.x + 11, (nameText.y + nameText.height / 2 - bg.height / 2) + 8);
     }
 
     /**

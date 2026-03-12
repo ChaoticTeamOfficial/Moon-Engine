@@ -132,8 +132,9 @@ class Chart
     /**
      * Calculates a clean 0-20 difficulty rating based on NPS, chords, and jacks.
      * @param notes The array containing all notes.
+     * @param bpm The BPM value.
      */
-    public static function calculateDifficultyRating(notes:Array<NoteStruct>):Int
+    public static function calculateDifficultyRating(notes:Array<NoteStruct>, bpm:Float):Int
     {
         if (notes == null || notes.length == 0) return 0;
 
@@ -158,20 +159,20 @@ class Chart
             while (p1Notes[i].time - p1Notes[windowStart].time > WINDOW_MS)
                 windowStart++;
 
-            // notes in the window = NPS (since window = 1s)
-            npsValues.push(i - windowStart + 1);
+            // normalize to per-second so units stay consistent
+            npsValues.push((i - windowStart + 1) * (1000.0 / WINDOW_MS));
         }
 
         npsValues.sort((a, b) -> a < b ? -1 : a > b ? 1 : 0);
 
         final peakNPS:Float = npsValues[npsValues.length - 1];
-        final p90NPS:Float = npsValues[Std.int(npsValues.length * 0.90)];
+        final p90NPS:Float  = npsValues[Std.int(npsValues.length * 0.90)];
         var avgNPS:Float = 0.0;
         for (v in npsValues) avgNPS += v;
         avgNPS /= npsValues.length;
 
         // peak and sustained matter more than average
-        final blendedNPS:Float = (peakNPS * 0.35) + (p90NPS * 0.45) + (avgNPS * 0.20);
+        final blendedNPS:Float = (peakNPS * 0.45) + (p90NPS * 0.45) + (avgNPS * 0.10);
 
         // now we go for the 2nd step, check for chord bonus (multiple notes at nearly the same time)
         var chordNotes:Int = 0;
@@ -203,13 +204,17 @@ class Chart
         // ~6 NPS blend -> ~11 (moderate)
         // ~10 NPS blend -> ~15 (hard)
         // ~18 NPS blend -> ~19 (extreme)
-        // -------------------------------------------------------
-        var adjustedNPS:Float = blendedNPS * chordFactor * jackFactor;
 
-        final SCALE:Float = 20.0;
-        final e2x:Float = Math.exp(2.0 * (adjustedNPS / SCALE));
+        // power of 1.8 squashes easy songs down while leaving hard songs near the top.
+        // that should nerf this a lil
+        // bc for example, bopeebo was getting 4 on diff rating LOL
+        // o yea also have bpm taking into account
+        final bpmFactor:Float = 1.0 + Math.max(0.0, (bpm - 120.0) / 120.0) * 0.20;
+        final adjustedNPS:Float = blendedNPS * chordFactor * jackFactor * bpmFactor;
+        final normalized:Float = Math.pow(adjustedNPS / 16.0, 2.0);
+        final e2x:Float = Math.exp(2.0 * normalized);
 
-        var rating:Float  = 20.0 * (e2x - 1.0) / (e2x + 1.0);
+        final rating:Float = 20.0 * (e2x - 1.0) / (e2x + 1.0);
 
         return Std.int(Math.min(20, Math.max(0, Math.round(rating))));
     }
