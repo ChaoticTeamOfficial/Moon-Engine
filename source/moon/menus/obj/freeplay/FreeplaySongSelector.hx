@@ -2,15 +2,13 @@ package moon.menus.obj.freeplay;
 
 import flixel.group.FlxGroup;
 import moon.backend.data.SongData;
-import openfl.filters.ShaderFilter;
-import openfl.filters.BitmapFilter;
-import openfl.filters.DropShadowFilter;
 
 using StringTools;
 
+//TODO: finish documenting this
 class FreeplaySongSelector extends FlxGroup
 {
-    public static var VISIBLE_RADIUS:Int = 2;
+    public static final VISIBLE_RADIUS:Int = 2;
 
     static final Y_SPACING:Float = 95.0;
     static final WIGGLE_SPEED = 1.2;
@@ -46,8 +44,9 @@ class FreeplaySongSelector extends FlxGroup
     inline function get_itemX() return disk.x + disk.width + 20;
 
     var songList:Array<SongBase> = [];
-    var charCache:Array<String> = [];
     var curSelected:Int = 0;
+
+    private var preloadedCharts:Array<Chart> = [];
 
     public function new()
     {
@@ -90,37 +89,31 @@ class FreeplaySongSelector extends FlxGroup
 
         disk.scale.set(0, 0);
         disk.updateHitbox();
-        disk.angle = -800;
+        disk.angle = -360;
         FlxTween.tween(disk.scale, {x: 1, y: 1}, 1, {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox()});
     }
 
+    /**
+     * Loads the song list AND pre-creates every Chart.
+     */
     public function loadSongs(songs:Array<SongBase>, selected:Int = 0):Void
     {
-        songList  = songs;
+        songList = songs;
         curSelected = (songs.length > 0) ? FlxMath.wrap(selected, 0, songs.length - 1) : 0;
 
-        charCache = [];
-        for (e in songs)
-        {
-            var ch = 'dad';
-            try
-            {
-                final d = Paths.JSON('songs/${e.song}/${e.mix}/chart-${e.difficulty}');
-                if (d?.meta?.opponents != null && (d.meta.opponents:Array<String>).length > 0)
-                    ch = d.meta.opponents[0];
-            }
-            catch (_:Dynamic) {}
-            charCache.push(ch);
-        }
+        refreshEntries();
 
         scrollDelta = 0;
         refreshItems(true);
     }
 
-    final selectedBizz:Array<BitmapFilter> = [
-        new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
-        new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
-    ];
+    public function refreshEntries():Void
+    {
+        preloadedCharts.resize(0);
+
+        for (entry in songList)
+            preloadedCharts.push(new Chart(entry.song, entry.difficulty, entry.mix));
+    }
 
     public function changeSelection(delta:Int):Void
     {
@@ -130,7 +123,7 @@ class FreeplaySongSelector extends FlxGroup
         scrollDelta += delta * Y_SPACING;
         diskTargetAngle += delta * DEG_PER_SONG;
 
-        refreshItems();
+        refreshItems(false);
     }
 
     public function getSelected():SongBase
@@ -139,6 +132,8 @@ class FreeplaySongSelector extends FlxGroup
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
+
+        SongPreview.update(elapsed);
 
         disk.angle = FlxMath.lerp(disk.angle, diskTargetAngle, elapsed * SCROLL_LERP);
         scrollDelta = FlxMath.lerp(scrollDelta, 0, elapsed * SCROLL_LERP);
@@ -249,7 +244,7 @@ class FreeplaySongSelector extends FlxGroup
 
         for (i in 0...items.length)
         {
-            final relIdx  = i - VISIBLE_RADIUS;
+            final relIdx = i - VISIBLE_RADIUS;
             final songIdx = curSelected + relIdx;
             final item = items[i];
             final rank = Math.abs(relIdx);
@@ -264,6 +259,18 @@ class FreeplaySongSelector extends FlxGroup
                 continue;
             }
 
+            final chart = preloadedCharts[songIdx];
+
+            if (item.data != chart)
+            {
+                item.data = chart;
+                if (item.icon.character != chart.content.meta.opponents[0])
+                    item.icon.character = chart.content.meta.opponents[0];
+
+                final displayName = chart.content.meta.displayName ?? songList[songIdx].song;
+                item.nameText.setText(displayName.toUpperCase());
+            }
+
             final scoreData = SongData.retrieveData(
                 songList[songIdx].song,
                 songList[songIdx].difficulty,
@@ -272,16 +279,15 @@ class FreeplaySongSelector extends FlxGroup
             final scoreVal = scoreData != null ? scoreData.score : -1;
             final accPct = scoreData != null ? Std.int(scoreData.accuracy) : -1;
 
-            item.loadEntry(songList[songIdx], charCache[songIdx], relIdx == 0, scoreVal, accPct);
+            item.setSelected(relIdx == 0, scoreVal, accPct);
 
             item.targetScale = Math.max(0.55, 1.0 - rank * 0.18);
             item.targetAlpha = Math.max(0.20, 1.0 - rank * 0.32);
 
             dots[i].visible = true;
             dots[i].alpha = item.targetAlpha;
-            item.icon.filters = (relIdx == 0) ? selectedBizz : null;
+
             item.bg.alpha = (relIdx == 0) ? 0.9 : 0;
-            //item.icon.filters = (i == songIdx) ? selectedBizz : null;
 
             if (instant)
             {
@@ -289,6 +295,13 @@ class FreeplaySongSelector extends FlxGroup
                 item.x = itemX;
                 item.y = slotBaseY[i] - item.icon.height * item.scale * 0.5;
                 item.applyPositions();
+            }
+
+            if(relIdx == 0)
+            {
+                SongPreview.loadAndPlay(chart);
+                final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
+                disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
             }
         }
     }

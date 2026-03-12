@@ -113,6 +113,10 @@ class Chart
      */
     public var events:Array<EventStruct>;
 
+    public var song:String;
+    public var difficulty:String;
+    public var mix:String;
+
     /**
      * Loads a chart from a path.
      * @param song        The song's name. (e.g. satin panties)
@@ -124,6 +128,10 @@ class Chart
         final modifier = (difficulty == 'erect' || difficulty == 'nightmare') ? '-erect' : '';
         events = (Paths.exists('songs/$song/$mix/events$modifier.json')) ? Paths.JSON('songs/$song/$mix/events$modifier') : [];
         content = Paths.JSON('songs/$song/$mix/chart-$difficulty');
+
+        this.song = song;
+        this.difficulty = difficulty;
+        this.mix = mix;
 
         content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
         events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);

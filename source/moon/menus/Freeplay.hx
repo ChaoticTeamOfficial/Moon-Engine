@@ -92,8 +92,7 @@ class Freeplay extends FlxSubState
                         songList.push({
                             song: song,
                             mix: mix,
-                            difficulty: diff,
-                            displayName: c.content?.meta?.displayName ?? song
+                            difficulty: diff
                         });
                     }
                 }

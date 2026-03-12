@@ -5,6 +5,10 @@ import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import moon.global_obj.PixelIcon;
 
+import openfl.filters.ShaderFilter;
+import openfl.filters.BitmapFilter;
+import openfl.filters.DropShadowFilter;
+
 using StringTools;
 
 class FreeplaySongItem
@@ -25,6 +29,12 @@ class FreeplaySongItem
     public var icon:PixelIcon;
     public var nameText:ScrollingText;
     public var scoreText:FlxText;
+    public var data:Chart;
+
+    final selectedBizz:Array<BitmapFilter> = [
+        new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
+        new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
+    ];
 
     public function new()
     {
@@ -48,17 +58,20 @@ class FreeplaySongItem
         scoreText.alpha = 0.0001;
     }
 
-    public function loadEntry(entry:SongBase, charName:String, selected:Bool, scoreVal:Int = -1, accPct:Int = -1):Void
+    public function loadEntry(entry:SongBase):Void
     {
-        if (icon.character != charName)
-            icon.character = charName;
+        data = new Chart(entry.song, entry.difficulty, entry.mix);
 
-        final displayName:String = Reflect.hasField(entry, "displayName") 
-            ? Reflect.field(entry, "displayName") 
-            : entry.song;
-        nameText.setText(displayName.toUpperCase());
+        if (icon.character != data.content.meta.opponents[0])
+            icon.character = data.content.meta.opponents[0];
 
+        nameText.setText(data.content.meta.displayName.toUpperCase());
+    }
+
+    public function setSelected(selected:Bool, scoreVal:Int = -1, accPct:Int = -1)
+    {
         scoreText.visible = selected;
+        icon.filters = selected ? selectedBizz : null;
         if (selected)
         {
             scoreText.text = ((scoreVal >= 0) ? '${MoonUtils.formatNumber(scoreVal)} SCORE' : '-- SCORE')
