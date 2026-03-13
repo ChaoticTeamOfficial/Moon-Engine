@@ -1,7 +1,14 @@
 package moon.dependency;
 
 import flixel.system.FlxAssets.FlxGraphicAsset;
-import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
+import haxe.io.Path;
+import animate.FlxAnimateFrames.FlxAnimateSettings;
+import animate.FlxAnimate;
+import animate.FlxAnimateFrames;
+import animate.internal.*;
+import flixel.util.FlxDestroyUtil;
+import flixel.util.FlxSpriteUtil;
+import flixel.tweens.FlxTween;
 
 using StringTools;
 
@@ -9,12 +16,12 @@ using StringTools;
  * A Sprite class with more compatibility over animated sprites.
  * With functions for centering offsets, adding offsets for animations, etc.
  */
-class MoonSprite extends FlxSprite
+class MoonSprite extends FlxAnimate
 {
 	/**
 	 * A map containing all the offsets for each animation in the sprite.
 	 */
-	public var animOffsets:Map<String, Array<Dynamic>>;
+	public var animOffsets:Map<String, Array<Dynamic>> = [];
 
 	/**
 	 * Used for setting up if the sprite will center
@@ -25,7 +32,7 @@ class MoonSprite extends FlxSprite
 	/**
 	 * An ID but it uses a string instead of an int.
 	 */
-	public var strID:String;
+	public var strID:String = '';
 
 	/**
 	 * A brightness field that looks just like Adobe Animate's brightness.
@@ -52,13 +59,6 @@ class MoonSprite extends FlxSprite
 	public var idleAnims:Array<String> = null;
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
-
-	public function new(x:Float = 0, y:Float = 0)
-	{
-		super(x, y);
-
-		animOffsets = new Map<String, Array<Dynamic>>();
-	}
 
 	public var twn:FlxTween;
 
@@ -202,89 +202,11 @@ class MoonSprite extends FlxSprite
         
         return value;
     }
-		
-	// ---- SKEW STUFF ---- //
 
-    /**
-     * @author Zaphod
-     */
-    public var skew(default, null):FlxPoint = FlxPoint.get();
+	override public function destroy():Void
+	{
+		extraOffset = FlxDestroyUtil.put(extraOffset);
 
-    /**
-     * Tranformation matrix for this sprite.
-     * Used only when matrixExposed is set to true
-     */
-    public var transformMatrix(default, null):FlxMatrix = new FlxMatrix();
-
-    /**
-     * Bool flag showing whether transformMatrix is used for rendering or not.
-     * False by default, which means that transformMatrix isn't used for rendering
-     */
-    public var matrixExposed:Bool = false;
-
-    /**
-     * Internal helper matrix object. Used for rendering calculations when matrixExposed is set to false
-     */
-    var _skewMatrix:FlxMatrix = new FlxMatrix();
-
-    override public function destroy():Void
-    {
-        skew = FlxDestroyUtil.put(skew);
-        _skewMatrix = null;
-        transformMatrix = null;
-
-        super.destroy();
-    }
-
-    override function drawComplex(camera:FlxCamera):Void
-    {
-        _frame.prepareMatrix(_matrix, FlxFrameAngle.ANGLE_0, checkFlipX(), checkFlipY());
-        _matrix.translate(-origin.x, -origin.y);
-        _matrix.scale(scale.x, scale.y);
-
-        if (matrixExposed)
-            _matrix.concat(transformMatrix);
-        else
-        {
-            if (bakedRotationAngle <= 0)
-            {
-                updateTrig();
-
-                if (angle != 0)
-                    _matrix.rotateWithTrig(_cosAngle, _sinAngle);
-            }
-
-            updateSkewMatrix();
-            _matrix.concat(_skewMatrix);
-        }
-
-        getScreenPosition(_point, camera).subtract(offset);
-        _point.add(origin);
-
-        if (isPixelPerfectRender(camera))
-            _point.floor();
-
-        _matrix.translate(_point.x, _point.y);
-
-        camera.drawPixels(_frame, framePixels, _matrix, colorTransform, blend, antialiasing, shader);
-    }
-
-    function updateSkewMatrix():Void
-    {
-        _skewMatrix.identity();
-
-        if (skew.x != 0 || skew.y != 0)
-        {
-            _skewMatrix.b = Math.tan(skew.y * FlxAngle.TO_RAD);
-            _skewMatrix.c = Math.tan(skew.x * FlxAngle.TO_RAD);
-        }
-    }
-
-    override public function isSimpleRender(?camera:FlxCamera):Bool
-    {
-        if (FlxG.renderBlit)
-            return super.isSimpleRender(camera) && (skew.x == 0) && (skew.y == 0) && !matrixExposed;
-        else
-            return false;
-    }
+		super.destroy();
+	}
 }

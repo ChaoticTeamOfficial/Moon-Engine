@@ -36,7 +36,7 @@ haxelib install moonchart 0.5.1
 haxelib install hxvlc 2.2.5
 haxelib install hscript-iris
 haxelib install flixel-waveform
-haxelib install flixel-animate 1.1.0 
+haxelib install flixel-animate 1.5.0 
 haxelib install hxdiscord_rpc
 
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -57,7 +57,7 @@ haxelib set flixel-text-input 2.0.2
 haxelib set hxcpp-debug-server 1.2.4
 haxelib set moonchart 0.5.1
 haxelib set hxvlc 2.2.5
-haxelib set flixel-animate 1.1.0
+haxelib set flixel-animate 1.5.0
 haxelib run lime setup
 
 cls

@@ -1,19 +1,20 @@
 import flixel.FlxG;
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
+import moon.dependency.MoonSprite;
 
-var bf:FlxAnimate;
-var gf:FlxAnimate;
+var bf:MoonSprite;
+var gf:MoonSprite;
 function onPostCreate()
 {
-	gf = new FlxAnimate();
+	gf = new MoonSprite();
     gf.frames = FlxAnimateFrames.fromAnimate(Paths.getPath("images/ingame/results/bf/GREAT/gf"));
     results.background.add(gf);
     gf.visible = gf.visible = false;
     gf.anim.addBySymbol("intro", "gf jumping", 24, false);
     gf.anim.onFinish.add(() -> gf.anim.play("intro", true, false, 9));
 
-	bf = new FlxAnimate();
+	bf = new MoonSprite();
     bf.frames = FlxAnimateFrames.fromAnimate(Paths.getPath("images/ingame/results/bf/GREAT/bf"));
     results.background.add(bf);
     bf.visible = gf.visible = false;

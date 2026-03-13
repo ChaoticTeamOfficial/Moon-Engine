@@ -1,11 +1,12 @@
 import flixel.FlxG;
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
+import moon.dependency.MoonSprite;
 
-var fuckers:FlxAnimate;
+var fuckers:MoonSprite;
 function onPostCreate()
 {
-	fuckers = new FlxAnimate();
+	fuckers = new MoonSprite();
     fuckers.frames = FlxAnimateFrames.fromAnimate(Paths.getPath("images/ingame/results/bf/PERFECT/bed"));
     results.background.add(fuckers);
 

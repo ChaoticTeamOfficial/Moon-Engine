@@ -3,7 +3,7 @@ import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
 import moon.dependency.MoonSprite;
 
-var bf:FlxAnimate;
+var bf:MoonSprite;
 var gf:MoonSprite;
 function onPostCreate()
 {
@@ -16,7 +16,7 @@ function onPostCreate()
 	});
     results.background.add(gf);
 
-	bf = new FlxAnimate();
+	bf = new MoonSprite();
     bf.frames = FlxAnimateFrames.fromAnimate(Paths.getPath("images/ingame/results/bf/GOOD/bf"));
     results.background.add(bf);
     
