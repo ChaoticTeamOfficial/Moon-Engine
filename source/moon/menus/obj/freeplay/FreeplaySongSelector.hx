@@ -302,7 +302,7 @@ class FreeplaySongSelector extends FlxGroup
             if(relIdx == 0)
             {
                 Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
-                SongPreview.loadAndPlay(chart);
+                //SongPreview.loadAndPlay(chart);
                 final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
                 disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
             }

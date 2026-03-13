@@ -298,11 +298,11 @@ class Chart
                 case 'FocusCamera': {
                     tag: 'Move Camera',
                     values: {
-                        character: (event.v.char == 1) ? 'opponent' : (event.v.char == 2) ? 'spectator' : (event.v.char == -1) ? 'none' : 'player', 
+                        character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player', 
                         duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
                         ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
-                        x: event.v.x ?? 0,
-                        y: event.v.y ?? 0,
+                        x: Std.parseFloat(event?.v?.x) ?? 0,
+                        y: Std.parseFloat(event?.v?.y) ?? 0,
                     },
                     lane: 0, time: event.t
                 };
@@ -310,7 +310,7 @@ class Chart
                 case 'ZoomCamera': {
                     tag: 'Set Zoom',
                     values: {
-                        zoom: event.v.zoom,
+                        zoom: Std.parseFloat(event.v.zoom),
                         duration: event?.v?.duration ?? 8,
                         ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
                         mode: event?.v?.mode ?? 'absolute',

@@ -1,0 +1,14 @@
+[
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 0,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	}
+]

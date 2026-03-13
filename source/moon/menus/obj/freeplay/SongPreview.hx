@@ -9,7 +9,6 @@ import sys.thread.Mutex;
  */
 class SongPreview
 {
-	static var instance:MoonSound;
 	static var mutex:Mutex = new Mutex();
 	static function loadAndPlay(chart:Chart)
 	{
@@ -17,33 +16,31 @@ class SongPreview
 		new lime.app.Future(() ->
         {
         	mutex.acquire();
-			if(instance != null)
+			if(FlxG.sound.music != null)
 			{
-				if(instance.playing) instance.stop();
-				MoonUtils.cancelActiveTwn(instance.fadeTween);
-				FlxG.sound.list.remove(instance);
+				if(FlxG.sound.music.playing) FlxG.sound.music.stop();
+				MoonUtils.cancelActiveTwn(FlxG.sound.music.fadeTween);
 
-				instance.destroy();
-				instance = null;
+				FlxG.sound.music.destroy();
+				FlxG.sound.music = null;
 
 				//trace('destroying');
 			}
 
-			instance = new MoonSound();
+			FlxG.sound.music = new MoonSound();
 
 			start = chart?.content?.meta?.preview[0] ?? 0;
 
 			//TODO: update this for the new custom difficulties system.
-			instance.loadEmbedded(Paths.sound('${chart.song}/${chart.mix}/Inst.ogg', 'songs'));
-			FlxG.sound.list.add(instance);
+			FlxG.sound.playMusic(Paths.sound('${chart.song}/${chart.mix}/Inst.ogg', 'songs'));
+			FlxG.sound.music.time = start;
 
 			//trace(start + ' ' + end);
 
-			end = chart?.content?.meta?.preview[1] ?? instance.length;
-			instance.volume = 0;
-			instance.play();
-			instance.time = start;
-			instance.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
+			end = chart?.content?.meta?.preview[1] ?? FlxG.sound.music.length;
+			FlxG.sound.music.volume = 0;
+			FlxG.sound.music.play();
+			FlxG.sound.music.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
 			resetting = false;
 
 			//trace('playing song');
@@ -56,18 +53,17 @@ class SongPreview
 	static var resetting:Bool = false;
 	static function update(elapsed:Float)
 	{
-		if(instance != null)
+		if(FlxG.sound.music != null)
 		{
-			instance.update(elapsed);
-			//trace(instance.time);
-			if(instance.playing && instance.time >= end && !resetting)
+			//trace(FlxG.sound.music.time);
+			if(FlxG.sound.music.playing && FlxG.sound.music.time >= end && !resetting)
 			{
 				//trace('ending');
 				resetting = true;
-				instance.fadeOut(1, 0, _->{
+				FlxG.sound.music.fadeOut(1, 0, _->{
 					resetting = false;
-					instance.time = start;
-					instance.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
+					FlxG.sound.music.time = start;
+					FlxG.sound.music.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
 				});
 			}
 		}
