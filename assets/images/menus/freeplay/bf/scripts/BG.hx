@@ -11,6 +11,11 @@ function onCreate()
 
     //Scrolling texts
     final texts = [
+		{
+            text: "PROTECT YO NUTS",
+            size: 32, color: 0xffffffff, speed: 2,
+            bold: true, offsetY: 0
+        },
         {
             text: "HOT BLOODED IN MORE WAYS THAN ONE",
             size: 32, color: 0xFFfff383, speed: 5,
@@ -50,7 +55,7 @@ function onCreate()
     for(i in 0...texts.length)
     {
         final dt = texts[i];
-        var textii = new TextScroll(0, 140 + (40 * i) + dt.offsetY, dt.text, 200, dt.size, dt.bold);
+        var textii = new TextScroll(0, 105 + (40 * i) + dt.offsetY, dt.text, 200, dt.size, dt.bold);
         textii.speed = dt.speed;
         textii.color = dt.color;
         behindBG.add(textii);

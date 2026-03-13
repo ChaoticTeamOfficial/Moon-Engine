@@ -23,7 +23,7 @@ class FreeplaySongSelector extends FlxGroup
     var selectPulse:Float = 0.0;
 
     var disk:MoonSprite;
-    var diskShader:VinylDiskShader;
+    var albumTitle:MoonSprite;
 
     var lineSprites:Array<MoonSprite> = [];
     var dots:Array<MoonSprite> = [];
@@ -53,12 +53,15 @@ class FreeplaySongSelector extends FlxGroup
         super();
 
         disk = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
-        diskShader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
-        disk.shader = diskShader;
+        disk.shader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
         disk.active = false;
         disk.screenCenter();
         disk.origin.set(disk.width / 2, disk.height / 2);
         add(disk);
+
+        albumTitle = new MoonSprite();
+        //albumTitle.scale.set(0.8, 0.8);
+        add(albumTitle);
 
         final poolSize = VISIBLE_RADIUS * 2 + 1;
         for (i in 0...poolSize)
@@ -302,9 +305,30 @@ class FreeplaySongSelector extends FlxGroup
             if(relIdx == 0)
             {
                 Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
-                //SongPreview.loadAndPlay(chart);
+                SongPreview.loadAndPlay(chart);
+                var curAlb:String = '';
                 final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
-                disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
+                if(curAlb != album) disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
+                if(!album.contains('placeholder'))
+                {
+                    if(curAlb != album)
+                    {
+                        albumTitle.frames = Paths.getSparrowAtlas('menus/freeplay/albums/$album-text');
+                        albumTitle.centerAnimations = true;
+                        albumTitle.animation.addByPrefix('switch', 'switch', 24, false);
+                        albumTitle.animation.addByPrefix('idle', 'idle', 24, false);
+                        albumTitle.animation.onFinish.addOnce(_->albumTitle.playAnim('idle'));
+                        albumTitle.playAnim('switch', true);
+
+                        albumTitle.scale.set(0.6, 0.6);
+                        albumTitle.updateHitbox();
+                        albumTitle.setPosition(disk.x, disk.y + disk.height - 48);
+                        albumTitle.visible = true;
+                    }
+                }
+                else albumTitle.visible = false;
+
+                curAlb = album;
             }
         }
     }

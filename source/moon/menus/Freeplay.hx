@@ -24,18 +24,15 @@ class Freeplay extends FlxSubState
 
     public var character:String;
 
-    public var songVolume:Float = 1;
-    private var conductor:Conductor;
+    public var songVolume:Float = MoonSettings.callSetting('Music Volume') / 100;
+    static var curSelected:Int = 0;
+    var songList:Array<SongBase> = [];
 
+    public var conductor:Conductor;
     public var mainBG:FreeplayBG;
     public var weekBG:MoonSprite;
     public var thisDJ:FreeplayDJ;
-
-    static var curSelected:Int = 0;
-
-    var songList:Array<SongBase> = [];
-
-    var selector:FreeplaySongSelector;
+    public var selector:FreeplaySongSelector;
     public var stars:DifficultyStars;
 
     public function new(character:String = 'bf')
@@ -50,6 +47,11 @@ class Freeplay extends FlxSubState
         thisDJ = new FreeplayDJ(character);
         add(thisDJ);
 
+        Global.scriptSet('behindBG', mainBG.behindBG);
+        Global.scriptSet('frontBG', mainBG.frontBG);
+        Global.scriptSet('foreground', mainBG.foreground);
+        Global.scriptSet('dj', thisDJ);
+
         // TODO: Week-based BG.
         weekBG = new MoonSprite();
         weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/weekend1'));
@@ -63,17 +65,15 @@ class Freeplay extends FlxSubState
 
         add(mainBG.frontBG);
 
-        mainBG.script.set('freeplay', this);
-        thisDJ.script.set('freeplay', this);
+        Global.scriptSet('freeplay', this);
 
         conductor = new Conductor(0, 4, 4);
-        conductor.onBeat.add(function(beat)
+        conductor.onBeat.add((beat) ->
         {
             if ((beat % 2 == 0 || conductor.bpm < 120) && thisDJ.canDance)
-                thisDJ.anim.play('idle', true);
+                thisDJ.playAnim('idle', true);
 
-            if (mainBG.script.exists('onBeat'))
-                mainBG.script.get('onBeat')(beat);
+            Global.scriptCall('onBeat', [beat]);
         });
 
         add(mainBG.foreground);
@@ -115,8 +115,7 @@ class Freeplay extends FlxSubState
         add(selector);
         add(stars);
 
-        if (mainBG.script.exists('onCreate'))
-            mainBG.script.call('onCreate');
+        Global.scriptCall('onCreate');
     }
 
     function change(num:Int = 0)
@@ -129,6 +128,13 @@ class Freeplay extends FlxSubState
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
+
+        if(FlxG.sound.music != null)
+        {
+            if(FlxG.sound.music.playing) conductor.time = FlxG.sound.music.time;
+            if(FlxG.sound.music.fadeTween == null || (FlxG.sound.music.fadeTween != null && !FlxG.sound.music.fadeTween.active)) 
+                FlxG.sound.music.volume = FlxMath.lerp(FlxG.sound.music.volume, songVolume, elapsed * 8);
+        }
 
         if (MoonInput.justPressed(UI_DOWN)) change(1);
         if (MoonInput.justPressed(UI_UP)) change(-1);       
@@ -147,7 +153,6 @@ class Freeplay extends FlxSubState
             }
         }
 
-        if (mainBG.script.exists('onUpdate'))
-            mainBG.script.get('onUpdate')(elapsed);
+        Global.scriptCall('onUpdate', [elapsed]);
     }
 }

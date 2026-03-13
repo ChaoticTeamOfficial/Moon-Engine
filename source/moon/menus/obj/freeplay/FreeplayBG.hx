@@ -37,8 +37,6 @@ class FreeplayBG extends FlxGroup
         super();
         script = new MoonScript();
         script.load('images/menus/freeplay/$character/scripts/BG.hx');
-        script.set('behindBG', behindBG);
-        script.set('frontBG', frontBG);
-        script.set('foreground', foreground);
+        Global.registerScript('freeplayBG', script);
     }
 }

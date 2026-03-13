@@ -61,7 +61,7 @@ class Global
                 script.call(field, args);
     }
 
-    /**S
+    /**
      * Sets a field on all the scripts.
      * @param variable The field name (used for the scripts).
      * @param value The field itself.

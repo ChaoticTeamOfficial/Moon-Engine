@@ -1,10 +1,9 @@
 package moon.menus.obj.freeplay;
 
 import moon.dependency.scripting.MoonScript;
-import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
 
-class FreeplayDJ extends FlxAnimate
+class FreeplayDJ extends MoonSprite
 {
     /**
      * Timer used for playing AFK Animations.
@@ -27,15 +26,12 @@ class FreeplayDJ extends FlxAnimate
 
         script = new MoonScript();
         script.load('images/menus/freeplay/$character/scripts/DJ.hx');
-        script.set('dj', this);
-        if(script.exists('onCreate')) script.call('onCreate');
+        Global.registerScript('freeplayDJ', script);
     }
 
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
         AFK_TIMER += elapsed;
-
-        if(script.exists('onUpdate')) script.get('onUpdate')(elapsed);
     }
 }
