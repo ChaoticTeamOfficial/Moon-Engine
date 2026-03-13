@@ -20,6 +20,7 @@ enum FreeplayTransition
 class Freeplay extends FlxSubState
 {
     public static var appearType:FreeplayTransition = NONE;
+    public static var instance:Freeplay;
 
     public var character:String;
 
@@ -33,12 +34,15 @@ class Freeplay extends FlxSubState
     static var curSelected:Int = 0;
 
     var songList:Array<SongBase> = [];
+
     var selector:FreeplaySongSelector;
+    public var stars:DifficultyStars;
 
     public function new(character:String = 'bf')
     {
         super();
         this.character = character;
+        instance = this;
 
         mainBG = new FreeplayBG(character);
         add(mainBG.behindBG);
@@ -84,11 +88,6 @@ class Freeplay extends FlxSubState
                     if (chart.startsWith('chart-'))
                     {
                         final diff = chart.substr(6);
-                        final c = new Chart(song, diff, mix);
-
-                        final rating = Chart.calculateDifficultyRating(c.content?.notes ?? [], c.content.meta.bpm);
-                        trace('Difficulty rating for ${song} (${mix}/${diff}): ${rating}/20');
-
                         songList.push({
                             song: song,
                             mix: mix,
@@ -106,9 +105,15 @@ class Freeplay extends FlxSubState
             return (aL < bL) ? -1 : (aL > bL) ? 1 : 0;
         });
 
+        stars = new DifficultyStars(0, 632, 24, 0.055);
+        stars.screenCenter(X);
+        stars.x += 280;
+        stars.difficulty = 0;
+
         selector = new FreeplaySongSelector();
         selector.loadSongs(songList, curSelected);
         add(selector);
+        add(stars);
 
         if (mainBG.script.exists('onCreate'))
             mainBG.script.call('onCreate');

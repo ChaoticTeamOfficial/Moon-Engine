@@ -36,13 +36,13 @@ class SongPreview
 			//TODO: update this for the new custom difficulties system.
 			instance.loadEmbedded(Paths.sound('${chart.song}/${chart.mix}/Inst.ogg', 'songs'));
 			FlxG.sound.list.add(instance);
-			instance.time = start;
 
 			//trace(start + ' ' + end);
 
 			end = chart?.content?.meta?.preview[1] ?? instance.length;
 			instance.volume = 0;
 			instance.play();
+			instance.time = start;
 			instance.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
 			resetting = false;
 

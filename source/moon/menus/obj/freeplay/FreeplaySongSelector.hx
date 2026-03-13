@@ -55,6 +55,7 @@ class FreeplaySongSelector extends FlxGroup
         disk = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
         diskShader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
         disk.shader = diskShader;
+        disk.active = false;
         disk.screenCenter();
         disk.origin.set(disk.width / 2, disk.height / 2);
         add(disk);
@@ -76,6 +77,7 @@ class FreeplaySongSelector extends FlxGroup
             dot.makeGraphic(DOT_RADIUS * 2, DOT_RADIUS * 2, FlxColor.TRANSPARENT);
             FlxSpriteUtil.drawCircle(dot, DOT_RADIUS, DOT_RADIUS, DOT_RADIUS, FlxColor.WHITE);
             dot.visible = false;
+            dot.active = false;
             dots.push(dot);
             add(dot);
 
@@ -299,6 +301,7 @@ class FreeplaySongSelector extends FlxGroup
 
             if(relIdx == 0)
             {
+                Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
                 SongPreview.loadAndPlay(chart);
                 final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
                 disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
