@@ -65,7 +65,6 @@ typedef MetadataStruct =
     var album:String;
     var artist:String;
     var charter:String;
-    var diffRating:Int;
     var preview:Array<Float>;
     
     // MISC
@@ -402,7 +401,6 @@ class Chart
             album: metadata.playData.album,
             artist: metadata.artist,
             charter: metadata.charter,
-            diffRating: Reflect.field(metadata.playData.ratings, difficulty),
             preview: [metadata.playData.previewStart, metadata.playData.previewEnd],
 
             generatedBy: metadata.generatedBy,

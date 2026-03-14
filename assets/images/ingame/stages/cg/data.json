@@ -15,7 +15,7 @@
         }
       ],
       "startAnim": "new",
-      "animBehavior": "ONCE",
+      "animBehavior": "ONBEAT",
       "scale": [1, 1],
       "scroll": [1, 1]
     }

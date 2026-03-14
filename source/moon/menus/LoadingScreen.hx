@@ -1,15 +1,18 @@
 package moon.menus;
 
 import flixel.ui.FlxBar;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.math.FlxMath;
+import haxe.CallStack;
+
 import moon.menus.obj.*;
 import moon.game.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
 
-// Heavily inspired at Doido Engine's loading screen!
 class LoadingScreen extends FlxTransitionableState
 {
-    //var mutex = new sys.thread.Mutex();
     var preloadGrp = new FlxGroup();
 
     private var loadingBar:FlxBar;
@@ -18,9 +21,18 @@ class LoadingScreen extends FlxTransitionableState
 
     var loadComplete:Bool = false;
     var loadProgress:Int = 0;
+
+    var loadError:Dynamic = null;
+
+    var tracker:Float = 0;
+    var trackerB:Bool = false;
+    var transitioning = false;
+    var failed:Bool = false;
+
     override public function create():Void
     {
         super.create();
+
         add(preloadGrp);
 
         var cover = new MoonSprite().makeGraphic(FlxG.width + 64, FlxG.height + 64, FlxColor.BLACK);
@@ -37,7 +49,7 @@ class LoadingScreen extends FlxTransitionableState
 
         loadText = new FlxText();
         loadText.setFormat(Paths.font('vcr.ttf'), 22, RIGHT);
-        loadText.text = '...';
+        loadText.text = 'Waiting for thread...';
         loadText.antialiasing = false;
         add(loadText);
         loadText.setPosition(loadingBar.x, loadingBar.y - loadText.height - 10);
@@ -47,75 +59,80 @@ class LoadingScreen extends FlxTransitionableState
         loadDisplay.antialiasing = true;
         add(loadDisplay);
         loadDisplay.y = FlxG.height - loadDisplay.height;
-
+		
         // We begin preloading here!!!
         new FlxTimer().start(0.4, function(_)
         {
             new lime.app.Future(() ->
             {
-                //mutex.acquire();
-                loadText.text = 'Preloading song...';
+                try
+                {
+                    loadText.text = 'Preloading song...';
 
-                final d = PlayState.songData;
-                var chart = new Chart(d.song, d.difficulty, d.mix);
-                var conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
+                    final d = PlayState.songData;
+                    var chart = new Chart(d.song, d.difficulty, d.mix);
+                    var conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
 
-                loadProgress = 15;
-                var playback = new Song(
-                    d.song,
-                    d.mix,
-                    (d.difficulty == 'erect' || d.difficulty == 'nightmare'),
-                    conductor
-                );
-                playback.state = STOP;
-                loadProgress = 30;
+                    loadProgress = 15;
+                    var playback = new Song(
+                        d.song,
+                        d.mix,
+                        (d.difficulty == 'erect' || d.difficulty == 'nightmare'),
+                        conductor
+                    );
+                    playback.state = STOP;
+                    loadProgress = 30;
 
-                loadText.text = 'Preloading Graphics...';
-                preload(new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]));
-                loadProgress = 40;
+                    loadText.text = 'Preloading Graphics...';
+                    preload(new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]));
+                    loadProgress = 40;
 
-                final thing = ['opponent', 'p1'];
+                    final thing = ['opponent', 'p1'];
 
-                //TODO: Skins lol
-                for(i in 0...thing.length)
-                    preload(new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', false, thing[i], conductor));
-                loadProgress = 50;
+                    for(i in 0...thing.length)
+                        preload(new Strumline(0, 68, chart.content?.meta?.noteskin ?? 'v-slice', false, thing[i], conductor));
+                    loadProgress = 50;
 
-                //TODO ONCE IMPLEMENTED: LOAD JUDGEMENTS N COMBO!
-                var stage = new Stage(chart.content.meta.stage, conductor);
-                
-                final chartMeta = chart.content.meta;
-                for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents);
-                for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players);
-                for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
-                preload(stage);
-                loadProgress = 70;
+                    var stage = new Stage(chart.content.meta.stage, conductor);
+                    
+                    final chartMeta = chart.content.meta;
+                    for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents);
+                    for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players);
+                    for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
+                    preload(stage);
+                    loadProgress = 70;
 
-                // This is the part where it'll preload song events (like change stage and change character)
-                // Once I have them implemented ofc lol
-                // also, TODO, have a "preload" function for song scripts.
-                loadText.text = 'Preloading events and such...';
+                    loadText.text = 'Preloading events and such...';
 
-                Paths.skipNextCleanup = true;
-                Global.clearScriptList();
+                    Paths.skipNextCleanup = true;
+                    Global.clearScriptList();
 
-                loadText.text = 'Done! Press ACCEPT to continue.';
-                loadProgress = 102;
-                loadComplete = true;
+                    loadText.text = 'Done! Press ACCEPT to continue.';
+                    loadProgress = 102;
+                    loadComplete = true;
 
-                FlxTween.tween(loadText, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
-                //mutex.release();
+                    FlxTween.tween(loadText, {alpha: 0.5}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
+                }
+                catch (e:Dynamic)
+                {
+                    loadError = Std.string(e) + "\n\n STACK TRACE \n" + CallStack.toString(CallStack.exceptionStack());
+                    trace('Crash on the loading screen!\n$loadError', "ERROR");
+
+                    failed = true;
+                    loadText.text = 'An error has happened. Press BACK to leave.';
+					loadText.color = FlxColor.RED;
+                }
+				
+				//shit lmao
+                null;
             }, true);
         });
     }
 
-    var tracker:Float = 0;
-    var trackerB:Bool = false;
-    var transitioning = false;
-    var failed:Bool = false;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+
         loadingBar.value = FlxMath.lerp(loadingBar.value, loadProgress, elapsed * 6);
 
         tracker += elapsed;

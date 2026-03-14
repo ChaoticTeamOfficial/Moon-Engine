@@ -301,8 +301,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
             if (sprite.animation.curAnim == null) continue;
 
             final beatInt = Std.int(curBeat);
-            if ((sprite.animation.curAnim.name.startsWith("idle") || sprite.animation.curAnim.name.startsWith("dance"))
-                && (beatInt % 2 == 0) && (beatInt != sprite.lastDanceBeat))
+            if ((sprite.animation.curAnim.name.startsWith("idle") || sprite.animation.curAnim.name.startsWith("dance")) && (beatInt != sprite.lastDanceBeat))
             {
                 sprite.lastDanceBeat = beatInt;
                 sprite.dance(true);

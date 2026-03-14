@@ -5178,17 +5178,17 @@
 		}
 	],
 	"meta": {
-		"stage": "mallXmasErect",
+		"stage": "mall",
 		"players": [
-			"bf-christmas"
+			"bf"
 		],
 		"opponents": [
-			"parents-christmas"
+			"dad"
 		],
 		"artist": "Saster",
 		"charter": "fabs + Spazkid",
 		"spectators": [
-			"gf-christmas"
+			"gf"
 		],
 		"diffRating": 8,
 		"bpm": 174,

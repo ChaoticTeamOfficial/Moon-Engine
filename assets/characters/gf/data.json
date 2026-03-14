@@ -6,6 +6,7 @@
     "healthbarColors": [0, 0, 0],
 	"extraOffsets": [0, -316],
     "danceFrequency": 1,
+	"type": "packed",
     "animations": [
         {
             "name": "idle-0", 

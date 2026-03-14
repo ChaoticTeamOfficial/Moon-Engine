@@ -35,11 +35,14 @@ class Title extends FlxTransitionableState
 
     var gridPos:Float = 0;
     var onTitle:Bool = false; //For tracking when the texts stuff are on screen
+    var isFridayNight:Bool = false;
 
     var colorSH:ColorSwap = new ColorSwap();
     override public function create():Void
     {
         super.create();
+
+        isFridayNight = (Date.now().getDay() == 5 && Date.now().getHours() >= 18) || (Date.now().getDay() == 6 && Date.now().getHours() < 5);
 		
 		// otherwise it fucks up the bg bars lol
 		FlxG.autoPause = false;
@@ -60,10 +63,7 @@ class Title extends FlxTransitionableState
         bg.shader = colorSH.shader;
         objects.push(bg);
         
-        var gradient = FlxGradient.createGradientFlxSprite(
-            FlxG.width, FlxG.height,
-            [0xff1022c1, FlxColor.TRANSPARENT, 0xffca15ac]
-        );
+        var gradient = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, [0xff1022c1, FlxColor.TRANSPARENT, 0xffca15ac]);
         gradient.alpha = 0.2;
         gradient.shader = colorSH.shader;
         add(gradient);
@@ -134,8 +134,9 @@ class Title extends FlxTransitionableState
         //GlobalMusic.start(true);
 
         //TODO: make a better handler for song metadatas
-        MoonUtils.playGlobalMusic('menus/freakyMenu', true);
-        updateConductor(Paths.JSON('music/menus/freakyMenu-metadata'));
+        final song = isFridayNight ? 'freakyMenu-fridayNight' : 'freakyMenu';
+        MoonUtils.playGlobalMusic('menus/${song}', true);
+        updateConductor(Paths.JSON('music/menus/${song}-metadata'));
 
         updateVis();
 

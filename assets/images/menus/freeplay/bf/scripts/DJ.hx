@@ -75,7 +75,7 @@ function onUpdate(elapsed)
         case 1:
             if(dj.AFK_TIMER >= 100)
             {
-                FlxTween.tween(freeplay, {songVolume: 0.15}, 2.2, {startDelay: 2.2});
+                FlxTween.tween(freeplay, {songVolume: 0.08}, 2.2, {startDelay: 2.2});
                 dj.canDance = false;
                 dj.playAnim("afk2", true);
                 afkIndex += 1;
@@ -113,10 +113,12 @@ function playRandomCartoon()
         {
             FlxG.sound.list.remove(cartoonPlayer);
             cartoonPlayer.stop();
+            cartoonPlayer.destroy();
         }
 
         cartoonPlayer.loadEmbedded(Paths.sound('menus/freeplay/cartoons/cartoon' + FlxG.random.int(1, 24) + '.ogg', 'sounds'));
         cartoonPlayer.play();
+        cartoonPlayer.volume = 1;
         FlxG.sound.list.add(cartoonPlayer);
     }, true);
 }

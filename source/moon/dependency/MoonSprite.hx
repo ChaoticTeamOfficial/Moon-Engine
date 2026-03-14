@@ -3,8 +3,7 @@ package moon.dependency;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import haxe.io.Path;
 import animate.FlxAnimateFrames.FlxAnimateSettings;
-import animate.FlxAnimate;
-import animate.FlxAnimateFrames;
+import animate.*;
 import animate.internal.*;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSpriteUtil;
@@ -153,16 +152,23 @@ class MoonSprite extends FlxAnimate
 	 * @param animations Array of AnimationDatas.
 	 * return array of idle anims, for chaining them.
 	 */
-	public function loadAnimations(animations:Array<Paths.AnimationData>):Array<String>
+	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW):Array<String>
 	{
 		var idleAnims:Array<String> = [];
 		for (i in 0...animations.length)
 		{
 			final anim:Paths.AnimationData = animations[i];
-			(anim.indices != null)
-			? this.animation.addByIndices(anim.name, anim.prefix, anim.indices, '', anim.fps ?? 24, anim.looped ?? false)
-			: this.animation.addByPrefix(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
+			switch(type)
+			{
+				case PACKED:
+					(anim.indices != null) ? cast(this.animation, FlxAnimateController).addBySymbolIndices(anim.name, anim.prefix, anim.indices, anim.fps ?? 24, anim.looped ?? false)
+					: cast(this.animation, FlxAnimateController).addBySymbol(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
+				default:
+					(anim.indices != null) ? this.animation.addByIndices(anim.name, anim.prefix, anim.indices, '', anim.fps ?? 24, anim.looped ?? false)
+					: this.animation.addByPrefix(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
+			}
 			this.addOffset(anim.name, anim?.x ?? 0, anim?.y ?? 0);
+			
 			//trace('added ' + animations);
 
 			if(anim.name.startsWith("idle-"))

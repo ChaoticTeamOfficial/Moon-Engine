@@ -1,5 +1,7 @@
 package moon.game.obj;
 
+import animate.FlxAnimate;
+import animate.FlxAnimateFrames;
 import moon.dependency.scripting.*;
 
 using StringTools;
@@ -8,6 +10,7 @@ typedef CharacterData =
 {
     var ?antialiasing:Bool;
     var ?scale:Float;
+    var ?type:AtlasType;
     var flipX:Bool;
     var camOffsets:Array<Float>;
     var ?extraOffsets:Array<Float>;
@@ -111,11 +114,17 @@ class Character extends MoonSprite
        
         this.character = char;
         data = cast Paths.JSON('characters/$character/data');
+        if(data.type == null) data.type = SPARROW;
         camOffsets = data.camOffsets;
-        this.frames = Paths.getSparrowAtlas('$character/$character', 'characters');
+
+        switch(data.type)
+        {
+            case SPARROW: this.frames = Paths.getSparrowAtlas('$character/$character', 'characters');
+            default: this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$character'));
+        }
 
         overrideAnims = data?.overrideAnims ?? [];
-        idleAnims = loadAnimations(data.animations);
+        idleAnims = loadAnimations(data.animations, data.type);
         danceFrequency = data.danceFrequency;
 
         this.antialiasing = data?.antialiasing ?? true;
