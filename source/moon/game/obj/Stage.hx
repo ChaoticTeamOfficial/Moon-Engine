@@ -205,27 +205,31 @@ class Stage extends FlxTypedGroup<FlxBasic>
     public function updatePositioning()
     {
         if (json == null) return;
-        for(character in json.characters)
-        {
-            switch(character.type)
-            {
-                case OPPONENT:
-                    opponentCharData = character;
-                    addGroupAtLayer(opponents, opponentCharData, objMap);
-                    opponents.origin.set(opponents.width / 2, opponents.height);
-                    setType(opponents, OPPONENT);
-                case PLAYER:
-                    playerCharData = character;
-                    addGroupAtLayer(players, playerCharData, objMap);
-                    players.origin.set(players.width / 2, players.height);
-                    setType(players, PLAYER);
-                case SPECTATOR:
-                    spectatorCharData = character;
-                    addGroupAtLayer(spectators, spectatorCharData, objMap);
-                    spectators.origin.set(spectators.width / 2, spectators.height);
-                    setType(spectators, SPECTATOR);
-            }
-        }
+        for (i in 0...json.characters.length)
+		{
+			final character = json.characters[json.characters.length - 1 - i];
+
+			switch (character.type)
+			{
+				case OPPONENT:
+					opponentCharData = character;
+					addGroupAtLayer(opponents, opponentCharData, objMap);
+					opponents.origin.set(opponents.width / 2, opponents.height);
+					setType(opponents, OPPONENT);
+
+				case PLAYER:
+					playerCharData = character;
+					addGroupAtLayer(players, playerCharData, objMap);
+					players.origin.set(players.width / 2, players.height);
+					setType(players, PLAYER);
+
+				case SPECTATOR:
+					spectatorCharData = character;
+					addGroupAtLayer(spectators, spectatorCharData, objMap);
+					spectators.origin.set(spectators.width / 2, spectators.height);
+					setType(spectators, SPECTATOR);
+			}
+		}
     }
 
     private function addGroupAtLayer(group:FlxSpriteGroup, charData:StageCharacter, objMap:Map<String, MoonSprite>)

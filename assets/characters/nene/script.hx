@@ -20,7 +20,6 @@ function onPostStageCreate()
 	specs.insert(specs.members.indexOf(system), aVisualizer);
 	aVisualizer.setPosition(char.x + 69, char.y + 388);
 	stereobg.setPosition(system.x + 148, system.y + 20);
-	
 	//system.shader = stereobg.shader = char.shader;
 }
 
