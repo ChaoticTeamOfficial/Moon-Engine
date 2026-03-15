@@ -24,6 +24,7 @@ using StringTools;
  * The Paths class, used for getting ingame files and memory cleaning as well.
  * 
  * Would like to clarify that: This class belongs to Doido Engine, and I'm using it with permission.
+ * I just sliiightly modified it so it can have support for modding as well!
  * https://github.com/DoidoTeam/FNF-Doido-Engine/blob/main/source/Paths.hx
  * (Give Doido Engine a try, It's a very well made engine! ^^)
  **/
@@ -39,7 +40,7 @@ class Paths
     public static var skipNextCleanup:Bool = false;
 
     // idk
-    public static function getPath(key:String, ?library:String):String
+    public static function getVanillaPath(key:String, ?library:String):String
     {
         #if RENAME_UNDERSCORE
         var pathArray:Array<String> = key.split("/").copy();
@@ -67,9 +68,19 @@ class Paths
             return 'assets/$library/$key';
     }
 
+    public static function getPath(key:String, ?library:String):String
+    {
+        #if sys
+        return Mods.getModdedPath(key, library);
+        #else
+        return getVanillaPath(key, library);
+        #end
+    }
+
     private static function fileExists(path:String, ?library:String):Bool
     {
-        var fsPath:String = getPath(path, library);
+        final fsPath:String = getPath(path, library);
+
         #if desktop
         return FileSystem.exists(fsPath);
         #else
@@ -79,16 +90,13 @@ class Paths
 
     private static function getFileBytes(path:String, ?library:String):Bytes
     {
-        var fsPath:String = getPath(path, library);
-        #if desktop
-        if (!FileSystem.exists(fsPath))
-            return null;
+        final fsPath:String = getPath(path, library);
 
+        #if desktop
+        if (!FileSystem.exists(fsPath)) return null;
         return File.getBytes(fsPath);
         #else
-        if (!Assets.exists(fsPath))
-            return null;
-
+        if (!Assets.exists(fsPath)) return null;
         return Assets.getBytes(fsPath);
         #end
     }
@@ -98,7 +106,7 @@ class Paths
     
     public static function getSound(key:String, ?library:String):Sound
     {
-        var cacheKey:String = key;
+        final cacheKey:String = key;
         if (!renderedSounds.exists(cacheKey))
         {
             if (!fileExists(key, library))
@@ -106,13 +114,14 @@ class Paths
                 trace('$key doesnt exist!', "ERROR");
                 return null;
             }
+
             var sound:Sound;
             #if desktop
-            sound = Sound.fromFile(getPath(key, library));
+            sound = Sound.fromFile(getPath(key, library));   // ← now always a real file (folder mods only)
             #else
             sound = Assets.getSound(getPath(key, library), false);
             #end
-            
+
             renderedSounds.set(cacheKey, sound);
         }
         return renderedSounds.get(cacheKey);
@@ -135,16 +144,15 @@ class Paths
             }
 
             var bitmap:BitmapData;
-            var fsPath = getPath(imagePath, library);
+
             #if desktop
-            bitmap = BitmapData.fromFile(fsPath);
+            bitmap = BitmapData.fromFile(getPath(imagePath, library));   // ← now always a real file
             #else
-            bitmap = Assets.getBitmapData(fsPath, false);
+            bitmap = Assets.getBitmapData(getPath(imagePath, library), false);
             #end
 
-            //hmmm doesnt seem to do anything different xd
             bitmap.disposeImage();
-            var newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
+            final newGraphic = FlxGraphic.fromBitmapData(bitmap, false, cacheKey, false);
             newGraphic.persist = true;
             renderedGraphics.set(cacheKey, newGraphic);
         }
@@ -367,36 +375,72 @@ class Paths
     public static function readDir(dir:String, ?typeArr:Array<String>, ?removeType:Bool = true, ?library:String):Array<String>
     {
         var swagList:Array<String> = [];
-        
-        try {
-            #if desktop
-            var rawList = FileSystem.readDirectory(getPath(dir, library));
-            for(i in 0...rawList.length)
+
+        #if desktop
+        var relativeDir = (library != null ? '$library/' : '') + dir;
+        if (!relativeDir.endsWith('/')) relativeDir += '/';
+
+        var tempList:Array<String> = [];
+        var seen:Map<String, Bool> = [];
+
+        inline function addIfNew(files:Array<String>)
+        {
+            for (f in files)
             {
-                if(typeArr?.length > 0)
+                if (!seen.exists(f))
                 {
-                    for(type in typeArr) {
-                        if(rawList[i].endsWith(type)) {
-                            // cleans it
-                            if(removeType)
-                                rawList[i] = rawList[i].replace(type, "");
-                            swagList.push(rawList[i]);
-                        }
+                    seen.set(f, true);
+                    tempList.push(f);
+                }
+            }
+        }
+
+        for (mod in Mods.activeMods)
+        {
+            final modDir = '${mod.root}/$relativeDir';
+            if (FileSystem.exists(modDir) && FileSystem.isDirectory(modDir))
+            {
+                try
+                {
+                    addIfNew(FileSystem.readDirectory(modDir));
+                }
+                catch (e) {}
+            }
+        }
+
+        final vanillaDir = getVanillaPath(dir, library);
+        try
+        {
+            addIfNew(FileSystem.readDirectory(vanillaDir));
+        }
+        catch (e) {}
+
+        final rawList = tempList;
+        for (i in 0...rawList.length)
+        {
+            if (typeArr?.length > 0)
+            {
+                for (type in typeArr)
+                {
+                    if (rawList[i].endsWith(type))
+                    {
+                        if (removeType)
+                            rawList[i] = rawList[i].replace(type, "");
+                        swagList.push(rawList[i]);
+                        break;
                     }
                 }
-                else
-                    swagList.push(rawList[i]);
             }
-            #end
-        } catch(e) {}
-        
-        //trace('read dir ${(swagList.length > 0) ? '$swagList' : 'EMPTY'} at ${getPath(dir, library)}', "DEBUG");
+            else swagList.push(rawList[i]);
+        }
+        #end
+
+        //trace('read dir ${swagList.length > 0 ? '$swagList' : 'EMPTY'} (modded) at $relativeDir', "DEBUG");
         return swagList;
     }
 
     public static function preloadGraphic(key:String, from:String = 'images', ?library:String)
     {
-        // no point in preloading something already loaded duh
         if(renderedGraphics.exists(key)) return;
 
         var what = new FlxSprite().loadGraphic(image(key, from, library));

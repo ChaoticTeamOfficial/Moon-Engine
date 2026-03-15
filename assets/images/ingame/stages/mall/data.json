@@ -81,6 +81,12 @@
   ],
   "characters": [
     {
+	  "type": "spectator",
+      "position": [858.5, 394],
+	  "camOffsets": [0, 0],
+      "objectBehind": "fgSnow"
+    },
+    {
 	  "type": "opponent",
       "position": [542, 452],
 	  "camOffsets": [150, -100],
@@ -90,12 +96,6 @@
 	  "type": "player",
       "position": [1577.5, 441],
 	  "camOffsets": [-404, -250],
-      "objectBehind": "fgSnow"
-    },
-    {
-	  "type": "spectator",
-      "position": [858.5, 394],
-	  "camOffsets": [0, 0],
       "objectBehind": "fgSnow"
     }
   ]

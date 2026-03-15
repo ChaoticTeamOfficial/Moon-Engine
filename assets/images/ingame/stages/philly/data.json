@@ -46,6 +46,11 @@
   ],
   "characters": [
     {
+	  "type": "spectator",
+      "position": [440, 472],
+      "objectBehind": "street"
+    },
+    {
 	  "type": "opponent",
       "position": [64, 387],
 	  "camOffsets": [200, -100],
@@ -55,11 +60,6 @@
 	  "type": "player",
       "position": [1020.5, 505],
 	  "camOffsets": [-200, -160],
-      "objectBehind": "street"
-    },
-    {
-	  "type": "spectator",
-      "position": [440, 472],
       "objectBehind": "street"
     }
   ]

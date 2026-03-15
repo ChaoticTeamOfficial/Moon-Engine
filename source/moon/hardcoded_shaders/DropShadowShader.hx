@@ -199,13 +199,8 @@ class DropShadowShader extends FlxShader
     attachedSprite = spr;
     updateFrameInfo(attachedSprite.frame);
 
-    //TODO
-    // Enable render texture for texture atlas sprites
-    // This allows the shader to work properly on them
-    //if (attachedSprite.isAnimate && !attachedSprite.useRenderTexture)
-    //{
-    //  attachedSprite.useRenderTexture = true;
-    //}
+    if (attachedSprite.isAnimate && !attachedSprite.useRenderTexture)
+      attachedSprite.useRenderTexture = true;
 
     return spr;
   }

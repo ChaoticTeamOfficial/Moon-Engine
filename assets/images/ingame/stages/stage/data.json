@@ -26,6 +26,11 @@
   ],
   "characters": [
     {
+	  "type": "spectator",
+      "position": [296, 374],
+      "objectBehind": "stagefront"
+    },
+    {
 	  "type": "opponent",
       "position": [64, 396],
       "objectBehind": "stagefront"
@@ -33,11 +38,6 @@
     {
 	  "type": "player",
       "position": [916, 396],
-      "objectBehind": "stagefront"
-    },
-    {
-	  "type": "spectator",
-      "position": [296, 374],
       "objectBehind": "stagefront"
     }
   ]
