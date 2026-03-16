@@ -63,6 +63,7 @@ class MainMenu extends FlxTransitionableState
                     FlxG.sound.music.stop();*/
                     openSubState(new PlaceholderReplayMenu());
 
+                case 'mods': FlxG.switchState(() -> new ModMenu());
 				case 'freeplay': openSubState(new Freeplay('bf'));
                 case 'settings': openSubState(new Settings());
                 case 'convert chart yeah': FlxG.switchState(()->new ChartConvert());

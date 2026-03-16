@@ -111,36 +111,6 @@ class Mods
     }
 
     /**
-     * Sets a mod to a higher priority (by moving it up in the list!)
-     */
-    static function moveModUp(modName:String):Void
-    {
-        final idx = loadOrder.indexOf(modName);
-        if (idx > 0)
-        {
-            loadOrder.remove(modName);
-            loadOrder.insert(idx - 1, modName);
-            rebuildActiveMods();
-            saveConfig();
-        }
-    }
-
-    /**
-     * Sets a mod to a lower priority (by moving it down in the list!)
-     */
-    static function moveModDown(modName:String):Void
-    {
-        final idx = loadOrder.indexOf(modName);
-        if (idx != -1 && idx < loadOrder.length - 1)
-        {
-            loadOrder.remove(modName);
-            loadOrder.insert(idx + 1, modName);
-            rebuildActiveMods();
-            saveConfig();
-        }
-    }
-
-    /**
      * Returns the first modded path that exists (highest priority mod).
      */
     static function getModdedPath(originalPath:String, ?library:String):String
