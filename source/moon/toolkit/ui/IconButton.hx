@@ -36,7 +36,7 @@ class IconButton extends FlxSpriteGroup
     {
         super.update(elapsed);
 
-        if (FlxG.mouse.overlaps(bg))
+        if (FlxG.mouse.overlaps(bg, camera))
             if (FlxG.mouse.justPressed)
             {
                 isPressed = !isPressed;

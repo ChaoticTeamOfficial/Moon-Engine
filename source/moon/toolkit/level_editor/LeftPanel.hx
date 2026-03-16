@@ -13,7 +13,7 @@ class LeftPanel extends FlxSpriteGroup
     var keybinds:Array<{modifiers:Array<String>, key:String, action:String}> = [];
 
     var editor:LevelEditor = null;
-    public function new(editor:LevelEditor)
+    public function new(editor:LevelEditor, ?list:Array<String>)
     {
         super();
 
@@ -22,10 +22,13 @@ class LeftPanel extends FlxSpriteGroup
         bg = new MoonSprite().makeGraphic(80, FlxG.height, 0xFF080808);
         add(bg);
 
-        final list = [
-            'menu', 'separator', 'joystick', 'videoSettings', 'separator',
-            'editDocument', 'openFolder', 'lightbulb', 'space-196', 'settings', 'openDoor'
-        ];
+        if(list == null || list.length <= 0)
+        {
+            list = [
+                'menu', 'separator', 'joystick', 'videoSettings', 'separator',
+                'editDocument', 'openFolder', 'lightbulb', 'space-196', 'settings', 'openDoor'
+            ];
+        }
 
         var curY:Float = 24;
         final gap:Float = 10;
@@ -48,7 +51,7 @@ class LeftPanel extends FlxSpriteGroup
             else
             {
                 var thing = new IconButton(0, 0, 48, 48, list[i]);
-                thing.invertShader = editor.invertColors;
+                thing.invertShader = editor?.invertColors ?? new InvertColor();
                 add(thing);
                 thing.setPosition(bg.x + bg.width / 2 - thing.width / 2, curY);
 

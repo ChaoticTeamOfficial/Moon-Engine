@@ -159,6 +159,41 @@
 			"name": "arrowBack",
 			"pos": [576, 128],
 			"size": [64, 64]
+		},
+		{
+			"name": "designServices",
+			"pos": [640, 128],
+			"size": [64, 64]
+		},
+		{
+			"name": "layers",
+			"pos": [0, 192],
+			"size": [64, 64]
+		},
+		{
+			"name": "add",
+			"pos": [64, 192],
+			"size": [64, 64]
+		},
+		{
+			"name": "editProperties",
+			"pos": [128, 192],
+			"size": [64, 64]
+		},
+		{
+			"name": "stackAdd",
+			"pos": [192, 192],
+			"size": [64, 64]
+		},
+		{
+			"name": "enable",
+			"pos": [256, 192],
+			"size": [64, 64]
+		},
+		{
+			"name": "layer",
+			"pos": [336, 208],
+			"size": [32, 32]
 		}
 	]
 }
