@@ -32,9 +32,6 @@ class MoonGame extends FlxGame
         Alphabet.init();
         SongData.init();
 
-        MoonSettings.updateGlobalSettings();
-        MoonSettings.updateWindow();
-
         FlxG.plugins.addPlugin(new flixel.addons.plugin.ScreenShotPlugin());
         flixel.addons.plugin.ScreenShotPlugin.screenshotKeys = [F3];
         //screenshotplugin.ScreenShotPlugin.screenshotKey = F3;

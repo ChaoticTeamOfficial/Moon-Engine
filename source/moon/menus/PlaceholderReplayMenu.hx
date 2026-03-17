@@ -7,7 +7,7 @@ using StringTools;
 class PlaceholderReplayMenu extends FlxSubState
 {
 	var replays:Array<FlxText> = [];
-	final dir = Paths.readDir('replays', ['.mrp']);
+	final dir = Paths.readDir('data/replays', ['.mrp']);
 	public function new()
 	{
 		super();
@@ -49,7 +49,7 @@ class PlaceholderReplayMenu extends FlxSubState
 	            mix: curThingie.split('_')[2]
 	        };
 
-	        final rep = PlayState.loadReplay('replays/$curThingie.mrp');
+	        final rep = PlayState.loadReplay('data/replays/$curThingie.mrp');
 	        if (rep != null)
 	            FlxG.switchState(() -> new PlayState(rep));
 

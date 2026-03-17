@@ -33,6 +33,8 @@ class Conductor
 	// - And the time (usually based on song position.)
 	var time(default, set):Float = 0;
 
+	var catchUp:Bool = false;
+
 	function set_time(value:Float):Float
 	{
 	    time = value;
@@ -46,21 +48,31 @@ class Conductor
 	        if (curStep != _stepTracker)
 	        {
 	            final dir = (_stepTracker > curStep) ? 1 : -1;
+	            if (Math.abs(_stepTracker - curStep) > 8)
+	                catchUp = true;
+
 	            while (curStep != _stepTracker)
 	            {
 	                curStep += dir;
-	                onStep.dispatch(curStep);
+	                if (!catchUp)
+	                    onStep.dispatch(curStep);
 	            }
+	            catchUp = false;
 	        }
 
 	        if (curBeat != _beatTracker)
 	        {
 	            final dir = (_beatTracker > curBeat) ? 1 : -1;
+	            if (Math.abs(_beatTracker - curBeat) > 2)
+	                catchUp = true;
+
 	            while (curBeat != _beatTracker)
 	            {
 	                curBeat += dir;
-	                onBeat.dispatch(curBeat);
+	                if (!catchUp)
+	                    onBeat.dispatch(curBeat);
 	            }
+	            catchUp = false;
 	        }
 
 	        if (curMeasure != _measureTracker)

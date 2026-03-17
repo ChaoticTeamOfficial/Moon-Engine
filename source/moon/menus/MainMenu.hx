@@ -9,7 +9,7 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['test replay', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit'];
+    final opt:Array<String> = ['test replay', 'test playlist', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit'];
     var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -34,7 +34,7 @@ class MainMenu extends FlxTransitionableState
 
         // TODO: remove this and make the title state window dance stop there.
         // its here due to the gf easter egg being able to window dance.
-        MoonSettings.updateWindow();
+        //MoonSettings.updateWindow();
         
         PlayState.replaysToSave = [];
         if(PlayState.instance != null) PlayState.instance.destroy();
@@ -62,6 +62,16 @@ class MainMenu extends FlxTransitionableState
                         FlxG.switchState(() -> new PlayState(rep));
                     FlxG.sound.music.stop();*/
                     openSubState(new PlaceholderReplayMenu());
+
+                case 'test playlist':
+                    /*PlayState.queuePlaylist([
+                        { song: "blammed", difficulty: "erect", mix: "bf" },
+                        { song: "cocoa", difficulty: "nightmare", mix: "bf" },
+                        { song: "green skies", difficulty: "hard", mix: "bf" }
+                    ]);
+                    FlxG.switchState(() -> new LoadingScreen());
+                    */
+                    openSubState(new PlaylistMode());
 
                 case 'mods': FlxG.switchState(() -> new ModMenu());
 				case 'freeplay': openSubState(new Freeplay('bf'));

@@ -17,9 +17,11 @@ class StageEditor extends FlxTransitionableState
 		var stage = new Stage('stage', null);
 		add(stage);
 
-		var lPanel = new LeftPanel(null, ['menu', 'separator', 'layers', 'designServices']);
+		var lPanel = new LeftPanel(null, ['menu', 'separator', 'layers', 'designServices', 'separator', 'openFolder']);
 		add(lPanel);
 		lPanel.camera = camHUD;
+
+		MoonUtils.playGlobalMusic('toolbox/artisticexpression', true);
 
 		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	}

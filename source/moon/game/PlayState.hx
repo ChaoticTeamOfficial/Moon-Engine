@@ -23,23 +23,43 @@ using StringTools;
 
 class PlayState extends FlxTransitionableState
 {	
-	// Just a variable for the current instance so you can get all the vars.
+	/**
+	 * The current active playstate instance.
+	 */
 	public static var instance:PlayState;
 
 	//-- Gameplay main variables --//
 
-	// The main gameplay interface
+	/**
+	 * The current playfield, containing the game's interface.
+	 */
 	public var playField:PlayField;
 
-	// Just the conductor :P poor little guy,,
+	/**
+	 * The playfield's conductor.
+	 */
 	public var conductor:Conductor;
 	
-	// Background (stage)
+	/**
+	 * The game's background.
+	 */
 	public var stage:Stage;
 	
 	// Cameras
+
+	/**
+	 * The camera in which is used for most HUD elements.
+	 */
 	public var camHUD:MoonCamera = new MoonCamera();
+
+	/**
+	 * The camera in which is used for other objects. For example, the Pause menu.
+	 */
 	public var camALT:MoonCamera = new MoonCamera();
+
+	/**
+	 * The camera used for most in-game objects.
+	 */
 	public var camGAME:MoonCamera = new MoonCamera();
 	public var camFollower:FlxObject = new FlxObject();
 	
@@ -61,6 +81,17 @@ class PlayState extends FlxTransitionableState
 		difficulty: 'hard',
 		mix: 'bf'
 	};
+
+	public static var playlist:Array<SongBase> = [];
+	public static var playlistIndex:Int = 0;
+
+	public static function queuePlaylist(songs:Array<SongBase>)
+	{
+		playlist = songs != null ? songs.copy() : [];
+		playlistIndex = 0;
+		if (playlist.length > 0)
+			songData = playlist[0];
+	}
 
 	public var paused:Bool = false;
 	public function new(?replay:Replay = null)
@@ -240,6 +271,8 @@ class PlayState extends FlxTransitionableState
 	{
 		super.update(elapsed);
 
+		camGAME.angle += 0.5;
+
 		// EVENTS CHECK
 		if(events.length > 0)
 		{
@@ -407,8 +440,27 @@ class PlayState extends FlxTransitionableState
             replaysToSave.push(rep);
         }
 
-		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
-		setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
+		// Playlist handling
+		if (playlist.length > 0 && playlistIndex < playlist.length - 1)
+		{
+			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->
+			{
+				Paths.skipNextCleanup = false;
+				Global.clearScriptList();
+				instance = null;
+				PlayField.instance = null;
+
+				playlistIndex++;
+				songData = playlist[playlistIndex];
+
+				FlxG.switchState(() -> new LoadingScreen());
+			});
+		}
+		else
+		{
+			setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
+			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
+		}
 	}
 
 	override function closeSubState()
@@ -467,11 +519,7 @@ class PlayState extends FlxTransitionableState
         #if sys
         for(replay in replaysToSave)
         {
-	        final folder = Paths.getPath('replays');
-	        if (!sys.FileSystem.exists(folder))
-	            sys.FileSystem.createDirectory(folder);
-
-	        final path = Paths.getPath('replays/${replay.filename}');
+	        final path = Paths.getPath('data/replays/${replay.filename}');
 
 	        final data = {
 	            song: replay.song,

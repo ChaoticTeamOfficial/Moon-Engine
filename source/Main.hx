@@ -67,6 +67,9 @@ class Main extends Sprite
 
 		fps = new FPS(10, 10);
 		addChild(fps);
+
+        MoonSettings.updateGlobalSettings();
+        MoonSettings.updateWindow();
 		
 		Global.allowInputs = true;
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);

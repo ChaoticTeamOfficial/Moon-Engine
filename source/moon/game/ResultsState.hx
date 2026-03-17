@@ -170,7 +170,7 @@ class ResultsState extends FlxState
                 text: PlayState.replaysToSave.length == 1 ? 'Replay saved!\n"${PlayState.replaysToSave[0]}"' :
                 'Saved ${PlayState.replaysToSave.length} replays.',
                 color: 0xFFd98617,
-                duration: 5
+                duration: 4
             }
             PlayState.saveReplays();
 
@@ -240,9 +240,9 @@ class ResultsState extends FlxState
                 add(clear);
 
                 replay.parameters = {
-                    text: 'Hold [TAB] to save a replay!',
+                    text: 'Hold [TAB] to save ' + (PlayState.replaysToSave.length == 1 ? "a replay!" : "all the replays!"),
                     color: 0xFF7117d5,
-                    duration: 5
+                    duration: 6
                 }
 
                 //score.playAnim('boop', true);

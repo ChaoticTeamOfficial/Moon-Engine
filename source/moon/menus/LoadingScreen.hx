@@ -48,7 +48,7 @@ class LoadingScreen extends FlxTransitionableState
         add(loadingBar);
 
         loadText = new FlxText();
-        loadText.setFormat(Paths.font('vcr.ttf'), 22, RIGHT);
+        loadText.setFormat(Paths.font('VHS-GOTHIC.TTF'), 22, RIGHT);
         loadText.text = 'Waiting for thread...';
         loadText.antialiasing = false;
         add(loadText);
@@ -133,7 +133,7 @@ class LoadingScreen extends FlxTransitionableState
     {
         super.update(elapsed);
 
-        loadingBar.value = FlxMath.lerp(loadingBar.value, loadProgress, elapsed * 6);
+        if(loadingBar != null) loadingBar.value = FlxMath.lerp(loadingBar.value, loadProgress, elapsed * 6);
 
         tracker += elapsed;
         if(tracker >= 0.6)
