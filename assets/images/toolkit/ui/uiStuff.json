@@ -51,6 +51,11 @@
             "size": [48, 48]
         },
 		{
+            "name": "playlistMode",
+            "pos": [480, 448],
+            "size": [48, 48]
+        },
+		{
             "name": "sustainHandle",
             "pos": [560, 384],
             "size": [32, 16]

@@ -50,12 +50,21 @@ class PlaylistMode extends FlxSubState
 		upperBG.y -= upperBG.height;
 		FlxTween.tween(upperBG, {y: 0, alpha: 1}, 0.7, {ease: FlxEase.expoOut, startDelay:0.4});
 
+		var icon = new MoonSprite(32, -90);
+		icon.frames = Tilemap.getAtlasFrames("mainUI");
+        icon.frame = Tilemap.getFrame('playlistMode', 'mainUI');
+        icon.alpha = 0.0001;
+        add(icon);
+        icon.antialiasing = false;
+        FlxTween.tween(icon, {y: 16, alpha: 1}, 0.7, {ease: FlxEase.expoOut, startDelay:0.8});
+        
 		var mode = new FlxText(96);
 		mode.setFormat(Paths.font('phantomuff/difficulty.ttf'), 40, CENTER);
-		add(mode);
 		mode.text = 'PLAYLIST MODE';
+		add(mode);
 		mode.alpha = 0.0001;
 		mode.y -= mode.height;
+		mode.antialiasing = true;
 		FlxTween.tween(mode, {y: 16, alpha: 1}, 0.7, {ease: FlxEase.expoOut, startDelay:0.65});
 
 		var sideImg = new MoonSprite().makeGraphic(541, FlxG.height, 0xFF040404);
