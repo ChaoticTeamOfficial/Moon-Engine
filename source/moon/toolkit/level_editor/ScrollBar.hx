@@ -17,7 +17,7 @@ import flixel.util.FlxSpriteUtil;
 
 class ScrollBar extends FlxSpriteGroup
 {
-    var totalHeight:Float;
+    public var totalHeight:Float;
     var conductor:Conductor;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}>;
     var playback:Song;

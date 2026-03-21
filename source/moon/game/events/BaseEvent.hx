@@ -5,7 +5,6 @@ import moon.game.PlayState;
 
 /**
  * Base class for all hardcoded events.
- * Each event type should extend this class and implement the execute method.
  */
 class BaseEvent
 {
@@ -35,4 +34,17 @@ class BaseEvent
             category: VISUALS
         };
     }
+
+    /**
+     * Returns the interactive field definitions shown in the Level Editor's Library panel.
+     */
+    public function getEditorFields():Array<EventFieldDef>
+        return [];
+
+    /**
+     * Converts the flat values object produced by `EventFormUI.getValues()` into the
+     * format expected by `execute()` (i.e. `event.values`).
+     */
+    public function processValues(raw:Dynamic):Dynamic
+        return raw;
 }

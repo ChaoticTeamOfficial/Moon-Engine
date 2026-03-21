@@ -47,6 +47,8 @@ haxelib git polymod https://github.com/larsiusprime/polymod
 haxelib git thx.core https://github.com/fponticelli/thx.core
 haxelib git thx.semver https://github.com/fponticelli/thx.semver
 haxelib git flixel-screenshot-plugin https://github.com/dotevie/flixel-screenshot-plugin
+haxelib git haxeui-flixel https://github.com/haxeui/haxeui-flixel
+haxelib git haxeui-core https://github.com/haxeui/haxeui-core
 
 haxelib set flixel 6.1.2
 haxelib set lime 8.3.1

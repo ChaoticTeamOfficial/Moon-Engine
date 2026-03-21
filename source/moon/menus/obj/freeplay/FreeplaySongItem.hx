@@ -1,8 +1,7 @@
 package moon.menus.obj.freeplay;
 
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.math.FlxMath;
+import flixel.group.FlxSpriteGroup;
+import moon.backend.gameplay.*;
 import moon.global_obj.PixelIcon;
 
 import openfl.filters.ShaderFilter;
@@ -11,24 +10,23 @@ import openfl.filters.DropShadowFilter;
 
 using StringTools;
 
-class FreeplaySongItem
+class FreeplaySongItem extends FlxSpriteGroup
 {
     static final TEXT_GAP:Float = 10.0;
     static final TEXT_W:Int = 260;
 
-    public var x:Float = -9999;
-    public var y:Float = -9999;
-
     public var targetAlpha:Float = 1.0;
     public var targetScale:Float = 1.0;
 
-    public var alpha:Float = 0.0;
-    public var scale:Float = 1.0;
+    public var lerpAlpha:Float = 0.0;
+    public var lerpScale:Float = 1.0;
+    public var transitioning:Bool = false;
 
     public var bg:MoonSprite;
     public var icon:PixelIcon;
     public var nameText:ScrollingText;
     public var scoreText:FlxText;
+    public var rankDisplay:FreeplayRank;
     public var data:Chart;
 
     final selectedBizz:Array<BitmapFilter> = [
@@ -38,24 +36,35 @@ class FreeplaySongItem
 
     public function new()
     {
+        super();
+
         bg = new MoonSprite().makeGraphic(416, 84, FlxColor.TRANSPARENT);
         FlxSpriteUtil.drawRoundRect(bg, 0, 0, bg.width, bg.height, 12, 12, 0xFF1d1d1d);
         bg.antialiasing = true;
         bg.active = false;
+        add(bg);
 
         icon = new PixelIcon(-9999, -9999, 'bf');
+        add(icon);
 
         nameText = new ScrollingText(-9999, -9999, TEXT_W, '', 22);
         nameText.textField.font = Paths.font('phantomuff/full.ttf');
         nameText.antialiasing = true;
         nameText.alpha = 0;
+        add(nameText);
 
         scoreText = new FlxText(-9999, -9999, TEXT_W, '', 13);
         scoreText.font = Paths.font('phantomuff/full.ttf');
         scoreText.antialiasing = true;
         scoreText.color = 0xFFAAAAAA;
-        scoreText.visible = scoreText.active = false;
-        scoreText.alpha = 0.0001;
+        scoreText.visible = false;
+        scoreText.active = false;
+        scoreText.alpha = 0;
+        add(scoreText);
+
+        rankDisplay = new FreeplayRank();
+        rankDisplay.visible = false;
+        add(rankDisplay);
     }
 
     public function loadEntry(entry:SongBase):Void
@@ -68,44 +77,70 @@ class FreeplaySongItem
         nameText.setText(data.content.meta.displayName.toUpperCase());
     }
 
-    public function setSelected(selected:Bool, scoreVal:Int = -1, accPct:Int = -1)
+    private var _lastRank:String = null;
+
+    public function setSelected(selected:Bool, scoreVal:Int = -1, accPct:Float = -1)
     {
         scoreText.visible = selected;
         icon.filters = selected ? selectedBizz : null;
+
         if (selected)
         {
             scoreText.text = ((scoreVal >= 0) ? '${MoonUtils.formatNumber(scoreVal)} SCORE' : '-- SCORE')
-            + '\n' + ((accPct >= 0) ? '${accPct}% ACCURACY' : '--% ACCURACY');
+            + '\n' + ((accPct >= 0) ? '${Std.int(accPct)}% ACCURACY' : '--% ACCURACY');
+        }
+
+        final rank = Timings.getRank(accPct).rank;
+        if (rank != _lastRank)
+        {
+            _lastRank = rank;
+            if ((rank != null && rank != 'NOT FOUND' && accPct >= 0))
+            {
+                rankDisplay.setRank(rank);
+                rankDisplay.visible = true;
+            }
+            else rankDisplay.visible = false;
         }
     }
 
     public function lerpVisuals(elapsed:Float):Void
     {
+        if(transitioning) return;
         final t = elapsed * 14;
-        alpha = FlxMath.lerp(alpha, targetAlpha, t);
-        scale = FlxMath.lerp(scale, targetScale, t);
+        lerpAlpha = FlxMath.lerp(lerpAlpha, targetAlpha, t);
+        lerpScale = FlxMath.lerp(lerpScale, targetScale, t);
     }
 
-    public function applyPositions():Void
+    public function applyPositions(px:Float, py:Float):Void
     {
-        icon.scale.set(scale + 1, scale + 1);
-        icon.setPosition(x, y);
-        icon.alpha = alpha;
+        icon.scale.set(lerpScale + 1, lerpScale + 1);
+        icon.setPosition(px, py);
+        icon.alpha = lerpAlpha;
         icon.updateHitbox();
 
-        final textX = x + 96 * scale + TEXT_GAP;
+        final textX = px + 96 * lerpScale + TEXT_GAP;
 
-        nameText.scale.set(scale, scale);
-        nameText.setPosition(textX, y + (icon.height * scale - 22 * scale) * 0.5 - 7 * scale);
-        nameText.alpha = alpha;
+        nameText.scale.set(lerpScale, lerpScale);
+        nameText.setPosition(textX, py + (icon.height * lerpScale - 22 * lerpScale) * 0.5 - 7 * lerpScale);
+        nameText.alpha = lerpAlpha;
 
-        scoreText.scale.set(scale, scale);
-        scoreText.setPosition(textX, nameText.y + 24 * scale);
-        scoreText.alpha = alpha * 0.85;
+        scoreText.scale.set(lerpScale, lerpScale);
+        scoreText.setPosition(textX, nameText.y + 24 * lerpScale);
+        scoreText.alpha = lerpAlpha * 0.85;
 
-        bg.scale.set(scale, scale);
+        bg.scale.set(lerpScale, lerpScale);
         bg.updateHitbox();
         bg.setPosition(icon.x + 11, (nameText.y + nameText.height / 2 - bg.height / 2) + 8);
+
+        rankDisplay.setPosition(nameText.x + nameText.width, nameText.y);
+        rankDisplay.scale.set(lerpScale, lerpScale);
+        rankDisplay.alpha = lerpAlpha;
+    }
+
+    public function doRankReveal()
+    {
+        transitioning = true;
+        
     }
 
     /**
@@ -113,16 +148,23 @@ class FreeplaySongItem
      */
     public function snapToTarget():Void
     {
-        alpha = targetAlpha;
-        scale = targetScale;
+        lerpAlpha = targetAlpha;
+        lerpScale = targetScale;
+    }
+
+    public function resetRank():Void
+    {
+        _lastRank = null;
+        rankDisplay.visible = false;
     }
 
     /**
-     * Hides all members without destroying anything. 
+     * Hides all members. 
      */
     public function hide():Void
     {
-        icon.alpha = nameText.alpha = scoreText.alpha = 0.0001;
+        icon.alpha = nameText.alpha = scoreText.alpha = 0;
         scoreText.visible = false;
+        rankDisplay.visible = false;
     }
 }

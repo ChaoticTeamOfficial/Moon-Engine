@@ -47,6 +47,7 @@ class FreeplaySongSelector extends FlxGroup
     var curSelected:Int = 0;
 
     private var preloadedCharts:Array<Chart> = [];
+    private var curAlb:String = '';
 
     public function new()
     {
@@ -86,10 +87,7 @@ class FreeplaySongSelector extends FlxGroup
 
             final item = new FreeplaySongItem();
             items.push(item);
-            add(item.bg);
-            add(item.icon);
-            add(item.scoreText);
-            add(item.nameText);
+            add(item);
         }
 
         disk.scale.set(0, 0);
@@ -153,7 +151,7 @@ class FreeplaySongSelector extends FlxGroup
             if (songIdx < 0 || songIdx >= songList.length)
             {
                 item.targetAlpha = 0;
-                item.alpha = 0;
+                item.lerpAlpha = 0;
                 item.hide();
                 dots[i].visible = false;
                 item.icon.filters = null;
@@ -161,18 +159,21 @@ class FreeplaySongSelector extends FlxGroup
                 continue;
             }
 
-            if (item.alpha < 0.01 && item.targetAlpha < 0.01) continue;
+            if(FlxG.keys.justPressed.O && relIdx == 0)
+            {
+                item.doRankReveal();
+            }
+
+            if (item.lerpAlpha < 0.01 && item.targetAlpha < 0.01) continue;
 
             item.lerpVisuals(elapsed);
 
-            final baseY = slotBaseY[i] - item.icon.height * item.scale * 0.5 + scrollDelta;
+            final baseY = slotBaseY[i] - item.icon.height * item.lerpScale * 0.5 + scrollDelta;
             var itemY = baseY;
             if (relIdx == 0)
                 itemY += Math.sin(selectPulse * WIGGLE_SPEED) * 3.5;
 
-            item.x = itemX;
-            item.y = itemY;
-            item.applyPositions();
+            item.applyPositions(itemX, itemY);
         }
 
         for (i in 0...dots.length)
@@ -205,7 +206,7 @@ class FreeplaySongSelector extends FlxGroup
             final line = lineSprites[i];
             final dot  = dots[i];
 
-            if (!dot.visible || item.alpha < 0.05)
+            if (!dot.visible || item.lerpAlpha < 0.05)
             {
                 line.visible = false;
                 continue;
@@ -226,7 +227,7 @@ class FreeplaySongSelector extends FlxGroup
             line.setPosition(cx0, cy0);
             line.scale.x = len / LINE_W;
             line.angle = Math.atan2(dy, dx) * (180.0 / Math.PI);
-            line.alpha = item.alpha * 0.9;
+            line.alpha = item.lerpAlpha * 0.9;
             line.visible = true;
         }
     }
@@ -252,12 +253,12 @@ class FreeplaySongSelector extends FlxGroup
             final relIdx = i - VISIBLE_RADIUS;
             final songIdx = curSelected + relIdx;
             final item = items[i];
-            final rank = Math.abs(relIdx);
+            final dist = Math.abs(relIdx);
 
             if (songIdx < 0 || songIdx >= songList.length)
             {
                 item.targetAlpha = 0;
-                if (instant) { item.alpha = 0; item.hide(); }
+                if (instant) { item.lerpAlpha = 0; item.hide(); }
                 dots[i].visible = false;
                 item.icon.filters = null;
                 item.bg.alpha = 0;
@@ -269,6 +270,7 @@ class FreeplaySongSelector extends FlxGroup
             if (item.data != chart)
             {
                 item.data = chart;
+                item.resetRank();
                 if (item.icon.character != chart.content.meta.opponents[0])
                     item.icon.character = chart.content.meta.opponents[0];
 
@@ -276,18 +278,13 @@ class FreeplaySongSelector extends FlxGroup
                 item.nameText.setText(displayName.toUpperCase());
             }
 
-            final scoreData = SongData.retrieveData(
-                songList[songIdx].song,
-                songList[songIdx].difficulty,
-                songList[songIdx].mix
-            );
-            final scoreVal = scoreData != null ? scoreData.score : -1;
-            final accPct = scoreData != null ? Std.int(scoreData.accuracy) : -1;
+            final scoreData = SongData.retrieveData(songList[songIdx].song, songList[songIdx].difficulty, songList[songIdx].mix);
+            //final rankStr:String = scoreData != null ? scoreData.rank : null;
 
-            item.setSelected(relIdx == 0, scoreVal, accPct);
+            item.setSelected(relIdx == 0, scoreData?.score ?? -1, scoreData?.accuracy ?? -1);
 
-            item.targetScale = Math.max(0.55, 1.0 - rank * 0.18);
-            item.targetAlpha = Math.max(0.20, 1.0 - rank * 0.32);
+            item.targetScale = Math.max(0.55, 1.0 - dist * 0.22);
+            item.targetAlpha = Math.max(0.20, 1.0 - dist * 0.30);
 
             dots[i].visible = true;
             dots[i].alpha = item.targetAlpha;
@@ -297,16 +294,16 @@ class FreeplaySongSelector extends FlxGroup
             if (instant)
             {
                 item.snapToTarget();
-                item.x = itemX;
-                item.y = slotBaseY[i] - item.icon.height * item.scale * 0.5;
-                item.applyPositions();
+                item.applyPositions(itemX, slotBaseY[i] - item.icon.height * item.lerpScale * 0.5);
             }
 
             if(relIdx == 0)
             {
                 Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
-                SongPreview.loadAndPlay(chart);
-                var curAlb:String = '';
+
+                //lol
+                try{ SongPreview.loadAndPlay(chart); } catch(e) { SongPreview.loadAndPlay(chart); }
+
                 final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
                 if(curAlb != album) disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));
                 if(!album.contains('placeholder'))
@@ -331,5 +328,11 @@ class FreeplaySongSelector extends FlxGroup
                 curAlb = album;
             }
         }
+    }
+
+    override public function destroy():Void
+    {
+        preloadedCharts.resize(0);
+        super.destroy();
     }
 }

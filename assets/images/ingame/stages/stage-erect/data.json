@@ -1,8 +1,8 @@
 {
   "camSettings": {
     "zoom": 0.9,
-    "startX": 751.5,
-    "startY": 300
+    "startX": 700,
+    "startY": 380
   },
   "objects": [
 	{
@@ -78,17 +78,17 @@
   "characters": [
 	{
 	  "type": "spectator",
-      "position": [296, 374],
+      "position": [296, 484],
       "objectBehind": "orangeLight"
     },
     {
 	  "type": "opponent",
-      "position": [64, 396],
+      "position": [64, 456],
       "objectBehind": "orangeLight"
     },
     {
 	  "type": "player",
-      "position": [916, 396],
+      "position": [916, 456],
       "objectBehind": "orangeLight"
     }
   ]

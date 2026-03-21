@@ -12,8 +12,24 @@ class CustomizedPulseTimingEvent extends BaseEvent
     {
         return {
             name: 'Customized Pulse Timing',
-            description: "Switches settings for the default camera pulse.",
+            description: 'Switches settings for the default camera pulse.',
             category: VISUALS
         };
+    }
+
+    override public function getEditorFields():Array<EventFieldDef>
+    {
+        return [
+            {
+                name: 'rate', label: 'Bop Rate (beats)', type: NUMBER,
+                defaultValue: Constants.DEFAULT_BOP_RATE,
+                min: 1, max: 32, step: 1
+            },
+            {
+                name: 'intensity', label: 'Intensity', type: NUMBER,
+                defaultValue: 1.0,
+                min: 0.0, max: 10.0, step: 0.1
+            }
+        ];
     }
 }

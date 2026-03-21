@@ -54,7 +54,7 @@ class BestScoreGroup extends FlxSpriteGroup
         add(bestScore);
 
         bestRank = new FreeplayRank(0);
-        bestRank.setRank(Timings.getRank(data.accuracy).rank, true);
+        bestRank.setRank(Timings.getRank(data.accuracy).rank);
         bestRank.updateHitbox();
         bestRank.y = bestBG.height / 2 - bestRank.height / 2 + 6;
         bestRank.x = bestBG.width - bestRank.width - 16;

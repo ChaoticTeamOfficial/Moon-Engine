@@ -144,7 +144,7 @@ class TestState extends FlxState
         vinyl.shader = new VinylDiskShader();
         add(vinyl);
 
-        testParser();
+        //testParser();
 
         var replay = new SaveReplayNotif(16, 16);
         add(replay);

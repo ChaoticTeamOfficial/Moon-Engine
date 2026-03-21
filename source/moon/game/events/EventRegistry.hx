@@ -74,4 +74,33 @@ class EventRegistry
         
         return null;
     }
+
+    /**
+     * Returns the field definitions for a hardcoded event.
+     */
+    public static function getEditorFields(tag:String):Array<EventFieldDef>
+    {
+        if (eventMap == null) init();
+
+        final cls = eventMap.get(tag);
+        if (cls != null)
+            return Type.createInstance(cls, [null, new MoonEvent(tag, {})]).getEditorFields();
+
+        return [];
+    }
+
+    /**
+     * Runs `processValues()` on the event class for `tag`, remapping the flat form
+     * output into the structure expected by `execute()`.
+     */
+    public static function processEventValues(tag:String, raw:Dynamic):Dynamic
+    {
+        if (eventMap == null) init();
+
+        final cls = eventMap.get(tag);
+        if (cls != null)
+            return Type.createInstance(cls, [null, new MoonEvent(tag, {})]).processValues(raw);
+
+        return raw;
+    }
 }

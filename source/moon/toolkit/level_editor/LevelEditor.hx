@@ -91,7 +91,6 @@ class LevelEditor extends FlxState
     private var dragOGlengths:Map<Note, Float> = null;
 
     // --- CHART-RELATED VARIABLES --- //
-    private var _internalChart:ChartStruct;
     public var song:String = '';
     public var diff:String = '';
     public var mix:String = '';
@@ -198,7 +197,6 @@ class LevelEditor extends FlxState
         Tilemap.addAtlas('btnIcons', 'toolkit/ui/googleIcons');
 
         chart = new Chart(song, diff, mix);
-        _internalChart = chart.content;
         NUM_LANES = 4 * chart.content.meta.lanes.length;
 
         conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
@@ -338,7 +336,6 @@ class LevelEditor extends FlxState
         }
         add(gridGroup);
 
-        // Add notes to the grid
         noteGroup = new FlxSpriteGroup();
         gridGroup.add(noteGroup);
 
@@ -359,10 +356,6 @@ class LevelEditor extends FlxState
         scrollbar.y = initialGridY + 8;
         scrollbar.x = gridGroup.x + gridWidth + 16;
 
-        //debugTxt = new FlxText(10, 10, 200, "Snap: 1/4", 16);
-        //debugTxt.setFormat(Paths.font('KodeMono-Bold.ttf'), 16, FlxColor.WHITE);
-        //add(debugTxt);
-
         cursor = new MoonSprite();
         cursor.makeGraphic(LANE_WIDTH, LANE_HEIGHT, FlxColor.WHITE);
         cursor.antialiasing = false;
@@ -373,10 +366,8 @@ class LevelEditor extends FlxState
         // lol
         final ogC = 0xFF1e1d1f;
         var colors = [ogC];
-        for(i in 0...10)
-            colors.push(FlxColor.TRANSPARENT);
+        for(i in 0...10) colors.push(FlxColor.TRANSPARENT);
         colors.push(ogC);
-
         add(FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, colors));
 
         strum = new Strums(gridGroup.x, initialGridY);
@@ -391,19 +382,15 @@ class LevelEditor extends FlxState
             button.frames = Tilemap.getAtlasFrames('MELE-buttons');
             button.animation.addByPrefix('idle', 'type-$s-normal-', 1, false);
             button.animation.addByPrefix('click', 'type-$s-click-', 1, false);
-            //button.shader = invertColors; HELL YEAH IT WORKS
             add(button);
             button.centerAnimations = true;
-
             button.scale.set(0.65, 0.65);
             button.updateHitbox();
             button.antialiasing = true;
-
             button.x = gridGroup.x - button.width;
             button.y += (button.height + 52 * i);
-
             button.animation.play('idle');
-            button.active = false; // I think we wont need it active?
+            button.active = false;
             typeButtons.set(gType, button);
         }
 
@@ -436,19 +423,9 @@ class LevelEditor extends FlxState
         //me when I debug
         FlxG.watch.addMouse();
 
-        //var playstate = new moon.game.PlayState();
-        //add(playstate);
-
         FlxG.autoPause = false;
         playback.state = PAUSE;
         curType = NOTES;
-
-        /*
-        var ye = new FlxSprite().makeGraphic(100, 100, FlxColor.TRANSPARENT);
-        ye.camera = camFRONT;
-        FlxSpriteUtil.drawRoundRect(ye, 10, 10, 80, 80, 15, 15, FlxColor.BLUE);
-        add(ye);
-        */
 
         Global.allowInputs = true;
     }
@@ -466,62 +443,62 @@ class LevelEditor extends FlxState
         if(rpcUpdateTmr >= 0.6)
         {
             rpcUpdateTmr = 0;
-            DiscordRPC.updatePresence(EDITOR, 'Editing ${_internalChart.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
+            DiscordRPC.updatePresence(EDITOR, 'Editing ${chart.content.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
         }
 
         // ----- Input Stuff ----- //
+        final haxeUIFocused = haxe.ui.focus.FocusManager.instance.focus != null;
+
         updateCursor();
-        if (FlxG.keys.pressed.CONTROL)
+
+        if (!haxeUIFocused)
         {
-            // snapping!!
-            if (MoonInput.justPressed(UI_LEFT) || MoonInput.justPressed(UI_RIGHT))
+            if (FlxG.keys.pressed.CONTROL)
             {
-                snapIndex = (MoonInput.justPressed(UI_LEFT) ? snapIndex - 1 + snaps.length : snapIndex + 1 ) % snaps.length;
-                curSnap = snaps[snapIndex];
-                //updatedebugTxt();
+                if (MoonInput.justPressed(UI_LEFT) || MoonInput.justPressed(UI_RIGHT))
+                {
+                    snapIndex = (MoonInput.justPressed(UI_LEFT) ? snapIndex - 1 + snaps.length : snapIndex + 1) % snaps.length;
+                    curSnap = snaps[snapIndex];
+                }
             }
-        }
-        else
-        {
-            final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
-            final advanceSecs = conductor.stepCrochet * 2 * addition;
-
-            if (MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
-            else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
-        }
-
-        if (FlxG.keys.justPressed.SPACE)
-        {
-            playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
-
-            if(playback.state == PAUSE)
+            else
             {
-                sustainLoopOpp.pause();
-                sustainLoopP1.pause();
+                final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
+                final advanceSecs = conductor.stepCrochet * 2 * addition;
+
+                if (MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
+                else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
             }
+
+            if (FlxG.keys.justPressed.SPACE)
+            {
+                playback.state = (playback.state != PLAY) ? PLAY : PAUSE;
+                if(playback.state == PAUSE)
+                {
+                    sustainLoopOpp.pause();
+                    sustainLoopP1.pause();
+                }
+            }
+
+            if (FlxG.mouse.wheel != 0 && !libFocus && !library.isFormScrollRegion)
+                playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
+
+            for(type => button in typeButtons)
+                if(FlxG.mouse.overlaps(button, button.camera) && FlxG.mouse.justPressed)
+                    curType = type;
+
+            if (FlxG.keys.justPressed.ESCAPE)
+            {
+                Global.clearScriptList();
+                EditorTransition.transitionToGameplay(this);
+            }
+
+            if(FlxG.keys.justPressed.ONE) curType = NOTES;
+            else if(FlxG.keys.justPressed.TWO) curType = VISUALS;
+            else if(FlxG.keys.justPressed.THREE) curType = CHARACTERS;
+            else if(FlxG.keys.justPressed.FOUR) curType = GIMMICKS;
+            else if(FlxG.keys.justPressed.FIVE) curType = SOUNDS;
         }
-
-        if (FlxG.mouse.wheel != 0 && !libFocus)
-            playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
-
-        for(type => button in typeButtons)
-            if(FlxG.mouse.overlaps(button, button.camera) && FlxG.mouse.justPressed)
-                curType = type;
-
-        if (FlxG.keys.justPressed.ESCAPE)
-        {
-            Global.clearScriptList();
-            EditorTransition.transitionToGameplay(this);
-        }
-
-        // I should make this better...
-        if(FlxG.keys.justPressed.ONE) curType = NOTES;
-        else if(FlxG.keys.justPressed.TWO) curType = VISUALS;
-        else if(FlxG.keys.justPressed.THREE) curType = CHARACTERS;
-        else if(FlxG.keys.justPressed.FOUR) curType = GIMMICKS;
-        else if(FlxG.keys.justPressed.FIVE) curType = SOUNDS;
-
-        //////////////////////////////////
 
         // this should HOPEFULLY reduce update calls and draw calls :3
         // update: YEAHH IT DID nice.
@@ -569,7 +546,7 @@ class LevelEditor extends FlxState
 
         gridGroup.y = FlxMath.lerp(gridGroup.y, initialGridY - timeToY(conductor.time), elapsed * 28);
 
-        // ----- Upon "note hit" ----- //
+        // Upon "note hit"
         for (note in noteGroup)
         {
             if(Std.isOfType(note, Note))
@@ -581,10 +558,6 @@ class LevelEditor extends FlxState
                 {
                     n.strID = 'h';
                     strum.onHit(n);
-
-                    //TOOD: make themmmm separate flxsoundses
-                    // so I cann like... what was I sayign?
-                    // oh yeah, so they can be stopped before playign to prvevent overlapping
                     Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav', true);
                 }
 
@@ -593,7 +566,6 @@ class LevelEditor extends FlxState
             }
         }
 
-        // ---- Sustain stuffs.
         updateHoldSounds();
         if(playback.state == PLAY)
         {
@@ -617,7 +589,6 @@ class LevelEditor extends FlxState
                 final unsnappedTime:Float = yToTime(relY);
                 final snappedTime = snapTime(unsnappedTime);
                 final newRefDur = Math.max(0.0, snappedTime - draggingNote.time);
-
                 final oldRefDur = draggingNote.duration; // remember before we change anything
 
                 // relative delta so other selected notes keep their length difference
@@ -642,29 +613,24 @@ class LevelEditor extends FlxState
                 Mouse.cursor = MouseCursor.BUTTON;
             }
         }
-        else
+        else if (!haxeUIFocused)
         {
             if (selectedNotes.length > 0)
             {
                 final delta = getSnapStepTime();
                 if (FlxG.keys.justPressed.E)
                 {
-                    for (t in selectedNotes)
-                        resizeNoteSustain(t, t.duration + delta);
-
+                    for (t in selectedNotes) resizeNoteSustain(t, t.duration + delta);
                     sfx('sustainIncrease', false, true);
                 }
                 else if (FlxG.keys.justPressed.Q)
                 {
-                    for (t in selectedNotes)
-                        resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
-
+                    for (t in selectedNotes) resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
                     sfx('sustainDecrease', false, true);
                 }
             }
         }
 
-        // Miniplayerr :3
         if (miniPlayer != null)
         {
             miniPlayer.visible = true;
@@ -676,12 +642,8 @@ class LevelEditor extends FlxState
     {
         if(playback.state != PLAY)
         {
-            if(sustainLoopP1 != null && sustainLoopP1.playing)
-                sustainLoopOpp.stop();
-
-            if(sustainLoopP1 != null && sustainLoopP1.playing)
-                sustainLoopOpp.stop();
-
+            if(sustainLoopP1 != null && sustainLoopP1.playing) sustainLoopOpp.stop();
+            if(sustainLoopP1 != null && sustainLoopP1.playing) sustainLoopOpp.stop();
             return;
         }
 
@@ -694,7 +656,6 @@ class LevelEditor extends FlxState
             if(Std.isOfType(note, Note))
             {
                 final n:Note = cast note;
-
                 if(n.duration > 0.0)
                 {
                     final endTime = n.time + n.duration;
@@ -711,16 +672,13 @@ class LevelEditor extends FlxState
         final wasOpp = sustainLoopOpp != null && sustainLoopOpp.playing;
         if(activeOpp && !wasOpp)
         {
-            //if (sustainLoopOpp.playing) sustainLoopOpp.stop();
             sustainLoopOpp.volume = MoonSettings.callSetting('SFX Volume') / 100;
             sustainLoopOpp.play();
-            //trace('holding');
         }
         else if (!activeOpp && wasOpp)
         {
             sustainLoopOpp.stop();
             Paths.playSFX('toolkit/level-editor/sustainOpponent-release.wav', true);
-            //trace('released');
         }
 
         //plays hold sfx for the player
@@ -738,13 +696,17 @@ class LevelEditor extends FlxState
     }
 
     // this snaps the square cursor thing
-    // ... I really should documment this code more. Before it turns into a giant mess of code...
     private function updateCursor():Void
     {
         if(libFocus) return;
         final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
         final relY = FlxG.mouse.viewY - gridGroup.y - 18;
+
+        // dev notes c:
+        // HAND shows the thingy when you're dragging smth
+        // IBEAM is when typing
+        // and BUTTON is clickable!
 
         if ((relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0) && draggingNote == null)
         {
@@ -755,23 +717,16 @@ class LevelEditor extends FlxState
 
         cursor.visible = true;
 
-        // dev notes c:
-        // HAND shows the thingy when you're dragging smth
-        // IBEAM is when typing
-        // and BUTTON is clickable!
-
+        //snap to the lane
         final laneNum:Int = Math.floor(relX / LANE_WIDTH);
-
-        // snap its lane
         cursor.x = gridGroup.x + laneNum * LANE_WIDTH;
 
-        // and snap its timee
+        // and snap to the time
         final unsnappedTime:Float = yToTime(relY);
         final snappedTime = snapTime(unsnappedTime);
-
         cursor.y = gridGroup.y + timeToY(snappedTime);
 
-        // check if we are hovering the flat gray square (handle)
+        // check if we are hovering the square
         for (yeah in noteGroup.members)
         {
             if (Std.isOfType(yeah, Note))
@@ -788,19 +743,15 @@ class LevelEditor extends FlxState
                             draggingNote = n;
                             Mouse.cursor = MouseCursor.HAND;
 
-                            // record original lengths for relative dragging (preserves differences)
                             if (dragOGlengths == null) dragOGlengths = new Map();
                             dragOGlengths.clear();
                             final targets = selectedNotes.length > 0 ? selectedNotes : [n];
-                            for (t in targets)
-                                dragOGlengths.set(t, t.duration);
+                            for (t in targets) dragOGlengths.set(t, t.duration);
                         }
                     }
                     break;
                 }
-                else{
-                    if(draggingNote == null) Mouse.cursor = MouseCursor.ARROW;
-                }
+                else { if(draggingNote == null) Mouse.cursor = MouseCursor.ARROW; }
             }
         }
 
@@ -814,7 +765,6 @@ class LevelEditor extends FlxState
         {
             if (FlxG.keys.pressed.SHIFT && curType == NOTES)
             {
-                // select note that matches the snapped cursor position
                 final noteAt = getNoteAtCursor(snappedTime, laneNum);
                 if (noteAt != null)
                 {
@@ -834,93 +784,81 @@ class LevelEditor extends FlxState
             {
                 switch(curType)
                 {
+                    // only create the note if it doesn't already exist
                     case NOTES:
                         final noteData = laneNum % 4;
                         final noteLane = (laneNum < 4) ? "opponent" : "p1";
-                        
-                        // check if a note already exists at this position
+
                         var noteExists = false;
-                        for (existingNote in _internalChart.notes)
+                        for (existingNote in chart.content.notes)
                         {
-                            if (existingNote.time == snappedTime && 
-                                existingNote.data == noteData && 
+                            if (existingNote.time == snappedTime &&
+                                existingNote.data == noteData &&
                                 existingNote.lane == noteLane)
                             {
                                 noteExists = true;
                                 break;
                             }
                         }
-                        
-                        // only create the note if it doesn't already exist
+
                         if (!noteExists)
                         {
                             final n = {
-                                time: snappedTime,
-                                data: noteData,
-                                lane: noteLane,
-                                type: 'default', //TODO: get current note type
-                                duration: 0.0 //mf wants a float .`  _ .
+                                time: snappedTime, data: noteData, lane: noteLane,
+                                type: 'default', duration: 0.0
                             };
-
                             createNote(n);
-                            _internalChart.notes.push(n);
+                            chart.content.notes.push(n);
                             sfx('place-${FlxG.random.int(1, 6)}');
                         }
 
-                    case VISUALS: trace('(place VISUALS)', "DEBUG");
-                    case CHARACTERS: trace('(place character event)', "DEBUG");
-                    case GIMMICKS: trace('(place gimmick event)', "DEBUG");
-                    case SOUNDS: trace('(place sound event)', "DEBUG");
+                    case VISUALS, CHARACTERS, GIMMICKS, SOUNDS:
+                        if (library.currentEventTag != null)
+                        {
+                            final raw = library.getConfiguredValues();
+                            final ev:EventStruct = {
+                                tag: library.currentEventTag,
+                                values: EventRegistry.processEventValues(library.currentEventTag, raw),
+                                time: snappedTime,
+                                lane: laneNum % (NUM_LANES + 1)
+                            };
+                            createEvent(ev);
+                            chart.events.push(ev);
+                            sfx('place-${FlxG.random.int(1, 6)}');
+                        }
                 }
             }
             else
             {
                 if(!FlxG.mouse.overlaps(miscGroup))
                 {
-                    //trace('adding bookmark');
                     var bm = new Bookmark(laneNum * LANE_WIDTH, timeToY(snappedTime), LANE_HEIGHT);
                     miscGroup.add(bm);
-
                     scrollbar.addBookmark(snappedTime, bm.col);
                     bm.active = false;
 
-                    if(_internalChart.bookmarks == null) _internalChart.bookmarks = [];
-                    _internalChart.bookmarks.push({
-                        text: bm.text,
-                        time: snappedTime
-                    });
+                    if(chart.content.bookmarks == null) chart.content.bookmarks = [];
+                    chart.content.bookmarks.push({text: bm.text, time: snappedTime});
                 }
             }
         }
     }
 
-    // ONCE I IMPLEMENT DELETE NOTE/DELETE EVENT
-    /**
-     * 
-    _internalChart.notes.remove(note);
-    EditorSync.onNoteDeleted(note);
-     EditorSync.onEventDeleted(event);
-    so i dont forget to call editor sync XD
-    */
-
     function createNote(n:NoteStruct)
     {
         var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
         note.state = CHART_EDITOR;
-        note.active = false; //doesnt need updates, so!
+        note.active = false;
         note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
         note.updateHitbox();
         note.lane = n.lane;
 
-        //TODO: update this once we have p2 support.
         final laneIndex = (n.lane == "p1") ? 4 : 0;
         note.x = (laneIndex + n.data) * LANE_WIDTH;
         note.y = timeToY(n.time);
-
         note.x += (LANE_WIDTH - note.width) / 2;
 
         noteGroup.add(note);
-
         note.makeHandle();
         noteGroup.add(note.sustainHandle);
         updateSustainVis(note, n.duration);
@@ -931,26 +869,20 @@ class LevelEditor extends FlxState
     function createEvent(ev:EventStruct)
     {
         var category:GridType = VISUALS;
-
         for(cat => sht in loadedEvents)
             for(evt in sht)
-                if(evt.name == ev.tag)
-                    category = cat;
+                if(evt.name == ev.tag) category = cat;
 
         var spr = new EventSpr(ev.tag, category);
         spr.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
         spr.updateHitbox();
-
         spr.x = ev.lane * LANE_WIDTH;
         spr.y = timeToY(ev.time);
-
         spr.x += (LANE_WIDTH - spr.width) / 2;
         spr.active = false;
-        if(ev.values.duration != null) spr.duration = stepsToHeight(ev.values.duration);
+        if(ev.values != null && ev.values.duration != null) spr.duration = stepsToHeight(ev.values.duration);
 
-        if(spr.duration > 0)
-            eventsGroup.add(new EventHold(spr));
-
+        if(spr.duration > 0) eventsGroup.add(new EventHold(spr));
         eventsGroup.add(spr);
         EditorSync.onEventAdded(ev);
     }
@@ -989,8 +921,7 @@ class LevelEditor extends FlxState
         {
             final seg = segments[i];
             final nextStart:Float = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
-            if (time < nextStart)
-                return seg;
+            if (time < nextStart) return seg;
         }
         return segments[segments.length - 1];
     }
@@ -998,7 +929,6 @@ class LevelEditor extends FlxState
     private function snapTime(rawTime:Float):Float
     {
         if (curSnap == 0) return rawTime;
-
         final seg = getTimeSeg(rawTime);
         final lc = seg.stepCrochet * 4;
         final localTime = rawTime - seg.startTime;
@@ -1050,7 +980,6 @@ class LevelEditor extends FlxState
     private function getNoteAtCursor(snappedTime:Float, laneNum:Int):Note
     {
         if (laneNum >= NUM_LANES) return null;
-
         final targetLane = (laneNum < 4) ? "opponent" : "p1";
         final targetData = laneNum % 4;
 
@@ -1068,8 +997,7 @@ class LevelEditor extends FlxState
 
     private function deselectAll():Void
     {
-        for (n in selectedNotes)
-            if (n != null) n.brightness = 0;
+        for (n in selectedNotes) if (n != null) n.brightness = 0;
         selectedNotes = [];
         refreshHandleVis();
     }
@@ -1097,7 +1025,7 @@ class LevelEditor extends FlxState
 
     private function updateNoteDurationData(n:Note, newDur:Float):Void
     {
-        for (existing in _internalChart.notes)
+        for (existing in chart.content.notes)
         {
             if (Math.abs(existing.time - n.time) < 0.01 &&
                 existing.data == n.direction &&
@@ -1131,37 +1059,33 @@ class LevelEditor extends FlxState
             n.child.destroy();
             n.child = null;
         }
-}
+    }
 
     private function resizeNoteSustain(n:Note, newDur:Float):Void
     {
-        if (Math.abs(newDur - n.duration) < 0.001) 
-            return;
-
+        if (Math.abs(newDur - n.duration) < 0.001) return;
         updateNoteDurationData(n, newDur);
         updateSustainVis(n, newDur);
     }
 
+    //TODO: CONVERT ALL SFX TO WAV
     public function sfx(p:String, general:Bool = false, once = false)
     {
-        //TODO: CONVERT ALL SFX TO WAV
         if (playback.state != PLAY)
             Paths.playSFX((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', once);
-            //FlxG.sound.play(Paths.sound((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', 'sounds'), MoonSettings.callSetting('Editor Sounds') / 100);
     }
 
     function set_curType(curType:GridType):GridType
     {
         this.curType = curType;
-
         final typeStr:String = '$curType';
 
         for (member in noteGroup.members)
         {
             member.shader = (curType != NOTES) ? grayscale : null;
-            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
+            member.alpha  = (curType != NOTES) ? 0.20
+                : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
         }
-        //FlxG.debugger.drawDebug = true;
 
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);

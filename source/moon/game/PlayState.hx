@@ -271,7 +271,7 @@ class PlayState extends FlxTransitionableState
 	{
 		super.update(elapsed);
 
-		camGAME.rotation += 0.5;
+		//camGAME.rotation += 0.5;
 
 		// EVENTS CHECK
 		if(events.length > 0)

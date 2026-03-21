@@ -11,6 +11,7 @@ import openfl.Lib;
 import openfl.events.Event;
 import openfl.events.UncaughtErrorEvent;
 import lime.app.Application;
+import haxe.ui.Toolkit;
 
 #if sys
 import sys.FileSystem;
@@ -60,6 +61,12 @@ class Main extends Sprite
 		#if !hl
 		DiscordRPC.initialize("1297678826809200720");
 		#end
+		
+		// - Init haxeui stuff - //
+		Toolkit.init();
+		Toolkit.theme = 'dark';
+		Toolkit.autoScale = false;
+		haxe.ui.focus.FocusManager.instance.autoFocus = false;
 
 		// There's other stuffies that's initialized at MoonGame btw!
 		var game = new MoonGame(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, Constants.INITIAL_STATE, Constants.GAME_FRAMERATE, Constants.GAME_FRAMERATE, Constants.SKIP_SPLASH);

@@ -24,4 +24,33 @@ class SetZoomEvent extends BaseEvent
             category: VISUALS
         };
     }
+
+    override public function getEditorFields():Array<EventFieldDef>
+    {
+        return [
+            {
+                name: 'zoom', label: 'Zoom', type: NUMBER,
+                defaultValue: 1.0, min: 0.1, max: 10.0, step: 0.05
+            },
+            {
+                name: 'duration', label: 'Duration (steps)', type: NUMBER,
+                defaultValue: 8, min: 0, max: 999, step: 1
+            },
+            {
+                name: 'ease', label: 'Easing', type: DROPDOWN,
+                defaultValue: 'circOut',
+                options: [
+                    'expoOut', 'expoIn', 'expoInOut',
+                    'circOut', 'circIn', 'circInOut',
+                    'quadOut', 'quadIn', 'quadInOut',
+                    'linear', 'INSTANT'
+                ]
+            },
+            {
+                name: 'mode', label: 'Mode', type: DROPDOWN,
+                defaultValue: 'absolute',
+                options: ['absolute', 'stage']
+            }
+        ];
+    }
 }

@@ -15,6 +15,7 @@ import moon.backend.Paths.AtlasType;
 import moon.backend.Paths.AnimBehavior;
 import moon.modding.*;
 import moon.dependency.*;
+import moon.dependency.scripting.*;
 import moon.dependency.user.*;
 import moon.backend.data.*;
 import moon.backend.misc.*;

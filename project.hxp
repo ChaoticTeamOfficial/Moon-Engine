@@ -36,8 +36,9 @@ class Project extends HXProject
 	// same thing I said above applies to libraries.
 	static final HAXELIBS:Array<String> = [
 		"lime", "openfl", "flixel", "flixel-addons",
-		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate", 
-		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin"
+		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate",
+		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin", 
+		"haxeui-flixel", "haxeui-core"
 		#if !hl , "hxdiscord_rpc" #end
 	];
 

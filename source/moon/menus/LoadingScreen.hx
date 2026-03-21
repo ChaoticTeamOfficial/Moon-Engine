@@ -10,6 +10,7 @@ import moon.menus.obj.*;
 import moon.game.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
+import moon.menus.obj.freeplay.*;
 
 class LoadingScreen extends FlxTransitionableState
 {
@@ -132,6 +133,7 @@ class LoadingScreen extends FlxTransitionableState
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+        SongPreview.update(elapsed);
 
         if(loadingBar != null) loadingBar.value = FlxMath.lerp(loadingBar.value, loadProgress, elapsed * 6);
 
@@ -152,6 +154,7 @@ class LoadingScreen extends FlxTransitionableState
             Paths.playSFX('ui/confirmMenu.ogg');
             if(FlxG.sound.music != null) FlxG.sound.music.stop();
 
+            SongPreview.destroy();
             FlxFlicker.flicker(loadText, 1.4, 0.05, true, true, (flicker)->FlxG.switchState(() -> new PlayState()));
         }
     }

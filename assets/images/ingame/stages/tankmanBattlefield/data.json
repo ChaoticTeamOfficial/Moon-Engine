@@ -1,0 +1,95 @@
+{
+  "camSettings": {
+    "zoom": 0.9,
+    "startX": 751.5,
+    "startY": 300
+  },
+  "objects": [
+	{
+      "name": "crowd",
+      "position": [100, 269],
+      "scroll": [0.9, 0.9],
+	  "type": "sparrow",
+      "animations": [
+        {
+          "name": "idle", "prefix": "idle0", "fps": 12, "looped": true, "x": 0, "y": 0
+        }
+      ],
+      "startAnim": "idle",
+      "animBehavior": "once",
+      "angle": 0
+    },
+	{
+	  "name": "brightLightSmall",
+      "position": [967, -103],
+      "scale": [1, 1],
+      "scroll": [1.2, 1.2],
+      "angle": 0
+    },
+	{
+	  "name": "bg",
+      "position": [-765, -247],
+      "scale": [1, 1],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+      "name": "server",
+      "position": [-991, 205],
+      "scale": [1, 1],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+	  "name": "lightred",
+      "position": [-101, 560],
+      "scale": [1, 1],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+	  "name": "lightgreen",
+      "position": [-171, 242],
+      "scale": [1, 1],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+	  "name": "orangeLight",
+      "position": [189, 300],
+      "scale": [1, 1700],
+      "scroll": [1, 1],
+      "angle": 0
+    },
+	{
+	  "name": "lights",
+      "position": [-847, -315],
+      "scale": [1, 1],
+      "scroll": [1.2, 1.2],
+      "angle": 0
+    },
+	{
+	  "name": "lightAbove",
+      "position": [804, -117],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    }
+  ],
+  "characters": [
+	{
+	  "type": "spectator",
+      "position": [296, 374],
+      "objectBehind": "orangeLight"
+    },
+    {
+	  "type": "opponent",
+      "position": [64, 396],
+      "objectBehind": "orangeLight"
+    },
+    {
+	  "type": "player",
+      "position": [916, 396],
+      "objectBehind": "orangeLight"
+    }
+  ]
+}

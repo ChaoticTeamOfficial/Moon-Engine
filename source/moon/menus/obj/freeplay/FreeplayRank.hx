@@ -1,6 +1,5 @@
 package moon.menus.obj.freeplay;
 
-
 class FreeplayRank extends MoonSprite
 {
     public var rank:String;
@@ -28,26 +27,11 @@ class FreeplayRank extends MoonSprite
 
         antialiasing = true;
     }
-
-    public function getRankColor():FlxColor
-    {
-        switch (rank)
-        {
-            case 'loss': return 0xFF6044FF;
-            case 'good': return 0xFFEF8764;
-            case 'great' :return 0xFFEAF6FF;
-            case 'excellent': return 0xFFFDCB42;
-            case 'perfect': return 0xFFFF58B4;
-            case 'perfectGold': return 0xFFFFB619;
-        }
-
-        return FlxColor.WHITE; //little handler :T
-    }
     
-    public function setRank(rank:String, force:Bool = false):Void
+    public function setRank(rank:String):Void
     {
         this.rank = rank;
-        playAnim(rank, force);
+        playAnim(rank, true);
         visible = true;
     }
 }

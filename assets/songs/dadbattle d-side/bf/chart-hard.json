@@ -9114,7 +9114,7 @@
 		}
 	],
 	"meta": {
-		"stage": "stage",
+		"stage": "stage-erect",
 		"players": [
 			"bf"
 		],
@@ -9122,7 +9122,7 @@
 			"dad"
 		],
 		"artist": "RedTV",
-		"charter": "Minha vó",
+		"charter": "eu",
 		"spectators": [
 			"gf"
 		],
@@ -9131,7 +9131,7 @@
 			4,
 			4
 		],
-		"album": "luna-volume1",
+		"album": "volume1",
 		"displayName": "Dad Battle (D-Side Remix)",
 		"preview": [
 			0,
