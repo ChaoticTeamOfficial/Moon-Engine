@@ -22,7 +22,8 @@ class Prebuild
         "just add an random useless fact idk i cant think of anything :sob: -- zzshu",
         "The evoker can change the color of the wool of the blue sheeps",
         "Easier to assimilate than explain, anyway.",
-        "A mod we gave to bug and beast as they had never dreamed"
+        "A mod we gave to bug and beast as they had never dreamed",
+        "Sou gay"
     ];
 
     static function main():Void

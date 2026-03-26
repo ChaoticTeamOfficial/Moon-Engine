@@ -16,6 +16,7 @@ typedef CharacterData =
     var ?extraOffsets:Array<Float>;
     var healthbarColors:Array<Int>;
     var danceFrequency:Int;
+    var ?holdDuration:Int;
     var animations:Array<Paths.AnimationData>;
     var ?overrideAnims:Array<String>;
 }
@@ -28,7 +29,7 @@ class Character extends MoonSprite
     public var character(default, set):String;
     public var animationHold:Float = 0;
     public var script:MoonScript;
-    public var danceFrequency:Int = 2;
+    public var holdDuration:Int = 8;
 
     public var camOffsets:Array<Float> = [];
     public var type:CharacterType;
@@ -49,7 +50,7 @@ class Character extends MoonSprite
 
         this.character = character;
 
-        if(conductor != null) conductor.onBeat.add(checkDance);
+        if(conductor != null) conductor.onStep.add(checkDance);
     }
    
     public function flipLeftRight():Void
@@ -69,7 +70,7 @@ class Character extends MoonSprite
     {
         if (animation.curAnim == null) return;
         if (animation.curAnim.name.startsWith('sing') || animation.curAnim.name.startsWith('miss'))
-            animationHold += conductor.stepCrochet;
+            animationHold += conductor.stepCrochet / 1000;
 
         final beatInt = Std.int(curBeat);
         if ((animation.curAnim.name.startsWith("idle") || animation.curAnim.name.startsWith("dance"))
@@ -82,7 +83,7 @@ class Character extends MoonSprite
        
     override public function update(elapsed:Float)
     {
-        if (conductor != null && animationHold >= conductor.stepCrochet * 3)
+        if (conductor != null && animationHold >= conductor.stepCrochet / 1000 * holdDuration)
         {
             dance(true);
             animationHold = 0;
@@ -95,10 +96,8 @@ class Character extends MoonSprite
         super.playAnim(animName, force, reversed, frame);
 
         if(animation.curAnim != null)
-        {
             if(animation.curAnim.name.startsWith('idle') || animation.curAnim.name.startsWith('sing'))
                 animationHold = 0;
-        }
     }
 
     @:noCompletion public function set_character(char:String):String
@@ -126,6 +125,7 @@ class Character extends MoonSprite
         overrideAnims = data?.overrideAnims ?? [];
         idleAnims = loadAnimations(data.animations, data.type);
         danceFrequency = data.danceFrequency;
+        holdDuration = data?.holdDuration ?? 8;
 
         this.antialiasing = data?.antialiasing ?? true;
         this.scale.set(data?.scale ?? 0, data?.scale ?? 0);

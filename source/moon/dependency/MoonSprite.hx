@@ -58,6 +58,7 @@ class MoonSprite extends FlxAnimate
 	public var idleAnims:Array<String> = null;
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
+	public var danceFrequency:Int = 2;
 
 	public var twn:FlxTween;
 
@@ -152,7 +153,7 @@ class MoonSprite extends FlxAnimate
 	 * @param animations Array of AnimationDatas.
 	 * return array of idle anims, for chaining them.
 	 */
-	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW):Array<String>
+	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW, ?conductor:Conductor):Array<String>
 	{
 		var idleAnims:Array<String> = [];
 		for (i in 0...animations.length)
@@ -170,15 +171,26 @@ class MoonSprite extends FlxAnimate
 			this.addOffset(anim.name, anim?.x ?? 0, anim?.y ?? 0);
 			
 			//trace('added ' + animations);
-
+			
 			if(anim.name.startsWith("idle-"))
 				idleAnims.push(anim.name);
 
-			if(anim.finishAnim != null)
-				animation.onFinish.add((animName) -> {
-					if(animation.curAnim != null && animation.curAnim.name == animations[i].name)
-						playAnim(animations[i].finishAnim, true); //compiler being ass moment
+			if (anim.finishAnim != null)
+			{
+				animation.onFinish.add(finishedName ->
+				{
+					final cur = animation.curAnim != null ? animation.curAnim.name : "";
+					final playedName = (animationSuffix != "" && cur.endsWith('-$animationSuffix'))
+						? cur.substring(0, cur.lastIndexOf('-'))
+						: cur;
+
+					if (playedName == anim.name)
+					{
+						if (anim.finishAnim == "idle" || anim.finishAnim.startsWith("idle-")) dance(true);
+						else playAnim(anim.finishAnim, true);
+					}
 				});
+			}
 		}
 		return idleAnims;
 	}

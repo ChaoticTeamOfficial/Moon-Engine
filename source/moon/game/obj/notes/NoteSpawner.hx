@@ -117,8 +117,15 @@ class NoteSpawner extends FlxGroup
         );
         note.speed = scrollSpeed;
         note.lane = struct.lane;
+        note.quantColor = getQuantColor(struct.time, conductor);
         return note; 
     }
+
+    /**
+     * Returns 0-9 based on how the note is snapped inside the current beat/step
+     */
+    public static function getQuantColor(time:Float, conductor:Conductor):Int
+        return Std.int((Math.round((time % conductor.crochet) / (conductor.crochet / 32)) * 10) / 32);
 
     public function updateNoteScroll()
     {

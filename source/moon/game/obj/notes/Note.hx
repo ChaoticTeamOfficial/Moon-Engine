@@ -75,7 +75,7 @@ class Note extends MoonSprite
     /**
      * The note's strumline, in which it's attached to
      */
-    public var lane:String = 'P1';
+    public var lane:String = 'p1';
 
     /**
      * The receptor in which the note will go to.
@@ -123,6 +123,10 @@ class Note extends MoonSprite
         script = sharedScripts.get(curSkin);
         script.set("staticNote", this);
         script.get("createStaticNote")(curSkin, dir);
+
+        //TODO: Have a setting for this instead, and make it use the default one!
+        useQuantization = script?.get("useQuantization") ?? true;
+        updateQuantAnim();
         updateHitbox();
         playAnim(dir);
     }
@@ -172,6 +176,27 @@ class Note extends MoonSprite
 
         if(child!=null)child.updateOther();
         return this.receptor;
+    }
+
+    public var quantColor(default, set):Int = 0;
+    public var useQuantization:Bool = false;
+
+    @:noCompletion function set_quantColor(v:Int):Int
+    {
+        quantColor = FlxMath.wrap(v, 0, 9);
+        updateQuantAnim();
+        return quantColor;
+    }
+
+    private function updateQuantAnim()
+    {
+        final dir = MoonUtils.intToDir(direction);
+        if (!useQuantization) 
+        {
+            playAnim(dir);
+            return;
+        }
+        playAnim(dir + quantColor);
     }
 
     // Editor stuffies

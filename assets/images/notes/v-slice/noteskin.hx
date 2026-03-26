@@ -1,5 +1,6 @@
 import flixel.FlxG;
 
+var useQuantization:Bool = true;
 final scale = 0.6;
 
 //TODO: UPDATE
@@ -58,12 +59,28 @@ function createReceptor(direction)
 
 function createStaticNote(skin, direction)
 {
-    staticNote.frames = Paths.getSparrowAtlas(p + 'staticArrows');
+	if(!useQuantization)
+	{
+		staticNote.frames = Paths.getSparrowAtlas(p + 'staticArrows');
 
-    staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
-    staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
-    staticNote.animation.addByPrefix(direction + '-holdEnd', direction +'-holdend0', 24, true);
-    staticNote.antialiasing = true;
+		staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
+		staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
+		staticNote.animation.addByPrefix(direction + '-holdEnd', direction +'-holdend0', 24, true);
+	}
+	else
+	{
+        staticNote.frames = Paths.getSparrowAtlas(p + 'staticArrows-quant');
+
+        for (i in 0...10)
+        {
+			staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
+            staticNote.animation.addByPrefix(direction + i, direction + i + '0', 24, true);
+            staticNote.animation.addByPrefix(direction + i + '-hold', direction + i + '-hold0', 24, true);
+            staticNote.animation.addByPrefix(direction + i + '-holdEnd', direction + i + '-holdend0', 24, true);
+        }
+    }
+	staticNote.antialiasing = true;
+	
 }
 
 /**

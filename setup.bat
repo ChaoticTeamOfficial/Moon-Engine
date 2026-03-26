@@ -39,6 +39,7 @@ haxelib install flixel-waveform
 haxelib install flixel-animate 1.5.0 
 haxelib install hxdiscord_rpc
 
+haxelib git funkin-modchart https://github.com/theoo-h/FunkinModchart.git
 haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
 haxelib git funkin.vis https://github.com/ACrazyTown/funkVis
 haxelib git hxdsp https://github.com/baioc/hxdsp

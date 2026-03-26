@@ -90,6 +90,8 @@ class Receptor extends FlxSpriteGroup
     public function new(x:Float, y:Float, ?skin:String = 'v-slice', data:Int, ?isCPU:Bool = false, playerID:String, conductor:Conductor)
     {
         super(x, y);
+
+        // I just realized that this is prob the only placed I did this separation bullshit LOL
         this.data      = data;
         this.isCPU     = isCPU;
         this.playerID  = playerID;

@@ -8,7 +8,7 @@
 	"type": "packed",
     "animations": [
         {"name": "idle-0", "prefix": "anims/Idle", "x": 0, "y": 0, "fps": 24},
-		{"name": "hey", "prefix": "anims/Hey", "x": 138, "y": 168, "fps": 24, "finishAnim": "idle-0"},
+		{"name": "hey", "prefix": "anims/Hey", "x": 138, "y": 168, "fps": 24, "finishAnim": "idle"},
         {"name": "singLEFT", "prefix": "anims/Left", "x": 0, "y": 0, "fps": 24},
         {"name": "singDOWN", "prefix": "anims/Down", "x": 0, "y": 0, "fps": 24},
         {"name": "singUP", "prefix": "anims/Up", "x": 0, "y": 0, "fps": 24},

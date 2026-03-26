@@ -480,7 +480,7 @@ class LevelEditor extends FlxState
                 }
             }
 
-            if (FlxG.mouse.wheel != 0 && !libFocus && !library.isFormScrollRegion)
+            if (FlxG.mouse.wheel != 0 && !libFocus)
                 playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
 
             for(type => button in typeButtons)
@@ -813,19 +813,7 @@ class LevelEditor extends FlxState
                         }
 
                     case VISUALS, CHARACTERS, GIMMICKS, SOUNDS:
-                        if (library.currentEventTag != null)
-                        {
-                            final raw = library.getConfiguredValues();
-                            final ev:EventStruct = {
-                                tag: library.currentEventTag,
-                                values: EventRegistry.processEventValues(library.currentEventTag, raw),
-                                time: snappedTime,
-                                lane: laneNum % (NUM_LANES + 1)
-                            };
-                            createEvent(ev);
-                            chart.events.push(ev);
-                            sfx('place-${FlxG.random.int(1, 6)}');
-                        }
+                       // TODO
                 }
             }
             else

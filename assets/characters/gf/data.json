@@ -24,8 +24,8 @@
             "y": -9, 
             "fps": 24
         },
-		{"name": "comboBreak", "prefix": "gf sad", "x": 2, "y": -21, "fps": 24, "finishAnim": "idle-0"},
-		{"name": "combo50", "prefix": "GF Cheer", "x": 0, "y": 0, "fps": 24, "finishAnim": "idle-0"}
+		{"name": "comboBreak", "prefix": "gf sad", "x": 2, "y": -21, "fps": 24, "finishAnim": "idle"},
+		{"name": "combo50", "prefix": "GF Cheer", "x": 0, "y": 0, "fps": 24, "finishAnim": "idle"}
     ],
 	"overrideAnims": ["combo50"]
 }

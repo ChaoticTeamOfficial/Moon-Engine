@@ -38,7 +38,7 @@ class Project extends HXProject
 		"lime", "openfl", "flixel", "flixel-addons",
 		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate",
 		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin", 
-		"haxeui-flixel", "haxeui-core"
+		"funkin-modchart", "haxeui-flixel", "haxeui-core"
 		#if !hl , "hxdiscord_rpc" #end
 	];
 
@@ -128,6 +128,11 @@ class Project extends HXProject
 			setHaxedef("FLX_NO_DEBUG");
 
 		setHaxedef("message.reporting", "pretty");
+		setHaxedef("FM_ENGINE", "MOON");
+		setHaxedef("FM_ENGINE_VERSION", "1.0.0");
+		
+		// We set haxeflags here!
+		addHaxeFlag('--macro modchart.backend.macros.Macro.includeFiles()');
 	}
 
 	function setupFeatureFlags()

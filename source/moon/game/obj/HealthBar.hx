@@ -117,7 +117,7 @@ class HealthBar extends FlxSpriteGroup
         {
             final percent = 1 - (health / 100);
             lerpPercent = FlxMath.lerp(lerpPercent, percent, elapsed * 16);
-            final iconOffset = 16;
+            final iconOffset = 16; // looks a lil offcentered, so TODO: fix it 'xD
 			
             playerIcon.x = bar.x + (bar.width * lerpPercent) + (150 * playerIcon.scale.x - 150) / 2 + iconOffset * 2;
             oppIcon.x = bar.x + (bar.width * lerpPercent) - (150 * oppIcon.scale.x) / 2 - iconOffset * 2;

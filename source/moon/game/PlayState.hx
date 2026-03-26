@@ -3,10 +3,11 @@ package moon.game;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
-import moon.dependency.scripting.MoonScript;
+import modchart.Manager;
 import openfl.filters.ShaderFilter;
-import moon.game.obj.Character;
 
+import moon.dependency.scripting.MoonScript;
+import moon.game.obj.Character;
 import moon.menus.*;
 import moon.game.submenus.*;
 import moon.game.obj.*;
@@ -44,6 +45,11 @@ class PlayState extends FlxTransitionableState
 	 * The game's background.
 	 */
 	public var stage:Stage;
+
+	/**
+	 * The funkin' modchart instance.
+	 */
+	public var fmInstance:Manager;
 	
 	// Cameras
 
@@ -156,6 +162,10 @@ class PlayState extends FlxTransitionableState
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
 	
 		stage.updatePositioning();
+
+		// initialize the modchart manager
+		//fmInstance = new Manager();
+		//add(fmInstance);
 		
 		Countdown.init(conductor, playField);
 		Countdown.performCountdown();

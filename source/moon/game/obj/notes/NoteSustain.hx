@@ -14,6 +14,9 @@ class NoteSustain extends TiledSprite
      * Height to use when in chart editor mode (set externally by LevelEditor)
      */
     public var editorHeight:Float = 0;
+
+    public var quantColor:Int = 0;
+    public var useQuantization:Bool = true;
     
     /**
      * Creates a new sustain note.
@@ -86,6 +89,8 @@ class NoteSustain extends TiledSprite
         this.centerAnimations = true;
         this.frames = parent.frames;
         this.animation.copyFrom(parent.animation);
+        this.quantColor = parent.quantColor;
+        this.useQuantization = parent.useQuantization;
 
         updateOther();
     }
@@ -93,8 +98,10 @@ class NoteSustain extends TiledSprite
     public function updateOther()
     {
         final dir:String = MoonUtils.intToDir(parent.direction);
-        this.playAnim('$dir-hold', true);
-        this.setTail('$dir-holdEnd');
+        final holdAnim = useQuantization ?'${dir}${quantColor}-hold' : '${dir}-hold';
+
+        this.playAnim(holdAnim, true);
+        this.setTail('${holdAnim}End');
 
         this.scale.set(parent.scale.x, parent.scale.y);
         this.antialiasing = parent.antialiasing;

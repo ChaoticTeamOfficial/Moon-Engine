@@ -29,10 +29,10 @@
             "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11],
             "x": 17,
             "y": -5, 
-            "fps": 24, "finishAnim": "idle-0"
+            "fps": 24, "finishAnim": "idle"
         },
-		{"name": "combo50", "prefix": "combo celebration 1 nene", "x": -119, "y": 55, "fps": 24, "finishAnim": "idle-0"},
-		{"name": "combo200", "prefix": "fawn nene", "x": -41, "y": -15, "fps": 24, "finishAnim": "idle-0"}
+		{"name": "combo50", "prefix": "combo celebration 1 nene", "x": -119, "y": 55, "fps": 24, "finishAnim": "idle"},
+		{"name": "combo200", "prefix": "fawn nene", "x": -41, "y": -15, "fps": 24, "finishAnim": "idle"}
     ],
 	"overrideAnims": ["combo50", "combo200", "comboBreak"]
 }
