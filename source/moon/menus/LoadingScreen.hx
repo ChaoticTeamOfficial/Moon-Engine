@@ -12,6 +12,7 @@ import moon.game.obj.*;
 import moon.game.obj.notes.*;
 import moon.menus.obj.freeplay.*;
 
+using StringTools;
 class LoadingScreen extends FlxTransitionableState
 {
     var preloadGrp = new FlxGroup();
@@ -103,7 +104,24 @@ class LoadingScreen extends FlxTransitionableState
                     preload(stage);
                     loadProgress = 70;
 
+                    loadText.text = 'Preloading Gameover...';
+
+                    if(Paths.exists('characters/${chart.content.meta.players[0]}/gameover/data.json'))
+                        preload(new Character(0,0, '${chart.content.meta.players[0]}/gameover', null));
+                    else preload(new Character(0,0, 'bf/gameover', null));
+
+                    if(Paths.exists('characters/${chart.content.meta.players[0]}/gameover/gameOverSong.ogg'))
+                        Paths.preloadSound('${chart.content.meta.players[0]}/gameover/gameOverSong.ogg', 'characters');
+                    else Paths.preloadSound('bf/gameover/gameOverSong.ogg', 'characters');
+
                     loadText.text = 'Preloading events and such...';
+                    loadProgress = 80;
+
+                    //TODO: Preload events stuff.
+
+                    loadProgress = 90;
+                    loadText.text = 'Preloading scripts...';
+                    Global.scriptCall('onPreload', [this]);
 
                     Paths.skipNextCleanup = true;
                     Global.clearScriptList();
@@ -120,7 +138,7 @@ class LoadingScreen extends FlxTransitionableState
                     trace('Crash on the loading screen!\n$loadError', "ERROR");
 
                     failed = true;
-                    loadText.text = 'An error has happened. Press BACK to leave.';
+                    loadText.text = 'An error occurred. Press BACK.';
 					loadText.color = FlxColor.RED;
                 }
 				

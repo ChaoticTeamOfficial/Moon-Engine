@@ -90,7 +90,7 @@ class NoteSustain extends TiledSprite
         this.frames = parent.frames;
         this.animation.copyFrom(parent.animation);
         this.quantColor = parent.quantColor;
-        this.useQuantization = parent.useQuantization;
+        this.useQuantization = parent?.useQuantization ?? false;
 
         updateOther();
     }

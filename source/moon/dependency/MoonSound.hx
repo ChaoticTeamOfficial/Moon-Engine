@@ -6,6 +6,8 @@ import flixel.util.FlxTimer;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
+using StringTools;
+
 enum MusicType {
     Inst;
     Voices_Player;
@@ -24,16 +26,15 @@ typedef Metadata = {
  * This class basically is an extension of FlxSound, and
  * aims to add more utilities/functionalities to the already existing FlxSound;
  * Such as: pitch tween, pausing for a timer, and maybe more? who knows!
- * by @toffeecaramel
  **/
 class MoonSound extends FlxSound
 {
     // ----------- SONG DATA STUFF ----------- //
 
     /**
-     * A metadata typedef, which contains important song INFO (if the file exists).
+     * Metadata loaded automatically if a -metadata.json file exists in the same path as the sound.
      */
-    public var metadata:Metadata;
+    public var metadata(default, null):Metadata = null;
 
     /**
      * Used for recognizing whether the audio is inst or voices.
@@ -48,6 +49,24 @@ class MoonSound extends FlxSound
     @:inheritDoc(FlxSound.loadEmbedded)
     override public function loadEmbedded(EmbeddedSound:FlxSoundAsset, Looped:Bool = false, AutoDestroy:Bool = false, ?OnComplete:() -> Void):MoonSound
         return cast super.loadEmbedded(EmbeddedSound, Looped, AutoDestroy, OnComplete);
+
+    /**
+     * Loads a sound using Paths.sound() directly and automatically loads accompanying metadata
+     * if a file named `key-metadata.json` exists.
+     * @param key The same key you would pass to Paths.sound()
+     * @param from The folder it loads from. Defaults to music.
+     * @param looped Whether the sound should loop
+     * @param autoDestroy Auto destroy flag
+     */
+    public function loadSoundAndMeta(key:String, ?from:String = 'music', autoDestroy:Bool = false):MoonSound
+    {
+        final metaKey = '${from}/' + (key.endsWith('.ogg') ? key.substring(0, key.length - 4) : key);
+        if (Paths.exists(metaKey + '-metadata.json'))
+            metadata = Paths.JSON(metaKey + '-metadata', 'json');
+
+        loadEmbedded(Paths.sound(key, from), metadata?.looped ?? true, autoDestroy);
+        return this;
+    }
 
     // ---------- TWEENS AND TIMERS ---------- //
 

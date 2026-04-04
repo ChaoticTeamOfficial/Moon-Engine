@@ -20,12 +20,7 @@ class HealthIcon extends MoonSprite
      * @param health the health value.
      */
     public dynamic function updateAnim(health:Float)
-    {
-        if (health < 20)
-            animation.curAnim.curFrame = 1;
-        else
-            animation.curAnim.curFrame = 0;
-    }
+        animation.curAnim.curFrame = (health < 20) ? 1 : 0;
 
     @:noCompletion public function set_icon(val:String)
     {

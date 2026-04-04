@@ -1,6 +1,6 @@
 package moon.dependency.user;
 
-#if cpp
+#if (cpp && !android)
 import flixel.FlxG;
 import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;

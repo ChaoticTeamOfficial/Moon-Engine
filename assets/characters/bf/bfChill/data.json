@@ -1,0 +1,17 @@
+{
+    "antialiasing": true,
+    "scale": 1,
+    "flipX": false,
+	"extraOffsets": [0, 0],
+    "danceFrequency": 2,
+	"type": "packed",
+    "animations": [
+        {
+            "name": "idle-0", 
+            "prefix": "idle", 
+            "x": 0,
+            "y": 0, 
+            "fps": 24
+        }
+    ]
+}

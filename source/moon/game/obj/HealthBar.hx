@@ -8,15 +8,39 @@ import flixel.group.FlxSpriteGroup;
 
 class HealthBar extends FlxSpriteGroup
 {
+    /**
+     * The healthbar's background.
+     */
     public var barBG:MoonSprite;
+
+    /**
+     * The healthbar itself.
+     */
     public var bar:FlxBar;
 
+    /**
+     * The opponent's name. Will automatically update the icon if changed.
+     */
     public var opponent(default, set):String;
+
+    /**
+     * The player's name. Will automatically update the icon if changed.
+     */
     public var player(default, set):String;
 
+    /**
+     * An array containing all icons. There's no purpose to it for now, but will be used for a future multi-icon implementation!
+     */
     public var icons:Array<HealthIcon> = [];
 
+    /**
+     * The opponent's icon.
+     */
     public var oppIcon:HealthIcon;
+
+    /**
+     * The player's icon.
+     */
     public var playerIcon:HealthIcon;
 
     /**
@@ -30,7 +54,17 @@ class HealthBar extends FlxSpriteGroup
     public var iconScale:Float = 0.8;
 
     /**
-     * Will create a health bar instance.
+     * Whether or not to update the icon position.
+     */
+    public var updateIconsPos:Bool = true;
+
+    /**
+     * The distance between both icons.
+     */
+    public var iconDistance:Float = 42;
+
+    /**
+     * Creates a healthbar.
      * @param opponent the opponent name.
      * @param player the player name.
      */
@@ -54,8 +88,7 @@ class HealthBar extends FlxSpriteGroup
         oppIcon.y = bar.y - (oppIcon.height * 0.5);
 
         playerIcon = new HealthIcon();
-        playerIcon.scale.set(0.5, 0.5);
-
+        playerIcon.scale.set(iconScale, iconScale);     // fixed - was 0.5
         playerIcon.flipX = true;
         playerIcon.y = bar.y - (playerIcon.height * 0.5);
 
@@ -103,7 +136,6 @@ class HealthBar extends FlxSpriteGroup
         }, 5);
     }
 
-    public var updateIconsPos:Bool = true;
     public var lerpPercent:Float = 0;
     public var transitioning:Bool = false;
     override public function update(elapsed:Float)
@@ -115,12 +147,13 @@ class HealthBar extends FlxSpriteGroup
 
         if(updateIconsPos && MoonSettings.callSetting('Icons') == 'At Healthbar')
         {
-            final percent = 1 - (health / 100);
-            lerpPercent = FlxMath.lerp(lerpPercent, percent, elapsed * 16);
-            final iconOffset = 16; // looks a lil offcentered, so TODO: fix it 'xD
-			
-            playerIcon.x = bar.x + (bar.width * lerpPercent) + (150 * playerIcon.scale.x - 150) / 2 + iconOffset * 2;
-            oppIcon.x = bar.x + (bar.width * lerpPercent) - (150 * oppIcon.scale.x) / 2 - iconOffset * 2;
+            final targetPercent = 1 - (health / 100);
+            lerpPercent = FlxMath.lerp(lerpPercent, targetPercent, elapsed * 16);
+
+            final divisionX = bar.x + (bar.width * lerpPercent);
+
+            playerIcon.x = FlxMath.lerp(playerIcon.x, divisionX + iconDistance - playerIcon.width / 2, elapsed * 16);
+            oppIcon.x = FlxMath.lerp(oppIcon.x, divisionX - iconDistance - oppIcon.width / 2, elapsed * 10);
 
             oppIcon.y = bar.y - (oppIcon.height * 0.5);
             playerIcon.y = bar.y - (playerIcon.height * 0.5);
@@ -146,8 +179,15 @@ class HealthBar extends FlxSpriteGroup
     public function bump()
     {
         if(transitioning) return;
+
         oppIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
         playerIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
+
+        if(updateIconsPos)
+        {
+            oppIcon.x -= 15;
+            playerIcon.x += 15;
+        }
     }
 
     public function getRGBData(character:String)

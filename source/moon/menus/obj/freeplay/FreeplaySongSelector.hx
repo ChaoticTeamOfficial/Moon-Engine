@@ -93,7 +93,7 @@ class FreeplaySongSelector extends FlxGroup
         disk.scale.set(0, 0);
         disk.updateHitbox();
         disk.angle = -360;
-        FlxTween.tween(disk.scale, {x: 1, y: 1}, 1, {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox()});
+        FlxTween.tween(disk.scale, {x: 1, y: 1}, 1, {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox(), onComplete: _-> Global.allowInputs = true});
     }
 
     /**

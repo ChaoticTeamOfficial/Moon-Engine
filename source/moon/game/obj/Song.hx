@@ -134,7 +134,7 @@ class Song extends FlxTypedGroup<MoonSound>
             if(voices.length > 0)
                 for(v in voices)
                     for(i in inst)
-                        if(Math.abs(v.time - i.time) > 5) //has to be at 5 just to make sure its in time :P
+                        if(Math.abs(v.time - i.time) > 5 && v.playing)
                             v.time = i.time;
         }
     }
@@ -146,8 +146,8 @@ class Song extends FlxTypedGroup<MoonSound>
     {
         for(i in inst)
         {
-            conductor.time = i.time;
-            if(voices.length > 0) for(v in voices) v.time = i.time;
+            if (i.playing) conductor.time = i.time;
+            if(voices.length > 0) for(v in voices) if(v.playing) v.time = i.time;
         }
         //(member.type == Inst) ? conductor.time = member.time : member.time = conductor.time;
     }

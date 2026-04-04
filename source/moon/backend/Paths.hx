@@ -458,10 +458,10 @@ class Paths
     }
 
     private static var sfxCache = new Map<Sound, FlxSound>();
-    public inline static function playSFX(key:String, once:Bool = false)
+    public inline static function playSFX(key:String, ?from:String = 'sounds', once:Bool = false, ?pitch:Float = 1)
     {
         var snd:FlxSound;
-        final p:Sound = sound('$key', 'sounds');
+        final p:Sound = sound('$key', from);
 
         if(!once)
             return FlxG.sound.play(p, MoonSettings.callSetting('SFX Volume') / 100);
@@ -476,6 +476,8 @@ class Paths
         if(snd.playing) snd.stop();
 
         snd.volume = MoonSettings.callSetting('SFX Volume') / 100;
+        snd.persist = true;
+        snd.pitch = pitch;
         return snd.play(true);
     }
 

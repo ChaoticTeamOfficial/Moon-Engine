@@ -1,0 +1,610 @@
+[
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": -1,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 0,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 0,
+		"values": {
+			"zoom": 0.75,
+			"duration": 32,
+			"ease": "quintInOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 1387.28323699422,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 5,
+		"tag": "Set Zoom",
+		"time": 1387.28323699422,
+		"values": {
+			"zoom": 1.25,
+			"duration": 4,
+			"ease": "elasticOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 2080.92485549133,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 2080.92485549133,
+		"values": {
+			"zoom": 0.75,
+			"duration": 24,
+			"ease": "expoIn",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 4161.84971098266,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 4161.84971098266,
+		"values": {
+			"zoom": 1.25,
+			"duration": 4,
+			"ease": "elasticOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 6936.4161849711,
+		"values": {
+			"character": "spectator",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 6936.4161849711,
+		"values": {
+			"zoom": 0.75,
+			"duration": 8,
+			"ease": "expoOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 4,
+		"tag": "Set Zoom",
+		"time": 9710.98265895954,
+		"values": {
+			"zoom": 1.1,
+			"duration": 8,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 10404.6242774566,
+		"values": {
+			"zoom": 1.1,
+			"duration": 8,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 4,
+		"tag": "Set Zoom",
+		"time": 11965.3179190751,
+		"values": {
+			"zoom": 0.5,
+			"duration": 8,
+			"ease": "elasticOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 12485.549132948,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 4,
+		"tag": "Set Zoom",
+		"time": 12485.549132948,
+		"values": {
+			"zoom": 1,
+			"duration": 4,
+			"ease": "expoOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 6,
+		"tag": "Camera Bop",
+		"time": 13352.6011560694,
+		"values": {
+			"array": [1.5]
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Camera Bop",
+		"time": 13526.0115606936,
+		"values": {
+			"array": [1.5]
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Camera Bop",
+		"time": 13699.4219653179,
+		"values": {
+			"array": [1.5]
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Camera Bop",
+		"time": 13786.1271676301,
+		"values": {
+			"array": [1.5]
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 13872.8323699422,
+		"values": {
+			"zoom": 0.75,
+			"duration": 4,
+			"ease": "quartOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 16647.3988439306,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Camera Bop",
+		"time": 18728.323699422,
+		"values": {
+			"array": [2]
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Camera Bop",
+		"time": 18872.8323699422,
+		"values": {
+			"array": [2]
+		}
+	},
+	{
+		"lane": 6,
+		"tag": "Camera Bop",
+		"time": 19017.3410404624,
+		"values": {
+			"array": [2]
+		}
+	},
+	{
+		"lane": 3,
+		"tag": "Camera Bop",
+		"time": 19075.1445086705,
+		"values": {
+			"array": [2]
+		}
+	},
+	{
+		"lane": 4,
+		"tag": "Set Zoom",
+		"time": 19421.9653179191,
+		"values": {
+			"zoom": 0.5,
+			"duration": 4,
+			"ease": "elasticOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 19768.7861271676,
+		"values": {
+			"zoom": 1,
+			"duration": 4,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 19768.7861271676,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Customized Pulse Timing",
+		"time": 19768.7861271676,
+		"values": {
+			"rate": 1.75,
+			"intensity": 1.0
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 22196.5317919075,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 23583.8150289017,
+		"values": {
+			"zoom": 1.25,
+			"duration": 4,
+			"ease": "expoOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 6,
+		"tag": "Set Zoom",
+		"time": 24277.4566473988,
+		"values": {
+			"zoom": 0.9,
+			"duration": 8,
+			"ease": "quadIn",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 24971.098265896,
+		"values": {
+			"character": "spectator",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 3,
+		"tag": "Customized Pulse Timing",
+		"time": 24971.098265896,
+		"values": {
+			"rate": 2,
+			"intensity": 1.0
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Set Zoom",
+		"time": 24971.098265896,
+		"values": {
+			"zoom": 0.75,
+			"duration": 16,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 27745.6647398844,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 5,
+		"tag": "Set Zoom",
+		"time": 27745.6647398844,
+		"values": {
+			"zoom": 1,
+			"duration": 8,
+			"ease": "quintOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 30520.2312138728,
+		"values": {
+			"character": "spectator",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 30520.2312138728,
+		"values": {
+			"zoom": 0.75,
+			"duration": 8,
+			"ease": "expoOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 33294.7976878613,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 5,
+		"tag": "Set Zoom",
+		"time": 33294.7976878613,
+		"values": {
+			"zoom": 1,
+			"duration": 8,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 1,
+		"tag": "Set Zoom",
+		"time": 34682.0809248555,
+		"values": {
+			"zoom": 1.25,
+			"duration": 4,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 4,
+		"tag": "Set Zoom",
+		"time": 35375.7225433526,
+		"values": {
+			"zoom": 1,
+			"duration": 4,
+			"ease": "backOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 36069.3641618497,
+		"values": {
+			"character": "spectator",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 5,
+		"tag": "Set Zoom",
+		"time": 36069.3641618497,
+		"values": {
+			"zoom": 0.75,
+			"duration": 4,
+			"ease": "quadOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 38843.9306358382,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 2,
+		"tag": "Set Zoom",
+		"time": 38843.9306358382,
+		"values": {
+			"zoom": 1,
+			"duration": 4,
+			"ease": "quartOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 41618.4971098266,
+		"values": {
+			"character": "opponent",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 6,
+		"tag": "Set Zoom",
+		"time": 41618.4971098266,
+		"values": {
+			"zoom": 0.75,
+			"duration": 4,
+			"ease": "quintOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 44393.063583815,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 6,
+		"tag": "Set Zoom",
+		"time": 44393.063583815,
+		"values": {
+			"zoom": 1,
+			"duration": 4,
+			"ease": "quartOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 46994.2196531792,
+		"values": {
+			"character": "spectator",
+			"duration": 26,
+			"ease": "expoOut",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 5,
+		"tag": "Set Zoom",
+		"time": 46994.2196531792,
+		"values": {
+			"zoom": 0.5,
+			"duration": 4,
+			"ease": "quintOut",
+			"mode": "absolute"
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 48554.9132947977,
+		"values": {
+			"character": "player",
+			"duration": 26,
+			"ease": "INSTANT",
+			"x": null,
+			"y": null
+		}
+	},
+	{
+		"lane": 0,
+		"tag": "Set Zoom",
+		"time": 48554.9132947977,
+		"values": {
+			"zoom": 2,
+			"duration": 0,
+			"ease": "INSTANT",
+			"mode": "absolute"
+		}
+	}
+]

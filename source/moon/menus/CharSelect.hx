@@ -1,6 +1,7 @@
 package moon.menus;
 
 import moon.menus.obj.charSelect.*;
+import moon.game.obj.*;
 
 class CharSelect extends FlxState
 {
@@ -12,15 +13,15 @@ class CharSelect extends FlxState
         'locked', 'locked', 'locked'
     ];
 
-    var conductor:Conductor;
-    var cursor:Cursor;
-    var grid:CharGrid;
+    public var conductor:Conductor;
+    public var cursor:Cursor;
+    public var grid:CharGrid;
+    public var player:Character;
 
     public var background:FlxGroup = new FlxGroup();
+    private var scrollSnd:MoonSound;
 
     public var isLightsOff:Bool = false;
-
-    private var scrollSnd:MoonSound;
     override public function create():Void
     {
         super.create();
@@ -29,6 +30,10 @@ class CharSelect extends FlxState
         playlist = new SyncPlaylist().loadFromDirectory("music/menus/charSelect");
 
         conductor = new Conductor(180);
+
+        player = new Character(0,0, 'bf/bfChill', conductor);
+        add(player);
+        player.screenCenter();
 
         cursor = new Cursor();
         add(cursor);
@@ -44,9 +49,14 @@ class CharSelect extends FlxState
 
         var nametag = new Nametag(0, 0, 'bf');
         add(nametag);
+
+        // on changing a selection...
         grid.onChange.add((dir)->{
             if(scrollSnd.playing) scrollSnd.stop();
-            if(dir != 0) scrollSnd.play();
+            if(dir != 0){
+                //scrollSnd.pitch = FlxG.random.float(0.98, 1.02);
+                scrollSnd.play();
+            }
 
             final song = 'stayFunky-${CharGrid.curChar.toLowerCase()}'; 
             playlist.focusSong = playlist.sounds.exists(song) ? song : 'stayFunky';
@@ -77,6 +87,7 @@ class CharSelect extends FlxState
 
            // trace(song, "DEBUG");
         });
+
         FlxG.sound.list.add(scrollSnd);
 
         grid.scroll(0);
@@ -202,8 +213,8 @@ class CharSelect extends FlxState
                         playlist.volume = 0;
                         Global.allowInputs = false;
 
-                        FlxG.camera.fade(FlxColor.BLACK, 0.9, false);
-                        FlxTween.tween(FlxG.camera.scroll, {y: -800}, 1, {ease: FlxEase.circIn, onComplete: _->{
+                        FlxG.camera.fade(FlxColor.BLACK, 0.6, false);
+                        FlxTween.tween(FlxG.camera.scroll, {y: -340}, 1.3, {ease: FlxEase.backInOut, onComplete: _->{
                             Global.allowInputs = true;
                             FlxG.switchState(()-> new MainMenu());
                         }});

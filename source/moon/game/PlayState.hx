@@ -76,14 +76,14 @@ class PlayState extends FlxTransitionableState
 
 	public var songScript:MoonScript = new MoonScript();
 
-	// If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch.
+	/** If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch. */
 	public static var VALID_SCORE:Bool = true;
 
     public var loadedReplay:Replay = null;
     public static var replaysToSave:Array<Replay> = [];
 
 	public static var songData:SongBase = {
-		song: 'earworm',
+		song: 'dadbattle d-side',
 		difficulty: 'hard',
 		mix: 'bf'
 	};
@@ -100,6 +100,7 @@ class PlayState extends FlxTransitionableState
 	}
 
 	public var paused:Bool = false;
+	public var isDead:Bool = false;
 	public function new(?replay:Replay = null)
 	{
 		super();
@@ -184,6 +185,23 @@ class PlayState extends FlxTransitionableState
 			setEvents();
 			Countdown.performCountdown();
 			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
+
+			// annoying shit *shrug*
+	        var chars:Array<FlxSprite> = [];
+
+	        for(p in stage.players.members) chars.push(p);
+	        for(o in stage.opponents.members) chars.push(o);
+	    	for(s in stage.spectators.members) chars.push(s);
+
+	    	for(c in chars)
+	    	{
+	    		if(Std.isOfType(c, Character))
+	    		{
+	    			final p = cast(c, Character);
+	    			p.playAnim("idle-0", true);
+	    			p.animationHold = 0;
+	    		}
+	    	}
 			Global.scriptCall('onSongRestart');
 		};
 		
@@ -276,7 +294,13 @@ class PlayState extends FlxTransitionableState
 		allowGameBop = true;
 	}
 
-	var isDead:Bool = false;
+	public function gameOverRestart()
+	{
+		isDead = false;
+		playField.restartSong();
+        resumeGame();
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -316,15 +340,13 @@ class PlayState extends FlxTransitionableState
 
 		if(playField.healthBar.health <= 0 && !isDead)
 		{
-			playField.inCutscene = isDead = true;
+			isDead = true;
 
-			playField.playback.state = STOP;
+			playField.playback.state = PAUSE;
 
-			setCameraFocus('player', [], 0.7, {ease: FlxEase.circOut, startDelay: 0.01});
-			setCameraZoom(camGAME.zoom * 2, 0.5, {startDelay: 0.25, ease: FlxEase.expoIn, onComplete: _->{
-				//trace('yup.');
-				openSubState(new Gameover());
-			}});
+			setCameraFocus('player', [0, 50], 1.4, {ease: FlxEase.circOut, startDelay: 0.01});
+			setCameraZoom(1, 1, {ease: FlxEase.expoOut});
+			openSubState(new Gameover());
 		}
 
 		//TODO: REMOVE, THIS IS DEBUGGIN
@@ -337,8 +359,8 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onUpdate', [elapsed]);
 	}
 
-	var camMov:FlxTween;
-	var	camZoom:FlxTween;
+	public var camMov:FlxTween;
+	public var camZoom:FlxTween;
 
 	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
@@ -488,7 +510,7 @@ class PlayState extends FlxTransitionableState
 
 	public function pauseGame()
 	{
-		if(paused) return;
+		if(paused || isDead) return;
 
 		paused = true;
 		activeTweens(false);

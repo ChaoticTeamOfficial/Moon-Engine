@@ -11,12 +11,13 @@ typedef CharacterData =
     var ?antialiasing:Bool;
     var ?scale:Float;
     var ?type:AtlasType;
-    var flipX:Bool;
-    var camOffsets:Array<Float>;
+    var ?flipX:Bool;
+    var ?camOffsets:Array<Float>;
     var ?extraOffsets:Array<Float>;
-    var healthbarColors:Array<Int>;
-    var danceFrequency:Int;
+    var ?healthbarColors:Array<Int>;
+    var ?danceFrequency:Int;
     var ?holdDuration:Int;
+    var ?gameoverColorScheme:String;
     var animations:Array<Paths.AnimationData>;
     var ?overrideAnims:Array<String>;
 }
@@ -30,6 +31,7 @@ class Character extends MoonSprite
     public var animationHold:Float = 0;
     public var script:MoonScript;
     public var holdDuration:Int = 8;
+    public var gameoverColorScheme:FlxColor;
 
     public var camOffsets:Array<Float> = [];
     public var type:CharacterType;
@@ -50,7 +52,14 @@ class Character extends MoonSprite
 
         this.character = character;
 
-        if(conductor != null) conductor.onStep.add(checkDance);
+        if(conductor != null){
+            conductor.onStep.add(step -> {
+                if (animation.curAnim != null && (animation.curAnim.name.startsWith('sing') || animation.curAnim.name.startsWith('miss')))
+                    animationHold += conductor.stepCrochet / 1000;
+            });
+
+            conductor.onBeat.add(checkDance);
+        }
     }
    
     public function flipLeftRight():Void
@@ -69,8 +78,6 @@ class Character extends MoonSprite
     public function checkDance(curBeat:Float)
     {
         if (animation.curAnim == null) return;
-        if (animation.curAnim.name.startsWith('sing') || animation.curAnim.name.startsWith('miss'))
-            animationHold += conductor.stepCrochet / 1000;
 
         final beatInt = Std.int(curBeat);
         if ((animation.curAnim.name.startsWith("idle") || animation.curAnim.name.startsWith("dance"))
@@ -102,54 +109,70 @@ class Character extends MoonSprite
 
     @:noCompletion public function set_character(char:String):String
     {
+        if(this.character == char) return char;
+
         if(Global.scripts.exists(this.character))
             Global.unregisterScript(this.character);
 
         if(!Paths.exists('characters/$char/data.json'))
         {
             trace('Specified character "$char" data does not exist. Loading default...', "WARNING");
-            char = 'darnell';
+            char = 'asmile-erect';
         }
-       
+
         this.character = char;
         data = cast Paths.JSON('characters/$character/data');
         if(data.type == null) data.type = SPARROW;
-        camOffsets = data.camOffsets;
+
+        // yayy subfolder support :D
+        // I like having things clean inside the same folder, sooo.. I thought... Why not!?
+        var atlasName = character;
+        if (character.indexOf('/') != -1)
+        {
+            final parts = character.split('/');
+            atlasName = parts[parts.length - 1];
+        }
 
         switch(data.type)
         {
-            case SPARROW: this.frames = Paths.getSparrowAtlas('$character/$character', 'characters');
-            default: this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$character'));
+            case SPARROW: this.frames = Paths.getSparrowAtlas('$character/$atlasName', 'characters');
+            default: this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$atlasName')/*, {filterQuality: HIGH}*/);
         }
 
+        camOffsets = data?.camOffsets ?? [0, 0];
         overrideAnims = data?.overrideAnims ?? [];
         idleAnims = loadAnimations(data.animations, data.type);
-        danceFrequency = data.danceFrequency;
+        danceFrequency = data?.danceFrequency ?? 2;
         holdDuration = data?.holdDuration ?? 8;
+        gameoverColorScheme = FlxColor.fromString(data?.gameoverColorScheme ?? '0xFF4924ff');
 
         this.antialiasing = data?.antialiasing ?? true;
         this.scale.set(data?.scale ?? 0, data?.scale ?? 0);
         this.updateHitbox();
         this.playAnim("idle-0");
+        this.flipX = data?.flipX ?? false;
+        origin.set(width / 2, height);
 
         script.load('characters/${this.character}/script.hx');
         if(script.code != null)
         {
             script.set('char', this);
-            Global.registerScript('script-${this.character}', script);
+            if(script.exists('onCharCreate'))script.call('onCharCreate');
+
+            Global.registerScript('script-${this.character}-${script?.get("scriptID") ?? 0}', script);
         }
 
-        /*animation.onFinish.add((anim)->
-        {
-            //TODO: 'Softcode' this :3
-            // DONE!
-            //if(conductor != null && (anim == 'comboBreak' || anim == 'combo50' || anim == 'combo200')) dance(true);
-        }); */
-
-        this.flipX = data?.flipX ?? false;
-        origin.set(width / 2, height);
-
         return char;
+    }
+
+    override function destroy()
+    {
+        super.destroy();
+
+        if(script.code != null)
+            Global.unregisterScript('script-${this.character}-${script?.get("scriptID") ?? 0}');
+
+        conductor = null;
     }
 }
 

@@ -1,6 +1,6 @@
 import flixel.FlxG;
 
-var useQuantization:Bool = true;
+var useQuantization:Bool = false;
 final scale = 0.6;
 
 //TODO: UPDATE

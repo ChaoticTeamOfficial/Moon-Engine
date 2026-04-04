@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="asmile-erect.png" width="1790" height="703">
+  <SubTexture name="down0000" x="0" y="0"  width="370" height="340" frameX="-133" frameY="-163" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0000" x="370" y="0"  width="357" height="352" frameX="-142" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0000" x="0" y="340"  width="348" height="356" frameX="-144" frameY="-147" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0000" x="727" y="0"  width="355" height="352" frameX="-143" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="down0002" x="1082" y="0"  width="354" height="344" frameX="-141" frameY="-159" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0002" x="1436" y="0"  width="354" height="351" frameX="-140" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0000" x="1082" y="344"  width="354" height="351" frameX="-146" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0004" x="1436" y="351"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0002" x="348" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0002" x="700" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="down0001" x="0" y="0"  width="370" height="340" frameX="-133" frameY="-163" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="down0003" x="1082" y="0"  width="354" height="344" frameX="-141" frameY="-159" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="down0004" x="1082" y="0"  width="354" height="344" frameX="-141" frameY="-159" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="down0005" x="1082" y="0"  width="354" height="344" frameX="-141" frameY="-159" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0001" x="727" y="0"  width="355" height="352" frameX="-143" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0002" x="727" y="0"  width="355" height="352" frameX="-143" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0003" x="727" y="0"  width="355" height="352" frameX="-143" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0005" x="1436" y="351"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0006" x="1436" y="351"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="idle0007" x="1436" y="351"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0001" x="370" y="0"  width="357" height="352" frameX="-142" frameY="-148" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0003" x="1436" y="0"  width="354" height="351" frameX="-140" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0004" x="1436" y="0"  width="354" height="351" frameX="-140" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="left0005" x="1436" y="0"  width="354" height="351" frameX="-140" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0001" x="1082" y="344"  width="354" height="351" frameX="-146" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0003" x="348" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0004" x="348" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="right0005" x="348" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0001" x="0" y="340"  width="348" height="356" frameX="-144" frameY="-147" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0003" x="700" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0004" x="700" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+  <SubTexture name="up0005" x="700" y="352"  width="352" height="351" frameX="-142" frameY="-152" frameWidth="656" frameHeight="656"/>
+</TextureAtlas>

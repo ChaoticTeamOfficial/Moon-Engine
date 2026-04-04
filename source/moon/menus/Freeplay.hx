@@ -39,6 +39,7 @@ class Freeplay extends FlxSubState
     {
         super();
         this.character = character;
+		Global.allowInputs = false;
         instance = this;
 
         mainBG = new FreeplayBG(character);
@@ -140,7 +141,7 @@ class Freeplay extends FlxSubState
         if (MoonInput.justPressed(UI_UP)) change(-1);       
 
         if (MoonInput.justPressed(ACCEPT))
-        {
+        {			
             final selected = selector.getSelected();
             if (selected != null)
             {

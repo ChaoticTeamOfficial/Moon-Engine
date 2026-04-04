@@ -21,7 +21,7 @@ class Nametag extends MoonSprite
 	{
 		this.character = character;
 
-		loadGraphic((character != 'locked') ? Paths.image('$character/charSelect/nametag', 'characters') : Paths.image('menus/charSelect/lockedNametag'));
+		loadGraphic((character != 'locked') ? Paths.image('$character/${character}Chill/nametag', 'characters') : Paths.image('menus/charSelect/lockedNametag'));
 		this.shader = mosaic;
 		MoonUtils.cancelActiveTwn(mosaicTwn);
 

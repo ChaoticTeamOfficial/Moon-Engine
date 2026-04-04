@@ -125,7 +125,7 @@ class Note extends MoonSprite
         script.get("createStaticNote")(curSkin, dir);
 
         //TODO: Have a setting for this instead, and make it use the default one!
-        useQuantization = script?.get("useQuantization") ?? true;
+        useQuantization = script?.get("useQuantization") ?? false;
         updateQuantAnim();
         updateHitbox();
         playAnim(dir);

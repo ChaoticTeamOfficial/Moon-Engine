@@ -92,7 +92,7 @@ class PauseScreen extends FlxSubState
     public var pauseItems:FlxTypedGroup<UIButton> = new FlxTypedGroup<UIButton>();
 
     private var pf:PlayField;
-    var game(get, never):PlayState;
+    var game:PlayState = PlayState.instance;
     var center:Float = 0;
 
     public function new(camera:FlxCamera)
@@ -300,7 +300,4 @@ class PauseScreen extends FlxSubState
             counter--;
         }, 5);
     }
-
-    @:noCompletion function get_game():PlayState
-        return PlayState.instance;
 }
