@@ -4,8 +4,14 @@ using StringTools;
 
 // public fields on my life
 @:publicFields
+
+/**
+ * The SongLibrary class basically handles the entire game Song List!
+ * It separates weeks onto categories.
+ **/
 class SongLibrary
 {
+	@:dox(hide)
 	static var instance:SongLibrary;
 
 	static function get():SongLibrary
@@ -14,19 +20,28 @@ class SongLibrary
 		return instance;
 	}
 
+	/**
+	 * An array containing all the found difficulties.
+	 */
 	var allDifficulties:Array<Difficulty> = [];
+
+	/**
+	 * All the songs separated by week. `all` is a value that'll list every available song.
+	 */
 	var songsByWeek:Map<String, Array<SongBase>> = [];
+
+	/**
+	 * All the available songs.
+	 */
 	var allSongs:Array<SongBase> = [];
 
+	@:dox(hide)
 	function new()
 	{
 		loadDifficulties();
 		scanSongs();
 	}
 
-	/**
-	 * Loads all difficulty definitions.
-	 */
 	private function loadDifficulties():Void
 	{
 		// we want to reset the array just to guarantee nothing goes wrong...
@@ -109,6 +124,8 @@ class SongLibrary
 
 	/**
 	 * Returns all available difficulties for a song.
+	 * @param song The song's name.
+	 * @param mix  The song's mix.
 	 */
 	function availableDifficulties(song:String, mix:String):Array<Difficulty>
 	{
@@ -125,6 +142,7 @@ class SongLibrary
 
 	/**
 	 * Gets a song list for a specific week (returns all found songs if week == 'all')
+	 * @param week The week's name.
 	 */
 	function weekSonglist(week:String = 'all'):Array<SongBase>
 		return (week == 'all') ? allSongs : (songsByWeek?.get(week) ?? []);

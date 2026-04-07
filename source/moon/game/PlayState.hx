@@ -11,14 +11,14 @@ import moon.game.obj.Character;
 import moon.menus.*;
 import moon.game.submenus.*;
 import moon.game.obj.*;
+import moon.toolkit.level_editor.*;
+import moon.backend.gameplay.*;
 
 import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
-import moon.toolkit.level_editor.*;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
-import moon.backend.gameplay.Replay;
 
 using StringTools;
 
@@ -177,7 +177,7 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onPostCreate');
 		setEvents();
 
-		playField.onSongRestart = () -> {
+		playField.onSongRestart.add(() -> {
 			FlxTween.cancelTweensOf(camGAME);
 			FlxTween.cancelTweensOf(camFollower);
 
@@ -203,10 +203,10 @@ class PlayState extends FlxTransitionableState
 	    		}
 	    	}
 			Global.scriptCall('onSongRestart');
-		};
+		});
 		
-		playField.onGhostTap = (keyDir) -> Global.scriptCall('onGhostTap', [keyDir]);
-		playField.onNoteHit = (playerID, note, timing, isSustain) -> 
+		playField.onGhostTap.add((keyDir) -> Global.scriptCall('onGhostTap', [keyDir]));
+		playField.onNoteHit.add((playerID, note, timing, isSustain) -> 
 		{
 			final combo = playField.inputHandlers.get('p1').stats.combo;
 
@@ -216,9 +216,9 @@ class PlayState extends FlxTransitionableState
 						cast(spectator, Character).playAnim((combo == 50) ? 'combo50' : 'combo200',true);
 
 			Global.scriptCall('onNoteHit', [playerID, note, timing, isSustain]);
-		};
+		});
 
-		playField.onNoteMiss = (playerID, note) -> 
+		playField.onNoteMiss.add((playerID, note) -> 
 		{
 			if(playerID == 'p1')
 				for(spectator in stage.spectators.members)
@@ -226,14 +226,11 @@ class PlayState extends FlxTransitionableState
 						cast(spectator, Character).playAnim('comboBreak', true);
 			
 			Global.scriptCall('onNoteMiss', [playerID, note]);
-		};
+		});
 		
-		playField.onSongCountdown = (number) -> Global.scriptCall('onSongCountdown', [number]);
+		playField.onSongCountdown.add((number) -> Global.scriptCall('onSongCountdown', [number]));
 
-		playField.onSongStart = () -> Global.scriptCall('onSongStart');
-
-		playField.inCutscene = (callScriptField('onCutsceneStart'));
-		if(playField.inCutscene)Global.scriptCall('onCutsceneStart');
+		playField.onSongStart.add(() -> Global.scriptCall('onSongStart'));
 		playField.playback.onFinish.add(()->endSong());
 
 		//trace(SongData.retrieveData(song, difficulty, mix));
@@ -253,22 +250,6 @@ class PlayState extends FlxTransitionableState
 	{
 		FlxTimer.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
         FlxTween.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
-	}
-
-	/**
-	 * Calls a field in the script if it exists.
-	 * @param field The field's name.
-	 * @return true or false depending if the field exists or not.
-	 */
-	public function callScriptField(field:String, ?args:Null<Array<Dynamic>>):Bool
-	{
-		if (songScript != null && songScript.exists(field)) 
-		{
-			songScript.call(field, args);
-			return true;
-		}
-
-		return false;
 	}
 
 	public function setEvents()

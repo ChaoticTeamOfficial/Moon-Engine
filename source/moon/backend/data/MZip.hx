@@ -9,6 +9,10 @@ import haxe.io.BytesInput;
 import sys.io.File;
 
 @:publicFields
+
+/**
+ * A class that supports zip file reading. I did not use it, but it was a fun experiment!
+ */
 class MZip
 {
     /**

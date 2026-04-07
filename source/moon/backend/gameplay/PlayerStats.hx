@@ -1,6 +1,10 @@
 package moon.backend.gameplay;
 
 @:publicFields
+
+/**
+ * A class in which stores stats for a player.
+ */
 class PlayerStats
 {
     /**
@@ -14,17 +18,17 @@ class PlayerStats
     var accuracyCount(default, set):Float = 0;
 
     /**
-     * Total accuracy by said player.
+     * The player's precise accuracy.
      */
     var accuracy:Float = 0;
 
     /**
-     * Total misses by said player, either by ghost tapping or missing notes.
+     * The player's total misses, either by ghost tapping or missing notes.
      */
     var misses(default, set):Int = 0;
 
     /**
-     * Total score by said player, gained by each note hit, depending on the Timing it got.
+     * The player's total score that increases depending on the judgement.
      */
     var score:Int = 0;
 
@@ -49,12 +53,12 @@ class PlayerStats
     var noSustainHighestCombo:Int = 0;
 
     /**
-     * The total health by said player.
+     * This player's total health.
      */
     var health(default, set):Float = 50;
 
     /**
-     * The ID of this player.
+     * This player's ID.
      */
     var playerID:String = 'p1';
 
@@ -74,7 +78,7 @@ class PlayerStats
 
     /**
      * Creates states for a specific player
-     * @param playerID The player ID that'll be used. (e.g. `p1, opponent[...]`)
+     * @param playerID The player ID that'll be used. (e.g. `p1`, `opponent`)
      */
     function new(playerID:String = 'p1')
     {
@@ -102,6 +106,7 @@ class PlayerStats
             judgementsCounter.set(judge, 0);
     }
 
+    @:dox(hide)
     @:noCompletion function set_accuracyCount(value:Float):Float
     {
         accuracyCount = value;
@@ -109,6 +114,7 @@ class PlayerStats
         return value;
     }
 
+    @:dox(hide)
     @:noCompletion function set_totalNotes(value:Int):Int
     {
         totalNotes = value;
@@ -116,6 +122,7 @@ class PlayerStats
         return value;
     }
 
+    @:dox(hide)
     @:noCompletion function set_health(value:Float):Float
     {
         if(value <= 100)
@@ -124,6 +131,7 @@ class PlayerStats
         return value;
     }
 
+    @:dox(hide)
     @:noCompletion function set_misses(misses:Int):Int
     {
         this.misses = misses;
@@ -133,6 +141,7 @@ class PlayerStats
         return this.misses;
     }
 
+    @:dox(hide)
     @:noCompletion function set_combo(combo:Int):Int
     {
         this.combo = combo;
@@ -143,6 +152,7 @@ class PlayerStats
         return this.combo;
     }
 
+    @:dox(hide)
     @:noCompletion function set_noSustainCombo(noSustainCombo:Int):Int
     {
         this.noSustainCombo = noSustainCombo;

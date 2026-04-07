@@ -2,17 +2,11 @@ package moon.game.obj;
 
 import moon.menus.Freeplay;
 import flixel.tweens.FlxTween;
-import flixel.math.FlxMath;
 import moon.game.obj.judgements.*;
-import moon.backend.gameplay.PlayerStats;
-import flixel.FlxSprite;
-import flixel.util.FlxTimer;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.FlxG;
-import flixel.group.FlxGroup;
 import moon.game.obj.notes.*;
 import moon.backend.gameplay.*;
+import moon.backend.gameplay.PlayerStats;
+import flixel.util.FlxSignal;
 
 @:publicFields
 class PlayField extends FlxGroup
@@ -45,37 +39,35 @@ class PlayField extends FlxGroup
 
     static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
 
-    // -- CALLBACKS -- //
+    /**
+     * Dispatched whenever a song is started.
+     */
+    final onSongStart = new FlxTypedSignal<Void->Void>();
 
     /**
-     * Called whenever a song is started.
+     * Dispatched whenever the song is restarted.
      */
-    var onSongStart:Void->Void;
+    final onSongRestart = new FlxTypedSignal<Void->Void>();
 
     /**
-     * Called whenever the song is restarted
+     * Dispatched when the countdown is happening.
      */
-    var onSongRestart:Void->Void;
+    final onSongCountdown = new FlxTypedSignal<Int->Void>();
 
     /**
-     * Called when countdown is happening.
+     * Dispatched whenever a note gets hit (Good Hit.)
      */
-    var onSongCountdown:Int->Void;
+    final onNoteHit = new FlxTypedSignal<(playerID:String, note:Note, timing:String, isSustain:Bool)->Void>();
 
     /**
-     * Called whenever a note gets hit (Good Hit.)
+     * Dispatched whenever a note is missed (Bad Hit.)
      */
-    var onNoteHit:(String, Note, String, Bool)->Void;
-
-    /**
-     * Called whenever a note is missed (Bad Hit.)
-     */
-    var onNoteMiss:(String, Note)->Void;
+    final onNoteMiss = new FlxTypedSignal<(playerID:String, note:Note)->Void>();
     
     /**
-     * Called whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
+     * Dispatched whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
      */
-    var onGhostTap:Int->Void;
+    final onGhostTap = new FlxTypedSignal<Int->Void>();
 
     /**
      * Creates a gameplay scene on screen.
@@ -153,9 +145,9 @@ class PlayField extends FlxGroup
             if (playerIDs[i] == 'p1' && replay != null)
                 inputHandler.loadReplay(replay);
 
-            inputHandler.onNoteHit = (note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain);
-            inputHandler.onNoteMiss = (note) -> onMiss(playerIDs[i], note);
-            inputHandler.onGhostTap = (keyDir) -> if(onGhostTap != null) onGhostTap(keyDir);
+            inputHandler.onNoteHit.add((note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain));
+            inputHandler.onNoteMiss.add((note) -> onMiss(playerIDs[i], note));
+            inputHandler.onGhostTap.add((keyDir) -> onGhostTap.dispatch(keyDir));
         }
 
         // Little text for testing out the accuracy.
@@ -276,7 +268,7 @@ class PlayField extends FlxGroup
 
         healthBar.performTransition(conductor);
 
-        if(onSongRestart != null) onSongRestart();
+        onSongRestart.dispatch();
         inCountdown = true;
     }
 
@@ -381,7 +373,7 @@ class PlayField extends FlxGroup
         //final input = inputHandlers.get(playerID);
         //input.attachedChar
 
-        if(onNoteHit != null) onNoteHit(playerID, note, timing, isSustain);
+        onNoteHit.dispatch(playerID, note, timing, isSustain);
     }
 
     var statShake:FlxTween;
@@ -404,7 +396,7 @@ class PlayField extends FlxGroup
 
             playback.muteStatus(Voices_Player, MoonSettings.callSetting('Mute Voices on Miss'));
         }
-        if(onNoteMiss != null) onNoteMiss(playerID, note);
+        onNoteMiss.dispatch(playerID, note);
     }
 
     private function updateP1Stats(judgement, ?statsOnly = false):Void
@@ -447,12 +439,12 @@ class PlayField extends FlxGroup
                 case 0: 
                     playback.state = PLAY;
                     inCountdown = false;
-                    if(onSongStart != null) onSongStart();
+                    onSongStart.dispatch();
                 //case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
                 //default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
             }
 
-            if(onSongCountdown != null) onSongCountdown(Std.int(beat));
+            onSongCountdown.dispatch(Std.int(beat));
        }
     }
 

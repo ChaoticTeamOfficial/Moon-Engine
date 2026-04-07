@@ -1,21 +1,19 @@
 package moon.backend.gameplay;
 
-import flixel.math.FlxMath;
 import moon.game.obj.Character;
 import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
-import moon.backend.gameplay.Timings;
 import lime.system.System;
 import moon.backend.gameplay.Replay.ReplayInput;
+import flixel.util.FlxSignal;
 
 /**
- * Class meant to handle note inputs in a gameplay scene.
+ * Class meant to handle note inputs and player stats in a gameplay scene.
  **/
 class InputHandler
 {
     /**
-     * Playerstats used in here.
-     * TODO: make a better description for this ;V
+     * The player's stats, which holds accuracy, score, etc.
      */
     public var stats:PlayerStats;
 
@@ -39,9 +37,7 @@ class InputHandler
      */
     public var conductor:Conductor;
 
-    /**
-     * Map for the sustain notes.
-     */
+    @:dox(hide)
     public var heldSustains:Map<Int, Note> = new Map<Int, Note>();
 
     /**
@@ -50,32 +46,32 @@ class InputHandler
     public var thisNotes:Array<Note> = [];
 
     /**
-     * Function called whenever a note gets hit (Good Hit.)
+     * Signal dispached whenever a note gets hit (Good Hit.)
      */
-    public var onNoteHit:(Note, String, Bool)->Void;
+    public final onNoteHit = new FlxTypedSignal<(note:Note, timing:String, isSustain:Bool)->Void>();
 
     /**
-     * Function called whenever a note is missed (Bad Hit.)
+     * Signal dispached whenever a note is missed (Bad Hit.)
      */
-    public var onNoteMiss:Note->Void;
+    public final onNoteMiss = new FlxTypedSignal<Note->Void>();
     
     /**
-     * Function called whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
+     * Signal dispatched whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
      */
-    public var onGhostTap:Int->Void;
+    public final onGhostTap = new FlxTypedSignal<Int->Void>();
 
     /**
-     * Function called whenever a key is released.
+     * Signal dispatched whenever a key is released.
      */
-    public var onKeyRelease:Int->Void;
+    public final onKeyRelease = new FlxTypedSignal<Int->Void>();
 
     /**
-     * Function called whenever a sustain gets completed (held till the end.)
+     * Signal dispatched whenever a sustain gets completed (held till the end.)
      */
-    public var onSustainComplete:Note->Void;
+    public final onSustainComplete = new FlxTypedSignal<Note->Void>();
 
     /**
-     * An character to be attached, useful for playing animations.
+     * A character which will play sing animations automatically.
      */
     public var attachedChar:Character;
 
@@ -90,19 +86,19 @@ class InputHandler
     public var pressed:Array<Bool> = [];
 
     /**
-     * Array for all the the keys on the 'released' state.
+     * Array for all the the keys on the 'justReleased' state.
      */
     public var released:Array<Bool> = [];
 
     // -- REPLAY SYSTEM STUFF
 
     /**
-     * Whether is on replay mode or not.
+     * Whether is the input on replay mode or not.
      */
     public var isReplay:Bool = false;
 
     /**
-     * Whether is recording a replay or not.
+     * Whether is the input recording a replay or not.
      */
     public var recording:Bool = false;
 
@@ -166,6 +162,7 @@ class InputHandler
 
     private var forcedJudgements:Map<Int, String> = [];
 
+    @:dox(hide)
     public function update():Void
     {
         if (isReplay) processReplayInputs();
@@ -277,7 +274,7 @@ class InputHandler
                     if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true, judgement: null});
                     forcedJudgements.remove(i);
 
-                    if (onGhostTap != null) onGhostTap(i);
+                    onGhostTap.dispatch(i);
                     strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
                     if (!MoonSettings.callSetting('Ghost Tapping'))
                     {
@@ -295,7 +292,7 @@ class InputHandler
             {
                 if (recording) recordedInputs.push({time: conductor.time, dir: i, press: false, judgement: null});
 
-                if (onKeyRelease != null) onKeyRelease(i);
+                onKeyRelease.dispatch(i);
                 strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-static', true);
 
                 if (heldSustains.exists(i))
@@ -340,10 +337,10 @@ class InputHandler
 
         if((timing == 'good' || timing == 'bad' || timing == 'shit' || timing == 'miss') && stats.isGold) stats.isGold = false;
 
-        (timing != 'miss' && onNoteHit != null) ? onNoteHit(note, timing, isSustain) : (timing == 'miss') ? onMiss(note) : null;
+        (timing != 'miss') ? onNoteHit.dispatch(note, timing, isSustain) : (timing == 'miss') ? onMiss(note) : null;
     }
 
-    public function onMiss(note:Note):Void
+    private function onMiss(note:Note):Void
     {
         if(note != null)
         {
@@ -363,7 +360,7 @@ class InputHandler
         stats.noSustainCombo = 0;
         stats.updtAccuracy();
         
-        if(onNoteMiss != null) onNoteMiss(note);
+        onNoteMiss.dispatch(note);
     }
 
     // Map for tracking the last conductor step a sustain note was hit on.
@@ -401,8 +398,7 @@ class InputHandler
                     
                     strumline.members[direction].sustainSplash.despawn(CPUMode);
                     
-                    if (onSustainComplete != null) 
-                        onSustainComplete(heldNote);
+                    onSustainComplete.dispatch(heldNote);
 
                     heldSustains.remove(direction);
                     lastSustainStep.remove(direction);
@@ -426,15 +422,17 @@ class InputHandler
 
     /**
      * Checks if the note is within timing,
-     * @param note 
-     * @return Bool
-        return checkTiming(note) != null
+     * @param note The note it'll check the timing 
+     * returns checkTiming(note) != null
      */
     private function isWithinTiming(note:Note, ?dir:Int = -1):Bool
     {
         // during replay, if a forced judgement is waiting for this direction, 
         // always allow the note through regardless of current time.
-        // needed due to toffee's pc being trash and sometimes lag spiking.
+        // needed due to toffee's (old) pc being trash and sometimes lag spiking.
+
+        //OKAY I JUST FOUND OUT THAT IT STILL APPLIES THE WRONG JUDGEMENT
+        // ugh I'll figure this out l8r...
         if (isReplay && dir >= 0 && forcedJudgements.exists(dir))
             return true;
 

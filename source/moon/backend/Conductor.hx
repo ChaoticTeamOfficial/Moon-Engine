@@ -3,14 +3,10 @@ package moon.backend;
 import lime.app.Event;
 
 /**
-	The conductor. Steps, beats, and measures use floats because this class was carried over from the original version from fnf zenith.
-	Also, time signature changing math was implemented here.
-
-    Class made entirely by @SomeGuyWhoLovesCoding (https://github.com/SomeGuyWhoLovesCoding)
-	Revamped math by @sword_352 (https://github.com/Sword352)
-	
-	All I made here was to make some few changes that I am comfortable with, so all credits goes to them ^^
-**/
+ * Conductor made entirely by [SomeGuyWhoLovesCoding](https://github.com/SomeGuyWhoLovesCoding)
+ * Revamped math by [sword_352](https://github.com/Sword352).
+ * All I made here was to make some few changes that I am comfortable with, so all credits goes to them.
+ */
 @:publicFields
 class Conductor
 {

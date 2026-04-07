@@ -1,8 +1,12 @@
-    package moon.backend.gameplay;
+package moon.backend.gameplay;
 
 import flixel.util.FlxColor;
 
 @:publicFields
+
+//TODO: reorganize this class, and documment it properly.
+// the reason as to why i'm not doing it *right now* is simply because I
+// will change how the judgements are organized!
 class Timings
 {
     static var judgementsMap:Map<String, Array<Dynamic>> = [

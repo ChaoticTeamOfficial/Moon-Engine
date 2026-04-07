@@ -9,50 +9,59 @@ typedef DialogueLine = {
     /**
      * The character who's speaking.
      */
-    ?character:String,
+    var ?character:String;
+
     /**
      * The expression a character will do.
      */
-    ?expression:String,
+    var ?expression:String;
+
     /**
      * The text displayed when a character speaks.
      */
-    text:String,
+    var text:String;
+
     /**
      * The text's speed.
      */
-    ?speed:Float,
+    var ?speed:Float;
+
     /**
      * The event that'll execute on this dialogue line (if exists.)
      */
-    ?events:Array<DialogueEvent>,
+    var ?events:Array<DialogueEvent>;
+
     /**
      * Color that overrides the character's one if exists.
      */
-    ?color:Array<Int>,
+    var ?color:Array<Int>;
+
     /**
      * The tweened animation the portrait will do.
      */
-    ?anim:moon.game.obj.dialogue.Portrait.PortraitAnim
+    var ?anim:moon.game.obj.dialogue.Portrait.PortraitAnim;
 }
 
 /**
  * Structure for a Dialogue Event.
- */
+ **/
 typedef DialogueEvent = {
+
     /**
      * Character range in the line that this event affects.
      * Inclusive start, exclusive end.
      */
-    ?range:{ start:Int, end:Int },
+    var ?range:{ start:Int, end:Int };
+
     /**
      * The event's name.
      */
-    name:String,
+    var name:String;
+
     /**
      * The event's values.
      */
-    values:Dynamic
+    var values:Dynamic;
 }
 
 /**
@@ -67,8 +76,16 @@ typedef DialogueFile = {
 
 @:publicFields
 @:forward
+
+/**
+ * This abstract basically loads a dialogue file and returns it.
+ */
 abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
 {
+    /**
+     * Gets a dialogue file and returns its data.
+     * @param dialogueFile the Path to the dialogue file (Paths usage is not needed.)
+     */
     static function getDialogue(dialogueFile:String):Dialogue
     {
         if (Paths.exists('$dialogueFile.json'))
@@ -80,8 +97,9 @@ abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
 }
 
 /**
- * Class used for parsing dialogue tag events.
- */
+ * Class used for parsing dialogue tag events. I won't write it's documentation that much because it's very... complicated.
+ * Plus I don't see why modders would need it soo... if you're reading this, my apologies :(
+ **/
 class DialogueParser
 {
     /**

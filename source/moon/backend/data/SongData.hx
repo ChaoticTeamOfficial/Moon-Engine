@@ -3,13 +3,31 @@ package moon.backend.data;
 import flixel.util.FlxSave;
 import haxe.ds.StringMap;
 
+/**
+ * The stats data that will be saved once a song is completed.
+ **/
 typedef SongScoreData = {
-    score:Int,
-    misses:Int,
-    accuracy:Float
+    /**
+     * The score the player got.
+     */
+    var score:Int;
+
+    /**
+     * The misses the player got.
+     */
+    var misses:Int;
+
+    /**
+     * The player's accuracy during a song.
+     */
+    var accuracy:Float;
 }
 
 @:publicFields
+
+/**
+ * A class that's used for saving a song's score, misses and accuracy.
+ **/
 class SongData
 {
     /**
@@ -22,6 +40,7 @@ class SongData
      */
     static var songs:StringMap<SongScoreData> = new StringMap<SongScoreData>();
 
+    @:dox(hide)
     static function init()
     {
         save.bind(Constants.SONGDATA_SAVE_BIND);
@@ -50,12 +69,12 @@ class SongData
 
     /**
      * Saves a song data.
-     * @param songName The song's name.
+     * @param songName   The song's name.
      * @param difficulty The song's difficulty
-     * @param mix The character mix.
-     * @param score The score.
-     * @param misses The misses.
-     * @param accuracy The accuracy.
+     * @param mix        The character mix.
+     * @param score      The score.
+     * @param misses     The misses.
+     * @param accuracy   The accuracy.
      * returns if the data got saved or not.
      */
     static function saveData(songName:String, difficulty:String, mix:String, score:Int, misses:Int, accuracy:Float):Bool

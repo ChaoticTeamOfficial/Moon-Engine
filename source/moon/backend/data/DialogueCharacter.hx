@@ -9,7 +9,7 @@ typedef DialogueChar = {
     /**
      * The name that will be displayed when a character is speaking.
      */
-    ?displayName:String,
+    var ?displayName:String;
 
     /**
      * Data for dialogue sounds.
@@ -17,33 +17,41 @@ typedef DialogueChar = {
      * @param playType How will the sound play. Types: `order`, `random`, `order-double` and `even-odds`.
      * @param pitchIntensity How much will the pitch vary when typing.
      */
-    ?soundData:{sounds:Array<String>, ?playType:String, ?pitchIntensity:Float},
+    var ?soundData:{sounds:Array<String>, ?playType:String, ?pitchIntensity:Float};
 
     /**
-     * Position in-screen.
+     * Position of the character in-screen.
      */
-    ?position:Array<Float>,
+    var position:Array<Float>;
 
     /**
      * The sprite's antialiasing,
      */
-    ?antialiasing:Bool,
+    var antialiasing:Bool;
 
     /**
      * All the animations on this portrait.
      */
-    animations:Array<Paths.AnimationData>,
+    var animations:Array<Paths.AnimationData>;
 
     /**
      * The color that will override the character's default.
      */
-    ?color:Array<Int>
+    var color:Array<Int>;
 }
 
 @:publicFields
 @:forward
+
+/**
+ * An abstract that reads a DialogueChar file and returns its data.
+ */
 abstract DialogueCharacter(DialogueChar) from DialogueChar to DialogueChar
 {
+    /**
+     * Gets the dialogueChar file and returns its data.
+     * @param characterPath The character's name.
+     */
     static function getChar(characterPath:String):DialogueCharacter
     {
         final actualPath = 'characters/$characterPath/dialogue/data';
