@@ -116,7 +116,7 @@ class Character extends MoonSprite
 
         if(!Paths.exists('characters/$char/data.json'))
         {
-            trace('Specified character "$char" data does not exist. Loading default...', "WARNING");
+            trace('[CHARACTER] Specified character "$char" data does not exist. Loading default...', "WARNING");
             char = 'asmile-erect';
         }
 

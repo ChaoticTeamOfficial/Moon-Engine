@@ -241,7 +241,7 @@ class Chart
         // vslice, because vslice will be our main 'base' for converting.
         // (thanks moonchart for existing its BASED AF)
 
-        trace('choosing format', "DEBUG");
+        //trace('choosing format', "DEBUG");
         final chart = switch (type)
         {
             // This switch is a mess btw!!!
@@ -254,12 +254,12 @@ class Chart
             default: new FNFVSlice().fromFile(path, metaPath, difficulty);
         };
 
-        trace('done! reading content', "DEBUG");
+        //trace('done! reading content', "DEBUG");
 
         final data = Json.parse(chart.stringify().data);
         final metadata = Json.parse(chart.stringify().meta);
 
-        trace('content read! now, converting notes', "DEBUG");
+        //trace('content read! now, converting notes', "DEBUG");
         // Now we create a variable for the converted chart.
         var convertedChart:ChartStruct = {notes: [], meta: null};
         var convertedEvents:Array<EventStruct> = [];
@@ -286,7 +286,7 @@ class Chart
 
         convertedChart.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
 
-        trace('converting events', "DEBUG");
+        //trace('converting events', "DEBUG");
 
         // time to convert some basic events (such as camera and stuff)
         final events:Array<Dynamic> = data.events;
@@ -382,7 +382,7 @@ class Chart
 
         convertedEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
 
-        trace('converting metadata', "DEBUG");
+        //trace('[CHART] converting metadata', "DEBUG");
 
         // Now let's convert the metadata as well.
         convertedChart.meta =

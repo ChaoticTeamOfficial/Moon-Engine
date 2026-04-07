@@ -43,7 +43,7 @@ class Countdown
 		countdownNum--;
 		if(countdownNum >= 0)
 		{
-			trace('Performing countdown! ($countdownNum)', "INFO");
+			trace('[COUNTDOWN] Performing! ($countdownNum)', "INFO");
 			Paths.playSFX('game/countdown/intro-$countdownNum$audioSuffix.ogg');
 
 			final path = 'ingame/UI/countdown/graphic-$countdownNum$graphicSuffix';
@@ -59,7 +59,7 @@ class Countdown
 		}
 		else
 		{
-			trace('The countdown has finished.', "INFO");
+			trace('[COUNTDOWN] The countdown has finished.', "INFO");
 			countdownActive = false;
 		}
 	}

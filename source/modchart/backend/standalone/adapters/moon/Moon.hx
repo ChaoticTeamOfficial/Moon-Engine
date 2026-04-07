@@ -26,7 +26,7 @@ class Moon implements IAdapter
 	}
 
 	public function onModchartingInitialization() {
-		trace('Moon Engine\'s modchart adapter initialized!');
+		trace('[MOON] Moon Engine\'s modchart adapter initialized!');
 
 		FlxG.signals.postDraw.add(postDraw);
 		FlxG.signals.preStateSwitch.addOnce(() -> FlxG.signals.postDraw.remove(postDraw));

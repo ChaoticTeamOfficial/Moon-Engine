@@ -94,7 +94,7 @@ class VideoSubState extends FlxSubState
     public function new(?params:VideoParams)
     {
         super();
-        trace("VIDEOS ARE ONLY SUPPORTED ON C++ TARGETS!", "WARNING");
+        trace("[VIDEO] VIDEOS ARE ONLY SUPPORTED ON C++ TARGETS!", "WARNING");
 
         if(params.onComplete != null) params.onComplete();
         close();

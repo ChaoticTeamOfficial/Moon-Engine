@@ -7,7 +7,7 @@ class EditorPopup extends FlxSubState
     var bg:MoonSprite;
     var textTitle:FlxText = new FlxText();
     var textDescription:FlxText = new FlxText();
-    var button1:PopupButton;
+    //var button1:PopupButton;
 
     public function new(type:PopupType, info:{title:String, description:String, button1:String, button2:String}, coverBG:Bool = true)
     {

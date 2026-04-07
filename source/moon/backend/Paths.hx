@@ -111,7 +111,7 @@ class Paths
         {
             if (!fileExists(key, library))
             {
-                trace('$key doesnt exist!', "ERROR");
+                trace('[PATHS] $key doesnt exist!', "ERROR");
                 return null;
             }
 
@@ -139,7 +139,7 @@ class Paths
         {
             if (!fileExists(imagePath, library))
             {
-                trace('$imagePath does not exist!', "ERROR");
+                trace('[PATHS] $imagePath does not exist!', "ERROR");
                 return null;
             }
 
@@ -193,8 +193,8 @@ class Paths
 
         if(clearCount.length > 0)
         {
-            trace('cleared $clearCount', "DEBUG");
-            trace('cleared ${clearCount.length} assets', "DEBUG");
+            trace('[PATHS] cleared $clearCount', "DEBUG");
+            trace('[PATHS] cleared ${clearCount.length} assets', "DEBUG");
         }
 
         // uhhhh
@@ -299,8 +299,8 @@ class Paths
             }
         }
 
-        if(clearedGraphics.length > 0) trace('cleared graphics $clearedGraphics', "DEBUG");
-        if(clearedSounds.length > 0) trace('cleared sounds $clearedSounds', "DEBUG");
+        if(clearedGraphics.length > 0) trace('[PATHS] cleared graphics $clearedGraphics', "DEBUG");
+        if(clearedSounds.length > 0) trace('[PATHS] cleared sounds $clearedSounds', "DEBUG");
     }
     
     public static function sound(key:String, from:String = 'music', ?library:String):Sound
@@ -323,7 +323,7 @@ class Paths
         var bytes:Bytes = getFileBytes(path, library);
         if (bytes == null)
         {
-            trace('$path doesnt exist!', "ERROR");
+            trace('[PATHS] $path doesnt exist!', "ERROR");
             return "";
         }
         return bytes.toString();

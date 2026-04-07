@@ -55,7 +55,7 @@ class MoonScript
             for(variableName => variableValue in DEFAULT_VARIABLES)
                 code.set(variableName, variableValue);
         }
-        else trace('Script path at $path was not found!', "ERROR");
+        else trace('[MOON-SCRIPT] Script path at $path was not found!', "ERROR");
     }
 
     @:inheritDoc(Iris.get)

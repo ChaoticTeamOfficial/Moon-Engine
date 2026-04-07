@@ -232,7 +232,7 @@ class MoonSettings
         final screenH = Capabilities.screenResolutionY;
         if (resArr[0] > screenW || resArr[1] > screenH)
         {
-            trace('Selected resolution ${resArr[0]}x${resArr[1]} exceeds monitor resolution ${screenW}x${screenH}. Resetting to 800x600.', "DEBUG");
+            //trace('Selected resolution ${resArr[0]}x${resArr[1]} exceeds monitor resolution ${screenW}x${screenH}. Resetting to 800x600.', "DEBUG");
             setSetting("Window Resolution", "800x600");
             curRes = "800x600";
             resArr = resolutions.get(curRes);
@@ -275,7 +275,7 @@ class MoonSettings
     {
         var s:Setting = findSetting(name);
         
-        if(s == null) trace('Setting $name was not found when calling for it!', "ERROR");
+        if(s == null) trace('[SETTINGS] Setting $name was not found when calling for it!', "ERROR");
         return s != null ? s.value : null;
     }
 

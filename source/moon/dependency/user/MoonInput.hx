@@ -102,7 +102,7 @@ class MoonInput
         if ((MoonSettings.save.data.binds != null) && (Lambda.count(MoonSettings.save.data.binds) == Lambda.count(binds)))
             binds = cast MoonSettings.save.data.binds;
         else
-            trace("Control settings do not match or are missing. Loading defaults.", "WARNING");
+            trace("[CONTROLS] Control settings do not match or are missing. Loading defaults.", "WARNING");
         saveControls();
     }
 

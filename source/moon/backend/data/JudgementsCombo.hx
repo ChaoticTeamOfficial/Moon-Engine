@@ -24,7 +24,7 @@ abstract JudgementsCombo(JudgementsComboFile) from JudgementsComboFile to Judgem
         if(Paths.exists('images/combo_judgements/$skin/config.json'))
             return Paths.JSON('images/combo_judgements/$skin/config');
         else
-            trace('$skin was not found within the combo judgements directory.', "ERROR");
+            trace('[JUDGEMENTS-COMBO] $skin was not found within the combo judgements directory.', "ERROR");
 
         return null;
     }

@@ -58,7 +58,7 @@ class EventRegistry
             var eventInstance = Type.createInstance(eventClass, [game, event]);
             eventInstance.execute();
         }
-        else trace('Unknown event: ${event.tag}', "WARNING");
+        else trace('[EVENT-REGISTRY] Unknown event: ${event.tag}', "WARNING");
     }
 
     /**

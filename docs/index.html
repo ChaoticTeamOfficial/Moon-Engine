@@ -3,29 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moon Engine API Documentation</title>
+    <title>Moon Engine Modding Docs</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <nav class="sidebar" id="sidebar">
-            <h2 class="sidebar-title">Moon Engine API</h2>
-            <ul class="sidebar-menu">
+       <nav class="sidebar" id="sidebar">
+			<h2 class="sidebar-title">Moon Engine Modding Docs</h2>
+			<ul class="sidebar-menu">
 				<div class="sidebar-indicator"></div>
 
-                <li class="menu-header">Introduction</li>
-                <li><a href="#introduction">Overview</a></li>
-                
-                <li class="menu-header">Getting Started</li>
-                <li><a href="#making-stage">Making a Stage</a></li>
-            </ul>
-        </nav>
+				<li class="menu-header">Introduction</li>
+				<li><a href="#introduction">Overview</a></li>
+				
+				<li class="menu-header">Getting Started</li>
+				<li class="has-submenu open">
+					<div class="parent-link">
+						<a href="#making-stage">Making a Stage</a>
+						<span class="toggle-arrow">▶</span>
+					</div>
+					<ul class="submenu">
+						<li><a href="#top-level-fields">Top Level Fields</a></li>
+						<li><a href="#camera-settings-fields">Camera Settings Fields</a></li>
+						<li><a href="#objects-fields">Objects Fields</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
         <div class="resizer" id="resizer"></div>
         <main class="content" id="content">
             <section id="introduction">
 				<h1>Introduction</h1>
 				<p>
-					Welcome to the <span style="color: #bb86fc;"><strong>Moon Engine API documentation!</strong></span><br><br>
+					Welcome to the <span style="color: #bb86fc;"><strong>Moon Engine modding documentation!</strong></span><br><br>
 					Moon Engine is a Friday Night Funkin’ framework built from scratch on
 					HaxeFlixel, designed to give modders full control and creative freedom over playable characters and such.<br>
 					This guide will walk you through the engine’s core features and help you
@@ -91,10 +101,173 @@
 }</code></pre>
                     <button class="copy-btn">Copy</button>
                 </div>
+				
+				<h2>Stage JSON Structure</h2>
+
+				<div id="top-level-fields" class="json-fields">
+					<h3>Top Level Fields</h3>
+					<div class="json-grid">
+						<div class="header">Field</div>
+						<div class="header">Type</div>
+						<div class="header">Description</div>
+						<div class="header">Default</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">camSettings</span></div>
+							<div class="cell"><span class="field-type">object</span></div>
+							<div class="cell field-description">Camera configuration (zoom + start position)</div>
+							<div class="cell"><span class="field-required">(required)</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">objects</span></div>
+							<div class="cell"><span class="field-type">array</span></div>
+							<div class="cell field-description">List of stage background objects</div>
+							<div class="cell"><span class="field-default">[]</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">characters</span></div>
+							<div class="cell"><span class="field-type">array</span></div>
+							<div class="cell field-description">Character positions and layering</div>
+							<div class="cell"><span class="field-required">(required)</span></div>
+						</div>
+					</div>
+				</div>
+
+				<div id="camera-settings-fields" class="json-fields">
+					<h3>Camera Settings Fields</h3>
+					<div class="json-grid">
+						<div class="header">Field</div>
+						<div class="header">Type</div>
+						<div class="header">Description</div>
+						<div class="header">Default</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">zoom</span></div>
+							<div class="cell"><span class="field-type">float</span></div>
+							<div class="cell field-description">Default camera zoom</div>
+							<div class="cell"><span class="field-default">0.9</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">startX</span></div>
+							<div class="cell"><span class="field-type">float</span></div>
+							<div class="cell field-description">Initial camera X position</div>
+							<div class="cell"><span class="field-default">751.5</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">startY</span></div>
+							<div class="cell"><span class="field-type">float</span></div>
+							<div class="cell field-description">Initial camera Y position</div>
+							<div class="cell"><span class="field-default">300</span></div>
+						</div>
+					</div>
+				</div>
+
+				<div id="objects-fields" class="json-fields">
+					<h3>Objects Fields</h3>
+					<div class="json-grid">
+						<div class="header">Field</div>
+						<div class="header">Type</div>
+						<div class="header">Description</div>
+						<div class="header">Default</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">name</span></div>
+							<div class="cell"><span class="field-type">string</span></div>
+							<div class="cell field-description">The sprite's name in the stage's path.</div>
+							<div class="cell"><span class="field-required">required</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">position</span></div>
+							<div class="cell"><span class="field-type">array(float)</span></div>
+							<div class="cell field-description">The sprite's position on the stage.</div>
+							<div class="cell"><span class="field-required">required</span></div>
+						</div>
+
+						<div class="row">
+							<div class="cell"><span class="field-name">type</span></div>
+							<div class="cell"><span class="field-type">string</span></div>
+							<div class="cell field-description">The sprite's type. Available types are:<br>"none", "sparrow" and "packed".</div>
+							<div class="cell"><span class="field-default">none</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">scale</span></div>
+							<div class="cell"><span class="field-type">array(float)</span></div>
+							<div class="cell field-description">The sprite's scale.</div>
+							<div class="cell"><span class="field-default">[1, 1]</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">scroll</span></div>
+							<div class="cell"><span class="field-type">array(float)</span></div>
+							<div class="cell field-description">The sprite's parallax.</div>
+							<div class="cell"><span class="field-default">[1, 1]</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">angle</span></div>
+							<div class="cell"><span class="field-type">float</span></div>
+							<div class="cell field-description">The sprite's angle.</div>
+							<div class="cell"><span class="field-default">0</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">alpha</span></div>
+							<div class="cell"><span class="field-type">float</span></div>
+							<div class="cell field-description">The sprite's alpha.</div>
+							<div class="cell"><span class="field-default">1</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">antialiasing</span></div>
+							<div class="cell"><span class="field-type">bool</span></div>
+							<div class="cell field-description">The sprite's antialiasing.</div>
+							<div class="cell"><span class="field-default">true</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">flipX</span></div>
+							<div class="cell"><span class="field-type">bool</span></div>
+							<div class="cell field-description">Whether should the sprite be flipped horizontally or not.</div>
+							<div class="cell"><span class="field-default">false</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">flipY</span></div>
+							<div class="cell"><span class="field-type">bool</span></div>
+							<div class="cell field-description">Whether should the sprite be flipped vertically or not.</div>
+							<div class="cell"><span class="field-default">false</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">blend</span></div>
+							<div class="cell"><span class="field-type">string</span></div>
+							<div class="cell field-description">The sprite's blend. Check 
+							<a href="https://api.openfl.org/openfl/display/BlendMode.html" target="_blank">the blend mode API</a> 
+							for available blends. Blend names can be either uppercase or lowercase!</div>
+							<div class="cell"><span class="field-default">null</span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><span class="field-name">animations</span></div>
+							<div class="cell"><span class="field-type">array(AnimationData)</span></div>
+							<div class="cell field-description">A list of animations.</div>
+							<div class="cell"><span class="field-default">null</span></div>
+						</div>
+						
+						<!-- TODO: ADD THE REST LMAO -->
+					</div>
+				</div>
+				
                 <p>Aaand this is the part where I write the rest. :P</p>
             </section>
         </main>
     </div>
     <script src="script.js"></script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e8a9924ddd5a156',t:'MTc3NTU4MTMyOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

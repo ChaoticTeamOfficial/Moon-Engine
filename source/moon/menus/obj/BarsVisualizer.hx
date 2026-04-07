@@ -7,14 +7,18 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
+#if !doc
 import funkin.vis.dsp.SpectralAnalyzer;
 import funkin.vis.audioclip.frontends.LimeAudioClip;
+#end
 import lime.media.AudioSource;
 
 @:publicFields
 class BarsVisualizer extends FlxSpriteGroup
 {
+	#if !doc
     var analyzer:SpectralAnalyzer;
+	#end
     var barCount:Int = 0;
     var debugMode:Bool = false;
 
@@ -37,11 +41,13 @@ class BarsVisualizer extends FlxSpriteGroup
 	
 	public function setAudioSource(src:AudioSource)
     {
+		#if !doc
 		analyzer = new SpectralAnalyzer(new LimeAudioClip(src), barCount + 1, 0.1, 10);
 
         #if sys
         analyzer.fftN = 256;
         #end
+		#end
     }
 
     @:generic
@@ -50,10 +56,12 @@ class BarsVisualizer extends FlxSpriteGroup
 
     override function draw()
     {
+		#if !doc
         var levels = analyzer.getLevels();
 
         for (i in 0...min(this.members.length, levels.length))
             this.members[i].scale.y = flixel.math.FlxMath.lerp(this.members[i].scale.y, levels[i].value, FlxG.elapsed * 24);
+		#end
         super.draw();
     }
 

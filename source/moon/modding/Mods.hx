@@ -62,7 +62,7 @@ class Mods
                 activeMods.push(mod);
         }
 
-        trace('Active mods (in order): ${[for(m in activeMods) m.name]}', "DEBUG");
+        trace('[MODS] Active mods (in order): ${[for(m in activeMods) m.name]}', "DEBUG");
     }
 
     static function saveConfig():Void
@@ -72,7 +72,7 @@ class Mods
         config.order = loadOrder;
 
         File.saveContent('mods/mods.json', Json.stringify(config, null, "\t"));
-        trace('Saved mod config!', "DEBUG");
+        trace('[MODS] Saved mod config!', "DEBUG");
         #end
     }
 

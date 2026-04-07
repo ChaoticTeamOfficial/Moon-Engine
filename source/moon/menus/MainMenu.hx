@@ -9,7 +9,7 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['test replay', 'test playlist', 'freeplay', 'convert chart yeah', 'mods', 'toolbox', 'settings', 'exit'];
+    final opt:Array<String> = ['test playlist', 'freeplay', 'convert chart yeah', 'mods', 'settings', 'exit'];
     var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -19,9 +19,25 @@ class MainMenu extends FlxTransitionableState
         super.create();
 
         Global.clearScriptList();
-        
-        var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+
+        var bg = new MoonSprite().loadGraphic(Paths.image('menus/menuDesat'));
+        bg.color = 0xFFffd863;
+        bg.x += 132;
         add(bg);
+
+        var blackBar = new MoonSprite().makeGraphic(564, FlxG.height, FlxColor.BLACK);
+        blackBar.skew.x = 10;
+        blackBar.x -= 100;
+        add(blackBar);
+
+        var welcome = new FlxText();
+        welcome.setFormat(Paths.font('tardling/Solid/Tardling-Solid.ttf'), 48, CENTER);
+        welcome.text = '- WELCOME TO FUNKIN\'! -';
+        add(welcome);
+        welcome.color = 0xFFffd863;
+        welcome.setBorderStyle(OUTLINE, FlxColor.BLACK, 4);
+        welcome.letterSpacing = -2;
+        welcome.y = 116;
 
         for (i in 0...opt.length)
         {

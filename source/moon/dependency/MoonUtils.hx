@@ -163,7 +163,7 @@ class MoonUtils
         if (Paths.exists(path))
             return Paths.getFileContent(path).split("\n").map((line) -> return line.trim());
         else 
-            trace('File at $path not found!', "ERROR");
+            trace('[UTILS] File at $path not found!', "ERROR");
         return null;
     }
 
@@ -274,7 +274,7 @@ class MoonUtils
                 tween = FlxTween.shake(sprite, 0.03, duration - 0.16, XY, {ease: FlxEase.expoOut, onComplete: _ -> getOutAnim(sprite,outAnim,setTween)});
 
             default:
-                trace('Unknown appear anim: $anim', "ERROR");
+                trace('[UTILS] Unknown appear anim: $anim', "ERROR");
                 getOutAnim(sprite, outAnim, setTween);
         }
 
@@ -322,7 +322,7 @@ class MoonUtils
                 tween = FlxTween.tween(sprite.scale, {x: squishX, y: squishY}, duration - 0.3, {startDelay: delay, ease: FlxEase.circIn, onComplete: _->sprite.alpha = 0.0001});
 
             default:
-                trace('Unknown disappear anim: $anim', "ERROR");
+                trace('[UTILS] Unknown disappear anim: $anim', "ERROR");
                 sprite.alpha = 0.0001;
         }
 

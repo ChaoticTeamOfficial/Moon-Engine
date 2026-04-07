@@ -85,7 +85,7 @@ class SongData
                 accuracy: accuracy
             });
 
-            trace('Saving data for $key');
+            trace('[SONG-DATA] Saving data for $key');
 
             var saveData:Dynamic = {};
             for (k in songs.keys())

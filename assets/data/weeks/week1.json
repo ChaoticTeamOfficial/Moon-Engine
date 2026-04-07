@@ -1,0 +1,7 @@
+{
+	"displayName": "Test Week!",
+	"description": "This is a very silly one",
+	"tracks": ["asmiling"],
+	"color": [0, 0, 0],
+	"mainMix": "luna"
+}

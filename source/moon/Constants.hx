@@ -7,6 +7,10 @@ import moon.toolkit.offset.OffsetEditor;
 import flixel.FlxState;
 
 @:publicFields
+
+/**
+ * A class that contains constant variables. Basically, variables that don't and can't change their values. 
+ */
 class Constants
 {
 	static final GAME_WIDTH:Int = 1280;
@@ -17,6 +21,7 @@ class Constants
 
 	static final SETTINGS_SAVE_BIND:String = 'MoonEngine-Settings';
 	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
+    static final ACHIEVEMENTS_SAVE_BIND:String = 'MoonEngine-Achievements';
 
     static final INITIAL_STATE:Class<FlxState> = Title;
 

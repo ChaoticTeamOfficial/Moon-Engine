@@ -50,7 +50,7 @@ abstract DialogueCharacter(DialogueChar) from DialogueChar to DialogueChar
         if (Paths.exists('$actualPath.json'))
             return Paths.JSON(actualPath);
 
-        trace('$actualPath.json was not found.', "ERROR");
+        trace('[DIALOGUE-CHARACTER] $actualPath.json was not found.', "ERROR");
         return null;
     }
 }

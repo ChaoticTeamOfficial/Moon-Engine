@@ -1,4 +1,6 @@
 .vscode/
 .haxelib/
 export/
+APIDocs/
+doc.hxml
 .build_time

@@ -5,8 +5,10 @@ import openfl.display.BlendMode;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+#if !doc
 import funkin.vis.dsp.SpectralAnalyzer;
 import funkin.vis.audioclip.frontends.LimeAudioClip;
+#end
 import lime.media.AudioSource;
 
 //TODO: Softcode this?
@@ -14,7 +16,9 @@ import lime.media.AudioSource;
 @:publicFields
 class ABotVisualizer extends FlxSpriteGroup
 {
+	#if !doc
     var analyzer:SpectralAnalyzer;
+	#end
     var barCount:Int = 7;
     var currentLevels:Array<Float> = [];
 
@@ -50,6 +54,7 @@ class ABotVisualizer extends FlxSpriteGroup
 	
     public function setAudioSource(sound:MoonSound)
     {
+		#if !doc
     	@:privateAccess
         analyzer = new SpectralAnalyzer(new LimeAudioClip(sound._channel.__audioSource), barCount, 0.1, 60);
         analyzer.minDb = -75;
@@ -60,11 +65,14 @@ class ABotVisualizer extends FlxSpriteGroup
         #if sys
         analyzer.fftN = 256;
         #end
+		#end
     }
 
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
+		
+		#if !doc
 
         if (analyzer == null) return;
 
@@ -90,6 +98,8 @@ class ABotVisualizer extends FlxSpriteGroup
             members[i].animation.curAnim.curFrame = Std.int(Math.abs(preFrame - 5));
             members[i].visible = true;
         }
+		
+		#end
     }
 	
 	public function resetVis()

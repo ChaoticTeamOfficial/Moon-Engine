@@ -423,7 +423,7 @@ class PlayState extends FlxTransitionableState
 			}
 		}
 
-		trace('Could not get character with name $charName', "WARNING");
+		trace('[PLAYSTATE] Could not get character with name $charName', "WARNING");
 		return null;
 	}
 
@@ -561,10 +561,10 @@ class PlayState extends FlxTransitionableState
 	        };
 
 	        sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
-	        trace('Replay saved on $path');
+	        trace('[REPLAY] Replay saved on $path');
         }
         #else
-        trace("Replay saving not supported on this platform", "ERROR");
+        trace("[REPLAY] Replay saving not supported on this platform", "ERROR");
         #end
     }
 

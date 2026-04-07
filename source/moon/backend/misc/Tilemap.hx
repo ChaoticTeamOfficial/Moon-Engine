@@ -22,7 +22,7 @@ class Tilemap
     public static function addAtlas(id:String, atlasName:String, folder:String = 'images'):Void
     {
         if (atlasFrameMap.exists(id))
-            trace('Atlas $id already exists, overriding.');
+            trace('[TILEMAP] Atlas $id already exists, overriding.');
 
         final imgPath = '$folder/$atlasName.png';
         final jsonPath = '$folder/$atlasName';
@@ -31,7 +31,7 @@ class Tilemap
         // my english is so awesome sometimes.
         if (!Paths.exists(imgPath))
         {
-            trace('Image file not found at $imgPath', "ERROR");
+            trace('[TILEMAP] Image file not found at $imgPath', "ERROR");
             return;
         }
 
@@ -41,7 +41,7 @@ class Tilemap
         final graphic:FlxGraphic = Paths.image(atlasName, folder);
         if (graphic == null)
         {
-            trace('Failed to load graphic from $imgPath', "ERROR");
+            trace('[TILEMAP] Failed to load graphic from $imgPath', "ERROR");
             return;
         }
 
@@ -53,7 +53,7 @@ class Tilemap
             final jsonArr:Array<Dynamic> = parsedData.frames;
             if (jsonArr == null)
             {
-                trace('JSON at $jsonPath has no "frames" array', "ERROR");
+                trace('[TILEMAP] JSON at $jsonPath has no "frames" array', "ERROR");
                 return;
             }
 
@@ -61,7 +61,7 @@ class Tilemap
             {
                 if (!Reflect.hasField(frameData, 'name') || !Reflect.hasField(frameData, 'pos') || !Reflect.hasField(frameData, 'size'))
                 {
-                    trace('Invalid frame data, missing name/pos/size: $frameData', "ERROR");
+                    trace('[TILEMAP] Invalid frame data, missing name/pos/size: $frameData', "ERROR");
                     continue;
                 }
                 final rect = new FlxRect(frameData.pos[0], frameData.pos[1], frameData.size[0], frameData.size[1]);
@@ -69,11 +69,11 @@ class Tilemap
                 final offset = FlxPoint.get();
                 frames.addAtlasFrame(rect, size, offset, frameData.name);
             }
-            trace('Atlas "$atlasName" loaded with ${jsonArr.length} frames');
+            trace('[TILEMAP] Atlas "$atlasName" loaded with ${jsonArr.length} frames');
         }
         catch (e:Dynamic)
         {
-            trace('Error parsing JSON at $jsonPath: $e', "ERROR");
+            trace('[TILEMAP] Error parsing JSON at $jsonPath: $e', "ERROR");
             return;
         }
 
@@ -85,19 +85,19 @@ class Tilemap
         final frames:FlxAtlasFrames = atlasFrameMap.get(id);
         if (frames == null)
         {
-            trace('Atlas "$id" not found! Is it loaded?');
+            trace('[TILEMAP] Atlas "$id" not found! Is it loaded?');
             return null;
         }
 
         final frame:FlxFrame = frames.getByName(name);
-        if (frame == null) trace('Frame "$name" not found in atlas "$id".');
+        if (frame == null) trace('[TILEMAP] Frame "$name" not found in atlas "$id".');
         return frame;
     }
 
     public static function getAtlasFrames(id:String):FlxAtlasFrames
     {
         var frames:FlxAtlasFrames = atlasFrameMap.get(id);
-        if (frames == null) trace('Atlas "$id" not found.');
+        if (frames == null) trace('[TILEMAP] Atlas "$id" not found.');
         return frames;
     }
 }

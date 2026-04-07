@@ -6,7 +6,7 @@ import haxe.io.Bytes;
 @:publicFields
 
 /**
- * This class has global variables (which can't go into Constants since they can be changed).
+ * This class has global variables and multiple utilities that are used anywhere in the game.
  */
 class Global
 {
@@ -32,7 +32,7 @@ class Global
         if(!scripts.exists(scriptName))
         {
             scripts.set(scriptName, script);
-            trace('Registered a new script: $scriptName', "DEBUG");
+            trace('[SCRIPTS] Registered a new script: $scriptName', "DEBUG");
         }
     }
 
@@ -45,7 +45,7 @@ class Global
         if(scripts.exists(scriptName))
         {
             scripts.remove(scriptName);
-            trace('Un-Registered a script: $scriptName', "DEBUG");
+            trace('[SCRIPTS] Un-Registered a script: $scriptName', "DEBUG");
         }
     }
 
@@ -79,7 +79,7 @@ class Global
      */
     static function clearScriptList()
     {
-        trace('CLEARING SCRIPT LIST!', "WARNING");
+        trace('[SCRIPTS] CLEARING SCRIPT LIST!', "WARNING");
         for(name => script in scripts)
             unregisterScript(name);
     }

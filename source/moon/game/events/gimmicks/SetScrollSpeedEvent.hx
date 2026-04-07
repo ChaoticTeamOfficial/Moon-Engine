@@ -25,7 +25,7 @@ class SetScrollSpeedEvent extends BaseEvent
                 {ease: MoonUtils.resolveEase(event.values.ease)}
             );
 
-        trace('Changing scroll speed to ${scroll}!', "DEBUG");
+        //trace('Changing scroll speed to ${scroll}!', "DEBUG");
     }
 
     override public function getEditorData():EventInfo

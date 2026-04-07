@@ -74,7 +74,7 @@ abstract Dialogue(DialogueFile) from DialogueFile to DialogueFile
         if (Paths.exists('$dialogueFile.json'))
             return Paths.JSON(dialogueFile);
 
-        trace('$dialogueFile.json was not found.', "ERROR");
+        trace('[DIALOGUE] $dialogueFile.json was not found.', "ERROR");
         return null;
     }
 }

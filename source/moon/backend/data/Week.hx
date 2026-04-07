@@ -3,13 +3,11 @@ package moon.backend.data;
 typedef WeekFile = {
     var displayName:String;
     var description:String;
-    
-    var diffRating:Int;
+
     var tracks:Array<String>;
-    
-    var colors:Array<Int>;
-    var weekImage:String;
-    var bgImage:String;
+    var color:Array<Int>;
+
+    var ?mainMix:String;
 }
 
 @:publicFields
@@ -18,10 +16,10 @@ abstract Week(WeekFile) from WeekFile to WeekFile
 {
     static function getWeek(week:String):Week
     {
-        if(Paths.exists('data/weeks/$week'))
-            return Paths.JSON('data/weeks/$week/$week');
+        if(Paths.exists('data/weeks/$week.json'))
+            return Paths.JSON('data/weeks/$week');
         else
-            trace('$week was not found within the week directory.', "ERROR");
+            trace('[WEEK] $week was not found within the week directory.', "ERROR");
 
         return null;
     }

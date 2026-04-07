@@ -11,7 +11,7 @@ class DiscordRPC
 	public static var presence:DiscordRichPresence;
 	public static function initialize(appId:String = "1297678826809200720"):Void
 	{
-		trace('Initializing Discord RPC...');
+		trace('[DISCORD-RPC] Initializing Discord RPC...');
 
 		final handlers:DiscordEventHandlers = new DiscordEventHandlers();
 		handlers.ready = cpp.Function.fromStaticFunction(onReady);
@@ -36,7 +36,7 @@ class DiscordRPC
 
 	public static function shutdown():Void
 	{
-		trace('Shutting down Discord RPC...');
+		trace('[DISCORD-RPC] Shutting down Discord RPC...');
 		Discord.Shutdown();
 	}
 	
@@ -84,17 +84,17 @@ class DiscordRPC
 
 	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
-		trace('Connected to user @${request[0].username} successfully.');
+		trace('[DISCORD-RPC] Connected to user @${request[0].username} successfully.');
 		presence = new DiscordRichPresence();
 		
 		updatePresence(OG, "Welcome to Moon Engine!", "Initializing...", true);
 	}
 
 	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
-		trace('Disconnected ($errorCode: $message)', "WARNING");
+		trace('[DISCORD-RPC] Disconnected ($errorCode: $message)', "WARNING");
 
 	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
-		trace('Error ($errorCode: $message)', "ERROR");
+		trace('[DISCORD-RPC] Error ($errorCode: $message)', "ERROR");
 }
 #else
 class DiscordRPC

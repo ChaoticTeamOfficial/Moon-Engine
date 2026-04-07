@@ -1,14 +1,21 @@
 import flixel.FlxG;
-import moon.global_obj.TextScroll;
-import moon.dependency.MoonSprite;
 import flixel.text.FlxText;
 import flixel.addons.display.FlxBackdrop;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import moon.dependency.MoonSprite;
+import moon.global_obj.TextScroll;
 
+var background:MoonSprite;
 function onCreate()
 {
-    var test = new MoonSprite();
-    test.makeGraphic(600, FlxG.height, 0xFFffd863);
-    behindBG.add(test);
+    background = new MoonSprite();
+    background.makeGraphic(600, FlxG.height, 0xFFFFFFFF);
+	background.color = 0xFFffd4e9;
+	background.skew.x = 5;
+    behindBG.add(background);
+	background.x = -700;
+	FlxTween.tween(background, {x: -100}, 0.8, {ease: FlxEase.expoOut});
     
     // peak....	
 	//var checker = new FlxBackdrop(Paths.image('oi'));
@@ -68,4 +75,9 @@ function onCreate()
         textii.color = dt.color;
         behindBG.add(textii);
     }
+}
+
+function onTransitionEnd()
+{
+	FlxTween.color(background, 0.6, 0xFFFFFFFF, 0xFFffd863);
 }

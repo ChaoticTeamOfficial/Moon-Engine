@@ -40,7 +40,7 @@ class SyncPlaylist
 			snd.strID = file;
 			FlxG.sound.list.add(snd);
 
-			trace('Loaded $file into the Playlist.', "DEBUG");
+			trace('[SYNCPLAYLIST] Loaded $file into the Playlist.', "DEBUG");
 			sounds.set(file, snd);
 		}
 

@@ -26,7 +26,7 @@ class Shortcuts
 		final char = PlayState.instance.stage.opponents.members[index];
 		if(Std.isOfType(char, Character)) return cast char;
 
-		trace('$index at opponents is not a Character!', "ERROR");
+		trace('[SHORTCUTS] $index at opponents is not a Character!', "ERROR");
 		return null;
 	}
 
@@ -39,7 +39,7 @@ class Shortcuts
 		final char = PlayState.instance.stage.players.members[index];
 		if(Std.isOfType(char, Character)) return cast char;
 
-		trace('$index at players is not a Character!', "ERROR");
+		trace('[SHORTCUTS] $index at players is not a Character!', "ERROR");
 		return null;
 	}
 
@@ -52,7 +52,7 @@ class Shortcuts
 		final char = PlayState.instance.stage.spectators.members[index];
 		if(Std.isOfType(char, Character)) return cast char;
 
-		trace('$index at spectators is not a Character!', "ERROR");
+		trace('[SHORTCUTS] $index at spectators is not a Character!', "ERROR");
 		return null;
 	}
 

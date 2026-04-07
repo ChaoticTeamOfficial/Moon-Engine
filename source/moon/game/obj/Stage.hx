@@ -189,7 +189,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
         }
 
         if(script != null && script.exists('onCreate'))
-        script.call('onCreate');
+			script.call('onCreate');
 
         return stg;
     }
@@ -198,7 +198,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         if(objMap.exists(name)) return objMap.get(name);
 
-        trace('$name wasn\'t found in the stage objects!', "WARNING");
+        trace('[STAGE] $name wasn\'t found in the stage objects!', "WARNING");
         return null;
     }
 
@@ -325,7 +325,7 @@ typedef StageObject = {
 
     var name:String;
     var position:Array<Float>;
-    var type:AtlasType;
+    var ?type:AtlasType;
     var ?scale:Array<Float>;
     var ?scroll:Array<Float>;
     var ?angle:Float;

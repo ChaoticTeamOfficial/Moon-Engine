@@ -34,7 +34,7 @@ class Main extends Sprite
 			final logLevels = [ // Doing sidenotes for the colors cause theyre confusing as fuck
 				"DEBUG" => { prefix: "[>]", color: "\x1b[32m" },  // Green
 				"WARNING" => { prefix: "[!]", color: "\x1b[33m" },  // Yellow
-				"ERROR" => { prefix: "[x]", color: "\x1b[31m" },  // Red
+				"ERROR" => { prefix: "[X]", color: "\x1b[31m" },  // Red
 				"INFO" => { prefix: "[?]", color: "\x1b[36m" }   // Cyan blue whatever
 			];
 		
@@ -48,11 +48,10 @@ class Main extends Sprite
 		
 			// Gets some details. It fallbacks to INFO if the prefix is empty. 
 			final levelData = logLevels.exists(logLevel) ? logLevels[logLevel] : logLevels["INFO"];
-			final className = infos != null && infos.className != null ? '${infos.className}: ' : '';
-			final infoBefore = '> ${levelData.prefix} - ${className}';
+			final infoBefore = '';
 		
 			// And then displays the pretty text on the console. :D
-			Sys.println('${levelData.color}${infoBefore.rpad(" ", 10)}${v}\x1b[0m');
+			Sys.println('${levelData.color}${levelData.prefix} > ${v}\x1b[0m');
 		};
 		#end
 
@@ -84,11 +83,11 @@ class Main extends Sprite
 		#if sys
 		// idk who put this coconut image on the files but when I tried to delete it the game just wouldn't start.
 		// words cannot describe my fucking confusion.
-		if (!Paths.exists("data/importantdata-do-not-delete.png"))
-		{
-			Application.current.window.alert("Funkin' but at what cost...", "Put it back. Now.");
-			Sys.exit(1);
-		}
+		//if (!Paths.exists("data/importantdata-do-not-delete.png"))
+		//{
+		//	Application.current.window.alert("Funkin' but at what cost...", "Put it back. Now.");
+		//	Sys.exit(1);
+		//}
 		#end
 	}
 

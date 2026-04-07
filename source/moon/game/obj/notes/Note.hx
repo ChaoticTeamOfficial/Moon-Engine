@@ -24,11 +24,6 @@ enum NoteState
     TOO_LATE;
 
     /**
-     * When a note is missed.
-     */
-    MISSED;
-
-    /**
      * None state.
      */
     NONE;
@@ -38,7 +33,7 @@ class Note extends MoonSprite
 {
     /**
      * Defines the note state.
-     * E.G; `MISSED, GOT_HIT, TOO_LATE` etc.
+     * E.G; `GOT_HIT, TOO_LATE` etc.
      */
     public var state:NoteState = NONE;
 
@@ -141,7 +136,7 @@ class Note extends MoonSprite
     override public function update(dt:Float):Void
     {
         super.update(dt);
-        if(state == GOT_HIT || state == MISSED || state == TOO_LATE)
+        if(state == GOT_HIT || state == TOO_LATE)
             visible = active = false;
 
         if (receptor != null && state == NONE)

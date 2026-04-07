@@ -22,7 +22,7 @@ class Freeplay extends FlxSubState
     public static var appearType:FreeplayTransition = NONE;
     public static var instance:Freeplay;
 
-    public var character:String;
+    public var character:String; // this is used as the preferred mix (e.g. "bf")
 
     public var songVolume:Float = MoonSettings.callSetting('Music Volume') / 100;
     static var curSelected:Int = 0;
@@ -39,7 +39,7 @@ class Freeplay extends FlxSubState
     {
         super();
         this.character = character;
-		Global.allowInputs = false;
+        Global.allowInputs = false;
         instance = this;
 
         mainBG = new FreeplayBG(character);
@@ -53,16 +53,21 @@ class Freeplay extends FlxSubState
         Global.scriptSet('foreground', mainBG.foreground);
         Global.scriptSet('dj', thisDJ);
 
-        // TODO: Week-based BG.
         weekBG = new MoonSprite();
-        weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/weekend1'));
+        weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/random-bf'));
         weekBG.scale.set(1.4, 1.4);
         weekBG.antialiasing = true;
         weekBG.updateHitbox();
-        weekBG.skew.x = 5;
-        weekBG.x = FlxG.width - weekBG.width + 360;
-        weekBG.brightness = -0.45;
+        weekBG.skew.x = -20;
+        weekBG.x = FlxG.width + weekBG.width + 360;
+        weekBG.brightness = -1;
         add(weekBG);
+
+        FlxTween.tween(weekBG, {x: FlxG.width - weekBG.width + 360, "skew.x": 5}, 0.7, {ease: FlxEase.expoOut, onComplete: _->{
+            weekBG.brightness = 0.69;
+            FlxTween.tween(weekBG, {brightness: -0.45}, 0.35);
+            Global.scriptCall('onTransitionEnd', []);
+        }});
 
         add(mainBG.frontBG);
 
@@ -78,33 +83,9 @@ class Freeplay extends FlxSubState
         });
 
         add(mainBG.foreground);
-        for (song in Paths.readDir('songs/'))
-        {
-            for (mix in Paths.readDir('songs/$song/'))
-            {
-                if (mix == 'events' || !Paths.exists('songs/$song/$mix/', null)) continue;
 
-                for (chart in Paths.readDir('songs/$song/$mix/', ['.json'], true))
-                {
-                    if (chart.startsWith('chart-'))
-                    {
-                        final diff = chart.substr(6);
-                        songList.push({
-                            song: song,
-                            mix: mix,
-                            difficulty: diff
-                        });
-                    }
-                }
-            }
-        }
-
-        songList.sort(function(a, b)
-        {
-            final aL = a.song.toLowerCase();
-            final bL = b.song.toLowerCase();
-            return (aL < bL) ? -1 : (aL > bL) ? 1 : 0;
-        });
+        songList = getMixSonglist('week1', character);
+        //trace(songList);
 
         stars = new DifficultyStars(0, 632, 24, 0.055);
         stars.screenCenter(X);
@@ -117,6 +98,22 @@ class Freeplay extends FlxSubState
         add(stars);
 
         Global.scriptCall('onCreate');
+    }
+
+    /**
+     * Gets the song list for a week, preferring the given mix.
+     * @param week The week name. It can also be 'all' if you want all available songs.
+     * @param preferredMix The character mix.
+     */
+    public function getMixSonglist(week:String, preferredMix:String):Array<SongBase>
+    {
+        final filtered:Array<SongBase> = [];
+
+        for (song in SongLibrary.get().weekSonglist(week))
+            if (song.mix == preferredMix)
+                filtered.push(song);
+
+        return filtered;
     }
 
     function change(num:Int = 0)
@@ -141,7 +138,7 @@ class Freeplay extends FlxSubState
         if (MoonInput.justPressed(UI_UP)) change(-1);       
 
         if (MoonInput.justPressed(ACCEPT))
-        {			
+        {
             final selected = selector.getSelected();
             if (selected != null)
             {

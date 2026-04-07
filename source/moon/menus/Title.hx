@@ -190,7 +190,7 @@ class Title extends FlxTransitionableState
 
         //FlxG.sound.music.onComplete = updateVis;
 
-        trace('Text of the day: $randomText', "DEBUG");
+        trace('[TITLE] Text of the day: $randomText', "DEBUG");
 
         prepareAD();
     }
@@ -209,14 +209,14 @@ class Title extends FlxTransitionableState
     function prepareAD()
     {
         #if !cpp return; #end
-        trace('Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
+        trace('[TITLE] Playing a random AD video in ${Constants.TITLE_VIDEO_DELAY} seconds.', "DEBUG");
         vidTimer = new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _-> {
             // now we get a random video.
             final vidDir = Paths.readDir('videos/titleADs', [".mp4"]);
             if(lastVidIndex >= vidDir.length) lastVidIndex = 0;
 
             final curVid = vidDir[lastVidIndex];
-            trace('AD has been chosen: $curVid', "DEBUG");
+            trace('[TITLE] AD has been chosen: $curVid', "DEBUG");
 
             // we must cancel inputs here.
             // I mean, not really, though I think it's nice to.
@@ -352,7 +352,7 @@ class Title extends FlxTransitionableState
                 FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
                 Paths.playSFX('ui/confirmMenu.ogg');
 
-                trace('Enjoy!', "DEBUG");
+                trace('Enjoy :)', "DEBUG");
                 backVis.alpha = 1;
 
                 updateVis();

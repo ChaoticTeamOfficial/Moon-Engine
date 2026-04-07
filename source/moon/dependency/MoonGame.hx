@@ -30,12 +30,15 @@ class MoonGame extends FlxGame
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         
 		MoonSettings.init();
-        Alphabet.init();
+		MoonAchievements.init();
         SongData.init();
-
+        Alphabet.init();
+	
+		#if !doc
         FlxG.plugins.addPlugin(new flixel.addons.plugin.ScreenShotPlugin());
         flixel.addons.plugin.ScreenShotPlugin.screenshotKeys = [F3];
         //screenshotplugin.ScreenShotPlugin.screenshotKey = F3;
+		#end
 
         FlxG.stage.addEventListener(openfl.events.KeyboardEvent.KEY_DOWN, (e) ->
 		{

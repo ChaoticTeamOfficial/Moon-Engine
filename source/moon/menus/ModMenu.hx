@@ -1,6 +1,9 @@
 package moon.menus;
 
+#if sys
 import sys.FileSystem;
+#end
+
 //TODOS:
 //Check why this class causes a memory leak when putting a mod up or down in priority
 // documment this class too ofc

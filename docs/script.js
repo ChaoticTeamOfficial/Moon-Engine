@@ -3,8 +3,6 @@ document.querySelectorAll('.copy-btn').forEach(button => {
     button.addEventListener('click', () => {
         const codeElement = button.previousElementSibling.querySelector('code');
         const textToCopy = codeElement.textContent;
-		
-		// this button looks so cuteyyy,, >w<
         navigator.clipboard.writeText(textToCopy).then(() => {
             button.textContent = '✓ Copied';
             setTimeout(() => {
@@ -14,7 +12,8 @@ document.querySelectorAll('.copy-btn').forEach(button => {
     });
 });
 
-const sections = document.querySelectorAll('section');
+// scrolling and active section
+const sections = document.querySelectorAll('section, .json-fields');
 const navLinks = document.querySelectorAll('.sidebar-menu a');
 const indicator = document.querySelector('.sidebar-indicator');
 
@@ -35,13 +34,36 @@ function updateActiveSection() {
         if (isActive) {
             const linkRect = link.getBoundingClientRect();
             const menuRect = link.closest('.sidebar-menu').getBoundingClientRect();
-
             indicator.style.top = `${linkRect.top - menuRect.top}px`;
             indicator.style.height = `${linkRect.height}px`;
             indicator.style.opacity = '1';
         }
     });
 }
+
+// collapsible submenus
+document.querySelectorAll('.has-submenu').forEach(item => {
+    const arrow = item.querySelector('.toggle-arrow');
+    const submenu = item.querySelector('.submenu');
+    const parentA = item.querySelector('a');
+
+    if (arrow && submenu) {
+        arrow.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            const willOpen = !item.classList.contains('open');
+            item.classList.toggle('open');
+            submenu.style.display = willOpen ? 'block' : 'none';
+        });
+
+        parentA.addEventListener('click', () => {
+            if (!item.classList.contains('open')) {
+                item.classList.add('open');
+                submenu.style.display = 'block';
+            }
+        });
+    }
+});
 
 window.addEventListener('scroll', updateActiveSection);
 window.addEventListener('load', updateActiveSection);
