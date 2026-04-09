@@ -106,13 +106,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
     {
         //if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
         //    trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
-        script.load('images/ingame/stages/$stg/script.hx');
+        script.load('stages/$stg/script.hx');
         script.set("background", this);
 
         this.stage = stg;
 
         // nice lil fallback if theres no json
-        json = cast Paths?.JSON('images/ingame/stages/$stg/data') ?? cast {
+        json = cast Paths?.JSON('stages/$stg/data') ?? cast {
             camSettings: {
                 zoom: 1,
                 startX: 751.5,
@@ -152,10 +152,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
                 switch (objData.type)
                 {
                     case SPARROW:
-                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'images/ingame/stages');
+                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'stages');
                     case PACKED:
-                        sprite.frames = Paths.getPackerAtlas(assetPath, 'images/ingame/stages');
-                    default: sprite.loadGraphic(Paths.image(assetPath, 'images/ingame/stages'));
+                        sprite.frames = Paths.getPackerAtlas(assetPath, 'stages');
+                    default: sprite.loadGraphic(Paths.image(assetPath, 'stages'));
                 }
 
                 if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);

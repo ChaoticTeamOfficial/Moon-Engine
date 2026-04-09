@@ -7,6 +7,8 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 using flixel.util.FlxStringUtil;
+
+@:dox(hide)
 class FPS extends TextField
 {
     var times:Array<Float> = [];

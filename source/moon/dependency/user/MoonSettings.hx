@@ -3,6 +3,8 @@ package moon.dependency.user;
 import moon.menus.Settings;
 import openfl.system.Capabilities;
 import lime.app.Application;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ColorMatrixFilter;
 
 using StringTools;
 
@@ -160,7 +162,7 @@ class MoonSettings
             new Setting("FPS Cap", SELECTOR, "The maximum amount your framerate can reach.", [30, 60, 120, 144, 240, 360], 60),
             new Setting("Shaders", CHECKMARK, "Toggles shaders (may affect performance on low-end devices).", null, true),
             new Setting("Flashing Lights", CHECKMARK, "Toggles flashing effects. Recommended to turn OFF in case of high photosensitivity.", null, true),
-            new Setting("Colorblind Filters", SELECTOR, "Applies filters for colorblindness.", ["Off", "T", "P", "R"], "Off")
+            new Setting("Colorblind Filters", SELECTOR, "Applies filters for colorblindness.", ["Off", "T", "P", "D"], "Off")
         ]);
 
         categories.set("Interface Settings",
@@ -189,6 +191,40 @@ class MoonSettings
     }
 
     /**
+     * The game's color filters for people with color blindness!
+     * kinda stole from flixel demos lol
+     */
+    public static var colorFilters:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}> = [
+        "D" => {
+            var matrix:Array<Float> = [
+                0.43, 0.72, -.15, 0, 0,
+                0.34, 0.57, 0.09, 0, 0,
+                -.02, 0.03,    1, 0, 0,
+                   0,    0,    0, 1, 0,
+            ];
+            {filter: new ColorMatrixFilter(matrix)}
+        },
+        "P" => {
+            var matrix:Array<Float> = [
+                0.20, 0.99, -.19, 0, 0,
+                0.16, 0.79, 0.04, 0, 0,
+                0.01, -.01,    1, 0, 0,
+                   0,    0,    0, 1, 0,
+            ];
+            {filter: new ColorMatrixFilter(matrix)}
+        },
+        "T" => {
+            var matrix:Array<Float> = [
+                0.97, 0.11, -.08, 0, 0,
+                0.02, 0.82, 0.16, 0, 0,
+                0.06, 0.88, 0.18, 0, 0,
+                   0,    0,    0, 1, 0,
+            ];
+            {filter: new ColorMatrixFilter(matrix)}
+        }
+    ];
+
+    /**
      * Update global options.
      */
     static function updateGlobalSettings():Void
@@ -197,10 +233,18 @@ class MoonSettings
 
         if(FlxG.sound.music != null) FlxG.sound.music.volume = callSetting('Music Volume') / 100;
 
+        //TODO: vsync setting
         if (Main.fps != null) Main.fps.visible = callSetting("Show FPS");
         //FlxG.updateFramerate = FlxG.drawFramerate = (!callSetting('V-Sync')) ? callSetting('FPS Cap') : 999;
         FlxG.updateFramerate = FlxG.drawFramerate = callSetting('FPS Cap');
         //trace("Monitor resolution: " + Capabilities.screenResolutionX + " x " + Capabilities.screenResolutionY);
+
+        //apply color-blind filters.
+        FlxG.game.setFilters([]);
+
+        final f = colorFilters.get(callSetting('Colorblind Filters'));
+        if (f != null)
+            FlxG.game.setFilters([f.filter]);
     }
 
     // actually shortens (isBorderlessFullscreen) LOL

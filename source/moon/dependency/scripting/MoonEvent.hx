@@ -49,6 +49,9 @@ class MoonEvent extends MoonScript
         else valid = false;
     }
 
+    /**
+     * Calls the "onExecute" function on events.
+     */
     public function exec()
         if(valid) call('onExecute', [values]);
 

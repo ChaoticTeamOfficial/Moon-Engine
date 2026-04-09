@@ -20,26 +20,35 @@ import openfl.system.System;
 
 using StringTools;
 
+//TODO: Finish documenting this class, I'm lazy.
+
 /**
  * The Paths class, used for getting ingame files and memory cleaning as well.
  * 
  * Would like to clarify that: This class belongs to Doido Engine, and I'm using it with permission.
  * I just sliiightly modified it so it can have support for modding as well!
- * https://github.com/DoidoTeam/FNF-Doido-Engine/blob/main/source/Paths.hx
  * (Give Doido Engine a try, It's a very well made engine! ^^)
+ * @see https://github.com/DoidoTeam/FNF-Doido-Engine/blob/main/source/Paths.hx
  **/
 class Paths
 {
+    /**
+     * All the rendered graphics are stored here.
+     */
     public static var renderedGraphics:Map<String, FlxGraphic> = [];
+
+    /**
+     * All the loaded sounds are stored here.
+     */
     public static var renderedSounds:Map<String, Sound> = [];
 
     /**
      * Whether or not should the game skip the next memory cleanup.
-     * Used for the loading screen. 
+     * Used on the loading screen, for example. 
      */
     public static var skipNextCleanup:Bool = false;
 
-    // idk
+    @:dox(hide)
     public static function getVanillaPath(key:String, ?library:String):String
     {
         #if RENAME_UNDERSCORE
@@ -68,6 +77,10 @@ class Paths
             return 'assets/$library/$key';
     }
 
+    /**
+     * Returns a file in a path.
+     * @param key the path (don't include assets!)
+     */
     public static function getPath(key:String, ?library:String):String
     {
         #if sys

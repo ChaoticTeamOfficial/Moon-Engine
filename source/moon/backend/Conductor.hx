@@ -10,27 +10,59 @@ import lime.app.Event;
 @:publicFields
 class Conductor
 {
-	// - Conductor's events.
+	// -- EVENTS
+
+	/**
+	 * An event dispatched once a 'step' is triggered.
+	 */
 	var onStep:Event<Float->Void> = new Event<Float->Void>();
+
+	/**
+	 * An event dispatched once a 'beat' is triggered.
+	 */
 	var onBeat:Event<Float->Void> = new Event<Float->Void>();
+
+	/**
+	 * An event dispatched once a 'measure' is triggered.
+	 */
 	var onMeasure:Event<Float->Void> = new Event<Float->Void>();
 
-	// - Crochet values.
+	// -- CROCHET VALUES
+
+	/**
+	 * A step crochet's duration. Divide it by 1000 if you use it on tweens.
+	 */
 	var stepCrochet(default, null):Float = 150;
+
+	/**
+	 * A beat crochet's duration. Divide it by 1000 if you use it on tweens.
+	 */
 	var crochet(default, null):Float = 600;
+
+	/**
+	 * A measure crochet's duration. Divide it by 1000 if you use it on tweens.
+	 */
 	var measureCrochet(default, null):Float = 2400;
 
-	// - Beats per Minute.
+	/**
+	 * Beats per minute.
+	 */
 	var bpm(default, null):Float = 100;
 
-	//- Whenever the conductor's active.
+	/**
+	 * Is the conductor active?
+	 */
 	var active:Bool;
 
-	// - And the time (usually based on song position.)
+	/**
+	 * The conductor's time position.
+	 */
 	var time(default, set):Float = 0;
 
+	@:dox(hide)
 	var catchUp:Bool = false;
 
+	@:dox(hide)
 	function set_time(value:Float):Float
 	{
 	    time = value;
@@ -92,37 +124,53 @@ class Conductor
 	}
 
 	/**
-		The step counter.
-	**/
+	 * The current step counter.
+	 */
 	var curStep(default, null):Float = 0;
 
 	/**
-		The beat counter.
-	**/
+	 * The current beat counter.
+	 */
 	var curBeat(default, null):Float = 0;
 
 	/**
-		The measure counter.
-	**/
+	 * The current measure counter.
+	 */
 	var curMeasure(default, null):Float = 0;
 
-	/**
-		The step tracker.
-	**/
 	private var _stepTracker(default, null):Float = 0;
 
-	/**
-		The beat tracker.
-	**/
 	private var _beatTracker(default, null):Float = 0;
 	private var _measureTracker(default, null):Float = 0;
+
+	/**
+	 * An offset that will be applied to the conductor's time.
+	 */
 	var offsetTime(default, null):Float = 0;
+
+	/**
+	 * An offset that will be applied to the conductor's steps.
+	 */
 	var stepOffset(default, null):Float = 0;
+
+	/**
+	 * An offset that will be applied to the conductor's beats.
+	 */
 	var beatOffset(default, null):Float = 0;
+
+	/**
+	 * An offset that will be applied to the conductor's measures.
+	 */
 	var measureOffset(default, null):Float = 0;
 
-	// - These are for time signature's steps/beats.
+	/**
+	 * Time signature numerator.
+	 */
 	var numerator:Float = 4;
+
+	/**
+	 * Time signature denominator.
+	 */
 	var denominator:Float = 4;
 
 	/**
