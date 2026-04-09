@@ -170,6 +170,7 @@ class PlayState extends FlxTransitionableState
 		
 		Countdown.init(conductor, playField);
 		Countdown.performCountdown();
+		playField.healthBar.performTransition(conductor);
 
 		// call on post create for scripts
 		Global.scriptSet('game', instance);

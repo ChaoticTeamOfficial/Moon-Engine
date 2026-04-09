@@ -23,7 +23,7 @@ class PixelIcon extends FilteredSprite
 
         this.antialiasing = false;
 
-        final actualIcon = (Paths.exists('characters/$iconName/ui_icon.png')) ? iconName : 'dummy';
+        final actualIcon = (Paths.exists('characters/$iconName/ui_icon.png')) ? iconName : 'asmile-erect';
         this.character = actualIcon;
 
         this.frames = Paths.getSparrowAtlas('$actualIcon/ui_icon', 'characters');

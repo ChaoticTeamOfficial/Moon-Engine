@@ -110,7 +110,7 @@ class MoonSettings
      */
     static final categoryOrder:Array<String> = [
         "Video Settings", "Sound Settings", "Gameplay Settings",
-        "Graphic Settings", "Interface Settings", "Engine Settings"
+        "Interface Settings", "Graphic Settings", "Engine Settings"
     ];
 
     /**
@@ -162,7 +162,7 @@ class MoonSettings
             new Setting("FPS Cap", SELECTOR, "The maximum amount your framerate can reach.", [30, 60, 120, 144, 240, 360], 60),
             new Setting("Shaders", CHECKMARK, "Toggles shaders (may affect performance on low-end devices).", null, true),
             new Setting("Flashing Lights", CHECKMARK, "Toggles flashing effects. Recommended to turn OFF in case of high photosensitivity.", null, true),
-            new Setting("Colorblind Filters", SELECTOR, "Applies filters for colorblindness.", ["Off", "T", "P", "D"], "Off")
+            new Setting("Colorblind Filters", SELECTOR, "Applies filters for colorblindness.", ["Off", "Tritan", "Protan", "Deutran"], "Off")
         ]);
 
         categories.set("Interface Settings",
@@ -195,7 +195,7 @@ class MoonSettings
      * kinda stole from flixel demos lol
      */
     public static var colorFilters:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}> = [
-        "D" => {
+        "Deutran" => {
             var matrix:Array<Float> = [
                 0.43, 0.72, -.15, 0, 0,
                 0.34, 0.57, 0.09, 0, 0,
@@ -204,7 +204,7 @@ class MoonSettings
             ];
             {filter: new ColorMatrixFilter(matrix)}
         },
-        "P" => {
+        "Protan" => {
             var matrix:Array<Float> = [
                 0.20, 0.99, -.19, 0, 0,
                 0.16, 0.79, 0.04, 0, 0,
@@ -213,7 +213,7 @@ class MoonSettings
             ];
             {filter: new ColorMatrixFilter(matrix)}
         },
-        "T" => {
+        "Tritan" => {
             var matrix:Array<Float> = [
                 0.97, 0.11, -.08, 0, 0,
                 0.02, 0.82, 0.16, 0, 0,

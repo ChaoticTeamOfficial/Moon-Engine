@@ -30,6 +30,11 @@ class Constants
     // - Title
 
     /**
+     * Whether is the game running on a friday night or not.
+     */
+    static final isFridayNight = (Date.now().getDay() == 5 && Date.now().getHours() >= 18) || (Date.now().getDay() == 6 && Date.now().getHours() < 5);
+
+    /**
      * Time it takes to play a video on TitleState.
      */
     static final TITLE_VIDEO_DELAY:Float = 27.5;

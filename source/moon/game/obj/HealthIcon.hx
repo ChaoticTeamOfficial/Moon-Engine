@@ -24,7 +24,7 @@ class HealthIcon extends MoonSprite
 
     @:noCompletion public function set_icon(val:String)
     {
-        final char = (Paths.exists('characters/$val/icon.png')) ? val : 'dummy';
+        final char = (Paths.exists('characters/$val/icon.png')) ? val : 'asmile-erect';
         this.icon = char;
 
         centerAnimations = true;

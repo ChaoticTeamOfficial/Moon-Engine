@@ -167,7 +167,6 @@ class PlayField extends FlxGroup
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
         conductor.time = -(conductor.crochet * 5);
-        healthBar.performTransition(conductor);
     }
 
     function setupNotes()
@@ -212,12 +211,17 @@ class PlayField extends FlxGroup
             //oppStrum.visible = oppStrum.strumBG.visible = playerStrum.visible = playerStrum.strumBG.visible = false;
         }
 
-        healthBar.y = (downscroll) ? 64 : FlxG.height - healthBar.height + 32;
+        noteSpawner.update(0);
+
+        healthBar.update(0);
+        healthBar.y = (downscroll) ? 64 : FlxG.height - 78;
+        healthBar.updateBarPos(true);
 
         // also this is just so much offsetted it looks like ASS
         stats.y = (MoonSettings.callSetting('Stats Position') == 'On Player Lane')
         ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
         : healthBar.y + stats.height + 8;
+
         centerText();
         //updateP1Stats(null, false);
 

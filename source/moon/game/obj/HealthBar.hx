@@ -86,11 +86,13 @@ class HealthBar extends FlxSpriteGroup
         oppIcon = new HealthIcon();
         oppIcon.scale.set(iconScale, iconScale);
         oppIcon.y = bar.y - (oppIcon.height * 0.5);
+        oppIcon.updateHitbox();
 
         playerIcon = new HealthIcon();
-        playerIcon.scale.set(iconScale, iconScale);     // fixed - was 0.5
+        playerIcon.scale.set(iconScale, iconScale);
         playerIcon.flipX = true;
         playerIcon.y = bar.y - (playerIcon.height * 0.5);
+        playerIcon.updateHitbox();
 
         add(oppIcon);
         add(playerIcon);
@@ -138,26 +140,15 @@ class HealthBar extends FlxSpriteGroup
 
     public var lerpPercent:Float = 0;
     public var transitioning:Bool = false;
+    private var targetAlpha:Float = 1;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
 
-        if(health >= 100) health = 101;
-        bar.value = FlxMath.lerp(bar.value, health, elapsed * 8);
-
-        if(updateIconsPos && MoonSettings.callSetting('Icons') == 'At Healthbar')
-        {
-            final targetPercent = 1 - (health / 100);
-            lerpPercent = FlxMath.lerp(lerpPercent, targetPercent, elapsed * 16);
-
-            final divisionX = bar.x + (bar.width * lerpPercent);
-
-            playerIcon.x = FlxMath.lerp(playerIcon.x, divisionX + iconDistance - playerIcon.width / 2, elapsed * 16);
-            oppIcon.x = FlxMath.lerp(oppIcon.x, divisionX - iconDistance - oppIcon.width / 2, elapsed * 10);
-
-            oppIcon.y = bar.y - (oppIcon.height * 0.5);
-            playerIcon.y = bar.y - (playerIcon.height * 0.5);
-        }
+        // uhmm, weird shit :(
+        if(health > 98) health = 101;
+        //if(bar.value != health) trace(health);
+        bar.value = FlxMath.lerp(bar.value, health, 0.2);
         
         if(!transitioning)
         {
@@ -165,6 +156,51 @@ class HealthBar extends FlxSpriteGroup
             oppIcon.scale.x = oppIcon.scale.y = FlxMath.lerp(oppIcon.scale.x, iconScale, scaleSpeed);
             playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale, scaleSpeed);
         }
+
+        updateBarPos();
+    }
+
+    public function updateBarPos(instant:Bool = false)
+    {
+        if(MoonSettings.callSetting('Healthbar Visibility') == 'Below 100%')
+            targetAlpha = health < 100 ? 1 : 0;
+        else targetAlpha = MoonSettings.callSetting('Healthbar Visibility') == 'On' ? 1 : 0;
+
+        if(updateIconsPos)
+        {
+            switch(MoonSettings.callSetting('Icons'))
+            {
+                case 'On Lanes':
+                    final pf = PlayField.instance;
+                    final d = 169;
+                    if(pf != null)
+                    {
+                        playerIcon.setPosition(pf.playerStrum.x + d, pf.playerStrum.y);
+                        oppIcon.setPosition(pf.oppStrum.x - oppIcon.width - d, pf.oppStrum.y);
+                    }
+
+                default:
+                    final targetPercent = 1 - (health / 100);
+                    lerpPercent = FlxMath.lerp(lerpPercent, targetPercent, 0.2);
+
+                    final divisionX = bar.x + (bar.width * lerpPercent);
+
+                    final px = divisionX + iconDistance - playerIcon.width / 2;
+                    playerIcon.x = (instant) ? px : FlxMath.lerp(playerIcon.x, px, 0.2);
+
+                    final ox = divisionX - iconDistance - oppIcon.width / 2;
+                    oppIcon.x = (instant) ? ox : FlxMath.lerp(oppIcon.x, ox, 0.2);
+
+                    oppIcon.y = bar.y - (oppIcon.height * 0.5);
+                    playerIcon.y = bar.y - (playerIcon.height * 0.5);
+
+            }
+        }
+
+        barBG.alpha = bar.alpha = instant ? targetAlpha : FlxMath.lerp(bar.alpha, targetAlpha, 0.2);
+        oppIcon.alpha = playerIcon.alpha = (MoonSettings.callSetting('Icons') == 'At Healthbar') ? bar.alpha : 1;
+
+        oppIcon.visible = playerIcon.visible = (MoonSettings.callSetting('Icons') != 'Off');
     }
 
     public function updateBarStats()
@@ -182,12 +218,6 @@ class HealthBar extends FlxSpriteGroup
 
         oppIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
         playerIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
-
-        if(updateIconsPos)
-        {
-            oppIcon.x -= 15;
-            playerIcon.x += 15;
-        }
     }
 
     public function getRGBData(character:String)

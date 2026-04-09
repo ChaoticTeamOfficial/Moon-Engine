@@ -35,14 +35,20 @@ class Title extends FlxTransitionableState
 
     var gridPos:Float = 0;
     var onTitle:Bool = false; //For tracking when the texts stuff are on screen
-    var isFridayNight:Bool = false;
 
     var colorSH:ColorSwap = new ColorSwap();
     override public function create():Void
     {
         super.create();
 
-        isFridayNight = (Date.now().getDay() == 5 && Date.now().getHours() >= 18) || (Date.now().getDay() == 6 && Date.now().getHours() < 5);
+        /*UpdateCheck.run(
+            function(latest:String) {
+                trace('Update available: $latest');
+            },
+            function() {
+                trace('Running latest version');
+            }
+        );*/
 		
 		// otherwise it fucks up the bg bars lol
 		FlxG.autoPause = false;
@@ -136,7 +142,7 @@ class Title extends FlxTransitionableState
         //~~TODO:~~ make a better handler for song metadatas
         // Done! :D
         //loadSoundAndMeta it is.
-        final song = isFridayNight ? 'freakyMenu-fridayNight' : 'freakyMenu';
+        final song = Constants.isFridayNight ? 'freakyMenu-fridayNight' : 'freakyMenu';
         final music = new MoonSound().loadSoundAndMeta('menus/${song}', 'music', false);
 
         MoonUtils.playGlobalMusic('menus/${song}', true);
