@@ -132,6 +132,14 @@ class FreeplaySongSelector extends FlxGroup
     public function getSelected():SongBase
         return songList[curSelected];
 
+    public function getSelectedItem():FreeplaySongItem
+    {
+        if (items.length == 0)
+            return null;
+            
+        return items[VISIBLE_RADIUS];
+    }
+
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
@@ -302,7 +310,7 @@ class FreeplaySongSelector extends FlxGroup
                 Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
 
                 //lol
-                try{ SongPreview.loadAndPlay(chart); } catch(e) { SongPreview.loadAndPlay(chart); }
+                try{ SongPreview.loadAndPlay(chart); } catch(e) { }
 
                 final album = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
                 if(curAlb != album) disk.loadGraphic(Paths.image('menus/freeplay/albums/$album'));

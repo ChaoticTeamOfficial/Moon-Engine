@@ -29,7 +29,7 @@ class OptionObject extends FlxSpriteGroup
         final fontSize = 24;
         final halfWidth = separationWidth * 0.5;
 
-        name = new FlxText(0, 0, separationWidth, setting.name);
+        name = new FlxText(0, 0, separationWidth, MoonLang.settingName(setting.name));
         name.setFormat(font, fontSize, FlxColor.WHITE, LEFT);
         name.antialiasing = true;
         add(name);
@@ -147,8 +147,14 @@ class OptionObject extends FlxSpriteGroup
             MoonSettings.setSetting(setting.name, setting.value);
             MoonSettings.updateGlobalSettings();
 
-            if(setting.name == 'Window Resolution' || setting.name == 'Screen Mode')
-                MoonSettings.updateWindow();
+            switch(setting.name)
+            {
+                case 'Window Resolution', 'Screen Mode': MoonSettings.updateWindow();
+                case 'Language': 
+                    MoonLang.loadFromSettings();
+                    if(Settings.current != null)
+                        Settings.current.refreshOptions();
+            }
 
             if(PlayField.instance != null)
                PlayField.instance.settingsUpdate(); 

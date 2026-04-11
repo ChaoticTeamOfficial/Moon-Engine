@@ -13,7 +13,11 @@ function onPostCreate()
 	//TODO: FIX THIS SCREEN...
     fuckers.visible = false;
     fuckers.anim.addBySymbol("intro", "boyfriend perfect rank", 24, false);
-    fuckers.anim.onFinish.add(() -> fuckers.anim.play("intro", true, false, 69));
+    //fuckers.anim.onFinish.add(() -> );
+	fuckers.anim.onFrameChange.add((idx, blah, bleh) ->{
+		if(idx >= 200)
+			fuckers.anim.play("intro", true, false, 69);
+	});
 	fuckers.antialiasing = true;
 }
 

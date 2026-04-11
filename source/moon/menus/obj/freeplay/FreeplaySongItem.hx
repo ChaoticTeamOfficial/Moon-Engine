@@ -1,5 +1,6 @@
 package moon.menus.obj.freeplay;
 
+import haxe.ui.filters.Brightness;
 import flixel.group.FlxSpriteGroup;
 import moon.backend.gameplay.*;
 import moon.global_obj.PixelIcon;
@@ -140,7 +141,18 @@ class FreeplaySongItem extends FlxSpriteGroup
     public function doRankReveal()
     {
         transitioning = true;
-        
+    }
+
+    /**
+     * Does the 'confirm' animation on the icon and a nice lil effect on the object itself.
+     */
+    public function doConfirm()
+    {
+        icon.playAnim('select', true);
+        FlxFlicker.flicker(nameText, 1.79, 0.05, true);
+
+        bg.brightness = 1;
+        FlxTween.tween(bg, {brightness: 0}, 0.8);
     }
 
     /**
@@ -152,6 +164,9 @@ class FreeplaySongItem extends FlxSpriteGroup
         lerpScale = targetScale;
     }
 
+    /**
+     * Resets the rank.
+     */
     public function resetRank():Void
     {
         _lastRank = null;

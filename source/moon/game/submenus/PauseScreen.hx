@@ -141,7 +141,7 @@ class PauseScreen extends FlxSubState
 
         var np = new FlxText(-400, songName.y - 12);
         np.setFormat(Paths.font('phantomuff/full.ttf'), 12, LEFT);
-        np.text = 'Now Playing:\n\n\nCharted by: ${meta.charter}';
+        np.text = MoonLang.get('pause.Now Playing', 'Now Playing') + ':\n\n\n' + MoonLang.get('pause.Charted By', 'Charted By') + ': ${meta.charter}';
         np.antialiasing = true;
         np.active = false;
         add(np);
@@ -190,7 +190,7 @@ class PauseScreen extends FlxSubState
 
         if(MoonInput.justPressed(ACCEPT) && canMove)
         {
-            switch(pauseItems.members[curSelected].text.toLowerCase())
+            switch(DEFAULT_ITEMS[curSelected].toLowerCase())
             {
                 case 'resume': 
                     prepareToClose();
@@ -231,10 +231,9 @@ class PauseScreen extends FlxSubState
         
         for (i in 0...items.length)
         {
-            final item = items[i];
             pauseItems.recycle(UIButton, function():UIButton
             {
-                var hi = new UIButton(-250, 320 + (50 * i), item);
+                var hi = new UIButton(-250, 320 + (50 * i), MoonLang.get('pause.${items[i]}', items[i]));
                 hi.alpha = 0;
                 hi.scale.set(0, 0);
                 hi.selected = false;
@@ -259,9 +258,6 @@ class PauseScreen extends FlxSubState
 
         if(!pressedEsc)FlxFlicker.flicker(pauseItems.members[curSelected], 1, 0.05, true);
         oppIcon.playAnim('select', true);
-        // Note: Assuming access via the group; if BestScoreGroup is not a member variable, declare it as such if needed.
-        // For this refactor, we'll assume it's local but accessible; in practice, make it a class member if reused.
-        // But since it's only used in constructor and here, for completeness, declare private var bestGroup:BestScoreGroup; and assign in new.
         bestGroup.playerIcon.playAnim('select', true);
 
         // COUNTDOWN TEXT
@@ -273,6 +269,18 @@ class PauseScreen extends FlxSubState
         //wah.textField.sharpness = 400;
         add(wah);
 
+        // Rewind the music a little so it starts playing before the countdown ends
+        // actually I won't use it cause it kinda fucks on laggy devices so ehhh nvm
+        /*pf.playback.time = Math.max(0, originalTime - countdownDuration);
+        for(sound in pf.playback.members)
+        {
+            sound.volume = 0;
+            sound.fadeIn(countdownDuration / 1000, 0, MoonSettings.callSetting(sound.type == Inst ? 'Instrumental Volume' : 'Voices Volume') / 100);
+        }
+
+        pf.playback.state = PLAY;
+        */
+        
         new FlxTimer().start(pf.conductor.crochet / 1000 * 2, function(_)
         {
             for (bg in [backGradient, back]) FlxTween.tween(bg, {alpha: 0}, pf.conductor.crochet / 1000 * 2);

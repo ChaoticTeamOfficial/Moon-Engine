@@ -1,6 +1,7 @@
 package moon.dependency;
 
 import moon.global_obj.Alphabet;
+import moon.dependency.user.MoonLang;
 import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -29,7 +30,9 @@ class MoonGame extends FlxGame
     	// AFTER game initializes...
         super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
         
+		MoonLang.scan();
 		MoonSettings.init();
+		MoonLang.loadFromSettings();
 		MoonAchievements.init();
         SongData.init();
         Alphabet.init();

@@ -84,7 +84,7 @@ class Freeplay extends FlxSubState
 
         add(mainBG.foreground);
 
-        songList = getMixSonglist('week1', character);
+        songList = getMixSonglist('all', character);
         //trace(songList);
 
         stars = new DifficultyStars(0, 632, 24, 0.055);
@@ -140,15 +140,27 @@ class Freeplay extends FlxSubState
         if (MoonInput.justPressed(ACCEPT))
         {
             final selected = selector.getSelected();
-            if (selected != null)
-            {
-                PlayState.songData = {
-                    song: selected.song,
-                    difficulty: selected.difficulty,
-                    mix: selected.mix
-                };
-                FlxG.switchState(() -> new LoadingScreen());
-            }
+            Global.allowInputs = false;
+
+            thisDJ.canDance = false;
+            thisDJ.playAnim('confirm', true);
+
+            Paths.playSFX('ui/confirmMenu.ogg');
+
+            selector.getSelectedItem().doConfirm();
+            Global.scriptCall('onConfirm');
+            new FlxTimer().start(1.79, _->{
+                if (selected != null)
+                {
+                    PlayState.songData = {
+                        song: selected.song,
+                        difficulty: selected.difficulty,
+                        mix: selected.mix
+                    };
+                    FlxG.switchState(() -> new LoadingScreen());
+                    Global.allowInputs = true;
+                }
+            });
         }
 
         Global.scriptCall('onUpdate', [elapsed]);

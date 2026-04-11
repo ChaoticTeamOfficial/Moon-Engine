@@ -63,11 +63,11 @@ class Setting
      * @param options       The setting's options, slider = [minVal, maxVal], selector = [values], checkmark = null.
      * @param defaultValue  The setting's default value.
      */
-    public function new(name:String, type:SettingType, description:String, options:Dynamic, defaultValue:Dynamic)
+    public function new(name:String, type:SettingType, options:Dynamic, defaultValue:Dynamic)
     {
         this.name = name;
         this.type = type;
-        this.description = description;
+        this.description = 'No description found.';
         this.options = options;
         this.defaultValue = defaultValue;
         this.value = defaultValue;
@@ -120,73 +120,74 @@ class MoonSettings
     {
         categories.set("Video Settings",
         [
-            new Setting("Screen Mode", SELECTOR, "Set your screen mode.", ["Windowed", "Fullscreen", "Borderless Fullscreen"], "Windowed"),
+            new Setting("Screen Mode", SELECTOR, ["Windowed", "Fullscreen", "Borderless Fullscreen"], "Windowed"),
 
-            new Setting("Window Resolution", SELECTOR, "Change your window resolution. (ONLY APPLIED IF ON WINDOWED!)", 
+            new Setting("Window Resolution", SELECTOR, 
             ["800x600", "1024x768", "1280x720", "1280x800", "1366x768", "1440x900", 
             "1600x900", "1680x1050", "1920x1080", "2560x1440", "3840x2160"], "1280x720")
         ]);
 
         categories.set("Sound Settings",
         [
-            new Setting("Master Volume", SLIDER, "Changes the game's main volume (affects everything).", [0, 100], 100),
-            new Setting("Instrumental Volume", SLIDER, "Changes the volume for in-game instrumentals.", [0, 100], 100),
-            new Setting("Voices Volume", SLIDER, "Changes the volume for in-game vocals.", [0, 100], 100),
-            new Setting("Music Volume", SLIDER, "Changes the volume for menu music.", [0, 100], 60),
-            new Setting("SFX Volume", SLIDER, "Changes the volume for general sound effects.", [0, 100], 80),
+            new Setting("Master Volume", SLIDER, [0, 100], 100),
+            new Setting("Instrumental Volume", SLIDER, [0, 100], 100),
+            new Setting("Voices Volume", SLIDER, [0, 100], 100),
+            new Setting("Music Volume", SLIDER, [0, 100], 60),
+            new Setting("SFX Volume", SLIDER, [0, 100], 80),
             //new Setting("Editor Sounds", SLIDER, "Changes the volume for editor sound effects.", [0, 100], 100),
-            new Setting("Ranking Sound", CHECKMARK, "Plays a sound when getting a higher or lower rank while playing a track.", null, false),
-            new Setting("Mute Voices on Miss", CHECKMARK, "Toggles muting the vocals when you miss. Useful if you'd like to hear uninterrupted music.", null, true)
+            new Setting("Ranking Sound", CHECKMARK, null, false),
+            new Setting("Mute Voices on Miss", CHECKMARK, null, true)
         ]);
 
         categories.set("Gameplay Settings",
         [
-            new Setting("Keybinds...", SELECTABLE, "Change your gameplay/menus keybinds.", null, null),
-            new Setting("Note Offset", UNCAP_SLIDER, "Changes the delay of the notes. Negative: Early, Positive: Late", null, 0),
-            new Setting("Calculate Offset...", SELECTABLE, "Calculate your offset by pressing in the beat.", null, null),
-            new Setting("Downscroll", CHECKMARK, "Places the judgement line at the bottom of the screen. Notes will descend into it.", null, false),
-            new Setting("Middlescroll", CHECKMARK, "Positions the judgement line at the middle of the screen, hiding opponent notes.", null, false),
-            new Setting("HUD Customization...", SELECTABLE, "Enter customization screen.", null, null),
-            new Setting("Note Splashes", CHECKMARK, "Toggles the visibility of the note splashes.", null, true),
-            new Setting("Hold Note Splashes", CHECKMARK,"Toggles the visibility of the hold note splashes.", null, true),
-            new Setting("Lane Background Visibility", SELECTOR, "Adds a lane behind your strumlines.", [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], 0),
-            new Setting("Ghost Tapping", CHECKMARK, "Allows tapping freely when there are no notes (hey, I don't judge).", null, true),
-            new Setting("Mechanics", CHECKMARK, "Toggles song-specific mechanics (such as dodging).", null, true),
-            new Setting("Modchart", CHECKMARK, "Toggles modcharts (animated/moving notes).", null, true)
+            new Setting("Keybinds...", SELECTABLE, null, null),
+            new Setting("Note Offset", UNCAP_SLIDER, null, 0),
+            new Setting("Calculate Offset...", SELECTABLE, null, null),
+            new Setting("Downscroll", CHECKMARK, null, false),
+            new Setting("Middlescroll", CHECKMARK, null, false),
+            new Setting("HUD Customization...", SELECTABLE, null, null),
+            new Setting("Note Splashes", CHECKMARK, null, true),
+            new Setting("Hold Note Splashes", CHECKMARK, null, true),
+            new Setting("Lane Background Visibility", SELECTOR, [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], 0),
+            new Setting("Ghost Tapping", CHECKMARK, null, true),
+            new Setting("Mechanics", CHECKMARK, null, true),
+            new Setting("Modchart", CHECKMARK, null, true)
         ]);
 
         categories.set("Graphic Settings",
         [
             // removing for now.
             //new Setting("V-Sync", CHECKMARK, "Uncaps the FPS and removes horizontal cuts on the screen (may increase input delay).", null, false),
-            new Setting("FPS Cap", SELECTOR, "The maximum amount your framerate can reach.", [30, 60, 120, 144, 240, 360], 60),
-            new Setting("Shaders", CHECKMARK, "Toggles shaders (may affect performance on low-end devices).", null, true),
-            new Setting("Flashing Lights", CHECKMARK, "Toggles flashing effects. Recommended to turn OFF in case of high photosensitivity.", null, true),
-            new Setting("Colorblind Filters", SELECTOR, "Applies filters for colorblindness.", ["Off", "Tritan", "Protan", "Deutran"], "Off")
+            new Setting("FPS Cap", SELECTOR, [30, 60, 120, 144, 240, 360], 60),
+            new Setting("Shaders", CHECKMARK, null, true),
+            new Setting("Flashing Lights", CHECKMARK, null, true),
+            new Setting("Colorblind Filters", SELECTOR, ["Off", "Tritan", "Protan", "Deutran"], "Off")
         ]);
 
         categories.set("Interface Settings",
         [
-            new Setting("Healthbar Visibility", SELECTOR, "Toggles whether the health bar should be visible or not.", ["On", "Below 100%", "Off"], "On"),
-            new Setting("Show Accuracy", SELECTOR, "Toggles accuracy stat on the in-game HUD.", ["Off", "Approximate", "Full"], "Full"),
-            new Setting("Stats Position", SELECTOR, "Changes the position of your stats HUD (misses, score, etc).", ["On HP-Bar", "On Player Lane"], "On HP-Bar"),
-            new Setting("Icons", SELECTOR, "Changes where the character icons will appear.", ["Off", "At Healthbar", "On Lanes"], "At Healthbar"),
-            new Setting("Show FPS", CHECKMARK, "Toggles FPS/Memory display.", null, false)
+            new Setting("Language", SELECTOR, MoonLang.getDisplayNames(), MoonLang.getDisplayNames()[0]),
+            new Setting("Healthbar Visibility", SELECTOR, ["On", "Below 100%", "Off"], "On"),
+            new Setting("Show Accuracy", SELECTOR, ["Off", "Approximate", "Full"], "Full"),
+            new Setting("Stats Position", SELECTOR, ["On HP-Bar", "On Player Lane"], "On HP-Bar"),
+            new Setting("Icons", SELECTOR, ["Off", "At Healthbar", "On Lanes"], "At Healthbar"),
+            new Setting("Show FPS", CHECKMARK, null, false)
         ]);
 
         categories.set("Engine Settings",
         [
-            new Setting("Auto-Updates", SELECTOR, "When an update is released, select whether to automatically download it, redirect you to a browser or do nothing.", ["Off", "In-Game", "Redirect"], "In-Game"),
-            new Setting("Experimental Features", CHECKMARK, "Toggles features that are in a experimental phase. (SOME OF THEM MAY CRASH YOUR GAME!)", null, false),
-            new Setting("Modding Tools", CHECKMARK, "Enable tools for modding (such as the chart and character editors).", null, false),
-            new Setting("Moon Engine Version", INFO, "Moon Engine's current version. Thanks for using!", null, 'v.${Application.current.meta.get('version')}')
+            new Setting("Auto-Updates", SELECTOR, ["Off", "In-Game", "Redirect"], "In-Game"),
+            new Setting("Experimental Features", CHECKMARK, null, false),
+            new Setting("Modding Tools", CHECKMARK, null, false),
+            new Setting("Moon Engine Version", INFO, null, 'v.${Application.current.meta.get('version')}')
         ]);
 
         // A category that's not visible on the settings, it's mostly just for internal use
         categories.set("Internal", [
-            new Setting("Game Character", SELECTOR, "", ['bf'], 'bf'),
-            new Setting("JudgePos", SELECTOR, "", [], [500, 270]),
-            new Setting("ComboPos", SELECTOR, "", [], [500, 340])
+            new Setting("Game Character", SELECTOR, ['bf'], 'bf'),
+            new Setting("JudgePos", SELECTOR, [], [500, 270]),
+            new Setting("ComboPos", SELECTOR, [], [500, 340])
         ]);
     }
 
@@ -335,6 +336,12 @@ class MoonSettings
             s.value = value;
             updateGlobalSettings();
             saveSettings();
+
+            if (name == 'Language')
+            {
+                final code = MoonLang.getCodes()[MoonLang.getDisplayNames().indexOf(value)];
+                if (code != null) MoonLang.load(code);
+            }
         }
     }
 

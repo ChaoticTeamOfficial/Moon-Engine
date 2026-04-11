@@ -18,11 +18,20 @@ class Settings extends FlxSubState
     //var optionDesc:FlxText;
     var info:OptionInfo;
 
+    // Title and header position (used for live refresh)
+    var titleText:FlxText;
+    var afterHeaderY:Float = 0;
+
+    // Static reference so OptionObject can trigger a full UI refresh when Language changes
+    public static var current:Null<Settings> = null;
+
     public function new(skipTransition:Bool = false)
     {
         super();
         
         if(PlayState.instance != null) this.camera = PlayState.instance.camALT;
+
+        current = this;
 
         var back = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         back.blend = HARDLIGHT;
@@ -54,16 +63,20 @@ class Settings extends FlxSubState
 
         add(optionsContainer);
 
-        var sttDisplay = new FlxText(32, yPos);
-        sttDisplay.text = 'SETTINGS';
-        sttDisplay.setFormat(Paths.font('phantomuff/difficulty.ttf'), 54, CENTER);
-        sttDisplay.antialiasing = true;
-        optionsContainer.add(sttDisplay);
-        yPos += sttDisplay.height + 16;
+        // Localized title (will update when language changes)
+        yPos = 0;
+        titleText = new FlxText(32, yPos);
+        titleText.text = MoonLang.get('ui.settings.title', 'SETTINGS');
+        titleText.setFormat(Paths.font('phantomuff/difficulty.ttf'), 54, CENTER);
+        titleText.antialiasing = true;
+        optionsContainer.add(titleText);
+        yPos += titleText.height + 16;
 
         var separator = new MoonSprite(32, yPos).makeGraphic(OptionObject.separationWidth, 2, FlxColor.WHITE);
         optionsContainer.add(separator);
         yPos += separator.height + 16;
+
+        afterHeaderY = yPos; // save position for refresh
 
         for(i in 0...MoonSettings.categoryOrder.length)
             createCategory(MoonSettings.categoryOrder[i]);
@@ -106,7 +119,7 @@ class Settings extends FlxSubState
     public function createCategory(category:String):Void
     {
         final separation = 16;
-        var categoryTxt:FlxText = new FlxText(32, yPos, -1, category.toUpperCase());
+        var categoryTxt:FlxText = new FlxText(32, yPos, -1, MoonLang.category(category));
         categoryTxt.setFormat(Paths.font("phantomuff/difficulty.ttf"), 32, FlxColor.WHITE, CENTER);
         categoryTxt.antialiasing = true;
         categoryTxt.alpha = 0.7;
@@ -118,7 +131,7 @@ class Settings extends FlxSubState
         for (i in 0...settings.length)
         {
             var option:OptionObject = new OptionObject(32, yPos, settings[i], category);
-            //option.screenCenter(X);
+            // option.changeValue(0); // already called inside OptionObject constructor now
             optionsContainer.add(option);
             option.camera = this.camera;
             navOptions.push(option);
@@ -126,6 +139,31 @@ class Settings extends FlxSubState
         }
     
         yPos += separation + 32;
+    }
+
+    public function refreshOptions():Void
+    {
+        var toRemove:Array<FlxSprite> = [];
+        for (i in 2...optionsContainer.members.length)
+            toRemove.push(optionsContainer.members[i]);
+
+        for (member in toRemove)
+        {
+            optionsContainer.remove(member);
+            member.destroy();
+        }
+
+        navOptions = [];
+
+        yPos = afterHeaderY;
+
+        // Re-create every category and re-localize the titles.
+        titleText.text = MoonLang.get('ui.settings.title', 'SETTINGS');
+
+        for (i in 0...MoonSettings.categoryOrder.length)
+            createCategory(MoonSettings.categoryOrder[i]);
+
+        changeSelection(0);
     }
 
     override public function update(elapsed:Float):Void
@@ -187,5 +225,12 @@ class Settings extends FlxSubState
                 return;
             }
         }
+    }
+
+    override public function close():Void
+    {
+        if (current == this)
+            current = null;
+        super.close();
     }
 }

@@ -32,9 +32,9 @@ class OptionInfo extends FlxSpriteGroup
 	var texts:Array<FlxText> = [];
 	public function updateInfo(setting:Setting)
 	{
-		topText.text = setting.name.toUpperCase();
+		topText.text = MoonLang.settingName(setting.name).toUpperCase();
 
-		descriptionText.text = setting.description;
+		descriptionText.text = MoonLang.settingDesc(setting.name, setting.description);
 		descriptionText.y = topText.y + topText.height + 24;
 		MoonUtils.scrambleText(topText);
 

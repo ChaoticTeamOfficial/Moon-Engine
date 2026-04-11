@@ -156,6 +156,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		for(name => charac in chars)
 		{
+			// beep :3
 			charac.resetBeeps();
 			charac.alpha = (name == line.character) ? 1 : 0.5;
 		}
