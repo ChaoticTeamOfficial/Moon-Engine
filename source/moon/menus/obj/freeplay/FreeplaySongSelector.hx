@@ -167,6 +167,7 @@ class FreeplaySongSelector extends FlxGroup
                 continue;
             }
 
+            //TODO: REMOVE THIS! ITS FOR debUGGING PURPOSES
             if(FlxG.keys.justPressed.O && relIdx == 0)
             {
                 item.doRankReveal();
