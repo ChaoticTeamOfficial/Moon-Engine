@@ -129,6 +129,9 @@ class MoonSprite extends FlxAnimate
 			centerOffsets();
         	centerOrigin();
 		}
+
+		offset.x += extraOffset.x;
+		offset.y += extraOffset.y;
 	}
 
 	@:inheritDoc(FlxSprite.loadGraphic)
@@ -186,7 +189,10 @@ class MoonSprite extends FlxAnimate
 
 					if (playedName == anim.name)
 					{
-						if (anim.finishAnim == "idle" || anim.finishAnim.startsWith("idle-")) dance(true);
+						if (anim.finishAnim == "idle" || anim.finishAnim.startsWith("idle-")) {
+							dance(true);
+							animation.curAnim.curFrame = animation.curAnim.frames[animation.curAnim.frames.length - 1];
+						}
 						else playAnim(anim.finishAnim, true);
 					}
 				});

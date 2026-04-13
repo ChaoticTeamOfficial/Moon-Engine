@@ -94,6 +94,7 @@ class Character extends MoonSprite
         {
             dance(true);
             animationHold = 0;
+            animation.curAnim.curFrame = animation.curAnim.frames[animation.curAnim.frames.length - 1];
         }
         super.update(elapsed);
     }

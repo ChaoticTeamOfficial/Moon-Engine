@@ -466,6 +466,7 @@ class Paths
         if(renderedSounds.exists(key)) return;
 
         var what = new FlxSound().loadEmbedded(getSound('$from/$key', library), false, false);
+        what.volume = 0;
         what.play();
         what.stop();
     }
