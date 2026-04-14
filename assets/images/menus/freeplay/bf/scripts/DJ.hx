@@ -60,8 +60,8 @@ function onCreate()
 var afkIndex = 0;
 function onUpdate(elapsed)
 {
-    if(FlxG.keys.justPressed.E) dj.AFK_TIMER += 30;
-    if(FlxG.keys.justPressed.P) dj.playAnim('rankLoss', true);
+    //if(FlxG.keys.justPressed.E) dj.AFK_TIMER += 30;
+    //if(FlxG.keys.justPressed.P) dj.playAnim('rankLoss', true);
     switch(afkIndex)
     {
         case 0:

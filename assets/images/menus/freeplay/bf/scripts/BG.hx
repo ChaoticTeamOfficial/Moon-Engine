@@ -4,9 +4,15 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import moon.dependency.MoonSprite;
+import moon.dependency.MoonUtils;
 import moon.global_obj.TextScroll;
 
 var background:MoonSprite;
+var txtBack:MoonSprite;
+var scrollTexts:Array<TextScroll> = [];
+
+var confirmGlow:MoonSprite;
+var confirmGlow2:MoonSprite;
 function onCreate()
 {
     background = new MoonSprite();
@@ -63,7 +69,17 @@ function onCreate()
         },
     ];
 
-    var txtBack = new MoonSprite(0, 418);
+    confirmGlow = new MoonSprite(16).loadGraphic(Paths.image('menus/freeplay/confirmGlow'));
+    confirmGlow.screenCenter(0x10);
+    behindBG.add(confirmGlow);
+
+    confirmGlow2 = new MoonSprite(confirmGlow.x).loadGraphic(Paths.image('menus/freeplay/confirmGlow2'));
+    confirmGlow2.screenCenter(0x10);
+    behindBG.add(confirmGlow2);
+
+    confirmGlow.visible = confirmGlow2.visible = false;
+
+    txtBack = new MoonSprite(0, 418);
     txtBack.makeGraphic(900, 70, 0xFFfed100);
     behindBG.add(txtBack);
 
@@ -74,10 +90,37 @@ function onCreate()
         textii.speed = dt.speed;
         textii.color = dt.color;
         behindBG.add(textii);
+        scrollTexts.push(textii);
     }
 }
 
+var tweenAAAAAA:FlxTween;
 function onTransitionEnd()
 {
-	FlxTween.color(background, 0.6, 0xFFFFFFFF, 0xFFffd863);
+	tweenAAAAAA = FlxTween.color(background, 0.6, 0xFFFFFFFF, 0xFFffd863);
+}
+
+function onConfirm()
+{
+    MoonUtils.cancelActiveTwn(tweenAAAAAA);
+    tweenAAAAAA = FlxTween.color(background, 0.33, 0xFFFFD0D5, 0xFF171831, {ease: FlxEase.quadOut});
+    txtBack.visible = false;
+    for(t in scrollTexts)
+        t.visible = false;
+
+    confirmGlow.visible = true;
+    confirmGlow2.visible = true;
+
+    confirmGlow2.alpha = 0;
+    confirmGlow.alpha = 0;
+
+    FlxTween.tween(confirmGlow2, {alpha: 0.5}, 0.33, {
+        ease: FlxEase.quadOut,
+        onComplete: function(_)
+        {
+            confirmGlow2.alpha = 0.6;
+            confirmGlow.alpha = 1;
+            FlxTween.tween(confirmGlow, {alpha: 0}, 0.5);
+        }
+    });
 }

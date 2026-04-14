@@ -121,6 +121,8 @@ class Freeplay extends FlxSubState
         curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
         selector.changeSelection(num);
         Paths.playSFX('ui/scrollMenu.ogg');
+
+        Global.scriptCall('onScroll');
     }
 
     override public function update(elapsed:Float):Void
@@ -142,13 +144,16 @@ class Freeplay extends FlxSubState
             final selected = selector.getSelected();
             Global.allowInputs = false;
 
+            //reset the AFK timer and the "canDance" so it doesn't fuck out the anims 
             thisDJ.canDance = false;
+            thisDJ.AFK_TIMER = 0;
             thisDJ.playAnim('confirm', true);
 
             Paths.playSFX('ui/confirmMenu.ogg');
 
             selector.getSelectedItem().doConfirm();
             Global.scriptCall('onConfirm');
+
             new FlxTimer().start(1.79, _->{
                 if (selected != null)
                 {
