@@ -44,7 +44,7 @@ class MoonScript
     public function new(){}
 
     /**
-     * Loads up a script from a path.
+     * Loads up a script from a path. (NOTE: `Paths` USAGE IS NOT NEEDED!)
      * @param path The path in which the script is at.
      */
     inline public function load(path:String)

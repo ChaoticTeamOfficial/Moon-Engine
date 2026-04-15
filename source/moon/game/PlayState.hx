@@ -285,6 +285,7 @@ class PlayState extends FlxTransitionableState
 
 	override public function update(elapsed:Float):Void
 	{
+		Global.scriptCall('onUpdate', [elapsed]);
 		super.update(elapsed);
 
 		//camGAME.rotation += 0.5;
@@ -338,7 +339,7 @@ class PlayState extends FlxTransitionableState
 		//if(FlxG.keys.justPressed.FOUR)
 		//	Countdown.performCountdown();
 
-		Global.scriptCall('onUpdate', [elapsed]);
+		Global.scriptCall('onPostUpdate', [elapsed]);
 	}
 
 	public var camMov:FlxTween;

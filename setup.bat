@@ -62,7 +62,6 @@ haxelib set hxcpp-debug-server 1.2.4
 haxelib set moonchart 0.5.1
 haxelib set hxvlc 2.2.5
 haxelib set flixel-animate 1.5.0
-haxelib run lime setup
 
 cls
 title Moon Engine Setup - Doing a set-up
@@ -71,6 +70,7 @@ echo ****************************************
 echo *** You will now set-up your Flixel. ***
 echo ****************************************
 
+haxelib run lime setup
 haxelib run flixel-tools setup
 cls
 
