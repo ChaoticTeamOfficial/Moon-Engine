@@ -122,8 +122,6 @@ class PlayState extends FlxTransitionableState
 	
 	var rpcString:String = "";
 
-	var rain:RainShader;
-	var rainFilter:ShaderFilter;
 	override public function create()
 	{
 		super.create();
@@ -251,13 +249,6 @@ class PlayState extends FlxTransitionableState
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
-
-		rain = new RainShader();
-		rain.scale = FlxG.height / 200;
-		rain.intensity = 0.7;
-
-		rainFilter = new ShaderFilter(rain);
-		camGAME.filters = [rainFilter];
 	}
 	
 	public function activeTweens(isActive:Bool)
@@ -353,9 +344,6 @@ class PlayState extends FlxTransitionableState
 		//	Countdown.performCountdown();
 
 		Global.scriptCall('onPostUpdate', [elapsed]);
-
-		rain.updateViewInfo(FlxG.width, FlxG.height, FlxG.camera);
-		rain.update(elapsed);
 	}
 
 	public var camMov:FlxTween;

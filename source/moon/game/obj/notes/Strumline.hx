@@ -80,4 +80,19 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
         
         return skin;
     }
+	
+	@:dox(hide)
+	@:noCompletion override public function set_alpha(v:Float):Float
+	{
+		//TODO: fix thiss, it still doesn't change the alpha values :P 
+		/*
+		for(shit in this.members)
+			if(Std.isOfType(shit, Receptor))
+			{
+				final obj = cast(shit, Receptor);
+				obj.splashGroup.alpha = obj.notesGroup.alpha = obj.sustainsGroup.alpha = v;
+			}
+		*/
+		return super.set_alpha(v);
+	}
 }
