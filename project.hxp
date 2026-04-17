@@ -132,7 +132,7 @@ class Project extends HXProject
 		setHaxedef("FM_ENGINE_VERSION", "1.0.0");
 		
 		// We set haxeflags here!
-		addHaxeFlag('--macro modchart.backend.macros.Macro.includeFiles()');
+		addHaxeMacro('modchart.backend.macros.Macro.includeFiles()');
 	}
 
 	function setupFeatureFlags()

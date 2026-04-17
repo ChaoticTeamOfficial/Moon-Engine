@@ -38,7 +38,9 @@ class MoonScript
         "FlxWaveEffect" => flixel.addons.effects.chainable.FlxWaveEffect,
         "FlxSpriteGroup" => flixel.group.FlxSpriteGroup,
         "DropShadowShader" => DropShadowShader,
-        "ABotVisualizer" => moon.game.obj.ABotVisualizer
+        "ABotVisualizer" => moon.game.obj.ABotVisualizer,
+        "RainShader" => moon.hardcoded_shaders.RainShader,
+        "ShaderFilter" => openfl.filters.ShaderFilter
     ];
 
     public function new(){}
