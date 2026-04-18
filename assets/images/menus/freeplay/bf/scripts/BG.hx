@@ -4,7 +4,7 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import moon.dependency.MoonSprite;
-import moon.dependency.MoonUtils;
+import moon.utils.MoonUtils;
 import moon.global_obj.TextScroll;
 
 var background:MoonSprite;

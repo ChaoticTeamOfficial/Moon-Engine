@@ -1,7 +1,7 @@
 import flixel.FlxG;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import moon.dependency.MoonUtils;
+import moon.utils.MoonUtils;
 
 final scale = 5;
 

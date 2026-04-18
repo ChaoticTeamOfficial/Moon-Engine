@@ -92,6 +92,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
         Global.registerScript('stageScript', script);
         this.stage = stage;
 
+        script.set('add', this.add);
+        script.set('insert', this.insert);
+        script.set('getObject', this.getObject);
+        script.set('members', this.members);
+
         if(conductor != null) conductor.onBeat.add(onStageBeat);
     }
 

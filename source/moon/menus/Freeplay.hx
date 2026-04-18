@@ -141,6 +141,11 @@ class Freeplay extends FlxSubState
 
         if (MoonInput.justPressed(ACCEPT))
         {
+            // sets the next transitionIn to false
+            // otherwise, for some reason, it shows the main menu when transitioning.
+            // so instead, I'll do a fade.
+            FlxTransitionableState.skipNextTransIn = FlxTransitionableState.skipNextTransOut = true;
+
             final selected = selector.getSelected();
             Global.allowInputs = false;
 

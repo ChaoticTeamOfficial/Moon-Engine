@@ -1,5 +1,6 @@
 package moon.game;
 
+import sys.FileSystem;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
@@ -536,6 +537,7 @@ class PlayState extends FlxTransitionableState
     static public function saveReplays()
     {
         #if sys
+		if(!FileSystem.exists('assets/data/replays')) FileSystem.createDirectory('assets/data/replays');
         for(replay in replaysToSave)
         {
 	        final path = Paths.getPath('data/replays/${replay.filename}');

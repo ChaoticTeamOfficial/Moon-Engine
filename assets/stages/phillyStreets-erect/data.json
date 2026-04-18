@@ -7,13 +7,13 @@
     },
 	{
 	  "name": "phillyForegroundCity",
-      "position": [600, 69],
-      "scroll": [0.3, 0.3],
+      "position": [600, 139],
+      "scroll": [0.3, 0.4],
 	  "__note": "dont forget to put another one, but gotta do it via code cuz no duplicated objects."
     },
 	{
 	  "name": "phillyConstruction",
-      "position": [1795, 360],
+      "position": [2325, 360],
       "scale": [1, 1]
     },
 	{
@@ -49,7 +49,7 @@
           "name": "toRed", "prefix": "greentored", "fps": 24, "looped": false, "x": 0, "y": 0
         }
       ],
-      "startAnim": "toRed",
+      "startAnim": "toGreen",
       "animBehavior": "once",
       "angle": 0
     },
@@ -86,6 +86,6 @@
     "camSettings": {
     "zoom": 0.77,
     "startX": 1600,
-    "startY": 700
+    "startY": 760
   }
 }

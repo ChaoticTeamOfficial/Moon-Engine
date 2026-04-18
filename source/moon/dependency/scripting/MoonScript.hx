@@ -23,6 +23,7 @@ class MoonScript
         "Paths" => Paths,
         "Constants" => Constants,
         "Global" => Global,
+        "ScriptUtils" => ScriptUtils,
 
         // I hate the fact I gotta include these... aghh
         "Reflect" => Reflect,

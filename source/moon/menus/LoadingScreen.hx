@@ -61,6 +61,8 @@ class LoadingScreen extends FlxTransitionableState
         loadDisplay.antialiasing = true;
         add(loadDisplay);
         loadDisplay.y = FlxG.height - loadDisplay.height;
+
+        FlxTransitionableState.skipNextTransIn = FlxTransitionableState.skipNextTransOut = false;
 		
         // We begin preloading here!!!
         new FlxTimer().start(0.4, function(_)
