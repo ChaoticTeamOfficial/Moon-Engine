@@ -50,6 +50,7 @@ function onPostCreate()
     // cars
     car1 = createCar();
     car2 = createCar();
+	FlxG.sound.cache(Paths.sound('stages/phillyStreets-erect/car-honk.wav', 'sounds'));
 
     // cool rim lighting
     final rim = {brightness: -21, hue: -10, contrast: -28, saturation: -45};
@@ -92,13 +93,22 @@ function onBeat(beat:Int)
         changeTrafficLights(beat);
 
     // car 1 (forward)
-    if (FlxG.random.bool(10) 
-        && beat != lastLightChangeBeat + lightChangeInterval 
-        && car1Interruptable 
-        && !carWaiting)
+	if (FlxG.random.bool(10) && beat != lastLightChangeBeat + lightChangeInterval && car1Interruptable && !carWaiting)
     {
         if (lightsStop)
-            driveCarToLights(car1);
+        {
+            // rare chance of these guys just straight up commiting crimes
+            // (go through the red light)
+            if (FlxG.random.bool(2))
+			{
+				//honk honk
+				// me when I'm late to work
+				Paths.playSFX('stages/phillyStreets-erect/car-honk.wav', 'sounds', true);
+                driveCarForward(car1);
+				trace('THIS GUY IS LATE');
+			}
+            else driveCarToLights(car1);
+        }
         else
             driveCarForward(car1);
     }
@@ -155,7 +165,7 @@ function driveCarGeneric(car:MoonSprite, stopAtLights:Bool, backward:Bool)
     switch (variant)
     {
         case 1: duration = FlxG.random.float(1, 1.7);
-        case 2: extraOffset = [20, 18]; duration = FlxG.random.float(0.6, 1.2); // why this bitch fast
+        case 2: extraOffset = [20, 42]; duration = FlxG.random.float(0.6, 1.2); // why this bitch fast
         case 3: extraOffset = [30, 50]; duration = FlxG.random.float(1.5, 2.5);
         case 4: extraOffset = [10, 60]; duration = FlxG.random.float(1.5, 2.5);
     }
