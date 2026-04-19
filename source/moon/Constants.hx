@@ -27,7 +27,7 @@ class Constants
 
     static final INITIAL_STATE:Class<FlxState> = Title;
 
-    ////// ------- MENUS RELATED CONSTANTS
+    /// ------- MENUS RELATED CONSTANTS
 
     // - Title
 

@@ -19,6 +19,7 @@ class Nametag extends MoonSprite
 	var mosaicTwn:FlxTween;
 	@:noCompletion public function set_character(character:String):String
 	{
+		if(this.character == character) return this.character;
 		this.character = character;
 
 		loadGraphic((character != 'locked') ? Paths.image('$character/${character}Chill/nametag', 'characters') : Paths.image('menus/charSelect/lockedNametag'));

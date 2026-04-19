@@ -94,12 +94,12 @@ class Title extends FlxTransitionableState
         objects.push(grid2);
 
         secretGF = new Character(0,0,'gf', conductor);
-        secretGF.blend = ADD;
         add(secretGF);
         secretGF.shader = colorSH.shader;
         secretGF.visible = false;
         secretGF.screenCenter();
         secretGF.x += 464;
+        secretGF.useRenderTexture = true;
 
         add(circles);
 
