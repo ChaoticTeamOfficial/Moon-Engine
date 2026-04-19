@@ -13,6 +13,12 @@ class UIButton extends FlxSpriteGroup
 		super(x, y);
 		this.text = text;
 
+		//TODO: find a way to use FlxScaledSliceSprite
+		/**
+	 		final slice = new FlxRect(21, 23, 202, 20);
+			button = new FlxScaledSliceSprite(Paths.image('toolkit/ui/uiStuff'), slice, 242, 67);
+		*/
+
 		button = new MoonSprite();
         button.frames = Tilemap.getAtlasFrames("mainUI");
         button.frame = Tilemap.getFrame('button-regular', 'mainUI');

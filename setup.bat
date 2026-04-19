@@ -51,6 +51,7 @@ haxelib git thx.semver https://github.com/fponticelli/thx.semver
 haxelib git flixel-screenshot-plugin https://github.com/dotevie/flixel-screenshot-plugin
 haxelib git haxeui-flixel https://github.com/haxeui/haxeui-flixel
 haxelib git haxeui-core https://github.com/haxeui/haxeui-core
+haxelib git flxscaledslicesprite https://github.com/TracedInPurple/FlxScaledSliceSprite.git
 
 haxelib set flixel 6.1.2
 haxelib set lime 8.3.1

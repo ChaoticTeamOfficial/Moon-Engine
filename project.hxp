@@ -38,8 +38,8 @@ class Project extends HXProject
 		"lime", "openfl", "flixel", "flixel-addons",
 		"flixel-ui", "hscript-iris", "moonchart", "flixel-animate",
 		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin", 
-		"funkin-modchart", "haxeui-flixel", "haxeui-core"
-		#if !hl , "hxdiscord_rpc" #end
+		"funkin-modchart", "haxeui-flixel", "haxeui-core",
+		"flxscaledslicesprite"
 	];
 
     public function new()
@@ -109,6 +109,7 @@ class Project extends HXProject
 		for(lib in HAXELIBS)
 			addHaxelib(lib);
 
+		// ADD HAXELIBS FOR TARGET SPECIFICS BELOW!
 		if (isDebug())
 			addHaxelib('hxcpp-debug-server');
 
