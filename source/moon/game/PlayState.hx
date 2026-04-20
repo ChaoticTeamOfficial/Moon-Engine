@@ -279,6 +279,9 @@ class PlayState extends FlxTransitionableState
 		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
 		isDead = false;
 		allowGameBop = true;
+		
+		bopRate = Constants.DEFAULT_BOP_RATE;
+		bopIntensity = Constants.DEFAULT_BOP_INTENSITY - 1;
 	}
 
 	public function gameOverRestart()
@@ -456,7 +459,10 @@ class PlayState extends FlxTransitionableState
         {
             final rep = new Replay(songData.song, songData.difficulty, songData.mix);
             rep.inputs = p1Handler.recordedInputs.copy();
-            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${Date.now().getTime()}.mrp';
+			rep.stats = Shortcuts.getStats();
+			rep.date = Date.now().getTime();
+            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${rep.date}.mrp';
+			rep.displayName = rep.toString();
             replaysToSave.push(rep);
         }
 
@@ -546,6 +552,14 @@ class PlayState extends FlxTransitionableState
 	            song: replay.song,
 	            difficulty: replay.difficulty,
 	            mix: replay.mix,
+				displayName: replay.displayName,
+				replayCode: replay.date,
+				stats: {
+					misses: replay.stats.misses,
+					accuracy: replay.stats.accuracy,
+					score: replay.stats.score,
+					maxCombo: replay.stats.highestCombo
+				},
 	            inputs: replay.inputs
 	        };
 

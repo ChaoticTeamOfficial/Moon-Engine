@@ -148,7 +148,7 @@ class Character extends MoonSprite
         gameoverColorScheme = FlxColor.fromString(data?.gameoverColorScheme ?? '0xFF4924ff');
 
         this.antialiasing = data?.antialiasing ?? true;
-        this.scale.set(data?.scale ?? 0, data?.scale ?? 0);
+        this.scale.set(data?.scale ?? 1, data?.scale ?? 1);
         this.updateHitbox();
         this.playAnim("idle-0");
         this.flipX = data?.flipX ?? false;

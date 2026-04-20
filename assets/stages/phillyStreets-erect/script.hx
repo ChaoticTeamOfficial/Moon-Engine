@@ -50,7 +50,9 @@ function onPostCreate()
     // cars
     car1 = createCar();
     car2 = createCar();
-	FlxG.sound.cache(Paths.sound('stages/phillyStreets-erect/car-honk.wav', 'sounds'));
+
+    //TODO: preload this!
+	//FlxG.sound.cache(Paths.sound('stages/phillyStreets-erect/car-honk.wav', 'sounds'));
 
     // cool rim lighting
     final rim = {brightness: -21, hue: -10, contrast: -28, saturation: -45};
