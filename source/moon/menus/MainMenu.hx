@@ -9,7 +9,7 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['test playlist', 'freeplay', 'convert chart yeah', 'mods', 'settings', 'test script state'];
+    final opt:Array<String> = ['test replay','test playlist', 'freeplay', 'convert chart yeah', 'mods', 'settings', 'test script state'];
     var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -77,7 +77,7 @@ class MainMenu extends FlxTransitionableState
                     if (rep != null)
                         FlxG.switchState(() -> new PlayState(rep));
                     FlxG.sound.music.stop();*/
-                    openSubState(new PlaceholderReplayMenu());
+                    openSubState(new ReplayMenu());
 
                 case 'test playlist':
                     /*PlayState.queuePlaylist([
