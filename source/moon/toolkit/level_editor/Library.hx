@@ -1,7 +1,7 @@
 package moon.toolkit.level_editor;
 
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
-import lime.app.Future;
+import moon.game.events.EventRegistry;
 import openfl.ui.MouseCursor;
 import openfl.ui.Mouse;
 
@@ -24,6 +24,8 @@ class Library extends FlxGroup
     private var scrollBarBg:MoonSprite;
     private var scrollBarThumb:MoonSprite;
     private var dragOffset:Null<Float> = null;
+
+    private var _form:EventFormUI = null;
 
     // -- Nice little variables for modifying this interface in general.
     private static inline final PAD:Float = 16;
@@ -189,6 +191,7 @@ class Library extends FlxGroup
 
     public function refreshLibrary():Void
     {
+        _clearForm();
         content.clear();
         scrollValue = 0;
         final curType = LevelEditor.instance.curType;
@@ -196,7 +199,7 @@ class Library extends FlxGroup
         if (selectedInfo == null)
         {
             tabIndicator.text = 'Library // ${curType}';
-            
+
             var col:Int = 0;
             var row:Int = 0;
             final columns:Int = Math.floor((bg2.width - 2 * PAD - SCROLL_BAR_WIDTH + SPACING) / (ITEM_SIZE + SPACING));
@@ -210,6 +213,7 @@ class Library extends FlxGroup
                 spr.antialiasing = false;
                 spr.active = false;
                 spr.alpha = 0.5;
+                spr.camera = this.camera;
 
                 spr.x = bg2.x + PAD + col * (ITEM_SIZE + SPACING);
                 spr.y = bg2.y + PAD + row * (ITEM_SIZE + SPACING);
@@ -253,28 +257,43 @@ class Library extends FlxGroup
             backBtn.ID = 9999;
             content.add(backBtn);
 
-            var descTxt:FlxText = new FlxText(backBtn.x + backBtn.width + PAD, 0, bg2.width - backBtn.width - SCROLL_BAR_WIDTH, selectedInfo.description);
+            var descTxt:FlxText = new FlxText(backBtn.x + backBtn.width + PAD, 0, bg2.width - backBtn.width - SCROLL_BAR_WIDTH - PAD, selectedInfo.description);
             descTxt.setFormat(Paths.font('Inconsolata-Black.ttf'), 16, LEFT);
             descTxt.antialiasing = true;
             content.add(descTxt);
             descTxt.y = backBtn.y + backBtn.height / 2 - descTxt.height / 2;
 
-            totalContentHeight = PAD + Math.max(descTxt.height, backBtn.height) + PAD;
-            maxScroll = Math.max(0, totalContentHeight - bg2.height);
+            // only shows the scrollbar for the header! the form has its own clip
+            final headerH = Math.max(backBtn.height, descTxt.height);
+            totalContentHeight = PAD + headerH + PAD;
+            maxScroll = 0;
+            scrollBarBg.visible = false;
+            scrollBarThumb.visible = false;
 
-            final showScroll:Bool = maxScroll > 0;
-            scrollBarBg.visible = showScroll;
-            scrollBarThumb.visible = showScroll;
+            final formY = bg2.y + PAD + headerH + 8;
 
-            if (showScroll)
+            _form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
+            /*_form.onPlace = () ->
             {
-                scrollBarThumb.makeGraphic(SCROLL_BAR_WIDTH, Std.int(Math.max(MIN_THUMB_HEIGHT, (bg2.height / totalContentHeight) * bg2.height)), FlxColor.WHITE);
-                scrollBarThumb.x = scrollBarBg.x;
-                updateThumbPosition();
-            }
+                LevelEditor.instance.placeEvent(selectedInfo.name, _form.getValues());
+                LevelEditor.instance.sfx('place-${FlxG.random.int(1, 6)}');
+            };*/
         }
+    }
+
+    private function _clearForm():Void
+    {
+        if (_form == null) return;
+        _form.dispose();
+        _form = null;
     }
 
     private function updateThumbPosition():Void
         scrollBarThumb.y = scrollBarBg.y + (scrollValue / maxScroll) * (bg2.height - scrollBarThumb.height);
+
+    override public function destroy():Void
+    {
+        _clearForm();
+        super.destroy();
+    }
 }

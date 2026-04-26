@@ -149,16 +149,8 @@ class LevelEditor extends FlxState
         // nice lil thing we can use to batch events.
         eventAtlas = new FlxAtlas("eventAtlas");
         for(dir in ['CHARACTERS', 'VISUALS', 'GIMMICKS', 'NOTES', 'SOUNDS'])
-        {
             for(file in Paths.readDir('images/toolkit/level-editor/icons/_$dir', ['.png']))
-            {
-                //trace(file);
-                // its actually very good that readDir returns only the file name by default
-                // cool!
-                // that actually makes it easier to register stuff in the atlas.
                 eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/_$dir/$file').bitmap, '$dir-$file');
-            }
-        }
 
         // preload hardcoded events
         for(eventTag in EventRegistry.getHardcodedTags())
@@ -401,11 +393,10 @@ class LevelEditor extends FlxState
         EditorSync.miniPlayer = miniPlayer;
 
         library = new Library();
-        library.camera = camMID;
         add(library);
 
         var leftpanel = new LeftPanel(this);
-        leftpanel.camera = camMID;
+        leftpanel.camera = camFRONT;
         add(leftpanel);
 
         /*for(i in 0...60)
@@ -610,7 +601,7 @@ class LevelEditor extends FlxState
             {
                 draggingNote = null;
                 if (dragOGlengths != null) dragOGlengths.clear();
-                Mouse.cursor = MouseCursor.BUTTON;
+                //Mouse.cursor = MouseCursor.BUTTON;
             }
         }
         else if (!haxeUIFocused)
@@ -711,7 +702,7 @@ class LevelEditor extends FlxState
         if ((relX < 0 || relX >= LANE_WIDTH * TOTAL_LANES || relY < 0) && draggingNote == null)
         {
             cursor.visible = false;
-            Mouse.cursor = MouseCursor.ARROW;
+            //Mouse.cursor = MouseCursor.ARROW;
             return;
         }
 
@@ -734,14 +725,14 @@ class LevelEditor extends FlxState
                 final n:Note = cast yeah;
                 if (n.sustainHandle != null && n.sustainHandle.visible && FlxG.mouse.overlaps(n.sustainHandle))
                 {
-                    if(draggingNote == null) Mouse.cursor = MouseCursor.BUTTON;
+                    //if(draggingNote == null) Mouse.cursor = MouseCursor.BUTTON;
                     if (FlxG.mouse.justPressed && curPlacementMode == PLACE && curType == NOTES)
                     {
                         final shouldDrag = (selectedNotes.length == 0 || selectedNotes.indexOf(n) != -1);
                         if (shouldDrag)
                         {
                             draggingNote = n;
-                            Mouse.cursor = MouseCursor.HAND;
+                            //Mouse.cursor = MouseCursor.HAND;
 
                             if (dragOGlengths == null) dragOGlengths = new Map();
                             dragOGlengths.clear();
@@ -751,7 +742,6 @@ class LevelEditor extends FlxState
                     }
                     break;
                 }
-                else { if(draggingNote == null) Mouse.cursor = MouseCursor.ARROW; }
             }
         }
 
@@ -854,7 +844,7 @@ class LevelEditor extends FlxState
         EditorSync.onNoteAdded(n);
     }
 
-    function createEvent(ev:EventStruct)
+    public function createEvent(ev:EventStruct)
     {
         var category:GridType = VISUALS;
         for(cat => sht in loadedEvents)
@@ -873,6 +863,22 @@ class LevelEditor extends FlxState
         if(spr.duration > 0) eventsGroup.add(new EventHold(spr));
         eventsGroup.add(spr);
         EditorSync.onEventAdded(ev);
+    }
+
+    public function placeEvent(tag:String, values:Dynamic):Void
+    {
+        final ev:EventStruct = {
+            tag: tag,
+            values: EventRegistry.processEventValues(tag, values),
+            time: conductor.time,
+            lane: 0
+        };
+
+        chart.events.push(ev);
+        chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+        createEvent(ev);
+
+        //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
     }
 
     function timeToY(time:Float):Float
