@@ -27,7 +27,7 @@ class CustomizedPulseTimingEvent extends BaseEvent
             },
             {
                 name: 'intensity', label: 'Intensity', type: NUMBER,
-                defaultValue: 1.0,
+                defaultValue: Constants.DEFAULT_BOP_INTENSITY,
                 min: 0.0, max: 10.0, step: 0.1
             }
         ];

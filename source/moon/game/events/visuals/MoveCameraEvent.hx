@@ -51,6 +51,10 @@ class MoveCameraEvent extends BaseEvent
             {
                 name: 'y', label: 'Y Offset', type: NUMBER,
                 defaultValue: 0, min: -9999, max: 9999, step: 1
+            },
+            {
+                name: 'rotation', label: 'Rotation', type: NUMBER,
+                defaultValue: 0, min: -9999, max: 9999, step: 1
             }
         ];
     }
