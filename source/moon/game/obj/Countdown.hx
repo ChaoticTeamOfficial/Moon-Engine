@@ -12,14 +12,20 @@ class Countdown
 	static var countdownActive:Bool = false;
 	static var countdownNum:Int = 4;
 	static var group:FlxGroup;
-	static final onStart = new FlxSignal();
+	static var onStart:FlxSignal;
 	private static var conductor:Conductor;
 
 	static function init(conductor:Conductor, grp:FlxGroup)
 	{
+		if(onStart != null) {
+			onStart.removeAll();
+			onStart.destroy();
+		}
+
 		Countdown.group = grp;
 		Countdown.conductor = conductor;
 
+		onStart = new FlxSignal();
 		conductor.onBeat.add(checkBeats);
 	}
 

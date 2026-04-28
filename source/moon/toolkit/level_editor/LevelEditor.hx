@@ -16,6 +16,10 @@ import openfl.ui.Mouse;
 import openfl.ui.MouseCursor;
 import moon.game.events.EventRegistry;
 
+#if sys
+import sys.io.File;
+#end
+
 enum abstract GridType(String) {
     var NOTES = 'Notes';
     var VISUALS = 'Visuals';
@@ -111,7 +115,7 @@ class LevelEditor extends FlxState
     public var grayscale:GrayscaleShader = new GrayscaleShader();
     public var invertColors:InvertColor = new InvertColor();
 
-    public function new(song:String = 'green skies', diff:String = 'hard', mix:String = 'bf')
+    public function new(song:String = 'darnell', diff:String = 'hard', mix:String = 'bf')
     {
         this.song = song;
         this.diff = diff;
@@ -751,8 +755,12 @@ class LevelEditor extends FlxState
 
         // NOTE: THANKS TO GOATMYRIA (Luna) WE HAVE A DIFFERENT MODE FOR SELECTION
         //WOHOOOOO NO MORE THINKING ABOUT OVERLAPPING SHIT!!!
+
+        //Anyways, place stuff!
         if(FlxG.mouse.justPressed && curPlacementMode == PLACE && draggingNote == null)
         {
+            //TODO: when not on placement mode, only on editing mode?
+            // uhhh
             if (FlxG.keys.pressed.SHIFT && curType == NOTES)
             {
                 final noteAt = getNoteAtCursor(snappedTime, laneNum);
@@ -774,7 +782,6 @@ class LevelEditor extends FlxState
             {
                 switch(curType)
                 {
-                    // only create the note if it doesn't already exist
                     case NOTES:
                         final noteData = laneNum % 4;
                         final noteLane = (laneNum < 4) ? "opponent" : "p1";
@@ -801,9 +808,21 @@ class LevelEditor extends FlxState
                             chart.content.notes.push(n);
                             sfx('place-${FlxG.random.int(1, 6)}');
                         }
-
+                    
+                    // huh... I think the switch isn't very needed here lmao
                     case VISUALS, CHARACTERS, GIMMICKS, SOUNDS:
-                       // TODO
+                        //shit
+                        final ev:EventStruct = {
+                            tag: library.selectedInfo.name,
+                            values: EventRegistry.processEventValues(library.selectedInfo.name, library.form.getValues()),
+                            time: snappedTime, lane: laneNum
+                        };
+
+                        chart.events.push(ev);
+                        chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+                        createEvent(ev);
+
+                        //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
                 }
             }
             else
@@ -817,6 +836,76 @@ class LevelEditor extends FlxState
 
                     if(chart.content.bookmarks == null) chart.content.bookmarks = [];
                     chart.content.bookmarks.push({text: bm.text, time: snappedTime});
+                }
+            }
+        }
+
+        // Delete stuff!!!
+        // or remove, eh, whatever!
+        if (FlxG.mouse.justPressedRight && draggingNote == null)
+        {
+            deselectAll();
+
+            if (curType == NOTES)
+            {
+                final hit = getNoteAtCursor(snappedTime, laneNum);
+                if (hit != null)
+                {
+                    chart.content.notes = chart.content.notes.filter(n ->
+                        !(Math.abs(n.time - hit.time) < 0.01 && n.data == hit.direction && n.lane == hit.lane)
+                    );
+
+                    if (hit.child != null)
+                    {
+                        noteGroup.remove(hit.child, true);
+                        hit.child.destroy();
+                        hit.child = null;
+                    }
+                    if (hit.sustainHandle != null)
+                        noteGroup.remove(hit.sustainHandle, true);
+
+                    noteGroup.remove(hit, true);
+                    hit.destroy();
+
+                    //sfx('place-${FlxG.random.int(1, 6)}');
+                }
+            }
+            else
+            {
+                var toRemoveSpr:EventSpr = null;
+
+                for (member in eventsGroup.members)
+                {
+                    if (Std.isOfType(member, EventSpr) && cast(member, EventSpr).category == curType)
+                    {
+                        final spr = cast(member, EventSpr);
+                        if (FlxG.mouse.overlaps(spr))
+                        {
+                            toRemoveSpr = spr;
+                            break;
+                        }
+                    }
+                }
+
+                if (toRemoveSpr != null)
+                {
+                    chart.events = chart.events.filter(e ->
+                        !(e.tag == toRemoveSpr.event && Math.abs(e.time - yToTime(toRemoveSpr.y - gridGroup.y)) < 50)
+                    );
+
+                    var toRemoveHold:EventHold = null;
+                    for (member in eventsGroup.members)
+                        if (Std.isOfType(member, EventHold) && cast(member, EventHold).parent == toRemoveSpr)
+                            toRemoveHold = cast member;
+
+                    if (toRemoveHold != null)
+                    {
+                        eventsGroup.remove(toRemoveHold, true);
+                        toRemoveHold.destroy();
+                    }
+
+                    eventsGroup.remove(toRemoveSpr, true);
+                    toRemoveSpr.destroy();
                 }
             }
         }
@@ -856,6 +945,7 @@ class LevelEditor extends FlxState
         spr.updateHitbox();
         spr.x = ev.lane * LANE_WIDTH;
         spr.y = timeToY(ev.time);
+
         spr.x += (LANE_WIDTH - spr.width) / 2;
         spr.active = false;
         if(ev.values != null && ev.values.duration != null) spr.duration = stepsToHeight(ev.values.duration);
@@ -863,22 +953,6 @@ class LevelEditor extends FlxState
         if(spr.duration > 0) eventsGroup.add(new EventHold(spr));
         eventsGroup.add(spr);
         EditorSync.onEventAdded(ev);
-    }
-
-    public function placeEvent(tag:String, values:Dynamic):Void
-    {
-        final ev:EventStruct = {
-            tag: tag,
-            values: EventRegistry.processEventValues(tag, values),
-            time: conductor.time,
-            lane: 0
-        };
-
-        chart.events.push(ev);
-        chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-        createEvent(ev);
-
-        //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
     }
 
     function timeToY(time:Float):Float
@@ -1089,5 +1163,15 @@ class LevelEditor extends FlxState
         sfx('${typeStr.toLowerCase()}Tab');
 
         return curType;
+    }
+
+    // -- External shit
+    public function saveLevel()
+    {
+        //TODO: support for the difficulty system
+        File.saveContent(Paths.getPath('songs/$song/$mix/chart-$diff.json'), haxe.Json.stringify(chart.content));
+        File.saveContent(Paths.getPath('songs/$song/$mix/events.json'), haxe.Json.stringify(chart.events));
+
+        trace('shit got saved ayooooo');
     }
 }

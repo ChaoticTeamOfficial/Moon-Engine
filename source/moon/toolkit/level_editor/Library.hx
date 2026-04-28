@@ -25,7 +25,7 @@ class Library extends FlxGroup
     private var scrollBarThumb:MoonSprite;
     private var dragOffset:Null<Float> = null;
 
-    private var _form:EventFormUI = null;
+    public var form:EventFormUI = null;
 
     // -- Nice little variables for modifying this interface in general.
     private static inline final PAD:Float = 16;
@@ -272,7 +272,7 @@ class Library extends FlxGroup
 
             final formY = bg2.y + PAD + headerH + 8;
 
-            _form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
+            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
             /*_form.onPlace = () ->
             {
                 LevelEditor.instance.placeEvent(selectedInfo.name, _form.getValues());
@@ -283,9 +283,9 @@ class Library extends FlxGroup
 
     private function _clearForm():Void
     {
-        if (_form == null) return;
-        _form.dispose();
-        _form = null;
+        if (form == null) return;
+        form.dispose();
+        form = null;
     }
 
     private function updateThumbPosition():Void
