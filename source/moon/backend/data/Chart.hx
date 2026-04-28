@@ -147,6 +147,11 @@ typedef MetadataStruct =
      */
     var ?noteskin:String;
 
+    /**
+     * Whether or not should the song do a countdown on the beginning.
+     */
+    var ?hasCountdown:Bool;
+
     // -- Other data
 
     /**
@@ -268,6 +273,33 @@ class Chart
         this.song = song;
         this.difficulty = difficulty;
         this.mix = mix;
+
+        if(content.meta.hasCountdown == null) content.meta.hasCountdown = true;
+
+        //checks for duplicate notes and removes them (finally...)
+        if (content.notes != null)
+        {
+            var seen = new Map<String, Bool>();
+            var unique:Array<NoteStruct> = [];
+            var duplicatesFound:Int = 0;
+
+            for (note in content.notes)
+            {
+                final key = '${note.time}_${note.data}_${note.lane}';
+
+                if (!seen.exists(key))
+                {
+                    seen.set(key, true);
+                    unique.push(note);
+                }
+                else duplicatesFound++;
+            }
+
+            content.notes = unique;
+
+            if (duplicatesFound > 0)
+                trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
+        }
 
         content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
         events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
@@ -533,6 +565,7 @@ class Chart
             spectators: [metadata.playData.characters.girlfriend],
             opponents: [metadata.playData.characters.opponent],
             noteskin: 'v-slice',
+            hasCountdown: true,
 
             displayName: metadata.songName,
             album: metadata.playData.album,

@@ -14,18 +14,19 @@ class PlayField extends FlxGroup
     // -- VARIBALES
     public static var instance:PlayField;
 
-    var conductor:Conductor;
-    var playback:Song;
-
-    var noteSpawner:NoteSpawner;
-    var chart:Chart;
-
     var inCutscene:Bool = false;
+    var inCountdown:Bool = false;
     var song:String;
     var mix:String;
     var difficulty:String;
 
     var previousRank:String = "";
+
+    var conductor:Conductor;
+    var playback:Song;
+
+    var noteSpawner:NoteSpawner;
+    var chart:Chart;
 
     var inputHandlers:Map<String, InputHandler> = [];
     var strumlines:Array<Strumline> = [];
@@ -166,7 +167,7 @@ class PlayField extends FlxGroup
         // obv loss, but whatev
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
-        conductor.time = -(conductor.crochet * 5);
+        setSongToStart();
     }
 
     function setupNotes()
@@ -238,7 +239,6 @@ class PlayField extends FlxGroup
     {
         playback.time = 0;
         playback.state = PAUSE;
-        conductor.time = -(conductor.crochet * 5);
 
         for(strum in strumlines)
             for(receptor in strum.members)
@@ -270,13 +270,27 @@ class PlayField extends FlxGroup
             p1.replayKeyStates = [false, false, false, false];
         }
 
-        healthBar.performTransition(conductor);
-
+        setSongToStart();
         onSongRestart.dispatch();
-        inCountdown = true;
     }
 
-    var inCountdown:Bool = true;
+    function setSongToStart()
+    {
+        if(chart.content.meta.hasCountdown)
+        {
+            conductor.time = -(conductor.crochet * 5);
+            inCountdown = true;
+        }
+        else
+        {
+            inCountdown = false;
+            playback.state = PLAY;
+            conductor.time = 0;
+
+            onSongStart.dispatch();
+        }
+    }
+
     override public function update(dt:Float)
     {
         // updates some stuff when not in cutscene.
@@ -354,12 +368,6 @@ class PlayField extends FlxGroup
         stats.color = rankData.color;
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
         centerText();
-        
-        if(FlxG.keys.justPressed.F5) {
-            Global.clearScriptList();
-            Paths.clearUnusedAssets();
-            FlxG.resetState();
-        }
     }
 
     function onHit(playerID:String, note:Note, timing:String, isSustain:Bool)

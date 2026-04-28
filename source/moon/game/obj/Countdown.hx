@@ -12,6 +12,7 @@ class Countdown
 	static var countdownActive:Bool = false;
 	static var countdownNum:Int = 4;
 	static var group:FlxGroup;
+	static final onStart = new FlxSignal();
 	private static var conductor:Conductor;
 
 	static function init(conductor:Conductor, grp:FlxGroup)
@@ -27,7 +28,7 @@ class Countdown
 	 * @param graphicSuffix a suffix for the countdown image, useful for skins.
 	 * @param audioSuffix a suffix for the countdown sfx, useful for skins.
 	 */
-	static function performCountdown(graphicSuffix:String = "", audioSuffix:String = "")
+	static function perform(graphicSuffix:String = "", audioSuffix:String = "")
 	{
 		Countdown.graphicSuffix = graphicSuffix;
 		Countdown.audioSuffix = audioSuffix;
@@ -39,11 +40,13 @@ class Countdown
 	static function checkBeats(beat:Float)
 	{
 		if(!countdownActive) return;
+		if(countdownNum == 4) onStart.dispatch();
 
 		countdownNum--;
 		if(countdownNum >= 0)
 		{
 			trace('[COUNTDOWN] Performing! ($countdownNum)', "INFO");
+
 			Paths.playSFX('game/countdown/intro-$countdownNum$audioSuffix.ogg');
 
 			final path = 'ingame/UI/countdown/graphic-$countdownNum$graphicSuffix';

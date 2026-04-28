@@ -19,6 +19,7 @@ class MainMenu extends FlxTransitionableState
         super.create();
 
         Global.clearScriptList();
+        Global.allowInputs = true;
 
         var bg = new MoonSprite().loadGraphic(Paths.image('menus/menuDesat'));
         bg.color = 0xFFffd863;

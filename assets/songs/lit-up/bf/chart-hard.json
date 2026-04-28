@@ -8608,6 +8608,7 @@
 			"p1"
 		],
 		"noteskin": "v-slice",
-		"version": "2.2.4"
+		"version": "2.2.4",
+		"hasCountdown": false
 	}
 }

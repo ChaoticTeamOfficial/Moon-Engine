@@ -174,8 +174,17 @@ class PlayState extends FlxTransitionableState
 		//add(fmInstance);
 		
 		Countdown.init(conductor, playField);
-		Countdown.performCountdown();
-		playField.healthBar.performTransition(conductor);
+		
+		if(chartMeta.hasCountdown)
+		{
+			playField.healthBar.visible = false;
+			Countdown.perform();
+			
+			Countdown.onStart.add(()-> {
+				playField.healthBar.performTransition(conductor);
+				playField.healthBar.visible = true;
+			});
+		}
 
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
@@ -189,7 +198,9 @@ class PlayState extends FlxTransitionableState
 
 			events = [];
 			setEvents();
-			Countdown.performCountdown();
+			if(chartMeta.hasCountdown)
+				Countdown.perform();
+
 			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
 
 			// annoying shit *shrug*
@@ -344,8 +355,15 @@ class PlayState extends FlxTransitionableState
 		if(FlxG.keys.justPressed.EIGHT)
 			endSong();
 
+		if(FlxG.keys.justPressed.F5) {
+            Global.clearScriptList();
+            Paths.clearUnusedAssets();
+            Countdown.onStart.removeAll();
+            FlxG.resetState();
+        }
+
 		//if(FlxG.keys.justPressed.FOUR)
-		//	Countdown.performCountdown();
+		//	Countdown.perform();
 
 		Global.scriptCall('onPostUpdate', [elapsed]);
 	}
@@ -535,6 +553,7 @@ class PlayState extends FlxTransitionableState
 		Global.clearScriptList();
 		instance = null;
 		PlayField.instance = null;
+		Countdown.onStart.removeAll();
 
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
