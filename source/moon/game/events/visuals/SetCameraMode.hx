@@ -71,8 +71,8 @@ class SetCameraMode extends BaseEvent
 
     private static function _doNudge(game:PlayState, direction:Int):Void
     {
-        final strength = 8.0;
-        final outDur = 0.4;
+        final strength = 16.0;
+        final outDur = 1;
         final backDur = 0.3;
 
         final dx = DIRS[direction][0] * strength;
@@ -81,7 +81,7 @@ class SetCameraMode extends BaseEvent
         //if(game.camMov != null && game.camMov.active) return;
 
         //whoops
-        MoonUtils.cancelActiveTwn(_nudgeTween);
+        TweenUtils.cancelTwn(_nudgeTween);
 
         // Undo whatever offset is currently applied so we always start from neutral!!!
         game.camFollower.x -= _nudgeOffset.x;

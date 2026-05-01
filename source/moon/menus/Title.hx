@@ -265,7 +265,7 @@ class Title extends FlxTransitionableState
             displayTxt.screenCenter();
             displayTxt.y -= 35;
 
-            MoonUtils.cancelActiveTwn(txTwn);
+            TweenUtils.cancelTwn(txTwn);
             txTwn = FlxTween.tween(displayTxt, {y: displayTxt.y - 15}, 1.1, {ease: FlxEase.expoOut});
         }
     }
@@ -387,7 +387,7 @@ class Title extends FlxTransitionableState
         FlxG.camera.flash(FlxColor.WHITE, conductor.crochet / 1000 * 4);
         onTitle = true;
 
-        MoonUtils.cancelActiveTwn(txTwn);
+        TweenUtils.cancelTwn(txTwn);
         displayTxt.setFormat(Paths.font('ARACNE CONDENSED REGULAR.TTF'), 64, CENTER);
         displayTxt.text = 'PRESS ENTER TO START';
         displayTxt.y = FlxG.height - displayTxt.height - 16;

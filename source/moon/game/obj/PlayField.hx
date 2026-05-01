@@ -276,19 +276,8 @@ class PlayField extends FlxGroup
 
     function setSongToStart()
     {
-        if(chart.content.meta.hasCountdown)
-        {
-            conductor.time = -(conductor.crochet * 5);
-            inCountdown = true;
-        }
-        else
-        {
-            inCountdown = false;
-            playback.state = PLAY;
-            conductor.time = 0;
-
-            onSongStart.dispatch();
-        }
+		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
+		inCountdown = true;
     }
 
     override public function update(dt:Float)
@@ -400,7 +389,7 @@ class PlayField extends FlxGroup
             // and do a lil cool thing to the stats
             setStatsColor(FlxColor.RED);
 
-            MoonUtils.cancelActiveTwn(statShake);
+            TweenUtils.cancelTwn(statShake);
             statShake = FlxTween.shake(stats, 0.04, 0.14, X);
 
             // the good ol sfx ahaha
@@ -428,7 +417,7 @@ class PlayField extends FlxGroup
     var statsColor:FlxTween;
     function setStatsColor(color:FlxColor)
     {
-        MoonUtils.cancelActiveTwn(statsColor);
+        TweenUtils.cancelTwn(statsColor);
         statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {startDelay: 0.05});
     }
     

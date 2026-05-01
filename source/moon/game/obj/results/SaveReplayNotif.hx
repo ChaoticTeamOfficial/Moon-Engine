@@ -81,7 +81,7 @@ class SaveReplayNotif extends FlxSpriteGroup
 
 	public function resetBar()
 	{
-		MoonUtils.cancelActiveTwn(twn);
+		TweenUtils.cancelTwn(twn);
 		bar.value = 101;
 		bar.color = circle.color = parameters?.color ?? FlxColor.WHITE;
 		text.text = parameters?.text ?? 'Text not found.';

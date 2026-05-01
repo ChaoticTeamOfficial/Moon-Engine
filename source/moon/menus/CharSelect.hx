@@ -208,7 +208,7 @@ class CharSelect extends FlxState
                     Paths.playSFX('menus/charSelect/CS_confirm.ogg');
                     cast(grid.members[CharGrid.curSelected], PixelIcon).playAnim('select', true);
 
-                    MoonUtils.cancelActiveTwn(songTween);
+                    TweenUtils.cancelTwn(songTween);
                     songTween = FlxTween.tween(playlist, {pitch: 0}, 1.3, {ease: FlxEase.quadInOut, onComplete: _ ->{
                         playlist.volume = 0;
                         Global.allowInputs = false;
@@ -231,7 +231,7 @@ class CharSelect extends FlxState
             ico.playAnim('select', true, true);
             ico.animation.onFinish.addOnce(_ -> ico.playAnim('idle', true));
 
-            MoonUtils.cancelActiveTwn(songTween);
+            TweenUtils.cancelTwn(songTween);
             songTween = FlxTween.tween(playlist, {pitch: 1}, 0.6, {ease: FlxEase.quadInOut});
         }
 

@@ -46,43 +46,6 @@ class MoonUtils
         return formatted;
     }
 
-    /**
-     * Function that resolve an ease string to a FlxEase.
-     * @param easeName the ease name.
-     */
-    static function resolveEase(easeName:String):EaseFunction
-    {
-        //btw this is just because of how vslice handle tween easings.
-
-        if(easeName == null || easeName == "" || easeName.toLowerCase().contains('linear'))
-            return FlxEase.linear; //safechecks are nice!
-
-        var name:String = easeName;
-        switch(name.toLowerCase())
-        {
-            case "instant": return null;
-            default: 
-                if(name.toLowerCase() != "linear" && !StringTools.endsWith(name, "In") && !StringTools.endsWith(name, "Out") && !StringTools.endsWith(name, "InOut"))
-                    name += "InOut";
-
-            var func = Reflect.field(FlxEase, name);
-
-            //just some last failsafes
-            if(func == null)
-            {
-                name = StringTools.replace(name, "InOut", "Out");
-                func = Reflect.field(FlxEase, name);
-            }
-
-            if(func == null)
-                func = FlxEase.expoInOut;
-
-            //trace('resolved ease: $name', "DEBUG");
-
-            return func;
-        }
-    }
-
     private static var symbols:String = "!@#$%^&*()1234567890?";
     private static var timer:FlxTimer;
 
@@ -166,20 +129,6 @@ class MoonUtils
             trace('[UTILS] File at $path not found!', "ERROR");
         return null;
     }
-
-    /**
-     * Cancels a tween that's active, preventing overlapping tweens if you're going to play another.
-     * @param tween The active tween.
-     */
-    static function cancelActiveTwn(tween:FlxTween)
-        if (tween != null && tween.active) tween.cancel();
-
-    /**
-     * Cancels a timer that's active, preventing overlapping timers if you're going to play another.
-     * @param timer The active timer.
-     */
-    static function cancelActiveTmr(timer:FlxTimer)
-        if (timer != null && timer.active) timer.cancel();
 
     /**
      * Starts a song upon calling, does nothing if already playing.

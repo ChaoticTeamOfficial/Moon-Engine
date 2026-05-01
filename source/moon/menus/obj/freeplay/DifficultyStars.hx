@@ -91,7 +91,7 @@ class DifficultyStars extends FlxSpriteGroup
         difficulty = value;
 
         for (t in pendingTimers)
-            MoonUtils.cancelActiveTmr(t);
+            TweenUtils.cancelTmr(t);
 
         pendingTimers = [];
 

@@ -46,7 +46,7 @@ class ScrollingArts extends FlxSpriteGroup
         spr.screenCenter();
 
         for(twn in [tween1, tween2, tween3])
-            MoonUtils.cancelActiveTwn(twn);
+            TweenUtils.cancelTwn(twn);
         
         tween1 = FlxTween.tween(spr, {alpha: 1}, 0.5);
         tween2 = FlxTween.tween(spr, {x: (cool) ? spr.x - scrollAmmount : spr.x + scrollAmmount}, scrollLength);

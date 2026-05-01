@@ -34,7 +34,7 @@ class DefaultVideoUI extends FlxGroup
 	@:noCompletion public function set_paused(paused:Bool):Bool
 	{
 		this.paused = paused;
-		MoonUtils.cancelActiveTwn(bgTwn);
+		TweenUtils.cancelTwn(bgTwn);
 		bgTwn = FlxTween.tween(bg, {alpha: paused ? 0.8 : 0}, 0.08);
 
 		return this.paused;

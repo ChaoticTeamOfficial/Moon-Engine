@@ -277,7 +277,7 @@ class Gameover extends FlxSubState
 
 				// Not using the camera focus function because it uses offsets.
 				// in here, we want to CENTER the camera.
-				MoonUtils.cancelActiveTwn(PlayState.instance.camMov);
+				TweenUtils.cancelTwn(PlayState.instance.camMov);
 				final char = PlayState.instance.getChar('player');
 				PlayState.instance.camMov = FlxTween.tween(PlayState.instance.camFollower, {x: char.x + char.width / 2, y: char.y + char.height / 2 - 48}, 2, {ease: FlxEase.expoOut});
 

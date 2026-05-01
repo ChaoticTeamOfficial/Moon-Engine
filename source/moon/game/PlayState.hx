@@ -82,6 +82,7 @@ class PlayState extends FlxTransitionableState
 
 	/** If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch. */
 	public static var VALID_SCORE:Bool = true;
+	public var canPause:Bool = true;
 
     public var loadedReplay:Replay = null;
     public static var replaysToSave:Array<Replay> = [];
@@ -180,7 +181,7 @@ class PlayState extends FlxTransitionableState
 			playField.healthBar.visible = false;
 			Countdown.perform();
 			
-			Countdown.onStart.add(()-> {
+			Countdown.onStart.addOnce(()-> {
 				playField.healthBar.performTransition(conductor);
 				playField.healthBar.visible = true;
 			});
@@ -199,9 +200,17 @@ class PlayState extends FlxTransitionableState
 			events = [];
 			setEvents();
 			if(chartMeta.hasCountdown)
+			{
+				playField.healthBar.visible = false;
+				Countdown.onStart.addOnce(()-> {
+					playField.healthBar.performTransition(conductor);
+					playField.healthBar.visible = true;
+				});
 				Countdown.perform();
+			}
 
 			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
+			camGAME.rotation = camHUD.rotation = camALT.rotation = 0;
 
 			// annoying shit *shrug*
 	        var chars:Array<FlxSprite> = [];
@@ -261,6 +270,9 @@ class PlayState extends FlxTransitionableState
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
+
+		// make sure we clean everything unused up
+		Paths.clearUnusedAssets();
 	}
 	
 	public function activeTweens(isActive:Bool)
@@ -335,6 +347,7 @@ class PlayState extends FlxTransitionableState
 		if(FlxG.keys.justPressed.SEVEN){
 			Global.clearScriptList();
 			EditorTransition.transitionToEditor(this);
+			canPause = false;
 		}
 
 		if(MoonInput.justPressed(PAUSE))
@@ -369,11 +382,12 @@ class PlayState extends FlxTransitionableState
 	}
 
 	public var camMov:FlxTween;
+	public var camRot:FlxTween;
 	public var camZoom:FlxTween;
 
 	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
-		MoonUtils.cancelActiveTwn(camMov);
+		TweenUtils.cancelTwn(camMov);
 		final charPos = getCamPos(char);
 
 		if(!isInstant)
@@ -384,11 +398,20 @@ class PlayState extends FlxTransitionableState
 	
 		Global.scriptCall('onCameraFocus', [getChar(char)?.type ?? CharacterType.OPPONENT]);
 	}
+	
+	public function rotateCamera(rotation:Float, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
+	{
+		TweenUtils.cancelTwn(camRot);
+		if(!isInstant)
+			camRot = FlxTween.tween(camGAME, {rotation: rotation}, duration, options);
+		else
+			camGAME.rotation = rotation;
+	}
 
 	var lastZoom:Float;
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
-		MoonUtils.cancelActiveTwn(camZoom);
+		TweenUtils.cancelTwn(camZoom);
 		allowGameBop = false;
 
 		//trace('Setting zoom to $zoom in $duration', "DEBUG");
@@ -448,6 +471,7 @@ class PlayState extends FlxTransitionableState
 				camGAME.zoom += bopIntensity * 1.5;
 
 			camHUD.zoom += bopIntensity;
+			Global.scriptCall('onCameraBop', []);
 		}
 		
 		// updates less frequently..!
@@ -522,7 +546,7 @@ class PlayState extends FlxTransitionableState
 
 	public function pauseGame()
 	{
-		if(paused || isDead) return;
+		if(paused || isDead || !canPause) return;
 
 		paused = true;
 		activeTweens(false);

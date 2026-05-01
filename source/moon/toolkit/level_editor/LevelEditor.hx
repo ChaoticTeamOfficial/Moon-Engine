@@ -422,6 +422,7 @@ class LevelEditor extends FlxState
         playback.state = PAUSE;
         curType = NOTES;
 
+        History.reset();
         Global.allowInputs = true;
     }
 
@@ -454,6 +455,23 @@ class LevelEditor extends FlxState
                 {
                     snapIndex = (MoonInput.justPressed(UI_LEFT) ? snapIndex - 1 + snaps.length : snapIndex + 1) % snaps.length;
                     curSnap = snaps[snapIndex];
+                }
+
+                if (FlxG.keys.justPressed.Z)
+                {
+                    if (History.undo()) 
+                    {
+                        sfx('undo', false, true);
+                        updateNotesFilter();
+                    }
+                }
+                else if (FlxG.keys.justPressed.Y)
+                {
+                    if (History.redo())
+                    {
+                        sfx('redo', false, true);
+                        updateNotesFilter();
+                    }
                 }
             }
             else
@@ -603,9 +621,16 @@ class LevelEditor extends FlxState
             }
             else
             {
+                // Mouse was released — commit duration changes to history
+                for (t in dragOGlengths.keys())
+                    History.pushNoteDuration(
+                        {time: t.time, data: t.direction, lane: t.lane, type: t.type, duration: t.duration, values: null},
+                        dragOGlengths.get(t),
+                        t.duration
+                    );
+
                 draggingNote = null;
                 if (dragOGlengths != null) dragOGlengths.clear();
-                //Mouse.cursor = MouseCursor.BUTTON;
             }
         }
         else if (!haxeUIFocused)
@@ -615,12 +640,28 @@ class LevelEditor extends FlxState
                 final delta = getSnapStepTime();
                 if (FlxG.keys.justPressed.E)
                 {
-                    for (t in selectedNotes) resizeNoteSustain(t, t.duration + delta);
+                    for (t in selectedNotes)
+                    {
+                        final oldDur = t.duration;
+                        resizeNoteSustain(t, t.duration + delta);
+                        History.pushNoteDuration(
+                            {time: t.time, data: t.direction, lane: t.lane, type: t.type, duration: t.duration, values: null},
+                            oldDur, t.duration
+                        );
+                    }
                     sfx('sustainIncrease', false, true);
                 }
                 else if (FlxG.keys.justPressed.Q)
                 {
-                    for (t in selectedNotes) resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
+                    for (t in selectedNotes)
+                    {
+                        final oldDur = t.duration;
+                        resizeNoteSustain(t, Math.max(0.0, t.duration - delta));
+                        History.pushNoteDuration(
+                            {time: t.time, data: t.direction, lane: t.lane, type: t.type, duration: t.duration, values: null},
+                            oldDur, t.duration
+                        );
+                    }
                     sfx('sustainDecrease', false, true);
                 }
             }
@@ -806,6 +847,7 @@ class LevelEditor extends FlxState
                             };
                             createNote(n);
                             chart.content.notes.push(n);
+                            History.pushNotePlace(n);
                             sfx('place-${FlxG.random.int(1, 6)}');
                         }
                     
@@ -821,6 +863,7 @@ class LevelEditor extends FlxState
                         chart.events.push(ev);
                         chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
                         createEvent(ev);
+                        History.pushEventPlace(ev);
 
                         //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
                 }
@@ -851,6 +894,11 @@ class LevelEditor extends FlxState
                 final hit = getNoteAtCursor(snappedTime, laneNum);
                 if (hit != null)
                 {
+                    History.pushNoteDelete({
+                        time: hit.time, data: hit.direction, lane: hit.lane,
+                        type: hit.type, duration: hit.duration, values: null
+                    });
+
                     chart.content.notes = chart.content.notes.filter(n ->
                         !(Math.abs(n.time - hit.time) < 0.01 && n.data == hit.direction && n.lane == hit.lane)
                     );
@@ -866,8 +914,6 @@ class LevelEditor extends FlxState
 
                     noteGroup.remove(hit, true);
                     hit.destroy();
-
-                    //sfx('place-${FlxG.random.int(1, 6)}');
                 }
             }
             else
@@ -889,8 +935,18 @@ class LevelEditor extends FlxState
 
                 if (toRemoveSpr != null)
                 {
+                    final evTime = yToTime(toRemoveSpr.y - gridGroup.y);
+
+                    var deletedEvStruct:moon.backend.data.Chart.EventStruct = null;
+
+                    for (e in chart.events)
+                        if (e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50) { deletedEvStruct = e; break; }
+
+                    if (deletedEvStruct != null)
+                        History.pushEventDelete(deletedEvStruct);
+
                     chart.events = chart.events.filter(e ->
-                        !(e.tag == toRemoveSpr.event && Math.abs(e.time - yToTime(toRemoveSpr.y - gridGroup.y)) < 50)
+                        !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50)
                     );
 
                     var toRemoveHold:EventHold = null;
@@ -911,7 +967,7 @@ class LevelEditor extends FlxState
         }
     }
 
-    function createNote(n:NoteStruct)
+    public function createNote(n:NoteStruct)
     {
         var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
         note.state = CHART_EDITOR;
@@ -953,6 +1009,91 @@ class LevelEditor extends FlxState
         if(spr.duration > 0) eventsGroup.add(new EventHold(spr));
         eventsGroup.add(spr);
         EditorSync.onEventAdded(ev);
+    }
+
+    public function removeNoteSpr(n:moon.backend.data.Chart.NoteStruct):Void
+    {
+        var toDestroy:Note = null;
+        for (member in noteGroup.members)
+        {
+            if (Std.isOfType(member, Note))
+            {
+                final existing:Note = cast member;
+                if (Math.abs(existing.time - n.time) < 0.01
+                    && existing.direction == n.data
+                    && existing.lane == n.lane)
+                {
+                    toDestroy = existing;
+                    break;
+                }
+            }
+        }
+
+        if (toDestroy == null) return;
+
+        if (toDestroy.child != null)
+        {
+            noteGroup.remove(toDestroy.child, true);
+            toDestroy.child.destroy();
+            toDestroy.child = null;
+        }
+        if (toDestroy.sustainHandle != null)
+            noteGroup.remove(toDestroy.sustainHandle, true);
+
+        noteGroup.remove(toDestroy, true);
+        toDestroy.destroy();
+    }
+
+    public function removeEventSpr(e:moon.backend.data.Chart.EventStruct):Void
+    {
+        var toRemoveSpr:EventSpr = null;
+        for (member in eventsGroup.members)
+        {
+            if (Std.isOfType(member, EventSpr))
+            {
+                final spr:EventSpr = cast member;
+                if (spr.event == e.tag && Math.abs(yToTime(spr.y - gridGroup.y) - e.time) < 50)
+                {
+                    toRemoveSpr = spr;
+                    break;
+                }
+            }
+        }
+
+        if (toRemoveSpr == null) return;
+
+        var toRemoveHold:EventHold = null;
+        for (member in eventsGroup.members)
+            if (Std.isOfType(member, EventHold) && cast(member, EventHold).parent == toRemoveSpr)
+                toRemoveHold = cast member;
+
+        if (toRemoveHold != null)
+        {
+            eventsGroup.remove(toRemoveHold, true);
+            toRemoveHold.destroy();
+        }
+
+        eventsGroup.remove(toRemoveSpr, true);
+        toRemoveSpr.destroy();
+    }
+
+    public function updateNoteDurSpr(n:moon.backend.data.Chart.NoteStruct, newDur:Float):Void
+    {
+        for (member in noteGroup.members)
+        {
+            if (Std.isOfType(member, Note))
+            {
+                final existing:Note = cast member;
+                if (Math.abs(existing.time - n.time) < 0.01
+                    && existing.direction == n.data
+                    && existing.lane == n.lane)
+                {
+                    updateSustainVis(existing, newDur);
+                    updateNoteDurationData(existing, newDur);
+                    return;
+                }
+            }
+        }
     }
 
     function timeToY(time:Float):Float
@@ -1108,7 +1249,7 @@ class LevelEditor extends FlxState
     var tw:Map<Note, FlxTween> = [];
     private function updateSustainVis(n:Note, newDur:Float):Void
     {
-        MoonUtils.cancelActiveTwn(tw.get(n));
+        TweenUtils.cancelTwn(tw.get(n));
         n.duration = newDur;
 
         if (newDur > 0)
@@ -1143,17 +1284,22 @@ class LevelEditor extends FlxState
             Paths.playSFX((!general) ? 'toolkit/level-editor/$p.wav' : 'toolkit/general/$p.wav', once);
     }
 
-    function set_curType(curType:GridType):GridType
+    function updateNotesFilter()
     {
-        this.curType = curType;
-        final typeStr:String = '$curType';
-
         for (member in noteGroup.members)
         {
             member.shader = (curType != NOTES) ? grayscale : null;
             member.alpha  = (curType != NOTES) ? 0.20
                 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
         }
+    }
+
+    function set_curType(curType:GridType):GridType
+    {
+        this.curType = curType;
+        final typeStr:String = '$curType';
+
+        updateNotesFilter();
 
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);
@@ -1169,8 +1315,8 @@ class LevelEditor extends FlxState
     public function saveLevel()
     {
         //TODO: support for the difficulty system
-        File.saveContent(Paths.getPath('songs/$song/$mix/chart-$diff.json'), haxe.Json.stringify(chart.content));
-        File.saveContent(Paths.getPath('songs/$song/$mix/events.json'), haxe.Json.stringify(chart.events));
+        File.saveContent(Paths.getPath('songs/$song/$mix/chart-$diff.json'), haxe.Json.stringify(chart.content, null, "\t"));
+        File.saveContent(Paths.getPath('songs/$song/$mix/events.json'), haxe.Json.stringify(chart.events, null, "\t"));
 
         trace('shit got saved ayooooo');
     }

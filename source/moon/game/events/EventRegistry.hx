@@ -28,6 +28,7 @@ class EventRegistry
             
             // SOUNDS
             'Change Playback Settings' => ChangePlaybackSettingsEvent,
+            'Countdown' => CountdownEvent,
 
             // GIMMICKS
             'Set Lane Scroll Speed' => SetScrollSpeedEvent

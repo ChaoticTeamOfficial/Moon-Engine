@@ -24,6 +24,7 @@ class MoonScript
         "Constants" => Constants,
         "Global" => Global,
         "ScriptUtils" => ScriptUtils,
+        "TweenUtils" => TweenUtils,
 
         // I hate the fact I gotta include these... aghh
         "Reflect" => Reflect,

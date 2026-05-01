@@ -8,7 +8,7 @@ typedef EventFieldDef =
     /** The key used in the event's values object, must match what execute() reads. **/
     var name:String;
 
-    /** Human-readable label shown next to the input widget. **/
+    /** Display label shown next to the input widget. **/
     var label:String;
 
     /** The input widget type to render. **/
