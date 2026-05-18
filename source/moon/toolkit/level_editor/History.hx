@@ -21,7 +21,6 @@ enum EditorAction
     EventDelete(event:EventStruct);
 }
 
-
 @:publicFields
 class History
 {

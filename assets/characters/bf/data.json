@@ -4,6 +4,7 @@
     "flipX": false,
     "camOffsets": [-169, -135],
     "healthbarColors": [49, 176, 209],
+	"extraOffsets": [0, 0],
     "danceFrequency": 2,
     "animations": [
         {"name": "idle-0", "prefix": "BF idle dance", "x": -5, "y": 0, "fps": 24},

@@ -1,31 +1,93 @@
 {
-    "antialiasing": true,
-    "scale": 1,
-    "flipX": false,
-    "camOffsets": [150, 0],
-    "healthbarColors": [0, 0, 0],
-	"extraOffsets": [0, -316],
-    "danceFrequency": 1,
+	"camOffsets": [
+		150,
+		0
+	],
+	"healthbarColors": [
+		0,
+		0,
+		0
+	],
+	"extraOffsets": [
+		3,
+		-316
+	],
 	"type": "packed",
-    "animations": [
-        {
-            "name": "idle-0", 
-            "prefix": "GF Dancing Beat", 
-            "indices": [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-            "x": 0,
-            "y": -9, 
-            "fps": 24
-        },
-        {
-            "name": "idle-1", 
-            "prefix": "GF Dancing Beat", 
-            "indices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
-            "x": 0,
-            "y": -9, 
-            "fps": 24
-        },
-		{"name": "comboBreak", "prefix": "gf sad", "x": 2, "y": -21, "fps": 24, "finishAnim": "idle"},
-		{"name": "combo50", "prefix": "GF Cheer", "x": 0, "y": 0, "fps": 24, "finishAnim": "idle"}
-    ],
-	"overrideAnims": ["combo50"]
+	"animations": [
+		{
+			"name": "idle-0",
+			"prefix": "GF Dancing Beat",
+			"indices": [
+				30,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			],
+			"fps": 24,
+			"x": -26,
+			"y": -9
+		},
+		{
+			"name": "idle-1",
+			"prefix": "GF Dancing Beat",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29
+			],
+			"fps": 24,
+			"x": -26,
+			"y": -9
+		},
+		{
+			"name": "comboBreak",
+			"prefix": "gf sad",
+			"finishAnim": "idle",
+			"fps": 24,
+			"x": -28,
+			"y": -27
+		},
+		{
+			"name": "combo50",
+			"prefix": "GF Cheer",
+			"finishAnim": "idle",
+			"fps": 24,
+			"x": -26,
+			"y": -24
+		}
+	],
+	"overrideAnims": [
+		"combo50",
+		"comboBreak"
+	],
+	"antialiasing": true,
+	"danceFrequency": 1,
+	"flipX": false,
+	"scale": 1,
+	"holdDuration": 8,
+	"gameoverColorScheme": "0xFF4924FF"
 }

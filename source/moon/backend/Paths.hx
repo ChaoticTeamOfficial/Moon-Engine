@@ -130,7 +130,7 @@ class Paths
 
             var sound:Sound;
             #if desktop
-            sound = Sound.fromFile(getPath(key, library));   // ← now always a real file (folder mods only)
+            sound = Sound.fromFile(getPath(key, library));
             #else
             sound = Assets.getSound(getPath(key, library), false);
             #end
@@ -159,7 +159,7 @@ class Paths
             var bitmap:BitmapData;
 
             #if desktop
-            bitmap = BitmapData.fromFile(getPath(imagePath, library));   // ← now always a real file
+            bitmap = BitmapData.fromFile(getPath(imagePath, library));
             #else
             bitmap = Assets.getBitmapData(getPath(imagePath, library), false);
             #end

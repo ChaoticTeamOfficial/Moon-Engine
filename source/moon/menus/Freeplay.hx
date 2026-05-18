@@ -168,7 +168,6 @@ class Freeplay extends FlxSubState
                         mix: selected.mix
                     };
                     FlxG.switchState(() -> new LoadingScreen());
-                    Global.allowInputs = true;
                 }
             });
         }

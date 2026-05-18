@@ -468,7 +468,7 @@ class PlayState extends FlxTransitionableState
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
 			if(allowGameBop)
-				camGAME.zoom += bopIntensity * 1.5;
+				camGAME.zoom += bopIntensity;
 
 			camHUD.zoom += bopIntensity;
 			Global.scriptCall('onCameraBop', []);

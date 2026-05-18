@@ -55,7 +55,21 @@ class MoonSprite extends FlxAnimate
 
 	public var extraOffset:FlxPoint = FlxPoint.get();
 
-	public var idleAnims:Array<String> = null;
+	/**
+	 * Map of idle animations grouped by their suffix.
+	 * Key `""` holds the base idle anims (e.g. `["idle-0", "idle-1"]`).
+	 * Key `"alt"` holds the suffixed variants (e.g. `["idle-0-alt", "idle-1-alt"]`).
+	 * And so goes on for every suffix.
+	 * `dance()` will use the group matching `animationSuffix`, falling back to `""`.
+	 */
+	public var idleAnimsMap:Map<String, Array<String>> = new Map();
+
+	/**
+	 * Convenience getter/setter for the base idle animations (`idleAnimsMap.get("")`).
+	 * Setting this directly replaces the base group.
+	 */
+	public var idleAnims(get, set):Array<String>;
+
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
 	public var danceFrequency:Int = 2;
@@ -158,7 +172,9 @@ class MoonSprite extends FlxAnimate
 	 */
 	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW, ?conductor:Conductor):Array<String>
 	{
-		var idleAnims:Array<String> = [];
+		var baseIdleAnims:Array<String> = [];
+		idleAnimsMap.clear();
+
 		for (i in 0...animations.length)
 		{
 			final anim:Paths.AnimationData = animations[i];
@@ -176,7 +192,18 @@ class MoonSprite extends FlxAnimate
 			//trace('added ' + animations);
 			
 			if(anim.name.startsWith("idle-"))
-				idleAnims.push(anim.name);
+			{
+				final parts = anim.name.split('-');
+				final suffix = (parts.length > 2) ? parts[parts.length - 1] : "";
+				
+				if (!idleAnimsMap.exists(suffix))
+					idleAnimsMap.set(suffix, []);
+				
+				idleAnimsMap.get(suffix).push(anim.name);
+				
+				if (suffix == "")
+					baseIdleAnims.push(anim.name);
+			}
 
 			if (anim.finishAnim != null)
 			{
@@ -198,23 +225,29 @@ class MoonSprite extends FlxAnimate
 				});
 			}
 		}
-		return idleAnims;
+		
+		// Ensure base group always exists
+		if (!idleAnimsMap.exists(""))
+			idleAnimsMap.set("", baseIdleAnims);
+			
+		return idleAnims; // returns base idles for compatibility
 	}
 
 	public function dance(?force:Bool = false)
     {
-        if (idleAnims != null && idleAnims.length > 0)
+        final group = idleAnimsMap.exists(animationSuffix) 
+            ? idleAnimsMap.get(animationSuffix) 
+            : (idleAnimsMap.exists("") ? idleAnimsMap.get("") : []);
+        
+        if (group != null && group.length > 0)
         {
-            playAnim(idleAnims[danceIndex], force);
-            danceIndex = (danceIndex + 1) % idleAnims.length;
+            playAnim(group[danceIndex], force);
+            danceIndex = (danceIndex + 1) % group.length;
         }
-        else
+        else if (animation.exists("idle-0"))
         {
-            if(animation.exists("idle-0"))
-            {
-                playAnim("idle-0", force);
-                danceIndex = 0;
-            }
+            playAnim("idle-0", force);
+            danceIndex = 0;
         }
     }
 
@@ -226,6 +259,15 @@ class MoonSprite extends FlxAnimate
         
         return value;
     }
+
+	private function get_idleAnims():Array<String>
+		return idleAnimsMap.exists("") ? idleAnimsMap.get("") : [];
+
+	private function set_idleAnims(value:Array<String>):Array<String>
+	{
+		idleAnimsMap.set("", value != null ? value : []);
+		return value;
+	}
 
 	override public function destroy():Void
 	{

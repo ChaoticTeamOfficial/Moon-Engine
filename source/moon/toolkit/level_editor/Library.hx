@@ -272,7 +272,7 @@ class Library extends FlxGroup
 
             final formY = bg2.y + PAD + headerH + 8;
 
-            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
+            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, new MoonEvent(selectedInfo.name, {}).retrieveEditorFields());
             /*_form.onPlace = () ->
             {
                 LevelEditor.instance.placeEvent(selectedInfo.name, _form.getValues());

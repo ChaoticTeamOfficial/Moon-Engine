@@ -16,22 +16,29 @@ class TweenUtils
     /**
      * An array containing all the available easings.
      */
-    @:isVar static var easeList(get, default):Array<String>;
-    @:noCompletion static function get_easeList():Array<String>
-    {
-        // we dont want these
-        // since uhh when getting fields using reflect, it returns some stuffies we dont want
-        final excluded = [
-            'PI2', 'EL', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'ELASTIC_AMPLITUDE', 'ELASTIC_PERIOD',
-            '__name__', '__constructor__', '__type__', '__meta__', '__implementedBy__'
-        ];
+	static var easeList:Array<String> = [
+		// I tried using reflect but didn't quite work weirdly.
+		// so yea
+		// absolute cinema
+		'INSTANT', 'linear',
 
-        easeList = Reflect.fields(FlxEase).filter(field -> return !excluded.contains(field));
-        //easeList = Reflect.fields(FlxEase);
-        easeList.push('INSTANT');
+		'smoothStepIn', 'smoothStepOut', 'smoothStepInOut',
+		'smootherStepIn', 'smootherStepOut', 'smootherStepInOut',
 
-        return easeList;
-    }
+		'sineIn', 'sineOut', 'sineInOut',
+
+		'quadIn', 'quadOut', 'quadInOut',
+		'cubeIn', 'cubeOut', 'cubeInOut',
+		'quartIn', 'quartOut', 'quartInOut',
+		'quintIn', 'quintOut', 'quintInOut',
+
+		'circIn', 'circOut', 'circInOut',
+		'expoIn', 'expoOut', 'expoInOut',
+
+		'backIn', 'backOut', 'backInOut',
+		'elasticIn', 'elasticOut', 'elasticInOut',
+		'bounceIn', 'bounceOut', 'bounceInOut'
+	];
 
     /**
      * Function that resolve an ease string to a FlxEase.

@@ -80,7 +80,7 @@ class Main extends Sprite
 		Global.allowInputs = true;
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
-		trace(TweenUtils.easeList);
+		//trace(TweenUtils.easeList);
 		
 		#if sys
 		// idk who put this coconut image on the files but when I tried to delete it the game just wouldn't start.
