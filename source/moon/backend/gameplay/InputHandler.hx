@@ -5,6 +5,7 @@ import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
 import lime.system.System;
 import moon.backend.gameplay.Replay.ReplayInput;
+import moon.game.notetypes.NoteTypeRegistry;
 import flixel.util.FlxSignal;
 
 /**
@@ -123,6 +124,11 @@ class InputHandler
     public var replayKeyStates:Array<Bool> = [false, false, false, false];
 
     /**
+     * A reference to PlayState, needed to dispatch note type behaviours.
+     */
+    public var game:moon.game.PlayState = null;
+	
+	/**
      * Creates input handler instance, all this does is handling inputs for a player you choose.
      * @param thisNotes The notes array that it will read.
      * @param playerID  The ID for the player. currently supported are [`opponent, p1`]
@@ -136,14 +142,14 @@ class InputHandler
         this.strumline = strumline;
         this.conductor = conductor;
         this.stats = new PlayerStats(playerID);
-
-        // it is always recording by default BUT maybe I'll make like...
+		
+		// it is always recording by default BUT maybe I'll make like...
         // something that disables by default idk.
         replayKeyStates = [false, false, false, false];
         recording = true;
     }
-
-    /**
+	
+	/**
      * Loads a Replay.
      * @param replay The replay class to be loaded.
      */
@@ -171,20 +177,19 @@ class InputHandler
 
         checkSustains();
         onLateMiss();
-
-        //stats.health = FlxMath.bound(stats.health, 0, 101);
+		//stats.health = FlxMath.bound(stats.health, 0, 101);
     }
 
     private function processReplayInputs():Void
     {
-        // clears every input so you cant press on replays.
+		// clears every input so you cant press on replays.
         for (i in 0...4)
         {
             justPressed[i] = false;
             released[i] = false;
         }
-
-        // process every input that should have happened by now
+		
+		// process every input that should have happened by now
         while (currentReplayIndex < replayInputs.length && replayInputs[currentReplayIndex].time <= conductor.time)
         {
             final input = replayInputs[currentReplayIndex];
@@ -218,15 +223,15 @@ class InputHandler
     {
         for (i in 0...4)
         {
-            // get the possible notes thats in the... perfect timing
+			// get the possible notes thats in the... perfect timing
             final possibleNotes = thisNotes.filter(note ->
             return (note.direction == i &&
                 note.lane == playerID &&
                 note.time - conductor.time <= 0 &&
                 note.state == NONE)
             );
-
-            // then call onhit
+			
+			// then call onhit
             if (possibleNotes.length > 0)
                 onHit(possibleNotes[0], i, 'sick', true);
         }
@@ -250,18 +255,18 @@ class InputHandler
                 if (possibleNotes.length > 0)
                 {
                     final note = possibleNotes[0];
-                    // use forced judgement when replaying, recalculates when live
+					// use forced judgement when replaying, recalculates when live
                     final timing = (isReplay && forcedJudgements.exists(i))
                         ? forcedJudgements.get(i)
                         : checkTiming(note);
-
-                    // clear the forced judgement slot now that it's been consumed
+					
+					// clear the forced judgement slot now that it's been consumed
                     // why that lowkey sounded funny lmao
                     forcedJudgements.remove(i);
 
                     if (timing != null)
                     {
-                        // record AFTER we know the timing so we can store the judgement
+						// record AFTER we know the timing so we can store the judgement
                         if (recording) recordedInputs.push({time: conductor.time, dir: i, press: true, judgement: timing});
 
                         onHit(note, i, timing, false);
@@ -311,46 +316,59 @@ class InputHandler
     private function onHit(note:Note, ID:Int, timing:String, isCPU:Bool, ?isSustain:Bool = false):Void
     {
         final convertedDir = MoonUtils.intToDir(note.direction);
-        
-        if(!isSustain)
+        final isTyped = note.type != null && note.type != 'default';
+
+        if (!isSustain)
         {
             note.state = GOT_HIT;
             note.visible = note.active = false;
             stats.judgementsCounter.set(timing, stats.judgementsCounter.get(timing) + 1);
             stats.noSustainCombo++;
-            //trace(stats.judgementsCounter, "DEBUG");
-            if (note.duration > 0) {
+			//trace(stats.judgementsCounter, "DEBUG");
+            if (note.duration > 0)
+            {
                 heldSustains.set(ID, note);
                 lastSustainStep.set(ID, conductor.curStep);
             }
         }
-        
+
         stats.health += (!isSustain) ? Timings.getParameters(timing)[3] : 0.5;
         stats.score += (!isSustain) ? Timings.getParameters(timing)[2] : 2;
         stats.combo++;
         strumline.members[note.direction].onNoteHit(note, timing, isSustain);
         stats.updtAccuracy();
-        //trace(timing);
-        
-        if(attachedChar != null && (note.type != "noanim" || note.type != "No Animation Note")) 
+		//trace(stats.judgementsCounter, "DEBUG");
+
+        // even though this is here, notetypes can play a specific 
+        if (attachedChar != null && !isTyped)
             attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
 
-        if((timing == 'good' || timing == 'bad' || timing == 'shit' || timing == 'miss') && stats.isGold) stats.isGold = false;
+        // dispatch a note hit on the note registry!
+        if (isTyped && game != null)
+            NoteTypeRegistry.executeHit(game, note, timing, isSustain);
+
+        if ((timing == 'good' || timing == 'bad' || timing == 'shit' || timing == 'miss') && stats.isGold)
+            stats.isGold = false;
 
         (timing != 'miss') ? onNoteHit.dispatch(note, timing, isSustain) : (timing == 'miss') ? onMiss(note) : null;
     }
 
     private function onMiss(note:Note):Void
     {
-        if(note != null)
+        if (note != null)
         {
             note.state = TOO_LATE;
             note.visible = note.active = false;
 
-            if(attachedChar != null) 
+            final isTyped = note.type != null && note.type != 'default';
+
+            if (attachedChar != null && !isTyped)
                 attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction).toUpperCase()}-miss', true);
+
+            if (isTyped && game != null)
+                NoteTypeRegistry.executeMiss(game, note);
         }
-        
+
         stats.isGold = false;
         stats.accuracyCount += Timings.getParameters('miss')[0];
         stats.score += Timings.getParameters('miss')[2];
@@ -359,11 +377,10 @@ class InputHandler
         stats.combo = 0;
         stats.noSustainCombo = 0;
         stats.updtAccuracy();
-        
+
         onNoteMiss.dispatch(note);
     }
 
-    // Map for tracking the last conductor step a sustain note was hit on.
     private var lastSustainStep:Map<Int, Float> = new Map<Int, Float>();
 
     private function checkSustains():Void
@@ -371,14 +388,14 @@ class InputHandler
         for (direction in heldSustains.keys())
         {
             final heldNote = heldSustains.get(direction);
-            
+
             if (heldNote != null && heldNote.state == GOT_HIT && heldNote.child != null && heldNote.child.active)
             {
                 if (lastSustainStep.exists(direction))
                 {
                     final last = lastSustainStep.get(direction);
-
-                    // fire once per every step we may have skipped due to lag
+					
+					// fire once per every step we may have skipped due to lag
                     if (conductor.curStep > last)
                     {
                         var step = last + 1;
@@ -395,9 +412,9 @@ class InputHandler
                 if (conductor.time >= heldNote.time + heldNote.duration)
                 {
                     heldNote.child.visible = heldNote.child.active = false;
-                    
+
                     strumline.members[direction].sustainSplash.despawn(CPUMode);
-                    
+
                     onSustainComplete.dispatch(heldNote);
 
                     heldSustains.remove(direction);
@@ -414,24 +431,23 @@ class InputHandler
     }
 
     private function onLateMiss():Void
-        // iterates through every notes and checks if they're too late.
         for (note in thisNotes)
             if (note.state != GOT_HIT && note.state != TOO_LATE && note.lane == playerID &&
                 conductor.time > note.time + Timings.getParameters('miss')[1])
                 onMiss(note);
-
-    /**
+	
+	/**
      * Checks if the note is within timing,
      * @param note The note it'll check the timing 
      * returns checkTiming(note) != null
      */
     private function isWithinTiming(note:Note, ?dir:Int = -1):Bool
     {
-        // during replay, if a forced judgement is waiting for this direction, 
+		// during replay, if a forced judgement is waiting for this direction, 
         // always allow the note through regardless of current time.
         // needed due to toffee's (old) pc being trash and sometimes lag spiking.
 
-        //OKAY I JUST FOUND OUT THAT IT STILL APPLIES THE WRONG JUDGEMENT
+        //OKAY I JUST FOUND OUT THAT IT STILL APPLIES THE WRONG JUDGEMENT IF THE GAME LAGSSS
         // ugh I'll figure this out l8r...
         if (isReplay && dir >= 0 && forcedJudgements.exists(dir))
             return true;

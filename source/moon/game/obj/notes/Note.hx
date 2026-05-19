@@ -77,6 +77,8 @@ class Note extends MoonSprite
      */
     public var receptor(default, set):Receptor;
 
+    public var values:Dynamic;
+
     /**
      * This note's sustain.
      */

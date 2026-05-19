@@ -4,6 +4,7 @@ import moon.toolkit.level_editor.LevelEditor.EventInfo;
 import moon.game.events.EventRegistry;
 import openfl.ui.MouseCursor;
 import openfl.ui.Mouse;
+import moon.game.notetypes.*;
 
 class Library extends FlxGroup
 {
@@ -272,7 +273,9 @@ class Library extends FlxGroup
 
             final formY = bg2.y + PAD + headerH + 8;
 
-            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, new MoonEvent(selectedInfo.name, {}).retrieveEditorFields());
+            //biggie
+            final fields = (curType == NOTES) ? NoteTypeRegistry.getEditorFields(selectedInfo.name) : new MoonEvent(selectedInfo.name, {}).retrieveEditorFields();
+            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, fields);
             /*_form.onPlace = () ->
             {
                 LevelEditor.instance.placeEvent(selectedInfo.name, _form.getValues());

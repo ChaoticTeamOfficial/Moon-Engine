@@ -8,6 +8,7 @@ import moon.toolkit.ui.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
 import moon.dependency.scripting.*;
+import moon.game.notetypes.*;
 import moon.backend.data.Chart.NoteStruct;
 import moon.backend.data.Chart.ChartStruct;
 import moon.backend.data.Chart.EventStruct;
@@ -186,6 +187,27 @@ class LevelEditor extends FlxState
                 return (aLower < bLower) ? -1 : (aLower > bLower) ? 1 : 0;
             });
         }
+
+        //we'll go over it again now but for notes.
+        NoteTypeRegistry.init();
+        
+        for (typeName in NoteTypeRegistry.getHardcodedNames())
+        {
+            final data = NoteTypeRegistry.getEditorData(typeName);
+            if (data != null) loadedEvents.get(NOTES).push(data);
+        }
+
+        for (file in Paths.readDir('data/notetypes', ['.hx'], true))
+        {
+            var alreadyLoaded = false;
+            for (t in loadedEvents.get(NOTES))
+                if (t.name == file) { alreadyLoaded = true; break; }
+
+            if (!alreadyLoaded)
+                loadedEvents.get(NOTES).push({ name: file, description: 'Script-based note type.', category: NOTES });
+        }
+
+        loadedEvents.get(NOTES).sort((a, b) -> a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
 
         //trace(loadedEvents, "DEBUG");
 
@@ -841,9 +863,11 @@ class LevelEditor extends FlxState
 
                         if (!noteExists)
                         {
+                            final selectedType = (library.selectedInfo != null) ? library.selectedInfo.name : 'default';
                             final n = {
                                 time: snappedTime, data: noteData, lane: noteLane,
-                                type: 'default', duration: 0.0
+                                type: selectedType, duration: 0.0,
+                                values: (library.form != null) ? NoteTypeRegistry.processNoteValues(selectedType, library.form.getValues()) : null
                             };
                             createNote(n);
                             chart.content.notes.push(n);
@@ -971,6 +995,7 @@ class LevelEditor extends FlxState
     {
         var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
         note.state = CHART_EDITOR;
+        note.values = n.values;
         note.active = false;
         note.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
         note.updateHitbox();

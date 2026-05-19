@@ -154,6 +154,10 @@ class PlayState extends FlxTransitionableState
 		playField.conductor.onBeat.add(beatHit);
 		playField.conductor.onStep.add(stepHit);
 		add(playField);
+
+		for (handler in playField.inputHandlers)
+			handler.game = this;
+		
 		this.conductor = playField.conductor;
 
 		if (playField.inputHandlers.get('p1').isReplay)

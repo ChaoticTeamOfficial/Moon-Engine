@@ -3,6 +3,7 @@ package moon.game.obj.notes;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import moon.backend.data.Chart.NoteStruct;
 import flixel.group.FlxGroup;
+import moon.game.notetypes.*;
 
 class NoteSpawner extends FlxGroup
 {
@@ -115,9 +116,11 @@ class NoteSpawner extends FlxGroup
             struct.duration,
             conductor
         );
+        note.values = struct.values;
         note.speed = scrollSpeed;
         note.lane = struct.lane;
         note.quantColor = getQuantColor(struct.time, conductor);
+        NoteTypeRegistry.executeSpawn(note);
         return note; 
     }
 
