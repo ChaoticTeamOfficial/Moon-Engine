@@ -98,7 +98,7 @@ class SongLibrary
 		{
 			//trace(weekFile);
 			//WD GASTER IS THAT YOU?!?!
-			final wd:Week = Week.getWeek(weekFile);
+			final wd:Week = Week.get(weekFile);
 			//trace(wd);
 			if(wd != null && wd.tracks != null)
 			{
