@@ -2,6 +2,7 @@ package moon.dependency.scripting;
 
 import moon.toolkit.level_editor.LevelEditor.GridType;
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
+import moon.game.events.EventFieldDef;
 import moon.game.events.EventRegistry;
 
 /**
@@ -75,6 +76,16 @@ class MoonEvent extends MoonScript
         }
         
         return null;
+    }
+
+    public function retrieveEditorFields():Array<EventFieldDef>
+    {
+        if (valid)
+            return (exists('editorFields')) ? code.get('editorFields') : [];
+        else if (EventRegistry.isHardcoded(tag))
+            return EventRegistry.getEditorFields(tag);
+
+        return [];
     }
 
     @:noCompletion public function set_PRESET_VARIABLES(vars)

@@ -24,7 +24,7 @@ class Nametag extends MoonSprite
 
 		loadGraphic((character != 'locked') ? Paths.image('$character/${character}Chill/nametag', 'characters') : Paths.image('menus/charSelect/lockedNametag'));
 		this.shader = mosaic;
-		MoonUtils.cancelActiveTwn(mosaicTwn);
+		TweenUtils.cancelTwn(mosaicTwn);
 
 		mosaic.bSize = 32.0;
 		mosaicTwn = FlxTween.tween(mosaic, {bSize: 1.0}, 0.4);

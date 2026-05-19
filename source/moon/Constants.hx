@@ -41,7 +41,7 @@ class Constants
      */
     static final TITLE_VIDEO_DELAY:Float = 27.5;
 
-    ////// ------- GAMEPLAY RELATED CONSTANTS
+    /// ------- GAMEPLAY RELATED CONSTANTS
 
     /**
      * The default intensity multiplier for camera bops.

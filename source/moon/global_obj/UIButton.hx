@@ -51,7 +51,7 @@ class UIButton extends FlxSpriteGroup
 		final thing = (selected) ? 'selected' : 'regular';
 		button.frame = Tilemap.getFrame('button-$thing', 'mainUI');
 		dText.color = selected ? FlxColor.BLACK : FlxColor.WHITE;
-		MoonUtils.cancelActiveTwn(thisTwn);
+		TweenUtils.cancelTwn(thisTwn);
 
 		if(selected)
 		{

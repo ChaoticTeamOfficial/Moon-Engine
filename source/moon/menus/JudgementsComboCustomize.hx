@@ -101,7 +101,7 @@ class JudgementsComboCustomize extends FlxSubState
 	{
 		super.update(elapsed);
 
-		updateTo(FlxG.mouse.overlaps(judgements) ? judgements : (FlxG.mouse.overlaps(combo)) ? combo : null);
+		updateTo(FlxG.mouse.overlaps(judgements, this.camera) ? judgements : (FlxG.mouse.overlaps(combo, this.camera)) ? combo : null);
 
 		if(currentDragOBJ != null)
 			currentDragOBJ.setPosition(FlxG.mouse.x - objOffset.x, FlxG.mouse.y - objOffset.y);

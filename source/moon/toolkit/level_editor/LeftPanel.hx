@@ -33,7 +33,7 @@ class LeftPanel extends FlxSpriteGroup
         {
             list = [
                 'menu', 'separator', 'joystick', 'videoSettings', 'separator',
-                'editDocument', 'openFolder', 'lightbulb', 'space-196', 'settings', 'openDoor'
+                'editDocument', 'openFolder', 'lightbulb', 'space-196', 'settings', 'openDoor', 'space-399999', 'saveL'
             ];
         }
 
@@ -77,7 +77,8 @@ class LeftPanel extends FlxSpriteGroup
         // but remember! actions must match button names from the list.
         // and make sure to check your key/modifier match the existing ones at FlxKey!!
         keybinds = [
-            {modifiers: ["CONTROL", "SHIFT"], key: "O", action: "openFolder"}
+            {modifiers: ["CONTROL"], key: "O", action: "openFolder"},
+            {modifiers: ["CONTROL"], key: "S", action: "saveL"}
         ];
     }
 
@@ -137,16 +138,18 @@ class LeftPanel extends FlxSpriteGroup
                 {
                     editor.sfx('popupSMALL', true);
 
-                    //TODO: make this work with the modding system.
-                    System.openFile('${System.applicationDirectory}assets/songs/${editor.song}/${editor.mix}');
+                    System.openFile(System.applicationDirectory + Paths.getPath('songs/${editor.song}/${editor.mix}'));
                 }
                 else
                 {
                     Paths.playSFX('toolkit/general/popupSMALL.wav', false);
 
                     //TODO: get the correct stage as well
-                    System.openFile('${System.applicationDirectory}assets/images/ingame/stages/stage');
+                    System.openFile('${System.applicationDirectory}assets/stages/stage');
                 }
+            case 'saveL':
+                if(editor != null)
+                    editor.saveLevel();
         }
 
         //TODO FOR WHEN I HAVE THE  MENUS WORKING: IT SHOULD CLOSE ONE BEFORE OPENING ANOTHER!

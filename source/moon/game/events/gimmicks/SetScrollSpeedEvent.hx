@@ -6,7 +6,7 @@ class SetScrollSpeedEvent extends BaseEvent
 
     override public function execute():Void
     {
-        MoonUtils.cancelActiveTwn(scrollTween);
+        TweenUtils.cancelTwn(scrollTween);
         
         //TODO: Make it possible to change for each lane
         // currently it changes for both only.
@@ -22,7 +22,7 @@ class SetScrollSpeedEvent extends BaseEvent
             scrollTween = FlxTween.tween(
                 spawner, {scrollSpeed: scroll},
                 game.conductor.stepCrochet / 1000 * event.values.duration,
-                {ease: MoonUtils.resolveEase(event.values.ease)}
+                {ease: TweenUtils.resolveEase(event.values.ease)}
             );
 
         //trace('Changing scroll speed to ${scroll}!', "DEBUG");
@@ -51,12 +51,7 @@ class SetScrollSpeedEvent extends BaseEvent
             {
                 name: 'ease', label: 'Easing', type: DROPDOWN,
                 defaultValue: 'expoOut',
-                options: [
-                    'expoOut', 'expoIn', 'expoInOut',
-                    'circOut', 'circIn', 'circInOut',
-                    'quadOut', 'quadIn', 'quadInOut',
-                    'linear', 'INSTANT'
-                ]
+                options: TweenUtils.easeList
             },
             {
                 name: 'absolute', label: 'Absolute Speed', type: CHECKBOX,

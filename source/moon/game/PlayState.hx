@@ -82,6 +82,7 @@ class PlayState extends FlxTransitionableState
 
 	/** If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch. */
 	public static var VALID_SCORE:Bool = true;
+	public var canPause:Bool = true;
 
     public var loadedReplay:Replay = null;
     public static var replaysToSave:Array<Replay> = [];
@@ -153,6 +154,10 @@ class PlayState extends FlxTransitionableState
 		playField.conductor.onBeat.add(beatHit);
 		playField.conductor.onStep.add(stepHit);
 		add(playField);
+
+		for (handler in playField.inputHandlers)
+			handler.game = this;
+		
 		this.conductor = playField.conductor;
 
 		if (playField.inputHandlers.get('p1').isReplay)
@@ -174,8 +179,17 @@ class PlayState extends FlxTransitionableState
 		//add(fmInstance);
 		
 		Countdown.init(conductor, playField);
-		Countdown.performCountdown();
-		playField.healthBar.performTransition(conductor);
+		
+		if(chartMeta.hasCountdown)
+		{
+			playField.healthBar.visible = false;
+			Countdown.perform();
+			
+			Countdown.onStart.addOnce(()-> {
+				playField.healthBar.performTransition(conductor);
+				playField.healthBar.visible = true;
+			});
+		}
 
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
@@ -189,8 +203,18 @@ class PlayState extends FlxTransitionableState
 
 			events = [];
 			setEvents();
-			Countdown.performCountdown();
+			if(chartMeta.hasCountdown)
+			{
+				playField.healthBar.visible = false;
+				Countdown.onStart.addOnce(()-> {
+					playField.healthBar.performTransition(conductor);
+					playField.healthBar.visible = true;
+				});
+				Countdown.perform();
+			}
+
 			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
+			camGAME.rotation = camHUD.rotation = camALT.rotation = 0;
 
 			// annoying shit *shrug*
 	        var chars:Array<FlxSprite> = [];
@@ -250,6 +274,9 @@ class PlayState extends FlxTransitionableState
 		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
+
+		// make sure we clean everything unused up
+		Paths.clearUnusedAssets();
 	}
 	
 	public function activeTweens(isActive:Bool)
@@ -279,6 +306,9 @@ class PlayState extends FlxTransitionableState
 		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
 		isDead = false;
 		allowGameBop = true;
+		
+		bopRate = Constants.DEFAULT_BOP_RATE;
+		bopIntensity = Constants.DEFAULT_BOP_INTENSITY - 1;
 	}
 
 	public function gameOverRestart()
@@ -321,6 +351,7 @@ class PlayState extends FlxTransitionableState
 		if(FlxG.keys.justPressed.SEVEN){
 			Global.clearScriptList();
 			EditorTransition.transitionToEditor(this);
+			canPause = false;
 		}
 
 		if(MoonInput.justPressed(PAUSE))
@@ -341,18 +372,26 @@ class PlayState extends FlxTransitionableState
 		if(FlxG.keys.justPressed.EIGHT)
 			endSong();
 
+		if(FlxG.keys.justPressed.F5) {
+            Global.clearScriptList();
+            Paths.clearUnusedAssets();
+            Countdown.onStart.removeAll();
+            FlxG.resetState();
+        }
+
 		//if(FlxG.keys.justPressed.FOUR)
-		//	Countdown.performCountdown();
+		//	Countdown.perform();
 
 		Global.scriptCall('onPostUpdate', [elapsed]);
 	}
 
 	public var camMov:FlxTween;
+	public var camRot:FlxTween;
 	public var camZoom:FlxTween;
 
 	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
-		MoonUtils.cancelActiveTwn(camMov);
+		TweenUtils.cancelTwn(camMov);
 		final charPos = getCamPos(char);
 
 		if(!isInstant)
@@ -363,11 +402,20 @@ class PlayState extends FlxTransitionableState
 	
 		Global.scriptCall('onCameraFocus', [getChar(char)?.type ?? CharacterType.OPPONENT]);
 	}
+	
+	public function rotateCamera(rotation:Float, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
+	{
+		TweenUtils.cancelTwn(camRot);
+		if(!isInstant)
+			camRot = FlxTween.tween(camGAME, {rotation: rotation}, duration, options);
+		else
+			camGAME.rotation = rotation;
+	}
 
 	var lastZoom:Float;
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
-		MoonUtils.cancelActiveTwn(camZoom);
+		TweenUtils.cancelTwn(camZoom);
 		allowGameBop = false;
 
 		//trace('Setting zoom to $zoom in $duration', "DEBUG");
@@ -424,9 +472,10 @@ class PlayState extends FlxTransitionableState
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
 			if(allowGameBop)
-				camGAME.zoom += bopIntensity * 1.5;
+				camGAME.zoom += bopIntensity;
 
 			camHUD.zoom += bopIntensity;
+			Global.scriptCall('onCameraBop', []);
 		}
 		
 		// updates less frequently..!
@@ -456,7 +505,10 @@ class PlayState extends FlxTransitionableState
         {
             final rep = new Replay(songData.song, songData.difficulty, songData.mix);
             rep.inputs = p1Handler.recordedInputs.copy();
-            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${Date.now().getTime()}.mrp';
+			rep.stats = Shortcuts.getStats();
+			rep.date = Date.now().getTime();
+            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${rep.date}.mrp';
+			rep.displayName = rep.toString();
             replaysToSave.push(rep);
         }
 
@@ -498,7 +550,7 @@ class PlayState extends FlxTransitionableState
 
 	public function pauseGame()
 	{
-		if(paused || isDead) return;
+		if(paused || isDead || !canPause) return;
 
 		paused = true;
 		activeTweens(false);
@@ -529,6 +581,7 @@ class PlayState extends FlxTransitionableState
 		Global.clearScriptList();
 		instance = null;
 		PlayField.instance = null;
+		Countdown.onStart.removeAll();
 
 		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
@@ -546,6 +599,14 @@ class PlayState extends FlxTransitionableState
 	            song: replay.song,
 	            difficulty: replay.difficulty,
 	            mix: replay.mix,
+				displayName: replay.displayName,
+				replayCode: replay.date,
+				stats: {
+					misses: replay.stats.misses,
+					accuracy: replay.stats.accuracy,
+					score: replay.stats.score,
+					maxCombo: replay.stats.highestCombo
+				},
 	            inputs: replay.inputs
 	        };
 

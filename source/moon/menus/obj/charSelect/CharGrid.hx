@@ -92,7 +92,7 @@ class CharGrid extends FlxSpriteGroup
 		for(i in 0...members.length)
 		{
 			final ico = cast(members[i], FilteredSprite);
-			MoonUtils.cancelActiveTwn(ico.twn);
+			TweenUtils.cancelTwn(ico.twn);
 
 			final sel = (curSelected == i);
 			ico.filters = sel ? selectedBizz : null;

@@ -102,7 +102,7 @@ function onTransitionEnd()
 
 function onConfirm()
 {
-    MoonUtils.cancelActiveTwn(tweenAAAAAA);
+    TweenUtils.cancelTwn(tweenAAAAAA);
     tweenAAAAAA = FlxTween.color(background, 0.33, 0xFFFFD0D5, 0xFF171831, {ease: FlxEase.quadOut});
     txtBack.visible = false;
     for(t in scrollTexts)

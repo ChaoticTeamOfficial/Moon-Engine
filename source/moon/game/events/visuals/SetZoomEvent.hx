@@ -11,7 +11,7 @@ class SetZoomEvent extends BaseEvent
         game.setCameraZoom(
             targetZoom,
             game.conductor.stepCrochet / 1000 * event.values.duration,
-            {ease: MoonUtils.resolveEase(event.values.ease)},
+            {ease: TweenUtils.resolveEase(event.values.ease)},
             (event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
         );
     }
@@ -30,7 +30,7 @@ class SetZoomEvent extends BaseEvent
         return [
             {
                 name: 'zoom', label: 'Zoom', type: NUMBER,
-                defaultValue: 1.0, min: 0.1, max: 10.0, step: 0.05
+                defaultValue: 1.0, min: 0.01, max: 100.0, step: 0.05
             },
             {
                 name: 'duration', label: 'Duration (steps)', type: NUMBER,
@@ -39,16 +39,11 @@ class SetZoomEvent extends BaseEvent
             {
                 name: 'ease', label: 'Easing', type: DROPDOWN,
                 defaultValue: 'circOut',
-                options: [
-                    'expoOut', 'expoIn', 'expoInOut',
-                    'circOut', 'circIn', 'circInOut',
-                    'quadOut', 'quadIn', 'quadInOut',
-                    'linear', 'INSTANT'
-                ]
+                options: TweenUtils.easeList
             },
             {
                 name: 'mode', label: 'Mode', type: DROPDOWN,
-                defaultValue: 'absolute',
+                defaultValue: 'stage',
                 options: ['absolute', 'stage']
             }
         ];

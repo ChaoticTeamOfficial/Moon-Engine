@@ -14,18 +14,19 @@ class PlayField extends FlxGroup
     // -- VARIBALES
     public static var instance:PlayField;
 
-    var conductor:Conductor;
-    var playback:Song;
-
-    var noteSpawner:NoteSpawner;
-    var chart:Chart;
-
     var inCutscene:Bool = false;
+    var inCountdown:Bool = false;
     var song:String;
     var mix:String;
     var difficulty:String;
 
     var previousRank:String = "";
+
+    var conductor:Conductor;
+    var playback:Song;
+
+    var noteSpawner:NoteSpawner;
+    var chart:Chart;
 
     var inputHandlers:Map<String, InputHandler> = [];
     var strumlines:Array<Strumline> = [];
@@ -166,7 +167,7 @@ class PlayField extends FlxGroup
         // obv loss, but whatev
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
-        conductor.time = -(conductor.crochet * 5);
+        setSongToStart();
     }
 
     function setupNotes()
@@ -238,7 +239,6 @@ class PlayField extends FlxGroup
     {
         playback.time = 0;
         playback.state = PAUSE;
-        conductor.time = -(conductor.crochet * 5);
 
         for(strum in strumlines)
             for(receptor in strum.members)
@@ -270,13 +270,16 @@ class PlayField extends FlxGroup
             p1.replayKeyStates = [false, false, false, false];
         }
 
-        healthBar.performTransition(conductor);
-
+        setSongToStart();
         onSongRestart.dispatch();
-        inCountdown = true;
     }
 
-    var inCountdown:Bool = true;
+    function setSongToStart()
+    {
+		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
+		inCountdown = true;
+    }
+
     override public function update(dt:Float)
     {
         // updates some stuff when not in cutscene.
@@ -354,12 +357,6 @@ class PlayField extends FlxGroup
         stats.color = rankData.color;
         stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
         centerText();
-        
-        if(FlxG.keys.justPressed.F5) {
-            Global.clearScriptList();
-            Paths.clearUnusedAssets();
-            FlxG.resetState();
-        }
     }
 
     function onHit(playerID:String, note:Note, timing:String, isSustain:Bool)
@@ -392,7 +389,7 @@ class PlayField extends FlxGroup
             // and do a lil cool thing to the stats
             setStatsColor(FlxColor.RED);
 
-            MoonUtils.cancelActiveTwn(statShake);
+            TweenUtils.cancelTwn(statShake);
             statShake = FlxTween.shake(stats, 0.04, 0.14, X);
 
             // the good ol sfx ahaha
@@ -420,7 +417,7 @@ class PlayField extends FlxGroup
     var statsColor:FlxTween;
     function setStatsColor(color:FlxColor)
     {
-        MoonUtils.cancelActiveTwn(statsColor);
+        TweenUtils.cancelTwn(statsColor);
         statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {startDelay: 0.05});
     }
     

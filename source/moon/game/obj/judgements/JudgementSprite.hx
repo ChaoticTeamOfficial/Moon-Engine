@@ -27,7 +27,7 @@ class JudgementSprite extends MoonSprite
     {
         if (judgement == null) return;
 
-        MoonUtils.cancelActiveTwn(thisTwn);
+        TweenUtils.cancelTwn(thisTwn);
 
         playAnim(judgement, true);
         extra.playAnim(judgement, true);
@@ -43,7 +43,7 @@ class JudgementSprite extends MoonSprite
         if(notAnimated) return;
         if(data?.judgementAnims?.appear == 'light')
         {
-            MoonUtils.cancelActiveTwn(xtraTwn);
+            TweenUtils.cancelTwn(xtraTwn);
 
             if(!extra.visible) extra.visible = true;
             extra.color = this.color;

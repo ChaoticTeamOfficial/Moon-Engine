@@ -17,7 +17,7 @@ class SongPreview
 	static function loadAndPlay(chart:Chart)
 	{
 		if (FlxG.sound.music != null)
-			MoonUtils.cancelActiveTwn(FlxG.sound.music.fadeTween);
+			TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
 
 		resetting = false;
 
@@ -30,7 +30,7 @@ class SongPreview
 			if(FlxG.sound.music != null)
 			{
 				if(FlxG.sound.music.playing) FlxG.sound.music.stop();
-				MoonUtils.cancelActiveTwn(FlxG.sound.music.fadeTween);
+				TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
 
 				FlxG.sound.music.destroy();
 				FlxG.sound.music = null;
@@ -106,7 +106,7 @@ class SongPreview
 	{
 		if (FlxG.sound.music != null)
 		{
-			MoonUtils.cancelActiveTwn(FlxG.sound.music.fadeTween);
+			TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
 			FlxG.sound.music.destroy();
 			FlxG.sound.music = null;
 		}

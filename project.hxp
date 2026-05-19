@@ -116,7 +116,7 @@ class Project extends HXProject
 		if(isDesktop() && !isHashLink())
 		{
 			addHaxelib('hxvlc');
-			addHaxelib('discord_rpc');
+			addHaxelib('hxdiscord_rpc');
 		}
 	}
 

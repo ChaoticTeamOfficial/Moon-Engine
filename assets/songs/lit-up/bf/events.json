@@ -1,5 +1,13 @@
 [
 	{
+		"tag": "Set Camera Mode",
+		"lane": 0,
+		"time": 0,
+		"values": {
+			"dynamicSinging": "opponent"
+		}
+	},
+	{
 		"tag": "Move Camera",
 		"lane": 0,
 		"time": 0,

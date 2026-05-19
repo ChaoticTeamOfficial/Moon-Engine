@@ -34,6 +34,7 @@ class LoadingScreen extends FlxTransitionableState
     override public function create():Void
     {
         super.create();
+        Global.allowInputs = true;
 
         add(preloadGrp);
 

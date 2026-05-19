@@ -35,6 +35,9 @@ class Replay
     public var mix:String;
     public var inputs:Array<ReplayInput> = [];
     public var filename:String = '';
+    public var displayName:String = '';
+    public var date:Dynamic;
+    public var stats:PlayerStats;
 
     public function new(song:String, difficulty:String, mix:String) {
         this.song = song;

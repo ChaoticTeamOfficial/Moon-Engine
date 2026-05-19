@@ -171,7 +171,7 @@ class Portrait extends MoonSprite
 
 	public function doAnim(anim:PortraitAnim, ?values:Dynamic)
 	{
-		MoonUtils.cancelActiveTwn(thisTwn);
+		TweenUtils.cancelTwn(thisTwn);
 		final p:FlxPoint = FlxPoint.get(data.position[0], data.position[1]);
 
 		switch(anim)
