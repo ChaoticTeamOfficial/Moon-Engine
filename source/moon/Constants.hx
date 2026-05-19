@@ -25,7 +25,7 @@ class Constants
 
     static inline final FALLBACK_LANG:String = 'en-US';
 
-    static final INITIAL_STATE:Class<FlxState> = OffsetEditor;
+    static final INITIAL_STATE:Class<FlxState> = Title;
 
     /// ------- MENUS RELATED CONSTANTS
 

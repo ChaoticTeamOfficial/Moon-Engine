@@ -16,6 +16,7 @@ import openfl.filters.ColorMatrixFilter;
 import openfl.ui.Mouse;
 import openfl.ui.MouseCursor;
 import moon.game.events.EventRegistry;
+import haxe.ui.components.*;
 
 #if sys
 import sys.io.File;
@@ -61,8 +62,12 @@ class LevelEditor extends FlxState
     var cursor:FlxSprite;
 
     var miniPlayer:MiniPlayer;
-
     public var eventAtlas:FlxAtlas;
+
+    //these two are placeholders!!!
+    var sectionStepper:NumberStepper;
+    var copySectionBtn:Button;
+    var swapSectionBtn:Button;
 
     private var gridGroup:FlxSpriteGroup;
     //private var sectionTexts:FlxSpriteGroup;
@@ -125,7 +130,9 @@ class LevelEditor extends FlxState
         
         DiscordRPC.updatePresence(EDITOR, '', '', true);
     }
-
+	
+	// TODO: take a look on event and note deletion, it seems to get stuck sometimes?
+	// I suck at this lolll
     override public function create()
     {
         // --- SETUP BACKEND STUFF --- //
@@ -218,12 +225,7 @@ class LevelEditor extends FlxState
         NUM_LANES = 4 * chart.content.meta.lanes.length;
 
         conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
-        playback = new Song(
-            song,
-            mix,
-            (diff == 'erect' || diff == 'nightmare'),
-            conductor
-        );
+        playback = new Song(song, mix, (diff == 'erect' || diff == 'nightmare'), conductor);
 
         // --- GENERATE OBJECTSS --- //
 
@@ -444,6 +446,57 @@ class LevelEditor extends FlxState
         playback.state = PAUSE;
         curType = NOTES;
 
+        //TODO: these are placeholders for now! eventually add the proper stuff.
+        final gridRight = gridGroup.x + (LANE_WIDTH * (NUM_LANES + 1)) + 40 + scrollbar.width + 24;
+        sectionStepper = new NumberStepper();
+        sectionStepper.left = gridRight;
+        sectionStepper.top = 54;
+        sectionStepper.width = 80;
+        sectionStepper.value = 1;
+        sectionStepper.step = 1;
+        add(sectionStepper);
+
+        copySectionBtn = new Button();
+        copySectionBtn.left = gridRight;
+        copySectionBtn.top = 54 + 38;
+        copySectionBtn.width = 80;
+        copySectionBtn.text = "Copy Section";
+        copySectionBtn.onClick = (_) -> {
+            final curSec = getCurSection();
+            final sourceSec = curSec + Std.int(sectionStepper.value);
+            if (sourceSec < 0) return;
+
+            for (n in getSectionNotes(sourceSec))
+            {
+                final pasted:NoteStruct = {
+                    time: n.time - getSectionStartTime(sourceSec) + getSectionStartTime(curSec),
+                    data: n.data, lane: n.lane,
+                    type: n.type, duration: n.duration, values: n.values
+                };
+
+                if (!Lambda.exists(chart.content.notes, e -> Math.abs(e.time - pasted.time) < 0.01 && e.data == pasted.data && e.lane == pasted.lane))
+                {
+                    chart.content.notes.push(pasted);
+                    createNote(pasted);
+                    History.pushNotePlace(pasted);
+                }
+            }
+            chart.content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+            sfx('copySection');
+        };
+        add(copySectionBtn);
+
+        swapSectionBtn = new Button();
+        swapSectionBtn.left = gridRight;
+        swapSectionBtn.top = 54 + 38 + 38;
+        swapSectionBtn.width = 80;
+        swapSectionBtn.text = "Swap Section";
+        swapSectionBtn.onClick = (_) -> {
+            swapCurrentSection();
+            sfx('laneSwap${FlxG.random.bool(0.5) ? "-secret" : ""}', false, true);
+        };
+        add(swapSectionBtn);
+
         History.reset();
         Global.allowInputs = true;
     }
@@ -516,7 +569,10 @@ class LevelEditor extends FlxState
             }
 
             if (FlxG.mouse.wheel != 0 && !libFocus)
+            {
                 playback.time -= FlxG.mouse.wheel * conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
+                sfx('scroll', false, true);
+            }
 
             for(type => button in typeButtons)
                 if(FlxG.mouse.overlaps(button, button.camera) && FlxG.mouse.justPressed)
@@ -834,6 +890,7 @@ class LevelEditor extends FlxState
                         selectedNotes.push(noteAt);
                         noteAt.brightness = 0.4;
                         refreshHandleVis();
+                        sfx('noteSelect', false, true);
                     }
                 }
                 return;
@@ -888,6 +945,7 @@ class LevelEditor extends FlxState
                         chart.events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
                         createEvent(ev);
                         History.pushEventPlace(ev);
+                        sfx('placeEvent-${FlxG.random.int(1, 2)}');
 
                         //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
                 }
@@ -909,7 +967,7 @@ class LevelEditor extends FlxState
 
         // Delete stuff!!!
         // or remove, eh, whatever!
-        if (FlxG.mouse.justPressedRight && draggingNote == null)
+        if (FlxG.mouse.pressedRight && draggingNote == null)
         {
             deselectAll();
 
@@ -918,26 +976,19 @@ class LevelEditor extends FlxState
                 final hit = getNoteAtCursor(snappedTime, laneNum);
                 if (hit != null)
                 {
-                    History.pushNoteDelete({
+                    final struct = {
                         time: hit.time, data: hit.direction, lane: hit.lane,
                         type: hit.type, duration: hit.duration, values: null
-                    });
+                    };
+
+                    History.pushNoteDelete(struct);
 
                     chart.content.notes = chart.content.notes.filter(n ->
                         !(Math.abs(n.time - hit.time) < 0.01 && n.data == hit.direction && n.lane == hit.lane)
                     );
 
-                    if (hit.child != null)
-                    {
-                        noteGroup.remove(hit.child, true);
-                        hit.child.destroy();
-                        hit.child = null;
-                    }
-                    if (hit.sustainHandle != null)
-                        noteGroup.remove(hit.sustainHandle, true);
-
-                    noteGroup.remove(hit, true);
-                    hit.destroy();
+                    removeNoteSpr(struct);
+                    sfx('delete', false, true);
                 }
             }
             else
@@ -961,31 +1012,20 @@ class LevelEditor extends FlxState
                 {
                     final evTime = yToTime(toRemoveSpr.y - gridGroup.y);
 
-                    var deletedEvStruct:moon.backend.data.Chart.EventStruct = null;
+                    var deletedEvStruct:EventStruct = null;
 
                     for (e in chart.events)
                         if (e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50) { deletedEvStruct = e; break; }
 
                     if (deletedEvStruct != null)
-                        History.pushEventDelete(deletedEvStruct);
-
-                    chart.events = chart.events.filter(e ->
-                        !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50)
-                    );
-
-                    var toRemoveHold:EventHold = null;
-                    for (member in eventsGroup.members)
-                        if (Std.isOfType(member, EventHold) && cast(member, EventHold).parent == toRemoveSpr)
-                            toRemoveHold = cast member;
-
-                    if (toRemoveHold != null)
                     {
-                        eventsGroup.remove(toRemoveHold, true);
-                        toRemoveHold.destroy();
+                        History.pushEventDelete(deletedEvStruct);
+                        removeEventSpr(deletedEvStruct);
                     }
 
-                    eventsGroup.remove(toRemoveSpr, true);
-                    toRemoveSpr.destroy();
+                    chart.events = chart.events.filter(e -> !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50));
+
+                    sfx('delete', false, true);
                 }
             }
         }
@@ -1010,6 +1050,9 @@ class LevelEditor extends FlxState
         note.makeHandle();
         noteGroup.add(note.sustainHandle);
         updateSustainVis(note, n.duration);
+
+        note.scale.set(0.5, 0.5);
+        FlxTween.tween(note, {"scale.x": 1, "scale.y": 1}, 0.28, {ease: FlxEase.backOut});
 
         EditorSync.onNoteAdded(n);
     }
@@ -1055,7 +1098,7 @@ class LevelEditor extends FlxState
         }
 
         if (toDestroy == null) return;
-
+        
         if (toDestroy.child != null)
         {
             noteGroup.remove(toDestroy.child, true);
@@ -1065,11 +1108,12 @@ class LevelEditor extends FlxState
         if (toDestroy.sustainHandle != null)
             noteGroup.remove(toDestroy.sustainHandle, true);
 
+        FlxTween.globalManager.cancelTweensOf(toDestroy);
         noteGroup.remove(toDestroy, true);
         toDestroy.destroy();
     }
 
-    public function removeEventSpr(e:moon.backend.data.Chart.EventStruct):Void
+    public function removeEventSpr(e:EventStruct):Void
     {
         var toRemoveSpr:EventSpr = null;
         for (member in eventsGroup.members)
@@ -1102,7 +1146,7 @@ class LevelEditor extends FlxState
         toRemoveSpr.destroy();
     }
 
-    public function updateNoteDurSpr(n:moon.backend.data.Chart.NoteStruct, newDur:Float):Void
+    public function updateNoteDurSpr(n:NoteStruct, newDur:Float):Void
     {
         for (member in noteGroup.members)
         {
@@ -1165,10 +1209,66 @@ class LevelEditor extends FlxState
         if (curSnap == 0) return rawTime;
         final seg = getTimeSeg(rawTime);
         final lc = seg.stepCrochet * 4;
-        final localTime = rawTime - seg.startTime;
-        final localBeat = localTime / lc;
-        final snappedBeat = Math.round(localBeat * curSnap) / curSnap;
-        return seg.startTime + snappedBeat * lc;
+        return seg.startTime + (Math.round(((rawTime - seg.startTime) / lc) * curSnap) / curSnap) * lc;
+    }
+
+    function getCurSection():Int
+    {
+        var sec = 0;
+
+        for (seg in segments)
+            sec += Std.int((conductor.time - seg.startTime) / seg.stepCrochet / Std.int(conductor.numerator * conductor.denominator));
+
+        return sec;
+    }
+
+    function getSectionNotes(sectionIndex:Int):Array<NoteStruct>
+    {
+        final stepsPerSection = Std.int(conductor.numerator * conductor.denominator);
+        return chart.content.notes.filter(n ->
+        {
+            var noteSection = 0;
+            for (i in 0...segments.length)
+            {
+                final seg = segments[i];
+                final nextStart = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
+                if (n.time >= seg.startTime && n.time < nextStart)
+                {
+                    noteSection += Std.int((n.time - seg.startTime) / seg.stepCrochet / stepsPerSection);
+                    break;
+                }
+                noteSection += Std.int((nextStart - seg.startTime) / seg.stepCrochet / stepsPerSection);
+            }
+            return noteSection == sectionIndex;
+        });
+    }
+
+    function getSectionStartTime(sectionIndex:Int):Float
+    {
+        final stepsPerSection = Std.int(conductor.numerator * conductor.denominator);
+        var counted = 0;
+        for (i in 0...segments.length)
+        {
+            final seg = segments[i];
+            final nextStart = (i < segments.length - 1) ? segments[i + 1].startTime : playback.fullLength;
+            final secsInSeg = Std.int((nextStart - seg.startTime) / seg.stepCrochet / stepsPerSection);
+            if (counted + secsInSeg > sectionIndex)
+                return seg.startTime + (sectionIndex - counted) * stepsPerSection * seg.stepCrochet;
+            counted += secsInSeg;
+        }
+        return playback.fullLength;
+    }
+
+    function swapCurrentSection():Void
+    {
+        for (n in getSectionNotes(getCurSection()))
+        {
+            //it's so easy!!
+            removeNoteSpr(n);
+            n.lane = (n.lane == "p1") ? "opponent" : "p1";
+            createNote(n);
+        }
+        chart.content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
     }
 
     function durationToHeight(startTime:Float, duration:Float):Float
@@ -1271,10 +1371,8 @@ class LevelEditor extends FlxState
         }
     }
 
-    var tw:Map<Note, FlxTween> = [];
     private function updateSustainVis(n:Note, newDur:Float):Void
     {
-        TweenUtils.cancelTwn(tw.get(n));
         n.duration = newDur;
 
         if (newDur > 0)
@@ -1285,7 +1383,8 @@ class LevelEditor extends FlxState
                 noteGroup.add(sus);
                 n.child = sus;
             }
-            tw.set(n, FlxTween.tween(n.child, {editorHeight: durationToHeight(n.time, newDur)}, 0.3, {ease: FlxEase.expoOut}));
+            FlxTween.globalManager.cancelTweensOf(n.child);
+            FlxTween.tween(n.child, {editorHeight: durationToHeight(n.time, newDur)}, 0.3, {ease: FlxEase.expoOut});
         }
         else if (n.child != null)
         {
@@ -1302,7 +1401,6 @@ class LevelEditor extends FlxState
         updateSustainVis(n, newDur);
     }
 
-    //TODO: CONVERT ALL SFX TO WAV
     public function sfx(p:String, general:Bool = false, once = false)
     {
         if (playback.state != PLAY)
@@ -1314,8 +1412,7 @@ class LevelEditor extends FlxState
         for (member in noteGroup.members)
         {
             member.shader = (curType != NOTES) ? grayscale : null;
-            member.alpha  = (curType != NOTES) ? 0.20
-                : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
+            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
         }
     }
 
@@ -1343,6 +1440,8 @@ class LevelEditor extends FlxState
         File.saveContent(Paths.getPath('songs/$song/$mix/chart-$diff.json'), haxe.Json.stringify(chart.content, null, "\t"));
         File.saveContent(Paths.getPath('songs/$song/$mix/events.json'), haxe.Json.stringify(chart.events, null, "\t"));
 
-        trace('shit got saved ayooooo');
+        //trace('shit got saved ayooooo');
+
+        sfx('save${FlxG.random.bool(0.5) ? "-secret" : ""}', false, true);
     }
 }

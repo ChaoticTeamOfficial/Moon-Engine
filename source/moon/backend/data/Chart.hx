@@ -300,9 +300,6 @@ class Chart
             if (duplicatesFound > 0)
                 trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
         }
-
-        content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-        events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
     }
 
     /**
