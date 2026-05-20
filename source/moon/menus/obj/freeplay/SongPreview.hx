@@ -10,6 +10,7 @@ class SongPreview
 	static var start:Float;
 	static var end:Float;
 	static var resetting:Bool = false;
+	static var active:Bool = false;
 
 	private static var _loadGen:Int = 0;
 	private static var _prevSoundKey:String = null;
@@ -71,6 +72,7 @@ class SongPreview
 				Freeplay.instance.conductor.changeBpmAt(0, chart?.content?.meta?.bpm ?? 145, chart?.content?.meta?.timeSignature[0] ?? 4, chart?.content?.meta?.timeSignature[0] ?? 4);
 
 			resetting = false;
+			active = true;
 
 			//trace('playing song');
 			return null;
@@ -79,6 +81,7 @@ class SongPreview
 
 	static function update(elapsed:Float)
 	{
+		if(!active) return;
 		if(FlxG.sound.music != null)
 		{
 			//trace(FlxG.sound.music.time);
@@ -113,7 +116,7 @@ class SongPreview
 
 		clear();
 
-		resetting = false;
+		active = resetting = false;
 		_loadGen = 0;
 	}
 
