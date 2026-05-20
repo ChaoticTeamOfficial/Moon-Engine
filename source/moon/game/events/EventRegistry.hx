@@ -22,6 +22,7 @@ class EventRegistry
             'Set Zoom' => SetZoomEvent,
             'Customized Pulse Timing' => CustomizedPulseTimingEvent,
             'Set Camera Mode' => SetCameraMode,
+            'Pulse Camera' => PulseCameraEvent,
             
             // CHARACTERS
             'Play Character Animation' => PlayCharacterAnimEvent,

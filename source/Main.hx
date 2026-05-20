@@ -74,6 +74,10 @@ class Main extends Sprite
 		fps = new FPS(10, 10);
 		addChild(fps);
 
+		var beta = new BetaBuild(10, 10);
+		addChild(beta);
+		fps.y = beta.y + beta.height + 10;
+
         MoonSettings.updateGlobalSettings();
         MoonSettings.updateWindow();
 		

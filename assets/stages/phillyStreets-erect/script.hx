@@ -15,7 +15,7 @@ import moon.game.PlayState;
 final RAIN_INTENSITY_MAP = {
     'darnell': [0.01, 0.06],
     'lit-up': [0.06, 0.085],
-    '2-hot': [0.088, 0.13]
+    '2hot': [0.088, 0.13]
 };
 
 // traffic light timing

@@ -13,6 +13,7 @@ import flixel.FlxState;
  */
 class Constants
 {
+    static final INDEV_VERSION:String = '0.4.8b';
 	static final GAME_WIDTH:Int = 1280;
 	static final GAME_HEIGHT:Int = 720;
 	static final GAME_FRAMERATE:Int = 60;

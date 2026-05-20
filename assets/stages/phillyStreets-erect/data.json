@@ -68,12 +68,13 @@
 	{
 	  "type": "spectator",
       "position": [1262, 689],
+	  "camOffsets": [-100, 180],
       "objectBehind": "phillyForeground"
     },
     {
 	  "type": "opponent",
       "position": [600, 856],
-	  "camOffsets": [364, -100],
+	  "camOffsets": [310, -148],
       "objectBehind": "phillyForeground"
     },
     {
