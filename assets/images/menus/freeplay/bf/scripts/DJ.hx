@@ -107,18 +107,15 @@ function chooseNextDJAction()
 
 function playRandomCartoon()
 {
-    new Future(() -> 
+    if(cartoonPlayer != null)
     {
-        if(cartoonPlayer != null)
-        {
-            FlxG.sound.list.remove(cartoonPlayer);
-            cartoonPlayer.stop();
-            cartoonPlayer.destroy();
-        }
+        FlxG.sound.list.remove(cartoonPlayer);
+        cartoonPlayer.stop();
+        cartoonPlayer.destroy();
+    }
 
-        cartoonPlayer.loadEmbedded(Paths.sound('menus/freeplay/cartoons/cartoon' + FlxG.random.int(1, 24) + '.ogg', 'sounds'));
-        cartoonPlayer.play();
-        cartoonPlayer.volume = 1;
-        FlxG.sound.list.add(cartoonPlayer);
-    }, true);
+    cartoonPlayer.loadEmbedded(Paths.sound('menus/freeplay/cartoons/cartoon' + FlxG.random.int(1, 24) + '.ogg', 'sounds'));
+    cartoonPlayer.play();
+    cartoonPlayer.volume = 1;
+    FlxG.sound.list.add(cartoonPlayer);
 }

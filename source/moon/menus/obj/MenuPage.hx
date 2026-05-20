@@ -20,9 +20,11 @@ class MenuPage extends FlxSpriteGroup
     public var navOptions:Array<OptionObject> = [];
     public var optionFollower:MoonSprite;
     public var curSelected:Int = 0;
+    public var onChange:FlxSignal = new FlxSignal();
 
     private var yPos:Float = 0;
     private var afterHeaderY:Float = 0;
+
 
     public function new(x:Float = 0, y:Float = 0, title:String = "SETTINGS")
     {
@@ -97,6 +99,8 @@ class MenuPage extends FlxSpriteGroup
 
         for (i in 0...navOptions.length)
             navOptions[i].selected = (i == curSelected);
+
+        onChange.dispatch();
     }
 
     /**

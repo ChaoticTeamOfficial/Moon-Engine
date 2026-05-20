@@ -42,6 +42,10 @@ class Constants
      */
     static final TITLE_VIDEO_DELAY:Float = 27.5;
 
+    // - Freeplay
+    
+    static final FREEPLAY_TRANSITION_DURATION:Float = 0.6;
+
     /// ------- GAMEPLAY RELATED CONSTANTS
 
     /**

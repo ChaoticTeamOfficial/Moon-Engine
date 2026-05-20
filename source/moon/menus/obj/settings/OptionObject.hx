@@ -115,7 +115,7 @@ class OptionObject extends FlxSpriteGroup
 
                 final str = value.text.toLowerCase() == '< on >' ? "ON" : value.text.toLowerCase() == '< off >' ? "OFF" : 'Selection';
                 if(amount != 0)
-                    Paths.playSFX('menus/settings/settings$str.wav');
+                    Paths.playSFX('menus/settings/settings$str.wav', 'sounds', true);
 
             case SLIDER:
                 var filledLength:Int = Math.round((setting.value - setting.options[0]) / (setting.options[1] - setting.options[0]) * 10);
@@ -128,14 +128,14 @@ class OptionObject extends FlxSpriteGroup
                 value.text = '< ${setting.value}% > [$filled$unfilled]';
 
                 if(amount != 0)
-                    Paths.playSFX('menus/settings/settingsMeterChange.wav');
+                    Paths.playSFX('menus/settings/settingsMeterChange.wav', 'sounds', true, FlxMath.remapToRange(setting.value, 0, 100, 0.5, 1.5));
 
             case UNCAP_SLIDER:
                 setting.value += amount;
                 value.text = '< ${setting.value} >';
 
                 if(amount != 0)
-                    Paths.playSFX('menus/settings/settingsMeterChange.wav');
+                    Paths.playSFX('menus/settings/settingsMeterChange.wav', 'sounds', true, FlxG.random.float(0.8, 1.2));
 
             case INFO: value.text = '( ${setting.defaultValue} )';
 
