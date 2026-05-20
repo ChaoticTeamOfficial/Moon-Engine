@@ -2,6 +2,7 @@ package moon.menus.obj.freeplay;
 
 import flixel.group.FlxGroup;
 import moon.backend.data.SongData;
+import moon.backend.gameplay.*;
 
 using StringTools;
 
@@ -27,7 +28,7 @@ class FreeplaySongSelector extends FlxGroup
 
     var lineSprites:Array<MoonSprite> = [];
     var dots:Array<MoonSprite> = [];
-    var items:Array<FreeplaySongItem> = [];
+    public var items:Array<FreeplaySongItem> = [];
 
     var slotBaseY:Array<Float> = [];
 
@@ -43,16 +44,18 @@ class FreeplaySongSelector extends FlxGroup
     var itemX(get, never):Float;
     inline function get_itemX() return disk.x + disk.width + 20;
 
-    var songList:Array<SongBase> = [];
+    public var songList:Array<SongBase> = [];
     var curSelected:Int = 0;
 
     private var preloadedCharts:Array<Chart> = [];
     private var curAlb:String = '';
 
+    public var PRanks:Int = 0;
+    public var goldPRanks:Int = 0;
+
     public function new()
     {
         super();
-
         disk = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
         disk.shader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
         disk.active = false;
@@ -93,7 +96,12 @@ class FreeplaySongSelector extends FlxGroup
         disk.scale.set(0, 0);
         disk.updateHitbox();
         disk.angle = -360;
-        FlxTween.tween(disk.scale, {x: 1, y: 1}, 0.7, {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox(), onComplete: _-> Global.allowInputs = true});
+        FlxTween.tween(
+            disk, 
+            {"scale.x": 1, "scale.y": 1}, 
+            Constants.FREEPLAY_TRANSITION_DURATION, 
+            {ease: FlxEase.expoOut, onUpdate: _->disk.updateHitbox(), onComplete: _-> Global.allowInputs = true}
+        );
     }
 
     /**
@@ -107,6 +115,20 @@ class FreeplaySongSelector extends FlxGroup
         refreshEntries();
 
         scrollDelta = 0;
+
+        for(song in songList)
+        {
+            final songD = SongData.retrieveData(song.song, song.difficulty, song.mix);
+            
+            if(songD != null)
+            {
+                final rank = Timings.getRank(songD.accuracy).rank;
+                if(rank == 'PERFECT')
+                    PRanks++;
+                if(rank == 'PERFECT-GOLD')
+                    goldPRanks++;
+            }
+        }
         refreshItems(true);
     }
 
@@ -267,7 +289,11 @@ class FreeplaySongSelector extends FlxGroup
             if (songIdx < 0 || songIdx >= songList.length)
             {
                 item.targetAlpha = 0;
-                if (instant) { item.lerpAlpha = 0; item.hide(); }
+                if (instant)
+                {
+                    item.lerpAlpha = 0;
+                    item.hide();
+                }
                 dots[i].visible = false;
                 item.icon.filters = null;
                 item.bg.alpha = 0;

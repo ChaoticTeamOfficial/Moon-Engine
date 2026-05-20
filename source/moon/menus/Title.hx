@@ -150,6 +150,8 @@ class Title extends FlxTransitionableState
 
         updateVis();
 
+        FlxG.mouse.visible = false;
+
         // -- ON CONDUCTOR'S BEAT HIT
         conductor.onBeat.add((beat) -> 
         {

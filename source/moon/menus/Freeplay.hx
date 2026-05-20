@@ -1,5 +1,6 @@
 package moon.menus;
 
+import animate.FlxAnimate;
 import moon.game.PlayState;
 import moon.menus.obj.freeplay.*;
 import flixel.FlxG;
@@ -34,6 +35,11 @@ class Freeplay extends FlxSubState
     public var thisDJ:FreeplayDJ;
     public var selector:FreeplaySongSelector;
     public var stars:DifficultyStars;
+    var topBar:MoonSprite;
+    public var playerIcon:PixelIcon;
+    public var infoText:HTMLText; //html text my belove,,,
+
+    public var title(default, set):String = 'Freeplay';
 
     public function new(character:String = 'bf')
     {
@@ -54,7 +60,7 @@ class Freeplay extends FlxSubState
         Global.scriptSet('dj', thisDJ);
 
         weekBG = new MoonSprite();
-        weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/random-bf'));
+        weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/week6'));
         weekBG.scale.set(1.4, 1.4);
         weekBG.antialiasing = true;
         weekBG.updateHitbox();
@@ -63,7 +69,7 @@ class Freeplay extends FlxSubState
         weekBG.brightness = -1;
         add(weekBG);
 
-        FlxTween.tween(weekBG, {x: FlxG.width - weekBG.width + 360, "skew.x": 5}, 0.7, {ease: FlxEase.expoOut, onComplete: _->{
+        FlxTween.tween(weekBG, {x: FlxG.width - weekBG.width + 360, "skew.x": 5}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoOut, onComplete: _->{
             weekBG.brightness = 0.69;
             FlxTween.tween(weekBG, {brightness: -0.45}, 0.35);
             Global.scriptCall('onTransitionEnd', []);
@@ -97,6 +103,31 @@ class Freeplay extends FlxSubState
         add(selector);
         add(stars);
 
+        topBar = new MoonSprite().makeGraphic(FlxG.width + 16, 78, FlxColor.BLACK);
+        topBar.screenCenter(X);
+        add(topBar);
+
+        // I love this goofy.,,,
+        playerIcon = new PixelIcon(32, 0, character);
+        add(playerIcon);
+        playerIcon.y = topBar.y + topBar.height / 2 - playerIcon.height / 2;
+        playerIcon.alpha = 0.0001;
+
+        infoText = new HTMLText();
+        infoText.setFormat(Paths.font('04/04B_19.TTF'), 24, LEFT);
+        add(infoText);
+        infoText.antialiasing = false;
+        updateInfoText();
+        infoText.x = -infoText.width - 16;
+        FlxTween.tween(infoText, {x: playerIcon.x + playerIcon.width + 32}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoOut}); 
+    
+        topBar.y -= topBar.height + 8;
+        FlxTween.tween(topBar, {y: 0}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.circInOut, onComplete: _->{
+            playerIcon.alpha = 1;
+            playerIcon.brightness = 1;
+            FlxTween.tween(playerIcon, {brightness: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
+        }});
+
         Global.scriptCall('onCreate');
     }
 
@@ -116,13 +147,23 @@ class Freeplay extends FlxSubState
         return filtered;
     }
 
-    function change(num:Int = 0)
+    public function change(num:Int = 0)
     {
         curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
         selector.changeSelection(num);
-        Paths.playSFX('ui/scrollMenu.ogg');
+        Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
 
         Global.scriptCall('onScroll');
+    }
+
+    public function updateInfoText()
+    {
+        final total = selector.songList.length;
+        infoText.text = '${title}\n' + 
+        '<font size="20px">' +
+        '<font color="#ff00fe">${selector.PRanks}/$total Perfects <font color="#ffffff">-'+
+        ' <font color="#fea711">${selector.goldPRanks}/$total Goldens';
+        infoText.y = topBar.y + topBar.height / 2 - infoText.height / 2;
     }
 
     override public function update(elapsed:Float):Void
@@ -137,7 +178,9 @@ class Freeplay extends FlxSubState
         }
 
         if (MoonInput.justPressed(UI_DOWN)) change(1);
-        if (MoonInput.justPressed(UI_UP)) change(-1);       
+        if (MoonInput.justPressed(UI_UP)) change(-1);
+
+        if(FlxG.mouse.wheel != 0) change(-FlxG.mouse.wheel);
 
         if (MoonInput.justPressed(ACCEPT))
         {
@@ -153,6 +196,7 @@ class Freeplay extends FlxSubState
             thisDJ.canDance = false;
             thisDJ.AFK_TIMER = 0;
             thisDJ.playAnim('confirm', true);
+            playerIcon.playAnim('select', true);
 
             Paths.playSFX('ui/confirmMenu.ogg');
 
@@ -173,5 +217,12 @@ class Freeplay extends FlxSubState
         }
 
         Global.scriptCall('onUpdate', [elapsed]);
+    }
+
+    @:noCompletion public function set_title(title:String):String
+    {
+        this.title = title;
+        updateInfoText();
+        return title;
     }
 }

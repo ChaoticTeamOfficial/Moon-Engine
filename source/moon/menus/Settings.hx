@@ -50,8 +50,13 @@ class Settings extends FlxSubState
         
         FlxTween.tween(menuPage.optionFollower, {alpha: 0.5}, 5, {type: PINGPONG, ease: FlxEase.quadIn});
 
+        menuPage.onChange.add(() -> {
+            info.updateInfo(menuPage.navOptions[menuPage.curSelected].setting);
+            Paths.playSFX('menus/settings/settingsSelection.wav', 'sounds', true, FlxG.random.float(0.9, 1.25));
+        });
+
         if (!skipTransition)
-            Paths.playSFX('menus/settings/settingsEnter.wav');
+            Paths.playSFX('menus/settings/settingsEnter.wav', 'sounds', true);
 
         changeSelection(0);
     }
@@ -75,7 +80,7 @@ class Settings extends FlxSubState
 
         if (MoonInput.justPressed(BACK))
         {
-            Paths.playSFX('menus/settings/settingsLeave.wav');
+            Paths.playSFX('menus/settings/settingsLeave.wav', 'sounds', true);
             close();
             if (PlayState.instance != null)
                 PlayState.instance.openSubState(new PauseScreen(PlayState.instance.camALT));
@@ -94,7 +99,7 @@ class Settings extends FlxSubState
             {
                 menuPage.curSelected = i;
                 menuPage.changeSelection(0);
-                Paths.playSFX('menus/settings/settingsSectionChange.wav');
+                Paths.playSFX('menus/settings/settingsSectionChange.wav', 'sounds', true);
                 return;
             }
         }

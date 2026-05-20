@@ -13,6 +13,7 @@ import flixel.FlxState;
  */
 class Constants
 {
+    static final INDEV_VERSION:String = '0.4.8b';
 	static final GAME_WIDTH:Int = 1280;
 	static final GAME_HEIGHT:Int = 720;
 	static final GAME_FRAMERATE:Int = 60;
@@ -40,6 +41,10 @@ class Constants
      * Time it takes to play a video on TitleState.
      */
     static final TITLE_VIDEO_DELAY:Float = 27.5;
+
+    // - Freeplay
+    
+    static final FREEPLAY_TRANSITION_DURATION:Float = 0.6;
 
     /// ------- GAMEPLAY RELATED CONSTANTS
 

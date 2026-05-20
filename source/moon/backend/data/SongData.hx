@@ -79,6 +79,7 @@ class SongData
      */
     static function saveData(songName:String, difficulty:String, mix:String, score:Int, misses:Int, accuracy:Float):Bool
     {
+        //TODO: ummm make this work better...
         var key:String = '(${mix})' + '${songName}-${difficulty}';
         var old:SongScoreData = songs.get(key);
 

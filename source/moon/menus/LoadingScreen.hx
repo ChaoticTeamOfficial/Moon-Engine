@@ -154,6 +154,7 @@ class LoadingScreen extends FlxTransitionableState
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+
         SongPreview.update(elapsed);
 
         if(loadingBar != null) loadingBar.value = FlxMath.lerp(loadingBar.value, loadProgress, elapsed * 6);

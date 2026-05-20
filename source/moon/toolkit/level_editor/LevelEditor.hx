@@ -676,10 +676,7 @@ class LevelEditor extends FlxState
         {
             if (FlxG.mouse.pressed)
             {
-                final relY = FlxG.mouse.viewY - gridGroup.y - 18;
-                final unsnappedTime:Float = yToTime(relY);
-                final snappedTime = snapTime(unsnappedTime);
-                final newRefDur = Math.max(0.0, snappedTime - draggingNote.time);
+                final newRefDur = Math.max(0.0, (snapTime(yToTime(FlxG.mouse.viewY - gridGroup.y - 18))) - draggingNote.time);
                 final oldRefDur = draggingNote.duration; // remember before we change anything
 
                 // relative delta so other selected notes keep their length difference
@@ -1153,9 +1150,7 @@ class LevelEditor extends FlxState
             if (Std.isOfType(member, Note))
             {
                 final existing:Note = cast member;
-                if (Math.abs(existing.time - n.time) < 0.01
-                    && existing.direction == n.data
-                    && existing.lane == n.lane)
+                if (Math.abs(existing.time - n.time) < 0.01 && existing.direction == n.data && existing.lane == n.lane)
                 {
                     updateSustainVis(existing, newDur);
                     updateNoteDurationData(existing, newDur);
