@@ -13,12 +13,12 @@ class MoonGame extends FlxGame
         ?skipSplash:Bool, ?startFullscreen:Bool)
     {
     	FlxG.signals.preStateCreate.add(_ -> {
-    		if(!Paths.skipNextCleanup){
-    			Paths.clearMemory();
-    			Paths.clearUnusedAssets();
+    		if(!AssetManager.skipNextCleanup){
+    			AssetManager.clearAll();
+    			AssetManager.clearUnused();
     		}
 			
-    		Paths.skipNextCleanup = false;
+    		AssetManager.skipNextCleanup = false;
     	});
 
     	Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');

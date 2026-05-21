@@ -142,6 +142,7 @@ class Title extends FlxTransitionableState
         //~~TODO:~~ make a better handler for song metadatas
         // Done! :D
         //loadSoundAndMeta it is.
+        //TODO: check this, it's broken :P
         final song = Constants.isFridayNight ? 'freakyMenu-fridayNight' : 'freakyMenu';
         final music = new MoonSound().loadSoundAndMeta('menus/${song}', 'music', false);
 
@@ -423,8 +424,8 @@ class Title extends FlxTransitionableState
             new FlxPoint(2, -1), {asset: diamond, width: 32, height: 32}, 
             new FlxRect(-1, 0, FlxG.width, FlxG.height));
             
-        FlxTransitionableState.defaultTransIn.cameraMode = NEW;
-        FlxTransitionableState.defaultTransOut.cameraMode = NEW;
+        FlxTransitionableState.defaultTransIn.cameraMode = TOP;
+        FlxTransitionableState.defaultTransOut.cameraMode = TOP;
 
         transIn = FlxTransitionableState.defaultTransIn;
         transOut = FlxTransitionableState.defaultTransOut;

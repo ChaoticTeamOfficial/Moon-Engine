@@ -57,7 +57,7 @@ class LeftPanel extends FlxSpriteGroup
             }
             else
             {
-                var thing = new IconButton(0, 0, 48, 48, list[i]);
+                var thing = new IconButton(0, 0, 32, 32, list[i]);
                 thing.invertShader = editor?.invertColors ?? new InvertColor();
                 add(thing);
                 thing.setPosition(bg.x + bg.width / 2 - thing.width / 2, curY);

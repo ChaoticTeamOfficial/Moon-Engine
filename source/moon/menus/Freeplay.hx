@@ -216,6 +216,16 @@ class Freeplay extends FlxSubState
             });
         }
 
+        if(MoonInput.justPressed(BACK))
+        {
+            Global.allowInputs = false;
+
+            FlxTween.tween(weekBG, {x: FlxG.width + weekBG.width + 360, "skew.x": -5}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn, onComplete: _->{
+                close();
+                Global.allowInputs = true;
+            }});
+        }
+
         Global.scriptCall('onUpdate', [elapsed]);
     }
 

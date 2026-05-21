@@ -46,6 +46,15 @@ class MoonUtils
         return formatted;
     }
 
+    public static inline function spaceToDash(s:String):String 
+        return s.replace(" ", "-");
+
+    public static inline function dashToSpace(s:String):String 
+        return s.replace("-", " ");
+    
+    public static inline function swapSpaceDash(s:String):String 
+        return s.contains('-') ? dashToSpace(s) : spaceToDash(s);
+
     private static var symbols:String = "!@#$%^&*()1234567890?";
     private static var timer:FlxTimer;
 

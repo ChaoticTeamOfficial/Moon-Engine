@@ -126,7 +126,7 @@ class LoadingScreen extends FlxTransitionableState
                     loadText.text = 'Preloading scripts...';
                     Global.scriptCall('onPreload', [this]);
 
-                    Paths.skipNextCleanup = true;
+                    AssetManager.skipNextCleanup = true;
                     Global.clearScriptList();
 
                     loadText.text = 'Done! Press ACCEPT to continue.';
