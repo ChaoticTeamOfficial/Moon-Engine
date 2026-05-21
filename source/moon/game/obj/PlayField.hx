@@ -167,7 +167,8 @@ class PlayField extends FlxGroup
         // obv loss, but whatev
         previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
-        setSongToStart();
+        conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
+		inCountdown = true;
     }
 
     function setupNotes()
@@ -233,51 +234,6 @@ class PlayField extends FlxGroup
     {
         inputHandlers.get('p1').loadReplay(replay);
         botPlay = false;
-    }
-
-    public function restartSong()
-    {
-        playback.time = 0;
-        playback.state = PAUSE;
-
-        for(strum in strumlines)
-            for(receptor in strum.members)
-            {
-                receptor.notesGroup.clear();
-                receptor.sustainsGroup.clear();
-                receptor.sustainSplash.despawn(true);
-            }
-        
-        for (handler in inputHandlers.iterator())
-        {
-            handler.thisNotes = [];
-            handler.heldSustains.clear();
-        }
-        
-        for (handler in inputHandlers.iterator())
-            handler.stats.reset();
-
-        setupNotes();
-        updateP1Stats(null);
-
-        previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
-
-        // reset replay stuff
-        final p1 = inputHandlers.get('p1');
-        if (p1.isReplay)
-        {
-            p1.currentReplayIndex = 0;
-            p1.replayKeyStates = [false, false, false, false];
-        }
-
-        setSongToStart();
-        onSongRestart.dispatch();
-    }
-
-    function setSongToStart()
-    {
-		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
-		inCountdown = true;
     }
 
     override public function update(dt:Float)

@@ -6,6 +6,7 @@ import haxe.Json;
 import flixel.ui.FlxBar;
 import flixel.group.FlxSpriteGroup;
 
+//TODO: take a further look on this, the healthbar is not correctly centered.
 class HealthBar extends FlxSpriteGroup
 {
     /**

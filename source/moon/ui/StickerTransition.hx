@@ -108,8 +108,8 @@ class StickerTransition extends Sprite
         final graphic = Paths.image(key);
         if (graphic == null) return null;
 
-        if (!Paths.dumpExclusions.contains('$key.png'))
-            Paths.dumpExclusions.push('$key.png');
+        if (!AssetManager.exclusions.contains('$key.png'))
+            AssetManager.exclusions.push('$key.png');
 
         var sticker = new Sprite();
         var bmp = new Bitmap(graphic.bitmap);

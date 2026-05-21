@@ -41,7 +41,7 @@ class SongPreview
 			// another request may have arrived during the destroy above, so we need to check again!
 			if (gen != _loadGen) return null;
 
-			// so I technically could just call Paths.clearUnusedAssets()
+			// so I technically could just call AssetManager.clearUnused();
 			// BUT! I wanna make sure I don't bump into any problems with it
 			// so! I think manually removing the sound is better.
 			clear();
@@ -124,12 +124,7 @@ class SongPreview
 	{
 		if (_prevSoundKey != null)
 		{
-			final old = Paths.renderedSounds.get(_prevSoundKey);
-			if (old != null)
-			{
-				old.close();
-				Paths.renderedSounds.remove(_prevSoundKey);
-			}
+			AssetManager.unloadSound(_prevSoundKey);
 			_prevSoundKey = null;
 		}
 	}

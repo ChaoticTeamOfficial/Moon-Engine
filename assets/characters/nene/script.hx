@@ -42,12 +42,6 @@ function onSongResume()
 	updateVis();
 }
 
-function onSongRestart()
-{
-	//updateVis();
-	aVisualizer.resetVis();
-}
-
 function updateVis()
 {
 	aVisualizer.analyzer = null;

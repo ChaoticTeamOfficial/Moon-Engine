@@ -199,8 +199,10 @@ class PauseScreen extends FlxSubState
                     //TODO: This isn't actually visible due to how fast it resets lol
                     // so uhhh... get it to be shown!!
                     paused.loadGraphic(Paths.image('menus/pause/reset'));
-                    pf.restartSong();
-                    game.resumeGame();
+                    //pf.restartSong();
+                    Global.clearScriptList();
+                    AssetManager.skipNextCleanup = true;
+                    FlxG.resetState();
                     close();
                 case 'settings': 
                     close();

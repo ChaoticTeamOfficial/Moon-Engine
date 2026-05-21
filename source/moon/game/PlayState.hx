@@ -196,44 +196,6 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onPostStageCreate');
 		Global.scriptCall('onPostCreate');
 		setEvents();
-
-		playField.onSongRestart.add(() -> {
-			FlxTween.cancelTweensOf(camGAME);
-			FlxTween.cancelTweensOf(camFollower);
-
-			events = [];
-			setEvents();
-			if(chartMeta.hasCountdown)
-			{
-				playField.healthBar.visible = false;
-				Countdown.onStart.addOnce(()-> {
-					playField.healthBar.performTransition(conductor);
-					playField.healthBar.visible = true;
-				});
-				Countdown.perform();
-			}
-
-			DiscordRPC.updatePresence(PLAYMODE, rpcString, "Restarting.", true);
-			camGAME.rotation = camHUD.rotation = camALT.rotation = 0;
-
-			// annoying shit *shrug*
-	        var chars:Array<FlxSprite> = [];
-
-	        for(p in stage.players.members) chars.push(p);
-	        for(o in stage.opponents.members) chars.push(o);
-	    	for(s in stage.spectators.members) chars.push(s);
-
-	    	for(c in chars)
-	    	{
-	    		if(Std.isOfType(c, Character))
-	    		{
-	    			final p = cast(c, Character);
-	    			p.playAnim("idle-0", true);
-	    			p.animationHold = 0;
-	    		}
-	    	}
-			Global.scriptCall('onSongRestart');
-		});
 		
 		playField.onGhostTap.add((keyDir) -> Global.scriptCall('onGhostTap', [keyDir]));
 		playField.onNoteHit.add((playerID, note, timing, isSustain) -> 
@@ -271,12 +233,13 @@ class PlayState extends FlxTransitionableState
 		//FlxG.signals.focusLost.add(()->pauseGame());
 
 		//alright.
-		camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
+		//camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
 
 		// make sure we clean everything unused up
-		Paths.clearUnusedAssets();
+		//AssetManager.clearUnused();
+		// wait shit it cleans the gameover stuff lol
 	}
 	
 	public function activeTweens(isActive:Bool)
@@ -314,8 +277,9 @@ class PlayState extends FlxTransitionableState
 	public function gameOverRestart()
 	{
 		isDead = false;
-		playField.restartSong();
-        resumeGame();
+		Global.clearScriptList();
+		AssetManager.skipNextCleanup = true;
+		FlxG.resetState();
 	}
 
 	override public function update(elapsed:Float):Void
@@ -374,7 +338,7 @@ class PlayState extends FlxTransitionableState
 
 		if(FlxG.keys.justPressed.F5) {
             Global.clearScriptList();
-            Paths.clearUnusedAssets();
+            AssetManager.clearUnused();
             Countdown.onStart.removeAll();
             FlxG.resetState();
         }
@@ -517,7 +481,7 @@ class PlayState extends FlxTransitionableState
 		{
 			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->
 			{
-				Paths.skipNextCleanup = false;
+				AssetManager.skipNextCleanup = false;
 				Global.clearScriptList();
 				instance = null;
 				PlayField.instance = null;
@@ -577,7 +541,7 @@ class PlayState extends FlxTransitionableState
 	public function exit(toMenu:Bool = true, savedData:Bool = false)
 	{
 		// jus to make sure
-		Paths.skipNextCleanup = false;
+		AssetManager.skipNextCleanup = false;
 		Global.clearScriptList();
 		instance = null;
 		PlayField.instance = null;

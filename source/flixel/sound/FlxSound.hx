@@ -308,19 +308,22 @@ class FlxSound extends FlxBasic
 		
 		_volumeAdjust = radialMultiplier;
 		updateTransform();
-	
-		if (_transform != null && _transform.volume > 0)
-		{
-			amplitudeLeft = _channel.leftPeak / _transform.volume;
-			amplitudeRight = _channel.rightPeak / _transform.volume;
-			amplitude = (amplitudeLeft + amplitudeRight) * 0.5;
+		
+		try{
+			if (_transform != null && _transform.volume > 0)
+			{
+				amplitudeLeft = _channel.leftPeak / _transform.volume;
+				amplitudeRight = _channel.rightPeak / _transform.volume;
+				amplitude = (amplitudeLeft + amplitudeRight) * 0.5;
+			}
+			else
+			{
+				amplitudeLeft = 0;
+				amplitudeRight = 0;
+				amplitude = 0;
+			}
 		}
-		else
-		{
-			amplitudeLeft = 0;
-			amplitudeRight = 0;
-			amplitude = 0;
-		}
+		catch(e) {}
 		
 		if (endTime != null && _time >= endTime)
 			stopped();
