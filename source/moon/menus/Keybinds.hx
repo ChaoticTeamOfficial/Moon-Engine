@@ -143,7 +143,7 @@ class Keybinds extends FlxSubState
             {
                 if (keysAddedThisSession == 0)
                 {
-                    rightItems[itemIndex].text = "< En attente... >";
+                    rightItems[itemIndex].text = "< waiting... >";
                 }
                 else
                 {
@@ -160,7 +160,7 @@ class Keybinds extends FlxSubState
                 for (k in MoonInput.binds.get(controlNames[i])[showKeyboard ? 0 : 1])
                     keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
                     
-                rightItems[itemIndex].text = keyStrings.length > 0 ? keyStrings.join(', ') : "Aucune";
+                rightItems[itemIndex].text = keyStrings.length > 0 ? keyStrings.join(', ') : "none";
             }
         }
     }
