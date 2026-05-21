@@ -152,6 +152,7 @@ class DifficultyStars extends FlxSpriteGroup
     override function update(elapsed)
    	{
    		super.update(elapsed);
+        //useful
    	}
 
     public function updateInstantly()

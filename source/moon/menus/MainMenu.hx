@@ -9,7 +9,7 @@ import moon.toolkit.level_editor.LevelEditor;
 
 class MainMenu extends FlxTransitionableState
 {
-    final opt:Array<String> = ['test replay','test playlist', 'freeplay', 'convert chart yeah', 'mods', 'settings', 'test script state'];
+    final opt:Array<String> = ['test replay','test playlist', 'story menu', 'freeplay', 'convert chart yeah', 'mods', 'settings', 'test script state'];
     var buttons:Array<UIButton> = [];
     var curSelected:Int = 0;
     var maxVisible:Int = 2;
@@ -96,6 +96,7 @@ class MainMenu extends FlxTransitionableState
                 case 'convert chart yeah': FlxG.switchState(()->new ChartConvert());
                 case 'blabla': openSubState(new JudgementsComboCustomize());
                 case 'test script state': FlxG.switchState(()->new MoonScriptedState('MyCoolScriptedState'));
+                case 'story menu': FlxG.switchState(()->new Story());
 			}
         }
 

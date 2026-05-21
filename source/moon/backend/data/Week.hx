@@ -42,7 +42,7 @@ abstract Week(WeekFile) from WeekFile to WeekFile
      * Returns a week data from a week file.
      * @param week the week's file name.
      */
-    static function getWeek(week:String):Week
+    static function get(week:String):Week
     {
         if(Paths.exists('data/weeks/$week.json'))
             return Paths.JSON('data/weeks/$week');
