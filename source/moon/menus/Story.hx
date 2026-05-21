@@ -17,8 +17,10 @@ import flixel.text.FlxText.FlxTextAlign;
 import flixel.util.FlxSpriteUtil;
 import moon.global_obj.Alphabet;
 import moon.menus.obj.story.StoryWeek;
+import moon.menus.obj.story.DifficultySelector;
 import moon.backend.data.SongData.SongScoreData;
 import moon.game.obj.HealthIcon;
+import moon.game.PlayState;
 
 import flixel.graphics.FlxGraphic;
 import flixel.util.FlxAxes;
@@ -26,13 +28,10 @@ import flixel.util.FlxAxes;
 //this been sitting around for way too long lol...
 class Story extends FlxState
 {
-	var currentDifficultyId:String = 'hard';
 	var currentLevelId:String = 'tutorial';
-	var curSelected:Int;
-	//var currentLevel:Level;
+	var curSelected:Int = -1;
 	//var isLevelUnlocked:Bool;
 	var highScore:Int = 42069420;
-	var highScoreLerp:Int = 12345678;
 	var highScoreTween:FlxTween;
 	var selectedLevel:Bool = false;
 
@@ -40,42 +39,39 @@ class Story extends FlxState
 	public var backdrop1:FlxBackdrop;
 	public var backdrop2:FlxBackdrop;
 	public var bgGradient:FlxSprite;
-	public var lp:MoonSprite;
 	public var lpGradientUp:FlxSprite;
 	public var lpGradientDown:FlxSprite;
 	public var rp:MoonSprite;
+	public var lp:MoonSprite;
 	public var pickWeek:MoonSprite;
 	public var selector:MoonSprite;
+	public var selectorDim:MoonSprite;
+
 	public var scoreTitle:FlxText;
 	public var descriptionTxt:FlxText;
 	public var tracksTitle:FlxText;
 	public var tracksTxt:FlxText;
 	public var scoreTxt:FlxText;
-	public var levelCharacter:MoonSprite;
-	public var levelCharacters:FlxSpriteGroup;
-	public var levelList:FlxTypedSpriteGroup<StoryWeek>;
-	var icon1 = new HealthIcon();
-	var icon2 = new HealthIcon();
-	var backBf:FlxBackdrop;
-	var backBf2:FlxBackdrop;
-	var backDad:FlxBackdrop;
-	var backDad2:FlxBackdrop;
+
+	public var weekCharacter:MoonSprite;
+	public var weekCharacters:FlxSpriteGroup;
+	public var weekList:FlxTypedSpriteGroup<StoryWeek>;
+	public var curDifficultySelector:Null<DifficultySelector>;
+	var isSelecting:Bool = false;
+
+	public var backBf:FlxBackdrop;
+	public var backBf2:FlxBackdrop;
+	public var backDad:FlxBackdrop;
+	public var backDad2:FlxBackdrop;
 
 	override public function create():Void
 	{
 		super.create();
 
-		FlxG.signals.postUpdate.add(function() {
-			if(FlxG.keys.justPressed.F4) FlxG.switchState(() -> new moon.menus.MainMenu());
-		});
-
 		FlxG.camera.bgColor = 0x0;
-		
-		icon1.icon = 'bf';
-		icon2.icon = 'gf';
 
 		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xfffff465);
-		FlxGradient.overlayGradientOnFlxSprite(bg, Std.int(bg.width + 500), Std.int(bg.height), [0xffddd354, 0x00ddd354], 0, 0, 1, 0);
+		FlxGradient.overlayGradientOnFlxSprite(bg, Std.int(bg.width + 500), Std.int(bg.height), [0xffcdc344, 0x00ddd354], 0, 0, 1, 0);
 		add(bg);
 
 		backBf = new FlxBackdrop();
@@ -150,26 +146,17 @@ class Story extends FlxState
 		tracksTxt.alignment = 'center';
 		add(tracksTxt);
 
-		levelCharacter = new MoonSprite(700, 160);
-		levelCharacter.frames = Paths.getSparrowAtlas('menus/story/characters/gf');
-		levelCharacter.animation.addByPrefix('idle', 'idle', 24, true);
-		levelCharacter.animation.play('idle');
-		add(levelCharacter);
+		weekCharacter = new MoonSprite(700, 160);
+		weekCharacter.frames = Paths.getSparrowAtlas('menus/story/characters/gf');
+		weekCharacter.animation.addByPrefix('idle', 'idle', 24, true);
+		weekCharacter.animation.play('idle');
+		add(weekCharacter);
 
-		levelCharacters = new FlxSpriteGroup();
-		levelList = new FlxTypedSpriteGroup<StoryWeek>();
-		add(levelList);
+		weekCharacters = new FlxSpriteGroup();
+		weekList = new FlxTypedSpriteGroup<StoryWeek>();
+		add(weekList);
 
-		var index:Int = 0;
-		for(week in SongLibrary.get().songsByWeek.keys()) {
-			if(week == 'all') continue;
-			trace('week: $week');
-			
-			var object = new StoryWeek(0, 200 + (index * 80), week);
-			levelList.add(object);
-
-			index++;
-		}
+		initializeWeeks();
 
 		lpGradientUp = FlxGradient.createGradientFlxSprite(520, 180, [0xFF0f0916, 0x000f0916]);
 		lpGradientUp.setPosition(10, lp.y + 199);
@@ -178,24 +165,27 @@ class Story extends FlxState
 		lpGradientDown = FlxGradient.createGradientFlxSprite(520, 180, [0xFF0f0916, 0x000f0916], 1, -90);
 		lpGradientDown.setPosition(10, lp.y + 450);
 		add(lpGradientDown);
+
+        selectorDim = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF0D0316);
+		selectorDim.alpha = 0;
+        add(selectorDim);
+
+		changeSelection(1);
 	}
 
 	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
 
-        if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
-        else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
-
-		for(idx => text in levelList.members) {
+		for(idx => text in weekList.members) {
 			text.alpha = FlxMath.lerp(text.alpha, curSelected == idx ? 1 : 0.4, 0.1);
 			text.x = FlxMath.lerp(text.x, curSelected == idx ? 130 : 80, 0.1);
-			selector.y = FlxMath.lerp(selector.y, levelList.members[curSelected].y + selector.height / 3, 0.075);
+			selector.y = FlxMath.lerp(selector.y, weekList.members[curSelected].y + selector.height / 3, 0.075);
 		}
 
-		selector.x = FlxMath.lerp(selector.x, levelList.members[curSelected].x - selector.width - 15, 0.075);
-		levelList.clipRect = new FlxRect(0, Math.abs(levelList.y) + 200, FlxG.width, 430);
+		selector.x = FlxMath.lerp(selector.x, weekList.members[curSelected].x - selector.width - 15, 0.075);
+		weekList.clipRect = new FlxRect(0, Math.abs(weekList.y) + 200, FlxG.width, 430);
 
-		if(levelList.y < -10) {
+		if(weekList.y < -10) {
 			FlxTween.cancelTweensOf(lpGradientUp);
 			FlxTween.tween(lpGradientUp, {alpha: 1}, 0.2);
 		}
@@ -203,22 +193,90 @@ class Story extends FlxState
 			FlxTween.tween(lpGradientUp, {alpha: 0}, 0.4);
 
 		scoreTxt.text = FlxStringUtil.formatMoney(highScore, false, true);
+
+		if(MoonInput.justPressed(BACK)) {
+			if(isSelecting) {
+				if(!curDifficultySelector.ready) return;
+
+				curDifficultySelector.close(() -> {
+					isSelecting = false;
+					curDifficultySelector = null;
+					FlxTween.tween(selectorDim, {alpha: 0}, 0.5);
+				});
+
+				return;
+			}
+			
+			FlxG.switchState(() -> new moon.menus.MainMenu());
+		};
+
+		if(MoonInput.justPressed(ACCEPT)) confirmWeek();
+
+		if(isSelecting) return;
+        if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
+        else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
+	}
+
+	function initializeWeeks():Void
+	{
+		var index:Int = 0;
+		for(week in SongLibrary.get().songsByWeek.keys()) {
+			if(week == 'all') continue;
+			trace('week: $week');
+			
+			var object = new StoryWeek(0, 200 + (index * 80), week);
+			weekList.add(object);
+
+			index++;
+		}
+	}
+
+	function confirmWeek() 
+	{		
+		if(isSelecting) {
+			if(!curDifficultySelector.ready) return;
+
+			var weekSonglist = SongLibrary.instance.weekSonglist(currentLevelId);
+			var difficultyId:String = curDifficultySelector.currentDifficulty ?? 'hard';
+
+			for(song in weekSonglist) {
+				song.difficulty = difficultyId;
+				//song.mix = currentMixId;
+			}
+			trace('Week selrcsted!: $currentLevelId, Playlist: ${weekSonglist}');
+
+			PlayState.queuePlaylist(SongLibrary.instance.weekSonglist(currentLevelId));
+			FlxG.switchState(() -> new LoadingScreen());
+
+			return;
+		}
+
+		curDifficultySelector = new DifficultySelector(currentLevelId);
+		curDifficultySelector.screenCenter();
+		curDifficultySelector.open();
+		add(curDifficultySelector);
+
+		isSelecting = true;
+
+		FlxTween.tween(selectorDim, {alpha: 0.5}, 0.75);
 	}
 
 	function changeSelection(change:Int = 0):Void
     {
-        curSelected = FlxMath.wrap(curSelected + change, 0, levelList.length - 1);
-        Paths.playSFX('ui/scrollMenu.ogg');
+		if(curDifficultySelector != null) 
+			return;
 
+		Paths.playSFX('ui/scrollMenu.ogg');
+        curSelected = FlxMath.wrap(curSelected + change, 0, weekList.length - 1);
 		if(curSelected > 2) {
-			FlxTween.cancelTweensOf(levelList);
-			FlxTween.tween(levelList, {y: (curSelected - 2) * -80}, 0.5, {ease: FlxEase.circOut});
+			FlxTween.cancelTweensOf(weekList);
+			FlxTween.tween(weekList, {y: (curSelected - 2) * -80}, 0.5, {ease: FlxEase.circOut});
 		} else {
-			FlxTween.cancelTweensOf(levelList);
-			FlxTween.tween(levelList, {y: 0}, 0.5, {ease: FlxEase.circOut});
+			FlxTween.cancelTweensOf(weekList);
+			FlxTween.tween(weekList, {y: 0}, 0.5, {ease: FlxEase.circOut});
 		}
 
-		currentLevelId = levelList.members[curSelected].weekId;
+		currentLevelId = weekList.members[curSelected].weekId;
 
 		var curWeek:Week = Week.get(currentLevelId);
 		descriptionTxt.text = '"${curWeek.description}"';
@@ -226,8 +284,8 @@ class Story extends FlxState
 		var totalScore:Int = 0;
 		var totalTracks:String = '';
 		for(idx => track in curWeek.tracks) {
-			var trackData:SongScoreData = SongData.retrieveData(track, currentDifficultyId, curWeek.mainMix);
-			var chartData:Chart = new Chart(track, currentDifficultyId, curWeek.mainMix);
+			var trackData:SongScoreData = SongData.retrieveData(track, 'hard', curWeek.mainMix);
+			var chartData:Chart = new Chart(track, 'hard', curWeek.mainMix);
 			totalScore += trackData?.score ?? 0;
 
 			totalTracks += '${chartData.content.meta.displayName}\n';
@@ -236,16 +294,6 @@ class Story extends FlxState
 		tracksTxt.text = totalTracks;
 		
 		highScoreTween?.cancel();
-		highScoreTween = FlxTween.num(highScore, totalScore, 0.7, {ease: FlxEase.cubeOut}, (value) -> highScore = Math.floor(value));
+		highScoreTween = FlxTween.num(highScore, totalScore, 0.5, {ease: FlxEase.cubeOut}, (value) -> highScore = Math.floor(value));
     }
-
-	inline function getDegreesFromPoint(xx:Float, yy:Float) {
-		// now to get polar degrees (theta) we do tan^-1(yy/xx)
-		var theta:Float = Math.atan(yy/xx);
-
-		// flixel returns radians bruh, so lets make this
-		var degrees:Float = theta * (180/Math.PI);
-
-		return degrees;
-	}
 }

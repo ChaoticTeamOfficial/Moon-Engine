@@ -10,6 +10,7 @@ class StoryWeek extends FlxSpriteGroup
     public var weekId:String;
     public var weekDisplayName:String;
     public var weekColor:FlxColor;
+    public var weekData:Week;
 
     public var text:FlxText;
     public var icon:MoonSprite;
@@ -20,8 +21,7 @@ class StoryWeek extends FlxSpriteGroup
     {
         super(x, y);
 
-        var weekData:Week = Week.get(weekId);
-
+        this.weekData = Week.get(weekId);
         this.weekId = weekId;
         this.weekDisplayName = weekData.displayName;
         this.weekColor = FlxColor.fromRGB(weekData.color[0], weekData.color[1], weekData.color[2]);

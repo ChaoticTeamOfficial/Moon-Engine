@@ -1,0 +1,7 @@
+{
+	"displayName": "Test Level!",
+	"description": "This is a very goofy one",
+	"tracks": ["darnell", "asmiling"],
+	"color": [0, 255, 255],
+	"mainMix": "bf"
+}
