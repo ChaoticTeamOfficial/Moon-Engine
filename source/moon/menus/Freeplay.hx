@@ -11,228 +11,325 @@ using StringTools;
 
 enum FreeplayTransition
 {
-    FADE;
-    STICKERS;
-    RANK;
-    NONE;
+	FADE;
+	STICKERS;
+	RANK;
+	NONE;
 }
 
 // TODO: Document Freeplay.
 class Freeplay extends FlxSubState
 {
-    public static var appearType:FreeplayTransition = NONE;
-    public static var instance:Freeplay;
+	public static var appearType:FreeplayTransition = NONE;
+	public static var instance:Freeplay;
 
-    public var character:String; // this is used as the preferred mix (e.g. "bf")
+	public var character:String; // this is used as the preferred mix (e.g. "bf")
 
-    public var songVolume:Float = MoonSettings.callSetting('Music Volume') / 100;
-    static var curSelected:Int = 0;
-    var songList:Array<SongBase> = [];
+	public var songVolume:Float = MoonSettings.callSetting('Music Volume') / 100;
 
-    public var conductor:Conductor;
-    public var mainBG:FreeplayBG;
-    public var weekBG:MoonSprite;
-    public var thisDJ:FreeplayDJ;
-    public var selector:FreeplaySongSelector;
-    public var stars:DifficultyStars;
-    var topBar:MoonSprite;
-    public var playerIcon:PixelIcon;
-    public var infoText:HTMLText; //html text my belove,,,
+	static var curSelected:Int = 0;
 
-    public var title(default, set):String = 'Freeplay';
+	var songList:Array<SongBase> = [];
 
-    public function new(character:String = 'bf')
-    {
-        super();
-        this.character = character;
-        Global.allowInputs = false;
-        instance = this;
+	var isClosing:Bool = false;
 
-        mainBG = new FreeplayBG(character);
-        add(mainBG.behindBG);
+	public var conductor:Conductor;
+	public var mainBG:FreeplayBG;
+	public var weekBG:MoonSprite;
+	public var thisDJ:FreeplayDJ;
+	public var selector:FreeplaySongSelector;
+	public var stars:DifficultyStars;
 
-        thisDJ = new FreeplayDJ(character);
-        add(thisDJ);
+	var topBar:MoonSprite;
 
-        Global.scriptSet('behindBG', mainBG.behindBG);
-        Global.scriptSet('frontBG', mainBG.frontBG);
-        Global.scriptSet('foreground', mainBG.foreground);
-        Global.scriptSet('dj', thisDJ);
+	public var playerIcon:PixelIcon;
+	public var infoText:HTMLText; // html text my belove,,,
 
-        weekBG = new MoonSprite();
-        weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/week6'));
-        weekBG.scale.set(1.4, 1.4);
-        weekBG.antialiasing = true;
-        weekBG.updateHitbox();
-        weekBG.skew.x = -20;
-        weekBG.x = FlxG.width + weekBG.width + 360;
-        weekBG.brightness = -1;
-        add(weekBG);
+	public var title(default, set):String = 'Freeplay';
 
-        FlxTween.tween(weekBG, {x: FlxG.width - weekBG.width + 360, "skew.x": 5}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoOut, onComplete: _->{
-            weekBG.brightness = 0.69;
-            FlxTween.tween(weekBG, {brightness: -0.45}, 0.35);
-            Global.scriptCall('onTransitionEnd', []);
-        }});
+	public function new(character:String = 'bf')
+	{
+		super();
+		this.character = character;
+		Global.allowInputs = false;
+		instance = this;
 
-        add(mainBG.frontBG);
+		mainBG = new FreeplayBG(character);
+		add(mainBG.behindBG);
 
-        Global.scriptSet('freeplay', this);
+		thisDJ = new FreeplayDJ(character);
+		add(thisDJ);
 
-        conductor = new Conductor(0, 4, 4);
-        conductor.onBeat.add((beat) ->
-        {
-            if ((beat % 2 == 0 || conductor.bpm < 120) && thisDJ.canDance)
-                thisDJ.playAnim('idle', true);
+		Global.scriptSet('behindBG', mainBG.behindBG);
+		Global.scriptSet('frontBG', mainBG.frontBG);
+		Global.scriptSet('foreground', mainBG.foreground);
+		Global.scriptSet('dj', thisDJ);
 
-            Global.scriptCall('onBeat', [beat]);
-        });
+		weekBG = new MoonSprite();
+		weekBG.loadGraphic(Paths.image('menus/freeplay/bgs/week6'));
+		weekBG.scale.set(1.4, 1.4);
+		weekBG.antialiasing = true;
+		weekBG.updateHitbox();
+		weekBG.skew.x = -20;
+		weekBG.x = FlxG.width + weekBG.width + 360;
+		weekBG.brightness = -1;
+		add(weekBG);
 
-        add(mainBG.foreground);
+		FlxTween.tween(weekBG, {x: FlxG.width - weekBG.width + 360, "skew.x": 5}, Constants.FREEPLAY_TRANSITION_DURATION, {
+			ease: FlxEase.expoOut,
+			onComplete: _ ->
+			{
+				weekBG.brightness = 0.69;
+				FlxTween.tween(weekBG, {brightness: -0.45}, 0.35);
+				Global.scriptCall('onTransitionEnd', []);
+			}
+		});
 
-        songList = getMixSonglist('all', character);
-        //trace(songList);
+		add(mainBG.frontBG);
 
-        stars = new DifficultyStars(0, 632, 24, 0.055);
-        stars.screenCenter(X);
-        stars.x += 280;
-        stars.difficulty = 0;
+		Global.scriptSet('freeplay', this);
 
-        selector = new FreeplaySongSelector();
-        selector.loadSongs(songList, curSelected);
-        add(selector);
-        add(stars);
+		conductor = new Conductor(0, 4, 4);
+		conductor.onBeat.add((beat) ->
+		{
+			if ((beat % 2 == 0 || conductor.bpm < 120) && thisDJ.canDance)
+				thisDJ.playAnim('idle', true);
 
-        topBar = new MoonSprite().makeGraphic(FlxG.width + 16, 78, FlxColor.BLACK);
-        topBar.screenCenter(X);
-        add(topBar);
+			Global.scriptCall('onBeat', [beat]);
+		});
 
-        // I love this goofy.,,,
-        playerIcon = new PixelIcon(32, 0, character);
-        add(playerIcon);
-        playerIcon.y = topBar.y + topBar.height / 2 - playerIcon.height / 2;
-        playerIcon.alpha = 0.0001;
+		add(mainBG.foreground);
 
-        infoText = new HTMLText();
-        infoText.setFormat(Paths.font('04/04B_19.TTF'), 24, LEFT);
-        add(infoText);
-        infoText.antialiasing = false;
-        updateInfoText();
-        infoText.x = -infoText.width - 16;
-        FlxTween.tween(infoText, {x: playerIcon.x + playerIcon.width + 32}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoOut}); 
-    
-        topBar.y -= topBar.height + 8;
-        FlxTween.tween(topBar, {y: 0}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.circInOut, onComplete: _->{
-            playerIcon.alpha = 1;
-            playerIcon.brightness = 1;
-            FlxTween.tween(playerIcon, {brightness: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
-        }});
+		songList = getMixSonglist('all', character);
+		// trace(songList);
 
-        Global.scriptCall('onCreate');
-    }
+		stars = new DifficultyStars(0, 632, 24, 0.055);
+		stars.screenCenter(X);
+		stars.x += 280;
+		stars.difficulty = 0;
 
-    /**
-     * Gets the song list for a week, preferring the given mix.
-     * @param week The week name. It can also be 'all' if you want all available songs.
-     * @param preferredMix The character mix.
-     */
-    public function getMixSonglist(week:String, preferredMix:String):Array<SongBase>
-    {
-        final filtered:Array<SongBase> = [];
+		selector = new FreeplaySongSelector();
+		selector.loadSongs(songList, curSelected);
+		add(selector);
+		add(stars);
 
-        for (song in SongLibrary.get().weekSonglist(week))
-            if (song.mix == preferredMix)
-                filtered.push(song);
+		topBar = new MoonSprite().makeGraphic(FlxG.width + 16, 78, FlxColor.BLACK);
+		topBar.screenCenter(X);
+		add(topBar);
 
-        return filtered;
-    }
+		// I love this goofy.,,,
+		playerIcon = new PixelIcon(32, 0, character);
+		add(playerIcon);
+		playerIcon.y = topBar.y + topBar.height / 2 - playerIcon.height / 2;
+		playerIcon.alpha = 0.0001;
 
-    public function change(num:Int = 0)
-    {
-        curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
-        selector.changeSelection(num);
-        Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
+		infoText = new HTMLText();
+		infoText.setFormat(Paths.font('04/04B_19.TTF'), 24, LEFT);
+		add(infoText);
+		infoText.antialiasing = false;
+		updateInfoText();
+		infoText.x = -infoText.width - 16;
+		FlxTween.tween(infoText, {x: playerIcon.x + playerIcon.width + 32}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoOut});
 
-        Global.scriptCall('onScroll');
-    }
+		topBar.y -= topBar.height + 8;
+		FlxTween.tween(topBar, {y: 0}, Constants.FREEPLAY_TRANSITION_DURATION, {
+			ease: FlxEase.circInOut,
+			onComplete: _ ->
+			{
+				playerIcon.alpha = 1;
+				playerIcon.brightness = 1;
+				FlxTween.tween(playerIcon, {brightness: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
+			}
+		});
 
-    public function updateInfoText()
-    {
-        final total = selector.songList.length;
-        infoText.text = '${title}\n' + 
-        '<font size="20px">' +
-        '<font color="#ff00fe">${selector.PRanks}/$total Perfects <font color="#ffffff">-'+
-        ' <font color="#fea711">${selector.goldPRanks}/$total Goldens';
-        infoText.y = topBar.y + topBar.height / 2 - infoText.height / 2;
-    }
+		Global.scriptCall('onCreate');
+	}
 
-    override public function update(elapsed:Float):Void
-    {
-        super.update(elapsed);
+	/**
+	 * Gets the song list for a week, preferring the given mix.
+	 * @param week The week name. It can also be 'all' if you want all available songs.
+	 * @param preferredMix The character mix.
+	 */
+	public function getMixSonglist(week:String, preferredMix:String):Array<SongBase>
+	{
+		final filtered:Array<SongBase> = [];
 
-        if(FlxG.sound.music != null)
-        {
-            if(FlxG.sound.music.playing) conductor.time = FlxG.sound.music.time;
-            if(FlxG.sound.music.fadeTween == null || (FlxG.sound.music.fadeTween != null && !FlxG.sound.music.fadeTween.active)) 
-                FlxG.sound.music.volume = FlxMath.lerp(FlxG.sound.music.volume, songVolume, elapsed * 8);
-        }
+		for (song in SongLibrary.get().weekSonglist(week))
+			if (song.mix == preferredMix)
+				filtered.push(song);
 
-        if (MoonInput.justPressed(UI_DOWN)) change(1);
-        if (MoonInput.justPressed(UI_UP)) change(-1);
+		return filtered;
+	}
 
-        if(FlxG.mouse.wheel != 0) change(-FlxG.mouse.wheel);
+	public function change(num:Int = 0)
+	{
+		curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
+		selector.changeSelection(num);
+		Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
 
-        if (MoonInput.justPressed(ACCEPT))
-        {
-            // sets the next transitionIn to false
-            // otherwise, for some reason, it shows the main menu when transitioning.
-            // so instead, I'll do a fade.
-            FlxTransitionableState.skipNextTransIn = FlxTransitionableState.skipNextTransOut = true;
+		Global.scriptCall('onScroll');
+	}
 
-            final selected = selector.getSelected();
-            Global.allowInputs = false;
+	public function updateInfoText()
+	{
+		final total = selector.songList.length;
+		infoText.text = '${title}\n'
+			+ '<font size="20px">'
+			+ '<font color="#ff00fe">${selector.PRanks}/$total Perfects <font color="#ffffff">-'
+			+ ' <font color="#fea711">${selector.goldPRanks}/$total Goldens';
+		infoText.y = topBar.y + topBar.height / 2 - infoText.height / 2;
+	}
 
-            //reset the AFK timer and the "canDance" so it doesn't fuck out the anims 
-            thisDJ.canDance = false;
-            thisDJ.AFK_TIMER = 0;
-            thisDJ.playAnim('confirm', true);
-            playerIcon.playAnim('select', true);
+	override public function update(elapsed:Float):Void
+	{
+		super.update(elapsed);
 
-            Paths.playSFX('ui/confirmMenu.ogg');
+		if (FlxG.sound.music != null)
+		{
+			if (FlxG.sound.music.playing)
+				conductor.time = FlxG.sound.music.time;
+			if (FlxG.sound.music.fadeTween == null || (FlxG.sound.music.fadeTween != null && !FlxG.sound.music.fadeTween.active))
+				FlxG.sound.music.volume = FlxMath.lerp(FlxG.sound.music.volume, songVolume, elapsed * 8);
+		}
 
-            selector.getSelectedItem().doConfirm();
-            Global.scriptCall('onConfirm');
+		if (MoonInput.justPressed(UI_DOWN))
+			change(1);
+		if (MoonInput.justPressed(UI_UP))
+			change(-1);
 
-            new FlxTimer().start(1.79, _->{
-                if (selected != null)
-                {
-                    PlayState.songData = {
-                        song: selected.song,
-                        difficulty: selected.difficulty,
-                        mix: selected.mix
-                    };
-                    FlxG.switchState(() -> new LoadingScreen());
-                }
-            });
-        }
+		if (FlxG.mouse.wheel != 0)
+			change(-FlxG.mouse.wheel);
 
-        if(MoonInput.justPressed(BACK))
-        {
-            Global.allowInputs = false;
+		if (MoonInput.justPressed(ACCEPT))
+		{
+			// sets the next transitionIn to false
+			// otherwise, for some reason, it shows the main menu when transitioning.
+			// so instead, I'll do a fade.
+			FlxTransitionableState.skipNextTransIn = FlxTransitionableState.skipNextTransOut = true;
 
-            FlxTween.tween(weekBG, {x: FlxG.width + weekBG.width + 360, "skew.x": -5}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn, onComplete: _->{
-                close();
-                Global.allowInputs = true;
-            }});
-        }
+			final selected = selector.getSelected();
+			Global.allowInputs = false;
 
-        Global.scriptCall('onUpdate', [elapsed]);
-    }
+			// reset the AFK timer and the "canDance" so it doesn't fuck out the anims
+			thisDJ.canDance = false;
+			thisDJ.AFK_TIMER = 0;
+			thisDJ.playAnim('confirm', true);
+			playerIcon.playAnim('select', true);
 
-    @:noCompletion public function set_title(title:String):String
-    {
-        this.title = title;
-        updateInfoText();
-        return title;
-    }
+			Paths.playSFX('ui/confirmMenu.ogg');
+
+			selector.getSelectedItem().doConfirm();
+			Global.scriptCall('onConfirm');
+
+			new FlxTimer().start(1.79, _ ->
+			{
+				if (selected != null)
+				{
+					PlayState.songData = {
+						song: selected.song,
+						difficulty: selected.difficulty,
+						mix: selected.mix
+					};
+					FlxG.switchState(() -> new LoadingScreen());
+				}
+			});
+		}
+
+		if (!isClosing && MoonInput.justPressed(BACK))
+		{
+			isClosing = true;
+			Global.allowInputs = false;
+
+			FlxTween.tween(topBar, {y: -topBar.height - 8}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.circInOut});
+			FlxTween.tween(infoText, {x: -infoText.width - 16}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+			FlxTween.tween(playerIcon, {x: -playerIcon.width - 32}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+
+			selector.active = false;
+			for (item in selector.members)
+			{
+				if (item != null)
+				{
+					if (Std.isOfType(item, flixel.FlxSprite))
+					{
+						var spr:flixel.FlxSprite = cast item;
+						spr.active = false;
+						FlxTween.tween(spr, {y: spr.y + FlxG.height}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+					}
+					else if (Std.isOfType(item, flixel.group.FlxGroup.FlxTypedGroup))
+					{
+						var grp:flixel.group.FlxGroup.FlxTypedGroup<Dynamic> = cast item;
+						grp.active = false;
+						for (subItem in grp.members)
+						{
+							if (subItem != null && Std.isOfType(subItem, flixel.FlxSprite))
+							{
+								var spr:flixel.FlxSprite = cast subItem;
+								spr.active = false;
+								FlxTween.tween(spr, {y: spr.y + FlxG.height}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+							}
+						}
+					}
+				}
+			}
+
+			stars.active = false;
+			for (star in stars.members)
+			{
+				if (star != null && Std.isOfType(star, flixel.FlxSprite))
+				{
+					var spr:flixel.FlxSprite = cast star;
+					spr.active = false;
+					FlxTween.tween(spr, {y: spr.y + 500}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+				}
+			}
+
+			for (bg in mainBG.behindBG.members)
+			{
+				if (bg != null && Std.isOfType(bg, flixel.FlxSprite))
+				{
+					var spr:flixel.FlxSprite = cast bg;
+					FlxTween.tween(spr, {alpha: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
+				}
+			}
+
+			for (bg in mainBG.frontBG.members)
+			{
+				if (bg != null && Std.isOfType(bg, flixel.FlxSprite))
+				{
+					var spr:flixel.FlxSprite = cast bg;
+					FlxTween.tween(spr, {alpha: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
+				}
+			}
+
+			for (bg in mainBG.foreground.members)
+			{
+				if (bg != null && Std.isOfType(bg, flixel.FlxSprite))
+				{
+					var spr:flixel.FlxSprite = cast bg;
+					FlxTween.tween(spr, {alpha: 0}, Constants.FREEPLAY_TRANSITION_DURATION);
+				}
+			}
+
+			if (thisDJ != null)
+				FlxTween.tween(thisDJ, {x: thisDJ.x - FlxG.width}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn});
+
+			FlxTween.tween(weekBG, {x: FlxG.width + weekBG.width + 360, "skew.x": -5}, Constants.FREEPLAY_TRANSITION_DURATION, {
+				ease: FlxEase.expoIn,
+				onComplete: _ ->
+				{
+					close();
+					Global.allowInputs = true;
+				}
+			});
+		}
+
+		Global.scriptCall('onUpdate', [elapsed]);
+	}
+
+	@:noCompletion public function set_title(title:String):String
+	{
+		this.title = title;
+		updateInfoText();
+		return title;
+	}
 }
