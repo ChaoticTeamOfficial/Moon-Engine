@@ -28,13 +28,11 @@ class Keybinds extends FlxSubState
     private var positionOffsets:Array<Float> = [];
     private var rebindMode:Bool = false;
     private var showKeyboard:Bool = true;
-    private var removeHoldTime:Float = 0;
+    private var keysAddedThisSession:Int = 0;
     private var offsetY:Float = 200;
     private var allButtons:Array<FlxPad>;
 
     private static inline var MAX_BINDS:Int = 5;
-    private static inline var INITIAL_REMOVE_DELAY:Float = 0.5;
-    private static inline var REPEAT_REMOVE_DELAY:Float = 0.05;
     private static inline var LINE_SPACING:Float = 100;
     private static inline var EXTRA_CATEGORY_SPACING:Float = 90;
 
@@ -48,10 +46,14 @@ class Keybinds extends FlxSubState
         super();
         this.camera = PlayState?.instance?.camALT ?? FlxG.camera;
 
+        var bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        bg.alpha = 0.6;
+        add(bg);
+
         menuContainer = new FlxSpriteGroup();
         add(menuContainer);
 
-        removeHoldTime = 0;
+        keysAddedThisSession = 0;
         allButtons = [];
         for (key in FlxPad.fromStringMap.keys())
         {
@@ -59,7 +61,7 @@ class Keybinds extends FlxSubState
             if (id != FlxPad.ANY && id != FlxPad.NONE)
                 allButtons.push(id);
         }
-       
+        
         // build headers and sections
         addHeader("Notes");
         final noteControls = ["LEFT", "DOWN", "UP", "RIGHT", "RESET"];
@@ -98,7 +100,7 @@ class Keybinds extends FlxSubState
 
         menuContainer.y = (FlxG.height / 2 - offsetY) - positionOffsets[selectableIndices[0]];
     }
-   
+    
     override public function update(elapsed:Float):Void
     {
         super.update(elapsed);
@@ -135,10 +137,31 @@ class Keybinds extends FlxSubState
     {
         for (i in 0...controlNames.length)
         {
-            var keyStrings:Array<String> = [];
-            for (k in MoonInput.binds.get(controlNames[i])[showKeyboard ? 0 : 1])
-                keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
-            rightItems[selectableIndices[i]].text = keyStrings.join(', ');
+            var itemIndex = selectableIndices[i];
+            
+            if (rebindMode && i == curSelection)
+            {
+                if (keysAddedThisSession == 0)
+                {
+                    rightItems[itemIndex].text = "< waiting... >";
+                }
+                else
+                {
+                    var keyStrings:Array<String> = [];
+                    for (k in MoonInput.binds.get(controlNames[i])[showKeyboard ? 0 : 1])
+                        keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
+                        
+                    rightItems[itemIndex].text = keyStrings.join(', ') + " <+>";
+                }
+            }
+            else
+            {
+                var keyStrings:Array<String> = [];
+                for (k in MoonInput.binds.get(controlNames[i])[showKeyboard ? 0 : 1])
+                    keyStrings.push(showKeyboard ? getKeyString(k) : getGamepadString(k));
+                    
+                rightItems[itemIndex].text = keyStrings.length > 0 ? keyStrings.join(', ') : "none";
+            }
         }
     }
 
@@ -151,7 +174,8 @@ class Keybinds extends FlxSubState
     {
         new FlxTimer().start(0.05, (_) -> {
             rebindMode = true;
-            removeHoldTime = 0;
+            keysAddedThisSession = 0;
+            refreshList();
         });
     }
 
@@ -161,81 +185,87 @@ class Keybinds extends FlxSubState
         var bindType:Int = isKeyboard ? 0 : 1;
         var control:String = controlNames[curSelection];
         var keyList:Array<Dynamic> = MoonInput.binds.get(control)[bindType];
-        var removePressed:Bool = false;
 
         if (isKeyboard)
-            removePressed = FlxG.keys.pressed.BACKSPACE || FlxG.keys.pressed.DELETE;
-        else
         {
-            if (FlxG.gamepads.lastActive == null)
+            if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.ESCAPE)
             {
                 rebindMode = false;
+                refreshList();
                 return;
             }
-            removePressed = FlxG.gamepads.lastActive.pressed.X;
+        }
+        else
+        {
+            var pad = FlxG.gamepads.lastActive;
+            if (pad != null && (pad.justPressed.A || pad.justPressed.B || pad.justPressed.START))
+            {
+                rebindMode = false;
+                refreshList();
+                return;
+            }
         }
 
+        var removePressed:Bool = isKeyboard ? (FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.DELETE)
+                                            : (FlxG.gamepads.lastActive != null && FlxG.gamepads.lastActive.justPressed.X);
         if (removePressed)
         {
-            if (removeHoldTime == 0)
-            {
-                if (keyList.length > 0) keyList.pop();
-                removeHoldTime = elapsed;
-            }
-            else removeHoldTime += elapsed;
-
-            if (removeHoldTime > INITIAL_REMOVE_DELAY)
-            {
-                if (keyList.length > 0) keyList.pop();
-                removeHoldTime -= REPEAT_REMOVE_DELAY;
-            }
-
-            refreshList();
+            while (keyList.length > 0) keyList.pop();
+            keysAddedThisSession = 1;
             MoonInput.saveControls();
+            refreshList();
+            return;
         }
-        else removeHoldTime = 0;
 
         if (isKeyboard)
         {
-            final keyCode:Int = FlxG.keys.firstJustPressed();
-            if (keyCode != -1)
+            var keyCode:Int = FlxG.keys.firstJustPressed();
+            if (keyCode != -1 && keyCode != FlxKey.ENTER && keyCode != FlxKey.ESCAPE && keyCode != FlxKey.BACKSPACE && keyCode != FlxKey.DELETE)
             {
                 var key:FlxKey = keyCode;
-                if (key == FlxKey.ESCAPE)
-                    rebindMode = false;
-                else if (key != FlxKey.BACKSPACE && key != FlxKey.DELETE)
+
+                if (keysAddedThisSession == 0)
                 {
-                    if (keyList.length < MAX_BINDS && !keyList.contains(key))
-                    {
-                        keyList.push(key);
-                        refreshList();
-                        MoonInput.saveControls();
-                    }
+                    while (keyList.length > 0) keyList.pop();
+                }
+
+                if (keyList.length < MAX_BINDS && !keyList.contains(key))
+                {
+                    keyList.push(key);
+                    keysAddedThisSession++;
+                    MoonInput.saveControls();
+                    refreshList();
                 }
             }
         }
         else // Controller
         {
-            var pressedButton:FlxPad = FlxPad.NONE;
-            for (button in allButtons)
+            var pad = FlxG.gamepads.lastActive;
+            if (pad != null)
             {
-                if (FlxG.gamepads.lastActive.checkStatus(button, JUST_PRESSED))
+                var pressedButton:FlxPad = FlxPad.NONE;
+                for (button in allButtons)
                 {
-                    pressedButton = button;
-                    break;
+                    if (pad.checkStatus(button, JUST_PRESSED) && button != FlxPad.A && button != FlxPad.B && button != FlxPad.START && button != FlxPad.X)
+                    {
+                        pressedButton = button;
+                        break;
+                    }
                 }
-            }
-            if (pressedButton != FlxPad.NONE)
-            {
-                if (pressedButton == FlxPad.B)
-                    rebindMode = false;
-                else if (pressedButton != FlxPad.X)
+
+                if (pressedButton != FlxPad.NONE)
                 {
+                    if (keysAddedThisSession == 0)
+                    {
+                        while (keyList.length > 0) keyList.pop();
+                    }
+
                     if (keyList.length < MAX_BINDS && !keyList.contains(pressedButton))
                     {
                         keyList.push(pressedButton);
-                        refreshList();
+                        keysAddedThisSession++;
                         MoonInput.saveControls();
+                        refreshList();
                     }
                 }
             }
