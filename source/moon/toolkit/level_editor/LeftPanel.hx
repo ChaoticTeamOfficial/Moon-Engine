@@ -1,27 +1,46 @@
 package moon.toolkit.level_editor;
 
+import haxe.ui.components.Button;
+import haxe.ui.components.Label;
+import haxe.ui.containers.HBox;
+import haxe.ui.core.Screen;
 import lime.system.System;
-
-// atp everything here are flxspritegroups '-'
+import moon.toolkit.level_editor.pages.*;
+import moon.menus.*;
 
 using StringTools;
+
 class LeftPanel extends FlxSpriteGroup
 {
     var panelBehind:MoonSprite;
     var bg:MoonSprite;
+
+    var headerBox:HBox;
+    var headerTitle:Label;
+    var backButton:Button;
+
     var buttons:Array<IconButton> = [];
     var buttonMap:Map<String, IconButton> = [];
     var keybinds:Array<{modifiers:Array<String>, key:String, action:String}> = [];
 
+    var pageMap:Map<String, PanelPage> = [];
+
+    var pageStack:Array<PanelPage> = [];
+
     var editor:LevelEditor = null;
     public var panelOpen:Bool = false;
+    public var curPanel:String = '';
+
+    static inline final PANEL_W:Int  = 360;
+    static inline final HEADER_H:Int = 40;
+
     public function new(editor:LevelEditor, ?list:Array<String>)
     {
         super();
 
         this.editor = editor;
 
-        panelBehind = new MoonSprite().makeGraphic(360, FlxG.height, 0xFF0b0b0b);
+        panelBehind = new MoonSprite().makeGraphic(PANEL_W, FlxG.height, 0xFF0b0b0b);
         add(panelBehind);
         panelBehind.x = -panelBehind.width;
 
@@ -29,11 +48,15 @@ class LeftPanel extends FlxSpriteGroup
         add(bg);
         bg.active = panelBehind.active = false;
 
-        if(list == null || list.length <= 0)
+        _buildHeader();
+
+        // Build icon buttons
+        if (list == null || list.length <= 0)
         {
             list = [
                 'menu', 'separator', 'joystick', 'videoSettings', 'separator',
-                'editDocument', 'openFolder', 'lightbulb', 'space-196', 'settings', 'openDoor', 'space-399999', 'saveL'
+                'editDocument', 'openFolder', 'lightbulb', 'space-196',
+                'settings', 'openDoor', 'space-399999', 'saveL'
             ];
         }
 
@@ -42,7 +65,6 @@ class LeftPanel extends FlxSpriteGroup
 
         for (i in 0...list.length)
         {
-            // I wish I could switch() this augh
             if (list[i].startsWith('space-'))
                 curY += Std.parseFloat(list[i].split('-')[1]);
             else if (list[i] == 'separator')
@@ -57,7 +79,7 @@ class LeftPanel extends FlxSpriteGroup
             }
             else
             {
-                var thing = new IconButton(0, 0, 32, 32, list[i]);
+                var thing = new IconButton(0, 0, 40, 40, list[i]);
                 thing.invertShader = editor?.invertColors ?? new InvertColor();
                 add(thing);
                 thing.setPosition(bg.x + bg.width / 2 - thing.width / 2, curY);
@@ -72,52 +94,45 @@ class LeftPanel extends FlxSpriteGroup
 
         panelOpen = false;
 
-        // define keybinds combo here! They work as cute shortcuts.
-        // modifiers are held down, while the key is justPressed to trigger the action.
-        // but remember! actions must match button names from the list.
-        // and make sure to check your key/modifier match the existing ones at FlxKey!!
         keybinds = [
             {modifiers: ["CONTROL"], key: "O", action: "openFolder"},
             {modifiers: ["CONTROL"], key: "S", action: "saveL"}
         ];
+
+        registerPage('menu', new MainPage());
     }
 
-    override public function update(elapsed:Float):Void
+    public function registerPage(buttonName:String, page:PanelPage):Void
     {
-        super.update(elapsed);
-        if (panelOpen && curPanel != "")
+        page.panel = this;
+        pageMap.set(buttonName, page);
+    }
+
+    public function push(page:PanelPage):Void
+    {
+        if (pageStack.length > 0)
+            pageStack[pageStack.length - 1].hide();
+
+        page.panel = this;
+        pageStack.push(page);
+        _showTopPage();
+        _refreshHeader();
+    }
+
+    public function pop():Void
+    {
+        if (pageStack.length == 0) return;
+
+        final top = pageStack.pop();
+        top.hide();
+
+        if (pageStack.length > 0)
         {
-            final btn = buttonMap.get(curPanel);
-            if (btn != null && !btn.isPressed)
-                close();
+            _showTopPage();
+            _refreshHeader();
         }
-
-        panelBehind.x = FlxMath.lerp(panelBehind.x, panelOpen ? bg.x + bg.width : -panelBehind.width, 0.2);
-
-        // check for keybind triggers
-        for (kb in keybinds)
-        {
-            var modsPressed:Bool = true;
-            for (mod in kb.modifiers)
-            {
-                // checks pressed state for each modifier
-                if (!Reflect.getProperty(FlxG.keys.pressed, mod))
-                {
-                    modsPressed = false;
-                    break;
-                }
-            }
-
-            // check justPressed for the main key
-            if (modsPressed && Reflect.getProperty(FlxG.keys.justPressed, kb.key))
-            {
-                final btn = buttonMap.get(kb.action);
-                if (btn != null)
-                    selectButton(btn, kb.action);
-            }
-        }
-
-        if(FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this, this.camera)) close();
+        else
+            close();
     }
 
     public function selectButton(selected:IconButton, name:String):Void
@@ -126,50 +141,184 @@ class LeftPanel extends FlxSpriteGroup
             if (btn != selected)
                 btn.isPressed = false;
 
-        switch(name)
+        switch (name)
         {
-            case 'menu', 'layers', 'designServices': 
-                updatePanel(name);
+            case 'menu', 'layers', 'designServices':
+                _openPageForButton(name);
 
             case 'openFolder':
-                new FlxTimer().start(0.1, _-> selected.isPressed = false);
+                new FlxTimer().start(0.1, _ -> selected.isPressed = false);
 
-                if(editor != null)
+                if (editor != null)
                 {
                     editor.sfx('popupSMALL', true);
-
                     System.openFile(System.applicationDirectory + Paths.getPath('songs/${editor.song}/${editor.mix}'));
                 }
                 else
                 {
                     Paths.playSFX('toolkit/general/popupSMALL.wav', false);
-
-                    //TODO: get the correct stage as well
                     System.openFile('${System.applicationDirectory}assets/stages/stage');
                 }
-            case 'saveL':
+
+            case 'settings':
                 if(editor != null)
+                {
+                    editor.playback.state = PAUSE;
+                    editor.sustainLoopOpp.pause();
+                    editor.sustainLoopP1.pause();
+
+                    var stt = new Settings();
+                    stt.camera = editor.camFRONT;
+                    FlxG.state.openSubState(stt);
+                }
+
+            case 'saveL':
+                if (editor != null)
                     editor.saveLevel();
         }
-
-        //TODO FOR WHEN I HAVE THE  MENUS WORKING: IT SHOULD CLOSE ONE BEFORE OPENING ANOTHER!
-        // and dont forget to editor.updates = false or smth
     }
 
-    public var curPanel:String = '';
-    public function updatePanel(name:String)
+    public function close():Void
     {
-        curPanel = name;
-        panelOpen = true;
-    }
+        for (page in pageStack)
+            page.hide();
+        pageStack = [];
 
-    public function close()
-    {
         for (btn in buttons)
             btn.isPressed = false;
 
         panelOpen = false;
+        curPanel  = '';
 
-        //TODO!!!!!
+        headerBox.visible = false;
+    }
+
+    override public function update(elapsed:Float):Void
+    {
+        super.update(elapsed);
+
+        if (editor != null) editor.allowEditing = !panelOpen;
+
+        if (panelOpen && curPanel != '' && pageStack.length == 0)
+        {
+            final btn = buttonMap.get(curPanel);
+            if (btn != null && !btn.isPressed)
+                close();
+        }
+
+        panelBehind.x = FlxMath.lerp(panelBehind.x, panelOpen ? bg.x + bg.width : -panelBehind.width, 0.2);
+
+        _positionHeader();
+
+        for (kb in keybinds)
+        {
+            var modsPressed:Bool = true;
+            for (mod in kb.modifiers)
+            {
+                if (!Reflect.getProperty(FlxG.keys.pressed, mod))
+                {
+                    modsPressed = false;
+                    break;
+                }
+            }
+
+            if (modsPressed && Reflect.getProperty(FlxG.keys.justPressed, kb.key))
+            {
+                final btn = buttonMap.get(kb.action);
+                if (btn != null) selectButton(btn, kb.action);
+            }
+        }
+
+        if (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this, this.camera))
+            close();
+    }
+
+    function _buildHeader():Void
+    {
+        headerBox = new HBox();
+        headerBox.styleString = "background-color: #111111; border: none; padding: 4px; spacing: 6px; vertical-align: center;";
+        headerBox.height = HEADER_H;
+        headerBox.visible = false;
+
+        backButton = new Button();
+        backButton.text = '‹';
+        backButton.width = 28;
+        backButton.height = 28;
+        backButton.styleString = "font-size: 18px;";
+        backButton.onClick = _ -> pop();
+        headerBox.addComponent(backButton);
+
+        headerTitle = new Label();
+        headerTitle.text = '';
+        headerTitle.styleString = "font-size: 13px; color: #cccccc; vertical-align: center;";
+        headerBox.addComponent(headerTitle);
+
+        Screen.instance.addComponent(headerBox);
+    }
+
+    function _positionHeader():Void
+    {
+        final px = panelBehind.x;
+        headerBox.left = px;
+        headerBox.top = 0;
+        headerBox.width = PANEL_W;
+
+        for (page in pageStack)
+        {
+            if (page.root != null && page.root.visible)
+            {
+                page.root.left = px;
+                page.root.top = HEADER_H;
+                page.root.width  = PANEL_W;
+                page.root.height = FlxG.height - HEADER_H;
+                page.content.width = PANEL_W;
+            }
+        }
+    }
+
+    function _refreshHeader():Void
+    {
+        if (pageStack.length == 0)
+        {
+            headerBox.visible = false;
+            return;
+        }
+
+        headerBox.visible = true;
+        headerTitle.text = pageStack[pageStack.length - 1].title;
+        backButton.visible = (pageStack.length > 1);
+    }
+
+    function _showTopPage():Void
+    {
+        if (pageStack.length == 0) return;
+        final top = pageStack[pageStack.length - 1];
+        final px  = panelBehind.x;
+        top.show(px, HEADER_H, PANEL_W, FlxG.height - HEADER_H);
+    }
+
+    function _openPageForButton(name:String):Void
+    {
+        if (panelOpen && curPanel == name)
+        {
+            close();
+            return;
+        }
+
+        for (page in pageStack) page.hide();
+        pageStack = [];
+
+        curPanel = name;
+        panelOpen = true;
+
+        final page = pageMap.get(name);
+        if (page != null)
+        {
+            page.panel = this;
+            pageStack.push(page);
+            _showTopPage();
+        }
+        
+        _refreshHeader();
     }
 }

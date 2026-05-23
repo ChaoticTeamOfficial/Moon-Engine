@@ -6,6 +6,7 @@ import flixel.graphics.atlas.FlxAtlas;
 import openfl.geom.Rectangle;
 import moon.toolkit.ui.*;
 import moon.game.obj.*;
+import moon.game.*;
 import moon.game.obj.notes.*;
 import moon.dependency.scripting.*;
 import moon.game.notetypes.*;
@@ -52,16 +53,17 @@ class LevelEditor extends FlxState
     public static var chart:Chart;
     public var conductor:Conductor;
     public var playback:Song;
-    private var camBACK:MoonCamera = new MoonCamera();
-    private var camMID:MoonCamera = new MoonCamera();
-    private var camFRONT:MoonCamera = new MoonCamera();
+    public var camBACK:MoonCamera = new MoonCamera();
+    public var camMID:MoonCamera = new MoonCamera();
+    public var camFRONT:MoonCamera = new MoonCamera();
     
     var library:Library;
+    var leftpanel:LeftPanel;
     var scrollbar:ScrollBar;
     var strum:Strums;
     var cursor:FlxSprite;
+    var frontOverlay:MoonSprite;
 
-    var miniPlayer:MiniPlayer;
     public var eventAtlas:FlxAtlas;
 
     //these two are placeholders!!!
@@ -75,8 +77,8 @@ class LevelEditor extends FlxState
     private var miscGroup:FlxSpriteGroup;
     private var eventsGroup:FlxSpriteGroup;
 
-    private var sustainLoopOpp:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainOpponent-hold.wav', 'sounds'), true, false);
-    private var sustainLoopP1:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainP1-hold.wav', 'sounds'), true, false);
+    public var sustainLoopOpp:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainOpponent-hold.wav', 'sounds'), true, false);
+    public var sustainLoopP1:MoonSound = new MoonSound().loadEmbedded(Paths.sound('toolkit/level-editor/sustainP1-hold.wav', 'sounds'), true, false);
 
     // --- NUMBER VARIABLES --- //
     public static final LANE_WIDTH:Int = 32;
@@ -106,6 +108,8 @@ class LevelEditor extends FlxState
     public var mix:String = '';
 
     // --- OTHER/MISC --- //
+    public var allowEditing:Bool = true;
+
     var changes:Array<{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
     var segments:Array<{startTime:Float, startY:Float, stepCrochet:Float}> = [];
     var sectionStarts:Array<{num:Int, y:Float}> = [];
@@ -140,6 +144,9 @@ class LevelEditor extends FlxState
         camBACK.bgColor = 0xFF1e1d1f;
         camMID.bgColor = 0x00000000;
         camFRONT.bgColor = 0x00000000;
+
+        PlayState.instance = null;
+        PlayField.instance = null;
 
         FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
         FlxG.cameras.add(camBACK, true);
@@ -414,16 +421,10 @@ class LevelEditor extends FlxState
             typeButtons.set(gType, button);
         }
 
-        miniPlayer = new MiniPlayer(108, 48, chart, conductor, playback);
-        miniPlayer.camera = camMID;
-        add(miniPlayer);
-
-        EditorSync.miniPlayer = miniPlayer;
-
         library = new Library();
         add(library);
 
-        var leftpanel = new LeftPanel(this);
+        leftpanel = new LeftPanel(this);
         leftpanel.camera = camFRONT;
         add(leftpanel);
 
@@ -497,6 +498,10 @@ class LevelEditor extends FlxState
         };
         add(swapSectionBtn);
 
+        frontOverlay = new MoonSprite().makeGraphic(FlxG.width + 16, FlxG.height + 16, FlxColor.BLACK);
+        frontOverlay.camera = camMID;
+        add(frontOverlay);
+
         History.reset();
         Global.allowInputs = true;
     }
@@ -508,6 +513,8 @@ class LevelEditor extends FlxState
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+
+        frontOverlay.alpha = FlxMath.lerp(frontOverlay.alpha, allowEditing ? 0 : 0.6, elapsed * 4);
         libFocus = FlxG.mouse.overlaps(library.bg2);
 
         rpcUpdateTmr += elapsed;
@@ -517,12 +524,14 @@ class LevelEditor extends FlxState
             DiscordRPC.updatePresence(EDITOR, 'Editing ${chart.content.meta.displayName} - ${diff.toUpperCase()}', 'At the $curType Tab.', false);
         }
 
+        library.active = !leftpanel.panelOpen;
+
         // ----- Input Stuff ----- //
         final haxeUIFocused = haxe.ui.focus.FocusManager.instance.focus != null;
 
         updateCursor();
 
-        if (!haxeUIFocused)
+        if (!haxeUIFocused && allowEditing)
         {
             if (FlxG.keys.pressed.CONTROL)
             {
@@ -741,12 +750,6 @@ class LevelEditor extends FlxState
                 }
             }
         }
-
-        if (miniPlayer != null)
-        {
-            miniPlayer.visible = true;
-            miniPlayer.update(elapsed);
-        }
     }
 
     private function updateHoldSounds():Void
@@ -809,7 +812,7 @@ class LevelEditor extends FlxState
     // this snaps the square cursor thing
     private function updateCursor():Void
     {
-        if(libFocus) return;
+        if(libFocus || !allowEditing) return;
         final TOTAL_LANES:Int = NUM_LANES + 1;
         final relX = FlxG.mouse.viewX - gridGroup.x;
         final relY = FlxG.mouse.viewY - gridGroup.y - 18;

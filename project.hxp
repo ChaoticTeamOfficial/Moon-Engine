@@ -30,7 +30,7 @@ class Project extends HXProject
 		"FLX_NO_HEALTH", "HXCPP_STACK_TRACE", "hscriptPos",
 		"openfl-enable-handle-error", 
 		"HXCPP_CHECK_POINTER", "HXCPP_STACK_LINE", "HXCPP_STACK_TRACE",
-		"FLX_NO_FOCUS_LOST_SCREEN"
+		"FLX_NO_FOCUS_LOST_SCREEN", "FLX_NO_SOUND_TRAY"
 	];
 
 	// same thing I said above applies to libraries.

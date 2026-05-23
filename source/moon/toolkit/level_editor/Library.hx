@@ -2,10 +2,8 @@ package moon.toolkit.level_editor;
 
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
 import moon.game.events.EventRegistry;
-import openfl.ui.MouseCursor;
-import openfl.ui.Mouse;
-import moon.game.notetypes.*;
 
+//TODO: Fix haxeUI items being interactable when the side bar is open.
 class Library extends FlxGroup
 {
     public var bg:MoonSprite;
@@ -15,10 +13,9 @@ class Library extends FlxGroup
 
     public var editing:Bool = false;
     public var selectedInfo:Null<EventInfo> = null;
-    //public var accessing(default, set):String = 'Notes';
 
     private var content:FlxSpriteGroup;
-    private var camLibrary:MoonCamera;
+    private var contentBaseY:Map<FlxBasic, Float> = [];
     private var scrollValue:Float = 0;
     private var totalContentHeight:Float = 0;
     private var maxScroll:Float = 0;
@@ -28,7 +25,6 @@ class Library extends FlxGroup
 
     public var form:EventFormUI = null;
 
-    // -- Nice little variables for modifying this interface in general.
     private static inline final PAD:Float = 16;
     private static inline final SPACING:Float = 16;
     private static inline final ITEM_SIZE:Float = 32;
@@ -59,7 +55,6 @@ class Library extends FlxGroup
         bg2.antialiasing = true;
         bg2.alpha = 0.3;
         bg2.active = false;
-
         bg2.setPosition(bg.x + bg.width / 2 - bg2.width / 2, bg.y + bg.height / 2 - bg2.height / 2 + 16);
 
         var icon = new MoonSprite(bg.x, bg.y - 6);
@@ -70,22 +65,15 @@ class Library extends FlxGroup
         icon.setGraphicSize(32, 32);
         add(icon);
 
-        tabIndicator = new FlxText(bg.x + (48), bg.y + 16);
+        tabIndicator = new FlxText(bg.x + 48, bg.y + 16);
         add(tabIndicator);
         tabIndicator.setFormat(Paths.font('Inconsolata-Black.ttf'), 16, LEFT);
         tabIndicator.text = 'Loading...';
         tabIndicator.antialiasing = true;
 
-        // --- setup camera for content clipping
-        camLibrary = new MoonCamera(Std.int(bg2.x), Std.int(bg2.y), Std.int(bg2.width), Std.int(bg2.height));
-        camLibrary.bgColor = 0x00000000;
-        FlxG.cameras.add(camLibrary, false);
-
         content = new FlxSpriteGroup();
-        content.camera = camLibrary;
         add(content);
 
-        // --- setup scrollbar
         scrollBarBg = new MoonSprite(bg2.x + bg2.width - SCROLL_BAR_WIDTH, bg2.y).makeGraphic(SCROLL_BAR_WIDTH, Std.int(bg2.height), FlxColor.BLACK);
         scrollBarBg.alpha = 0.5;
         add(scrollBarBg);
@@ -98,16 +86,15 @@ class Library extends FlxGroup
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
-        if(bgCopy.shader != null)
+        if (!visible) return;
+
+        if (bgCopy.shader != null)
         {
             var shader:BorderGlowShader = cast bgCopy.shader;
             shader.update(elapsed);
-
             shader.enabled = editing;
-            //shader.enabled = FlxG.keys.pressed.EIGHT;
         }
 
-        // handle mouse wheel scrolling
         if (scrollBarBg.visible && FlxG.mouse.overlaps(bg2))
         {
             if (FlxG.mouse.wheel != 0)
@@ -115,78 +102,65 @@ class Library extends FlxGroup
                 scrollValue -= FlxG.mouse.wheel * 30;
                 scrollValue = FlxMath.bound(scrollValue, 0, maxScroll);
                 updateThumbPosition();
+                _applyScroll();
             }
         }
 
-        // handle scrollbar thumb drag
-        if (scrollBarThumb.visible)
-            if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(scrollBarThumb)) dragOffset = FlxG.mouse.viewY - scrollBarThumb.y;
+        if (scrollBarThumb.visible && FlxG.mouse.justPressed && FlxG.mouse.overlaps(scrollBarThumb))
+            dragOffset = FlxG.mouse.viewY - scrollBarThumb.y;
 
         if (FlxG.mouse.pressed && dragOffset != null)
         {
-            scrollBarThumb.y = FlxG.mouse.viewY - dragOffset;
-            scrollBarThumb.y = FlxMath.bound(scrollBarThumb.y, scrollBarBg.y, scrollBarBg.y + bg2.height - scrollBarThumb.height);
+            scrollBarThumb.y = FlxMath.bound(FlxG.mouse.viewY - dragOffset, scrollBarBg.y, scrollBarBg.y + bg2.height - scrollBarThumb.height);
             scrollValue = (scrollBarThumb.y - scrollBarBg.y) / (bg2.height - scrollBarThumb.height) * maxScroll;
+            _applyScroll();
         }
 
-        if (FlxG.mouse.justReleased)
-            dragOffset = null;
+        if (FlxG.mouse.justReleased) dragOffset = null;
 
-        // Update camera scroll
-        camLibrary.scroll.set(bg2.x, bg2.y + scrollValue);
+        _updateClipRects();
 
-        // Update interactions (clicking events or back button)
-        final mouseWorld:FlxPoint = FlxG.mouse.getWorldPosition(camLibrary);
         if (selectedInfo == null)
         {
             for (member in content.members)
             {
-                if (Std.isOfType(member, EventSpr))
+                if (!Std.isOfType(member, EventSpr)) continue;
+                if (member.overlapsPoint(FlxG.mouse.getViewPosition(), false))
                 {
-                    if (member.overlapsPoint(mouseWorld, false))
+                    member.alpha = 1;
+                    if (FlxG.mouse.justPressed)
                     {
-                        member.alpha = 1;
-                        if (FlxG.mouse.justPressed)
-                        {
-                            selectedInfo = cast(member, EventSpr).info;
-                            refreshLibrary();
-                            break;
-                        }
+                        selectedInfo = cast(member, EventSpr).info;
+                        refreshLibrary();
+                        break;
                     }
-                    else member.alpha = 0.5;
                 }
+                else member.alpha = 0.5;
             }
         }
         else
         {
-            // Check for back button click
             for (member in content.members)
             {
-                if (member.ID == 9999)
+                if (member.ID != 9999) continue;
+                if (member.overlapsPoint(FlxG.mouse.getViewPosition(), false))
                 {
-                    if (member.overlapsPoint(mouseWorld, false))
+                    member.alpha = 1;
+                    if (FlxG.mouse.justPressed)
                     {
-                        member.alpha = 1;
-                        if (FlxG.mouse.justPressed)
-                        {
-                            selectedInfo = null;
-                            refreshLibrary();
-                            break;
-                        }
+                        selectedInfo = null;
+                        refreshLibrary();
+                        break;
                     }
-                    else member.alpha = 0.5;
                 }
+                else member.alpha = 0.5;
             }
         }
 
-        // Check for tab indicator click to go back
-        if (selectedInfo != null)
+        if (selectedInfo != null && FlxG.mouse.justPressed && FlxG.mouse.overlaps(tabIndicator))
         {
-            if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(tabIndicator))
-            {
-                selectedInfo = null;
-                refreshLibrary();
-            }
+            selectedInfo = null;
+            refreshLibrary();
         }
     }
 
@@ -194,6 +168,7 @@ class Library extends FlxGroup
     {
         _clearForm();
         content.clear();
+        contentBaseY.clear();
         scrollValue = 0;
         final curType = LevelEditor.instance.curType;
 
@@ -214,25 +189,21 @@ class Library extends FlxGroup
                 spr.antialiasing = false;
                 spr.active = false;
                 spr.alpha = 0.5;
-                spr.camera = this.camera;
 
                 spr.x = bg2.x + PAD + col * (ITEM_SIZE + SPACING);
                 spr.y = bg2.y + PAD + row * (ITEM_SIZE + SPACING);
 
                 content.add(spr);
+                contentBaseY.set(spr, spr.y);
 
                 col++;
-                if (col >= columns)
-                {
-                    col = 0;
-                    row++;
-                }
+                if (col >= columns) { col = 0; row++; }
             }
 
             totalContentHeight = PAD + (row + (col > 0 ? 1 : 0)) * (ITEM_SIZE + SPACING) - (row > 0 ? SPACING : 0) + PAD;
             maxScroll = Math.max(0, totalContentHeight - bg2.height);
 
-            var showScroll:Bool = maxScroll > 0;
+            final showScroll = maxScroll > 0;
             scrollBarBg.visible = showScroll;
             scrollBarThumb.visible = showScroll;
 
@@ -257,14 +228,15 @@ class Library extends FlxGroup
             backBtn.active = false;
             backBtn.ID = 9999;
             content.add(backBtn);
+            contentBaseY.set(backBtn, backBtn.y);
 
             var descTxt:FlxText = new FlxText(backBtn.x + backBtn.width + PAD, 0, bg2.width - backBtn.width - SCROLL_BAR_WIDTH - PAD, selectedInfo.description);
             descTxt.setFormat(Paths.font('Inconsolata-Black.ttf'), 16, LEFT);
             descTxt.antialiasing = true;
             content.add(descTxt);
             descTxt.y = backBtn.y + backBtn.height / 2 - descTxt.height / 2;
+            contentBaseY.set(descTxt, descTxt.y);
 
-            // only shows the scrollbar for the header! the form has its own clip
             final headerH = Math.max(backBtn.height, descTxt.height);
             totalContentHeight = PAD + headerH + PAD;
             maxScroll = 0;
@@ -272,16 +244,46 @@ class Library extends FlxGroup
             scrollBarThumb.visible = false;
 
             final formY = bg2.y + PAD + headerH + 8;
-
-            //biggie
-            final fields = (curType == NOTES) ? NoteTypeRegistry.getEditorFields(selectedInfo.name) : new MoonEvent(selectedInfo.name, {}).retrieveEditorFields();
-            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, fields);
-            /*_form.onPlace = () ->
-            {
-                LevelEditor.instance.placeEvent(selectedInfo.name, _form.getValues());
-                LevelEditor.instance.sfx('place-${FlxG.random.int(1, 6)}');
-            };*/
+            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
         }
+
+        _applyScroll();
+    }
+
+    private function _applyScroll():Void
+    {
+        for (member in content.members)
+        {
+            if (!Std.isOfType(member, FlxSprite)) continue;
+            cast(member, FlxSprite).y = (contentBaseY.get(member) ?? cast(member, FlxSprite).y) - scrollValue;
+        }
+        _updateClipRects();
+    }
+
+    private function _updateClipRects():Void
+    {
+        final clipBounds = FlxRect.get(0, bg2.y, bg2.width, bg2.height);
+        for (member in content.members)
+        {
+            if (!Std.isOfType(member, FlxSprite) || cast(member, FlxSprite).ID == 9999) continue;
+            final spr:FlxSprite = cast member;
+            final sprTop = spr.y;
+            final sprBottom = spr.y + spr.height;
+            final clipTop = bg2.y;
+            final clipBottom = bg2.y + bg2.height;
+
+            if (sprBottom <= clipTop || sprTop >= clipBottom)
+            {
+                spr.visible = false;
+                continue;
+            }
+
+            spr.visible = true;
+            final visTop = Math.max(sprTop, clipTop);
+            final visBottom = Math.min(sprBottom, clipBottom);
+            spr.clipRect = FlxRect.get(0, visTop - sprTop, spr.width, visBottom - visTop);
+        }
+        clipBounds.put();
     }
 
     private function _clearForm():Void

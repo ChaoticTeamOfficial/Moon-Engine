@@ -274,7 +274,7 @@ class Chart
         this.difficulty = difficulty;
         this.mix = mix;
 
-        if(content.meta.hasCountdown == null) content.meta.hasCountdown = true;
+        content.meta.hasCountdown ??= true;
 
         //checks for duplicate notes and removes them (finally...)
         if (content.notes != null)
