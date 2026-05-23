@@ -1,5 +1,6 @@
 package moon.game.notetypes;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.game.events.EventFieldDef;
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
 import moon.toolkit.level_editor.LevelEditor.GridType;
@@ -9,7 +10,7 @@ import moon.toolkit.level_editor.LevelEditor.GridType;
  */
 class AltAnimNote extends BaseNoteType
 {
-    override public function onHit(timing:String, isSustain:Bool):Void
+    override public function onHit(timing:Judgement, isSustain:Bool):Void
     {
         if (game == null || isSustain) return;
 

@@ -173,8 +173,12 @@ class Freeplay extends FlxSubState
         if(FlxG.sound.music != null)
         {
             if(FlxG.sound.music.playing) conductor.time = FlxG.sound.music.time;
-            if(FlxG.sound.music.fadeTween == null || (FlxG.sound.music.fadeTween != null && !FlxG.sound.music.fadeTween.active)) 
-                FlxG.sound.music.volume = FlxMath.lerp(FlxG.sound.music.volume, songVolume, elapsed * 8);
+            
+            try{
+                if(FlxG.sound.music.fadeTween == null || (FlxG.sound.music.fadeTween != null && !FlxG.sound.music.fadeTween.active)) 
+                    FlxG.sound.music.volume = FlxMath.lerp(FlxG.sound.music.volume, songVolume, elapsed * 8);
+            }
+            catch(e) {}
         }
 
         if (MoonInput.justPressed(UI_DOWN)) change(1);

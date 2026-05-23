@@ -1,5 +1,7 @@
 package moon.backend.gameplay;
 
+import moon.backend.gameplay.Timings.Judgement;
+
 @:publicFields
 
 /**
@@ -65,13 +67,13 @@ class PlayerStats
     /**
      * A map containing all the notes hit on said judgement.
      */
-    var judgementsCounter:Map<String, Int> =
+    var judgementsCounter:Map<Judgement, Int> =
     [
-        'sick' => 0,
-        'good' => 0,
-        'bad' => 0,
-        'shit' => 0,
-        'miss' => 0
+        SICK => 0,
+        GOOD => 0,
+        BAD => 0,
+        SHIT => 0,
+        MISS => 0
     ];
 
     var isGold:Bool = true;
@@ -136,7 +138,7 @@ class PlayerStats
     {
         this.misses = misses;
 
-        judgementsCounter.set('miss', judgementsCounter.get('miss') + 1);
+        judgementsCounter.set(MISS, judgementsCounter.get(MISS) + 1);
 
         return this.misses;
     }

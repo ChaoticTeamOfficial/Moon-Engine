@@ -1,5 +1,6 @@
 package moon.game.notetypes;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.game.obj.notes.Note;
 import moon.game.PlayState;
 import moon.game.events.EventFieldDef;
@@ -31,7 +32,7 @@ class NoteTypeRegistry
     /**
      * Executes onHit for the given note type, if it has one.
      */
-    public static function executeHit(game:PlayState, note:Note, timing:String, isSustain:Bool):Void
+    public static function executeHit(game:PlayState, note:Note, timing:Judgement, isSustain:Bool):Void
     {
         if (typeMap == null) init();
         if (typeMap.exists(note.type))

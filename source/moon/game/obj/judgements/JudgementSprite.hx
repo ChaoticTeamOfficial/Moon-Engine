@@ -1,5 +1,6 @@
 package moon.game.obj.judgements;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.backend.gameplay.*;
 
 using StringTools;
@@ -23,7 +24,7 @@ class JudgementSprite extends MoonSprite
 
     var thisTwn:FlxTween;
     var xtraTwn:FlxTween;
-    function pop(judgement:String = 'sick', isGold:Bool = false, notAnimated:Bool = false)
+    function pop(judgement:Judgement = SICK, isGold:Bool = false, notAnimated:Bool = false)
     {
         if (judgement == null) return;
 
@@ -32,7 +33,7 @@ class JudgementSprite extends MoonSprite
         playAnim(judgement, true);
         extra.playAnim(judgement, true);
 
-        this.color = (isGold) ? 0xFFfeae34 : Timings.getParameters(judgement)[4];
+        this.color = (isGold) ? 0xFFfeae34 : Timings.get(judgement).color;
         scale.set(data?.judgementsSize ?? 1, data?.judgementsSize ?? 1);
         updateHitbox();
         alpha = 1;

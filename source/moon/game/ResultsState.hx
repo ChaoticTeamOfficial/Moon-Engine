@@ -218,7 +218,7 @@ class ResultsState extends FlxState
                         final text = textOrder[i];
 
                         var t = new FlxText(point.x, point.y + 16);
-                        t.setFormat(Paths.font('tardling/Solid/Tardling-Solid.ttf'), 56, (i > 1) ? Timings.getParameters(text)[4] : FlxColor.WHITE);
+                        t.setFormat(Paths.font('tardling/Solid/Tardling-Solid.ttf'), 56, (i > 1) ? Timings.get(text).color : FlxColor.WHITE);
                         t.text = (i == 0) ? '${stats.totalNotes}' : (i == 1) ? '${stats.highestCombo}' : '${stats.judgementsCounter.get(text)}';
                         //t.textField.antiAliasType = ADVANCED;
                         //t.textField.sharpness = 400;

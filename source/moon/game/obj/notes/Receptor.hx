@@ -1,5 +1,6 @@
 package moon.game.obj.notes;
 
+import moon.backend.gameplay.Timings.Judgement;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import moon.dependency.scripting.MoonScript;
 import flixel.group.FlxSpriteGroup;
@@ -169,7 +170,7 @@ class Receptor extends FlxSpriteGroup
      * @param judgement The judgement when hitting the note.
      * @param isSustain Whether or not it’s a sustain note.
      */
-    public function onNoteHit(?note:Note, judgement:String = 'sick', isSustain:Bool = false)
+    public function onNoteHit(?note:Note, judgement:Judgement = SICK, isSustain:Bool = false)
     {
         // set positions
         final dir = MoonUtils.intToDir(data);
@@ -179,7 +180,7 @@ class Receptor extends FlxSpriteGroup
         strumNote.playAnim('$dir-confirm', true);
 
         // splash for taps (only sick non-sustains)
-        if (judgement == 'sick' && !isCPU && !isSustain
+        if (judgement == SICK && !isCPU && !isSustain
             && splash.animation.getAnimationList().length > 0)
         {
             splash.setPosition((cx - splash.width / 2), (cy - splash.height / 2));

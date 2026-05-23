@@ -1,5 +1,6 @@
 package moon.backend.gameplay;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.game.obj.Character;
 import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
@@ -49,7 +50,7 @@ class InputHandler
     /**
      * Signal dispached whenever a note gets hit (Good Hit.)
      */
-    public final onNoteHit = new FlxTypedSignal<(note:Note, timing:String, isSustain:Bool)->Void>();
+    public final onNoteHit = new FlxTypedSignal<(note:Note, timing:Judgement, isSustain:Bool)->Void>();
 
     /**
      * Signal dispached whenever a note is missed (Bad Hit.)
@@ -233,7 +234,7 @@ class InputHandler
 			
 			// then call onhit
             if (possibleNotes.length > 0)
-                onHit(possibleNotes[0], i, 'sick', true);
+                onHit(possibleNotes[0], i, SICK, true);
         }
     }
 
@@ -271,7 +272,7 @@ class InputHandler
 
                         onHit(note, i, timing, false);
                         stats.totalNotes++;
-                        stats.accuracyCount += Timings.getParameters(timing)[0];
+                        stats.accuracyCount += Timings.get(timing).accuracyCount;
                     }
                 }
                 else
@@ -313,7 +314,7 @@ class InputHandler
         }
     }
 
-    private function onHit(note:Note, ID:Int, timing:String, isCPU:Bool, ?isSustain:Bool = false):Void
+    private function onHit(note:Note, ID:Int, timing:Judgement, isCPU:Bool, ?isSustain:Bool = false):Void
     {
         final convertedDir = MoonUtils.intToDir(note.direction);
         final isTyped = note.type != null && note.type != 'default';
@@ -332,8 +333,8 @@ class InputHandler
             }
         }
 
-        stats.health += (!isSustain) ? Timings.getParameters(timing)[3] : 0.5;
-        stats.score += (!isSustain) ? Timings.getParameters(timing)[2] : 2;
+        stats.health += (!isSustain) ? Timings.get(timing).healthGain : 0.5;
+        stats.score += (!isSustain) ? Timings.get(timing).score : 2;
         stats.combo++;
         strumline.members[note.direction].onNoteHit(note, timing, isSustain);
         stats.updtAccuracy();
@@ -370,9 +371,9 @@ class InputHandler
         }
 
         stats.isGold = false;
-        stats.accuracyCount += Timings.getParameters('miss')[0];
-        stats.score += Timings.getParameters('miss')[2];
-        stats.health += Timings.getParameters('miss')[3];
+        stats.accuracyCount += Timings.get(MISS).accuracyCount;
+        stats.score += Timings.get(MISS).score;
+        stats.health += Timings.get(MISS).healthGain;
         stats.misses++;
         stats.combo = 0;
         stats.noSustainCombo = 0;
@@ -433,7 +434,7 @@ class InputHandler
     private function onLateMiss():Void
         for (note in thisNotes)
             if (note.state != GOT_HIT && note.state != TOO_LATE && note.lane == playerID &&
-                conductor.time > note.time + Timings.getParameters('miss')[1])
+                conductor.time > note.time + Timings.get(MISS).maxMs)
                 onMiss(note);
 	
 	/**
@@ -464,7 +465,7 @@ class InputHandler
     {
         final timeDifference = Math.abs(note.time - conductor.time);
         for (jt in Timings.values)
-            if (timeDifference <= Timings.getParameters(jt)[1])
+            if (timeDifference <= Timings.get(jt).maxMs)
                 return jt;
 
         return null;

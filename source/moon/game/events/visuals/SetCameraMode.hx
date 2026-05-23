@@ -1,5 +1,7 @@
 package moon.game.events.visuals;
 
+import moon.backend.gameplay.Timings.Judgement;
+
 class SetCameraMode extends BaseEvent
 {
     /**
@@ -49,7 +51,7 @@ class SetCameraMode extends BaseEvent
 
         if (mode == 'off') return;
 
-        _singHandler = (playerID:String, note:moon.game.obj.notes.Note, timing:String, isSustain:Bool) ->
+        _singHandler = (playerID:String, note:moon.game.obj.notes.Note, timing:Judgement, isSustain:Bool) ->
         {
             if (isSustain) return;
 

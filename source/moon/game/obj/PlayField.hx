@@ -1,5 +1,6 @@
 package moon.game.obj;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.menus.Freeplay;
 import flixel.tweens.FlxTween;
 import moon.game.obj.judgements.*;
@@ -58,7 +59,7 @@ class PlayField extends FlxGroup
     /**
      * Dispatched whenever a note gets hit (Good Hit.)
      */
-    final onNoteHit = new FlxTypedSignal<(playerID:String, note:Note, timing:String, isSustain:Bool)->Void>();
+    final onNoteHit = new FlxTypedSignal<(playerID:String, note:Note, timing:Judgement, isSustain:Bool)->Void>();
 
     /**
      * Dispatched whenever a note is missed (Bad Hit.)
@@ -315,7 +316,7 @@ class PlayField extends FlxGroup
         centerText();
     }
 
-    function onHit(playerID:String, note:Note, timing:String, isSustain:Bool)
+    function onHit(playerID:String, note:Note, timing:Judgement, isSustain:Bool)
     {
         if (playerID == 'p1')
         {

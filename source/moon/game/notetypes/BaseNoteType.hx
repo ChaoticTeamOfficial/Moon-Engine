@@ -1,5 +1,6 @@
 package moon.game.notetypes;
 
+import moon.backend.gameplay.Timings.Judgement;
 import moon.game.obj.notes.Note;
 import moon.game.PlayState;
 import moon.game.events.EventFieldDef;
@@ -22,10 +23,10 @@ class BaseNoteType
 
     /**
      * Called when the note is hit by the player.
-     * @param timing    The judgement string (e.g. 'sick', 'good').
+     * @param timing    The judgement. (E.G. 'sick' or SICK)
      * @param isSustain Whether this is a sustain tick.
      */
-    public function onHit(timing:String, isSustain:Bool):Void {}
+    public function onHit(timing:Judgement, isSustain:Bool):Void {}
 
     /**
      * Called when the note is missed.
