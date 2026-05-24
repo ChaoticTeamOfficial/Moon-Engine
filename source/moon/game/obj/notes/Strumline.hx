@@ -1,15 +1,16 @@
 package moon.game.obj.notes;
 
 import flixel.util.FlxColor;
-import flixel.FlxBasic;
 import flixel.FlxG;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.group.FlxGroup;
 
 class Strumline extends FlxTypedSpriteGroup<Receptor>
 {
+    /**
+     * Spacing between each receptor.
+     */
+    public var receptorSpacing(default, set):Float = 0;
+
     /**
      * Sets the ID for recognizing this strumline (whether its opponent or not.)
      */
@@ -45,8 +46,29 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
         this.playerID = playerID;
         this.conductor = conductor;
         this.isCPU = isCPU;
-
         this.skin = skin;
+    }
+
+    /**
+     * Repositions all receptors based on current `receptorSpacing`.
+     */
+    public function repositionReceptors():Void
+    {
+        final centerOffset = ((4 * 0.5) * members[0].strumNote.width);
+
+        for (i in 0...members.length)
+        {
+            var receptor = members[i];
+            if (receptor == null) continue;
+
+            receptor.setPosition(x, y);
+
+            //yummy emoji
+            receptor.x -= centerOffset;
+            receptor.x += (receptor.strumNote.width + (receptorSpacing != 0 ? receptorSpacing : receptor.spacing)) * i;
+
+            receptor.ID = i;
+        }
     }
 
     override public function update(elapsed:Float)
@@ -55,44 +77,33 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
     }
 
     public var strumBG:MoonSprite = new MoonSprite().makeGraphic(0, 0);
+
     @:noCompletion public function set_skin(skin:String):String
     {
         this.skin = skin;
         this.clear();
-        
+
         for (i in 0...4)
         {
             this.recycle(Receptor, () ->
             {
                 var receptor = new Receptor(0, 0, skin, i, isCPU, playerID, conductor);
-                receptor.setPosition(x, y);
-
-                // yummy emoji
-                receptor.x -= ((4 * 0.5) * receptor.strumNote.width);
-                receptor.x += ((receptor.strumNote.width + receptor.spacing) * i);
                 receptor.ID = i;
-
                 return receptor;
             });
         }
+
+        repositionReceptors();
 
         strumBG.makeGraphic(Std.int(this.width), FlxG.height, FlxColor.BLACK);
         
         return skin;
     }
-	
-	@:dox(hide)
-	@:noCompletion override public function set_alpha(v:Float):Float
-	{
-		//TODO: fix thiss, it still doesn't change the alpha values :P 
-		/*
-		for(shit in this.members)
-			if(Std.isOfType(shit, Receptor))
-			{
-				final obj = cast(shit, Receptor);
-				obj.splashGroup.alpha = obj.notesGroup.alpha = obj.sustainsGroup.alpha = v;
-			}
-		*/
-		return super.set_alpha(v);
-	}
+
+    @:noCompletion public function set_receptorSpacing(receptorSpacing:Float):Float
+    {
+        this.receptorSpacing = receptorSpacing;
+        repositionReceptors();
+        return this.receptorSpacing;
+    }
 }

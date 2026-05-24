@@ -8,14 +8,40 @@ import openfl.filters.ColorMatrixFilter;
 
 using StringTools;
 
+/**
+ * An Enum that holds all the setting types.
+ */
 enum abstract SettingType(String) to String
 {
-    var CHECKMARK = 'checkmark';        // for boolean options (true or false most likely)
-    var SELECTOR = 'selector';          // for multiple choices
-    var SLIDER = 'slider';              // for a numeric slider option
-    var UNCAP_SLIDER = 'uncap_slider';  // for a numeric slider option, but uncapped
-    var INFO = 'info';                  // for a non selectable option
-    var SELECTABLE = 'selectable';      // for a option that you can press enter and be redirected to somewhere.
+    /**
+     * For a setting that's either true or false.
+     */
+    var CHECKMARK = 'checkmark';
+
+    /**
+     * For a setting that holds multiple choices.
+     */
+    var SELECTOR = 'selector';
+
+    /**
+     * For a setting that goes from 0 to 100.
+     */
+    var SLIDER = 'slider';
+
+    /**
+     * For a numeric setting that can be any number value.
+     */
+    var UNCAP_SLIDER = 'uncap_slider';
+
+    /**
+     * For a visual setting.
+     */
+    var INFO = 'info';
+
+    /**
+     * For a setting that can redirect to somewhere else.
+     */
+    var SELECTABLE = 'selectable';
 }
 
 /**
@@ -59,7 +85,6 @@ class Setting
      * Creates a new setting.
      * @param name          The setting's name, which'll be displayed in the options menu, and also needed for when calling it.
      * @param type          The setting's type. Allowed types are: CHECKMARK, SELECTOR, SLIDER.
-     * @param description   The description of this setting, shown in the settings menu.
      * @param options       The setting's options, slider = [minVal, maxVal], selector = [values], checkmark = null.
      * @param defaultValue  The setting's default value.
      */
@@ -188,6 +213,21 @@ class MoonSettings
             new Setting("Game Character", SELECTOR, ['bf'], 'bf'),
             new Setting("JudgePos", SELECTOR, [], [500, 270]),
             new Setting("ComboPos", SELECTOR, [], [500, 340])
+        ]);
+
+        // a category that's visible in the customize hud menu
+        categories.set("Judgement Customization", [
+            new Setting('Judgement Custom Position', SELECTOR, ["On", "Track-Based", "Center"], 'Center'),
+            new Setting('Judgement Spawn Animation', SELECTOR, JudgementsCombo.getSpawnList(), 'jump-in'),
+            new Setting('Judgement Despawn Animation', SELECTOR, JudgementsCombo.getDespawnList(), 'fade')
+        ]);
+
+        categories.set("Combo Customization", [
+            new Setting('Combo Custom Position', SELECTOR, ["On", "Track-Based", "Center"], 'Center'),
+            new Setting('Combo Spacing', SELECTOR, [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1], 0.5),
+            new Setting('Combo Spawn Animation', SELECTOR, JudgementsCombo.getSpawnList([LIGHT]), 'jump-in'),
+            new Setting('Combo Despawn Animation', SELECTOR, JudgementsCombo.getDespawnList(), 'fade'),
+            new Setting('Combo Rolls', CHECKMARK, null, true)
         ]);
     }
 

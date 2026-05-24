@@ -42,7 +42,7 @@ class JudgementSprite extends MoonSprite
         this.setPosition(st[0], st[1]);
 
         if(notAnimated) return;
-        if(data?.judgementAnims?.appear == 'light')
+        if(data?.judgementAnims?.appear == LIGHT)
         {
             TweenUtils.cancelTwn(xtraTwn);
 
@@ -63,10 +63,10 @@ class JudgementSprite extends MoonSprite
             sparkle.setPosition(this.x + FlxG.random.float(-96, this.width - 96), this.y - 64 + FlxG.random.float(0, this.width / 2));
         }
 
-        final appear = data?.judgementAnims?.appear ?? 'jump-in';
-        final disappear = data?.judgementAnims?.disappear ?? 'fade';
+        final appear = data?.judgementAnims?.appear ?? JUMP_IN;
+        final disappear = data?.judgementAnims?.disappear ?? FADE;
 
-        MoonUtils.doSpriteAnim(this, appear, disappear, function(t) thisTwn = t);
+        SpriteUtils.doAppearAnim(this, appear, disappear, function(t) thisTwn = t);
     }
 
     function set_skin(skin:String):String

@@ -172,32 +172,22 @@ class Receptor extends FlxSpriteGroup
      */
     public function onNoteHit(?note:Note, judgement:Judgement = SICK, isSustain:Bool = false)
     {
-        // set positions
         final dir = MoonUtils.intToDir(data);
-        final cx = strumNote.x + strumNote.width / 2;
-        final cy = strumNote.y + strumNote.height / 2;
         
         strumNote.playAnim('$dir-confirm', true);
 
-        // splash for taps (only sick non-sustains)
-        if (judgement == SICK && !isCPU && !isSustain
-            && splash.animation.getAnimationList().length > 0)
-        {
-            splash.setPosition((cx - splash.width / 2), (cy - splash.height / 2));
+        if (judgement == SICK && !isCPU && !isSustain && splash.animation.getAnimationList().length > 0)
             splash.spawn();
-        }
         
-        // sustain splash
-        if (!isSustain && note != null && note.duration > 90
-            && sustainSplash.animation.getAnimationList().length > 0)
-        {
-            sustainSplash.setPosition((cx - sustainSplash.width / 2), (cy - sustainSplash.height / 2));
+        if (!isSustain && note != null && note.duration > 90 && sustainSplash.animation.getAnimationList().length > 0)
             sustainSplash.spawn();
-        }
     }
 
     override public function update(elapsed:Float)
     {
+        SpriteUtils.centerSprite(splash, strumNote);
+        SpriteUtils.centerSprite(sustainSplash, strumNote);
+
 		if(this.visible)
 		{
 			sustainSplash.visible = MoonSettings.callSetting('Hold Note Splashes');

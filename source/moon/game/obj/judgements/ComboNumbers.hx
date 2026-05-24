@@ -43,9 +43,9 @@ class ComboNumbers extends FlxSpriteGroup
 
             if(!notAnimated)
             {
-                final appear = data?.comboAnims?.appear ?? 'jump-in';
-                final disappear = data?.comboAnims?.disappear ?? 'fade';
-                MoonUtils.doSpriteAnim(number, appear, disappear, function(t) thisTwn = t);
+                final appear = data?.comboAnims?.appear ?? JUMP_IN;
+                final disappear = data?.comboAnims?.disappear ?? FADE;
+                SpriteUtils.doAppearAnim(number, appear, disappear, function(t) thisTwn = t);
             }
         }
 

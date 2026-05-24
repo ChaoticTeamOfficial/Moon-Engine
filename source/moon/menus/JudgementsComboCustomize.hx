@@ -4,6 +4,7 @@ import moon.game.*;
 import moon.game.obj.*;
 import moon.game.obj.notes.*;
 import moon.game.obj.judgements.*;
+import moon.menus.obj.MenuPage;
 
 class JudgementsComboCustomize extends FlxSubState
 {
@@ -14,6 +15,7 @@ class JudgementsComboCustomize extends FlxSubState
 	var judgements:JudgementSprite;
 	var combo:ComboNumbers;
 	var dragGraphic:MoonSprite;
+	var menuPage:MenuPage;
 	public function new()
 	{
 		super();
@@ -62,6 +64,14 @@ class JudgementsComboCustomize extends FlxSubState
        	final neg = FlxG.random.bool(50) ? '-' : 'x';
        	combo.pop('${neg}${FlxG.random.int(100, 9999)}', judgements.color, true);
 
+		menuPage = new MenuPage(0, 0, MoonLang.get('ui.customization.title', 'CUSTOMIZATION'));
+        add(menuPage);
+        menuPage.build(['Judgement Customization', 'Combo Customization'], cat -> MoonSettings.categories.get(cat));
+
+		menuPage.onChange.add(() -> {
+            Paths.playSFX('menus/settings/settingsSelection.wav', 'sounds', true, FlxG.random.float(0.9, 1.25));
+        });
+
        	//judgements.screenCenter();
        	//combo.screenCenter();
        	//combo.y += 64;
@@ -100,6 +110,18 @@ class JudgementsComboCustomize extends FlxSubState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (MoonInput.justPressed(UI_UP)) menuPage.changeSelection(-1);
+        else if (MoonInput.justPressed(UI_DOWN)) menuPage.changeSelection(1);
+
+        if (FlxG.mouse.wheel != 0)
+            menuPage.changeSelection(-FlxG.mouse.wheel);
+
+        // centers the selected option
+        final cur = menuPage.navOptions[menuPage.curSelected];
+        final targetY = FlxG.height / 2 - (cur.y + cur.height / 2 - menuPage.optionsContainer.y);
+        menuPage.optionsContainer.y = FlxMath.lerp(menuPage.optionsContainer.y, targetY, elapsed * 13);
+        menuPage.optionFollower.y = cur.y - 5;
 
 		updateTo(FlxG.mouse.overlaps(judgements, this.camera) ? judgements : (FlxG.mouse.overlaps(combo, this.camera)) ? combo : null);
 
