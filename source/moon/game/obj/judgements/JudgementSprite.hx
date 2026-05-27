@@ -42,7 +42,10 @@ class JudgementSprite extends MoonSprite
         this.setPosition(st[0], st[1]);
 
         if(notAnimated) return;
-        if(data?.judgementAnims?.appear == LIGHT)
+        final appear = MoonSettings.callSetting('Judgement Spawn Animation') == 'Noteskin Default' ? (data?.judgementAnims?.appear ?? JUMP_IN) : MoonSettings.callSetting('Judgement Spawn Animation');
+        final disappear = MoonSettings.callSetting('Judgement Despawn Animation') == 'Noteskin Default' ? (data?.judgementAnims?.disappear ?? FADE) : MoonSettings.callSetting('Judgement Despawn Animation');
+
+        if(appear == LIGHT)
         {
             TweenUtils.cancelTwn(xtraTwn);
 
@@ -62,9 +65,6 @@ class JudgementSprite extends MoonSprite
             sparkle.visible = true;
             sparkle.setPosition(this.x + FlxG.random.float(-96, this.width - 96), this.y - 64 + FlxG.random.float(0, this.width / 2));
         }
-
-        final appear = data?.judgementAnims?.appear ?? JUMP_IN;
-        final disappear = data?.judgementAnims?.disappear ?? FADE;
 
         SpriteUtils.doAppearAnim(this, appear, disappear, function(t) thisTwn = t);
     }

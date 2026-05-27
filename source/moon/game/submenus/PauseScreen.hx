@@ -239,6 +239,7 @@ class PauseScreen extends FlxSubState
                 hi.alpha = 0;
                 hi.scale.set(0, 0);
                 hi.selected = false;
+                if(items[i] == 'Restart Track' && MoonSettings.restartPending) hi.button.color = FlxColor.RED;
                 FlxTween.tween(hi, {alpha: 1, x: center - hi.width / 2}, 0.8, {ease: FlxEase.expoOut, startDelay: 0.04 * i});
                 return hi;
             });

@@ -194,7 +194,6 @@ class PlayState extends FlxTransitionableState
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostStageCreate');
-		Global.scriptCall('onPostCreate');
 		setEvents();
 		
 		playField.onGhostTap.add((keyDir) -> Global.scriptCall('onGhostTap', [keyDir]));
@@ -231,11 +230,14 @@ class PlayState extends FlxTransitionableState
 		DiscordRPC.updatePresence(PLAYMODE, rpcString, "", true);
 
 		//FlxG.signals.focusLost.add(()->pauseGame());
-
 		//alright.
 		//camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
+		
+		MoonSettings.restartPending = false;
+
+		Global.scriptCall('onPostCreate');
 
 		// make sure we clean everything unused up
 		//AssetManager.clearUnused();

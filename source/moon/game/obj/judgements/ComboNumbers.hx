@@ -43,8 +43,8 @@ class ComboNumbers extends FlxSpriteGroup
 
             if(!notAnimated)
             {
-                final appear = data?.comboAnims?.appear ?? JUMP_IN;
-                final disappear = data?.comboAnims?.disappear ?? FADE;
+                final appear = MoonSettings.callSetting('Combo Spawn Animation') == 'Noteskin Default' ? (data?.judgementAnims?.appear ?? JUMP_IN) : MoonSettings.callSetting('Combo Spawn Animation');
+                final disappear = MoonSettings.callSetting('Combo Despawn Animation') == 'Noteskin Default' ? (data?.judgementAnims?.disappear ?? FADE) : MoonSettings.callSetting('Combo Despawn Animation');
                 SpriteUtils.doAppearAnim(number, appear, disappear, function(t) thisTwn = t);
             }
         }

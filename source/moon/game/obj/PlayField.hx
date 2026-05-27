@@ -47,11 +47,6 @@ class PlayField extends FlxGroup
     final onSongStart = new FlxTypedSignal<Void->Void>();
 
     /**
-     * Dispatched whenever the song is restarted.
-     */
-    final onSongRestart = new FlxTypedSignal<Void->Void>();
-
-    /**
      * Dispatched when the countdown is happening.
      */
     final onSongCountdown = new FlxTypedSignal<Int->Void>();

@@ -125,6 +125,11 @@ class InputHandler
     public var replayKeyStates:Array<Bool> = [false, false, false, false];
 
     /**
+     * Whether or not should ghost tapping be enabled.
+     */
+    public var ghostTapping:Bool = MoonSettings.callSetting('Ghost Tapping');
+
+    /**
      * A reference to PlayState, needed to dispatch note type behaviours.
      */
     public var game:moon.game.PlayState = null;
@@ -282,7 +287,7 @@ class InputHandler
 
                     onGhostTap.dispatch(i);
                     strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
-                    if (!MoonSettings.callSetting('Ghost Tapping'))
+                    if (!ghostTapping)
                     {
                         if (attachedChar != null)
                             attachedChar.playAnim('sing${MoonUtils.intToDir(i).toUpperCase()}-miss', true);
