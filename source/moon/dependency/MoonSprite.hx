@@ -3,10 +3,10 @@ package moon.dependency;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import haxe.io.Path;
 import animate.*;
+import animate.internal.*;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSpriteUtil;
 import flixel.tweens.FlxTween;
-import moon.utils.AnimationUtils;
 import moon.backend.Paths;
 import moon.backend.Paths.AtlasType;
 
@@ -209,6 +209,65 @@ class MoonSprite extends FlxAnimate
             danceIndex = 0;
         }
     }
+
+	/**
+	 * Sets the visibility of one or more named layers, by default on this
+	 * sprite's currently-playing root symbol timeline. Note that it only works if this sprite is loaded with an
+	 * Animate Atlas!
+	 * @param names    Layer names to toggle (case-sensitive, matches the names from Adobe Animate!)
+	 * @param visible  Whether the named layers should be visible.
+	 * @param timeline Optional explicit timeline to search instead of the root symbol's.
+	 */
+	public function setLayersVisible(names:Array<String>, visible:Bool, ?timeline:Timeline):Void
+	{
+		final tl = timeline ?? getRootTimeline();
+		if (tl == null)
+		{
+			trace('[MoonSprite] Could not resolve a timeline to set layer visibility on!', "WARNING");
+			return;
+		}
+
+		var matched = 0;
+		tl.forEachLayer(layer ->
+		{
+			trace('[MoonSprite] layer: "${layer.name}" (visible=${layer.visible})', "DEBUG");
+			if (names.contains(layer.name))
+			{
+				layer.visible = visible;
+				matched++;
+			}
+		});
+		trace('[MoonSprite] setLayersVisible: matched $matched / ${names.length}', "DEBUG");
+	}
+
+	/**
+	 * Returns a named layer from a timeline (the root symbol's by default), or
+	 * `null` if it doesn't exist. Only works if the sprite is loaded with an Animate Atlas.
+	 */
+	public function getLayer(name:String, ?timeline:Timeline):Layer
+	{
+		final tl = timeline ?? getRootTimeline();
+		if (tl == null) return null;
+
+		var found:Layer = null;
+		tl.forEachLayer(layer -> { if (layer.name == name) found = layer; });
+		return found;
+	}
+
+	private function getRootTimeline():Timeline
+	{
+		final controller:FlxAnimateController = cast this.animation;
+		@:privateAccess if (!controller.hasAnimateAtlas) return null;
+
+		@:privateAccess if (controller.isAnimate)
+		{
+			final curAnim = cast controller.curAnim;
+			if (curAnim != null && curAnim.timeline != null)
+				return curAnim.timeline;
+		}
+
+		return controller.getDefaultTimeline();
+}
 
     @:noCompletion public function set_brightness(value:Float):Float
     {

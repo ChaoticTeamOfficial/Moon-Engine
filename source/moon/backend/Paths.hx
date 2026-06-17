@@ -413,7 +413,8 @@ enum abstract TextureAtlasAnimType(String)
     var FRAMELABEL = 'framelabel';
 }
 
-enum abstract AnimBehavior(String) {
+enum abstract AnimBehavior(String)
+{
     var ONBEAT = 'on-beat';
     var ONCE = 'once';
 }
