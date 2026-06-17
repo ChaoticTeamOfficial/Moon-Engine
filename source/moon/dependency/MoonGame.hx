@@ -12,6 +12,9 @@ class MoonGame extends FlxGame
         ?initialState:Null<flixel.util.typeLimit.NextState.InitialState>, ?updateFramerate:Int, ?drawFramerate:Int, 
         ?skipSplash:Bool, ?startFullscreen:Bool)
     {
+		openfl.utils.Assets.cache.enabled = false;
+		lime.utils.Assets.cache.enabled = false;
+
     	FlxG.signals.preStateCreate.add(_ -> {
     		if(!AssetManager.skipNextCleanup)
     			AssetManager.clearUnused();

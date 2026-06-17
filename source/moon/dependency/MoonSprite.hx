@@ -2,12 +2,13 @@ package moon.dependency;
 
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import haxe.io.Path;
-import animate.FlxAnimateFrames.FlxAnimateSettings;
 import animate.*;
-import animate.internal.*;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSpriteUtil;
 import flixel.tweens.FlxTween;
+import moon.utils.AnimationUtils;
+import moon.backend.Paths;
+import moon.backend.Paths.AtlasType;
 
 using StringTools;
 
@@ -21,6 +22,16 @@ class MoonSprite extends FlxAnimate
 	 * A map containing all the offsets for each animation in the sprite.
 	 */
 	public var animOffsets:Map<String, Array<Dynamic>> = [];
+
+	/**
+	 * Stores the raw `Paths.AnimationData` used to register each animation on
+	 * this sprite, keyed by animation name. Populated automatically by
+	 * `AnimationUtils` (`addAtlasAnimation` / `addTextureAtlasAnimation` /
+	 * `loadAnimations`) whenever an animation gets added through it, so you
+	 * can look up an animation's original prefix, indices, frame rate, etc.
+	 * later without keeping a separate array around.
+	 */
+	public var animDataMap:Map<String, Paths.AnimationData> = new Map();
 
 	/**
 	 * Used for setting up if the sprite will center
@@ -166,72 +177,20 @@ class MoonSprite extends FlxAnimate
 		animOffsets[name] = [x, y];
 
 	/**
-	 * Automatically adds animations and offsets using an array of AnimationData. 
+	 * Automatically adds animations and offsets using an array of AnimationData.
+	 * Delegates the actual frame-registration/offset/idle-grouping work to `AnimationUtils.loadAnimations`.
 	 * @param animations Array of AnimationDatas.
+	 * @param type       Which atlas/spritesheet format these animations come from.
 	 * return array of idle anims, for chaining them.
 	 */
-	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW, ?conductor:Conductor):Array<String>
-	{
-		var baseIdleAnims:Array<String> = [];
-		idleAnimsMap.clear();
+	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW):Array<String>
+		return AnimationUtils.loadAnimations(this, animations, type);
 
-		for (i in 0...animations.length)
-		{
-			final anim:Paths.AnimationData = animations[i];
-			switch(type)
-			{
-				case PACKED:
-					(anim.indices != null) ? cast(this.animation, FlxAnimateController).addBySymbolIndices(anim.name, anim.prefix, anim.indices, anim.fps ?? 24, anim.looped ?? false)
-					: cast(this.animation, FlxAnimateController).addBySymbol(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
-				default:
-					(anim.indices != null) ? this.animation.addByIndices(anim.name, anim.prefix, anim.indices, '', anim.fps ?? 24, anim.looped ?? false)
-					: this.animation.addByPrefix(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
-			}
-			this.addOffset(anim.name, anim?.x ?? 0, anim?.y ?? 0);
-			
-			//trace('added ' + animations);
-			
-			if(anim.name.startsWith("idle-"))
-			{
-				final parts = anim.name.split('-');
-				final suffix = (parts.length > 2) ? parts[parts.length - 1] : "";
-				
-				if (!idleAnimsMap.exists(suffix))
-					idleAnimsMap.set(suffix, []);
-				
-				idleAnimsMap.get(suffix).push(anim.name);
-				
-				if (suffix == "")
-					baseIdleAnims.push(anim.name);
-			}
-
-			if (anim.finishAnim != null)
-			{
-				animation.onFinish.add(finishedName ->
-				{
-					final cur = animation.curAnim != null ? animation.curAnim.name : "";
-					final playedName = (animationSuffix != "" && cur.endsWith('-$animationSuffix'))
-						? cur.substring(0, cur.lastIndexOf('-'))
-						: cur;
-
-					if (playedName == anim.name)
-					{
-						if (anim.finishAnim == "idle" || anim.finishAnim.startsWith("idle-")) {
-							dance(true);
-							animation.curAnim.curFrame = animation.curAnim.frames[animation.curAnim.frames.length - 1];
-						}
-						else playAnim(anim.finishAnim, true);
-					}
-				});
-			}
-		}
-		
-		// Ensure base group always exists
-		if (!idleAnimsMap.exists(""))
-			idleAnimsMap.set("", baseIdleAnims);
-			
-		return idleAnims; // returns base idles for compatibility
-	}
+	/**
+	 * Convenience lookup into `animDataMap`.
+	 */
+	public function getAnimData(name:String):Paths.AnimationData
+		return animDataMap.exists(name) ? animDataMap.get(name) : null;
 
 	public function dance(?force:Bool = false)
     {

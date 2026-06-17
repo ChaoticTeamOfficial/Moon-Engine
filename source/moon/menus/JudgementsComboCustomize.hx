@@ -137,7 +137,6 @@ class JudgementsComboCustomize extends FlxSubState
 		if(MoonInput.justPressed(BACK)) {
 			FlxG.state.openSubState(new Settings(true));
 			//Paths.clearUnusedAssets();
-			AssetManager.clearUnused();
 		}
 	}
 

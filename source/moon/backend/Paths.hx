@@ -21,6 +21,8 @@ using StringTools;
 
 /**
  * Class for path resolution and asset retrieval.
+ * Based off Doido Engine's.
+ * @see https://github.com/DoidoTeam/FNF-Doido-Engine/blob/main/source/Paths.hx
  */
 class Paths
 {
@@ -316,21 +318,99 @@ class Paths
     }
 }
 
+/**
+ * A typedef used for default animation structures.
+ */
 typedef AnimationData = {
+    /**
+     * The animation's name, which will be used for playing.
+     */
     var name:String;
-    var prefix:String;
+
+    /**
+     * The animation's prefix, which is the one on the spritesheet's data.
+     */
+    var ?prefix:String;
+
+    /**
+     * The animation's indices, in case you want specific frames on it.
+     */
     var ?indices:Array<Int>;
+
+    /**
+     * The X offset for this animation.
+     */
     var ?x:Float;
+
+    /**
+     * The Y offset for this animation.
+     */
     var ?y:Float;
+
+    /**
+     * The Frames Per Second in which the animation will play on.
+     */
     var ?fps:Int;
+
+    /**
+     * Whether should this animation loop or not.
+     */
     var ?looped:Bool;
+
+    /**
+     * The animation that will play after the current finishes.
+     */
     var ?finishAnim:String;
+
+    /**
+     * Whether should this animation be flipped horizontally or not.
+     */
+    var ?flipX:Bool;
+
+    /**
+     * Whether should this animation be flipped vertically or not.
+     */
+    var ?flipY:Bool;
+
+    /**
+     * The animation type, used for animate atlas sprites.
+     */
+    var ?animType:TextureAtlasAnimType;
 }
 
-enum abstract AtlasType(String) {
+/**
+ * Used for defining the type of a spritesheet.
+ */
+enum abstract AtlasType(String)
+{
+    /**
+     * Uniform grid spritesheet, frames referenced by index.
+     */
     var NONE = 'none';
+
+    /**
+     * Sparrow XML atlases, which has named frames and are adressed by prefixes.
+     */
     var SPARROW = 'sparrow';
+
+    /**
+     * Sprite Packer TXT atlases, which has named frames and are adressed by prefixes.
+     */
     var PACKED = 'packed';
+
+    /**
+     * Adobe animate texture atlases, adressed by symbols or frame-labels.
+     */
+    var ATLAS = 'atlas';
+}
+
+/** 
+ * Which addressing mode FlxAnimate should use for an `ATLAS` texture-atlas animation.
+ */
+enum abstract TextureAtlasAnimType(String)
+{
+    var SYMBOL = 'symbol';
+    var FRAMELABEL = 'framelabel';
 }
 
 enum abstract AnimBehavior(String) {

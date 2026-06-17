@@ -211,11 +211,39 @@ class Note extends MoonSprite
         sustainHandle.antialiasing = false;
         sustainHandle.blend = ADD;
         sustainHandle.active = false;
-        sustainHandle.alpha = 0.28;
+        sustainHandle.alpha = 0.6;
 
         // gotta set width shit manually cause weirdo hitboxes
         sustainHandle.width = 32;
         sustainHandle.height = 16;
+    }
+
+    /**
+     * A small badge shown in the chart editor whenever this note's type isn't "default".
+     * Purely visual, has no gameplay effect.
+     */
+    public var typeMarker:MoonSprite;
+
+    public function makeTypeMarker():Void
+    {
+        if (typeMarker != null) return;
+
+        final size = 10;
+        typeMarker = new MoonSprite();
+        typeMarker.makeGraphic(size, size, FlxColor.TRANSPARENT);
+        FlxSpriteUtil.drawCircle(typeMarker, size / 2, size / 2, size / 2 - 1, FlxColor.WHITE, {thickness: 1, color: FlxColor.BLACK});
+        typeMarker.active = false;
+        typeMarker.alpha = 0.6;
+        updateTypeMarker();
+    }
+
+    public function updateTypeMarker():Void
+    {
+        if (typeMarker == null) return;
+
+        typeMarker.x = x + width - typeMarker.width * 0.65;
+        typeMarker.y = y - typeMarker.height * 0.35;
+        typeMarker.visible = visible && (type != null && type != 'default' && type != '');
     }
 
     public function updateHandle():Void
@@ -234,6 +262,12 @@ class Note extends MoonSprite
         {
             sustainHandle.destroy();
             sustainHandle = null;
+        }
+
+        if (typeMarker != null)
+        {
+            typeMarker.destroy();
+            typeMarker = null;
         }
 
         child = null;

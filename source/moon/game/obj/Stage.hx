@@ -5,6 +5,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import openfl.display.BlendMode;
 import flixel.addons.display.FlxBackdrop;
+import animate.FlxAnimateFrames;
 import moon.dependency.scripting.*;
 import moon.game.obj.Character.CharacterType;
 
@@ -154,13 +155,18 @@ class Stage extends FlxTypedGroup<FlxBasic>
                 sprite.strID = objData.name;
 
                 final assetPath = '$stg/${objData.name}';
-                switch (objData.type)
+                final objType:AtlasType = objData?.type ?? NONE;
+
+                switch (objType)
                 {
                     case SPARROW:
                         sprite.frames = Paths.getSparrowAtlas(assetPath, 'stages');
                     case PACKED:
                         sprite.frames = Paths.getPackerAtlas(assetPath, 'stages');
-                    default: sprite.loadGraphic(Paths.image(assetPath, 'stages'));
+                    case NONE:
+                        sprite.loadGraphic(Paths.image(assetPath, 'stages'), objData.animations != null && objData.animations.length > 0, objData?.frameWidth ?? 0, objData?.frameHeight ?? 0);
+                    case ATLAS:
+                        sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/${objData.name}'));
                 }
 
                 if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
@@ -174,12 +180,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
                 if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
 
                 if(objData.animations != null && objData.animations.length > 0)
-                    sprite.idleAnims = sprite.loadAnimations(objData.animations);
+                    sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
 
                 if (objData.startAnim != null)
                     sprite.playAnim(objData.startAnim);
 
-                if (objData.animBehavior != null && objData.type != NONE)
+                if (objData.animBehavior != null)
                 {
                     switch (objData.animBehavior)
                     {
@@ -327,10 +333,13 @@ typedef StageJSONStructure = {
 
 typedef StageObject = {
     //TODO: ADD A COLOR FIELD
+    // and document too...  
 
     var name:String;
     var position:Array<Float>;
     var ?type:AtlasType;
+    var ?frameWidth:Int;
+    var ?frameHeight:Int;
     var ?scale:Array<Float>;
     var ?scroll:Array<Float>;
     var ?angle:Float;

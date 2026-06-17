@@ -42,7 +42,8 @@ class SpriteUtils
         {
             case JUMP_IN, JUMP_OUT:
                 final ogOffset = sprite.offset.y;
-                sprite.offset.y = (anim == JUMP_IN) ? -14 : 14;
+                sprite.offset.y = ogOffset;
+                sprite.offset.y = (anim == JUMP_IN) ? -8 : 8;
                 tween = FlxTween.tween(sprite, {"offset.y": ogOffset}, duration, {
                     ease: FlxEase.expoOut,
                     onComplete: _ -> doDisappearAnim(sprite, outAnim, setTween)
@@ -61,7 +62,7 @@ class SpriteUtils
                 });
 
             case SKEW_X, SKEW_Y, SKEW_BOTH:
-                final n = (FlxG.random.bool(50)) ? -24 : 24;
+                final n = (FlxG.random.bool(50)) ? -18 : 18;
                 sprite.skew.set((anim == SKEW_X || anim == SKEW_BOTH) ? n : 0, (anim == SKEW_Y || anim == SKEW_BOTH) ? n : 0);
                 tween = FlxTween.tween(sprite.skew, {x: 0, y: 0}, duration, {
                     ease: FlxEase.circOut,
@@ -70,7 +71,8 @@ class SpriteUtils
 
             case SLIDE, SLIDE_SKEW:
                 final ogOffset = sprite.offset.x;
-                sprite.offset.x = ogOffset + 20;
+                sprite.offset.x = ogOffset;
+                sprite.offset.x = ogOffset + 15;
                 if('$anim'.contains('skew')) sprite.skew.x = 22;
                 tween = FlxTween.tween(sprite, {"offset.x": ogOffset, "skew.x": 0}, duration + 0.3, {
                     ease: FlxEase.expoOut,

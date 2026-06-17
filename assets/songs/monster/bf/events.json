@@ -1,0 +1,928 @@
+[
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 2526.31578947368
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 7578.94736842105
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 12947.3684210526
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 13180,
+		"values": {
+			"duration": 10.08,
+			"text": "Guess it's time,"
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 14450,
+		"values": {
+			"duration": 25.84,
+			"text": "you better plug in all your nightlights."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 18315.7894736842
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 23368.4210526316
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 23370,
+		"values": {
+			"duration": 35.36,
+			"text": "What's out there, past your darkened door?"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 28421.0526315789
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 32820,
+		"values": {
+			"duration": 35.52,
+			"text": "Just the eyes floating up out of the shore."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 32842.1052631579
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 37263.1578947368
+	},
+	{
+		"values": {
+			"duration": 16,
+			"x": 0,
+			"character": "spectator",
+			"y": 0,
+			"ease": "quadInOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 41052.6315789474
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 95
+		},
+		"tag": "Change Playback Settings",
+		"time": 41770
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 100
+		},
+		"tag": "Change Playback Settings",
+		"time": 42975
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 44148.78
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 105
+		},
+		"tag": "Change Playback Settings",
+		"time": 44180
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 44250,
+		"values": {
+			"duration": 31.2,
+			"text": "Hey man, I'm gonna eat your girlfriend,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 48864.5714285714
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 53436
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 53490,
+		"values": {
+			"duration": 25.04,
+			"text": "Or maybe turn her into broth,"
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 56630,
+		"values": {
+			"duration": 9.84,
+			"text": "la-la-la la la"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 58007.4285714286
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 62007.4285714286
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 62320,
+		"values": {
+			"duration": 8.56,
+			"text": "Kill a kid, cut em up."
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 63400,
+		"values": {
+			"duration": 28.88,
+			"text": "Stuff em up inside of my, secret meat box."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 66578.8571428571
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 71436
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 71490,
+		"values": {
+			"duration": 26.56,
+			"text": "Find my, hands across your body slowly"
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 74820,
+		"values": {
+			"duration": 10.88,
+			"text": "peel your skin off."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 76007.4285714286
+	},
+	{
+		"values": {
+			"duration": 16,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "quadInOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 80578.8571428571
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 105
+		},
+		"tag": "Change Playback Settings",
+		"time": 80710
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 107.5
+		},
+		"tag": "Change Playback Settings",
+		"time": 81285
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 110
+		},
+		"tag": "Change Playback Settings",
+		"time": 81860
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 95
+		},
+		"tag": "Change Playback Settings",
+		"time": 81861
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 82007.652631579
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 82060,
+		"values": {
+			"duration": 17.84,
+			"text": "You'll meet your friends,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 84218.1789473684
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 86428.7052631579
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 86480,
+		"values": {
+			"duration": 17.76,
+			"text": "inside the ambulance."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 88639.2315789474
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 90533.9684210526
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 90580,
+		"values": {
+			"duration": 12.64,
+			"text": "Call into the night,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 92112.9157894737
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 94007.652631579
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 94060,
+		"values": {
+			"duration": 12.56,
+			"text": "to the werewolf."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 95586.6
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 97160,
+		"values": {
+			"duration": 18.16,
+			"text": "Give all your blood to him,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 97165.5473684211
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 99376.0736842105
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 101250,
+		"values": {
+			"duration": 18.16,
+			"text": "stand under the warm street light."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 101270.810526316
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 103481.336842105
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 105680,
+		"values": {
+			"duration": 25.76,
+			"text": "Let yourself be hypnotized."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 105691.863157895
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 108849.757894737
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 117218.178947368
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 132
+		},
+		"tag": "Change Playback Settings",
+		"time": 117230
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 117270,
+		"values": {
+			"duration": 17.84,
+			"text": "You're just a little snack,"
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 120430,
+		"values": {
+			"duration": 25.2,
+			"text": "and so is your girlfriend."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 124607.863636364
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "spectator",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 127676.045454545
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 132
+		},
+		"tag": "Change Playback Settings",
+		"time": 131770
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 119.5
+		},
+		"tag": "Change Playback Settings",
+		"time": 132540
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 107
+		},
+		"tag": "Change Playback Settings",
+		"time": 133310
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 132
+		},
+		"tag": "Change Playback Settings",
+		"time": 133311
+	},
+	{
+		"values": {
+			"timeSignature": [
+				4,
+				4
+			],
+			"bpm": 120
+		},
+		"tag": "Change Playback Settings",
+		"time": 133770
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 133897.05
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 133910,
+		"values": {
+			"duration": 25.84,
+			"text": "Hey man, I'm gonna tear your eyes out,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 137897.05
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 141850,
+		"values": {
+			"duration": 22.24,
+			"text": "and then I'll boil your girlfriend,"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 141897.05
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 144640,
+		"values": {
+			"duration": 8.16,
+			"text": "la-la-la la la"
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 145897.05
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 149647.05
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 149670,
+		"values": {
+			"duration": 7.44,
+			"text": "Kill a kid, cut em up."
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 150610,
+		"values": {
+			"duration": 24.56,
+			"text": "Stuff em up inside of my, burning dungeon."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 153647.05
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 157647.05
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 157660,
+		"values": {
+			"duration": 23.68,
+			"text": "I would give you guys a little break but"
+		}
+	},
+	{
+		"tag": "Show Subtitle",
+		"lane": 4,
+		"time": 160630,
+		"values": {
+			"duration": 8.16,
+			"text": "I'm not Satan."
+		}
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 161647.05
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "opponent",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 165897.05
+	},
+	{
+		"values": {
+			"duration": 26,
+			"x": 0,
+			"character": "player",
+			"y": 0,
+			"ease": "expoOut"
+		},
+		"lane": 0,
+		"tag": "Move Camera",
+		"time": 169897.05
+	}
+]

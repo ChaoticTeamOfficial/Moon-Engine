@@ -27,6 +27,7 @@ class ChartConvert extends FlxState
     private var metaPath:String = null;
     private var difficulty:String = 'hard';
     private var difficulties:Array<String> = ['easy', 'normal', 'hard', 'erect', 'nightmare'];
+    private var _srtPath:String = null;
 
     // temporary storage for conversion results before saving stuff :P
     private var _conversionResult:moon.backend.data.Chart.ConvertResult = null;
@@ -92,7 +93,7 @@ class ChartConvert extends FlxState
                     }
                     else startConversion();
                 }
-            case ChartFileSelect | MetaFileSelect | Converting | SavingChart | SavingEvents | Done:
+            case ChartFileSelect | MetaFileSelect | Converting | SavingChart | SavingEvents | SrtFileSelect | Done:
                 // already handled by dialogue or timers, so ignore.
             case Failed:
                 if (MoonInput.justPressed(ACCEPT) || MoonInput.justPressed(BACK)) FlxG.resetState();
@@ -203,8 +204,50 @@ class ChartConvert extends FlxState
     function onEventsFileSaved(path:String)
     {
         _fileDialog = null;
-        //Paths.saveFileContent(path, _conversionResult.eventsJson);
         _savedEventsPath = path;
+        state = SrtFileSelect;
+        updateStateText();
+        selectSrtFile();
+    }
+
+    function selectSrtFile()
+    {
+        #if sys
+        _fileDialog = new FileDialog();
+        _fileDialog.onSelect.add(onSrtFileSelected);
+        _fileDialog.onCancel.add(() -> { _fileDialog = null; finishConversion(); });
+        _fileDialog.browse(OPEN, "srt", Sys.getCwd(), "Browse for an SRT subtitle file (optional, cancel to skip)");
+        #else
+        finishConversion();
+        #end
+    }
+
+    function onSrtFileSelected(path:String)
+    {
+        _fileDialog = null;
+        _srtPath = path;
+
+        #if sys
+        try
+        {
+            final srtContent = sys.io.File.getContent(path);
+            final tempConductor = new Conductor(_conversionResult != null ? 120 : 120);
+            final subtitleEvents = SrtParser.parse(srtContent, tempConductor);
+
+            final eventsJson = haxe.Json.parse(_savedEventsPath != null ? sys.io.File.getContent(_savedEventsPath) : '[]');
+            final merged:Array<Dynamic> = cast eventsJson;
+            for (e in subtitleEvents) merged.push(e);
+            merged.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+            sys.io.File.saveContent(_savedEventsPath, haxe.Json.stringify(merged, null, "\t"));
+            trace('[CHART-CONVERT] Merged ${subtitleEvents.length} subtitle event(s) into events file.');
+        }
+        catch (e:Dynamic)
+        {
+            trace('[CHART-CONVERT] Failed to parse SRT: $e', "ERROR");
+        }
+        #end
+
         finishConversion();
     }
 
@@ -220,6 +263,7 @@ class ChartConvert extends FlxState
         _conversionResult = null;
         _savedChartPath = null;
         _savedEventsPath = null;
+        _srtPath = null;
     }
 
     // --- UI Updates ---
@@ -239,6 +283,10 @@ class ChartConvert extends FlxState
             case DifficultySelect:
                 changeTXT('Select the difficulty to convert:\n(Chart: ${haxe.io.Path.directory(chartPath)})');
                 changeStatus('< ${difficulties[_curSelection]} >', FlxColor.CYAN);
+
+            case SrtFileSelect:
+                changeTXT('Events saved! Optionally import subtitles as events.\n(Cancel the dialog to skip)');
+                changeStatus('');
 
             case MetaFileSelect:
                 changeTXT('This format requires a metadata file.\nPress Enter to select the metadata file...');
@@ -290,6 +338,7 @@ enum ConvertState
     ChartFileSelect;
     SavingChart;
     SavingEvents;
+    SrtFileSelect;
     DifficultySelect;
     MetaFileSelect;
     Converting;

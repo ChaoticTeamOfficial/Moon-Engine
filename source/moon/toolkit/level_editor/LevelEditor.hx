@@ -608,12 +608,14 @@ class LevelEditor extends FlxState
             {
                 final n = cast(yeah, Note);
                 n.updateHandle();
+                n.updateTypeMarker();
                 n.visible = n.active = n.isOnScreen();
             }
             else
             {
                 final spr = cast(yeah, MoonSprite);
-                spr.visible = spr.active = spr.isOnScreen();
+
+                if(spr != null && spr.alive) spr.visible = spr.active = spr.isOnScreen();
             }
         }
 
@@ -635,14 +637,8 @@ class LevelEditor extends FlxState
         playback.update(elapsed);
 
         // update grid pos stuff
-        while (changeIndex < changes.length && conductor.time >= changes[changeIndex].time)
-        {
-            final ch = changes[changeIndex];
-            conductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
-            EditorSync.onBPMChange(ch.time, ch.bpm, ch.numerator, ch.denominator);
-            changeIndex++;
-        }
         conductor.time = playback.time;
+        recalcChangeIndex();
 
         gridGroup.y = FlxMath.lerp(gridGroup.y, initialGridY - timeToY(conductor.time), elapsed * 28);
 
@@ -947,6 +943,17 @@ class LevelEditor extends FlxState
                         History.pushEventPlace(ev);
                         sfx('placeEvent-${FlxG.random.int(1, 2)}');
 
+                        if (ev.tag == 'Change Playback Settings')
+                        {
+                            changes.push({
+                                time: ev.time,
+                                bpm: ev.values.bpm,
+                                numerator: ev.values.timeSignature[0],
+                                denominator: ev.values.timeSignature[1]
+                            });
+                        }
+                        changes.sort((a, b) -> Std.int(a.time - b.time));
+                        recalcChangeIndex();
                         //trace('[EDITOR] Placed "$tag" at ${conductor.time}ms (lane $lane)', "DEBUG");
                 }
             }
@@ -1021,6 +1028,18 @@ class LevelEditor extends FlxState
                     {
                         History.pushEventDelete(deletedEvStruct);
                         removeEventSpr(deletedEvStruct);
+
+                        if (deletedEvStruct.tag == 'Change Playback Settings')
+                        {
+                            changes.remove({
+                                time: deletedEvStruct.time,
+                                bpm: deletedEvStruct.values.bpm,
+                                numerator: deletedEvStruct.values.timeSignature[0],
+                                denominator: deletedEvStruct.values.timeSignature[1]
+                            });
+                        }
+                        changes.sort((a, b) -> Std.int(a.time - b.time));
+                        recalcChangeIndex();
                     }
 
                     chart.events = chart.events.filter(e -> !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50));
@@ -1049,6 +1068,13 @@ class LevelEditor extends FlxState
         noteGroup.add(note);
         note.makeHandle();
         noteGroup.add(note.sustainHandle);
+
+        if(note.type != null)
+        {
+            note.makeTypeMarker();
+            noteGroup.add(note.typeMarker);
+        }
+
         updateSustainVis(note, n.duration);
 
         note.scale.set(0.5, 0.5);
@@ -1105,8 +1131,12 @@ class LevelEditor extends FlxState
             toDestroy.child.destroy();
             toDestroy.child = null;
         }
+
         if (toDestroy.sustainHandle != null)
             noteGroup.remove(toDestroy.sustainHandle, true);
+
+        if(toDestroy.typeMarker != null)
+            noteGroup.remove(toDestroy.typeMarker);
 
         FlxTween.globalManager.cancelTweensOf(toDestroy);
         noteGroup.remove(toDestroy, true);
@@ -1160,6 +1190,19 @@ class LevelEditor extends FlxState
                     return;
                 }
             }
+        }
+    }
+
+    private function recalcChangeIndex(reset:Bool = false):Void
+    {
+        changeIndex = 1;
+        if(reset) conductor.reset();
+        conductor.changeBpmAt(0, changes[0].bpm, changes[0].numerator, changes[0].denominator);
+        while (changeIndex < changes.length && conductor.time >= changes[changeIndex].time)
+        {
+            final ch = changes[changeIndex];
+            conductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
+            changeIndex++;
         }
     }
 
@@ -1410,7 +1453,7 @@ class LevelEditor extends FlxState
         for (member in noteGroup.members)
         {
             member.shader = (curType != NOTES) ? grayscale : null;
-            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.28);
+            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.6);
         }
     }
 

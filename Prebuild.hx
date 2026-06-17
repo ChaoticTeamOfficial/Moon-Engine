@@ -23,7 +23,8 @@ class Prebuild
         "The evoker can change the color of the wool of the blue sheeps",
         "Easier to assimilate than explain, anyway.",
         "A mod we gave to bug and beast as they had never dreamed",
-        "Sou gay"
+        "Sou gay",
+        "yo nene"
     ];
 
     static function main():Void

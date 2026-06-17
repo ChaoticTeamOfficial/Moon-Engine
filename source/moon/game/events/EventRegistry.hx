@@ -23,6 +23,7 @@ class EventRegistry
             'Customized Pulse Timing' => CustomizedPulseTimingEvent,
             'Set Camera Mode' => SetCameraMode,
             'Pulse Camera' => PulseCameraEvent,
+            'Show Subtitle' => ShowSubtitleEvent,
             
             // CHARACTERS
             'Play Character Animation' => PlayCharacterAnimEvent,

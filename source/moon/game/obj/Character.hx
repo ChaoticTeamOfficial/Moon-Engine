@@ -11,6 +11,8 @@ typedef CharacterData =
     var ?antialiasing:Bool;
     var ?scale:Float;
     var ?type:AtlasType;
+    var ?frameWidth:Int;
+    var ?frameHeight:Int;
     var ?flipX:Bool;
     var ?camOffsets:Array<Float>;
     var ?extraOffsets:Array<Float>;
@@ -136,8 +138,15 @@ class Character extends MoonSprite
 
         switch(data.type)
         {
-            case SPARROW: this.frames = Paths.getSparrowAtlas('$character/$atlasName', 'characters');
-            default: this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$atlasName')/*, {filterQuality: HIGH}*/);
+            case SPARROW:
+                this.frames = Paths.getSparrowAtlas('$character/$atlasName', 'characters');
+            case PACKED:
+                this.frames = Paths.getPackerAtlas('$character/$atlasName', 'characters');
+            case NONE:
+                this.loadGraphic(Paths.image('$character/$atlasName', 'characters'), true, data?.frameWidth ?? 0, data?.frameHeight ?? 0);
+            case ATLAS:
+                //TODO: quality configs?
+                this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$atlasName')/*, {filterQuality: HIGH}*/);
         }
 
         camOffsets = data?.camOffsets ?? [0, 0];

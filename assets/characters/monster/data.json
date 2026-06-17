@@ -1,0 +1,48 @@
+{
+	"camOffsets": [
+		230,
+		-100
+	],
+	"healthbarColors": [
+		243,
+		255,
+		110
+	],
+	"extraOffsets": [
+		0,
+		-264
+	],
+	"type": "atlas",
+	"animations": [
+		{
+			"name": "idle-0",
+			"prefix": "Idle",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singLEFT",
+			"prefix": "Left",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singDOWN",
+			"prefix": "Down",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singUP",
+			"prefix": "Up",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singRIGHT",
+			"prefix": "Right",
+			"animType": "framelabel"
+		}
+	],
+	"antialiasing": true,
+	"danceFrequency": 2,
+	"flipX": false,
+	"scale": 1,
+	"holdDuration": 8
+}

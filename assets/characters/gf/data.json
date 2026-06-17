@@ -12,7 +12,7 @@
 		3,
 		-316
 	],
-	"type": "packed",
+	"type": "atlas",
 	"animations": [
 		{
 			"name": "idle-0",
