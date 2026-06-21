@@ -94,13 +94,21 @@ class LevelEditor extends FlxState
     final allTypes:Array<GridType> = [NOTES, VISUALS, CHARACTERS, GIMMICKS, SOUNDS];
 
     public var curType(default, set):GridType;
-    public var curPlacementMode:PlacementMode = PLACE;
+    public var curPlacementMode(default, set):PlacementMode = PLACE;
     public var libFocus:Bool = false;
 
     private var draggingNote:Note = null;
 
     private var selectedNotes:Array<Note> = [];
     private var dragOGlengths:Map<Note, Float> = null;
+
+    private var editSelectedNotes:Array<Note> = [];
+    private var editSelectedEvents:Array<EventSpr> = [];
+    private var editNote:Note = null;
+    private var editNoteStruct:NoteStruct = null;
+    private var editEvent:EventSpr = null;
+    private var editEventStruct:EventStruct = null;
+    private var _lastEditSnapshot:String = null;
 
     // --- CHART-RELATED VARIABLES --- //
     public var song:String = '';
@@ -531,6 +539,8 @@ class LevelEditor extends FlxState
 
         updateCursor();
 
+        if (curPlacementMode == EDIT) updateEditingValues();
+
         if (!haxeUIFocused && allowEditing)
         {
             if (FlxG.keys.pressed.CONTROL)
@@ -598,6 +608,8 @@ class LevelEditor extends FlxState
             else if(FlxG.keys.justPressed.THREE) curType = CHARACTERS;
             else if(FlxG.keys.justPressed.FOUR) curType = GIMMICKS;
             else if(FlxG.keys.justPressed.FIVE) curType = SOUNDS;
+
+            if(FlxG.keys.justPressed.SIX) curPlacementMode = (curPlacementMode == PLACE) ? EDIT : PLACE;
         }
 
         // this should HOPEFULLY reduce update calls and draw calls :3
@@ -971,6 +983,63 @@ class LevelEditor extends FlxState
                 }
             }
         }
+        else if (FlxG.mouse.justPressed && curPlacementMode == EDIT && draggingNote == null)
+        {
+            final shiftHeld = FlxG.keys.pressed.SHIFT;
+
+            if (curType == NOTES)
+            {
+                final hit = getNoteAtCursor(snappedTime, laneNum);
+
+                if (hit != null)
+                {
+                    if (shiftHeld)
+                    {
+                        if (editSelectedNotes.indexOf(hit) == -1) { editSelectedNotes.push(hit); hit.brightness = 0.4; }
+                        else { editSelectedNotes.remove(hit); hit.brightness = 0; }
+                    }
+                    else
+                    {
+                        deselectEditTargets();
+                        editSelectedNotes.push(hit);
+                        hit.brightness = 0.4;
+                    }
+                }
+                else if (!shiftHeld) deselectEditTargets();
+
+                refreshEditTarget();
+            }
+            else
+            {
+                var hitSpr:EventSpr = null;
+                for (member in eventsGroup.members)
+                {
+                    if (Std.isOfType(member, EventSpr) && cast(member, EventSpr).category == curType)
+                    {
+                        final spr:EventSpr = cast member;
+                        if (FlxG.mouse.overlaps(spr)) { hitSpr = spr; break; }
+                    }
+                }
+
+                if (hitSpr != null)
+                {
+                    if (shiftHeld)
+                    {
+                        if (editSelectedEvents.indexOf(hitSpr) == -1) { editSelectedEvents.push(hitSpr); hitSpr.brightness = 0.4; }
+                        else { editSelectedEvents.remove(hitSpr); hitSpr.brightness = 0; }
+                    }
+                    else
+                    {
+                        deselectEditTargets();
+                        editSelectedEvents.push(hitSpr);
+                        hitSpr.brightness = 0.4;
+                    }
+                }
+                else if (!shiftHeld) deselectEditTargets();
+
+                refreshEditTarget();
+            }
+        }
 
         // Delete stuff!!!
         // or remove, eh, whatever!
@@ -996,6 +1065,7 @@ class LevelEditor extends FlxState
 
                     removeNoteSpr(struct);
                     sfx('delete', false, true);
+                    if (editSelectedNotes.remove(hit)) refreshEditTarget();
                 }
             }
             else
@@ -1041,10 +1111,10 @@ class LevelEditor extends FlxState
                         changes.sort((a, b) -> Std.int(a.time - b.time));
                         recalcChangeIndex();
                     }
-
+                    
                     chart.events = chart.events.filter(e -> !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50));
-
                     sfx('delete', false, true);
+                    if (editSelectedEvents.remove(toRemoveSpr)) refreshEditTarget();
                 }
             }
         }
@@ -1377,6 +1447,125 @@ class LevelEditor extends FlxState
         refreshHandleVis();
     }
 
+    public function deselectEditTargets():Void
+    {
+        for (n in editSelectedNotes) if (n != null) n.brightness = 0;
+        editSelectedNotes = [];
+        for (e in editSelectedEvents) if (e != null) e.brightness = 0;
+        editSelectedEvents = [];
+
+        editNote = null; 
+        editNoteStruct = null;
+        editEvent = null;
+        editEventStruct = null;
+        _lastEditSnapshot = null;
+    }
+
+    function refreshEditTarget():Void
+    {
+        final total = editSelectedNotes.length + editSelectedEvents.length;
+
+        if (total != 1)
+        {
+            editNote = null; editNoteStruct = null;
+            editEvent = null; editEventStruct = null;
+            _lastEditSnapshot = null;
+
+            if (library.editing || library.selectedInfo != null)
+            {
+                library.editing = false;
+                library.editingValues = null;
+                library.selectedInfo = null;
+                library.refreshLibrary();
+            }
+            return;
+        }
+
+        if (editSelectedNotes.length == 1)
+        {
+            final n = editSelectedNotes[0];
+            editNote = n; editEvent = null; editEventStruct = null; _lastEditSnapshot = null;
+
+            editNoteStruct = null;
+            for (existing in chart.content.notes)
+                if (Math.abs(existing.time - n.time) < 0.01 && existing.data == n.direction && existing.lane == n.lane)
+                    { editNoteStruct = existing; break; }
+
+            library.editingValues = n.values ?? {};
+            library.selectedInfo = _findEventInfo(NOTES, n.type ?? 'default');
+            library.editing = true;
+            library.refreshLibrary();
+        }
+        else
+        {
+            final spr = editSelectedEvents[0];
+            editEvent = spr; editNote = null; editNoteStruct = null; _lastEditSnapshot = null;
+
+            final evTime = yToTime(spr.y - gridGroup.y);
+            editEventStruct = null;
+            for (e in chart.events)
+                if (e.tag == spr.event && Math.abs(e.time - evTime) < 50) { editEventStruct = e; break; }
+
+            library.editingValues = (editEventStruct != null) ? editEventStruct.values : {};
+            library.selectedInfo = _findEventInfo(spr.category, spr.event);
+            library.editing = true;
+            library.refreshLibrary();
+        }
+    }
+
+    function _findEventInfo(category:GridType, name:String):Null<EventInfo>
+    {
+        for (info in loadedEvents.get(category))
+            if (info.name == name) return info;
+
+        // "default" (and any other untracked) note types aren't in the catalog,
+        // so without a stub here the Library has nothing to switch to and just
+        // falls back to the palette grid instead of opening the edit view.
+        if (category == NOTES)
+            return { name: name, description: 'This note type has no editable fields.', category: NOTES };
+
+        return null;
+    }
+
+    function updateEditingValues():Void
+    {
+        if (library.form == null || library.selectedInfo == null) return;
+        if (editNoteStruct == null && editEventStruct == null) return;
+
+        final raw = library.form.getValues();
+        final snapshot = haxe.Json.stringify(raw);
+        if (snapshot == _lastEditSnapshot) return;
+        _lastEditSnapshot = snapshot;
+
+        if (editNoteStruct != null)
+        {
+            final processed = NoteTypeRegistry.processNoteValues(library.selectedInfo.name, raw);
+            editNoteStruct.values = processed;
+            if (editNote != null) editNote.values = processed;
+        }
+        else if (editEventStruct != null)
+        {
+            final processed = EventRegistry.processEventValues(library.selectedInfo.name, raw);
+            editEventStruct.values = processed;
+
+            if (editEvent != null && processed != null && Reflect.hasField(processed, 'duration'))
+            {
+                final newDurHeight = stepsToHeight(Reflect.field(processed, 'duration'));
+                if (Math.abs(editEvent.duration - newDurHeight) > 0.01)
+                {
+                    var oldHold:EventHold = null;
+                    for (member in eventsGroup.members)
+                        if (Std.isOfType(member, EventHold) && cast(member, EventHold).parent == editEvent)
+                            oldHold = cast member;
+                    if (oldHold != null) { eventsGroup.remove(oldHold, true); oldHold.destroy(); }
+
+                    editEvent.duration = newDurHeight;
+                    if (editEvent.duration > 0) eventsGroup.add(new EventHold(editEvent));
+                }
+            }
+        }
+    }
+
     private function refreshHandleVis():Void
     {
         final hasSel = selectedNotes.length > 0;
@@ -1452,9 +1641,29 @@ class LevelEditor extends FlxState
     {
         for (member in noteGroup.members)
         {
-            member.shader = (curType != NOTES) ? grayscale : null;
-            member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.6);
+            if(member != null)
+            {
+                member.shader = (curType != NOTES) ? grayscale : null;
+                member.alpha = (curType != NOTES) ? 0.20 : ((Std.isOfType(member, Note) || Std.isOfType(member, NoteSustain)) ? 1 : 0.6);
+            }
         }
+    }
+
+    function set_curPlacementMode(mode:PlacementMode):PlacementMode
+    {
+        if (mode != curPlacementMode)
+        {
+            deselectEditTargets();
+            if (library != null)
+            {
+                library.editing = false;
+                library.editingValues = null;
+                library.selectedInfo = null;
+                library.refreshLibrary();
+            }
+        }
+        curPlacementMode = mode;
+        return mode;
     }
 
     function set_curType(curType:GridType):GridType
@@ -1467,6 +1676,9 @@ class LevelEditor extends FlxState
         for(type => button in typeButtons)
             button.playAnim(type == curType ? 'click' : 'idle', true);
 
+        deselectEditTargets();
+        library.editing = false;
+        library.editingValues = null;
         library.selectedInfo = null;
         library.refreshLibrary();
         sfx('${typeStr.toLowerCase()}Tab');

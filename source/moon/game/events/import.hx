@@ -3,3 +3,5 @@ package;
 import moon.toolkit.level_editor.LevelEditor.GridType;
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
 #end
+
+using StringTools;

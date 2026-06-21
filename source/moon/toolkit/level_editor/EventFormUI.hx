@@ -1,10 +1,13 @@
 package moon.toolkit.level_editor;
 
 import haxe.ui.components.*;
+import haxe.ui.components.popups.*;
 import haxe.ui.containers.*;
 import haxe.ui.core.Component;
 import haxe.ui.core.Screen;
 import moon.game.events.EventFieldDef;
+
+using StringTools;
 
 //TODO: document
 /**
@@ -23,10 +26,13 @@ class EventFormUI
     static inline final BTN_H:Float = 32;
     static inline final GAP:Float = 32;
 
-    public function new(x:Float, y:Float, w:Float, h:Float, fields:Array<EventFieldDef>)
+    private var _initialValues:Dynamic;
+
+    public function new(x:Float, y:Float, w:Float, h:Float, fields:Array<EventFieldDef>, ?initialValues:Dynamic)
     {
         _fields  = fields ?? [];
         _widgets = [];
+        _initialValues = initialValues;
 
         _scroll = new ScrollView();
         _scroll.left = x;
@@ -59,18 +65,21 @@ class EventFormUI
         lbl.styleString = "font-size: 12px; color: #cccccc; vertical-align: center;";
         row.addComponent(lbl);
 
+        final hasOverride = _initialValues != null && Reflect.hasField(_initialValues, field.name);
+        final overrideVal:Dynamic = hasOverride ? Reflect.field(_initialValues, field.name) : null;
+
         var widget:Component = null;
         switch (field.type)
         {
             case TEXT:
                 var tf = new TextField();
-                tf.text = (field.defaultValue != null) ? Std.string(field.defaultValue) : '';
+                tf.text = hasOverride ? Std.string(overrideVal) : ((field.defaultValue != null) ? Std.string(field.defaultValue) : '');
                 tf.percentWidth = 100;
                 widget = tf;
 
             case NUMBER:
                 var ns = new NumberStepper();
-                ns.value = (field.defaultValue != null) ? Std.parseFloat(Std.string(field.defaultValue)) : 0;
+                ns.value = hasOverride ? Std.parseFloat(Std.string(overrideVal)) : ((field.defaultValue != null) ? Std.parseFloat(Std.string(field.defaultValue)) : 0);
                 if (field.min != null) ns.min = field.min;
                 if (field.max != null) ns.max = field.max;
                 if (field.step != null) ns.step = field.step;
@@ -83,18 +92,41 @@ class EventFormUI
                 if (field.options != null)
                     for (opt in field.options) dd.dataSource.add({text: opt});
 
-                if (field.defaultValue != null && field.options != null)
+                final wanted = hasOverride ? Std.string(overrideVal) : ((field.defaultValue != null) ? Std.string(field.defaultValue) : null);
+                if (wanted != null && field.options != null)
                 {
-                    final idx = field.options.indexOf(Std.string(field.defaultValue));
+                    final idx = field.options.indexOf(wanted);
                     if (idx >= 0) dd.selectedIndex = idx;
                 }
-
                 widget = dd;
 
             case CHECKBOX:
                 var cb = new CheckBox();
-                cb.selected = (field.defaultValue != null) ? (field.defaultValue == true) : false;
+                cb.selected = hasOverride ? (overrideVal == true) : ((field.defaultValue != null) ? (field.defaultValue == true) : false);
                 widget = cb;
+
+            case COLOR:
+                var colorP = new ColorPickerPopup();
+                colorP.percentWidth = 100;
+                colorP.liveTracking = true;
+
+                final raw:Dynamic = hasOverride ? overrideVal : field.defaultValue;
+                if (raw != null)
+                {
+                    var colorStr:String = null;
+                    if (Std.isOfType(raw, String))
+                    {
+                        colorStr = cast raw;
+                        if (!colorStr.startsWith("#")) colorStr = "#" + colorStr;
+                    }
+                    else
+                        colorStr = "#" + StringTools.hex(Std.int(raw), 6);
+
+                    if (colorStr != null)
+                        colorP.selectedItem = haxe.ui.util.Color.fromString(colorStr);
+                }
+
+                widget = colorP;
         }
 
         if (widget != null)
@@ -125,6 +157,20 @@ class EventFormUI
                     Reflect.setField(result, field.name, (dd.selectedItem != null) ? dd.selectedItem.text : Std.string(field.defaultValue ?? ''));
                 case CHECKBOX:
                     Reflect.setField(result, field.name, cast(w, CheckBox).selected);
+                case COLOR:
+                    //Reflect.setField(result, field.name, Std.int(cast(w, ColorPicker).currentColor));
+                    final colorP = cast(w, ColorPickerPopup);
+                    var colorValue:Dynamic = null;
+
+                    if (colorP.selectedItem != null)
+                    {
+                        final col = colorP.selectedItem;
+                        colorValue = "#" + StringTools.hex(col, 6);
+                    }
+                    else
+                        colorValue = "#FFFFFF";
+
+                    Reflect.setField(result, field.name, colorValue);
             }
         }
         return result;

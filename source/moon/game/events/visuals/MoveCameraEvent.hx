@@ -4,7 +4,7 @@ class MoveCameraEvent extends BaseEvent
 {
     override public function execute():Void
     {
-        final isInstant = (event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0);
+        final isInstant = ((event?.values?.ease?.toUpperCase() ?? "INSTANT").contains('INSTANT') || event.values.duration == 0);
         game.setCameraFocus(
             event.values.character,
             [event?.values?.x ?? 0, event?.values?.y ?? 0],

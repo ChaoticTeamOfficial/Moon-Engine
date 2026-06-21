@@ -2,6 +2,7 @@ package moon.toolkit.level_editor;
 
 import moon.toolkit.level_editor.LevelEditor.EventInfo;
 import moon.game.events.EventRegistry;
+import moon.game.notetypes.NoteTypeRegistry;
 
 //TODO: Fix haxeUI items being interactable when the side bar is open.
 class Library extends FlxGroup
@@ -13,6 +14,8 @@ class Library extends FlxGroup
 
     public var editing:Bool = false;
     public var selectedInfo:Null<EventInfo> = null;
+
+    public var editingValues:Dynamic = null;
 
     private var content:FlxSpriteGroup;
     private var contentBaseY:Map<FlxBasic, Float> = [];
@@ -130,6 +133,8 @@ class Library extends FlxGroup
                     member.alpha = 1;
                     if (FlxG.mouse.justPressed)
                     {
+                        editing = false;
+                        editingValues = null;
                         selectedInfo = cast(member, EventSpr).info;
                         refreshLibrary();
                         break;
@@ -148,8 +153,7 @@ class Library extends FlxGroup
                     member.alpha = 1;
                     if (FlxG.mouse.justPressed)
                     {
-                        selectedInfo = null;
-                        refreshLibrary();
+                        _exitEditOrSel();
                         break;
                     }
                 }
@@ -158,10 +162,16 @@ class Library extends FlxGroup
         }
 
         if (selectedInfo != null && FlxG.mouse.justPressed && FlxG.mouse.overlaps(tabIndicator))
-        {
-            selectedInfo = null;
-            refreshLibrary();
-        }
+            _exitEditOrSel();
+    }
+
+    private function _exitEditOrSel():Void
+    {
+        editing = false;
+        editingValues = null;
+        selectedInfo = null;
+        LevelEditor.instance.deselectEditTargets();
+        refreshLibrary();
     }
 
     public function refreshLibrary():Void
@@ -244,7 +254,11 @@ class Library extends FlxGroup
             scrollBarThumb.visible = false;
 
             final formY = bg2.y + PAD + headerH + 8;
-            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, EventRegistry.getEditorFields(selectedInfo.name));
+            final fields = (curType == NOTES)
+                ? NoteTypeRegistry.getEditorFields(selectedInfo.name)
+                : EventRegistry.getEditorFields(selectedInfo.name);
+
+            form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, fields, editingValues);
         }
 
         _applyScroll();

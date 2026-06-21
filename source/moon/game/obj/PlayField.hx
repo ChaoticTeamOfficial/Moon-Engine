@@ -111,6 +111,15 @@ class PlayField extends FlxGroup
 
         combo = new ComboNumbers('moon-engine');
         add(combo);
+
+        // Little text for testing out the accuracy.
+        // oh lol it doesn't even show accuracy anymore LMFAO
+        // fym it does now
+        stats = new FlxText(0, 0);
+        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
+        stats.antialiasing = true;
+        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
+        add(stats);
     
         //< -- STRUMLINES & INPUTS SETUP -- >//
         strumlines = [];
@@ -146,15 +155,6 @@ class PlayField extends FlxGroup
             inputHandler.onNoteMiss.add((note) -> onMiss(playerIDs[i], note));
             inputHandler.onGhostTap.add((keyDir) -> onGhostTap.dispatch(keyDir));
         }
-
-        // Little text for testing out the accuracy.
-        // oh lol it doesn't even show accuracy anymore LMFAO
-        // fym it does now
-        stats = new FlxText(0, 0);
-        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
-        stats.antialiasing = true;
-        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
-        add(stats);
 
         setupNotes();
         settingsUpdate();

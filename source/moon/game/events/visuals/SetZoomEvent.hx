@@ -12,7 +12,7 @@ class SetZoomEvent extends BaseEvent
             targetZoom,
             game.conductor.stepCrochet / 1000 * event.values.duration,
             {ease: TweenUtils.resolveEase(event.values.ease)},
-            (event.values.ease.toUpperCase() == 'INSTANT' || event.values.duration == 0)
+            ((event?.values?.ease?.toUpperCase() ?? "INSTANT").contains('INSTANT') || event.values.duration <= 0)
         );
     }
 

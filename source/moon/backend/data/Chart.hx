@@ -6,6 +6,8 @@ import haxe.Json;
 import moonchart.formats.fnf.legacy.*;
 import moonchart.formats.fnf.*;
 import moonchart.formats.*;
+import sys.FileSystem;
+import sys.io.File;
 #end
 import haxe.io.Path;
 using StringTools;
@@ -393,6 +395,68 @@ class Chart
     }
 
     /**
+     * Returns all notes of a specific type.
+     * @param notes
+     * @param type 
+     */
+    public static function getNotesByType(notes:Array<NoteStruct>, type:String):Array<NoteStruct>
+        return notes.filter(n -> n.type == type);
+
+    /**
+     * Returns all notes on a specific lane.
+     * @param notes 
+     * @param lane
+     */
+    public static function getNotesByLane(notes:Array<NoteStruct>, lane:String):Array<NoteStruct>
+        return notes.filter(n -> n.lane == lane);
+
+    /**
+     * Changes an array of notes to a specific type.
+     * @param notes 
+     * @param oldType 
+     * @param newType 
+     */
+    public static function changeNoteType(notes:Array<NoteStruct>, oldType:String, newType:String):Void
+        for (n in notes) if (n.type == oldType) n.type = newType;
+
+    /**
+     * Changes an array of notes to a specific lane.
+     * @param notes 
+     * @param fromLane 
+     * @param toLane 
+     */
+    public static function changeNoteLane(notes:Array<NoteStruct>, fromLane:String, toLane:String):Void
+        for (n in notes) if (n.lane == fromLane) n.lane = toLane;
+
+    public static function findCompanionFile(chartPath:String, suffix:String):Null<String>
+    {
+        #if !sys return null; #end
+
+        final dir = Path.directory(chartPath);
+        final name = Path.withoutExtension(Path.withoutDirectory(chartPath));
+
+        final candidates = [
+            '$dir/$name$suffix', '$dir/$name-$suffix', '$dir/$suffix',
+            '$dir/events$suffix', '$dir/meta$suffix'
+        ];
+
+        for (c in candidates)
+        {
+            final jsonPath = c.endsWith(".json") ? c : '$c.json';
+            if (Paths.exists(jsonPath)) return jsonPath;
+        }
+
+        if (FileSystem.exists(dir) && FileSystem.isDirectory(dir))
+        {
+            for (f in FileSystem.readDirectory(dir))
+                if (f.toLowerCase().contains(suffix.toLowerCase()) && f.endsWith(".json"))
+                    return Path.join([dir, f]);
+        }
+        
+        return null;
+    }
+
+    /**
      * Converts a chart type to Moon Engine's chart type.
      * @param type       The chart type you're converting from
      * @param path       The chart's path
@@ -434,19 +498,16 @@ class Chart
         if (Reflect.hasField(data.notes, difficulty))
         {
             final noteArray:Array<Dynamic> = Reflect.field(data.notes, difficulty);
-            
             for (note in noteArray)
             {
-                final note:NoteStruct =
-                {
+                convertedChart.notes.push({
                     time: note.t,
                     data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
-                    lane:  (note.d > 3) ? 'opponent' : 'p1',
-                    type: (note.k == '') ? null : note.k,
-                    duration: note.l,
+                    lane: (note.d > 3) ? 'opponent' : 'p1',
+                    type: (note.k == null || note.k == '') ? null : note.k,
+                    duration: note.l ?? 0.0,
                     values: {}
-                };
-                convertedChart.notes.push(note);
+                });
             }
         }
 

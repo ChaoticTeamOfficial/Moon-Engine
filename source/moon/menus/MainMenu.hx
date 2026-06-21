@@ -93,7 +93,8 @@ class MainMenu extends FlxTransitionableState
                 case 'mods': FlxG.switchState(() -> new ModMenu());
 				case 'freeplay': openSubState(new Freeplay('bf'));
                 case 'settings': openSubState(new Settings());
-                case 'convert chart yeah': FlxG.switchState(()->new ChartConvert());
+                case 'convert chart yeah': //FlxG.switchState(()->new ChartConvert());
+                    openSubState(new moon.toolkit.ChartConverterSubState());
                 case 'blabla': openSubState(new JudgementsComboCustomize());
                 case 'test script state': FlxG.switchState(()->new MoonScriptedState('MyCoolScriptedState'));
                 case 'story menu': FlxG.switchState(()->new Story());

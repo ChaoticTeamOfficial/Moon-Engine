@@ -20,6 +20,7 @@ import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
+import moon.game.obj.SubtitleDisplay;
 
 import moon.hardcoded_shaders.RainShader;
 import openfl.filters.ShaderFilter;
@@ -54,6 +55,11 @@ class PlayState extends FlxTransitionableState
 	 * The funkin' modchart instance.
 	 */
 	public var fmInstance:Manager;
+
+	/**
+	 * The subtitles that show up on a show subtitle event :D
+	 */
+	public var captions:SubtitleDisplay;
 	
 	// Cameras
 
@@ -154,6 +160,10 @@ class PlayState extends FlxTransitionableState
 		playField.conductor.onBeat.add(beatHit);
 		playField.conductor.onStep.add(stepHit);
 		add(playField);
+
+		captions = new SubtitleDisplay();
+		captions.camera = camHUD;
+		add(captions);
 
 		for (handler in playField.inputHandlers)
 			handler.game = this;
@@ -350,6 +360,9 @@ class PlayState extends FlxTransitionableState
 
 		Global.scriptCall('onPostUpdate', [elapsed]);
 	}
+
+	public function showCaptions(textStr:String, duration:Float = 8.0, fontSize:Int = 24, boxType:SubtitleBoxType = ROUNDED, font:String = 'vcr.ttf', textColor:Dynamic = 0xFFFFFFFF, outlineColor:Dynamic = 0xFF000000, outlineType:String = 'None'):Void
+		if(captions != null) captions.show(textStr, duration, fontSize, boxType, font, textColor, outlineColor, outlineType);
 
 	public var camMov:FlxTween;
 	public var camRot:FlxTween;

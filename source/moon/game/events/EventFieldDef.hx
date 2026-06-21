@@ -46,4 +46,7 @@ enum abstract EventFieldType(String) from String to String
 
     /** Boolean toggle checkbox. **/
     var CHECKBOX = 'checkbox';
+
+    /** RGB color swatch picker. **/
+    var COLOR = 'color';
 }

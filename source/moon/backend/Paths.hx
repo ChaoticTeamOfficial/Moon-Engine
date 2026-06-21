@@ -70,7 +70,7 @@ class Paths
     public static function exists(filePath:String, ?library:String):Bool
     {
         final resolved = getPath(filePath, library);
-        #if desktop
+        #if sys
         return FileSystem.exists(resolved);
         #else
         return Assets.exists(resolved);
@@ -104,6 +104,25 @@ class Paths
             return "";
         }
         return bytes.toString();
+    }
+
+    /**
+     * Saves a file's content.
+     */
+    public static function saveFileContent(path:String, content:String, ?library:String):Void
+    {
+        #if sys
+        final resolved = getPath(path, library);
+        final dir = haxe.io.Path.directory(resolved);
+        
+        if (!FileSystem.exists(dir))
+            FileSystem.createDirectory(dir);
+            
+        File.saveContent(resolved, content);
+        trace('[PATHS] Saved to: $resolved');
+        #else
+        trace("Saving only works on desktop!", "ERROR");
+        #end
     }
 
     /**
