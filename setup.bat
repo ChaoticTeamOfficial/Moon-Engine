@@ -22,47 +22,8 @@ echo *** Installing Main Dependencies... ***
 echo ***************************************
 echo.
 
-haxelib install flixel 6.1.2
-haxelib install lime 8.3.1
-haxelib install openfl 9.5.1
-haxelib install flixel-addons 4.0.1
-haxelib install flixel-tools 1.5.1
-haxelib install flixel-text-input 2.0.2
-haxelib install hxcpp-debugger 
-haxelib install hxcpp-debug-server 1.2.4
-haxelib install flixel-ui
-haxelib install hxp
-
-haxelib install moonchart 0.5.1
-haxelib install hxvlc 2.2.5
-haxelib install hscript-iris
-haxelib install flixel-waveform
-haxelib install flixel-animate 1.5.0 
-haxelib install hxdiscord_rpc
-
-haxelib git funkin-modchart https://github.com/theoo-h/FunkinModchart.git
-haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-haxelib git funkin.vis https://github.com/ACrazyTown/funkVis
-haxelib git hxdsp https://github.com/baioc/hxdsp
-haxelib git grig.audio https://github.com/FunkinCrew/grig.audio
-haxelib git polymod https://github.com/larsiusprime/polymod
-haxelib git thx.core https://github.com/fponticelli/thx.core
-haxelib git thx.semver https://github.com/fponticelli/thx.semver
-haxelib git flixel-screenshot-plugin https://github.com/dotevie/flixel-screenshot-plugin
-haxelib git haxeui-flixel https://github.com/haxeui/haxeui-flixel
-haxelib git haxeui-core https://github.com/haxeui/haxeui-core
-haxelib git flxscaledslicesprite https://github.com/TracedInPurple/FlxScaledSliceSprite.git
-
-haxelib set flixel 6.1.2
-haxelib set lime 8.3.1
-haxelib set openfl 9.5.1
-haxelib set flixel-addons 4.0.1
-haxelib set flixel-tools 1.5.1
-haxelib set flixel-text-input 2.0.2
-haxelib set hxcpp-debug-server 1.2.4
-haxelib set moonchart 0.5.1
-haxelib set hxvlc 2.2.5
-haxelib set flixel-animate 1.5.0
+haxelib git hmm https://github.com/FunkinCrew/hmm funkin-patches
+haxelib run hmm install
 
 cls
 title Moon Engine Setup - Doing a set-up
@@ -72,7 +33,6 @@ echo *** You will now set-up your Flixel. ***
 echo ****************************************
 
 haxelib run lime setup
-haxelib run flixel-tools setup
 cls
 
 goto InstallVSCReq
