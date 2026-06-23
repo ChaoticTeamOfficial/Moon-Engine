@@ -1,0 +1,105 @@
+{
+  "dependencies": [
+    {
+      "name": "flixel",
+      "type": "haxelib",
+      "version": "6.1.2"
+    },
+    {
+      "name": "flixel-addons",
+      "type": "haxelib",
+      "version": "4.0.1"
+    },
+    {
+      "name": "flixel-animate",
+      "type": "haxelib",
+      "version": "1.5.0"
+    },
+    {
+      "name": "flixel-screenshot-plugin",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/dotevie/flixel-screenshot-plugin"
+    },
+    {
+      "name": "funkin-modchart",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/theoo-h/FunkinModchart"
+    },
+    {
+      "name": "funkin.vis",
+      "type": "git",
+      "dir": null,
+      "ref": "cool",
+      "url": "https://github.com/ACrazyTown/funkVis"
+    },
+    {
+      "name": "grig.audio",
+      "type": "git",
+      "dir": null,
+      "ref": "funkin",
+      "url": "https://github.com/FunkinCrew/grig.audio"
+    },
+    {
+      "name": "haxeui-core",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/haxeui/haxeui-core"
+    },
+    {
+      "name": "haxeui-flixel",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/haxeui/haxeui-flixel"
+    },
+    {
+      "name": "hxcpp-debug-server",
+      "type": "haxelib",
+      "version": "1.2.4"
+    },
+    {
+      "name": "hxdiscord_rpc",
+      "type": "haxelib",
+      "version": "1.3.0"
+    },
+    {
+      "name": "hxvlc",
+      "type": "haxelib",
+      "version": "2.2.5"
+    },
+    {
+      "name": "lime",
+      "type": "haxelib",
+      "version": "8.3.1"
+    },
+    {
+      "name": "moonchart",
+      "type": "haxelib",
+      "version": "0.5.1"
+    },
+    {
+      "name": "openfl",
+      "type": "haxelib",
+      "version": "9.5.1"
+    },
+    {
+      "name": "thx.core",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/fponticelli/thx.core"
+    },
+    {
+      "name": "thx.semver",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/fponticelli/thx.semver"
+    }
+  ]
+}
