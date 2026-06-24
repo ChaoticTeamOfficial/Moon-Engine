@@ -1,7 +1,7 @@
 {
 	"name": "erect",
 	"displayName": "ERECT",
-	"color": "0xFFfd579d",
+	"color": "#fd579d",
 	"suffix": "-erect",
 	"order": 4
 }

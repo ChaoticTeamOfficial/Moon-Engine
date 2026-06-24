@@ -23,7 +23,7 @@ class Freeplay extends FlxSubState
     public static var appearType:FreeplayTransition = NONE;
     public static var instance:Freeplay;
 
-    public var character:String; // this is used as the preferred mix (e.g. "bf")
+    public var character:String;
 
     public var songVolume:Float = MoonSettings.callSetting('Music Volume') / 100;
     static var curSelected:Int = 0;
@@ -35,6 +35,7 @@ class Freeplay extends FlxSubState
     public var thisDJ:FreeplayDJ;
     public var selector:FreeplaySongSelector;
     public var stars:DifficultyStars;
+    public var diffSelector:FreeplayDifficultySelector;
     var topBar:MoonSprite;
     public var playerIcon:PixelIcon;
     public var infoText:HTMLText; //html text my belove,,,
@@ -90,18 +91,22 @@ class Freeplay extends FlxSubState
 
         add(mainBG.foreground);
 
-        songList = getMixSonglist('all', character);
-        //trace(songList);
-
-        stars = new DifficultyStars(0, 632, 24, 0.055);
+        stars = new DifficultyStars(0, 614, 24, 0.055);
         stars.screenCenter(X);
         stars.x += 280;
         stars.difficulty = 0;
+
+        diffSelector = new FreeplayDifficultySelector();
+        diffSelector.setPos(stars.x + 110, stars.y + 64);
+        
+        // Now load the song list with the default difficulty
+        songList = getMixSonglist('all', character, diffSelector.getSelected());
 
         selector = new FreeplaySongSelector();
         selector.loadSongs(songList, curSelected);
         add(selector);
         add(stars);
+        add(diffSelector);
 
         topBar = new MoonSprite().makeGraphic(FlxG.width + 16, 78, FlxColor.BLACK);
         topBar.screenCenter(X);
@@ -132,16 +137,17 @@ class Freeplay extends FlxSubState
     }
 
     /**
-     * Gets the song list for a week, preferring the given mix.
+     * Gets the song list for a week, preferring the given mix and difficulty.
      * @param week The week name. It can also be 'all' if you want all available songs.
      * @param preferredMix The character mix.
+     * @param diff The difficulty to filter by.
      */
-    public function getMixSonglist(week:String, preferredMix:String):Array<SongBase>
+    public function getMixSonglist(week:String, preferredMix:String, diff:String):Array<SongBase>
     {
         final filtered:Array<SongBase> = [];
 
         for (song in SongLibrary.get().weekSonglist(week))
-            if (song.mix == preferredMix)
+            if (song.mix == preferredMix && song.difficulty == diff)
                 filtered.push(song);
 
         return filtered;
@@ -154,6 +160,41 @@ class Freeplay extends FlxSubState
         Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
 
         Global.scriptCall('onScroll');
+    }
+
+    /**
+     * Changes the difficulty, reloading the song list to reflect it.
+     * It attempts to keep the currently selected song if it exists in the new difficulty.
+     */
+    public function changeDiff(delta:Int)
+    {
+        diffSelector.change(delta);
+        
+        var newDiff = diffSelector.getSelected();
+        var newSongList = getMixSonglist('all', character, newDiff);
+        
+        // Try to find the currently selected song in the new list
+        var curSongName:String = songList.length > 0 ? songList[curSelected].song : null;
+        
+        songList = newSongList;
+        var newSelected:Int = 0;
+        if (curSongName != null)
+        {
+            for (i in 0...songList.length)
+            {
+                if (songList[i].song == curSongName)
+                {
+                    newSelected = i;
+                    break;
+                }
+            }
+        }
+        
+        curSelected = newSelected;
+        selector.loadSongs(songList, curSelected);
+        
+        updateInfoText();
+        Global.scriptCall('onDiffChange');
     }
 
     public function updateInfoText()
@@ -183,6 +224,9 @@ class Freeplay extends FlxSubState
 
         if (MoonInput.justPressed(UI_DOWN)) change(1);
         if (MoonInput.justPressed(UI_UP)) change(-1);
+
+        if (MoonInput.justPressed(UI_LEFT)) changeDiff(-1);
+        if (MoonInput.justPressed(UI_RIGHT)) changeDiff(1);
 
         if(FlxG.mouse.wheel != 0) change(-FlxG.mouse.wheel);
 

@@ -1,6 +1,6 @@
 {
 	"name": "hard",
 	"displayName": "HARD",
-	"color": "0xFFff0000",
+	"color": "#ff0000",
 	"order": 3
 }

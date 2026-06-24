@@ -1,6 +1,6 @@
 {
 	"name": "normal",
 	"displayName": "NORMAL",
-	"color": "0xFFffff00",
+	"color": "#ffff00",
 	"order": 2
 }
