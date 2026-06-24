@@ -4,14 +4,49 @@
     "flipX": false,
 	"extraOffsets": [0, 0],
     "danceFrequency": 2,
-	"type": "packed",
+	"type": "atlas",
     "animations": [
         {
             "name": "idle-0", 
             "prefix": "idle", 
             "x": 0,
             "y": 0, 
-            "fps": 24
+            "fps": 24,
+			"animType": "framelabel"
+        },
+		{
+            "name": "select", 
+            "prefix": "select", 
+            "x": 0,
+            "y": 0, 
+            "fps": 24,
+			"animType": "framelabel"
+        },
+		{
+            "name": "deselect", 
+            "prefix": "deselect", 
+            "x": 0,
+            "y": 0, 
+            "fps": 24,
+			"animType": "framelabel"
+        },
+		{
+            "name": "slide-in", 
+            "prefix": "slidein", 
+            "x": 0,
+            "y": 0, 
+            "fps": 24,
+			"animType": "framelabel",
+			"finishAnim": "endSlide"
+        },
+		{
+            "name": "endSlide", 
+            "prefix": "idle", 
+            "x": 0,
+            "y": 0, 
+            "fps": 24,
+			"indices": [5,6,7,8,9,10,11,12,13,14,15],
+			"animType": "framelabel"
         }
     ]
 }

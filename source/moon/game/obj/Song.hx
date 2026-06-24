@@ -1,6 +1,7 @@
 package moon.game.obj;
 
 import flixel.FlxG;
+import moon.backend.data.SongLibrary;
 import moon.dependency.MoonSound.MusicType;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxSignal;
@@ -43,33 +44,38 @@ class Song extends FlxTypedGroup<MoonSound>
     private var finished:Bool = false;
 
     /**
-     * Creates a song insance, useful for gameplay Inst & Voices.
-     * @param song The name of the song
-     * @param char The character mix
-     * @param useErect Whether or not to use the erect song 
-     * @param conductor 
+     * Creates a song instance, useful for gameplay Inst & Voices.
+     * @param song        The name of the song
+     * @param char        The character mix
+     * @param difficulty  The difficulty name
+     * @param conductor   
      */
-    public function new(song:String, char:String, ?useErect:Bool, conductor:Conductor)
+    public function new(song:String, char:String, difficulty:String = 'hard', conductor:Conductor)
     {
         super();
         this.conductor = conductor;
 
-        var audList =[Voices_Opponent, Voices_Player, Inst];
+        // Determine suffixes from the difficulty config
+        final instSfx = SongLibrary.getInstSuffix(difficulty);
+        final voicesSfx = SongLibrary.getVoicesSuffix(difficulty);
+
+        var audList = [Voices_Opponent, Voices_Player, Inst];
 
         for(i in 0...audList.length)
         {
             final item = audList[i];
+            final sfx = (item == Inst) ? instSfx : voicesSfx;
 
-            final erectOrNot = (useErect) ? "-erect" : "";
-            final items = '$song/$char/${audList[i]}$erectOrNot';
-            //trace(items);
-            //trace(Paths.sound('$items', 'songs'));
+            // Try with suffix first, then fall back to non-suffixed
+            var path = '$song/$char/${audList[i]}$sfx';
+            if (sfx != '' && !Paths.exists('songs/$path.ogg'))
+                path = '$song/$char/${audList[i]}';
 
-            if(Paths.exists('songs/$items.ogg'))
+            if(Paths.exists('songs/$path.ogg'))
             {
                 this.recycle(MoonSound, function():MoonSound
                 {
-                    var aud = cast new MoonSound().loadEmbedded(Paths.sound('$items.ogg', 'songs'), false, true);
+                    var aud = cast new MoonSound().loadEmbedded(Paths.sound('$path.ogg', 'songs'), false, true);
                     aud.type = audList[i];
                     aud.strID = song;
                     aud.onComplete = finish;
@@ -81,7 +87,7 @@ class Song extends FlxTypedGroup<MoonSound>
             }
         }
 
-        conductor.onStep.add(steps);
+        if (conductor != null) conductor.onStep.add(steps);
         finished = false;
     }
 
@@ -112,7 +118,6 @@ class Song extends FlxTypedGroup<MoonSound>
 
     function finish()
     {
-        //trace("AAAAAAAAAAAA");
         if(!finished)
         {
             onFinish.dispatch();
@@ -149,7 +154,6 @@ class Song extends FlxTypedGroup<MoonSound>
             if (i.playing) conductor.time = i.time;
             if(voices.length > 0) for(v in voices) if(v.playing) v.time = i.time;
         }
-        //(member.type == Inst) ? conductor.time = member.time : member.time = conductor.time;
     }
 
     override public function kill()

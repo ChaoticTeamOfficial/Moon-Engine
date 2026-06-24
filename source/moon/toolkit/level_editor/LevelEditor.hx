@@ -240,7 +240,7 @@ class LevelEditor extends FlxState
         NUM_LANES = 4 * chart.content.meta.lanes.length;
 
         conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
-        playback = new Song(song, mix, (diff == 'erect' || diff == 'nightmare'), conductor);
+        playback = new Song(song, mix, diff, conductor);
 
         // --- GENERATE OBJECTSS --- //
 

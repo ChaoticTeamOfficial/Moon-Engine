@@ -50,7 +50,7 @@ class DifficultySelector extends FlxSpriteGroup
         for(index => diff in difficulties) {
             var text = new FlxText(posX, 0, 0, diff.displayName);
             text.setFormat(Paths.font('phantomuff/difficulty.ttf'), fontSize);
-            text.color = FlxColor.fromRGB(diff.color[0], diff.color[1], diff.color[2]);
+            text.color = FlxColor.fromString(diff.color);
             difficultyTexts.add(text);
             posX += text.width + difficultySpacing;
         }

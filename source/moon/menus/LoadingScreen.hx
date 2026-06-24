@@ -79,12 +79,7 @@ class LoadingScreen extends FlxTransitionableState
                     var conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
 
                     loadProgress = 15;
-                    var playback = new Song(
-                        d.song,
-                        d.mix,
-                        (d.difficulty == 'erect' || d.difficulty == 'nightmare'),
-                        conductor
-                    );
+                    var playback = new Song(d.song, d.mix, d.difficulty, conductor);
                     playback.state = STOP;
                     loadProgress = 30;
 

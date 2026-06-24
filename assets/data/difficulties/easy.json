@@ -1,5 +1,6 @@
 {
 	"name": "easy",
 	"displayName": "EASY",
-	"color": [0,255,0]
+	"color": "0xFF00ff00",
+	"order": 1
 }

@@ -88,12 +88,7 @@ class PlayField extends FlxGroup
         conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
         conductor.onBeat.add(beatHit);
         
-        playback = new Song(
-            song,
-            mix,
-            (difficulty == 'erect' || difficulty == 'nightmare'),
-            conductor
-        );
+        playback = new Song(song, mix, difficulty, conductor);
         playback.state = PAUSE;
 
         //< -- HEALTHBAR SETUP -- >//

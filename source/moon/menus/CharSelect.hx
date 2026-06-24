@@ -19,7 +19,6 @@ class CharSelect extends FlxState
     public var player:Character;
 
     public var background:FlxGroup = new FlxGroup();
-    private var scrollSnd:MoonSound;
 
     public var isLightsOff:Bool = false;
     override public function create():Void
@@ -32,8 +31,10 @@ class CharSelect extends FlxState
         conductor = new Conductor(180);
 
         player = new Character(0,0, 'bf/bfChill', conductor);
-        add(player);
+        background.add(player);
         player.screenCenter();
+        player.overrideAnims = ['select', 'deselect', 'slide-in'];
+        player.holdDuration = 4;
 
         cursor = new Cursor();
         add(cursor);
@@ -44,19 +45,12 @@ class CharSelect extends FlxState
         grid.screenCenter();
         grid.x += 16;
 
-        scrollSnd = new MoonSound().loadEmbedded(Paths.sound('menus/charSelect/CS_select.ogg', 'sounds'));
-        scrollSnd.volume = MoonSettings.callSetting('SFX Volume') / 100;
-
         var nametag = new Nametag(0, 0, 'bf');
         add(nametag);
 
         // on changing a selection...
         grid.onChange.add((dir)->{
-            if(scrollSnd.playing) scrollSnd.stop();
-            if(dir != 0){
-                //scrollSnd.pitch = FlxG.random.float(0.98, 1.02);
-                scrollSnd.play();
-            }
+            Paths.playSFX('menus/charSelect/CS_select.ogg', true);
 
             final song = 'stayFunky-${CharGrid.curChar.toLowerCase()}'; 
             playlist.focusSong = playlist.sounds.exists(song) ? song : 'stayFunky';
@@ -67,6 +61,8 @@ class CharSelect extends FlxState
             nametag.screenCenter(X);
             nametag.x += 400;
             nametag.y = barThing.y + barThing.height / 2 - nametag.height / 2;
+
+            player.forcePlayAnim('slide-in', true);
 
             if(CharGrid.curChar.toLowerCase() == 'locked' && !isLightsOff)
             {
@@ -87,8 +83,6 @@ class CharSelect extends FlxState
 
            // trace(song, "DEBUG");
         });
-
-        FlxG.sound.list.add(scrollSnd);
 
         grid.scroll(0);
         conductor.onBeat.add(beatHit);
@@ -209,14 +203,16 @@ class CharSelect extends FlxState
                     cast(grid.members[CharGrid.curSelected], PixelIcon).playAnim('select', true);
 
                     TweenUtils.cancelTwn(songTween);
+
+                    player.forcePlayAnim('select', true);
                     songTween = FlxTween.tween(playlist, {pitch: 0}, 1.3, {ease: FlxEase.quadInOut, onComplete: _ ->{
                         playlist.volume = 0;
                         Global.allowInputs = false;
 
                         FlxG.camera.fade(FlxColor.BLACK, 0.6, false);
                         FlxTween.tween(FlxG.camera.scroll, {y: -340}, 1.3, {ease: FlxEase.backInOut, onComplete: _->{
-                            Global.allowInputs = true;
                             FlxG.switchState(()-> new MainMenu());
+                            Global.allowInputs = true;
                         }});
                     }});
                 }
@@ -230,6 +226,8 @@ class CharSelect extends FlxState
             final ico = cast(grid.members[CharGrid.curSelected], PixelIcon);
             ico.playAnim('select', true, true);
             ico.animation.onFinish.addOnce(_ -> ico.playAnim('idle', true));
+
+            player.forcePlayAnim('deselect', true);
 
             TweenUtils.cancelTwn(songTween);
             songTween = FlxTween.tween(playlist, {pitch: 1}, 0.6, {ease: FlxEase.quadInOut});

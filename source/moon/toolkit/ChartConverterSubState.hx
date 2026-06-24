@@ -6,6 +6,7 @@ import haxe.ui.core.Screen;
 import haxe.io.Path;
 import lime.ui.FileDialog;
 import moon.backend.data.Chart;
+import moon.backend.data.SongLibrary;
 import moon.backend.data.SrtParser;
 import moon.backend.Conductor;
 
@@ -79,8 +80,12 @@ class ChartConverterSubState extends FlxSubState
                 _format = formatDropdown.selectedItem.text;
         };
 
-        diffDropdown = addLabeledDropdown(sidebar, "Difficulty", ["easy", "normal", "hard", "erect", "nightmare"]);
-        diffDropdown.selectedIndex = 2;
+        var diffNames:Array<String> = [for(d in SongLibrary.getDifficultyList()) d.name];
+        if (diffNames.length == 0) diffNames = ["easy", "normal", "hard", "erect", "nightmare"];
+        
+        diffDropdown = addLabeledDropdown(sidebar, "Difficulty", diffNames);
+        var hardIdx = diffNames.indexOf("hard");
+        diffDropdown.selectedIndex = hardIdx >= 0 ? hardIdx : 0;
 
         mixField = addLabeledField(sidebar, "Mix name", "bf");
 
@@ -189,7 +194,8 @@ class ChartConverterSubState extends FlxSubState
 
         for (item in [
             "Output path: assets/songs/{name}/{mix}/chart-{diff}.json",
-            "Events path: assets/songs/{name}/{mix}/events.json",
+            "Metadata path: assets/songs/{name}/{mix}/meta{suffix}.json",
+            "Events path: assets/songs/{name}/{mix}/events{suffix}.json",
             "SRT subtitles -> Show Subtitle events (if provided)",
             "Note rules are applied after base conversion!"
         ])
@@ -228,13 +234,16 @@ class ChartConverterSubState extends FlxSubState
 
         try
         {
-            final result = Chart.convert(_format, _chartPath, diffDropdown.selectedItem?.text ?? 'hard', _metaPath);
             final diff = diffDropdown.selectedItem?.text ?? 'hard';
             final mix = mixField.text.trim().length > 0 ? mixField.text.trim() : 'bf';
             final songName = Path.withoutDirectory(Path.directory(_chartPath));
+            final suffix = Chart.getDifficultySuffix(diff);
+
+            final result = Chart.convert(_format, _chartPath, diff, _metaPath);
 
             var chartData:Dynamic = haxe.Json.parse(result.chartJson);
             var eventsData:Array<Dynamic> = haxe.Json.parse(result.eventsJson);
+            var metaData:Dynamic = result.metaJson != null ? haxe.Json.parse(result.metaJson) : null;
 
             if (chartData.notes != null)
             {
@@ -250,8 +259,8 @@ class ChartConverterSubState extends FlxSubState
                 try
                 {
                     final srtContent = sys.io.File.getContent(_srtPath);
-                    final bpm:Float = chartData?.meta?.bpm ?? 120.0;
-                    final timeSig:Array<Dynamic> = chartData?.meta?.timeSignature ?? [4, 4];
+                    final bpm:Float = metaData?.bpm ?? 120.0;
+                    final timeSig:Array<Dynamic> = metaData?.timeSignature ?? [4, 4];
                     final tempConductor = new Conductor(bpm, timeSig[0], timeSig[1]);
                     final subtitleEvents = SrtParser.parse(srtContent, tempConductor);
                     for (e in subtitleEvents) eventsData.push(e);
@@ -263,9 +272,13 @@ class ChartConverterSubState extends FlxSubState
 
             final chartJson = haxe.Json.stringify(chartData, null, "\t");
             final eventsJson = haxe.Json.stringify(eventsData, null, "\t");
+            final metaJson = metaData != null ? haxe.Json.stringify(metaData, null, "\t") : null;
 
             Paths.saveFileContent('songs/$songName/$mix/chart-$diff.json', chartJson);
-            Paths.saveFileContent('songs/$songName/$mix/events.json', eventsJson);
+            Paths.saveFileContent('songs/$songName/$mix/events$suffix.json', eventsJson);
+            
+            if (metaJson != null)
+                Paths.saveFileContent('songs/$songName/$mix/meta$suffix.json', metaJson);
 
             setStatus('Done! Saved to assets/songs/$songName/$mix/', "#4ade80");
         }
