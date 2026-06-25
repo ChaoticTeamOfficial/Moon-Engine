@@ -22,7 +22,8 @@ echo *** Installing Main Dependencies... ***
 echo ***************************************
 echo.
 
-haxelib git hmm https://github.com/FunkinCrew/hmm funkin-patches
+haxelib --global git haxelib https://github.com/FunkinCrew/haxelib funkin-patches
+haxelib --global git hmm https://github.com/FunkinCrew/hmm funkin-patches
 haxelib run hmm install
 
 cls
