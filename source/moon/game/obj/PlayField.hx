@@ -254,6 +254,9 @@ class PlayField extends FlxGroup
 		// update health based on p1's health.
 		healthBar.health = inputHandlers.get('p1').stats.health;
 
+		final stat = inputHandlers.get('p1').stats;
+		final rankData = Timings.getRank(stat.accuracy);
+
 		if (stats.color != rankData.color)
 		{
 			final curRank = Timings.getRank(stat.accuracy).rank;
@@ -262,20 +265,21 @@ class PlayField extends FlxGroup
 				final oldIndex = rankLevels.indexOf(previousRank);
 				final newIndex = rankLevels.indexOf(curRank);
 
+				if (MoonSettings.callSetting('Ranking Sound'))
+				{
+					if (newIndex > oldIndex)
+					{
+						Paths.playSFX('game/ratingRaise.wav');
+						Global.scriptCall('onRatingRaise');
+					}
+					else if (newIndex < oldIndex)
+					{
+						Paths.playSFX('game/ratingLower.wav');
+						Global.scriptCall('onRatingLower');
+					}
+				}
+
 				previousRank = curRank;
-
-				Global.scriptCall('onRatingChange');
-
-				if (newIndex > oldIndex)
-				{
-					if (MoonSettings.callSetting('Ranking Sound')) Paths.playSFX('game/ratingRaise.wav');
-					Global.scriptCall('onRatingRaise');
-				}
-				else if (newIndex < oldIndex)
-				{
-					if (MoonSettings.callSetting('Ranking Sound')) Paths.playSFX('game/ratingLower.wav');
-					Global.scriptCall('onRatingLower');
-				}
 			}
 		}
 
