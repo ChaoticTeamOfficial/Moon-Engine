@@ -2,12 +2,12 @@ package moon.backend;
 
 import lime.app.Event;
 
+@:publicFields
 /**
  * Conductor made entirely by [SomeGuyWhoLovesCoding](https://github.com/SomeGuyWhoLovesCoding)
  * Revamped math by [sword_352](https://github.com/Sword352).
  * All I made here was to make some few changes that I am comfortable with, so all credits goes to them.
  */
-@:publicFields
 class Conductor
 {
 	// -- EVENTS
@@ -60,7 +60,7 @@ class Conductor
 	var time(default, set):Float = 0;
 
 	@:dox(hide)
-	var catchUp:Bool = false;
+	private var catchUp:Bool = false;
 
 	@:dox(hide)
 	function set_time(value:Float):Float
@@ -102,11 +102,14 @@ class Conductor
 			if (curMeasure != _measureTracker)
 			{
 				final dir = (_measureTracker > curMeasure) ? 1 : -1;
+				if (Math.abs(_measureTracker - curMeasure) > 1) catchUp = true;
+
 				while (curMeasure != _measureTracker)
 				{
 					curMeasure += dir;
-					onMeasure.dispatch(curMeasure);
+					if (!catchUp) onMeasure.dispatch(curMeasure);
 				}
+				catchUp = false;
 			}
 		}
 		else
@@ -116,7 +119,7 @@ class Conductor
 			curMeasure = _measureTracker;
 		}
 
-		return value;
+		return time;
 	}
 
 	/**
@@ -168,6 +171,10 @@ class Conductor
 	 */
 	var denominator:Float = 4;
 
+	private var _initialBpm:Float;
+	private var _initialNumerator:Float;
+	private var _initialDenominator:Float;
+
 	/**
 		Change the conductor's beats per minute.
 		This also includes time signatures.
@@ -193,26 +200,42 @@ class Conductor
 		numerator = newNumerator;
 		denominator = newDenominator;
 
-		crochet = stepCrochet * numerator;
-		measureCrochet = crochet * denominator;
+		crochet = stepCrochet * 4;
+		measureCrochet = crochet * numerator * (4.0 / denominator);
 	}
 
 	/**
-		Reset the conductor.
+		Reset the conductor back to its initial state.
 	**/
 	inline function reset():Void
 	{
-		offsetTime = stepOffset = beatOffset = measureOffset = time = 0.0;
+		offsetTime = stepOffset = beatOffset = measureOffset = 0.0;
 		curStep = curBeat = curMeasure = 0;
-		changeBpmAt(0);
+		changeBpmAt(0, _initialBpm, _initialNumerator, _initialDenominator);
+		time = 0.0;
+	}
+
+	/**
+		Destroy the conductor and remove all event listeners.
+	**/
+	inline function destroy():Void
+	{
+		onStep.removeAll();
+		onBeat.removeAll();
+		onMeasure.removeAll();
 	}
 
 	/**
 		Constructs a conductor.
 		@param initialBpm The initial beats per minute.
+		@param initialNumerator The initial numerator of the time signature.
+		@param initialDenominator The initial denominator of the time signature.
 	**/
-	inline function new(initialBpm:Float = 100, initialNumerator:Float = 4, initialDenominator:Float = 4):Void
+	function new(initialBpm:Float = 100, initialNumerator:Float = 4, initialDenominator:Float = 4):Void
 	{
+		_initialBpm = initialBpm;
+		_initialNumerator = initialNumerator;
+		_initialDenominator = initialDenominator;
 		changeBpmAt(0, initialBpm, initialNumerator, initialDenominator);
 		active = true;
 	}
