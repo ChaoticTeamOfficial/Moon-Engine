@@ -2619,35 +2619,20 @@
 	],
 	"meta": {
 		"stage": "stage",
-		"players": [
-			"bf"
-		],
-		"opponents": [
-			"dad"
-		],
+		"players": ["bf"],
+		"opponents": ["dad"],
 		"artist": "Kawai Sprite",
 		"charter": "ninjamuffin99 + MtH",
-		"spectators": [
-			"gf"
-		],
+		"spectators": ["gf"],
 		"hasCountdown": true,
 		"bpm": 180,
-		"timeSignature": [
-			4,
-			4
-		],
+		"timeSignature": [4, 4],
 		"album": "volume1",
 		"displayName": "DadBattle",
-		"preview": [
-			0,
-			0
-		],
+		"preview": [0, 0],
 		"scrollSpd": 2.3,
 		"generatedBy": "Friday Night Funkin' - v0.8.1",
-		"lanes": [
-			"opponent",
-			"p1"
-		],
+		"lanes": ["opponent", "p1"],
 		"noteskin": "v-slice",
 		"version": "2.2.4"
 	}

@@ -14,6 +14,7 @@ class SaveReplayNotif extends FlxSpriteGroup
 	var pie:FlxRadialGauge;
 
 	public var onFinish:FlxSignal = new FlxSignal();
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
@@ -21,17 +22,20 @@ class SaveReplayNotif extends FlxSpriteGroup
 		FlxSpriteUtil.drawRoundRect(bg, 0, 0, bg.width, bg.height, 12, 12, 0xFF1b1b1b);
 		add(bg);
 
-		circle = new FlxShapeCircle(12, 12, 24, {thickness: 4, color: FlxColor.WHITE}, FlxColor.WHITE);
+		circle = new FlxShapeCircle(12, 12, 24, {
+			thickness: 4,
+			color: FlxColor.WHITE
+		}, FlxColor.WHITE);
 		add(circle);
 		circle.antialiasing = false;
 
 		var replayIcon = new MoonSprite(14, 14);
 		replayIcon.frames = Tilemap.getAtlasFrames("mainUI");
-        replayIcon.frame = Tilemap.getFrame('folder', 'mainUI');
-        add(replayIcon);
-        //replayIcon.setPosition(x + (circle.width - replayIcon.width) * 0.5, y + (circle.height - replayIcon.height) * 0.5);
+		replayIcon.frame = Tilemap.getFrame('folder', 'mainUI');
+		add(replayIcon);
+		// replayIcon.setPosition(x + (circle.width - replayIcon.width) * 0.5, y + (circle.height - replayIcon.height) * 0.5);
 
-		bar = new RoundBar(0,0, LEFT_TO_RIGHT, 317, 5, null, null, 0, 100, false, 5);
+		bar = new RoundBar(0, 0, LEFT_TO_RIGHT, 317, 5, null, null, 0, 100, false, 5);
 		bar.createFilledBar(FlxColor.TRANSPARENT, FlxColor.WHITE);
 		add(bar);
 
@@ -41,11 +45,11 @@ class SaveReplayNotif extends FlxSpriteGroup
 		text.fieldWidth = bg.width - 72;
 		add(text);
 
-	    pie = new FlxRadialGauge();
-	    pie.makeShapeGraphic(CIRCLE, 20, 10, FlxColor.WHITE);
-	    pie.replaceColor(FlxColor.BLACK, 0x8AC5C4C4);
-	    pie.amount = 0;
-	    add(pie);
+		pie = new FlxRadialGauge();
+		pie.makeShapeGraphic(CIRCLE, 20, 10, FlxColor.WHITE);
+		pie.replaceColor(FlxColor.BLACK, 0x8AC5C4C4);
+		pie.amount = 0;
+		add(pie);
 
 		alpha = 0.00001;
 		allowHolding = true;
@@ -54,20 +58,20 @@ class SaveReplayNotif extends FlxSpriteGroup
 	var twn:FlxTween;
 	var held:Float = 0;
 	var allowHolding = true;
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		if(allowHolding)
+		if (allowHolding)
 		{
-			if(FlxG.keys.pressed.TAB)
-				held += elapsed;
-			else held -= elapsed;
+			if (FlxG.keys.pressed.TAB) held += elapsed;
+			else
+				held -= elapsed;
 
-			if(held <= 0)
-				held = 0;
+			if (held <= 0) held = 0;
 
-			if(held >= 1)
+			if (held >= 1)
 			{
 				allowHolding = false;
 				pie.visible = false;
@@ -94,26 +98,39 @@ class SaveReplayNotif extends FlxSpriteGroup
 
 		function doTheRest()
 		{
-			twn = FlxTween.tween(bar, {value: 0}, parameters?.duration ?? 5, {onComplete: _->{
-				//aaaaa
-				fade(false, null);
-			}});
+			twn = FlxTween.tween(bar, {
+				value: 0
+			}, parameters?.duration ?? 5, {
+				onComplete: _ ->
+				{
+					// aaaaa
+					fade(false, null);
+				}
+			});
 		}
 
-		if(this.alpha < 1) fade(true, doTheRest);
-		else doTheRest();
+		if (this.alpha < 1) fade(true, doTheRest);
+		else
+			doTheRest();
 	}
 
 	public function flash()
 	{
 		bg.brightness = 1;
-		FlxTween.tween(bg, {brightness: 0}, 1);
+		FlxTween.tween(bg, {
+			brightness: 0
+		}, 1);
 	}
 
-	function fade(fadeIn:Bool = false, onComplete:Void->Void)
-		twn = FlxTween.tween(this, {alpha: fadeIn ? 1 : 0.000001}, 0.6, {onComplete: _-> (onComplete != null) ? onComplete() : {}});
+	function fade(fadeIn:Bool = false, onComplete:Void->Void) twn = FlxTween.tween(this, {
+		alpha: fadeIn ? 1 : 0.000001
+	}, 0.6, {
+		onComplete: _ -> (onComplete != null) ? onComplete() : {
+		}
+	});
 
-	@:noCompletion public function set_parameters(parameters:ReplayNotifParams):ReplayNotifParams
+	@:noCompletion
+	public function set_parameters(parameters:ReplayNotifParams):ReplayNotifParams
 	{
 		this.parameters = parameters;
 		resetBar();
@@ -121,7 +138,8 @@ class SaveReplayNotif extends FlxSpriteGroup
 	}
 }
 
-typedef ReplayNotifParams = {
+typedef ReplayNotifParams =
+{
 	var ?color:FlxColor;
 	var text:String;
 	var ?duration:Float;

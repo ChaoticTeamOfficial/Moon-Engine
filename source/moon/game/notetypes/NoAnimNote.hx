@@ -9,16 +9,17 @@ import moon.toolkit.level_editor.LevelEditor.GridType;
  */
 class NoAnimNote extends BaseNoteType
 {
-    //lol!!!! I figured I don't need to code anything :V
-    override public function onHit(timing:Judgement, isSustain:Bool):Void
-    {}
+	// lol!!!! I figured I don't need to code anything :V
+	override public function onHit(timing:Judgement, isSustain:Bool):Void
+	{
+	}
 
-    override public function getEditorData():EventInfo
-    {
-        return {
-            name: 'No Animation Note',
-            description: 'The character will not play a singing animation when hitting this note.',
-            category: NOTES
-        };
-    }
+	override public function getEditorData():EventInfo
+	{
+		return {
+			name: 'No Animation Note',
+			description: 'The character will not play a singing animation when hitting this note.',
+			category: NOTES
+		};
+	}
 }

@@ -22,7 +22,7 @@ class BetaBuild extends TextField
 
 		defaultTextFormat = new TextFormat(Paths.font('monsterrat/Montserrat-BoldItalic.ttf'), 20, 0xEBEBEB);
 		text = 'INDEV V.${Constants.INDEV_VERSION}';
-        alpha = 0.5;
-        visible = true;
+		alpha = 0.5;
+		visible = true;
 	}
 }

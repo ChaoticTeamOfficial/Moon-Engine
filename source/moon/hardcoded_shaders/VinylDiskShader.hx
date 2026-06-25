@@ -1,9 +1,10 @@
 package moon.hardcoded_shaders;
+
 import flixel.system.FlxAssets.FlxShader;
 
 class VinylDiskShader extends FlxShader
 {
-    @:glFragmentSource('
+	@:glFragmentSource('
         #pragma header
      
         uniform float outerRadius;
@@ -42,13 +43,12 @@ class VinylDiskShader extends FlxShader
             gl_FragColor = vec4(color, texColor.a * alpha);
         }
     ')
-
-    public function new(outer:Float = 0.5, inner:Float = 0.1, outerOutlineWidth:Float = 0.03, innerHoleRadius:Float = 0.02)
-    {
-        super();
-        this.outerRadius.value = [outer];
-        this.innerRadius.value = [inner];
-        this.outerOutlineWidth.value = [outerOutlineWidth];
-        this.innerHoleRadius.value = [innerHoleRadius];
-    }
+	public function new(outer:Float = 0.5, inner:Float = 0.1, outerOutlineWidth:Float = 0.03, innerHoleRadius:Float = 0.02)
+	{
+		super();
+		this.outerRadius.value = [outer];
+		this.innerRadius.value = [inner];
+		this.outerOutlineWidth.value = [outerOutlineWidth];
+		this.innerHoleRadius.value = [innerHoleRadius];
+	}
 }

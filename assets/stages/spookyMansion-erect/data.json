@@ -1,70 +1,75 @@
 {
-  "camSettings": {
-    "zoom": 1,
-    "startX": 700,
-    "startY": 280
-  },
-  "objects": [
-	{
-      "name": "bgtrees",
-      "position": [200, 50],
-      "scroll": [0.8, 0.8],
-	  "type": "sparrow",
-      "animations": [
-        {
-          "name": "bgtrees", "prefix": "bgtrees", "fps": 5, "looped": true, "x": 0, "y": 0
-        }
-      ],
-      "startAnim": "bgtrees",
-      "animBehavior": "once",
-      "angle": 0
-    },
-	{
-	  "name": "bgDark",
-      "position": [-560, -220],
-      "scale": [1, 1],
-      "scroll": [1, 1],
-      "angle": 0
-    },
-	{
-	  "name": "bgLight",
-      "position": [-560, -220],
-      "scale": [1, 1],
-      "scroll": [1, 1],
-      "angle": 0,
-	  "alpha": 0
-    },
-	{
-	  "name": "stairsDark",
-      "position": [966, -195],
-      "scale": [1, 1],
-      "scroll": [1, 1],
-      "angle": 0
-    },
-	{
-	  "name": "stairsLight",
-      "position": [966, -195],
-      "scale": [1, 1],
-      "scroll": [1, 1],
-      "angle": 0,
-	  "alpha": 0
-    }
-  ],
-  "characters": [
-	{
-	  "type": "spectator",
-      "position": [460, 450],
-      "objectBehind": "bgLight"
-    },
-    {
-	  "type": "opponent",
-      "position": [182, 495],
-      "objectBehind": "bgLight"
-    },
-    {
-	  "type": "player",
-      "position": [1050, 505],
-      "objectBehind": "bgLight"
-    }
-  ]
+	"camSettings": {
+		"zoom": 1,
+		"startX": 700,
+		"startY": 280
+	},
+	"objects": [
+		{
+			"name": "bgtrees",
+			"position": [200, 50],
+			"scroll": [0.8, 0.8],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "bgtrees",
+					"prefix": "bgtrees",
+					"fps": 5,
+					"looped": true,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"startAnim": "bgtrees",
+			"animBehavior": "once",
+			"angle": 0
+		},
+		{
+			"name": "bgDark",
+			"position": [-560, -220],
+			"scale": [1, 1],
+			"scroll": [1, 1],
+			"angle": 0
+		},
+		{
+			"name": "bgLight",
+			"position": [-560, -220],
+			"scale": [1, 1],
+			"scroll": [1, 1],
+			"angle": 0,
+			"alpha": 0
+		},
+		{
+			"name": "stairsDark",
+			"position": [966, -195],
+			"scale": [1, 1],
+			"scroll": [1, 1],
+			"angle": 0
+		},
+		{
+			"name": "stairsLight",
+			"position": [966, -195],
+			"scale": [1, 1],
+			"scroll": [1, 1],
+			"angle": 0,
+			"alpha": 0
+		}
+	],
+	"characters": [
+		{
+			"type": "spectator",
+			"position": [460, 450],
+			"objectBehind": "bgLight"
+		},
+		{
+			"type": "opponent",
+			"position": [182, 495],
+			"objectBehind": "bgLight"
+		},
+		{
+			"type": "player",
+			"position": [1050, 505],
+			"objectBehind": "bgLight"
+		}
+	]
 }

@@ -7,7 +7,7 @@ import flixel.system.FlxAssets.FlxShader;
  */
 class InvertColor extends FlxShader
 {
-    @:glFragmentSource('
+	@:glFragmentSource('
         #pragma header
         
         void main(void)
@@ -16,8 +16,8 @@ class InvertColor extends FlxShader
             gl_FragColor = vec4(vec3(color.a) - color.rgb, color.a);
         }
     ')
-    public function new()
-    {
-        super();
-    }
+	public function new()
+	{
+		super();
+	}
 }

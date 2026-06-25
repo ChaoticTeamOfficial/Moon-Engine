@@ -8,97 +8,96 @@ import flixel.FlxState;
  */
 class MoonScriptedState extends FlxState
 {
-    // alright uhhh let's begin ts
+	// alright uhhh let's begin ts
 
-    /**
-     * The script this state uses.
-     */
-    public var script:MoonScript = new MoonScript();
+	/**
+	 * The script this state uses.
+	 */
+	public var script:MoonScript = new MoonScript();
 
-    /**
-     * The state's name.
-     */
-    public var stateName:String;
+	/**
+	 * The state's name.
+	 */
+	public var stateName:String;
 
-    /**
-     * Loads a state from a script.
-     * @param stateName The state's name (which is also the script's name).
-     */
-    public function new(stateName:String)
-    {
-        super();
-        script.load('data/states/$stateName.hx');
-        script.set('state', this);
-        this.stateName = stateName;
-    }
-    
-    @:inheritDoc(FlxState.create)
-    override public function create():Void
-    {
-        script.call('onCreate');
-        super.create();
-        script.call('onPostCreate');
-    }
-    
-    /**
-     * Called when the game is updated each frame.
-     * @param elapsed 
-     */
-    override public function update(elapsed:Float)
-    {
-        script.call('onUpdate', [elapsed]);
-        super.update(elapsed);
-        script.call('onPostUpdate', [elapsed]);
-    }
+	/**
+	 * Loads a state from a script.
+	 * @param stateName The state's name (which is also the script's name).
+	 */
+	public function new(stateName:String)
+	{
+		super();
+		script.load('data/states/$stateName.hx');
+		script.set('state', this);
+		this.stateName = stateName;
+	}
 
-    /**
-     * Called when the state is "killed".
-     */
-    override public function kill()
-    {
-        super.kill();
-        script.call('kill');
-    }
+	@:inheritDoc(FlxState.create)
+	override public function create():Void
+	{
+		script.call('onCreate');
+		super.create();
+		script.call('onPostCreate');
+	}
 
-    /**
-     * Called when the state is destroyed.
-     */
-    override public function destroy()
-    {
-        super.destroy();
-        script.call('destroy');
-    }
+	/**
+	 * Called when the game is updated each frame.
+	 * @param elapsed 
+	 */
+	override public function update(elapsed:Float)
+	{
+		script.call('onUpdate', [elapsed]);
+		super.update(elapsed);
+		script.call('onPostUpdate', [elapsed]);
+	}
 
-    /**
-     * Called on every draw call.
-     */
-    override public function draw()
-    {
-        super.draw();
-        script.call('draw');
-    }
+	/**
+	 * Called when the state is "killed".
+	 */
+	override public function kill()
+	{
+		super.kill();
+		script.call('kill');
+	}
 
-    @:inheritDoc(FlxState.onFocus)
-    override public function onFocus()
-    {
-        super.onFocus();
-        script.call('onFocus');
-    }
+	/**
+	 * Called when the state is destroyed.
+	 */
+	override public function destroy()
+	{
+		super.destroy();
+		script.call('destroy');
+	}
 
-    @:inheritDoc(FlxState.onFocusLost)
-    override public function onFocusLost()
-    {
-        super.onFocusLost();
-        script.call('onFocusLost');
-    }
+	/**
+	 * Called on every draw call.
+	 */
+	override public function draw()
+	{
+		super.draw();
+		script.call('draw');
+	}
 
-    @:inheritDoc(FlxState.onResize)
-    override public function onResize(width:Int, height:Int)
-    {
-        super.onResize(width, height);
-        script.call('onResize', [width, height]);
-    }
+	@:inheritDoc(FlxState.onFocus)
+	override public function onFocus()
+	{
+		super.onFocus();
+		script.call('onFocus');
+	}
 
-    override public function toString():String
-        return 'SCRIPTED STATE: $stateName with ${members.length} members.';
+	@:inheritDoc(FlxState.onFocusLost)
+	override public function onFocusLost()
+	{
+		super.onFocusLost();
+		script.call('onFocusLost');
+	}
+
+	@:inheritDoc(FlxState.onResize)
+	override public function onResize(width:Int, height:Int)
+	{
+		super.onResize(width, height);
+		script.call('onResize', [width, height]);
+	}
+
+	override public function toString():String return 'SCRIPTED STATE: $stateName with ${members.length} members.';
 }

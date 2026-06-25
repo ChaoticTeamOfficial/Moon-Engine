@@ -3,16 +3,16 @@ import flixel.text.FlxText;
 import moon.dependency.MoonSprite;
 
 var veryCoolImg:MoonSprite;
-
 var coolArray:Array<String> = ['I got a nice value', 'yoo me too!', 'neat.'];
+
 function onCreate()
 {
 	trace('I got created!');
-	
+
 	var squishey = new MoonSprite().loadGraphic(Paths.image('oi'));
 	state.add(squishey);
 	squishey.scale.x = 4;
-	
+
 	veryCoolImg = new MoonSprite().loadGraphic(Paths.image('jerma'));
 	state.add(veryCoolImg);
 	veryCoolImg.screenCenter();
@@ -23,23 +23,23 @@ function onCreate()
 	state.add(welcome);
 	welcome.screenCenter();
 	welcome.y += 64;
-	
+
 	trace('Cool array: ' + coolArray);
 }
 
 var huge = false;
+
 function onPostUpdate(elapsed:Float)
 {
-	if(!huge)
+	if (!huge)
 	{
 		trace('[MY VERY COOL SCRIPT] Update seems to work! ' + elapsed);
 		huge = true;
 	}
-	
-	if(FlxG.keys.justPressed.BACKSPACE)
-		FlxG.switchState(()-> new moon.menus.MainMenu());
-		
-	if(veryCoolImg != null && veryCoolImg.alive) veryCoolImg.angle += elapsed * 12;
+
+	if (FlxG.keys.justPressed.BACKSPACE) FlxG.switchState(() -> new moon.menus.MainMenu());
+
+	if (veryCoolImg != null && veryCoolImg.alive) veryCoolImg.angle += elapsed * 12;
 }
 
 function onResize(width, height)
@@ -49,12 +49,13 @@ function onResize(width, height)
 
 function onFocusLost()
 {
-	if(veryCoolImg != null && veryCoolImg.alive)
+	if (veryCoolImg != null && veryCoolImg.alive)
 	{
 		trace('Focus lost... time to kill jerma... bye jerma...');
 		veryCoolImg.kill();
 	}
-	else trace('as I said, jerma is gone.');
+	else
+		trace('as I said, jerma is gone.');
 }
 
 function onFocus()

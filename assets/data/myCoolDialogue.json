@@ -1,67 +1,67 @@
 {
 	"lines": [
 		{
-			"character":"dad",
-			"expression":"determined",
+			"character": "dad",
+			"expression": "determined",
 			"text": "<shake=2><size=48><color=red>HEY!</color></size></shake>",
 			"anim": "shake"
 		},
 		{
-			"character":"bf",
-			"expression":"dodge",
+			"character": "bf",
+			"expression": "dodge",
 			"text": "beep?!",
 			"anim": "jump"
 		},
 		{
-			"character":"dad",
-			"expression":"determined",
+			"character": "dad",
+			"expression": "determined",
 			"text": "You think you can just sing with my daughter like that?!"
 		},
 		{
-			"character":"dad",
-			"expression":"determined",
+			"character": "dad",
+			"expression": "determined",
 			"text": "If you want to date her...",
 			"anim": "down"
 		},
 		{
-			"character":"dad",
-			"expression":"determined",
+			"character": "dad",
+			"expression": "determined",
 			"text": "You're going to have to go through <color=red>ME</color> first!",
 			"anim": "jump"
 		},
 		{
-			"character":"bf",
-			"expression":"lazy",
+			"character": "bf",
+			"expression": "lazy",
 			"text": "<wave=3>beeeeeeeeeeeeeep...</wave>",
 			"anim": "down"
 		},
 		{
-			"character":"bf",
-			"expression":"lazy",
+			"character": "bf",
+			"expression": "lazy",
 			"text": "<wave=3>bap be des... beep... bap bop bee... bee bop da beep beep</wave>",
 			"anim": "down"
 		},
 		{
-			"character":"bf",
-			"expression":"lazy",
+			"character": "bf",
+			"expression": "lazy",
 			"text": "...",
 			"anim": "none"
 		},
 		{
-			"character":"bf",
-			"expression":"miss",
+			"character": "bf",
+			"expression": "miss",
 			"text": "!",
 			"anim": "jump"
 		},
 		{
-			"character":"bf",
-			"expression":"angry",
+			"character": "bf",
+			"expression": "angry",
 			"text": "<shake=5><size=48><color=red>fuck you!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</color></size></shake>",
 			"anim": "shake"
 		},
 		{
-			"character":"bf",
-			"expression":"yeah",
+			"character": "bf",
+			"expression": "yeah",
 			"text": "yeah :D",
 			"anim": "jump"
 		},
@@ -72,26 +72,26 @@
 			"text": "Oh by the way I'm the narrator nice to meet yall ;))))"
 		},
 		{
-			"character":"dad",
-			"expression":"determined",
+			"character": "dad",
+			"expression": "determined",
 			"text": "<shake=2><size=48><color=red>STFU!!!!</color></size></shake>",
 			"anim": "shake"
 		},
 		{
-			"character":"cobalt",
-			"expression":"cobalt",
+			"character": "cobalt",
+			"expression": "cobalt",
 			"text": "Hi guys im cobalt from the haxe server",
 			"anim": "shake"
 		},
 		{
-			"character":"cobalt",
-			"expression":"cobalt",
+			"character": "cobalt",
+			"expression": "cobalt",
 			"text": "I will make fnf in lumina",
 			"anim": "none"
 		},
 		{
-			"character":"bf",
-			"expression":"dodge",
+			"character": "bf",
+			"expression": "dodge",
 			"text": "YOOOOO NO WAY?!",
 			"anim": "jump"
 		}

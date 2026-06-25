@@ -6,13 +6,14 @@ import flixel.addons.display.FlxRuntimeShader;
 
 class MoonShader extends FlxRuntimeShader
 {
-    public var script:MoonScript;
-    public function new(shader:String)
-    {
-        super(Paths.getFileContent('data/shaders/$shader.frag'));
+	public var script:MoonScript;
 
-        script = new MoonScript();
-        script.load('data/shaders/$shader.hx');
-        script.set('shader', this);
-    }
+	public function new(shader:String)
+	{
+		super(Paths.getFileContent('data/shaders/$shader.frag'));
+
+		script = new MoonScript();
+		script.load('data/shaders/$shader.hx');
+		script.set('shader', this);
+	}
 }

@@ -13,220 +13,242 @@ import openfl.Lib;
 
 using StringTools;
 
-//TODO: Documment these classes properly some time.
+// TODO: Documment these classes properly some time.
 
 class StickerSubState extends FlxSubState
 {
-    public var nextState:FlxState;
-    var transition:StickerTransition;
-    var switchingState:Bool = false;
+	public var nextState:FlxState;
 
-    public function new(nextState:FlxState)
-    {
-        super();
-        this.nextState = nextState;
+	var transition:StickerTransition;
+	var switchingState:Bool = false;
 
-        transition = new StickerTransition();
-        FlxG.game.addChild(transition);
+	public function new(nextState:FlxState)
+	{
+		super();
+		this.nextState = nextState;
 
-        transition.createStickers();
-        transition.startInAnimation(this);
+		transition = new StickerTransition();
+		FlxG.game.addChild(transition);
+
+		transition.createStickers();
+		transition.startInAnimation(this);
 		Global.allowInputs = false;
-    }
+	}
 
-    public function onInComplete():Void
-    {
-        switchingState = true;
-        FlxG.switchState(() -> nextState);
-        FlxG.signals.postStateSwitch.addOnce(() -> transition.startOutAnimation(this));
+	public function onInComplete():Void
+	{
+		switchingState = true;
+		FlxG.switchState(() -> nextState);
+		FlxG.signals.postStateSwitch.addOnce(() -> transition.startOutAnimation(this));
 		Global.allowInputs = true;
-    }
+	}
 
-    public function onOutComplete():Void
-    {
-        switchingState = false;
-        //Lib.application.window.resizable = true;
-        destroy();
-    }
+	public function onOutComplete():Void
+	{
+		switchingState = false;
+		// Lib.application.window.resizable = true;
+		destroy();
+	}
 
-    override public function destroy():Void
-    {
-        if (switchingState) return;
-        if (transition != null)
-        {
-            transition.destroy();
-            FlxG.game.removeChild(transition);
-        }
-        super.destroy();
-    }
+	override public function destroy():Void
+	{
+		if (switchingState) return;
+		if (transition != null)
+		{
+			transition.destroy();
+			FlxG.game.removeChild(transition);
+		}
+		super.destroy();
+	}
 }
 
 // You might wonder "Why the fuck would you render stuff outside the game"
 // Because I... don't wanna do like funkin did and deal with caching graphics
 // and positioning them correctly :'( I'm one person coding everything
+
 class StickerTransition extends Sprite
 {
-    var stickers:Array<Sprite> = [];
-    var inCompleteCount:Int = 0;
-    var outCompleteCount:Int = 0;
-    var stickerKeys:Array<String> = [];
-    final spacingFactor:Float = 0.6;
+	var stickers:Array<Sprite> = [];
+	var inCompleteCount:Int = 0;
+	var outCompleteCount:Int = 0;
+	var stickerKeys:Array<String> = [];
+	final spacingFactor:Float = 0.6;
+	var globalScale:Float;
+	var offsetX:Float;
+	var offsetY:Float;
 
-    var globalScale:Float;
-    var offsetX:Float;
-    var offsetY:Float;
+	public function new()
+	{
+		super();
+		final windowW = Lib.application.window.width;
+		final windowH = Lib.application.window.height;
+		globalScale = Math.min(windowW / FlxG.width, windowH / FlxG.height);
+		offsetX = (windowW - FlxG.width * globalScale) / 2;
+		offsetY = (windowH - FlxG.height * globalScale) / 2;
 
-    public function new()
-    {
-        super();
-        final windowW = Lib.application.window.width;
-        final windowH = Lib.application.window.height;
-        globalScale = Math.min(windowW / FlxG.width, windowH / FlxG.height);
-        offsetX = (windowW - FlxG.width * globalScale) / 2;
-        offsetY = (windowH - FlxG.height * globalScale) / 2;
+		stickerKeys = getStickerKeys("images/menus/transitions/stickers");
+	}
 
-        stickerKeys = getStickerKeys("images/menus/transitions/stickers");
-    }
+	function getStickerKeys(baseDir:String, subPath:String = ""):Array<String>
+	{
+		var keys:Array<String> = [];
+		final currentDir = baseDir + (subPath != "" ? "/" + subPath : "");
 
-    function getStickerKeys(baseDir:String, subPath:String = ""):Array<String>
-    {
-        var keys:Array<String> = [];
-        final currentDir = baseDir + (subPath != "" ? "/" + subPath : "");
+		for (file in Paths.readDir(currentDir, [".png"], true)) keys.push("menus/transitions/stickers" + (subPath != "" ? "/" + subPath : "") + "/" + file);
 
-        for (file in Paths.readDir(currentDir, [".png"], true))
-            keys.push("menus/transitions/stickers" + (subPath != "" ? "/" + subPath : "") + "/" + file);
+		for (item in Paths.readDir(
+			currentDir,
+			null,
+			false
+		)) if (!item.contains(".")) keys = keys.concat(getStickerKeys(baseDir, subPath + (subPath != "" ? "/" : "") + item));
 
-        for (item in Paths.readDir(currentDir, null, false))
-            if (!item.contains("."))
-                keys = keys.concat(getStickerKeys(baseDir, subPath + (subPath != "" ? "/" : "") + item));
+		return keys;
+	}
 
-        return keys;
-    }
+	function createSticker(key:String, x:Float, y:Float):Sprite
+	{
+		final graphic = Paths.image(key);
+		if (graphic == null) return null;
 
-    function createSticker(key:String, x:Float, y:Float):Sprite
-    {
-        final graphic = Paths.image(key);
-        if (graphic == null) return null;
+		if (!AssetManager.exclusions.contains('$key.png')) AssetManager.exclusions.push('$key.png');
 
-        if (!AssetManager.exclusions.contains('$key.png'))
-            AssetManager.exclusions.push('$key.png');
+		var sticker = new Sprite();
+		var bmp = new Bitmap(graphic.bitmap);
+		bmp.smoothing = true; // cant believe it took me so damn long to find ts
+		bmp.x = -graphic.width / 2;
+		bmp.y = -graphic.height / 2;
+		sticker.addChild(bmp);
 
-        var sticker = new Sprite();
-        var bmp = new Bitmap(graphic.bitmap);
-        bmp.smoothing = true; //cant believe it took me so damn long to find ts
-        bmp.x = -graphic.width / 2;
-        bmp.y = -graphic.height / 2;
-        sticker.addChild(bmp);
+		sticker.x = x;
+		sticker.y = y;
+		sticker.rotation = Math.random() * 360;
+		sticker.scaleX = sticker.scaleY = 0;
+		sticker.alpha = 0;
 
-        sticker.x = x;
-        sticker.y = y;
-        sticker.rotation = Math.random() * 360;
-        sticker.scaleX = sticker.scaleY = 0;
-        sticker.alpha = 0;
+		return sticker;
+	}
 
-        return sticker;
-    }
+	public function createStickers()
+	{
+		if (stickerKeys.length == 0)
+		{
+			trace("No stickers found!", "ERROR");
+			return;
+		}
 
-    public function createStickers()
-    {
-        if (stickerKeys.length == 0)
-        {
-            trace("No stickers found!", "ERROR");
-            return;
-        }
+		final offscreen = 100;
 
-        final offscreen = 100;
+		final extraX = offsetX / globalScale;
+		final extraY = offsetY / globalScale;
 
-        final extraX = offsetX / globalScale;
-        final extraY = offsetY / globalScale;
+		var xPos:Float = -offscreen - extraX;
+		var yPos:Float = -offscreen - extraY;
 
-        var xPos:Float = -offscreen - extraX;
-        var yPos:Float = -offscreen - extraY;
+		// jumpscares you with 2 while cases
+		while (yPos <= FlxG.height + offscreen + extraY)
+		{
+			xPos = -offscreen - extraX;
+			while (xPos <= FlxG.width + offscreen + extraX)
+			{
+				final key = FlxG.random.getObject(stickerKeys);
+				final sticker = createSticker(key, xPos * globalScale + offsetX, yPos * globalScale + offsetY);
+				if (sticker == null) continue;
 
-        // jumpscares you with 2 while cases
-        while (yPos <= FlxG.height + offscreen + extraY)
-        {
-            xPos = -offscreen - extraX;
-            while (xPos <= FlxG.width + offscreen + extraX)
-            {
-                final key = FlxG.random.getObject(stickerKeys);
-                final sticker = createSticker(key, xPos * globalScale + offsetX, yPos * globalScale + offsetY);
-                if (sticker == null) continue;
+				addChild(sticker);
+				stickers.push(sticker);
 
-                addChild(sticker);
-                stickers.push(sticker);
+				xPos += Paths.image(key).width * spacingFactor;
+			}
+			yPos += FlxG.random.float(80, 120);
+		}
 
-                xPos += Paths.image(key).width * spacingFactor;
-            }
-            yPos += FlxG.random.float(80, 120);
-        }
+		final centerSticker = createSticker(
+			FlxG.random.getObject(stickerKeys),
+			(FlxG.width / 2) * globalScale + offsetX,
+			(FlxG.height / 2) * globalScale + offsetY
+		);
 
-        final centerSticker = createSticker(FlxG.random.getObject(stickerKeys), 
-            (FlxG.width / 2) * globalScale + offsetX, 
-            (FlxG.height / 2) * globalScale + offsetY);
+		if (centerSticker != null)
+		{
+			centerSticker.rotation = 0;
+			addChild(centerSticker);
+			stickers.push(centerSticker);
+		}
 
-        if (centerSticker != null)
-        {
-            centerSticker.rotation = 0;
-            addChild(centerSticker);
-            stickers.push(centerSticker);
-        }
+		FlxG.random.shuffle(stickers);
+	}
 
-        FlxG.random.shuffle(stickers);
-    }
-
-    public function startInAnimation(sub:StickerSubState):Void
-    {
-        // just to guarantee that people wont see how crappy this code is...
+	public function startInAnimation(sub:StickerSubState):Void
+	{
+		// just to guarantee that people wont see how crappy this code is...
 		// nvm it kinda fucks up the window
-        //Lib.application.window.resizable = false;
+		// Lib.application.window.resizable = false;
 
-        for (i in 0...stickers.length)
-        {
-            new FlxTimer().start(FlxMath.remapToRange(i, 0, stickers.length - 1, 0, 0.7), (_) -> {
-                try {Paths.playSFX('ui/stickers/keyClick${FlxG.random.int(1, 8)}.ogg');}
-                catch (e:Dynamic){}
+		for (i in 0...stickers.length)
+		{
+			new FlxTimer().start(FlxMath.remapToRange(i, 0, stickers.length - 1, 0, 0.7), (_) ->
+			{
+				try
+				{
+					Paths.playSFX('ui/stickers/keyClick${FlxG.random.int(1, 8)}.ogg');
+				}
+				catch (e:Dynamic)
+				{
+				}
 
-                FlxTween.tween(stickers[i], {
-                    scaleX: globalScale, 
-                    scaleY: globalScale, 
-                    alpha: 1, 
-                    rotation: try{ (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0;} catch(e) {0;}
-                    }, 0.05, {ease: FlxEase.backOut, onComplete: (_) -> {
-                    inCompleteCount++;
-                    if (inCompleteCount >= stickers.length)
-                        sub.onInComplete();
-                }});
-            });
-        }
-    }
+				FlxTween.tween(stickers[i], {
+					scaleX: globalScale,
+					scaleY: globalScale,
+					alpha: 1,
+					rotation: try
+					{
+						(stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0;
+					}
+					catch (e)
+					{
+						0;
+					}
+				}, 0.05, {
+					ease: FlxEase.backOut,
+					onComplete: (_) ->
+					{
+						inCompleteCount++;
+						if (inCompleteCount >= stickers.length) sub.onInComplete();
+					}
+				});
+			});
+		}
+	}
 
-    public function startOutAnimation(sub:StickerSubState):Void
-    {
-        for (i in 0...stickers.length)
-        {
-            FlxTween.tween(stickers[i], {
-                scaleX: 0, scaleY: 0, 
-                alpha: 0, 
-                rotation: (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0
-                }, 0.13, {ease: FlxEase.backIn, startDelay: Math.random() * 0.5, onComplete: (_) -> {
-                outCompleteCount++;
-                if (outCompleteCount >= stickers.length)
-                    sub.onOutComplete();
-            }});
-        }
-    }
+	public function startOutAnimation(sub:StickerSubState):Void
+	{
+		for (i in 0...stickers.length)
+		{
+			FlxTween.tween(stickers[i], {
+				scaleX: 0,
+				scaleY: 0,
+				alpha: 0,
+				rotation: (stickers[i].rotation != 0) ? stickers[i].rotation + FlxG.random.float(-45, 45) : 0
+			}, 0.13, {
+				ease: FlxEase.backIn,
+				startDelay: Math.random() * 0.5,
+				onComplete: (_) ->
+				{
+					outCompleteCount++;
+					if (outCompleteCount >= stickers.length) sub.onOutComplete();
+				}
+			});
+		}
+	}
 
-    public function destroy():Void
-    {
-        while (stickers.length > 0)
-        {
-            final sticker = stickers.pop();
-            if (sticker.parent != null)
-                sticker.parent.removeChild(sticker);
-        }
+	public function destroy():Void
+	{
+		while (stickers.length > 0)
+		{
+			final sticker = stickers.pop();
+			if (sticker.parent != null) sticker.parent.removeChild(sticker);
+		}
 
-        if (parent != null)
-            parent.removeChild(this);
-    }
+		if (parent != null) parent.removeChild(this);
+	}
 }

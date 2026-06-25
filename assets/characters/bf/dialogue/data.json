@@ -5,15 +5,15 @@
 		"playType": "random",
 		"pitchIntensity": 0.02
 	},
-	
+
 	"position": [760, 200],
-	
+
 	"animations": [
-        {"name": "angry", "prefix": "angy", "x": 64, "y": 0, "fps": 24},
-		{"name": "dodge", "prefix": "dodge", "x": 32, "y": 0, "fps": 24},
-		{"name": "lazy", "prefix": "hit", "x": 0, "y": 0, "fps": 24},
-		{"name": "miss", "prefix": "miss", "x": 0, "y": 0, "fps": 24},
-		{"name": "normal", "prefix": "normal0", "x": 0, "y": 0, "fps": 24},
-		{"name": "yeah", "prefix": "yeah!0", "x": 0, "y": 0, "fps": 24}
-    ]
+		{ "name": "angry", "prefix": "angy", "x": 64, "y": 0, "fps": 24 },
+		{ "name": "dodge", "prefix": "dodge", "x": 32, "y": 0, "fps": 24 },
+		{ "name": "lazy", "prefix": "hit", "x": 0, "y": 0, "fps": 24 },
+		{ "name": "miss", "prefix": "miss", "x": 0, "y": 0, "fps": 24 },
+		{ "name": "normal", "prefix": "normal0", "x": 0, "y": 0, "fps": 24 },
+		{ "name": "yeah", "prefix": "yeah!0", "x": 0, "y": 0, "fps": 24 }
+	]
 }

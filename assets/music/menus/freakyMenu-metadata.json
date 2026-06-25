@@ -1,7 +1,7 @@
 {
-  "artist": "Kawai Sprite",
-  "displayName": "Freaky Menu",
-  "bpm": 102,
-  "timeSignature": [4, 4],
-  "looped": true
+	"artist": "Kawai Sprite",
+	"displayName": "Freaky Menu",
+	"bpm": 102,
+	"timeSignature": [4, 4],
+	"looped": true
 }

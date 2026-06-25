@@ -3547,35 +3547,20 @@
 	],
 	"meta": {
 		"stage": "spookyMansion-erect",
-		"players": [
-			"bf"
-		],
-		"opponents": [
-			"monster"
-		],
+		"players": ["bf"],
+		"opponents": ["monster"],
 		"artist": "Bassetfilms",
 		"charter": "ChaoticGamerCG + MtH + Spazkid",
-		"spectators": [
-			"gf"
-		],
+		"spectators": ["gf"],
 		"hasCountdown": true,
 		"bpm": 95,
-		"timeSignature": [
-			4,
-			4
-		],
+		"timeSignature": [4, 4],
 		"album": "volume2",
 		"displayName": "Monster",
-		"preview": [
-			0,
-			0
-		],
+		"preview": [0, 0],
 		"scrollSpd": 1.5,
 		"generatedBy": "Friday Night Funkin' - v0.8.1",
-		"lanes": [
-			"opponent",
-			"p1"
-		],
+		"lanes": ["opponent", "p1"],
 		"noteskin": "v-slice",
 		"version": "2.2.4"
 	}

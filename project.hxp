@@ -38,8 +38,7 @@ class Project extends HXProject
 		"lime", "openfl", "flixel", "flixel-addons",
 		"hscript-iris", "moonchart", "flixel-animate",
 		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin", 
-		"funkin-modchart", "haxeui-flixel", "haxeui-core",
-		"flxscaledslicesprite"
+		"funkin-modchart", "haxeui-flixel", "haxeui-core"
 	];
 
     public function new()

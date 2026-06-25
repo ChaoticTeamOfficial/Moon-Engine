@@ -3,10 +3,8 @@ package moon.game;
 import sys.FileSystem;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-
 import modchart.Manager;
 import openfl.filters.ShaderFilter;
-
 import moon.dependency.scripting.MoonScript;
 import moon.game.obj.Character;
 import moon.menus.*;
@@ -14,21 +12,19 @@ import moon.game.submenus.*;
 import moon.game.obj.*;
 import moon.toolkit.level_editor.*;
 import moon.backend.gameplay.*;
-
 import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
 import moon.game.obj.SubtitleDisplay;
-
 import moon.hardcoded_shaders.RainShader;
 import openfl.filters.ShaderFilter;
 
 using StringTools;
 
 class PlayState extends FlxTransitionableState
-{	
+{
 	/**
 	 * The current active playstate instance.
 	 */
@@ -45,7 +41,7 @@ class PlayState extends FlxTransitionableState
 	 * The playfield's conductor.
 	 */
 	public var conductor:Conductor;
-	
+
 	/**
 	 * The game's background.
 	 */
@@ -60,7 +56,7 @@ class PlayState extends FlxTransitionableState
 	 * The subtitles that show up on a show subtitle event :D
 	 */
 	public var captions:SubtitleDisplay;
-	
+
 	// Cameras
 
 	/**
@@ -77,10 +73,10 @@ class PlayState extends FlxTransitionableState
 	 * The camera used for most in-game objects.
 	 */
 	public var camGAME:MoonCamera = new MoonCamera();
-	public var camFollower:FlxObject = new FlxObject();
-	
-	// -- Some other values --
 
+	public var camFollower:FlxObject = new FlxObject();
+
+	// -- Some other values --
 	// Events (a array containing every MoonEvent, not the raw events from chart.)
 	public static var events:Array<MoonEvent> = [];
 
@@ -88,17 +84,16 @@ class PlayState extends FlxTransitionableState
 
 	/** If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch. */
 	public static var VALID_SCORE:Bool = true;
+
 	public var canPause:Bool = true;
+	public var loadedReplay:Replay = null;
 
-    public var loadedReplay:Replay = null;
-    public static var replaysToSave:Array<Replay> = [];
-
+	public static var replaysToSave:Array<Replay> = [];
 	public static var songData:SongBase = {
 		song: 'dadbattle d-side',
 		difficulty: 'hard',
 		mix: 'bf'
 	};
-
 	public static var playlist:Array<SongBase> = [];
 	public static var playlistIndex:Int = 0;
 
@@ -106,17 +101,17 @@ class PlayState extends FlxTransitionableState
 	{
 		playlist = songs != null ? songs.copy() : [];
 		playlistIndex = 0;
-		if (playlist.length > 0)
-			songData = playlist[0];
+		if (playlist.length > 0) songData = playlist[0];
 	}
 
 	public var paused:Bool = false;
 	public var isDead:Bool = false;
+
 	public function new(?replay:Replay = null)
 	{
 		super();
 		Global.allowInputs = true;
-		
+
 		EventRegistry.init();
 
 		if (replay != null)
@@ -127,24 +122,24 @@ class PlayState extends FlxTransitionableState
 			songData.mix = replay.mix;
 		}
 	}
-	
+
 	var rpcString:String = "";
 
 	override public function create()
 	{
 		super.create();
 		activeTweens(true);
-		//Paths.clearStoredMemory();
+		// Paths.clearStoredMemory();
 		instance = this;
 		events = [];
 
 		Global.registerScript("songScript", songScript);
 		songScript.load('songs/${songData.song}/${songData.mix}/script.hx');
-		
+
 		this.persistentUpdate = false;
-		//this.persistentDraw = false;
-		
-		//< -- CAMERAS SETUP -- >//
+		// this.persistentDraw = false;
+
+		// < -- CAMERAS SETUP -- >//
 		camGAME.bgColor = FlxColor.BLACK;
 		camGAME.bgColor.alpha = 1;
 		camHUD.bgColor.alpha = 0;
@@ -153,8 +148,8 @@ class PlayState extends FlxTransitionableState
 		FlxG.cameras.reset(camGAME);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camALT, false);
-		
-		//< -- PLAYFIELD SETUP -- >//
+
+		// < -- PLAYFIELD SETUP -- >//
 		playField = new PlayField(songData.song, songData.difficulty, songData.mix, loadedReplay);
 		playField.camera = camHUD;
 		playField.conductor.onBeat.add(beatHit);
@@ -165,37 +160,36 @@ class PlayState extends FlxTransitionableState
 		captions.camera = camHUD;
 		add(captions);
 
-		for (handler in playField.inputHandlers)
-			handler.game = this;
-		
+		for (handler in playField.inputHandlers) handler.game = this;
+
 		this.conductor = playField.conductor;
 
-		if (playField.inputHandlers.get('p1').isReplay)
-            VALID_SCORE = false;
-		
-		//< -- BACKGROUND SETUP -- >//
+		if (playField.inputHandlers.get('p1').isReplay) VALID_SCORE = false;
+
+		// < -- BACKGROUND SETUP -- >//
 		stage = new Stage(Shortcuts.getChart().meta.stage, conductor);
 		add(stage);
-		
+
 		final chartMeta = Shortcuts.getChart().meta;
 		for (opp in chartMeta.opponents) stage.addCharTo(opp, stage.opponents, playField.inputHandlers.get('opponent'));
 		for (plyr in chartMeta.players) stage.addCharTo(plyr, stage.players, playField.inputHandlers.get('p1'));
 		for (spct in chartMeta.spectators) stage.addCharTo(spct, stage.spectators);
-	
+
 		stage.updatePositioning();
 
 		// initialize the modchart manager
-		//fmInstance = new Manager();
-		//add(fmInstance);
-		
+		// fmInstance = new Manager();
+		// add(fmInstance);
+
 		Countdown.init(conductor, playField);
-		
-		if(chartMeta.hasCountdown)
+
+		if (chartMeta.hasCountdown)
 		{
 			playField.healthBar.visible = false;
 			Countdown.perform();
-			
-			Countdown.onStart.addOnce(()-> {
+
+			Countdown.onStart.addOnce(() ->
+			{
 				playField.healthBar.performTransition(conductor);
 				playField.healthBar.visible = true;
 			});
@@ -205,72 +199,71 @@ class PlayState extends FlxTransitionableState
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostStageCreate');
 		setEvents();
-		
+
 		playField.onGhostTap.add((keyDir) -> Global.scriptCall('onGhostTap', [keyDir]));
-		playField.onNoteHit.add((playerID, note, timing, isSustain) -> 
+		playField.onNoteHit.add((playerID, note, timing, isSustain) ->
 		{
 			final combo = playField.inputHandlers.get('p1').stats.combo;
 
-			if((playerID == 'p1') && (combo == 50 || combo == 200))
-				for(spectator in stage.spectators.members)
-					if(Std.isOfType(spectator, Character))
-						cast(spectator, Character).playAnim((combo == 50) ? 'combo50' : 'combo200',true);
+			if
+				((playerID == 'p1')
+					&& (combo == 50 || combo == 200)
+				) for (spectator in stage.spectators.members) if (Std.isOfType(
+					spectator,
+					Character
+				)) cast(spectator, Character).playAnim((combo == 50) ? 'combo50' : 'combo200', true);
 
 			Global.scriptCall('onNoteHit', [playerID, note, timing, isSustain]);
 		});
 
-		playField.onNoteMiss.add((playerID, note) -> 
+		playField.onNoteMiss.add((playerID, note) ->
 		{
-			if(playerID == 'p1')
-				for(spectator in stage.spectators.members)
-					if(Std.isOfType(spectator, Character))
-						cast(spectator, Character).playAnim('comboBreak', true);
-			
+			if (playerID == 'p1') for (spectator in stage.spectators.members) if (Std.isOfType(
+				spectator,
+				Character
+			)) cast(spectator, Character).playAnim('comboBreak', true);
+
 			Global.scriptCall('onNoteMiss', [playerID, note]);
 		});
-		
+
 		playField.onSongCountdown.add((number) -> Global.scriptCall('onSongCountdown', [number]));
 
 		playField.onSongStart.add(() -> Global.scriptCall('onSongStart'));
-		playField.playback.onFinish.add(()->endSong());
+		playField.playback.onFinish.add(() -> endSong());
 
-		//trace(SongData.retrieveData(song, difficulty, mix));
-		
+		// trace(SongData.retrieveData(song, difficulty, mix));
+
 		rpcString = 'Playing ${playField.chart.content.meta.displayName} on ${songData.difficulty.toUpperCase()}';
 		DiscordRPC.updatePresence(PLAYMODE, rpcString, "", true);
 
-		//FlxG.signals.focusLost.add(()->pauseGame());
-		//alright.
-		//camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
+		// FlxG.signals.focusLost.add(()->pauseGame());
+		// alright.
+		// camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, true);
 		camGAME.follow(camFollower, LOCKON, 1);
 		camGAME.focusOn(camFollower.getPosition());
-		
+
 		MoonSettings.restartPending = false;
 
 		Global.scriptCall('onPostCreate');
 
 		// make sure we clean everything unused up
-		//AssetManager.clearUnused();
+		// AssetManager.clearUnused();
 		// wait shit it cleans the gameover stuff lol
 	}
-	
+
 	public function activeTweens(isActive:Bool)
 	{
-		FlxTimer.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
-        FlxTween.globalManager.forEach((t)-> if (!t.finished)t.active = isActive);
+		FlxTimer.globalManager.forEach((t) -> if (!t.finished) t.active = isActive);
+		FlxTween.globalManager.forEach((t) -> if (!t.finished) t.active = isActive);
 	}
 
 	public function setEvents()
 	{
-		//< -- EVENTS SETUP -- >//
-		for(event in playField.chart.events)
+		// < -- EVENTS SETUP -- >//
+		for (event in playField.chart.events)
 		{
 			var ev = new MoonEvent(event.tag, event.values);
-			ev.PRESET_VARIABLES = [
-				'game' => this,
-				'stage' => stage,
-				'playField' => playField
-			];
+			ev.PRESET_VARIABLES = ['game' => this, 'stage' => stage, 'playField' => playField];
 			ev.time = event.time;
 			events.push(ev);
 		}
@@ -281,7 +274,7 @@ class PlayState extends FlxTransitionableState
 		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
 		isDead = false;
 		allowGameBop = true;
-		
+
 		bopRate = Constants.DEFAULT_BOP_RATE;
 		bopIntensity = Constants.DEFAULT_BOP_INTENSITY - 1;
 	}
@@ -299,70 +292,84 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onUpdate', [elapsed]);
 		super.update(elapsed);
 
-		//camGAME.rotation += 0.5;
+		// camGAME.rotation += 0.5;
 
 		// EVENTS CHECK
-		if(events.length > 0)
+		if (events.length > 0)
 		{
 			for (event in events)
 			{
 				if (event.time <= conductor.time)
 				{
 					Global.scriptCall('onEvent', [event.tag]);
-					
+
 					if (event.valid) event.exec();
-					else EventRegistry.executeEvent(this, event);
-					
+					else
+						EventRegistry.executeEvent(this, event);
+
 					events.remove(event);
 				}
 			}
 		}
-		
-		if(allowGameBop)
-			camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom, elapsed * 6);
+
+		if (allowGameBop) camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom, elapsed * 6);
 
 		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
-		
-		if(FlxG.keys.justPressed.NINE) FlxG.switchState(()->new ChartConvert());
-		if(FlxG.keys.justPressed.SEVEN){
+
+		if (FlxG.keys.justPressed.NINE) FlxG.switchState(() -> new ChartConvert());
+		if (FlxG.keys.justPressed.SEVEN)
+		{
 			Global.clearScriptList();
 			EditorTransition.transitionToEditor(this);
 			canPause = false;
 		}
 
-		if(MoonInput.justPressed(PAUSE))
-			pauseGame();
+		if (MoonInput.justPressed(PAUSE)) pauseGame();
 
-		if(playField.healthBar.health <= 0 && !isDead)
+		if (playField.healthBar.health <= 0 && !isDead)
 		{
 			isDead = true;
 
 			playField.playback.state = PAUSE;
 
-			setCameraFocus('player', [0, 50], 1.4, {ease: FlxEase.circOut, startDelay: 0.01});
-			setCameraZoom(1, 1, {ease: FlxEase.expoOut});
+			setCameraFocus('player', [0, 50], 1.4, {
+				ease: FlxEase.circOut,
+				startDelay: 0.01
+			});
+			setCameraZoom(1, 1, {
+				ease: FlxEase.expoOut
+			});
 			openSubState(new Gameover());
 		}
 
-		//TODO: REMOVE, THIS IS DEBUGGIN
-		if(FlxG.keys.justPressed.EIGHT)
-			endSong();
+		// TODO: REMOVE, THIS IS DEBUGGIN
+		if (FlxG.keys.justPressed.EIGHT) endSong();
 
-		if(FlxG.keys.justPressed.F5) {
-            Global.clearScriptList();
-            AssetManager.clearUnused();
-            Countdown.onStart.removeAll();
-            FlxG.resetState();
-        }
+		if (FlxG.keys.justPressed.F5)
+		{
+			Global.clearScriptList();
+			AssetManager.clearUnused();
+			Countdown.onStart.removeAll();
+			FlxG.resetState();
+		}
 
-		//if(FlxG.keys.justPressed.FOUR)
+		// if(FlxG.keys.justPressed.FOUR)
 		//	Countdown.perform();
 
 		Global.scriptCall('onPostUpdate', [elapsed]);
 	}
 
 	public function showCaptions(textStr:String, duration:Float = 8.0, fontSize:Int = 24, boxType:SubtitleBoxType = ROUNDED, font:String = 'vcr.ttf', textColor:Dynamic = 0xFFFFFFFF, outlineColor:Dynamic = 0xFF000000, outlineType:String = 'None'):Void
-		if(captions != null) captions.show(textStr, duration, fontSize, boxType, font, textColor, outlineColor, outlineType);
+		if (captions != null) captions.show(
+		textStr,
+		duration,
+		fontSize,
+		boxType,
+		font,
+		textColor,
+		outlineColor,
+		outlineType
+	);
 
 	public var camMov:FlxTween;
 	public var camRot:FlxTween;
@@ -373,40 +380,47 @@ class PlayState extends FlxTransitionableState
 		TweenUtils.cancelTwn(camMov);
 		final charPos = getCamPos(char);
 
-		if(!isInstant)
-			camMov = FlxTween.tween(camFollower, {x: (charPos[0] ?? 0) + (offsets[0] ?? 0), y: (charPos[1] ?? 0) + (offsets[1] ?? 0)}, 
-			duration, options);
+		if (!isInstant) camMov = FlxTween.tween(camFollower, {
+			x: (charPos[0] ?? 0) + (offsets[0] ?? 0),
+			y: (charPos[1] ?? 0) + (offsets[1] ?? 0)
+		}, duration, options);
 		else
 			camFollower.setPosition(charPos[0] + (offsets[0] ?? 0), charPos[1] + (offsets[1] ?? 0));
-	
+
 		Global.scriptCall('onCameraFocus', [getChar(char)?.type ?? CharacterType.OPPONENT]);
 	}
-	
+
 	public function rotateCamera(rotation:Float, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
 		TweenUtils.cancelTwn(camRot);
-		if(!isInstant)
-			camRot = FlxTween.tween(camGAME, {rotation: rotation}, duration, options);
+		if (!isInstant) camRot = FlxTween.tween(camGAME, {
+			rotation: rotation
+		}, duration, options);
 		else
 			camGAME.rotation = rotation;
 	}
 
 	var lastZoom:Float;
+
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
 		TweenUtils.cancelTwn(camZoom);
 		allowGameBop = false;
 
-		//trace('Setting zoom to $zoom in $duration', "DEBUG");
-		if(!isInstant)
+		// trace('Setting zoom to $zoom in $duration', "DEBUG");
+		if (!isInstant)
 		{
-			camZoom = FlxTween.tween(camGAME, {zoom: zoom}, duration, options);
-			camZoom.onComplete = _->{
+			camZoom = FlxTween.tween(camGAME, {
+				zoom: zoom
+			}, duration, options);
+			camZoom.onComplete = _ ->
+			{
 				lastZoom = camGAME.zoom;
 				allowGameBop = true;
 			};
 		}
-		else{
+		else
+		{
 			allowGameBop = true;
 			camGAME.zoom = lastZoom = zoom;
 		}
@@ -415,8 +429,10 @@ class PlayState extends FlxTransitionableState
 	public function getCamPos(charName:String):Array<Float>
 	{
 		final char = getChar(charName);
-		if(char != null)
-			return [char.getMidpoint().x + char.camOffsets[0], char.getMidpoint().y + char.camOffsets[1]];
+		if (char != null) return [
+			char.getMidpoint().x + char.camOffsets[0],
+			char.getMidpoint().y + char.camOffsets[1]
+		];
 
 		return [0, 0];
 	}
@@ -425,15 +441,17 @@ class PlayState extends FlxTransitionableState
 	{
 		for (c in stage.chars)
 		{
-			if('${c.character}-${c.ID}' == charName)
-				return c;
+			if ('${c.character}-${c.ID}' == charName) return c;
 			else
 			{
-				switch(charName)
+				switch (charName)
 				{
-					case 'opponent': for(opponent in stage.opponents.members) if(Std.isOfType(opponent, Character)) return cast opponent;
-					case 'spectator': for(spectator in stage.spectators.members) if(Std.isOfType(spectator, Character)) return cast spectator;
-					case 'player': for(player in stage.players.members) if(Std.isOfType(player, Character)) return cast player;
+					case 'opponent':
+						for (opponent in stage.opponents.members) if (Std.isOfType(opponent, Character)) return cast opponent;
+					case 'spectator':
+						for (spectator in stage.spectators.members) if (Std.isOfType(spectator, Character)) return cast spectator;
+					case 'player':
+						for (player in stage.players.members) if (Std.isOfType(player, Character)) return cast player;
 				}
 			}
 		}
@@ -444,23 +462,21 @@ class PlayState extends FlxTransitionableState
 
 	public var bopRate:Int = Constants.DEFAULT_BOP_RATE;
 	public var bopIntensity:Float = Constants.DEFAULT_BOP_INTENSITY - 1;
-
 	public var allowGameBop:Bool = false;
+
 	public function beatHit(curBeat:Float)
 	{
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
-			if(allowGameBop)
-				camGAME.zoom += bopIntensity;
+			if (allowGameBop) camGAME.zoom += bopIntensity;
 
 			camHUD.zoom += bopIntensity;
 			Global.scriptCall('onCameraBop', []);
 		}
-		
+
 		// updates less frequently..!
-		if(curBeat % 4 == 0)
-			DiscordRPC.updatePresence(PLAYMODE, rpcString, 'Accuracy: ${Std.int(playField.inputHandlers.get("p1").stats.accuracy)}%', false);
-			
+		if (curBeat % 4 == 0) DiscordRPC.updatePresence(PLAYMODE, rpcString, 'Accuracy: ${Std.int(playField.inputHandlers.get("p1").stats.accuracy)}%', false);
+
 		Global.scriptCall('onBeat', [curBeat]);
 	}
 
@@ -475,26 +491,25 @@ class PlayState extends FlxTransitionableState
 		final stat = playField.inputHandlers.get('p1').stats;
 
 		var saved:Bool = false;
-		if(VALID_SCORE)
-			saved = SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
+		if (VALID_SCORE) saved = SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
 
 		// saves replay stuff
-        final p1Handler = playField.inputHandlers.get('p1');
-        if (p1Handler.recording && p1Handler.recordedInputs.length > 0)
-        {
-            final rep = new Replay(songData.song, songData.difficulty, songData.mix);
-            rep.inputs = p1Handler.recordedInputs.copy();
+		final p1Handler = playField.inputHandlers.get('p1');
+		if (p1Handler.recording && p1Handler.recordedInputs.length > 0)
+		{
+			final rep = new Replay(songData.song, songData.difficulty, songData.mix);
+			rep.inputs = p1Handler.recordedInputs.copy();
 			rep.stats = Shortcuts.getStats();
 			rep.date = Date.now().getTime();
-            rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${rep.date}.mrp';
+			rep.filename = '${rep.song}_${rep.difficulty}_${rep.mix}_${rep.date}.mrp';
 			rep.displayName = rep.toString();
-            replaysToSave.push(rep);
-        }
+			replaysToSave.push(rep);
+		}
 
 		// Playlist handling
 		if (playlist.length > 0 && playlistIndex < playlist.length - 1)
 		{
-			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->
+			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, () ->
 			{
 				AssetManager.skipNextCleanup = false;
 				Global.clearScriptList();
@@ -509,8 +524,10 @@ class PlayState extends FlxTransitionableState
 		}
 		else
 		{
-			setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {ease: FlxEase.circOut});
-			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, ()->exit(false, saved));
+			setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {
+				ease: FlxEase.circOut
+			});
+			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, () -> exit(false, saved));
 		}
 	}
 
@@ -523,19 +540,17 @@ class PlayState extends FlxTransitionableState
 	{
 		super.onFocusLost();
 
-		if (playField != null)
-			pauseGame();
+		if (playField != null) pauseGame();
 	}
 
 	public function pauseGame()
 	{
-		if(paused || isDead || !canPause) return;
+		if (paused || isDead || !canPause) return;
 
 		paused = true;
 		activeTweens(false);
 		openSubState(new PauseScreen(camALT));
-		if(playField.playback.state == PLAY)
-			playField.playback.state = PAUSE;
+		if (playField.playback.state == PLAY) playField.playback.state = PAUSE;
 
 		Global.scriptCall('onSongPause');
 	}
@@ -544,10 +559,10 @@ class PlayState extends FlxTransitionableState
 	{
 		paused = false;
 		activeTweens(true);
-		if(!playField.inCountdown)
+		if (!playField.inCountdown)
 		{
-			playField.playback.state = PLAY;    
-            playField.playback.resync();
+			playField.playback.state = PLAY;
+			playField.playback.resync();
 		}
 
 		Global.scriptCall('onSongResume');
@@ -562,22 +577,23 @@ class PlayState extends FlxTransitionableState
 		PlayField.instance = null;
 		Countdown.onStart.removeAll();
 
-		if(toMenu) openSubState(new StickerSubState(new MainMenu()));
-		else FlxG.switchState(()-> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
+		if (toMenu) openSubState(new StickerSubState(new MainMenu()));
+		else
+			FlxG.switchState(() -> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
 
-    static public function saveReplays()
-    {
-        #if sys
-		if(!FileSystem.exists('assets/data/replays')) FileSystem.createDirectory('assets/data/replays');
-        for(replay in replaysToSave)
-        {
-	        final path = Paths.getPath('data/replays/${replay.filename}');
+	static public function saveReplays()
+	{
+		#if sys
+		if (!FileSystem.exists('assets/data/replays')) FileSystem.createDirectory('assets/data/replays');
+		for (replay in replaysToSave)
+		{
+			final path = Paths.getPath('data/replays/${replay.filename}');
 
-	        final data = {
-	            song: replay.song,
-	            difficulty: replay.difficulty,
-	            mix: replay.mix,
+			final data = {
+				song: replay.song,
+				difficulty: replay.difficulty,
+				mix: replay.mix,
 				displayName: replay.displayName,
 				replayCode: replay.date,
 				stats: {
@@ -586,31 +602,31 @@ class PlayState extends FlxTransitionableState
 					score: replay.stats.score,
 					maxCombo: replay.stats.highestCombo
 				},
-	            inputs: replay.inputs
-	        };
+				inputs: replay.inputs
+			};
 
-	        sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
-	        trace('[REPLAY] Replay saved on $path');
-        }
-        #else
-        trace("[REPLAY] Replay saving not supported on this platform", "ERROR");
-        #end
-    }
+			sys.io.File.saveContent(path, haxe.Json.stringify(data, null, "  \t"));
+			trace('[REPLAY] Replay saved on $path');
+		}
+		#else
+		trace("[REPLAY] Replay saving not supported on this platform", "ERROR");
+		#end
+	}
 
-    public static function loadReplay(path:String):Replay 
-    {
-        #if sys
-        if (Paths.exists(path))
-        {
-            final content = Paths.getFileContent(path);
-            if (content == "") return null;
+	public static function loadReplay(path:String):Replay
+	{
+		#if sys
+		if (Paths.exists(path))
+		{
+			final content = Paths.getFileContent(path);
+			if (content == "") return null;
 
-            final json:Dynamic = haxe.Json.parse(content);
-            final rep = new Replay(json.song, json.difficulty, json.mix);
-            rep.inputs = json.inputs;
-            return rep;
-        }
-        #end
-        return null;
-    }
+			final json:Dynamic = haxe.Json.parse(content);
+			final rep = new Replay(json.song, json.difficulty, json.mix);
+			rep.inputs = json.inputs;
+			return rep;
+		}
+		#end
+		return null;
+	}
 }

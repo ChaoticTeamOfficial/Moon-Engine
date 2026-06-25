@@ -48,7 +48,7 @@ class MoonSprite extends FlxAnimate
 	 * A brightness field that looks just like Adobe Animate's brightness.
 	 */
 	public var brightness(default, set):Float = 0;
-	
+
 	/**
 	 * The suffix used for animations.
 	 * Let's say you have an "`idle`" animation, then, you set the suffix to "`alt`".
@@ -84,7 +84,6 @@ class MoonSprite extends FlxAnimate
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
 	public var danceFrequency:Int = 2;
-
 	public var twn:FlxTween;
 
 	/**
@@ -100,8 +99,10 @@ class MoonSprite extends FlxAnimate
 		{
 			switch (group.toLowerCase())
 			{
-				case "singanims": return lowerName.startsWith("sing");
-				default: return lowerName.startsWith(group.toLowerCase());
+				case "singanims":
+					return lowerName.startsWith("sing");
+				default:
+					return lowerName.startsWith(group.toLowerCase());
 			}
 		}
 		return false;
@@ -111,8 +112,7 @@ class MoonSprite extends FlxAnimate
 	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0):Void
 	{
 		// Prevent playing a new animation if the current one is an override and hasn't finished
-		if (animation.curAnim != null && isOverrideAnim(animation.curAnim.name) && !animation.curAnim.finished)
-			return;
+		if (animation.curAnim != null && isOverrideAnim(animation.curAnim.name) && !animation.curAnim.finished) return;
 
 		doAnimThingy(animName, force, reversed, frame);
 	}
@@ -125,26 +125,28 @@ class MoonSprite extends FlxAnimate
 	 * @param reversed Whether to play the animation in reverse.
 	 * @param frame The frame to start the animation from.
 	 */
-	public function forcePlayAnim(animName:String, force:Bool = true, reversed:Bool = false, frame:Int = 0):Void
-		doAnimThingy(animName, force, reversed, frame);
+	public function forcePlayAnim(animName:String, force:Bool = true, reversed:Bool = false, frame:Int = 0):Void doAnimThingy(
+		animName,
+		force,
+		reversed,
+		frame
+	);
 
 	private function doAnimThingy(animName:String, force:Bool, reversed:Bool, frame:Int)
 	{
 		var playName:String = animName;
-		if (animationSuffix != "" && animation.exists('$animName-$animationSuffix'))
-			playName = '$animName-$animationSuffix';
+		if (animationSuffix != "" && animation.exists('$animName-$animationSuffix')) playName = '$animName-$animationSuffix';
 
-		if(!animation.exists(playName))
+		if (!animation.exists(playName))
 		{
-			//trace('Tried to play animation $playName, but it doesn\'t exist!', "WARNING");
+			// trace('Tried to play animation $playName, but it doesn\'t exist!', "WARNING");
 			return;
 		}
 
 		animation.play(playName, force, reversed, frame);
 
 		var offsetKey:String = playName;
-		if (!animOffsets.exists(offsetKey))
-			offsetKey = animName;
+		if (!animOffsets.exists(offsetKey)) offsetKey = animName;
 
 		final daOffset = animOffsets.get(offsetKey);
 		(animOffsets.exists(offsetKey)) ? offset.set(daOffset[0], daOffset[1]) : offset.set(0, 0);
@@ -152,7 +154,7 @@ class MoonSprite extends FlxAnimate
 		if (centerAnimations)
 		{
 			centerOffsets();
-        	centerOrigin();
+			centerOrigin();
 		}
 
 		offset.x += extraOffset.x;
@@ -161,11 +163,24 @@ class MoonSprite extends FlxAnimate
 
 	@:inheritDoc(FlxSprite.loadGraphic)
 	override public function loadGraphic(graphic:FlxGraphicAsset, animated:Bool = false, frameWidth:Int = 0, frameHeight:Int = 0, unique:Bool = false, ?key:String):MoonSprite
-		return cast super.loadGraphic(graphic, animated, frameWidth, frameHeight, unique, key);
+		return cast super.loadGraphic(
+		graphic,
+		animated,
+		frameWidth,
+		frameHeight,
+		unique,
+		key
+	);
 
 	@:inheritDoc(FlxSprite.makeGraphic)
 	override public function makeGraphic(width:Int, height:Int, color:FlxColor = FlxColor.WHITE, unique:Bool = false, ?key:String):MoonSprite
-		return cast super.makeGraphic(width, height, color, unique, key);
+		return cast super.makeGraphic(
+		width,
+		height,
+		color,
+		unique,
+		key
+	);
 
 	/**
 	 * Adds an offset to a animation. (IMPORTANT NOTE: For offsets to apply, use `playAnim()` instead of `animation.play()`.)
@@ -173,8 +188,7 @@ class MoonSprite extends FlxAnimate
 	 * @param x    The X offset.
 	 * @param y    The Y offset.
 	 */
-	public function addOffset(name:String, x:Float = 0, y:Float = 0)
-		animOffsets[name] = [x, y];
+	public function addOffset(name:String, x:Float = 0, y:Float = 0) animOffsets[name] = [x, y];
 
 	/**
 	 * Automatically adds animations and offsets using an array of AnimationData.
@@ -183,32 +197,32 @@ class MoonSprite extends FlxAnimate
 	 * @param type       Which atlas/spritesheet format these animations come from.
 	 * return array of idle anims, for chaining them.
 	 */
-	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW):Array<String>
-		return AnimationUtils.loadAnimations(this, animations, type);
+	public function loadAnimations(animations:Array<Paths.AnimationData>, type:AtlasType = SPARROW):Array<String> return AnimationUtils.loadAnimations(
+		this,
+		animations,
+		type
+	);
 
 	/**
 	 * Convenience lookup into `animDataMap`.
 	 */
-	public function getAnimData(name:String):Paths.AnimationData
-		return animDataMap.exists(name) ? animDataMap.get(name) : null;
+	public function getAnimData(name:String):Paths.AnimationData return animDataMap.exists(name) ? animDataMap.get(name) : null;
 
 	public function dance(?force:Bool = false)
-    {
-        final group = idleAnimsMap.exists(animationSuffix) 
-            ? idleAnimsMap.get(animationSuffix) 
-            : (idleAnimsMap.exists("") ? idleAnimsMap.get("") : []);
-        
-        if (group != null && group.length > 0)
-        {
-            playAnim(group[danceIndex], force);
-            danceIndex = (danceIndex + 1) % group.length;
-        }
-        else if (animation.exists("idle-0"))
-        {
-            playAnim("idle-0", force);
-            danceIndex = 0;
-        }
-    }
+	{
+		final group = idleAnimsMap.exists(animationSuffix) ? idleAnimsMap.get(animationSuffix) : (idleAnimsMap.exists("") ? idleAnimsMap.get("") : []);
+
+		if (group != null && group.length > 0)
+		{
+			playAnim(group[danceIndex], force);
+			danceIndex = (danceIndex + 1) % group.length;
+		}
+		else if (animation.exists("idle-0"))
+		{
+			playAnim("idle-0", force);
+			danceIndex = 0;
+		}
+	}
 
 	/**
 	 * Sets the visibility of one or more named layers, by default on this
@@ -250,7 +264,10 @@ class MoonSprite extends FlxAnimate
 		if (tl == null) return null;
 
 		var found:Layer = null;
-		tl.forEachLayer(layer -> { if (layer.name == name) found = layer; });
+		tl.forEachLayer(layer ->
+		{
+			if (layer.name == name) found = layer;
+		});
 		return found;
 	}
 
@@ -258,28 +275,26 @@ class MoonSprite extends FlxAnimate
 	{
 		final controller:FlxAnimateController = cast this.animation;
 		@:privateAccess if (!controller.hasAnimateAtlas) return null;
-
 		@:privateAccess if (controller.isAnimate)
 		{
 			final curAnim = cast controller.curAnim;
-			if (curAnim != null && curAnim.timeline != null)
-				return curAnim.timeline;
+			if (curAnim != null && curAnim.timeline != null) return curAnim.timeline;
 		}
 
 		return controller.getDefaultTimeline();
-}
+	}
 
-    @:noCompletion public function set_brightness(value:Float):Float
-    {
-        this.brightness = value;
-        
-        FlxSpriteUtil.setBrightness(this, value);
-        
-        return value;
-    }
+	@:noCompletion
+	public function set_brightness(value:Float):Float
+	{
+		this.brightness = value;
 
-	private function get_idleAnims():Array<String>
-		return idleAnimsMap.exists("") ? idleAnimsMap.get("") : [];
+		FlxSpriteUtil.setBrightness(this, value);
+
+		return value;
+	}
+
+	private function get_idleAnims():Array<String> return idleAnimsMap.exists("") ? idleAnimsMap.get("") : [];
 
 	private function set_idleAnims(value:Array<String>):Array<String>
 	{

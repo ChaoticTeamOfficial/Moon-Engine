@@ -23,8 +23,8 @@ class MosaicShader extends FlxShader
 			gl_FragColor = flixel_texture2D(bitmap, floor(uv * blocks) / blocks);
 		}
 	')
-	
-	public var bSize(default,set):Float = 0;
+	public var bSize(default, set):Float = 0;
+
 	public function new()
 	{
 		super();

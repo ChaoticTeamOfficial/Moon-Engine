@@ -79,8 +79,7 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 	 * @param alpha The initial alpha value for newly created sprites for the trail.
 	 * @param diff How much to decrement the alpha of existing sprites when a new one is added
 	 */
-	public function new(target:FlxSprite, ?graphic:flixel.system.FlxAssets.FlxGraphicAsset,
-		length = 10, delay = 3, alpha = 0.4, diff = 0.05):Void
+	public function new(target:FlxSprite, ?graphic:flixel.system.FlxAssets.FlxGraphicAsset, length = 10, delay = 3, alpha = 0.4, diff = 0.05):Void
 	{
 		super();
 
@@ -112,73 +111,73 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 	{
 		_counter++;
 
-		if(_counter >= delay && countLiving() < trailLength)
+		if (_counter >= delay && countLiving() < trailLength)
 		{
 			_counter = 0;
 
-			for(i in 0...members.length)
+			for (i in 0...members.length)
 			{
 				final sprite = members[i];
-				if(sprite != null && sprite.exists)
+				if (sprite != null && sprite.exists)
 				{
 					sprite.alpha -= _alphaDecrement;
-					if(sprite.alpha <= 0) sprite.kill();
+					if (sprite.alpha <= 0) sprite.kill();
 				}
 			}
 
 			// emit new sprite if still under length
-			if(countLiving() < trailLength && !paused)
-				emitTrailSprite();
+			if (countLiving() < trailLength && !paused) emitTrailSprite();
 		}
 
 		// enforces max length killing oldes if exceeded
-		while (countLiving() > trailLength) killOldest();
+		while (countLiving() > trailLength)
+			killOldest();
 
 		super.update(elapsed);
 	}
 
 	private function emitTrailSprite():Void
 	{
-	    var trailSprite:FlxSprite = recycle(FlxSprite);
-	    trailSprite.active = true;
-	    trailSprite.solid = solid;
-	    trailSprite.alpha = _initialAlpha;
-	    trailSprite.offset.copyFrom(target.offset);
-	    trailSprite.setPosition(target.x, target.y);
+		var trailSprite:FlxSprite = recycle(FlxSprite);
+		trailSprite.active = true;
+		trailSprite.solid = solid;
+		trailSprite.alpha = _initialAlpha;
+		trailSprite.offset.copyFrom(target.offset);
+		trailSprite.setPosition(target.x, target.y);
 
-	    if(rotationsEnabled)
-	    {
-	        trailSprite.angle = target.angle;
-	        trailSprite.origin.copyFrom(_spriteOrigin);
-	    }
+		if (rotationsEnabled)
+		{
+			trailSprite.angle = target.angle;
+			trailSprite.origin.copyFrom(_spriteOrigin);
+		}
 
-	    if(scalesEnabled)
-	        trailSprite.scale.copyFrom(target.scale);
+		if (scalesEnabled) trailSprite.scale.copyFrom(target.scale);
 
-	    if(_graphic == null)
-	    {
-	        trailSprite.loadGraphicFromSprite(target);
-	        if(framesEnabled && target.animation.curAnim != null)
-	        {
-	            trailSprite.animation.frameIndex = target.animation.frameIndex;
-	            trailSprite.animation.curAnim.frameRate = 0;
-	            trailSprite.flipX = target.flipX;
-	            trailSprite.flipY = target.flipY;
-	            //trailSprite.animation.curAnim = target.animation.curAnim;
-	        }
-	    }
-	    else trailSprite.loadGraphic(_graphic);
+		if (_graphic == null)
+		{
+			trailSprite.loadGraphicFromSprite(target);
+			if (framesEnabled && target.animation.curAnim != null)
+			{
+				trailSprite.animation.frameIndex = target.animation.frameIndex;
+				trailSprite.animation.curAnim.frameRate = 0;
+				trailSprite.flipX = target.flipX;
+				trailSprite.flipY = target.flipY;
+				// trailSprite.animation.curAnim = target.animation.curAnim;
+			}
+		}
+		else
+			trailSprite.loadGraphic(_graphic);
 
-	    trailSprite.velocity.copyFrom(FlxPoint.get(trailVelocity[0], trailVelocity[1]));
-	    trailSprite.exists = true;
+		trailSprite.velocity.copyFrom(FlxPoint.get(trailVelocity[0], trailVelocity[1]));
+		trailSprite.exists = true;
 	}
 
 	private function killOldest():Void
 	{
-		for(i in 0...members.length)
+		for (i in 0...members.length)
 		{
 			final sprite = members[i];
-			if(sprite != null && sprite.exists)
+			if (sprite != null && sprite.exists)
 			{
 				sprite.kill();
 				return;

@@ -65,62 +65,58 @@ class Conductor
 	@:dox(hide)
 	function set_time(value:Float):Float
 	{
-	    time = value;
-	    final calc = (time - offsetTime);
-	    _stepTracker = Math.ffloor(stepOffset + calc / stepCrochet);
-	    _beatTracker = Math.ffloor(beatOffset + calc / crochet);
-	    _measureTracker = Math.ffloor(measureOffset + calc / measureCrochet);
+		time = value;
+		final calc = (time - offsetTime);
+		_stepTracker = Math.ffloor(stepOffset + calc / stepCrochet);
+		_beatTracker = Math.ffloor(beatOffset + calc / crochet);
+		_measureTracker = Math.ffloor(measureOffset + calc / measureCrochet);
 
-	    if (active)
-	    {
-	        if (curStep != _stepTracker)
-	        {
-	            final dir = (_stepTracker > curStep) ? 1 : -1;
-	            if (Math.abs(_stepTracker - curStep) > 8)
-	                catchUp = true;
+		if (active)
+		{
+			if (curStep != _stepTracker)
+			{
+				final dir = (_stepTracker > curStep) ? 1 : -1;
+				if (Math.abs(_stepTracker - curStep) > 8) catchUp = true;
 
-	            while (curStep != _stepTracker)
-	            {
-	                curStep += dir;
-	                if (!catchUp)
-	                    onStep.dispatch(curStep);
-	            }
-	            catchUp = false;
-	        }
+				while (curStep != _stepTracker)
+				{
+					curStep += dir;
+					if (!catchUp) onStep.dispatch(curStep);
+				}
+				catchUp = false;
+			}
 
-	        if (curBeat != _beatTracker)
-	        {
-	            final dir = (_beatTracker > curBeat) ? 1 : -1;
-	            if (Math.abs(_beatTracker - curBeat) > 2)
-	                catchUp = true;
+			if (curBeat != _beatTracker)
+			{
+				final dir = (_beatTracker > curBeat) ? 1 : -1;
+				if (Math.abs(_beatTracker - curBeat) > 2) catchUp = true;
 
-	            while (curBeat != _beatTracker)
-	            {
-	                curBeat += dir;
-	                if (!catchUp)
-	                    onBeat.dispatch(curBeat);
-	            }
-	            catchUp = false;
-	        }
+				while (curBeat != _beatTracker)
+				{
+					curBeat += dir;
+					if (!catchUp) onBeat.dispatch(curBeat);
+				}
+				catchUp = false;
+			}
 
-	        if (curMeasure != _measureTracker)
-	        {
-	            final dir = (_measureTracker > curMeasure) ? 1 : -1;
-	            while (curMeasure != _measureTracker)
-	            {
-	                curMeasure += dir;
-	                onMeasure.dispatch(curMeasure);
-	            }
-	        }
-	    }
-	    else
-	    {
-	        curStep = _stepTracker;
-	        curBeat = _beatTracker;
-	        curMeasure = _measureTracker;
-	    }
+			if (curMeasure != _measureTracker)
+			{
+				final dir = (_measureTracker > curMeasure) ? 1 : -1;
+				while (curMeasure != _measureTracker)
+				{
+					curMeasure += dir;
+					onMeasure.dispatch(curMeasure);
+				}
+			}
+		}
+		else
+		{
+			curStep = _stepTracker;
+			curBeat = _beatTracker;
+			curMeasure = _measureTracker;
+		}
 
-	    return value;
+		return value;
 	}
 
 	/**
@@ -139,7 +135,6 @@ class Conductor
 	var curMeasure(default, null):Float = 0;
 
 	private var _stepTracker(default, null):Float = 0;
-
 	private var _beatTracker(default, null):Float = 0;
 	private var _measureTracker(default, null):Float = 0;
 
@@ -189,15 +184,15 @@ class Conductor
 		measureOffset += calc / measureCrochet;
 		offsetTime = position;
 
-		if (newBpm > 0) 
+		if (newBpm > 0)
 		{
 			bpm = newBpm;
 			stepCrochet = 60000 / (bpm * 4);
 		}
-		
+
 		numerator = newNumerator;
 		denominator = newDenominator;
-		
+
 		crochet = stepCrochet * numerator;
 		measureCrochet = crochet * denominator;
 	}

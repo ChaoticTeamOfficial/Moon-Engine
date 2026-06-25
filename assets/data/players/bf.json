@@ -1,7 +1,7 @@
 {
-    "version": "1.0.0",
-    "displayName": "Boyfriend",
-    "freeplayData": {
-        "textColors": "0xff00fff2"
-    }
+	"version": "1.0.0",
+	"displayName": "Boyfriend",
+	"freeplayData": {
+		"textColors": "0xff00fff2"
+	}
 }

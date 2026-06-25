@@ -6,8 +6,8 @@ import haxe.Json;
 import moon.backend.data.MZip;
 
 using StringTools;
-@:publicFields
 
+@:publicFields
 /**
  * Represents one single mod.
  */
@@ -30,8 +30,7 @@ class Mod
 	{
 		#if sys
 		final meta = '$root/mod_metadata.json';
-		if (FileSystem.exists(meta))
-			metadata = Json.parse(File.getContent(meta));
+		if (FileSystem.exists(meta)) metadata = Json.parse(File.getContent(meta));
 		#end
 	}
 
@@ -49,7 +48,8 @@ class Mod
 	}
 }
 
-typedef ModMetadata = {
+typedef ModMetadata =
+{
 	/**
 	 * The mod's name.
 	 */
@@ -63,7 +63,8 @@ typedef ModMetadata = {
 	/**
 	 * The mod's team, each array member having a `name` and `role` field.
 	 */
-	var ?team:Array<{name:String, role:String}>;
+	var ?team:Array<
+		{name:String, role:String}>;
 
 	/**
 	 * The mod's version.

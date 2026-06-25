@@ -1,4 +1,5 @@
 package;
+
 #if !macro
 import flixel.*;
 import flixel.text.*;
@@ -8,7 +9,6 @@ import flixel.math.*;
 import flixel.group.*;
 import flixel.effects.*;
 import flixel.addons.transition.*;
-
 import moon.backend.*;
 import moon.backend.Paths.AnimationData;
 import moon.backend.Paths.AtlasType;

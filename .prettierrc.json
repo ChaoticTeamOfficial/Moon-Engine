@@ -1,0 +1,14 @@
+{
+	"printWidth": 80,
+
+	"useTabs": true,
+	"tabWidth": 4,
+
+	"singleQuote": false,
+	"quoteProps": "preserve",
+	"parser": "json",
+
+	"bracketSpacing": true,
+	"trailingComma": "none",
+	"semi": false
+}

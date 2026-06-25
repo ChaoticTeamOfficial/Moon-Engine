@@ -1,0 +1,3 @@
+# Don't format Texture Atlases.
+**/Animation.json
+**/spritemap[0-9]*.json

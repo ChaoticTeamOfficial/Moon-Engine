@@ -103,8 +103,8 @@ class BorderGlowShader extends FlxShader
 			gl_FragColor = vec4(col, 1.0);
 		}
 	')
-
 	public var time(default, set):Float = 0.0;
+
 	function set_time(v:Float):Float
 	{
 		uTime.value = [v];
@@ -112,6 +112,7 @@ class BorderGlowShader extends FlxShader
 	}
 
 	public var aspect(default, set):Float = 1.0;
+
 	function set_aspect(v:Float):Float
 	{
 		uAspect.value = [v];
@@ -119,7 +120,6 @@ class BorderGlowShader extends FlxShader
 	}
 
 	public var enabled:Bool = true;
-
 	public var fadeSpeed:Float = 11.0;
 
 	private var _intensity:Float = 1.0;

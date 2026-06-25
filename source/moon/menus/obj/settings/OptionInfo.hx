@@ -7,6 +7,7 @@ class OptionInfo extends FlxSpriteGroup
 	var bg:MoonSprite;
 	var topText:FlxText;
 	var descriptionText:FlxText;
+
 	public function new()
 	{
 		super();
@@ -30,6 +31,7 @@ class OptionInfo extends FlxSpriteGroup
 	}
 
 	var texts:Array<FlxText> = [];
+
 	public function updateInfo(setting:Setting)
 	{
 		topText.text = MoonLang.settingName(setting.name).toUpperCase();
@@ -40,32 +42,30 @@ class OptionInfo extends FlxSpriteGroup
 
 		// this is kinda ass lol
 		/*if(texts.length > 0)
-			for(option in texts)
-			{
-				remove(option);
-				option.destroy();
-				texts
-			}
+				for(option in texts)
+				{
+					remove(option);
+					option.destroy();
+					texts
+				}
 
-		if(setting.type == SELECTOR)
-		{
-			final options:Array<Dynamic> = cast setting.options;
-			for(i in 0...options.length)
+			if(setting.type == SELECTOR)
 			{
-				var option = new FlxText(24, descriptionText.y + descriptionText.height + (20 * i), bg.width - 26, '${options[i]}');
-				option.setFormat(Paths.font('phantomuff/full.ttf'), 18, LEFT);
-				option.antialiasing = true;
-				add(option);
-				texts.push(option);
+				final options:Array<Dynamic> = cast setting.options;
+				for(i in 0...options.length)
+				{
+					var option = new FlxText(24, descriptionText.y + descriptionText.height + (20 * i), bg.width - 26, '${options[i]}');
+					option.setFormat(Paths.font('phantomuff/full.ttf'), 18, LEFT);
+					option.antialiasing = true;
+					add(option);
+					texts.push(option);
+				}
 			}
-		}
-		*/
+		 */
 	}
 
 	public function updateSetting(setting:Setting)
 	{
-		if(setting.type != SELECTOR) return;
-
-
+		if (setting.type != SELECTOR) return;
 	}
 }

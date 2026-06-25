@@ -3,7 +3,8 @@ package moon.backend.data;
 /**
  * A typedef that contains basic song data, used in some menus.
  */
-typedef SongBase = {
+typedef SongBase =
+{
 	/**
 	 * The song's name.
 	 */

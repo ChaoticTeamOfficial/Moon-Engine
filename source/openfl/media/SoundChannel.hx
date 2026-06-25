@@ -41,7 +41,9 @@ import lime.utils.Int16Array;
 @:access(openfl.events.SampleDataEvent)
 @:access(openfl.media.Sound)
 @:access(openfl.media.SoundMixer)
-@:final @:keep class SoundChannel extends EventDispatcher
+@:final
+@:keep
+class SoundChannel extends EventDispatcher
 {
 	/**
 		The current amplitude (volume) of the left channel, from 0 (silent) to 1
@@ -77,19 +79,21 @@ import lime.utils.Int16Array;
 	**/
 	public var soundTransform(get, set):SoundTransform;
 
-	@:noCompletion private var __sound:Sound;
-	@:noCompletion private var __isValid:Bool;
-	@:noCompletion private var __soundTransform:SoundTransform;
+	@:noCompletion
+	private var __sound:Sound;
+	@:noCompletion
+	private var __isValid:Bool;
+	@:noCompletion
+	private var __soundTransform:SoundTransform;
 	#if lime
-	@:noCompletion private var __audioSource:AudioSource;
+	@:noCompletion
+	private var __audioSource:AudioSource;
 	#end
-
 	#if (js && html5)
 	private var __sampleDataEvent:SampleDataEvent;
 	private var __processor:ScriptProcessorNode;
 	private var __firstRun:Bool = true;
 	#end
-
 	#if lime_openal
 	private var __sampleDataEvent:SampleDataEvent;
 	private var __alSource:ALSource;
@@ -101,7 +105,8 @@ import lime.utils.Int16Array;
 	#end
 
 	#if openfljs
-	@:noCompletion private static function __init__()
+	@:noCompletion
+	private static function __init__()
 	{
 		untyped Object.defineProperties(SoundChannel.prototype, {
 			"position": {
@@ -116,7 +121,8 @@ import lime.utils.Int16Array;
 	}
 	#end
 
-	@:noCompletion private function new(sound:Sound, audioSource:#if lime AudioSource #else Dynamic #end = null, soundTransform:SoundTransform = null):Void
+	@:noCompletion
+	private function new(sound:Sound, audioSource:#if lime AudioSource #else Dynamic #end = null, soundTransform:SoundTransform = null):Void
 	{
 		super(this);
 
@@ -178,7 +184,8 @@ import lime.utils.Int16Array;
 		__dispose();
 	}
 
-	@:noCompletion private function __dispose():Void
+	@:noCompletion
+	private function __dispose():Void
 	{
 		if (!__isValid) return;
 
@@ -190,7 +197,8 @@ import lime.utils.Int16Array;
 		__isValid = false;
 	}
 
-	@:noCompletion private function __startSampleData():Void
+	@:noCompletion
+	private function __startSampleData():Void
 	{
 		#if (js && html5)
 		var webAudioContext = __sound.__webAudioContext;
@@ -276,12 +284,14 @@ import lime.utils.Int16Array;
 		#end
 	}
 
-	@:noCompletion private function __updateTransform():Void
+	@:noCompletion
+	private function __updateTransform():Void
 	{
 		this.soundTransform = soundTransform;
 	}
 
-	@:noCompletion private function __initAudioSource(audioSource:#if lime AudioSource #else Dynamic #end):Void
+	@:noCompletion
+	private function __initAudioSource(audioSource:#if lime AudioSource #else Dynamic #end):Void
 	{
 		#if lime
 		__audioSource = audioSource;
@@ -298,15 +308,18 @@ import lime.utils.Int16Array;
 	}
 
 	// Get & Set Methods
-	@:noCompletion private function get_position():Float
+
+	@:noCompletion
+	private function get_position():Float
 	{
 		if (!__isValid) return 0;
 
 		#if lime
-		try{
+		try
+		{
 			return __audioSource.currentTime + __audioSource.offset;
 		}
-		catch(e)
+		catch (e)
 		{
 			return 0;
 		}
@@ -315,7 +328,8 @@ import lime.utils.Int16Array;
 		#end
 	}
 
-	@:noCompletion private function set_position(value:Float):Float
+	@:noCompletion
+	private function set_position(value:Float):Float
 	{
 		if (!__isValid) return 0;
 
@@ -325,12 +339,14 @@ import lime.utils.Int16Array;
 		return value;
 	}
 
-	@:noCompletion private function get_soundTransform():SoundTransform
+	@:noCompletion
+	private function get_soundTransform():SoundTransform
 	{
 		return __soundTransform.clone();
 	}
 
-	@:noCompletion private function set_soundTransform(value:SoundTransform):SoundTransform
+	@:noCompletion
+	private function set_soundTransform(value:SoundTransform):SoundTransform
 	{
 		if (value != null)
 		{
@@ -349,13 +365,16 @@ import lime.utils.Int16Array;
 				#if lime
 				__audioSource.gain = volume;
 
-				try {
-                    var position = __audioSource.position;
-                    position.x = pan;
-                    position.z = -1 * Math.sqrt(1 - Math.pow(pan, 2));
-                    __audioSource.position = position;
-                }
-                catch (e) { }
+				try
+				{
+					var position = __audioSource.position;
+					position.x = pan;
+					position.z = -1 * Math.sqrt(1 - Math.pow(pan, 2));
+					__audioSource.position = position;
+				}
+				catch (e)
+				{
+				}
 
 				return value;
 				#end
@@ -366,7 +385,9 @@ import lime.utils.Int16Array;
 	}
 
 	// Event Handlers
-	@:noCompletion private function audioSource_onComplete():Void
+
+	@:noCompletion
+	private function audioSource_onComplete():Void
 	{
 		SoundMixer.__unregisterSoundChannel(this);
 
@@ -424,8 +445,7 @@ import lime.utils.Int16Array;
 					else
 					{
 						__sampleDataEvent.getSamples(__outputBuffer);
-						alAudioContext.bufferData(__emptyBuffers[a], AL.FORMAT_STEREO16, __bufferView, __sampleDataEvent.getBufferSize() * 4,
-							44100);
+						alAudioContext.bufferData(__emptyBuffers[a], AL.FORMAT_STEREO16, __bufferView, __sampleDataEvent.getBufferSize() * 4, 44100);
 						alAudioContext.sourceQueueBuffer(__alSource, __emptyBuffers[a]);
 					}
 				}

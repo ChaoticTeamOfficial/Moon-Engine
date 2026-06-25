@@ -2,8 +2,9 @@ package moon.hardcoded_shaders;
 
 import flixel.system.FlxAssets.FlxShader;
 
-class GrayscaleShader extends FlxShader {
-    @:glFragmentSource('
+class GrayscaleShader extends FlxShader
+{
+	@:glFragmentSource('
         #pragma header
 
         void main(void) {
@@ -12,5 +13,8 @@ class GrayscaleShader extends FlxShader {
             gl_FragColor = vec4(gray, gray, gray, color.a);
         }
     ')
-    public function new() { super(); }
+	public function new()
+	{
+		super();
+	}
 }

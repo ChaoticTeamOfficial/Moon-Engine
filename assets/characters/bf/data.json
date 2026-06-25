@@ -1,22 +1,83 @@
 {
-    "antialiasing": true,
-    "scale": 1,
-    "flipX": false,
-    "camOffsets": [-169, -135],
-    "healthbarColors": [49, 176, 209],
+	"antialiasing": true,
+	"scale": 1,
+	"flipX": false,
+	"camOffsets": [-169, -135],
+	"healthbarColors": [49, 176, 209],
 	"extraOffsets": [0, 0],
-    "danceFrequency": 2,
-    "animations": [
-        {"name": "idle-0", "prefix": "BF idle dance", "x": -5, "y": 0, "fps": 24},
-		{"name": "hey", "prefix": "BF HEY!!", "x": -5, "y": 0, "fps": 24, "finishAnim": "idle"},
-        {"name": "singLEFT", "prefix": "BF NOTE LEFT0", "x": 12, "y": -6, "fps": 24},
-        {"name": "singDOWN", "prefix": "BF NOTE DOWN0", "x": -10, "y": -50, "fps": 24},
-        {"name": "singUP", "prefix": "BF NOTE UP0", "x": -29, "y": 27, "fps": 24},
-        {"name": "singRIGHT", "prefix": "BF NOTE RIGHT0", "x": -38, "y": -7, "fps": 24},
-        {"name": "singLEFT-miss", "prefix": "BF NOTE LEFT MISS", "x": 12, "y": 24,"fps": 24},
-        {"name": "singDOWN-miss","prefix": "BF NOTE DOWN MISS","x": -11, "y": -19, "fps": 24},
-        {"name": "singUP-miss","prefix": "BF NOTE UP MISS","x": -29, "y":27, "fps": 24},
-        {"name": "singRIGHT-miss","prefix": "BF NOTE RIGHT MISS","x": -30, "y":21, "fps": 24}
-    ],
+	"danceFrequency": 2,
+	"animations": [
+		{
+			"name": "idle-0",
+			"prefix": "BF idle dance",
+			"x": -5,
+			"y": 0,
+			"fps": 24
+		},
+		{
+			"name": "hey",
+			"prefix": "BF HEY!!",
+			"x": -5,
+			"y": 0,
+			"fps": 24,
+			"finishAnim": "idle"
+		},
+		{
+			"name": "singLEFT",
+			"prefix": "BF NOTE LEFT0",
+			"x": 12,
+			"y": -6,
+			"fps": 24
+		},
+		{
+			"name": "singDOWN",
+			"prefix": "BF NOTE DOWN0",
+			"x": -10,
+			"y": -50,
+			"fps": 24
+		},
+		{
+			"name": "singUP",
+			"prefix": "BF NOTE UP0",
+			"x": -29,
+			"y": 27,
+			"fps": 24
+		},
+		{
+			"name": "singRIGHT",
+			"prefix": "BF NOTE RIGHT0",
+			"x": -38,
+			"y": -7,
+			"fps": 24
+		},
+		{
+			"name": "singLEFT-miss",
+			"prefix": "BF NOTE LEFT MISS",
+			"x": 12,
+			"y": 24,
+			"fps": 24
+		},
+		{
+			"name": "singDOWN-miss",
+			"prefix": "BF NOTE DOWN MISS",
+			"x": -11,
+			"y": -19,
+			"fps": 24
+		},
+		{
+			"name": "singUP-miss",
+			"prefix": "BF NOTE UP MISS",
+			"x": -29,
+			"y": 27,
+			"fps": 24
+		},
+		{
+			"name": "singRIGHT-miss",
+			"prefix": "BF NOTE RIGHT MISS",
+			"x": -30,
+			"y": 21,
+			"fps": 24
+		}
+	],
 	"overrideAnims": ["hey"]
 }

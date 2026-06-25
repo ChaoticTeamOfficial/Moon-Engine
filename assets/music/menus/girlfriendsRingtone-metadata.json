@@ -1,7 +1,7 @@
 {
-  "artist": "Saruky",
-  "displayName": "Girlfriend's Song",
-  "bpm": 160,
-  "timeSignature": [4, 4],
-  "looped": true
+	"artist": "Saruky",
+	"displayName": "Girlfriend's Song",
+	"bpm": 160,
+	"timeSignature": [4, 4],
+	"looped": true
 }

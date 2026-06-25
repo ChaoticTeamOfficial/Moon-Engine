@@ -5,7 +5,6 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import moon.backend.gameplay.*;
 import moon.global_obj.PixelIcon;
-
 import openfl.filters.BitmapFilter;
 import openfl.filters.DropShadowFilter;
 
@@ -13,253 +12,253 @@ using StringTools;
 
 class FreeplaySongItem extends FlxSpriteGroup
 {
-    static final TEXT_GAP:Float = 10.0;
-    static final TEXT_W:Int = 260;
-    static final LERP_SPEED:Float = 14;
-    static final RANK_FADE_SPEED:Float = 12;
-    static final DIFF_SWITCH_DURATION:Float = 0.35;
+	static final TEXT_GAP:Float = 10.0;
+	static final TEXT_W:Int = 260;
+	static final LERP_SPEED:Float = 14;
+	static final RANK_FADE_SPEED:Float = 12;
+	static final DIFF_SWITCH_DURATION:Float = 0.35;
 
-    public var targetAlpha:Float = 1.0;
-    public var targetScale:Float = 1.0;
-    public var lerpAlpha:Float = 0.0;
-    public var lerpScale:Float = 1.0;
-    public var transitioning:Bool = false;
-    public var data:Chart;
+	public var targetAlpha:Float = 1.0;
+	public var targetScale:Float = 1.0;
+	public var lerpAlpha:Float = 0.0;
+	public var lerpScale:Float = 1.0;
+	public var transitioning:Bool = false;
+	public var data:Chart;
+	public var bg:MoonSprite;
+	public var icon:PixelIcon;
+	public var nameText:ScrollingText;
+	public var scoreText:FlxText;
+	public var rankDisplay:FreeplayRank;
 
-    public var bg:MoonSprite;
-    public var icon:PixelIcon;
-    public var nameText:ScrollingText;
-    public var scoreText:FlxText;
-    public var rankDisplay:FreeplayRank;
+	private var _lastRank:String = null;
+	private var _rankAlphaMult:Float = 0;
+	private var _isDiffSwitching:Bool = false;
+	final selectedFilters:Array<BitmapFilter> = [
+		new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
+		new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
+	];
 
-    private var _lastRank:String = null;
-    private var _rankAlphaMult:Float = 0;
-    private var _isDiffSwitching:Bool = false;
+	public function new()
+	{
+		super();
 
-    final selectedFilters:Array<BitmapFilter> = [
-        new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
-        new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
-    ];
+		bg = new MoonSprite().makeGraphic(416, 84, FlxColor.TRANSPARENT);
+		FlxSpriteUtil.drawRoundRect(bg, 0, 0, bg.width, bg.height, 12, 12, 0xFF1d1d1d);
+		bg.antialiasing = true;
+		bg.active = false;
+		add(bg);
 
-    public function new()
-    {
-        super();
+		icon = new PixelIcon(-9999, -9999, 'bf');
+		add(icon);
 
-        bg = new MoonSprite().makeGraphic(416, 84, FlxColor.TRANSPARENT);
-        FlxSpriteUtil.drawRoundRect(bg, 0, 0, bg.width, bg.height, 12, 12, 0xFF1d1d1d);
-        bg.antialiasing = true;
-        bg.active = false;
-        add(bg);
+		nameText = new ScrollingText(-9999, -9999, TEXT_W, '', 22);
+		nameText.textField.font = Paths.font('phantomuff/full.ttf');
+		nameText.antialiasing = true;
+		nameText.alpha = 0;
+		add(nameText);
 
-        icon = new PixelIcon(-9999, -9999, 'bf');
-        add(icon);
+		scoreText = new FlxText(-9999, -9999, TEXT_W, '', 13);
+		scoreText.font = Paths.font('phantomuff/full.ttf');
+		scoreText.antialiasing = true;
+		scoreText.color = 0xFFAAAAAA;
+		scoreText.visible = false;
+		scoreText.active = false;
+		scoreText.alpha = 0;
+		add(scoreText);
 
-        nameText = new ScrollingText(-9999, -9999, TEXT_W, '', 22);
-        nameText.textField.font = Paths.font('phantomuff/full.ttf');
-        nameText.antialiasing = true;
-        nameText.alpha = 0;
-        add(nameText);
+		rankDisplay = new FreeplayRank();
+		rankDisplay.visible = false;
+		add(rankDisplay);
+	}
 
-        scoreText = new FlxText(-9999, -9999, TEXT_W, '', 13);
-        scoreText.font = Paths.font('phantomuff/full.ttf');
-        scoreText.antialiasing = true;
-        scoreText.color = 0xFFAAAAAA;
-        scoreText.visible = false;
-        scoreText.active = false;
-        scoreText.alpha = 0;
-        add(scoreText);
+	public function setEnterValues():Void
+	{
+		lerpAlpha = 0;
+		lerpScale = 0;
+	}
 
-        rankDisplay = new FreeplayRank();
-        rankDisplay.visible = false;
-        add(rankDisplay);
-    }
+	public function loadEntry(entry:SongBase):Void
+	{
+		data = new Chart(entry.song, entry.difficulty, entry.mix);
 
-    public function setEnterValues():Void
-    {
-        lerpAlpha = 0;
-        lerpScale = 0;
-    }
+		if (icon.character != data.content.meta.opponents[0]) icon.character = data.content.meta.opponents[0];
 
-    public function loadEntry(entry:SongBase):Void
-    {
-        data = new Chart(entry.song, entry.difficulty, entry.mix);
+		nameText.setText(data.content.meta.displayName.toUpperCase());
+	}
 
-        if (icon.character != data.content.meta.opponents[0])
-            icon.character = data.content.meta.opponents[0];
+	public function setSelected(selected:Bool, scoreVal:Int = -1, accPct:Float = -1):Void
+	{
+		updateFilters(selected);
+		updateScoreText(selected, scoreVal, accPct);
+		updateRank(accPct);
+	}
 
-        nameText.setText(data.content.meta.displayName.toUpperCase());
-    }
+	function updateFilters(selected:Bool):Void icon.filters = selected ? selectedFilters : null;
 
-    public function setSelected(selected:Bool, scoreVal:Int = -1, accPct:Float = -1):Void
-    {
-        updateFilters(selected);
-        updateScoreText(selected, scoreVal, accPct);
-        updateRank(accPct);
-    }
+	function updateScoreText(selected:Bool, scoreVal:Int, accPct:Float):Void
+	{
+		scoreText.visible = selected;
+		if (!selected) return;
 
-    function updateFilters(selected:Bool):Void
-        icon.filters = selected ? selectedFilters : null;
+		final scoreStr = (scoreVal >= 0) ? '${MoonUtils.formatNumber(scoreVal)} SCORE' : '-- SCORE';
+		final accStr = (accPct >= 0) ? '${Std.int(accPct)}% ACCURACY' : '--% ACCURACY';
 
-    function updateScoreText(selected:Bool, scoreVal:Int, accPct:Float):Void
-    {
-        scoreText.visible = selected;
-        if (!selected) return;
+		scoreText.text = '$scoreStr\n$accStr';
+	}
 
-        final scoreStr = (scoreVal >= 0)
-            ? '${MoonUtils.formatNumber(scoreVal)} SCORE'
-            : '-- SCORE';
-        final accStr = (accPct >= 0)
-            ? '${Std.int(accPct)}% ACCURACY'
-            : '--% ACCURACY';
+	function updateRank(accPct:Float):Void
+	{
+		if (accPct < 0)
+		{
+			hideRank();
+			return;
+		}
 
-        scoreText.text = '$scoreStr\n$accStr';
-    }
+		final rankResult = Timings.getRank(accPct);
+		final rank = rankResult.rank;
 
-    function updateRank(accPct:Float):Void
-    {
-        if (accPct < 0)
-        {
-            hideRank();
-            return;
-        }
+		if (rank == null || rank == 'NOT FOUND')
+		{
+			hideRank();
+			return;
+		}
 
-        final rankResult = Timings.getRank(accPct);
-        final rank = rankResult.rank;
+		if (rank != _lastRank)
+		{
+			_lastRank = rank;
+			rankDisplay.setRank(rank);
+			_rankAlphaMult = 0;
+		}
 
-        if (rank == null || rank == 'NOT FOUND')
-        {
-            hideRank();
-            return;
-        }
+		rankDisplay.visible = true;
+	}
 
-        if (rank != _lastRank)
-        {
-            _lastRank = rank;
-            rankDisplay.setRank(rank);
-            _rankAlphaMult = 0;
-        }
+	function hideRank():Void
+	{
+		if (_lastRank == null && !rankDisplay.visible) return;
+		_lastRank = null;
+		_rankAlphaMult = 0;
+		rankDisplay.visible = false;
+	}
 
-        rankDisplay.visible = true;
-    }
+	public function forceResetRank():Void
+	{
+		_lastRank = null;
+		_rankAlphaMult = 0;
+		rankDisplay.visible = false;
+	}
 
-    function hideRank():Void
-    {
-        if (_lastRank == null && !rankDisplay.visible) return;
-        _lastRank = null;
-        _rankAlphaMult = 0;
-        rankDisplay.visible = false;
-    }
+	public function playDifficultySwitchEffect():Void
+	{
+		_isDiffSwitching = true;
 
-    public function forceResetRank():Void
-    {
-        _lastRank = null;
-        _rankAlphaMult = 0;
-        rankDisplay.visible = false;
-    }
+		bg.brightness = 0.5;
+		FlxTween.tween(bg, {
+			brightness: 0
+		}, DIFF_SWITCH_DURATION, {
+			ease: FlxEase.circOut,
+			onComplete: _ -> _isDiffSwitching = false
+		});
 
-    public function playDifficultySwitchEffect():Void
-    {
-        _isDiffSwitching = true;
+		final originalScale = lerpScale;
+		lerpScale *= 1.12;
 
-        bg.brightness = 0.5;
-        FlxTween.tween(bg, {brightness: 0}, DIFF_SWITCH_DURATION, {
-            ease: FlxEase.circOut,
-            onComplete: _ -> _isDiffSwitching = false
-        });
+		FlxTween.tween(this, {
+			lerpScale: originalScale
+		}, DIFF_SWITCH_DURATION, {
+			ease: FlxEase.elasticOut
+		});
+	}
 
-        final originalScale = lerpScale;
-        lerpScale *= 1.12;
+	public function lerpVisuals(elapsed:Float):Void
+	{
+		if (transitioning) return;
 
-        FlxTween.tween(this, {lerpScale: originalScale}, DIFF_SWITCH_DURATION, {ease: FlxEase.elasticOut});
-    }
+		final t = elapsed * LERP_SPEED;
+		lerpAlpha = FlxMath.lerp(lerpAlpha, targetAlpha, t);
+		lerpScale = FlxMath.lerp(lerpScale, targetScale, t);
 
-    public function lerpVisuals(elapsed:Float):Void
-    {
-        if (transitioning) return;
+		_rankAlphaMult = FlxMath.lerp(_rankAlphaMult, 1.0, elapsed * RANK_FADE_SPEED);
+		if (_rankAlphaMult > 0.99) _rankAlphaMult = 1.0;
+	}
 
-        final t = elapsed * LERP_SPEED;
-        lerpAlpha = FlxMath.lerp(lerpAlpha, targetAlpha, t);
-        lerpScale = FlxMath.lerp(lerpScale, targetScale, t);
+	public function applyPositions(px:Float, py:Float):Void
+	{
+		applyIconPosition(px, py);
+		applyTextPositions(px, py);
+		applyBackgroundPosition();
+		applyRankPosition();
+	}
 
-        _rankAlphaMult = FlxMath.lerp(_rankAlphaMult, 1.0, elapsed * RANK_FADE_SPEED);
-        if (_rankAlphaMult > 0.99) _rankAlphaMult = 1.0;
-    }
+	function applyIconPosition(px:Float, py:Float):Void
+	{
+		icon.scale.set(lerpScale + 1, lerpScale + 1);
+		icon.setPosition(px, py);
+		icon.alpha = lerpAlpha;
+		icon.updateHitbox();
+	}
 
-    public function applyPositions(px:Float, py:Float):Void
-    {
-        applyIconPosition(px, py);
-        applyTextPositions(px, py);
-        applyBackgroundPosition();
-        applyRankPosition();
-    }
+	function applyTextPositions(px:Float, py:Float):Void
+	{
+		final textX = px + 96 * lerpScale + TEXT_GAP;
+		final textOffsetY = (icon.height * lerpScale - 22 * lerpScale) * 0.5 - 7 * lerpScale;
 
-    function applyIconPosition(px:Float, py:Float):Void
-    {
-        icon.scale.set(lerpScale + 1, lerpScale + 1);
-        icon.setPosition(px, py);
-        icon.alpha = lerpAlpha;
-        icon.updateHitbox();
-    }
+		nameText.scale.set(lerpScale, lerpScale);
+		nameText.setPosition(textX, py + textOffsetY);
+		nameText.alpha = lerpAlpha;
 
-    function applyTextPositions(px:Float, py:Float):Void
-    {
-        final textX = px + 96 * lerpScale + TEXT_GAP;
-        final textOffsetY = (icon.height * lerpScale - 22 * lerpScale) * 0.5 - 7 * lerpScale;
+		scoreText.scale.set(lerpScale, lerpScale);
+		scoreText.setPosition(textX, nameText.y + 24 * lerpScale);
+		scoreText.alpha = lerpAlpha * 0.85;
+	}
 
-        nameText.scale.set(lerpScale, lerpScale);
-        nameText.setPosition(textX, py + textOffsetY);
-        nameText.alpha = lerpAlpha;
+	function applyBackgroundPosition():Void
+	{
+		bg.scale.set(lerpScale, lerpScale);
+		bg.updateHitbox();
+		bg.setPosition(icon.x + 11, (nameText.y + nameText.height / 2 - bg.height / 2) + 8);
+	}
 
-        scoreText.scale.set(lerpScale, lerpScale);
-        scoreText.setPosition(textX, nameText.y + 24 * lerpScale);
-        scoreText.alpha = lerpAlpha * 0.85;
-    }
+	function applyRankPosition():Void
+	{
+		rankDisplay.setPosition(nameText.x + nameText.width, nameText.y);
+		rankDisplay.scale.set(lerpScale, lerpScale);
+		rankDisplay.alpha = lerpAlpha * _rankAlphaMult;
+	}
 
-    function applyBackgroundPosition():Void
-    {
-        bg.scale.set(lerpScale, lerpScale);
-        bg.updateHitbox();
-        bg.setPosition(icon.x + 11, (nameText.y + nameText.height / 2 - bg.height / 2) + 8);
-    }
+	public function doRankReveal():Void
+	{
+		transitioning = true;
+		// TODO!
+	}
 
-    function applyRankPosition():Void
-    {
-        rankDisplay.setPosition(nameText.x + nameText.width, nameText.y);
-        rankDisplay.scale.set(lerpScale, lerpScale);
-        rankDisplay.alpha = lerpAlpha * _rankAlphaMult;
-    }
+	/**
+	 * Does the 'confirm' animation on the icon and a nice lil effect on the object itself.
+	 */
+	public function doConfirm():Void
+	{
+		icon.playAnim('select', true);
+		FlxFlicker.flicker(nameText, 1.79, 0.05, true);
 
-    public function doRankReveal():Void
-    {
-        transitioning = true;
-        //TODO!
-    }
+		bg.brightness = 1;
+		FlxTween.tween(bg, {
+			brightness: 0
+		}, 0.8);
+	}
 
-    /**
-     * Does the 'confirm' animation on the icon and a nice lil effect on the object itself.
-     */
-    public function doConfirm():Void
-    {
-        icon.playAnim('select', true);
-        FlxFlicker.flicker(nameText, 1.79, 0.05, true);
+	public function snapToTarget():Void
+	{
+		lerpAlpha = targetAlpha;
+		lerpScale = targetScale;
+		_rankAlphaMult = 1.0;
+	}
 
-        bg.brightness = 1;
-        FlxTween.tween(bg, {brightness: 0}, 0.8);
-    }
-
-    public function snapToTarget():Void
-    {
-        lerpAlpha = targetAlpha;
-        lerpScale = targetScale;
-        _rankAlphaMult = 1.0;
-    }
-
-    public function hide():Void
-    {
-        icon.alpha = 0;
-        nameText.alpha = 0;
-        scoreText.alpha = 0;
-        scoreText.visible = false;
-        rankDisplay.visible = false;
-    }
+	public function hide():Void
+	{
+		icon.alpha = 0;
+		nameText.alpha = 0;
+		scoreText.alpha = 0;
+		scoreText.visible = false;
+		rankDisplay.visible = false;
+	}
 }
