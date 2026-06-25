@@ -96,6 +96,12 @@ class PlayField extends FlxGroup
 			globalScript.load('data/global/${path[i]}');
 		}
 
+		// < -- HEALTHBAR SETUP -- >//
+		healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
+		add(healthBar);
+		healthBar.setPosition(0, 0);
+		healthBar.screenCenter(X);
+
 		// < -- COMBO AND JUDGEMENTS SETUP -- >//
 		// TODO: skins dammit
 		judgements = new JudgementSprite('moon-engine');
