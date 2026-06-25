@@ -158,7 +158,7 @@ class Note extends MoonSprite
 
             if (MoonSettings.callSetting('Downscroll')) ypos = receptor.y - timeDiff * speed;
 
-            y = ypos;
+            y = FlxMath.lerp(y, ypos, 0.9);
             x = receptor.x + (receptor.width - width) * 0.5;
 
             if (child != null) child.downscroll = MoonSettings.callSetting('Downscroll');

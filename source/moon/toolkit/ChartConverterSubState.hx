@@ -81,7 +81,9 @@ class ChartConverterSubState extends FlxSubState
         };
 
         var diffNames:Array<String> = [for(d in SongLibrary.getDifficultyList()) d.name];
-        if (diffNames.length == 0) diffNames = ["easy", "normal", "hard", "erect", "nightmare"];
+        if (diffNames.length == 0) diffNames = ["easy", "normal", "hard", "erect"];
+
+        diffNames.push("nightmare");
         
         diffDropdown = addLabeledDropdown(sidebar, "Difficulty", diffNames);
         var hardIdx = diffNames.indexOf("hard");

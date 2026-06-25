@@ -155,6 +155,8 @@ class Freeplay extends FlxSubState
 
     public function change(num:Int = 0)
     {
+        if(songList.length <= 0) return;
+
         curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
         selector.changeSelection(num);
         Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
@@ -194,7 +196,14 @@ class Freeplay extends FlxSubState
         selector.loadSongs(songList, curSelected);
         
         updateInfoText();
-        Global.scriptCall('onDiffChange');
+
+        if(songList.length <= 0)
+        {
+            stars.difficulty = 0;
+            //
+        }
+
+        Global.scriptCall('onDifficultyChange');
     }
 
     public function updateInfoText()
@@ -232,6 +241,8 @@ class Freeplay extends FlxSubState
 
         if (MoonInput.justPressed(ACCEPT))
         {
+            if(songList.length <= 0) return;
+
             // sets the next transitionIn to false
             // otherwise, for some reason, it shows the main menu when transitioning.
             // so instead, I'll do a fade.
@@ -268,6 +279,8 @@ class Freeplay extends FlxSubState
         {
             Global.allowInputs = false;
 
+            diffSelector.setPos(stars.x + 900, stars.y + 64);
+            selector.playExitAnimation(null);
             FlxTween.tween(weekBG, {x: FlxG.width + weekBG.width + 360, "skew.x": -5}, Constants.FREEPLAY_TRANSITION_DURATION, {ease: FlxEase.expoIn, onComplete: _->{
                 close();
                 Global.allowInputs = true;

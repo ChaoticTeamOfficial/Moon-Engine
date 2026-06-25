@@ -81,6 +81,14 @@ class PlayField extends FlxGroup
         this.difficulty = difficulty;
 
         instance = this;
+		
+		final path = Paths.readDir('data/global', ['.hx'], false);
+		for(i in 0...path.length)
+		{
+			var globalScript = new MoonScript();
+			Global.registerScript('globalScript-$i', globalScript);
+			globalScript.load('data/global/${path[i]}');
+		}
 
         //< -- SONG SETUP -- >//
         chart = new Chart(song, difficulty, mix);
@@ -219,6 +227,8 @@ class PlayField extends FlxGroup
         //updateP1Stats(null, false);
 
         playback.updateVolume();
+		
+		Global.scriptCall('onSettingsChange');
     }
 
     public function startReplay(replay:Replay)
@@ -279,25 +289,24 @@ class PlayField extends FlxGroup
         {
             final curRank = Timings.getRank(stat.accuracy).rank;
             if (curRank != previousRank)
-            {
+            {	
                 final oldIndex = rankLevels.indexOf(previousRank);
                 final newIndex = rankLevels.indexOf(curRank);
+				
+				previousRank = curRank;
+				
+				Global.scriptCall('onRatingChange');
 
-                if(MoonSettings.callSetting('Ranking Sound'))
-                {
-                    if (newIndex > oldIndex)
-					{
-                        Paths.playSFX('game/ratingRaise.wav');
-						Global.scriptCall('onRatingRaise');
-					}
-                    else if (newIndex < oldIndex)
-					{
-                        Paths.playSFX('game/ratingLower.wav');
-						Global.scriptCall('onRatingLower');
-					}
-                }
-
-                previousRank = curRank;
+				if (newIndex > oldIndex)
+				{
+					if(MoonSettings.callSetting('Ranking Sound')) Paths.playSFX('game/ratingRaise.wav');
+					Global.scriptCall('onRatingRaise');
+				}
+				else if (newIndex < oldIndex)
+				{
+					if(MoonSettings.callSetting('Ranking Sound')) Paths.playSFX('game/ratingLower.wav');
+					Global.scriptCall('onRatingLower');
+				}
             }
         }
 

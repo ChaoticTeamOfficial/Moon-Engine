@@ -81,13 +81,13 @@ class DifficultySelector extends FlxSpriteGroup
 
     function loadDifficulties() 
     {
-        difficulties = SongLibrary.instance.allDifficulties;
+        difficulties = SongLibrary.get().allDifficulties;
 
         var dummy:Null<Array<Difficulty>> = null;
 
         // Makes a list of difficulties and only keeps the ones that are in all of the songs in the week
         for(song in weekGroup.weekData.tracks) {
-            var diffs:Array<Difficulty> = SongLibrary.instance.availableDifficulties(song, weekGroup.weekData.mainMix);
+            var diffs:Array<Difficulty> = SongLibrary.get().availableDifficulties(song, weekGroup.weekData.mainMix);
             dummy ??= diffs;
             for(difficulty in dummy) 
                 if(!diffs.contains(difficulty)) dummy.remove(difficulty); 

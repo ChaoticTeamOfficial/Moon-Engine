@@ -23,20 +23,20 @@ class FreeplayDifficultySelector extends FlxTypedGroup<Dynamic>
 
         loadDifficulties();
 
-        leftArrow = new MoonSprite(0, 0);
+        leftArrow = new MoonSprite(1000, 0);
         leftArrow.loadGraphic(Paths.image('menus/freeplay/arrow'));
         leftArrow.flipX = true;
         leftArrow.antialiasing = true;
         leftArrow.scale.set(0.6, 0.6);
         add(leftArrow);
 
-        rightArrow = new MoonSprite(0, 0);
+        rightArrow = new MoonSprite(1000, 0);
         rightArrow.loadGraphic(Paths.image('menus/freeplay/arrow'));
         rightArrow.antialiasing = true;
         rightArrow.scale.set(0.6, 0.6);
         add(rightArrow);
 
-        text = new FlxText(0, 0, 0, "", 48);
+        text = new FlxText(1000, 0, 0, "", 48);
         text.setFormat(Paths.font('phantomuff/difficulty.ttf'), 48, FlxColor.WHITE, CENTER);
         text.bold = true;
         text.antialiasing = true;

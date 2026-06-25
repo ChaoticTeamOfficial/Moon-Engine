@@ -1,131 +1,162 @@
 package moon.menus.obj.freeplay;
 
+import moon.backend.data.SongLibrary;
+
 @:publicFields
 
 /**
- * A simple class that loads a song preview.
+ * Handles loading and looping song previews in the freeplay menu.
  */
 class SongPreview
 {
-	static var start:Float;
-	static var end:Float;
-	static var resetting:Bool = false;
-	static var active:Bool = false;
+    static var previewStart:Float;
+    static var previewEnd:Float;
+    static var isLooping:Bool = false;
+    static var isActive:Bool = false;
 
-	private static var _loadGen:Int = 0;
-	private static var _prevSoundKey:String = null;
+    private static var loadGeneration:Int = 0;
+    private static var currentSoundKey:String = null;
 
-	static function loadAndPlay(chart:Chart)
-	{
-		if (FlxG.sound.music != null)
-			TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
+    /**
+     * Loads and plays a song preview based on the provided chart data.
+     */
+    static function loadAndPlay(chart:Chart)
+    {
+        cancelCurrentFade();
+        isLooping = false;
 
-		resetting = false;
+        final gen = ++loadGeneration;
 
-		final gen = ++_loadGen;
-
-		new lime.app.Future(() ->
+        new lime.app.Future(() ->
         {
-			if (gen != _loadGen) return null;
+            if (gen != loadGeneration) return null;
 
-			if(FlxG.sound.music != null)
+            destroyCurrentMusic();
+
+            // another request may have arrived during the destroy above, so we need to check again!
+            if (gen != loadGeneration) return null;
+
+            unloadPreviousSound();
+            FlxG.sound.music = new MoonSound();
+            previewStart = chart?.content?.meta?.preview[0] ?? 0;
+            final soundKey = resolveSoundKey(chart?.song ?? '', chart?.mix ?? '', SongLibrary.getInstSuffix(chart?.difficulty ?? ''));
+
+            FlxG.sound.playMusic(Paths.getSound(soundKey));
+            currentSoundKey = soundKey;
+
+            FlxG.sound.music.time = previewStart;
+            previewEnd = chart?.content?.meta?.preview[1] ?? FlxG.sound.music.length;
+
+            FlxG.sound.music.volume = 0;
+            FlxG.sound.music.play();
+            FlxG.sound.music.fadeIn(1, 0, Freeplay.instance.songVolume);
+
+            updateConductor(chart);
+
+            isLooping = false;
+            isActive = true;
+
+            return null;
+        }, true);
+    }
+
+    static function update(elapsed:Float)
+    {
+        if (!isActive || FlxG.sound.music == null) return;
+        if (!FlxG.sound.music.playing || isLooping) return;
+
+        if (FlxG.sound.music.time >= previewEnd)
+        {
+            isLooping = true;
+
+            // Capture reference to ensure we target the correct sound object
+            final loopTarget = FlxG.sound.music;
+            loopTarget.fadeOut(1, 0, _ ->
 			{
-				if(FlxG.sound.music.playing) FlxG.sound.music.stop();
-				TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
+                // Bail if this sound was replaced during the fade-out
+                if (FlxG.sound.music != loopTarget) return;
 
-				FlxG.sound.music.destroy();
-				FlxG.sound.music = null;
-				//trace('destroying');
-			}
+                isLooping = false;
+                loopTarget.time = previewStart;
+                loopTarget.fadeIn(1, 0, Freeplay.instance.songVolume);
+            });
+        }
+    }
 
-			// another request may have arrived during the destroy above, so we need to check again!
-			if (gen != _loadGen) return null;
+    static function destroy()
+    {
+        if (FlxG.sound.music != null)
+        {
+            cancelCurrentFade();
+            FlxG.sound.music.destroy();
+            FlxG.sound.music = null;
+        }
 
-			// so I technically could just call AssetManager.clearUnused();
-			// BUT! I wanna make sure I don't bump into any problems with it
-			// so! I think manually removing the sound is better.
-			clear();
+        unloadPreviousSound();
+        isActive = false;
+        isLooping = false;
+        loadGeneration = 0;
+    }
 
-			FlxG.sound.music = new MoonSound();
+    /**
+     * Resolves the correct sound path based on difficulty suffixes.
+     */
+    static function resolveSoundKey(song:String, mix:String, instSuffix:String):String
+    {
+        if (song.length == 0 || mix.length == 0)
+            return 'music/menus/freeplayRandom.ogg';
 
-			start = chart?.content?.meta?.preview[0] ?? 0;
+        if (instSuffix != null && instSuffix.length > 0)
+        {
+            final diffPath = 'songs/$song/$mix/Inst$instSuffix.ogg';
+            if (Paths.exists(diffPath))
+                return diffPath;
+        }
 
-			//TODO: update this for the new custom difficulties system.
-			final soundKey = Paths.exists('songs/${chart.song}/${chart.mix}/Inst.ogg')
-				? 'songs/${chart.song}/${chart.mix}/Inst.ogg'
-				: 'music/menus/freeplayRandom.ogg';
+        final defaultPath = 'songs/$song/$mix/Inst.ogg';
+        if (Paths.exists(defaultPath))
+            return defaultPath;
 
-			FlxG.sound.playMusic(Paths.getSound(soundKey));
-			_prevSoundKey = soundKey;
+        return 'music/menus/freeplayRandom.ogg';
+    }
 
-			FlxG.sound.music.time = start;
+    static function updateConductor(chart:Chart):Void
+    {
+        if (Freeplay.instance.conductor == null) return;
 
-			//trace(start + ' ' + end);
+        final bpm:Float = chart?.content?.meta?.bpm ?? 145;
+        final ts = chart?.content?.meta?.timeSignature;
 
-			end = chart?.content?.meta?.preview[1] ?? FlxG.sound.music.length;
-			FlxG.sound.music.volume = 0;
-			FlxG.sound.music.play();
-			FlxG.sound.music.fadeIn(1, 0, Freeplay.instance.songVolume);
+        final tsNum:Int = (ts != null && ts.length > 0) ? ts[0] : 4;
+        final tsDen:Int = (ts != null && ts.length > 1) ? ts[1] : 4;
 
-			//TODO: get the uhh metadata for the random song.
-			if(Freeplay.instance.conductor != null) 
-				Freeplay.instance.conductor.changeBpmAt(0, chart?.content?.meta?.bpm ?? 145, chart?.content?.meta?.timeSignature[0] ?? 4, chart?.content?.meta?.timeSignature[0] ?? 4);
+        Freeplay.instance.conductor.changeBpmAt(0, bpm, tsNum, tsDen);
+    }
 
-			resetting = false;
-			active = true;
+    static function destroyCurrentMusic():Void
+    {
+        if (FlxG.sound.music == null) return;
 
-			//trace('playing song');
-			return null;
-		}, true);
-	}
+        if (FlxG.sound.music.playing)
+            FlxG.sound.music.stop();
 
-	static function update(elapsed:Float)
-	{
-		if(!active) return;
-		if(FlxG.sound.music != null)
-		{
-			//trace(FlxG.sound.music.time);
-			if(FlxG.sound.music.playing && FlxG.sound.music.time >= end && !resetting)
-			{
-				//trace('ending');
-				resetting = true;
+        cancelCurrentFade();
+        FlxG.sound.music.destroy();
+        FlxG.sound.music = null;
+    }
 
-				// capture the music ref so the closure always targets the right object,
-				// even if it swaps FlxG.sound.music mid a fade.
-				final loopTarget = FlxG.sound.music;
-				loopTarget.fadeOut(1, 0, _->{
-					// Bail if this sound was replaced while fading out.
-					if (FlxG.sound.music != loopTarget) return;
+    static function unloadPreviousSound():Void
+    {
+        if (currentSoundKey != null)
+        {
+            AssetManager.unloadSound(currentSoundKey);
+            currentSoundKey = null;
+        }
+    }
 
-					resetting = false;
-					loopTarget.time = start;
-					loopTarget.fadeIn(1, 0, Freeplay.instance.songVolume);
-				});
-			}
-		}
-	}
-
-	static function destroy()
-	{
-		if (FlxG.sound.music != null)
-		{
-			TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
-			FlxG.sound.music.destroy();
-			FlxG.sound.music = null;
-		}
-
-		clear();
-
-		active = resetting = false;
-		_loadGen = 0;
-	}
-
-	static function clear()
-	{
-		if (_prevSoundKey != null)
-		{
-			AssetManager.unloadSound(_prevSoundKey);
-			_prevSoundKey = null;
-		}
-	}
+    static function cancelCurrentFade():Void
+    {
+        if (FlxG.sound.music != null && FlxG.sound.music.fadeTween != null)
+            TweenUtils.cancelTwn(FlxG.sound.music.fadeTween);
+    }
 }
