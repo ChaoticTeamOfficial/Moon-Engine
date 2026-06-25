@@ -1,32 +1,17 @@
 {
 	"meta": {
-		"players": [
-			"bf"
-		],
-		"spectators": [
-			"gf"
-		],
+		"players": ["bf"],
+		"spectators": ["gf"],
 		"generatedBy": "Moonchart 0.5.1",
-		"opponents": [
-			"asmile"
-		],
+		"opponents": ["asmile"],
 		"hasCountdown": true,
-		"lanes": [
-			"opponent",
-			"p1"
-		],
+		"lanes": ["opponent", "p1"],
 		"artist": "Toffee",
-		"preview": [
-			0,
-			15000
-		],
+		"preview": [0, 15000],
 		"version": "2.2.4",
 		"scrollSpd": 3.2,
 		"charter": "Cerbera",
-		"timeSignature": [
-			4,
-			4
-		],
+		"timeSignature": [4, 4],
 		"displayName": "Asmilin'",
 		"stage": "stage",
 		"bpm": 173,

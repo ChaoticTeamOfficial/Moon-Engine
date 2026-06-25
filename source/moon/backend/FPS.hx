@@ -11,7 +11,7 @@ using flixel.util.FlxStringUtil;
 @:dox(hide)
 class FPS extends TextField
 {
-    var times:Array<Float> = [];
+	var times:Array<Float> = [];
 	var memPeak:UInt = 0;
 
 	public function new(x:Float, y:Float)
@@ -37,10 +37,9 @@ class FPS extends TextField
 			times.shift();
 
 		/*var mem = System.totalMemory;
-		if (mem > memPeak)
-			memPeak = mem;
-		*/
-		if (visible)
-			text = (times.length + " FPS\n");
+			if (mem > memPeak)
+				memPeak = mem;
+		 */
+		if (visible) text = (times.length + " FPS\n");
 	}
 }

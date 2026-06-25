@@ -8,59 +8,57 @@ import flixel.util.FlxColor;
  */
 class ColorSwap
 {
-  public var shader(default, null):ColorSwapShader;
-  public var colorToReplace(default, set):FlxColor;
-  public var newColor(default, set):FlxColor;
-  public var daTime(default, set):Float;
+	public var shader(default, null):ColorSwapShader;
+	public var colorToReplace(default, set):FlxColor;
+	public var newColor(default, set):FlxColor;
+	public var daTime(default, set):Float;
+	public var hasOutline(default, set):Bool = false;
+	public var hueShit:Float = 0;
 
-  public var hasOutline(default, set):Bool = false;
+	public function new():Void
+	{
+		shader = new ColorSwapShader();
+		shader.uTime.value = [0];
+		shader.money.value = [0];
+		shader.awesomeOutline.value = [hasOutline];
+	}
 
-  public var hueShit:Float = 0;
+	public function update(elapsed:Float):Void
+	{
+		shader.uTime.value[0] += elapsed;
+		hueShit += elapsed;
+		// trace(shader.money.value[0]);
+	}
 
-  public function new():Void
-  {
-    shader = new ColorSwapShader();
-    shader.uTime.value = [0];
-    shader.money.value = [0];
-    shader.awesomeOutline.value = [hasOutline];
-  }
+	function set_colorToReplace(color:FlxColor):FlxColor
+	{
+		colorToReplace = color;
 
-  public function update(elapsed:Float):Void
-  {
-    shader.uTime.value[0] += elapsed;
-    hueShit += elapsed;
-    // trace(shader.money.value[0]);
-  }
+		return color;
+	}
 
-  function set_colorToReplace(color:FlxColor):FlxColor
-  {
-    colorToReplace = color;
+	function set_hasOutline(lol:Bool):Bool
+	{
+		shader.awesomeOutline.value = [lol];
+		return lol;
+	}
 
-    return color;
-  }
+	function set_daTime(daTime:Float):Float
+	{
+		return daTime;
+	}
 
-  function set_hasOutline(lol:Bool):Bool
-  {
-    shader.awesomeOutline.value = [lol];
-    return lol;
-  }
+	function set_newColor(color:FlxColor):FlxColor
+	{
+		newColor = color;
 
-  function set_daTime(daTime:Float):Float
-  {
-    return daTime;
-  }
-
-  function set_newColor(color:FlxColor):FlxColor
-  {
-    newColor = color;
-
-    return color;
-  }
+		return color;
+	}
 }
 
 class ColorSwapShader extends FlxShader
 {
-  @:glFragmentSource('
+	@:glFragmentSource('
         #pragma header
 
         uniform float uTime;
@@ -155,8 +153,8 @@ class ColorSwapShader extends FlxShader
         }
 
     ')
-  public function new()
-  {
-    super();
-  }
+	public function new()
+	{
+		super();
+	}
 }

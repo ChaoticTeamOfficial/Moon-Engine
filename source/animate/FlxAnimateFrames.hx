@@ -115,8 +115,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 			if (name.contains("/")) // Look for the shortcut name if the symbol is contained in a folder
 			{
 				final shortcut:String = name.split("/").pop();
-				if (dictionary.exists(shortcut))
-					return dictionary.get(shortcut);
+				if (dictionary.exists(shortcut)) return dictionary.get(shortcut);
 			}
 		}
 
@@ -148,8 +147,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 
 		for (collection in addedCollections)
 		{
-			if (collection.dictionary.exists(name))
-				return collection.dictionary.get(name);
+			if (collection.dictionary.exists(name)) return collection.dictionary.get(name);
 		}
 
 		FlxG.log.warn("SymbolItem with name " + '"$name"' + " doesn't exist.");
@@ -165,8 +163,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 	public function existsSymbol(name:String):Bool
 	{
 		final existsBasic:Bool = dictionary.exists(name);
-		if (existsBasic)
-			return true;
+		if (existsBasic) return true;
 
 		if (name.contains("/")) // Look for the shortcut name if the symbol is contained in a folder
 		{
@@ -201,8 +198,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 	 * @param   unique  	Optional, ensures that the texture atlas uses a new slot in the cache.
 	 * @return  Newly created `FlxAnimateFrames` collection.
 	 */
-	public static function fromAnimate(animate:String, ?spritemaps:Array<SpritemapInput>, ?metadata:String, ?key:String, ?unique:Bool = false,
-			?settings:FlxAnimateSettings):FlxAnimateFrames
+	public static function fromAnimate(animate:String, ?spritemaps:Array<SpritemapInput>, ?metadata:String, ?key:String, ?unique:Bool = false, ?settings:FlxAnimateSettings):FlxAnimateFrames
 	{
 		var key:String = key ?? animate;
 
@@ -251,8 +247,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 			}
 		}
 
-		if (FlxAnimateAssets.exists(animate + "/Animation.json", TEXT))
-			return _fromAnimatePath(animate, key, settings);
+		if (FlxAnimateAssets.exists(animate + "/Animation.json", TEXT)) return _fromAnimatePath(animate, key, settings);
 
 		return _fromAnimateInput(animate, spritemaps, metadata, key, settings);
 	}
@@ -270,8 +265,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 
 	static function getGraphic(path:String):FlxGraphic
 	{
-		if (FlxG.bitmap.checkCache(path))
-			return FlxG.bitmap.get(path);
+		if (FlxG.bitmap.checkCache(path)) return FlxG.bitmap.get(path);
 
 		return FlxG.bitmap.add(FlxAnimateAssets.getBitmapData(path), false, path);
 	}
@@ -334,8 +328,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 		return _fromAnimateInput(animation, spritemaps, metadata, key ?? path, isInlined, libraryList, settings);
 	}
 
-	static function _fromAnimateInput(animation:String, spritemaps:Array<SpritemapInput>, ?metadata:String, ?path:String, ?isInlined:Bool = true,
-			?libraryList:Array<String>, settings:FlxAnimateSettings):FlxAnimateFrames
+	static function _fromAnimateInput(animation:String, spritemaps:Array<SpritemapInput>, ?metadata:String, ?path:String, ?isInlined:Bool = true, ?libraryList:Array<String>, settings:FlxAnimateSettings):FlxAnimateFrames
 	{
 		var animData:AnimationJson = null;
 		try
@@ -368,8 +361,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 		for (spritemap in spritemaps)
 		{
 			var graphic = FlxG.bitmap.add(spritemap.source);
-			if (graphic == null)
-				continue;
+			if (graphic == null) continue;
 
 			var atlas = new FlxAtlasFrames(graphic);
 			var spritemap:SpritemapJson = Json.parse(spritemap.json);
@@ -385,8 +377,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 			#if (flixel >= "5.4.0")
 			frames.addAtlas(atlas);
 			#else
-			for (frame in atlas.frames)
-				frames.pushFrame(frame);
+			for (frame in atlas.frames) frames.pushFrame(frame);
 			#end
 
 			spritemapCollection.addSpritemap(graphic);
@@ -420,10 +411,8 @@ class FlxAnimateFrames extends FlxAtlasFrames
 
 	@:allow(animate.FlxAnimateController)
 	var dictionary:Map<String, SymbolItem>;
-
 	@:allow(animate.FlxAnimateController)
 	var path:String;
-
 	@:allow(animate.FlxAnimateController)
 	var addedCollections:Array<FlxAnimateFrames>;
 
@@ -444,8 +433,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 				if (!spritemap.spritemaps.contains(graphic)) // Graphic isnt part of the texture atlas spritemap, check for atlas frames
 				{
 					var atlasFrames = FlxAtlasFrames.findFrame(graphic);
-					if (atlasFrames != null)
-						super.addAtlas(atlasFrames, overwriteHash);
+					if (atlasFrames != null) super.addAtlas(atlasFrames, overwriteHash);
 				}
 			}
 
@@ -496,8 +484,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 	@:noCompletion
 	static inline function _combineAtlas(atlasA:FlxAtlasFrames, atlasB:FlxAtlasFrames):FlxAtlasFrames
 	{
-		if (atlasA is FlxAnimateFrames)
-			return atlasA.addAtlas(atlasB);
+		if (atlasA is FlxAnimateFrames) return atlasA.addAtlas(atlasB);
 
 		return atlasB.addAtlas(atlasA);
 	}
@@ -508,14 +495,12 @@ class FlxAnimateFrames extends FlxAtlasFrames
 	function setSymbolDirty(targetSymbol:String)
 	{
 		// Doing this so in a batch of setSymbolDirty, symbols dont get double checked
-		if (checkedDirtySymbols.contains(targetSymbol))
-			return;
+		if (checkedDirtySymbols.contains(targetSymbol)) return;
 
 		var checkForSymbol:Timeline->Void;
 		checkForSymbol = (timeline:Timeline) ->
 		{
-			if (timeline == null || timeline.name.length <= 0)
-				return;
+			if (timeline == null || timeline.name.length <= 0) return;
 
 			checkedDirtySymbols.push(timeline.name);
 
@@ -524,8 +509,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 				for (frame in layer)
 				{
 					@:privateAccess
-					if (!frame._requireBake)
-						continue;
+					if (!frame._requireBake) continue;
 
 					var wasFrameSetDirty:Bool = false;
 					for (element in frame)
@@ -536,8 +520,7 @@ class FlxAnimateFrames extends FlxAtlasFrames
 								var foundSymbol = element.toSymbolInstance().libraryItem;
 								if (foundSymbol.name == targetSymbol)
 								{
-									if (!wasFrameSetDirty)
-										frame.setDirty();
+									if (!wasFrameSetDirty) frame.setDirty();
 									wasFrameSetDirty = true;
 								}
 								else
@@ -557,15 +540,13 @@ class FlxAnimateFrames extends FlxAtlasFrames
 
 	override function destroy():Void
 	{
-		if (_cachedAtlases.exists(path))
-			_cachedAtlases.remove(path);
+		if (_cachedAtlases.exists(path)) _cachedAtlases.remove(path);
 
 		super.destroy();
 
 		if (dictionary != null)
 		{
-			for (symbol in dictionary.iterator())
-				symbol.destroy();
+			for (symbol in dictionary.iterator()) symbol.destroy();
 		}
 
 		stageRect = FlxDestroyUtil.put(stageRect);
@@ -596,17 +577,14 @@ class FlxAnimateSpritemapCollection extends FlxGraphic
 
 	public function addSpritemap(graphic:FlxGraphic):Void
 	{
-		if (this.bitmap == null)
-			this.bitmap = graphic.bitmap;
+		if (this.bitmap == null) this.bitmap = graphic.bitmap;
 
-		if (spritemaps.indexOf(graphic) == -1)
-			spritemaps.push(graphic);
+		if (spritemaps.indexOf(graphic) == -1) spritemaps.push(graphic);
 	}
 
 	function destroySpritemaps():Void
 	{
-		for (spritemap in spritemaps)
-			FlxG.bitmap.remove(spritemap);
+		for (spritemap in spritemaps) FlxG.bitmap.remove(spritemap);
 
 		spritemaps.resize(0);
 		parentFrames = FlxDestroyUtil.destroy(parentFrames);
@@ -615,14 +593,12 @@ class FlxAnimateSpritemapCollection extends FlxGraphic
 	#if (flixel >= "5.4.0")
 	override function checkUseCount():Void
 	{
-		if (useCount <= 0 && destroyOnNoUse && !persist)
-			destroySpritemaps();
+		if (useCount <= 0 && destroyOnNoUse && !persist) destroySpritemaps();
 	}
 	#else
 	override function set_useCount(value:Int):Int
 	{
-		if (value <= 0 && _destroyOnNoUse && !persist)
-			destroySpritemaps();
+		if (value <= 0 && _destroyOnNoUse && !persist) destroySpritemaps();
 		return _useCount = value;
 	}
 	#end
@@ -635,8 +611,7 @@ class FlxAnimateSpritemapCollection extends FlxGraphic
 
 		if (spritemaps != null)
 		{
-			for (spritemap in spritemaps)
-				FlxG.bitmap.remove(spritemap);
+			for (spritemap in spritemaps) FlxG.bitmap.remove(spritemap);
 		}
 
 		spritemaps = null;
@@ -660,10 +635,14 @@ enum abstract FilterQuality(Int) to Int
 	{
 		return switch (this)
 		{
-			case FilterQuality.MEDIUM: 1.75;
-			case FilterQuality.LOW: 2.0;
-			case FilterQuality.RUDY: 2.25;
-			default: 1.0;
+			case FilterQuality.MEDIUM:
+				1.75;
+			case FilterQuality.LOW:
+				2.0;
+			case FilterQuality.RUDY:
+				2.25;
+			default:
+				1.0;
 		}
 	}
 
@@ -671,10 +650,14 @@ enum abstract FilterQuality(Int) to Int
 	{
 		return switch (this)
 		{
-			case FilterQuality.MEDIUM: 16.0;
-			case FilterQuality.LOW: 12.0;
-			case FilterQuality.RUDY: 8.0;
-			default: 1.0;
+			case FilterQuality.MEDIUM:
+				16.0;
+			case FilterQuality.LOW:
+				12.0;
+			case FilterQuality.RUDY:
+				8.0;
+			default:
+				1.0;
 		}
 	}
 }

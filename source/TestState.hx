@@ -34,212 +34,215 @@ using StringTools;
 
 class TestState extends FlxState
 {
-    var waveform:FlxWaveform;
-    var playfield:PlayField;
-    var note:Note;
-    var sustain:NoteSustain;
-    override public function create():Void
-    {
-        super.create();
-        FlxG.mouse.useSystemCursor = true;
-        //FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
-        // addons file test
-        /*var files = new Map<String, Bytes>();
-        files.set("nya/text.txt", Bytes.ofString("Hello world! I am here to spread an important message.\nI got created by code.\nYes.\nThat's right.\n\n\nIsn't that cool?"));
-        files.set("data.json", Bytes.ofString('{"hi": true}'));
-        MZip.create(files, "test.mzip");*/
-        //var fileList = MZip.listFiles("test.mzip");
-        //trace('Files: $fileList', "DEBUG");
-        //var fileContent = MZip.extract(Paths.getPath("test.mzip", null), "nya/text.txt");
-        //trace('Content of text: ${fileContent.toString()}', "DEBUG");
-        //var request = new URLRequest('(link)');
-        //var loader = new URLLoader();
-        //loader.dataFormat = URLLoaderDataFormat.BINARY;
-        //files download test
-        /*loader.addEventListener(Event.COMPLETE, function(e:Event)
-        {
-            File.saveBytes('assets/video foda do luis.mp4', cast(loader.data, Bytes));
-            trace('gg', "DEBUG");
-        });
-        loader.addEventListener(ProgressEvent.PROGRESS, function(e:ProgressEvent)
-        {
-            final mbLoaded = e.bytesLoaded / 1048576;
-            final mbTotal = e.bytesTotal / 1048576;
-            final percent = (e.bytesLoaded / e.bytesTotal) * 100;
-            var display = 'Progress: $formatFloat(percent)% ($formatFloat(mbLoaded) MB / $formatFloat(mbTotal) MB)';
-            trace(display);
-        });
-        loader.load(request);*/
-        //reading a json file
-        /*var loader = new URLLoader();
-        loader.dataFormat = URLLoaderDataFormat.TEXT;
-        loader.addEventListener(Event.COMPLETE, function(e:Event)
-        {
-            trace('gg', "DEBUG");
-            var raw:String = cast(e.target, URLLoader).data;
-            try
-            {
-                var list:Array<String> = haxe.Json.parse(raw).teste;
-                for (file in list)
-                    trace(file, "DEBUG");
-            }
-            catch (e) {trace(e, "ERROR");}
-        });
-        loader.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent)
-        {
-            trace('a: ${e.text}', "ERROR");
-        });
-        loader.load(new URLRequest('link'));*/
-        //var displayIcon = new PixelIcon('dummy');
-        //add(displayIcon);
-        //displayIcon.playAnim('select', true);
-        //trace();
-        //testMod();
-        //testParser();
-        add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
+	var waveform:FlxWaveform;
+	var playfield:PlayField;
+	var note:Note;
+	var sustain:NoteSustain;
 
-        // i'm so relieved to find out they batch.
-        /*for(i in 0...2000)
-        {
-            var indicator = new FlxSprite(0.3 * i).makeGraphic(10, 10, FlxColor.TRANSPARENT);
-            FlxSpriteUtil.drawRoundRect(indicator, 0, 0, 10, 10, 5, 5, FlxColor.BLACK);
-            add(indicator);
-            indicator.alpha = 0.3;
-            indicator.active = false;
-        }*/
+	override public function create():Void
+	{
+		super.create();
+		FlxG.mouse.useSystemCursor = true;
+		// FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
+		// addons file test
+		/*var files = new Map<String, Bytes>();
+			files.set("nya/text.txt", Bytes.ofString("Hello world! I am here to spread an important message.\nI got created by code.\nYes.\nThat's right.\n\n\nIsn't that cool?"));
+			files.set("data.json", Bytes.ofString('{"hi": true}'));
+			MZip.create(files, "test.mzip"); */
+		// var fileList = MZip.listFiles("test.mzip");
+		// trace('Files: $fileList', "DEBUG");
+		// var fileContent = MZip.extract(Paths.getPath("test.mzip", null), "nya/text.txt");
+		// trace('Content of text: ${fileContent.toString()}', "DEBUG");
+		// var request = new URLRequest('(link)');
+		// var loader = new URLLoader();
+		// loader.dataFormat = URLLoaderDataFormat.BINARY;
+		// files download test
+		/*loader.addEventListener(Event.COMPLETE, function(e:Event)
+			{
+				File.saveBytes('assets/video foda do luis.mp4', cast(loader.data, Bytes));
+				trace('gg', "DEBUG");
+			});
+			loader.addEventListener(ProgressEvent.PROGRESS, function(e:ProgressEvent)
+			{
+				final mbLoaded = e.bytesLoaded / 1048576;
+				final mbTotal = e.bytesTotal / 1048576;
+				final percent = (e.bytesLoaded / e.bytesTotal) * 100;
+				var display = 'Progress: $formatFloat(percent)% ($formatFloat(mbLoaded) MB / $formatFloat(mbTotal) MB)';
+				trace(display);
+			});
+			loader.load(request); */
+		// reading a json file
+		/*var loader = new URLLoader();
+			loader.dataFormat = URLLoaderDataFormat.TEXT;
+			loader.addEventListener(Event.COMPLETE, function(e:Event)
+			{
+				trace('gg', "DEBUG");
+				var raw:String = cast(e.target, URLLoader).data;
+				try
+				{
+					var list:Array<String> = haxe.Json.parse(raw).teste;
+					for (file in list)
+						trace(file, "DEBUG");
+				}
+				catch (e) {trace(e, "ERROR");}
+			});
+			loader.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent)
+			{
+				trace('a: ${e.text}', "ERROR");
+			});
+			loader.load(new URLRequest('link')); */
+		// var displayIcon = new PixelIcon('dummy');
+		// add(displayIcon);
+		// displayIcon.playAnim('select', true);
+		// trace();
+		// testMod();
+		// testParser();
+		add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
 
-        /*Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
-        for(i in 0...100)
-        {
-            final a = new InvertColor();
-            var thing = new IconButton(0.3 * i, 20, 64, 64, 'speed');
-            thing.invertShader = a;
-            add(thing);
-        }*/
+		// i'm so relieved to find out they batch.
+		/*for(i in 0...2000)
+			{
+				var indicator = new FlxSprite(0.3 * i).makeGraphic(10, 10, FlxColor.TRANSPARENT);
+				FlxSpriteUtil.drawRoundRect(indicator, 0, 0, 10, 10, 5, 5, FlxColor.BLACK);
+				add(indicator);
+				indicator.alpha = 0.3;
+				indicator.active = false;
+		}*/
+		/*Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
+			for(i in 0...100)
+			{
+				final a = new InvertColor();
+				var thing = new IconButton(0.3 * i, 20, 64, 64, 'speed');
+				thing.invertShader = a;
+				add(thing);
+		}*/
 
-        //note = new Note(0,0,"default", "v-slice", 0, null);
-        //note.state = CHART_EDITOR;
+		// note = new Note(0,0,"default", "v-slice", 0, null);
+		// note.state = CHART_EDITOR;
 
-        //sustain = new NoteSustain(note);
+		// sustain = new NoteSustain(note);
 
-        //add(sustain);
-        //add(note);
+		// add(sustain);
+		// add(note);
 
-        //var vis = new ABotVisualizer();
-        //add(vis);
-        //vis.screenCenter();
-        
-        //var conductor = new Conductor(160, 4, 4);
-        //var song = new Song('thorns', 'noimix', false, conductor);
-        //song.state = PLAY;
+		// var vis = new ABotVisualizer();
+		// add(vis);
+		// vis.screenCenter();
 
-        //FlxG.sound.music = ;
-        
-        //vis.setAudioSource(song.inst[0]);
-        //song.muteStatus(Voices_Opponent, true);
-        //song.muteStatus(Voices_Player, true);
+		// var conductor = new Conductor(160, 4, 4);
+		// var song = new Song('thorns', 'noimix', false, conductor);
+		// song.state = PLAY;
 
-        vinyl = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/placeholder'));
-        vinyl.screenCenter();
-        vinyl.shader = new VinylDiskShader();
-        add(vinyl);
+		// FlxG.sound.music = ;
 
-        //testParser();
+		// vis.setAudioSource(song.inst[0]);
+		// song.muteStatus(Voices_Opponent, true);
+		// song.muteStatus(Voices_Player, true);
 
-        var replay = new SaveReplayNotif(16, 16);
-        add(replay);
-        replay.parameters = {
-            text: 'Hold [TAB] to save a replay!',
-            color: 0xFF7117d5,
-            duration: 5
-        }
+		vinyl = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/placeholder'));
+		vinyl.screenCenter();
+		vinyl.shader = new VinylDiskShader();
+		add(vinyl);
 
-        replay.onFinish.add(() -> {
-            replay.parameters = {
-                text: 'Replay saved!\n"replay_foda.mrp"',
-                color: 0xFFd98617,
-                duration: 5
-            }
-        });
-    }
-    var vinyl:MoonSprite;
+		// testParser();
 
-    //helper 'w'
-    /*function formatFloat(val:Float, decimals:Int = 2):String
-    {
-        var factor = Math.pow(10, decimals);
-        return (Math.round(val * factor) / factor) + "";
-    }*/
+		var replay = new SaveReplayNotif(16, 16);
+		add(replay);
+		replay.parameters = {
+			text: 'Hold [TAB] to save a replay!',
+			color: 0xFF7117d5,
+			duration: 5
+		}
 
-    function testMod()
-    {
-        /*MZip.loadMod('mods/test.mzip');
-        trace(MZip.listFiles('mods/test.mzip'));
-        var image = new MoonSprite().loadGraphic(Paths.image('curMod/oie'));
-        add(image);*/
-        //var popup = new Popup(500, 164);
-        //popup.screenCenter();
-        //add(popup);
-    }
+		replay.onFinish.add(() ->
+		{
+			replay.parameters = {
+				text: 'Replay saved!\n"replay_foda.mrp"',
+				color: 0xFFd98617,
+				duration: 5
+			}
+		});
+	}
 
-    function testParser() {
-        // this could be awesome for making custom events!
-        // oh my god the potential...
-        // -- TEST FOR PARSING INFO -- //
-        /*final schema:Map<String, Array<String>> = [
-            "wave" => ["intensity", "duration"],
-            "shake" => ["intensity"]
-        ];
-        final raw = 'I have the <wave=0.3, 1>feeling</wave> that this dialogue is <shake=0.5>very cool</shake>';
-        final parsed = DialogueParser.parseTaggedText(raw, schema);
-        trace('raw text: $raw', "DEBUG");
-        trace('clean text: ${parsed.text}', "DEBUG");
-        for (e in parsed.events)
-            trace('event: ${e.name} chars= ${e.range} values= ${e.values}', "DEBUG");
-        */
+	var vinyl:MoonSprite;
 
-        // -- TEST FOR ACTUAL TEXT RENDERING -- //
-        /*final rawDialogue = "I hate this <color=pink>fucking</color> typer\n" +
-        "Ok these should <wave=3>float</wave> in a nice sine\n" +
-        "<shake=0.8>ooooo i shake</shake>\n" +
-        "suck my <size=48>WOAH</size> <size=16>stop swearing dude...</size>\n" +
-        "I can just <font=DS-DIGI.TTF>change my font</font> whether you <font=KodeMono-Bold.ttf>like</font> <font=5by7_b.ttf>or</font> <font=phantomuff/full.ttf>not</font>.\n" +
-        "I can also: <color=red><shake=1.2><wave=0.5>COMBO VERY <size=56>COOL</size> EFFECTS!</wave></shake></color>\n";
+	// helper 'w'
 
-        final schema:Map<String, Array<String>> = [
-            "wave" => ["intensity", "frequency", "delay"],
-            "shake" => ["intensity"],
-            "size" => ["size"],
-            "color" => ["color"],
-            "font" => ["path"]
-        ];
+	/*function formatFloat(val:Float, decimals:Int = 2):String
+		{
+			var factor = Math.pow(10, decimals);
+			return (Math.round(val * factor) / factor) + "";
+	}*/
+	function testMod()
+	{
+		/*MZip.loadMod('mods/test.mzip');
+			trace(MZip.listFiles('mods/test.mzip'));
+			var image = new MoonSprite().loadGraphic(Paths.image('curMod/oie'));
+			add(image); */
+		// var popup = new Popup(500, 164);
+		// popup.screenCenter();
+		// add(popup);
+	}
 
-        final parsed = DialogueParser.parseTaggedText(rawDialogue, schema);
-        var typer = new TextTyper(0, 0, parsed.text, parsed.events, 45);
-        typer.defaultFont = 'vcr.ttf';
-        typer.defaultSize = 32;
-        typer.defaultColor = 0xFFFFFFFF;
-        typer.lineHeight = 48;
-        add(typer);*/
+	function testParser()
+	{
+		// this could be awesome for making custom events!
+		// oh my god the potential...
+		// -- TEST FOR PARSING INFO -- //
+		/*final schema:Map<String, Array<String>> = [
+				"wave" => ["intensity", "duration"],
+				"shake" => ["intensity"]
+			];
+			final raw = 'I have the <wave=0.3, 1>feeling</wave> that this dialogue is <shake=0.5>very cool</shake>';
+			final parsed = DialogueParser.parseTaggedText(raw, schema);
+			trace('raw text: $raw', "DEBUG");
+			trace('clean text: ${parsed.text}', "DEBUG");
+			for (e in parsed.events)
+				trace('event: ${e.name} chars= ${e.range} values= ${e.values}', "DEBUG");
+		 */
 
-        var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
-        add(box.portraitsGrp);
-        add(box);
-        box.screenCenter(X);
-        box.y = FlxG.height - box.height - 32;
-        box.visible = true;
-        box.show();
+		// -- TEST FOR ACTUAL TEXT RENDERING -- //
+		/*final rawDialogue = "I hate this <color=pink>fucking</color> typer\n" +
+			"Ok these should <wave=3>float</wave> in a nice sine\n" +
+			"<shake=0.8>ooooo i shake</shake>\n" +
+			"suck my <size=48>WOAH</size> <size=16>stop swearing dude...</size>\n" +
+			"I can just <font=DS-DIGI.TTF>change my font</font> whether you <font=KodeMono-Bold.ttf>like</font> <font=5by7_b.ttf>or</font> <font=phantomuff/full.ttf>not</font>.\n" +
+			"I can also: <color=red><shake=1.2><wave=0.5>COMBO VERY <size=56>COOL</size> EFFECTS!</wave></shake></color>\n";
 
-        FlxG.sound.playMusic(Paths.sound('bittersweet sunset/luna/Inst.ogg', 'songs'));
-    }
+			final schema:Map<String, Array<String>> = [
+				"wave" => ["intensity", "frequency", "delay"],
+				"shake" => ["intensity"],
+				"size" => ["size"],
+				"color" => ["color"],
+				"font" => ["path"]
+			];
 
-    override public function update(elapsed:Float)
-    {
-        super.update(elapsed);
-        vinyl.angle += elapsed * 24;
-        //if(FlxG.keys.justPressed.R) FlxG.resetState();
+			final parsed = DialogueParser.parseTaggedText(rawDialogue, schema);
+			var typer = new TextTyper(0, 0, parsed.text, parsed.events, 45);
+			typer.defaultFont = 'vcr.ttf';
+			typer.defaultSize = 32;
+			typer.defaultColor = 0xFFFFFFFF;
+			typer.lineHeight = 48;
+			add(typer); */
 
-        //if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
-        //else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
-    }
+		var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
+		add(box.portraitsGrp);
+		add(box);
+		box.screenCenter(X);
+		box.y = FlxG.height - box.height - 32;
+		box.visible = true;
+		box.show();
+
+		FlxG.sound.playMusic(Paths.sound('bittersweet sunset/luna/Inst.ogg', 'songs'));
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+		vinyl.angle += elapsed * 24;
+		// if(FlxG.keys.justPressed.R) FlxG.resetState();
+
+		// if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
+		// else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
+	}
 }

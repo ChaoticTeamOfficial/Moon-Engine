@@ -7,157 +7,149 @@ import moon.game.notetypes.*;
 
 class NoteSpawner extends FlxGroup
 {
-    public var notes(get, never):Array<Note>;
-    final _notes:Array<Note> = [];
-    final _strumlineMap:Map<String, Strumline> = new Map();
+	public var notes(get, never):Array<Note>;
 
-    var conductor:Conductor;
-    var nextNoteIndex:Int = 0;
+	final _notes:Array<Note> = [];
+	final _strumlineMap:Map<String, Strumline> = new Map();
+	var conductor:Conductor;
+	var nextNoteIndex:Int = 0;
 
-    public var scrollSpeed(default, set):Float = 1.0;
-    public var spawnThreshold:Float = 700;
+	public var scrollSpeed(default, set):Float = 1.0;
+	public var spawnThreshold:Float = 700;
 
-    var _noteOffset:Float = 0;
-    public var noteOffset(get, set):Float;
+	var _noteOffset:Float = 0;
 
-    var _downscroll:Bool = false;
+	public var noteOffset(get, set):Float;
 
-    public function new(noteStructs:Array<NoteStruct>, strumlines:Array<Strumline>, conductor:Conductor)
-    {
-        super();
-        this.conductor = conductor;
+	var _downscroll:Bool = false;
 
-        // build strumline lookup map
-        for (strum in strumlines)
-            _strumlineMap[strum.playerID] = strum;
+	public function new(noteStructs:Array<NoteStruct>, strumlines:Array<Strumline>, conductor:Conductor)
+	{
+		super();
+		this.conductor = conductor;
 
-        // create and sort notes
-        for (struct in noteStructs)
-        {
-            final note = createNoteFromStruct(struct);
-            if (note != null)
-                _notes.push(note);
-        }
-        _notes.sort((a, b) -> Std.int(a.time - b.time));
-        updateCachedSettings();
-    }
+		// build strumline lookup map
+		for (strum in strumlines) _strumlineMap[strum.playerID] = strum;
 
-    override function update(dt:Float):Void
-    {
-        updateCachedSettings();
-        updateSpawnThreshold();
+		// create and sort notes
+		for (struct in noteStructs)
+		{
+			final note = createNoteFromStruct(struct);
+			if (note != null) _notes.push(note);
+		}
+		_notes.sort((a, b) -> Std.int(a.time - b.time));
+		updateCachedSettings();
+	}
 
-        super.update(dt);
+	override function update(dt:Float):Void
+	{
+		updateCachedSettings();
+		updateSpawnThreshold();
 
-        final spawnTime = conductor.time + spawnThreshold;
-        var i = nextNoteIndex;
-        while (i < _notes.length && _notes[i].time <= spawnTime)
-            recycleNote(_notes[i++]);
+		super.update(dt);
 
-        nextNoteIndex = i;
-    }
+		final spawnTime = conductor.time + spawnThreshold;
+		var i = nextNoteIndex;
+		while (i < _notes.length && _notes[i].time <= spawnTime)
+			recycleNote(_notes[i++]);
 
-    inline function updateCachedSettings():Void
-    {
-        noteOffset = MoonSettings.callSetting('Note Offset');
-        _downscroll = MoonSettings.callSetting('Downscroll');
-    }
+		nextNoteIndex = i;
+	}
 
-    inline function updateSpawnThreshold():Void
-    {
-        final newThreshold = (scrollSpeed <= 0.9) ? 3000 : (scrollSpeed <= 0.4) ? 5000 : 700;
-        if (spawnThreshold != newThreshold)
-            spawnThreshold = newThreshold;
-    }
+	inline function updateCachedSettings():Void
+	{
+		noteOffset = MoonSettings.callSetting('Note Offset');
+		_downscroll = MoonSettings.callSetting('Downscroll');
+	}
 
-    function recycleNote(note:Note):Void
-    {
-        final strum = _strumlineMap[note.lane];
-        if (strum == null) return;
+	inline function updateSpawnThreshold():Void
+	{
+		final newThreshold = (scrollSpeed <= 0.9) ? 3000 : (scrollSpeed <= 0.4) ? 5000 : 700;
+		if (spawnThreshold != newThreshold) spawnThreshold = newThreshold;
+	}
 
-        final group = strum.members[note.direction];
-        if (group?.notesGroup == null) return;
+	function recycleNote(note:Note):Void
+	{
+		final strum = _strumlineMap[note.lane];
+		if (strum == null) return;
 
-        group.notesGroup.recycle(Note, () -> {
-            note.receptor = strum.members[note.direction];
-            note.visible = false;
-            note.speed = scrollSpeed;
-            note.state = NONE;
-            if (note.duration > 0)
-                recycleSustain(note, group.sustainsGroup);
-            return note;
-        });
-    }
+		final group = strum.members[note.direction];
+		if (group?.notesGroup == null) return;
 
-    function recycleSustain(note:Note, sustainGroup:FlxTypedSpriteGroup<NoteSustain>):Void
-    {
-        sustainGroup.recycle(NoteSustain, () -> {
-            var sustain = note.child;
-            if (sustain == null)
-            {
-                sustain = new NoteSustain(note);
-                note.child = sustain;
-            }
-            sustain.downscroll = _downscroll;
-            return sustain;
-        });
-    }
+		group.notesGroup.recycle(Note, () ->
+		{
+			note.receptor = strum.members[note.direction];
+			note.visible = false;
+			note.speed = scrollSpeed;
+			note.state = NONE;
+			if (note.duration > 0) recycleSustain(note, group.sustainsGroup);
+			return note;
+		});
+	}
 
-    function createNoteFromStruct(struct:NoteStruct):Note
-    {
-        final strum = _strumlineMap[struct.lane];
-        if (strum == null || strum.members[struct.data] == null) return null;
+	function recycleSustain(note:Note, sustainGroup:FlxTypedSpriteGroup<NoteSustain>):Void
+	{
+		sustainGroup.recycle(NoteSustain, () ->
+		{
+			var sustain = note.child;
+			if (sustain == null)
+			{
+				sustain = new NoteSustain(note);
+				note.child = sustain;
+			}
+			sustain.downscroll = _downscroll;
+			return sustain;
+		});
+	}
 
-        final note = new Note(
-            struct.data,
-            struct.time + _noteOffset,
-            struct.type,
-            strum.members[struct.data].skin,
-            struct.duration,
-            conductor
-        );
-        note.values = struct.values;
-        note.speed = scrollSpeed;
-        note.lane = struct.lane;
-        note.quantColor = getQuantColor(struct.time, conductor);
-        NoteTypeRegistry.executeSpawn(note);
-        return note; 
-    }
+	function createNoteFromStruct(struct:NoteStruct):Note
+	{
+		final strum = _strumlineMap[struct.lane];
+		if (strum == null || strum.members[struct.data] == null) return null;
 
-    /**
-     * Returns 0-9 based on how the note is snapped inside the current beat/step
-     */
-    public static function getQuantColor(time:Float, conductor:Conductor):Int
-        return Std.int((Math.round((time % conductor.crochet) / (conductor.crochet / 32)) * 10) / 32);
+		final note = new Note(struct.data, struct.time + _noteOffset, struct.type, strum.members[struct.data].skin, struct.duration, conductor);
+		note.values = struct.values;
+		note.speed = scrollSpeed;
+		note.lane = struct.lane;
+		note.quantColor = getQuantColor(struct.time, conductor);
+		NoteTypeRegistry.executeSpawn(note);
+		return note;
+	}
 
-    public function updateNoteScroll()
-    {
-        for (note in _notes)
-            note.updateNotePos();
-    }
+	/**
+	 * Returns 0-9 based on how the note is snapped inside the current beat/step
+	 */
+	public static function getQuantColor(time:Float, conductor:Conductor):Int return Std.int(
+		(Math.round((time % conductor.crochet) / (conductor.crochet / 32)) * 10) / 32
+	);
 
-    // === GETTERS === //
-    inline function get_notes():Array<Note> return _notes;
+	public function updateNoteScroll()
+	{
+		for (note in _notes) note.updateNotePos();
+	}
 
-    function get_noteOffset():Float return _noteOffset;
+	// === GETTERS === //
 
-    // === SETTERS === //
-    function set_scrollSpeed(sp:Float):Float
-    {
-        scrollSpeed = sp / 2.4; // adoro sao paulo...
-        for (note in _notes)
-            note.speed = scrollSpeed;
-        return scrollSpeed;
-    }
+	inline function get_notes():Array<Note> return _notes;
 
-    function set_noteOffset(value:Float):Float
-    {
-        final diff = value - _noteOffset;
-        _noteOffset = value;
+	function get_noteOffset():Float return _noteOffset;
 
-        for (note in _notes)
-            note.time += diff;
+	// === SETTERS === //
 
-        return value;
-    }
+	function set_scrollSpeed(sp:Float):Float
+	{
+		scrollSpeed = sp / 2.4; // adoro sao paulo...
+		for (note in _notes) note.speed = scrollSpeed;
+		return scrollSpeed;
+	}
+
+	function set_noteOffset(value:Float):Float
+	{
+		final diff = value - _noteOffset;
+		_noteOffset = value;
+
+		for (note in _notes) note.time += diff;
+
+		return value;
+	}
 }

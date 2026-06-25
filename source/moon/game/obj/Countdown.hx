@@ -1,6 +1,7 @@
 package moon.game.obj;
 
 using StringTools;
+
 @:publicFields
 /**
  * Static class that triggers a countdown. Don't forget to `init()` it first!
@@ -17,7 +18,8 @@ class Countdown
 
 	static function init(conductor:Conductor, grp:FlxGroup)
 	{
-		if(onStart != null) {
+		if (onStart != null)
+		{
 			onStart.removeAll();
 			onStart.destroy();
 		}
@@ -45,25 +47,29 @@ class Countdown
 
 	static function checkBeats(beat:Float)
 	{
-		if(!countdownActive) return;
-		if(countdownNum == 4) onStart.dispatch();
+		if (!countdownActive) return;
+		if (countdownNum == 4) onStart.dispatch();
 
 		countdownNum--;
-		if(countdownNum >= 0)
+		if (countdownNum >= 0)
 		{
 			trace('[COUNTDOWN] Performing! ($countdownNum)', "INFO");
 
 			Paths.playSFX('game/countdown/intro-$countdownNum$audioSuffix.ogg');
 
 			final path = 'ingame/UI/countdown/graphic-$countdownNum$graphicSuffix';
-			if(Paths.exists('images/$path.png'))
+			if (Paths.exists('images/$path.png'))
 			{
 				var countdownSpr = new MoonSprite().loadGraphic(Paths.image(path));
 				countdownSpr.screenCenter();
 				group.add(countdownSpr);
 				countdownSpr.antialiasing = (path.contains('pixel'));
 
-				FlxTween.tween(countdownSpr, {alpha: 0}, conductor.crochet / 1500, {onComplete: _->countdownSpr.destroy()});
+				FlxTween.tween(countdownSpr, {
+					alpha: 0
+				}, conductor.crochet / 1500, {
+					onComplete: _ -> countdownSpr.destroy()
+				});
 			}
 		}
 		else

@@ -12,395 +12,381 @@ import flixel.util.FlxSignal;
 @:publicFields
 class PlayField extends FlxGroup
 {
-    // -- VARIBALES
-    public static var instance:PlayField;
+	// -- VARIBALES
+	public static var instance:PlayField;
 
-    var inCutscene:Bool = false;
-    var inCountdown:Bool = false;
-    var song:String;
-    var mix:String;
-    var difficulty:String;
+	var inCutscene:Bool = false;
+	var inCountdown:Bool = false;
+	var song:String;
+	var mix:String;
+	var difficulty:String;
+	var previousRank:String = "";
+	var conductor:Conductor;
+	var playback:Song;
+	var noteSpawner:NoteSpawner;
+	var chart:Chart;
+	var inputHandlers:Map<String, InputHandler> = [];
+	var strumlines:Array<Strumline> = [];
+	var playerStrum:Strumline;
+	var oppStrum:Strumline;
+	var healthBar:HealthBar;
+	var stats:FlxText;
+	var judgements:JudgementSprite;
+	var combo:ComboNumbers;
 
-    var previousRank:String = "";
+	static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
 
-    var conductor:Conductor;
-    var playback:Song;
+	/**
+	 * Dispatched whenever a song is started.
+	 */
+	final onSongStart = new FlxTypedSignal<Void->Void>();
 
-    var noteSpawner:NoteSpawner;
-    var chart:Chart;
+	/**
+	 * Dispatched when the countdown is happening.
+	 */
+	final onSongCountdown = new FlxTypedSignal<Int->Void>();
 
-    var inputHandlers:Map<String, InputHandler> = [];
-    var strumlines:Array<Strumline> = [];
-    var playerStrum:Strumline;
-    var oppStrum:Strumline;
+	/**
+	 * Dispatched whenever a note gets hit (Good Hit.)
+	 */
+	final onNoteHit = new FlxTypedSignal<(playerID:String, note:Note, timing:Judgement, isSustain:Bool) -> Void>();
 
-    var healthBar:HealthBar;
-    var stats:FlxText;
-    var judgements:JudgementSprite;
-    var combo:ComboNumbers;
+	/**
+	 * Dispatched whenever a note is missed (Bad Hit.)
+	 */
+	final onNoteMiss = new FlxTypedSignal<(playerID:String, note:Note) -> Void>();
 
-    static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
+	/**
+	 * Dispatched whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
+	 */
+	final onGhostTap = new FlxTypedSignal<Int->Void>();
 
-    /**
-     * Dispatched whenever a song is started.
-     */
-    final onSongStart = new FlxTypedSignal<Void->Void>();
+	/**
+	 * Creates a gameplay scene on screen.
+	 * @param song        The song that'll be played on the directory.
+	 * @param difficulty  The song's difficulty.
+	 * @param mix         The song's mix (e.g. bf, pico)
+	 * @param replay      (optional) A replay to be loaded.
+	 */
+	public function new(song:String, difficulty:String, mix:String, ?replay:Replay = null)
+	{
+		super();
+		this.song = song;
+		this.mix = mix;
+		this.difficulty = difficulty;
 
-    /**
-     * Dispatched when the countdown is happening.
-     */
-    final onSongCountdown = new FlxTypedSignal<Int->Void>();
+		instance = this;
 
-    /**
-     * Dispatched whenever a note gets hit (Good Hit.)
-     */
-    final onNoteHit = new FlxTypedSignal<(playerID:String, note:Note, timing:Judgement, isSustain:Bool)->Void>();
+		// < -- SONG SETUP -- >//
+		chart = new Chart(song, difficulty, mix);
 
-    /**
-     * Dispatched whenever a note is missed (Bad Hit.)
-     */
-    final onNoteMiss = new FlxTypedSignal<(playerID:String, note:Note)->Void>();
-    
-    /**
-     * Dispatched whenever a key is pressed (if ghost tapping is off, it'll call onNoteMiss right after.)
-     */
-    final onGhostTap = new FlxTypedSignal<Int->Void>();
+		conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
+		conductor.onBeat.add(beatHit);
 
-    /**
-     * Creates a gameplay scene on screen.
-     * @param song        The song that'll be played on the directory.
-     * @param difficulty  The song's difficulty.
-     * @param mix         The song's mix (e.g. bf, pico)
-     * @param replay      (optional) A replay to be loaded.
-     */
-    public function new(song:String, difficulty:String, mix:String, ?replay:Replay = null)
-    {
-        super();
-        this.song = song;
-        this.mix = mix;
-        this.difficulty = difficulty;
+		playback = new Song(song, mix, difficulty, conductor);
+		playback.state = PAUSE;
 
-        instance = this;
+		// < -- HEALTHBAR SETUP -- >//
+		healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
+		add(healthBar);
+		healthBar.setPosition(0, 0);
+		healthBar.screenCenter(X);
 
-        //< -- SONG SETUP -- >//
-        chart = new Chart(song, difficulty, mix);
-        
-        conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
-        conductor.onBeat.add(beatHit);
-        
-        playback = new Song(song, mix, difficulty, conductor);
-        playback.state = PAUSE;
+		// < -- COMBO AND JUDGEMENTS SETUP -- >//
+		// TODO: skins dammit
+		judgements = new JudgementSprite('moon-engine');
+		add(judgements);
+		add(judgements.extra);
+		add(judgements.sparkle);
 
-        //< -- HEALTHBAR SETUP -- >//
-        healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
-        add(healthBar);
-        healthBar.setPosition(0, 0);
-        healthBar.screenCenter(X);
+		combo = new ComboNumbers('moon-engine');
+		add(combo);
 
-        //< -- COMBO AND JUDGEMENTS SETUP -- >//
-        // TODO: skins dammit
-        judgements = new JudgementSprite('moon-engine');
-        add(judgements);
-        add(judgements.extra);
-        add(judgements.sparkle);
+		// Little text for testing out the accuracy.
+		// oh lol it doesn't even show accuracy anymore LMFAO
+		// fym it does now
+		stats = new FlxText(0, 0);
+		stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
+		stats.antialiasing = true;
+		stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
+		add(stats);
 
-        combo = new ComboNumbers('moon-engine');
-        add(combo);
+		// < -- STRUMLINES & INPUTS SETUP -- >//
+		strumlines = [];
 
-        // Little text for testing out the accuracy.
-        // oh lol it doesn't even show accuracy anymore LMFAO
-        // fym it does now
-        stats = new FlxText(0, 0);
-        stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
-        stats.antialiasing = true;
-        stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
-        add(stats);
-    
-        //< -- STRUMLINES & INPUTS SETUP -- >//
-        strumlines = [];
-        
-        // btw these variables are placeholders!
-        final playerIDs = ["opponent", "p1"];
-        final isCPUPlayers = [true, false];
+		// btw these variables are placeholders!
+		final playerIDs = ["opponent", "p1"];
+		final isCPUPlayers = [true, false];
 
-        for (i in 0...playerIDs.length)
-        {
-            var strumline = new Strumline(0, 68, chart?.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
-            add(strumline.strumBG);
-            add(strumline);
+		for (i in 0...playerIDs.length)
+		{
+			var strumline = new Strumline(0, 68, chart?.content?.meta?.noteskin ?? 'v-slice', isCPUPlayers[i], playerIDs[i], conductor);
+			add(strumline.strumBG);
+			add(strumline);
 
-            for(receptor in strumline.members)
-            {
-                add(receptor.sustainsGroup);
-                add(receptor.notesGroup);
-                add(receptor.splashGroup);
-            }
+			for (receptor in strumline.members)
+			{
+				add(receptor.sustainsGroup);
+				add(receptor.notesGroup);
+				add(receptor.splashGroup);
+			}
 
-            strumlines.push(strumline);
-            (playerIDs[i]=='opponent') ? oppStrum = strumline : playerStrum = strumline; 
+			strumlines.push(strumline);
+			(playerIDs[i] == 'opponent') ? oppStrum = strumline : playerStrum = strumline;
 
-            var inputHandler = new InputHandler(null, playerIDs[i], strumline, conductor);
-            inputHandler.CPUMode = isCPUPlayers[i];
-            inputHandlers.set(playerIDs[i], inputHandler);
+			var inputHandler = new InputHandler(null, playerIDs[i], strumline, conductor);
+			inputHandler.CPUMode = isCPUPlayers[i];
+			inputHandlers.set(playerIDs[i], inputHandler);
 
-            if (playerIDs[i] == 'p1' && replay != null)
-                inputHandler.loadReplay(replay);
+			if (playerIDs[i] == 'p1' && replay != null) inputHandler.loadReplay(replay);
 
-            inputHandler.onNoteHit.add((note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain));
-            inputHandler.onNoteMiss.add((note) -> onMiss(playerIDs[i], note));
-            inputHandler.onGhostTap.add((keyDir) -> onGhostTap.dispatch(keyDir));
-        }
+			inputHandler.onNoteHit.add((note, timing, isSustain) -> onHit(playerIDs[i], note, timing, isSustain));
+			inputHandler.onNoteMiss.add((note) -> onMiss(playerIDs[i], note));
+			inputHandler.onGhostTap.add((keyDir) -> onGhostTap.dispatch(keyDir));
+		}
 
-        setupNotes();
-        settingsUpdate();
-        updateP1Stats(null, true);
+		setupNotes();
+		settingsUpdate();
+		updateP1Stats(null, true);
 
-        // obv loss, but whatev
-        previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
+		// obv loss, but whatev
+		previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
-        conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
+		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
 		inCountdown = true;
-    }
+	}
 
-    function setupNotes()
-    {
-        //< -- NOTES SETUP -- >//
-        // Add the note spawner.
-        if(noteSpawner != null){
-            noteSpawner.clear();
-            noteSpawner.killMembers();
-            remove(noteSpawner, true);
-        }
-        
-        noteSpawner = new NoteSpawner(chart.content.notes, strumlines, conductor);
-        noteSpawner.scrollSpeed = chart.content.meta.scrollSpd;
-        add(noteSpawner);
+	function setupNotes()
+	{
+		// < -- NOTES SETUP -- >//
+		// Add the note spawner.
+		if (noteSpawner != null)
+		{
+			noteSpawner.clear();
+			noteSpawner.killMembers();
+			remove(noteSpawner, true);
+		}
 
-        // Set each input handler's notes.
-        for (handler in inputHandlers.iterator())
-            handler.thisNotes = noteSpawner.notes;
-    }
+		noteSpawner = new NoteSpawner(chart.content.notes, strumlines, conductor);
+		noteSpawner.scrollSpeed = chart.content.meta.scrollSpd;
+		add(noteSpawner);
 
-    public function settingsUpdate()
-    {
-        final downscroll = MoonSettings.callSetting('Downscroll');
+		// Set each input handler's notes.
+		for (handler in inputHandlers.iterator()) handler.thisNotes = noteSpawner.notes;
+	}
 
-        for (strum in strumlines)
-        {
-            strum.y = (!downscroll) ? 46 : FlxG.height - strum.height - 46;
+	public function settingsUpdate()
+	{
+		final downscroll = MoonSettings.callSetting('Downscroll');
 
-            final mid = (FlxG.width * 0.5);
-            final xAddition = (FlxG.width * 0.25);
-            final strumXs = [-xAddition, xAddition];
+		for (strum in strumlines)
+		{
+			strum.y = (!downscroll) ? 46 : FlxG.height - strum.height - 46;
 
-            //TODO: Fix opp notes appearing
-            playerStrum.x = (MoonSettings.callSetting('Middlescroll')) ? mid : mid + strumXs[1];
-            oppStrum.x = mid + strumXs[0];
-            oppStrum.visible = oppStrum.strumBG.visible = !MoonSettings.callSetting('Middlescroll');
+			final mid = (FlxG.width * 0.5);
+			final xAddition = (FlxG.width * 0.25);
+			final strumXs = [-xAddition, xAddition];
 
-            strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
-            strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
+			// TODO: Fix opp notes appearing
+			playerStrum.x = (MoonSettings.callSetting('Middlescroll')) ? mid : mid + strumXs[1];
+			oppStrum.x = mid + strumXs[0];
+			oppStrum.visible = oppStrum.strumBG.visible = !MoonSettings.callSetting('Middlescroll');
 
-            //oppStrum.visible = oppStrum.strumBG.visible = playerStrum.visible = playerStrum.strumBG.visible = false;
-        }
+			strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
+			strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
 
-        noteSpawner.update(0);
+			// oppStrum.visible = oppStrum.strumBG.visible = playerStrum.visible = playerStrum.strumBG.visible = false;
+		}
 
-        healthBar.update(0);
-        healthBar.y = (downscroll) ? 64 : FlxG.height - 78;
-        healthBar.updateBarPos(true);
+		noteSpawner.update(0);
 
-        // also this is just so much offsetted it looks like ASS
-        stats.y = (MoonSettings.callSetting('Stats Position') == 'On Player Lane')
-        ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height -8 : playerStrum.y - stats.height)
-        : healthBar.y + stats.height + 8;
+		healthBar.update(0);
+		healthBar.y = (downscroll) ? 64 : FlxG.height - 78;
+		healthBar.updateBarPos(true);
 
-        centerText();
-        //updateP1Stats(null, false);
+		// also this is just so much offsetted it looks like ASS
+		stats.y =
+			(MoonSettings.callSetting(
+				'Stats Position'
+			) == 'On Player Lane') ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height - 8 : playerStrum.y - stats.height) : healthBar.y
+				+ stats.height
+				+ 8;
 
-        playback.updateVolume();
-    }
+		centerText();
+		// updateP1Stats(null, false);
 
-    public function startReplay(replay:Replay)
-    {
-        inputHandlers.get('p1').loadReplay(replay);
-        botPlay = false;
-    }
+		playback.updateVolume();
+	}
 
-    override public function update(dt:Float)
-    {
-        // updates some stuff when not in cutscene.
-        if(!inCutscene) conductor.time += (dt * 1000) * playback.pitch;
-        Global.allowInputs = !inCutscene;
+	public function startReplay(replay:Replay)
+	{
+		inputHandlers.get('p1').loadReplay(replay);
+		botPlay = false;
+	}
 
-        super.update(dt);
+	override public function update(dt:Float)
+	{
+		// updates some stuff when not in cutscene.
+		if (!inCutscene) conductor.time += (dt * 1000) * playback.pitch;
+		Global.allowInputs = !inCutscene;
 
-        // set the input keys.
-        for (handler in inputHandlers.iterator())
-        {
-            handler.justPressed = [
-                MoonInput.justPressed(LEFT),
-                MoonInput.justPressed(DOWN),
-                MoonInput.justPressed(UP),
-                MoonInput.justPressed(RIGHT)
-            ];
+		super.update(dt);
 
-            handler.pressed = [
-                MoonInput.pressed(LEFT),
-                MoonInput.pressed(DOWN),
-                MoonInput.pressed(UP),
-                MoonInput.pressed(RIGHT)
-            ];
+		// set the input keys.
+		for (handler in inputHandlers.iterator())
+		{
+			handler.justPressed = [MoonInput.justPressed(LEFT), MoonInput.justPressed(DOWN), MoonInput.justPressed(UP), MoonInput.justPressed(RIGHT)];
 
-            handler.released = [
-                MoonInput.released(LEFT),
-                MoonInput.released(DOWN),
-                MoonInput.released(UP),
-                MoonInput.released(RIGHT)
-            ];
-            handler.update();
-        }
+			handler.pressed = [MoonInput.pressed(LEFT), MoonInput.pressed(DOWN), MoonInput.pressed(UP), MoonInput.pressed(RIGHT)];
 
-        //TODO: REMOVE, PLACEHOLDER.
-        if(FlxG.keys.justPressed.I) playback.pitch -= 0.05;
-        else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
-        //if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
-        
-        // update health based on p1's health.
-        healthBar.health = inputHandlers.get('p1').stats.health;
+			handler.released = [MoonInput.released(LEFT), MoonInput.released(DOWN), MoonInput.released(UP), MoonInput.released(RIGHT)];
+			handler.update();
+		}
 
-        // uhhmmm yeah stats scaling thats p much all
-        stats.scale.x = stats.scale.y = FlxMath.lerp(stats.scale.x, 1, dt * 12);
+		// TODO: REMOVE, PLACEHOLDER.
+		if (FlxG.keys.justPressed.I) playback.pitch -= 0.05;
+		else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
+		// if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
 
-        final stat = inputHandlers.get('p1').stats;
-        final rankData = Timings.getRank(stat.accuracy);
+		// update health based on p1's health.
+		healthBar.health = inputHandlers.get('p1').stats.health;
 
-        if(stats.color != rankData.color)
-        {
-            final curRank = Timings.getRank(stat.accuracy).rank;
-            if (curRank != previousRank)
-            {
-                final oldIndex = rankLevels.indexOf(previousRank);
-                final newIndex = rankLevels.indexOf(curRank);
+		// uhhmmm yeah stats scaling thats p much all
+		stats.scale.x = stats.scale.y = FlxMath.lerp(stats.scale.x, 1, dt * 12);
 
-                if(MoonSettings.callSetting('Ranking Sound'))
-                {
-                    if (newIndex > oldIndex)
+		final stat = inputHandlers.get('p1').stats;
+		final rankData = Timings.getRank(stat.accuracy);
+
+		if (stats.color != rankData.color)
+		{
+			final curRank = Timings.getRank(stat.accuracy).rank;
+			if (curRank != previousRank)
+			{
+				final oldIndex = rankLevels.indexOf(previousRank);
+				final newIndex = rankLevels.indexOf(curRank);
+
+				if (MoonSettings.callSetting('Ranking Sound'))
+				{
+					if (newIndex > oldIndex)
 					{
-                        Paths.playSFX('game/ratingRaise.wav');
+						Paths.playSFX('game/ratingRaise.wav');
 						Global.scriptCall('onRatingRaise');
 					}
-                    else if (newIndex < oldIndex)
+					else if (newIndex < oldIndex)
 					{
-                        Paths.playSFX('game/ratingLower.wav');
+						Paths.playSFX('game/ratingLower.wav');
 						Global.scriptCall('onRatingLower');
 					}
-                }
+				}
 
-                previousRank = curRank;
-            }
-        }
+				previousRank = curRank;
+			}
+		}
 
-        stats.color = rankData.color;
-        stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
-        centerText();
-    }
+		stats.color = rankData.color;
+		stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
+		centerText();
+	}
 
-    function onHit(playerID:String, note:Note, timing:Judgement, isSustain:Bool)
-    {
-        if (playerID == 'p1')
-        {
-            stats.scale.set(1.07, 1.07);
+	function onHit(playerID:String, note:Note, timing:Judgement, isSustain:Bool)
+	{
+		if (playerID == 'p1')
+		{
+			stats.scale.set(1.07, 1.07);
 
-            // actually its colored by judgement now so fuck
-            //if(timing != null) setStatsColor(Timings.getParameters(timing)[4]);
-            updateP1Stats(timing);
-            playback.muteStatus(Voices_Player, false);
-        }
+			// actually its colored by judgement now so fuck
+			// if(timing != null) setStatsColor(Timings.getParameters(timing)[4]);
+			updateP1Stats(timing);
+			playback.muteStatus(Voices_Player, false);
+		}
 
-        //final input = inputHandlers.get(playerID);
-        //input.attachedChar
+		// final input = inputHandlers.get(playerID);
+		// input.attachedChar
 
-        onNoteHit.dispatch(playerID, note, timing, isSustain);
-    }
+		onNoteHit.dispatch(playerID, note, timing, isSustain);
+	}
 
-    var statShake:FlxTween;
-    function onMiss(playerID:String, note:Note)
-    {
-        if (playerID == 'p1')
-        {
-            // update stats
-            updateP1Stats('miss');
-            //p1Combo.comboRoll(0, 2, true);
+	var statShake:FlxTween;
 
-            // and do a lil cool thing to the stats
-            setStatsColor(FlxColor.RED);
+	function onMiss(playerID:String, note:Note)
+	{
+		if (playerID == 'p1')
+		{
+			// update stats
+			updateP1Stats('miss');
+			// p1Combo.comboRoll(0, 2, true);
 
-            TweenUtils.cancelTwn(statShake);
-            statShake = FlxTween.shake(stats, 0.04, 0.14, X);
+			// and do a lil cool thing to the stats
+			setStatsColor(FlxColor.RED);
 
-            // the good ol sfx ahaha
-            Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}.ogg');
+			TweenUtils.cancelTwn(statShake);
+			statShake = FlxTween.shake(stats, 0.04, 0.14, X);
 
-            playback.muteStatus(Voices_Player, MoonSettings.callSetting('Mute Voices on Miss'));
-        }
-        onNoteMiss.dispatch(playerID, note);
-    }
+			// the good ol sfx ahaha
+			Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}.ogg');
 
-    private function updateP1Stats(judgement, ?statsOnly = false):Void
-    {
-        // get the stat and update them
-        final stat = inputHandlers.get('p1').stats;
+			playback.muteStatus(Voices_Player, MoonSettings.callSetting('Mute Voices on Miss'));
+		}
+		onNoteMiss.dispatch(playerID, note);
+	}
 
-        if(!statsOnly)
-        {
-            if(judgement != null)
-                judgements.pop(judgement, stat.isGold);
+	private function updateP1Stats(judgement, ?statsOnly = false):Void
+	{
+		// get the stat and update them
+		final stat = inputHandlers.get('p1').stats;
 
-            combo.pop('x${stat.combo}', judgements.color);
-        }
-    }
+		if (!statsOnly)
+		{
+			if (judgement != null) judgements.pop(judgement, stat.isGold);
 
-    var statsColor:FlxTween;
-    function setStatsColor(color:FlxColor)
-    {
-        TweenUtils.cancelTwn(statsColor);
-        statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {startDelay: 0.05});
-    }
-    
-    function centerText()
-    {
-        if(MoonSettings.callSetting('Stats Position') != 'On Player Lane' || MoonSettings.callSetting('Middlescroll'))
-            stats.screenCenter(X);
-        else stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
-    }
+			combo.pop('x${stat.combo}', judgements.color);
+		}
+	}
 
-    function beatHit(beat:Float):Void
-    {
-        healthBar.bump();
+	var statsColor:FlxTween;
 
-       // <- COUNTDOWN STUFF -> //
-       if(inCountdown && !inCutscene)
-       {
-            switch(beat)
-            {
-                case 0: 
-                    playback.state = PLAY;
-                    inCountdown = false;
-                    onSongStart.dispatch();
-                //case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
-                //default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
-            }
+	function setStatsColor(color:FlxColor)
+	{
+		TweenUtils.cancelTwn(statsColor);
+		statsColor = FlxTween.color(stats, 0.4, color, Timings.getRank(inputHandlers.get('p1').stats.accuracy).color, {
+			startDelay: 0.05
+		});
+	}
 
-            onSongCountdown.dispatch(Std.int(beat));
-       }
-    }
+	function centerText()
+	{
+		if (MoonSettings.callSetting('Stats Position') != 'On Player Lane' || MoonSettings.callSetting('Middlescroll')) stats.screenCenter(X);
+		else
+			stats.x = playerStrum.x + playerStrum.width / 2 - stats.width;
+	}
 
-    public var botPlay(default, set):Bool = false;
+	function beatHit(beat:Float):Void
+	{
+		healthBar.bump();
 
-    function set_botPlay(value:Bool):Bool {
-        botPlay = value;
-        inputHandlers.get('p1').CPUMode = value;
-        return value;
-    }
+		// <- COUNTDOWN STUFF -> //
+		if (inCountdown && !inCutscene)
+		{
+			switch (beat)
+			{
+				case 0:
+					playback.state = PLAY;
+					inCountdown = false;
+					onSongStart.dispatch();
+					// case -1: FlxG.sound.play(Paths.sound('game/countdown/intro-0.ogg', 'sounds'));
+					// default: if(beat >= -4)FlxG.sound.play(Paths.sound('game/countdown/intro${beat+1}.ogg', 'sounds'));
+			}
+
+			onSongCountdown.dispatch(Std.int(beat));
+		}
+	}
+
+	public var botPlay(default, set):Bool = false;
+
+	function set_botPlay(value:Bool):Bool
+	{
+		botPlay = value;
+		inputHandlers.get('p1').CPUMode = value;
+		return value;
+	}
 }

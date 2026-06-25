@@ -14,12 +14,14 @@ class SyncPlaylist
 	public var sounds:StringMap<MoonSound> = new StringMap<MoonSound>();
 	public var focusSong(default, set):String = null;
 	public var volume(default, set):Float = 1.0;
-	@:isVar public var pitch(default, set):Float = 1.0;
+	@:isVar
+	public var pitch(default, set):Float = 1.0;
 	public var time(get, set):Float;
-
 	public var fadeDuration:Float = 0.4;
 
-	public function new() {}
+	public function new()
+	{
+	}
 
 	/**
 	 * Directories won't include assets, something like this: "music/coolPath/variations"
@@ -53,8 +55,7 @@ class SyncPlaylist
 			}
 
 			final keyArray = [for (k in sounds.keys()) k];
-			if (keyArray.length > 0)
-				focusSong = keyArray[0];
+			if (keyArray.length > 0) focusSong = keyArray[0];
 		}
 
 		return this;
@@ -62,8 +63,7 @@ class SyncPlaylist
 
 	function set_focusSong(newSong:String):String
 	{
-		if (newSong == focusSong || !sounds.exists(newSong))
-			return focusSong;
+		if (newSong == focusSong || !sounds.exists(newSong)) return focusSong;
 
 		final oldSound = focusSong != null ? sounds.get(focusSong) : null;
 		final newSound = sounds.get(newSong);
@@ -75,8 +75,7 @@ class SyncPlaylist
 			newSound.time = oldSound?.time ?? 0;
 		}
 
-		if (oldSound != null)
-			oldSound.fadeOut(fadeDuration, 0, _ -> oldSound.volume = 0); // Ensure it ends at 0
+		if (oldSound != null) oldSound.fadeOut(fadeDuration, 0, _ -> oldSound.volume = 0); // Ensure it ends at 0
 
 		focusSong = newSong;
 		return newSong;
@@ -86,43 +85,36 @@ class SyncPlaylist
 	{
 		volume = v < 0 ? 0 : (v > 1 ? 1 : v);
 
-		if (focusSong != null && sounds.exists(focusSong))
-			sounds.get(focusSong).volume = volume;
+		if (focusSong != null && sounds.exists(focusSong)) sounds.get(focusSong).volume = volume;
 
 		return volume;
 	}
 
-	function get_time():Float
-		return (focusSong != null && sounds.exists(focusSong)) ? sounds.get(focusSong).time : 0;
+	function get_time():Float return (focusSong != null && sounds.exists(focusSong)) ? sounds.get(focusSong).time : 0;
 
 	function set_time(t:Float):Float
 	{
+		for (s in sounds) s.time = (s.length > 0) ? t % s.length : t;
 
-		for (s in sounds)
-			s.time = (s.length > 0) ? t % s.length : t;
-		
 		return t;
 	}
 
 	function set_pitch(p:Float):Float
 	{
 		this.pitch = p;
-		for (s in sounds)
-			s.pitch = p;
-		
+		for (s in sounds) s.pitch = p;
+
 		return p;
 	}
 
 	public function play()
 	{
-		for (snd in sounds)
-			snd.resume();
+		for (snd in sounds) snd.resume();
 	}
 
 	public function pause()
 	{
-		for (snd in sounds)
-			snd.pause();
+		for (snd in sounds) snd.pause();
 	}
 
 	public function stop()
@@ -136,6 +128,6 @@ class SyncPlaylist
 
 	public function getSongList():Array<String>
 	{
-		return [for (k in sounds.keys()) k];
+		return[for (k in sounds.keys()) k];
 	}
 }

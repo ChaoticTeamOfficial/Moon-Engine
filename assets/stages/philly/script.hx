@@ -9,11 +9,9 @@ import flixel.math.FlxMath;
 import Shortcuts;
 
 var trainSound:MoonSound;
-
 var trainMoving:Bool = false;
 var trainFinishing:Bool = false;
 var trainEnabled:Bool = true;
-
 var trainFrameTiming:Float = 0;
 var trainCars:Int = 8;
 var trainCooldown:Int = 0;
@@ -22,26 +20,33 @@ function onPostCreate()
 {
 	// preload the train sound.
 	trainSound = new MoonSound().loadEmbedded(Paths.sound('stages/philly/train_passes.ogg', 'sounds'), false, false);
-	
+
 	// oh yeah for a sound to update you gotta **add** it. thats stupid...
 	game.add(trainSound);
-	
-	if(trainSound.playing) trainSound.stop();
+
+	if (trainSound.playing) trainSound.stop();
 	trainSound.volume = MoonSettings.callSetting('SFX Volume') / 100;
 }
 
-final lightColors:Array<FlxColor> = [0xFF31A2FD, 0xFF31FD8C, 0xFFFB33F5, 0xFFFBA633, 0xFFFD4531];
+final lightColors:Array<FlxColor> = [
+	0xFF31A2FD,
+	0xFF31FD8C,
+	0xFFFB33F5,
+	0xFFFBA633,
+	0xFFFD4531
+];
+
 function onBeat(beat)
 {
 	// does the thingy on the building windows every four beats
-	if(beat % 4 == 0)
+	if (beat % 4 == 0)
 	{
 		background.getObject('win').color = lightColors[FlxG.random.int(0, lightColors.length - 1)];
 		background.getObject('win').alpha = 1;
 	}
-	
+
 	if (trainEnabled)
-    {
+	{
 		// update the train's cooldown
 		if (!trainMoving) trainCooldown += 1;
 
@@ -51,16 +56,16 @@ function onBeat(beat)
 			trainCooldown = FlxG.random.int(-4, 0);
 			trainStart();
 		}
-    }
+	}
 }
 
 function onUpdate(elapsed)
 {
 	background.getObject('win').alpha = FlxMath.lerp(background.getObject('win').alpha, 0.3, elapsed);
-	
+
 	// update some train stuff
-    if (trainEnabled && trainMoving)
-    {
+	if (trainEnabled && trainMoving)
+	{
 		trainFrameTiming += elapsed;
 
 		if (trainFrameTiming >= 1 / 24)
@@ -68,7 +73,7 @@ function onUpdate(elapsed)
 			updateTrainPos();
 			trainFrameTiming = 0;
 		}
-    }
+	}
 }
 
 function trainStart():Void
@@ -118,16 +123,16 @@ function trainReset():Void
 function addShader(character:MoonSprite)
 {
 	/*if(character==null) return;
-	
-	if(Std.isOfType(character, MoonSprite))
-	{
-		var rim = new DropShadowShader();
-		rim.setAdjustColor(-46, -38, -25, -20);
-		rim.color = 0xFFff6b6b;
-		character.shader = rim;
-		rim.attachedSprite = character;
-		rim.angle = 90;
 
-		character.animation.onFrameChange.add(() -> rim.updateFrameInfo(character.frame));
+		if(Std.isOfType(character, MoonSprite))
+		{
+			var rim = new DropShadowShader();
+			rim.setAdjustColor(-46, -38, -25, -20);
+			rim.color = 0xFFff6b6b;
+			character.shader = rim;
+			rim.attachedSprite = character;
+			rim.angle = 90;
+
+			character.animation.onFrameChange.add(() -> rim.updateFrameInfo(character.frame));
 	}*/
 }

@@ -1,160 +1,160 @@
 {
 	"frames": [
 		{
-            "name": "gridSnap",
-            "pos": [0, 0],
-            "size": [64, 64]
-        },
+			"name": "gridSnap",
+			"pos": [0, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "section",
-            "pos": [64, 0],
-            "size": [64, 64]
-        },
+			"name": "section",
+			"pos": [64, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "bookmark",
-            "pos": [128, 0],
-            "size": [64, 64]
-        },
+			"name": "bookmark",
+			"pos": [128, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "speed",
-            "pos": [192, 0],
-            "size": [64, 64]
-        },
+			"name": "speed",
+			"pos": [192, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "menu",
-            "pos": [256, 0],
-            "size": [64, 64]
-        },
+			"name": "menu",
+			"pos": [256, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "joystick",
-            "pos": [320, 0],
-            "size": [64, 64]
-        },
+			"name": "joystick",
+			"pos": [320, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "videoSettings",
-            "pos": [384, 0],
-            "size": [64, 64]
-        },
+			"name": "videoSettings",
+			"pos": [384, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "editDocument",
-            "pos": [448, 0],
-            "size": [64, 64]
-        },
+			"name": "editDocument",
+			"pos": [448, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "openFolder",
-            "pos": [512, 0],
-            "size": [64, 64]
-        },
+			"name": "openFolder",
+			"pos": [512, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "lightbulb",
-            "pos": [576, 0],
-            "size": [64, 64]
-        },
+			"name": "lightbulb",
+			"pos": [576, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "settings",
-            "pos": [640, 0],
-            "size": [64, 64]
-        },
+			"name": "settings",
+			"pos": [640, 0],
+			"size": [64, 64]
+		},
 		{
-            "name": "openDoor",
-            "pos": [0, 64],
-            "size": [64, 64]
-        },
+			"name": "openDoor",
+			"pos": [0, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "pauseCircle",
-            "pos": [64, 64],
-            "size": [64, 64]
-        },
+			"name": "pauseCircle",
+			"pos": [64, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "playCircle",
-            "pos": [128, 64],
-            "size": [64, 64]
-        },
+			"name": "playCircle",
+			"pos": [128, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "collapse",
-            "pos": [192, 64],
-            "size": [64, 64]
-        },
+			"name": "collapse",
+			"pos": [192, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "uncollapse",
-            "pos": [256, 64],
-            "size": [64, 64]
-        },
+			"name": "uncollapse",
+			"pos": [256, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "musicCast",
-            "pos": [320, 64],
-            "size": [64, 64]
-        },
+			"name": "musicCast",
+			"pos": [320, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "editAudio",
-            "pos": [384, 64],
-            "size": [64, 64]
-        },
+			"name": "editAudio",
+			"pos": [384, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "brush",
-            "pos": [448, 64],
-            "size": [64, 64]
-        },
+			"name": "brush",
+			"pos": [448, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "pencil",
-            "pos": [512, 64],
-            "size": [64, 64]
-        },
+			"name": "pencil",
+			"pos": [512, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "diagonalLine",
-            "pos": [576, 64],
-            "size": [64, 64]
-        },
+			"name": "diagonalLine",
+			"pos": [576, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "library",
-            "pos": [640, 64],
-            "size": [64, 64]
-        },
+			"name": "library",
+			"pos": [640, 64],
+			"size": [64, 64]
+		},
 		{
-            "name": "fileSave",
-            "pos": [0, 128],
-            "size": [64, 64]
-        },
+			"name": "fileSave",
+			"pos": [0, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "style",
-            "pos": [64, 128],
-            "size": [64, 64]
-        },
+			"name": "style",
+			"pos": [64, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "borderColor",
-            "pos": [128, 128],
-            "size": [64, 64]
-        },
+			"name": "borderColor",
+			"pos": [128, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "formatSize",
-            "pos": [192, 128],
-            "size": [64, 64]
-        },
+			"name": "formatSize",
+			"pos": [192, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "background",
-            "pos": [256, 128],
-            "size": [64, 64]
-        },
+			"name": "background",
+			"pos": [256, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "vignette",
-            "pos": [320, 128],
-            "size": [64, 64]
-        },
+			"name": "vignette",
+			"pos": [320, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "data",
-            "pos": [384, 128],
-            "size": [64, 64]
-        },
+			"name": "data",
+			"pos": [384, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "closedCaption",
-            "pos": [448, 128],
-            "size": [64, 64]
-        },
+			"name": "closedCaption",
+			"pos": [448, 128],
+			"size": [64, 64]
+		},
 		{
-            "name": "info",
-            "pos": [512, 128],
-            "size": [64, 64]
-        },
+			"name": "info",
+			"pos": [512, 128],
+			"size": [64, 64]
+		},
 		{
 			"name": "arrowBack",
 			"pos": [576, 128],

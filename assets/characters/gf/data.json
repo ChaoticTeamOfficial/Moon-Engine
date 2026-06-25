@@ -1,40 +1,13 @@
 {
-	"camOffsets": [
-		-50,
-		100
-	],
-	"healthbarColors": [
-		0,
-		0,
-		0
-	],
-	"extraOffsets": [
-		3,
-		-316
-	],
+	"camOffsets": [-50, 100],
+	"healthbarColors": [0, 0, 0],
+	"extraOffsets": [3, -316],
 	"type": "atlas",
 	"animations": [
 		{
 			"name": "idle-0",
 			"prefix": "GF Dancing Beat",
-			"indices": [
-				30,
-				0,
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8,
-				9,
-				10,
-				11,
-				12,
-				13,
-				14
-			],
+			"indices": [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 			"fps": 24,
 			"x": -26,
 			"y": -9
@@ -43,21 +16,7 @@
 			"name": "idle-1",
 			"prefix": "GF Dancing Beat",
 			"indices": [
-				15,
-				16,
-				17,
-				18,
-				19,
-				20,
-				21,
-				22,
-				23,
-				24,
-				25,
-				26,
-				27,
-				28,
-				29
+				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
 			],
 			"fps": 24,
 			"x": -26,
@@ -80,10 +39,7 @@
 			"y": -24
 		}
 	],
-	"overrideAnims": [
-		"combo50",
-		"comboBreak"
-	],
+	"overrideAnims": ["combo50", "comboBreak"],
 	"antialiasing": true,
 	"danceFrequency": 1,
 	"flipX": false,

@@ -1,64 +1,64 @@
 {
 	"frames": [
 		{
-            "name": "popupBox",
-            "pos": [0, 0],
-            "size": [645, 344]
-        },
+			"name": "popupBox",
+			"pos": [0, 0],
+			"size": [645, 344]
+		},
 		{
-            "name": "button-selected",
-            "pos": [0, 351],
-            "size": [242, 67]
-        },
+			"name": "button-selected",
+			"pos": [0, 351],
+			"size": [242, 67]
+		},
 		{
-            "name": "button-regular",
-            "pos": [243, 351],
-            "size": [242, 67]
-        },
+			"name": "button-regular",
+			"pos": [243, 351],
+			"size": [242, 67]
+		},
 		{
-            "name": "smallButton-regular",
-            "pos": [0, 432],
-            "size": [80, 96]
-        },
+			"name": "smallButton-regular",
+			"pos": [0, 432],
+			"size": [80, 96]
+		},
 		{
-            "name": "smallButton-selected",
-            "pos": [96, 432],
-            "size": [80, 96]
-        },
+			"name": "smallButton-selected",
+			"pos": [96, 432],
+			"size": [80, 96]
+		},
 		{
-            "name": "exit",
-            "pos": [224, 448],
-            "size": [48, 48]
-        },
+			"name": "exit",
+			"pos": [224, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "restart",
-            "pos": [272, 448],
-            "size": [48, 48]
-        },
+			"name": "restart",
+			"pos": [272, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "skip",
-            "pos": [320, 448],
-            "size": [48, 48]
-        },
+			"name": "skip",
+			"pos": [320, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "resume",
-            "pos": [368, 448],
-            "size": [48, 48]
-        },
+			"name": "resume",
+			"pos": [368, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "folder",
-            "pos": [416, 448],
-            "size": [48, 48]
-        },
+			"name": "folder",
+			"pos": [416, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "playlistMode",
-            "pos": [480, 448],
-            "size": [48, 48]
-        },
+			"name": "playlistMode",
+			"pos": [480, 448],
+			"size": [48, 48]
+		},
 		{
-            "name": "sustainHandle",
-            "pos": [560, 384],
-            "size": [32, 16]
-        }
+			"name": "sustainHandle",
+			"pos": [560, 384],
+			"size": [32, 16]
+		}
 	]
 }

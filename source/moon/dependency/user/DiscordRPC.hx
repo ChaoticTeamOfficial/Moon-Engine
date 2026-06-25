@@ -9,6 +9,7 @@ import sys.thread.Thread;
 class DiscordRPC
 {
 	public static var presence:DiscordRichPresence;
+
 	public static function initialize(appId:String = "1297678826809200720"):Void
 	{
 		trace('[DISCORD-RPC] Initializing Discord RPC...');
@@ -39,21 +40,22 @@ class DiscordRPC
 		trace('[DISCORD-RPC] Shutting down Discord RPC...');
 		Discord.Shutdown();
 	}
-	
+
 	public static var lastTime:Int = 0;
+
 	public static function updatePresence(?icoType:RPCIconType = OG, details:String, state:String, reset:Bool = false):Void
 	{
-		if(reset) lastTime = Math.floor(Date.now().getTime() / 1000);
-		
+		if (reset) lastTime = Math.floor(Date.now().getTime() / 1000);
+
 		presence.type = DiscordActivityType_Playing;
 		presence.details = details;
 		presence.state = state;
 		presence.largeImageKey = '$icoType';
 		presence.largeImageText = 'Moon Engine v.${lime.app.Application.current.meta.get("version")}';
-		
-		switch(icoType)
+
+		switch (icoType)
 		{
-			case AWAY: 
+			case AWAY:
 				presence.smallImageKey = 'paused';
 				presence.smallImageText = 'Paused!';
 			case PLAYMODE:
@@ -66,9 +68,9 @@ class DiscordRPC
 				presence.smallImageKey = null;
 				presence.smallImageText = null;
 		}
-		
+
 		presence.startTimestamp = lastTime;
-		
+
 		final button1:DiscordButton = new DiscordButton();
 		button1.label = "test1";
 		button1.url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
@@ -86,35 +88,39 @@ class DiscordRPC
 	{
 		trace('[DISCORD-RPC] Connected to user @${request[0].username} successfully.');
 		presence = new DiscordRichPresence();
-		
+
 		updatePresence(OG, "Welcome to Moon Engine!", "Initializing...", true);
 	}
 
-	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
-		trace('[DISCORD-RPC] Disconnected ($errorCode: $message)', "WARNING");
+	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void trace(
+		'[DISCORD-RPC] Disconnected ($errorCode: $message)',
+		"WARNING"
+	);
 
-	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
-		trace('[DISCORD-RPC] Error ($errorCode: $message)', "ERROR");
+	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void trace('[DISCORD-RPC] Error ($errorCode: $message)', "ERROR");
 }
 #else
 class DiscordRPC
 {
 	// these just exist so I dont need to do ifs for every damn call in here
 	public static function initialize(appId:String = ""):Void
-	{}
-	
+	{
+	}
+
 	public static function shutdown():Void
-	{}
+	{
+	}
 
 	public static function updatePresence(?icoType:RPCIconType = OG, details:String, state:String, reset:Bool = false):Void
-	{}
+	{
+	}
 }
 #end
 
-enum abstract RPCIconType(String) {
-    var PLAYMODE = 'iconregular';
+enum abstract RPCIconType(String)
+{
+	var PLAYMODE = 'iconregular';
 	var OG = 'icondefault';
-    var AWAY = 'iconaway';
-    var EDITOR = 'iconeditor';
-
+	var AWAY = 'iconaway';
+	var EDITOR = 'iconeditor';
 }

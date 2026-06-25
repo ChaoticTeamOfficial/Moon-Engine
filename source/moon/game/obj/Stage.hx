@@ -16,207 +16,208 @@ using StringTools;
  */
 class Stage extends FlxTypedGroup<FlxBasic>
 {
-    /**
-     * The stage name itself, name must match the folder it's in.
-     */
-    public var stage(default, set):String;
+	/**
+	 * The stage name itself, name must match the folder it's in.
+	 */
+	public var stage(default, set):String;
 
-    /**
-     * All the camera settings.
-     */
-    public var cameraSettings:{?zoom:Float, ?startX:Float, ?startY:Float};
+	/**
+	 * All the camera settings.
+	 */
+	public var cameraSettings:
+		{?zoom:Float, ?startX:Float, ?startY:Float};
 
-    /**
-     * Background's spectators.
-     */
-    public var spectators:FlxSpriteGroup = new FlxSpriteGroup();
+	/**
+	 * Background's spectators.
+	 */
+	public var spectators:FlxSpriteGroup = new FlxSpriteGroup();
 
-    /**
-     * Background's opponents.
-     */
-    public var opponents:FlxSpriteGroup = new FlxSpriteGroup();
+	/**
+	 * Background's opponents.
+	 */
+	public var opponents:FlxSpriteGroup = new FlxSpriteGroup();
 
-    /**
-     * Background's players.
-     */
-    public var players:FlxSpriteGroup = new FlxSpriteGroup();
+	/**
+	 * Background's players.
+	 */
+	public var players:FlxSpriteGroup = new FlxSpriteGroup();
 
-    /**
-     * An array containing every character in the stage.
-     */
-    public var chars:Array<Character> = [];
+	/**
+	 * An array containing every character in the stage.
+	 */
+	public var chars:Array<Character> = [];
 
-    /**
-     * Conductor used for calling beat hit and amongst other stuff.
-     */
-    public var conductor:Conductor;
+	/**
+	 * Conductor used for calling beat hit and amongst other stuff.
+	 */
+	public var conductor:Conductor;
 
-    /**
-     * The stage script.
-     */
-    public var script:MoonScript;
+	/**
+	 * The stage script.
+	 */
+	public var script:MoonScript;
 
-    public var json:StageJSONStructure;
+	public var json:StageJSONStructure;
 
-    var objMap:Map<String, MoonSprite> = [];
-    var dancingSprites:Array<MoonSprite> = [];
+	var objMap:Map<String, MoonSprite> = [];
+	var dancingSprites:Array<MoonSprite> = [];
+	var opponentCharData:StageCharacter;
+	var playerCharData:StageCharacter;
+	var spectatorCharData:StageCharacter;
+	// sucks to be me
+	private var blendModes:Map<String, BlendMode> = [
+		"ADD" => ADD,
+		"ALPHA" => ALPHA,
+		"DARKEN" => DARKEN,
+		"DIFFERENCE" => DIFFERENCE,
+		"ERASE" => ERASE,
+		"HARDLIGHT" => HARDLIGHT,
+		"INVERT" => INVERT,
+		"LAYER" => LAYER,
+		"LIGHTEN" => LIGHTEN,
+		"MULTIPLY" => MULTIPLY,
+		"NORMAL" => NORMAL,
+		"OVERLAY" => OVERLAY,
+		"SCREEN" => SCREEN,
+		"SHADER" => SHADER,
+		"SUBTRACT" => SUBTRACT
+	];
 
-    var opponentCharData:StageCharacter;
-    var playerCharData:StageCharacter;
-    var spectatorCharData:StageCharacter;
+	public function new(stage:String = 'stage', conductor:Conductor)
+	{
+		super();
+		this.conductor = conductor;
 
-    // sucks to be me
-    private var blendModes:Map<String, BlendMode> = [
-        "ADD" => ADD,
-        "ALPHA" => ALPHA,
-        "DARKEN" => DARKEN,
-        "DIFFERENCE" => DIFFERENCE,
-        "ERASE" => ERASE,
-        "HARDLIGHT" => HARDLIGHT,
-        "INVERT" => INVERT,
-        "LAYER" => LAYER,
-        "LIGHTEN" => LIGHTEN,
-        "MULTIPLY" => MULTIPLY,
-        "NORMAL" => NORMAL,
-        "OVERLAY" => OVERLAY,
-        "SCREEN" => SCREEN,
-        "SHADER" => SHADER,
-        "SUBTRACT" => SUBTRACT
-    ];
+		script = new MoonScript();
+		Global.registerScript('stageScript', script);
+		this.stage = stage;
 
-    public function new(stage:String = 'stage', conductor:Conductor)
-    {
-        super();
-        this.conductor = conductor;
-        
-        script = new MoonScript();
-        Global.registerScript('stageScript', script);
-        this.stage = stage;
+		script.set('add', this.add);
+		script.set('insert', this.insert);
+		script.set('getObject', this.getObject);
+		script.set('members', this.members);
 
-        script.set('add', this.add);
-        script.set('insert', this.insert);
-        script.set('getObject', this.getObject);
-        script.set('members', this.members);
+		if (conductor != null) conductor.onBeat.add(onStageBeat);
+	}
 
-        if(conductor != null) conductor.onBeat.add(onStageBeat);
-    }
+	private function setType(group:FlxSpriteGroup, type:CharacterType)
+	{
+		for (member in group.members) if (Std.isOfType(member, Character)) cast(member, Character).type = type;
+	}
 
-    private function setType(group:FlxSpriteGroup, type:CharacterType)
-    {
-        for(member in group.members)
-            if(Std.isOfType(member, Character))
-                cast(member, Character).type = type;
-    }
+	@:noCompletion
+	public function set_stage(stg:String):String
+	{
+		// if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
+		//    trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
+		script.load('stages/$stg/script.hx');
+		script.set("background", this);
 
-    @:noCompletion public function set_stage(stg:String):String
-    {
-        //if (!Paths.exists('images/ingame/stages/$stg/script.hx'))
-        //    trace('The specified stage "$stg" does not have an hx file at "assets/images/ingame/stages/$stg"!', "WARNING");
-        script.load('stages/$stg/script.hx');
-        script.set("background", this);
+		this.stage = stg;
 
-        this.stage = stg;
+		// nice lil fallback if theres no json
+		json = cast Paths?.JSON('stages/$stg/data') ?? cast {
+			camSettings: {
+				zoom: 1,
+				startX: 751.5,
+				startY: 300
+			},
+			characters: [
+				{
+					type: "opponent",
+					position: [64.0, 396.0],
+					objectBehind: null
+				},
+				{
+					type: "player",
+					position: [916.0, 396.0],
+					objectBehind: null
+				},
+				{
+					type: "spectator",
+					position: [296.0, 374.0],
+					objectBehind: null
+				}
+			]
+		};
 
-        // nice lil fallback if theres no json
-        json = cast Paths?.JSON('stages/$stg/data') ?? cast {
-            camSettings: {
-                zoom: 1,
-                startX: 751.5,
-                startY: 300
-            },
-            characters: [
-                {
-                    type: "opponent",
-                    position: [64.0, 396.0],
-                    objectBehind: null
-                },
-                {
-                    type: "player",
-                    position: [916.0, 396.0],
-                    objectBehind: null
-                },
-                {
-                    type: "spectator",
-                    position: [296.0, 374.0],
-                    objectBehind: null
-                }
-            ]
-        };
+		// trace(json);
 
-        //trace(json);
+		cameraSettings = json.camSettings;
 
-        cameraSettings = json.camSettings;
+		if (json.objects != null && json.objects.length > 0)
+		{
+			for (objData in json.objects)
+			{
+				var sprite = new MoonSprite(objData.position[0], objData.position[1]);
+				sprite.strID = objData.name;
 
-        if(json.objects != null && json.objects.length > 0)
-        {
-            for (objData in json.objects)
-            {
-                var sprite = new MoonSprite(objData.position[0], objData.position[1]);
-                sprite.strID = objData.name;
+				final assetPath = '$stg/${objData.name}';
+				final objType:AtlasType = objData?.type ?? NONE;
 
-                final assetPath = '$stg/${objData.name}';
-                final objType:AtlasType = objData?.type ?? NONE;
+				switch (objType)
+				{
+					case SPARROW:
+						sprite.frames = Paths.getSparrowAtlas(assetPath, 'stages');
+					case PACKED:
+						sprite.frames = Paths.getPackerAtlas(assetPath, 'stages');
+					case NONE:
+						sprite.loadGraphic(
+							Paths.image(assetPath, 'stages'), objData.animations != null && objData.animations.length > 0,
+							objData?.frameWidth ?? 0,
+							objData?.frameHeight ?? 0
+						);
+					case ATLAS:
+						sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/${objData.name}'));
+				}
 
-                switch (objType)
-                {
-                    case SPARROW:
-                        sprite.frames = Paths.getSparrowAtlas(assetPath, 'stages');
-                    case PACKED:
-                        sprite.frames = Paths.getPackerAtlas(assetPath, 'stages');
-                    case NONE:
-                        sprite.loadGraphic(Paths.image(assetPath, 'stages'), objData.animations != null && objData.animations.length > 0, objData?.frameWidth ?? 0, objData?.frameHeight ?? 0);
-                    case ATLAS:
-                        sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/${objData.name}'));
-                }
+				if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
+				if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
 
-                if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
-                if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
+				sprite.angle = objData?.angle ?? 0;
+				sprite.alpha = objData?.alpha ?? 1;
+				sprite.antialiasing = objData?.antialiasing ?? true;
+				sprite.flipX = objData?.flipX ?? false;
+				sprite.flipY = objData?.flipY ?? false;
+				if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
 
-                sprite.angle = objData?.angle ?? 0;
-                sprite.alpha = objData?.alpha ?? 1;
-                sprite.antialiasing = objData?.antialiasing ?? true;
-                sprite.flipX = objData?.flipX ?? false;
-                sprite.flipY = objData?.flipY ?? false;
-                if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
+				if (objData.animations != null && objData.animations.length > 0) sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
 
-                if(objData.animations != null && objData.animations.length > 0)
-                    sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
+				if (objData.startAnim != null) sprite.playAnim(objData.startAnim);
 
-                if (objData.startAnim != null)
-                    sprite.playAnim(objData.startAnim);
+				if (objData.animBehavior != null)
+				{
+					switch (objData.animBehavior)
+					{
+						case ONBEAT:
+							dancingSprites.push(sprite);
+						case ONCE:
+							if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
+					}
+				}
 
-                if (objData.animBehavior != null)
-                {
-                    switch (objData.animBehavior)
-                    {
-                        case ONBEAT: dancingSprites.push(sprite);
-                        case ONCE: if (objData.startAnim != null) sprite.playAnim(objData.startAnim, true);
-                    }
-                }
+				add(sprite);
+				objMap.set(objData.name, sprite);
+			}
+		}
 
-                add(sprite);
-                objMap.set(objData.name, sprite);
-            }
-        }
+		if (script != null && script.exists('onCreate')) script.call('onCreate');
 
-        if(script != null && script.exists('onCreate'))
-			script.call('onCreate');
+		return stg;
+	}
 
-        return stg;
-    }
+	public function getObject(name:String):MoonSprite
+	{
+		if (objMap.exists(name)) return objMap.get(name);
 
-    public function getObject(name:String):MoonSprite
-    {
-        if(objMap.exists(name)) return objMap.get(name);
+		trace('[STAGE] $name wasn\'t found in the stage objects!', "WARNING");
+		return null;
+	}
 
-        trace('[STAGE] $name wasn\'t found in the stage objects!', "WARNING");
-        return null;
-    }
-
-    public function updatePositioning()
-    {
-        if (json == null) return;
-        for (i in 0...json.characters.length)
+	public function updatePositioning()
+	{
+		if (json == null) return;
+		for (i in 0...json.characters.length)
 		{
 			final character = json.characters[json.characters.length - 1 - i];
 
@@ -241,124 +242,124 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					setType(spectators, SPECTATOR);
 			}
 		}
-    }
+	}
 
-    private function addGroupAtLayer(group:FlxSpriteGroup, charData:StageCharacter, objMap:Map<String, MoonSprite>)
-    {
-        if (charData == null) return;
+	private function addGroupAtLayer(group:FlxSpriteGroup, charData:StageCharacter, objMap:Map<String, MoonSprite>)
+	{
+		if (charData == null) return;
 
-        group.x = charData?.position[0] ?? 0.0;
-        group.y = charData?.position[1] ?? 0.0;
-        group.angle = charData?.angle ?? 0.0;
-        if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
+		group.x = charData?.position[0] ?? 0.0;
+		group.y = charData?.position[1] ?? 0.0;
+		group.angle = charData?.angle ?? 0.0;
+		if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
 
-        for(obj in group.members)
-            if(Std.isOfType(obj, Character))
-                if (charData.camOffsets != null) cast(obj, Character).camOffsets = charData.camOffsets;
+		for (obj in group.members) if (Std.isOfType(obj, Character)) if (charData.camOffsets != null) cast(obj, Character).camOffsets = charData.camOffsets;
 
-        var insertIndex:Int = length;
-        if (charData.objectBehind != null)
-        {
-            final behindSprite = objMap.get(charData.objectBehind);
-            if (behindSprite != null)
-                insertIndex = members.indexOf(behindSprite) + 1;
-        }
-        insert(insertIndex, group);
-        //add(group);
-    }
+		var insertIndex:Int = length;
+		if (charData.objectBehind != null)
+		{
+			final behindSprite = objMap.get(charData.objectBehind);
+			if (behindSprite != null) insertIndex = members.indexOf(behindSprite) + 1;
+		}
+		insert(insertIndex, group);
+		// add(group);
+	}
 
-    var index:Int = 0;
+	var index:Int = 0;
 
-    /**
-     * Adds a char to a specific group.
-     * @param charName The name of the character (e.g. darnell)
-     * @param group The group in which the character will be added to.
-     * @param attachedInputs The input handler for the character (necessary if you want it to sing when a note is hit.)
-     */
-    public function addCharTo(charName:String, group:FlxSpriteGroup, ?attachedInputs:InputHandler)
-    {
-        group.recycle(Character, function():Character
-        {
-            var char = new Character(0, 0, charName, conductor);
-            char.ID = index;
-            chars.push(char);
+	/**
+	 * Adds a char to a specific group.
+	 * @param charName The name of the character (e.g. darnell)
+	 * @param group The group in which the character will be added to.
+	 * @param attachedInputs The input handler for the character (necessary if you want it to sing when a note is hit.)
+	 */
+	public function addCharTo(charName:String, group:FlxSpriteGroup, ?attachedInputs:InputHandler)
+	{
+		group.recycle(Character, function():Character
+		{
+			var char = new Character(0, 0, charName, conductor);
+			char.ID = index;
+			chars.push(char);
 
-            if(char.data.extraOffsets != null)
-            {
-                char.x += char?.data?.extraOffsets[0] ?? 0;
-                char.y += char?.data?.extraOffsets[1] ?? 0;
-            }
-            
-            if(attachedInputs != null) attachedInputs.attachedChar = char;
+			if (char.data.extraOffsets != null)
+			{
+				char.x += char?.data?.extraOffsets[0] ?? 0;
+				char.y += char?.data?.extraOffsets[1] ?? 0;
+			}
 
-            index++;
-            return char;
-        });
-    }
+			if (attachedInputs != null) attachedInputs.attachedChar = char;
 
-    public function adjustGroupColor(group:FlxSpriteGroup, values:{?hue:Float, ?saturation:Float, ?brightness:Float, ?contrast:Float})
-    {
-        var shader = new MoonShader('AdjustColor');
-        shader.script.call("setValues", [values?.hue ?? 0, values?.saturation ?? 0,values?.brightness ?? 0, values?.contrast ?? 0]);
+			index++;
+			return char;
+		});
+	}
 
-        for(i in 0...group.members.length) group.members[i].shader = shader;
-    }
+	public function adjustGroupColor(group:FlxSpriteGroup, values:
+		{?hue:Float, ?saturation:Float, ?brightness:Float, ?contrast:Float})
+	{
+		var shader = new MoonShader('AdjustColor');
+		shader.script.call("setValues", [values?.hue ?? 0, values?.saturation ?? 0, values?.brightness ?? 0, values?.contrast ?? 0]);
 
-    override public function update(elapsed:Float)
-    {
-        super.update(elapsed);
-    }
+		for (i in 0...group.members.length) group.members[i].shader = shader;
+	}
 
-    public function onStageBeat(curBeat:Float)
-    {
-        for (sprite in dancingSprites)
-        {
-            if (sprite.animation.curAnim == null) continue;
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+	}
 
-            final beatInt = Std.int(curBeat);
-            if ((sprite.animation.curAnim.name.startsWith("idle") || sprite.animation.curAnim.name.startsWith("dance")) && (beatInt != sprite.lastDanceBeat))
-            {
-                sprite.lastDanceBeat = beatInt;
-                sprite.dance(true);
-            }
-        }
-    }
+	public function onStageBeat(curBeat:Float)
+	{
+		for (sprite in dancingSprites)
+		{
+			if (sprite.animation.curAnim == null) continue;
+
+			final beatInt = Std.int(curBeat);
+			if ((sprite.animation.curAnim.name.startsWith("idle") || sprite.animation.curAnim.name.startsWith("dance")) && (beatInt != sprite.lastDanceBeat))
+			{
+				sprite.lastDanceBeat = beatInt;
+				sprite.dance(true);
+			}
+		}
+	}
 }
 
-typedef StageJSONStructure = {
-    var camSettings:{?zoom:Float, ?startX:Float, ?startY:Float};
-    var objects:Array<StageObject>;
-    var characters:Array<StageCharacter>;
+typedef StageJSONStructure =
+{
+	var camSettings:
+		{?zoom:Float, ?startX:Float, ?startY:Float};
+	var objects:Array<StageObject>;
+	var characters:Array<StageCharacter>;
 }
 
-typedef StageObject = {
-    //TODO: ADD A COLOR FIELD
-    // and document too...  
-
-    var name:String;
-    var position:Array<Float>;
-    var ?type:AtlasType;
-    var ?frameWidth:Int;
-    var ?frameHeight:Int;
-    var ?scale:Array<Float>;
-    var ?scroll:Array<Float>;
-    var ?angle:Float;
-    var ?alpha:Float;
-    var ?antialiasing:Bool;
-    var ?flipX:Bool;
-    var ?flipY:Bool;
-
-    var ?blend:String;
-    var ?animations:Array<AnimationData>;
-    var ?animBehavior:AnimBehavior;
-    var ?startAnim:String;
+typedef StageObject =
+{
+	// TODO: ADD A COLOR FIELD
+	// and document too...
+	var name:String;
+	var position:Array<Float>;
+	var ?type:AtlasType;
+	var ?frameWidth:Int;
+	var ?frameHeight:Int;
+	var ?scale:Array<Float>;
+	var ?scroll:Array<Float>;
+	var ?angle:Float;
+	var ?alpha:Float;
+	var ?antialiasing:Bool;
+	var ?flipX:Bool;
+	var ?flipY:Bool;
+	var ?blend:String;
+	var ?animations:Array<AnimationData>;
+	var ?animBehavior:AnimBehavior;
+	var ?startAnim:String;
 }
 
-typedef StageCharacter = {
-    var type:CharacterType;
-    var position:Array<Float>;
-    var objectBehind:String;
-    var ?camOffsets:Array<Float>;
-    var ?scale:Array<Float>;
-    var ?angle:Float;
+typedef StageCharacter =
+{
+	var type:CharacterType;
+	var position:Array<Float>;
+	var objectBehind:String;
+	var ?camOffsets:Array<Float>;
+	var ?scale:Array<Float>;
+	var ?angle:Float;
 }

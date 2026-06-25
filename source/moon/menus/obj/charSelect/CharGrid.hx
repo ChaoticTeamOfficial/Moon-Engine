@@ -12,13 +12,13 @@ class CharGrid extends FlxSpriteGroup
 
 	public static var curSelected:Int = 4;
 	public static var curChar:String;
-	public var list:Array<String> = [];
 
+	public var list:Array<String> = [];
 	public final onChange:FlxTypedSignal<Int->Void> = new FlxTypedSignal<Int->Void>();
 
 	var selectedBizz:Array<BitmapFilter> = [
-	    new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
-	    new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
+		new DropShadowFilter(0, 0, 0xfcfcfc, 1, 2, 2, 19, 1, false, false, false),
+		new DropShadowFilter(5, 45, 0x000000, 1, 2, 2, 1, 1, false, false, false)
 	];
 
 	public function new(columns:Int, spacing:Int)
@@ -32,8 +32,7 @@ class CharGrid extends FlxSpriteGroup
 	{
 		this.list = items;
 
-		if(this.members.length > 0)
-			clear();
+		if (this.members.length > 0) clear();
 
 		final lockColors = [
 			0xFF31F2A5, 0xFF20ECCD, 0xFF24D9E8,
@@ -43,20 +42,20 @@ class CharGrid extends FlxSpriteGroup
 
 		for (i in 0...items.length)
 		{
-			final pos = FlxPoint.get((i % columns) * spacing , (Math.floor(i / columns)) * spacing);
+			final pos = FlxPoint.get((i % columns) * spacing, (Math.floor(i / columns)) * spacing);
 
-			if(items[i] != "locked")
+			if (items[i] != "locked")
 			{
-				final icon = new PixelIcon(0,0, items[i]);
+				final icon = new PixelIcon(0, 0, items[i]);
 				add(icon);
 				icon.setPosition(pos.x - icon.width / 2, pos.y - icon.height / 2);
 			}
 			else
 			{
-				final icon = new FilteredSprite(0,0).loadGraphic(Paths.image('menus/charSelect/lock'));
+				final icon = new FilteredSprite(0, 0).loadGraphic(Paths.image('menus/charSelect/lock'));
 				add(icon);
 				icon.antialiasing = false;
-				//icon.color = lockColors[i];
+				// icon.color = lockColors[i];
 				icon.setPosition(pos.x - icon.width / 2, pos.y - icon.height / 2);
 			}
 		}
@@ -78,18 +77,15 @@ class CharGrid extends FlxSpriteGroup
 		{
 			final delta = direction > 0 ? 1 : -1;
 
-			if (Math.abs(direction) == 1)
-				col = (col + delta + columns) % columns;
-			else if (Math.abs(direction) == columns)
-				row = (row + delta + numRows) % numRows;
+			if (Math.abs(direction) == 1) col = (col + delta + columns) % columns;
+			else if (Math.abs(direction) == columns) row = (row + delta + numRows) % numRows;
 
 			curSelected = row * columns + col;
 
-			if (curSelected >= length)
-				curSelected = lastSelected;
+			if (curSelected >= length) curSelected = lastSelected;
 		}
 
-		for(i in 0...members.length)
+		for (i in 0...members.length)
 		{
 			final ico = cast(members[i], FilteredSprite);
 			TweenUtils.cancelTwn(ico.twn);
@@ -99,7 +95,13 @@ class CharGrid extends FlxSpriteGroup
 
 			ico.scale.set(2, 2);
 			ico.strID = '';
-			if(sel) ico.twn = FlxTween.tween(ico, {"scale.x": 3, "scale.y": 3}, 0.1, {ease: FlxEase.backOut, onComplete: _->ico.strID = "bump"});
+			if (sel) ico.twn = FlxTween.tween(ico, {
+				"scale.x": 3,
+				"scale.y": 3
+			}, 0.1, {
+				ease: FlxEase.backOut,
+				onComplete: _ -> ico.strID = "bump"
+			});
 		}
 
 		curChar = list[curSelected];
@@ -111,12 +113,11 @@ class CharGrid extends FlxSpriteGroup
 	{
 		super.update(elapsed);
 
-		for(i in 0...members.length)
+		for (i in 0...members.length)
 		{
 			final ico = cast(members[i], FilteredSprite);
 
-			if(i == curSelected && ico.strID == 'bump')
-				ico.scale.x = ico.scale.y = FlxMath.lerp(ico.scale.x, 3, elapsed * 16);
+			if (i == curSelected && ico.strID == 'bump') ico.scale.x = ico.scale.y = FlxMath.lerp(ico.scale.x, 3, elapsed * 16);
 		}
 	}
 
@@ -124,7 +125,6 @@ class CharGrid extends FlxSpriteGroup
 	{
 		final ico = cast(members[curSelected], FilteredSprite);
 
-		if(ico.strID == 'bump' && beat % 2 == 0)
-			ico.scale.x = ico.scale.y = 3.3;
+		if (ico.strID == 'bump' && beat % 2 == 0) ico.scale.x = ico.scale.y = 3.3;
 	}
 }

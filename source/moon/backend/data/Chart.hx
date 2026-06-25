@@ -10,6 +10,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import haxe.io.Path;
+
 using StringTools;
 
 /**
@@ -17,849 +18,866 @@ using StringTools;
  */
 typedef NoteStruct =
 {
-    /**
-     * The note's time in milliseconds.
-     */
-    var time:Float;
+	/**
+	 * The note's time in milliseconds.
+	 */
+	var time:Float;
 
-    /**
-     * The note's direction. It can go from 0 to 3.
-     */
-    var data:Int;
+	/**
+	 * The note's direction. It can go from 0 to 3.
+	 */
+	var data:Int;
 
-    /**
-     * The note's lane. Currently supported are "p1" and "opponent".
-     */
-    var lane:String;
+	/**
+	 * The note's lane. Currently supported are "p1" and "opponent".
+	 */
+	var lane:String;
 
-    /**
-     * The note's type.
-     */
-    var type:String;
+	/**
+	 * The note's type.
+	 */
+	var type:String;
 
-    /**
-     * The note's hold duration.
-     */
-    var duration:Float;
+	/**
+	 * The note's hold duration.
+	 */
+	var duration:Float;
 
-    /**
-     * The note's values. Used for triggering specific actions when hit.
-     */
-    var ?values:Dynamic;
+	/**
+	 * The note's values. Used for triggering specific actions when hit.
+	 */
+	var ?values:Dynamic;
 };
 
 /**
  * Structure for the Chart's events.
- **/
-typedef EventStruct = 
+**/
+typedef EventStruct =
 {
-    /**
-     * The event's tag.
-     */
-    var tag:String;
+	/**
+	 * The event's tag.
+	 */
+	var tag:String;
 
-    /**
-     * The event's values.
-     */
-    var values:Dynamic;
+	/**
+	 * The event's values.
+	 */
+	var values:Dynamic;
 
-    /**
-     * The event's time in miliseconds.
-     */
-    var time:Float;
+	/**
+	 * The event's time in miliseconds.
+	 */
+	var time:Float;
 
-    /**
-     * The event's lane, used for the chart editor.
-     */
-    var ?lane:Int;
+	/**
+	 * The event's lane, used for the chart editor.
+	 */
+	var ?lane:Int;
 };
 
 /**
  * Struct for a bookmark.
  * Only visible in the chart editor.
- **/
-typedef BookmarkStruct = 
+**/
+typedef BookmarkStruct =
 {
-    /**
-     * The text that'll be displayed in it.
-     */
-    var text:String;
+	/**
+	 * The text that'll be displayed in it.
+	 */
+	var text:String;
 
-    /**
-     * The person who wrote it.
-     */
-    var ?author:String;
+	/**
+	 * The person who wrote it.
+	 */
+	var ?author:String;
 
-    /**
-     * The time in milisseconds.
-     */
-    var time:Float;
+	/**
+	 * The time in milisseconds.
+	 */
+	var time:Float;
 };
 
 /**
  * Structure for the Chart's metadata.
- **/
+**/
 typedef MetadataStruct =
 {
-    // -- Game data
+	// -- Game data
 
-    /**
-     * The song's BPM. It can have decimal numbers.
-     */
-    var bpm:Float;
+	/**
+	 * The song's BPM. It can have decimal numbers.
+	 */
+	var bpm:Float;
 
-    /**
-     * The song's time signature. Default is [4, 4] (which is the same as 4/4)
-     */
-    var timeSignature:Array<Int>;
+	/**
+	 * The song's time signature. Default is [4, 4] (which is the same as 4/4)
+	 */
+	var timeSignature:Array<Int>;
 
-    /**
-     * The song's scroll speed. 
-     * Do note that it feels a bit more faster in Moon Engine rather than V-Slice, for example.
-     */
-    var scrollSpd:Float;
+	/**
+	 * The song's scroll speed. 
+	 * Do note that it feels a bit more faster in Moon Engine rather than V-Slice, for example.
+	 */
+	var scrollSpd:Float;
 
-    /**
-     * The stage in which will be used for the song.
-     */
-    var stage:String;
+	/**
+	 * The stage in which will be used for the song.
+	 */
+	var stage:String;
 
-    /**
-     * The available lanes. Default is `["opponent", "p1"]`.
-     */
-    var lanes:Array<String>;
+	/**
+	 * The available lanes. Default is `["opponent", "p1"]`.
+	 */
+	var lanes:Array<String>;
 
-    /**
-     * All the characters that'll be at the "players" group on the stage.
-     */
-    var players:Array<String>;
+	/**
+	 * All the characters that'll be at the "players" group on the stage.
+	 */
+	var players:Array<String>;
 
-    /**
-     * All the characters that'll be at the "spectators" group on the stage.
-     */
-    var spectators:Array<String>;
+	/**
+	 * All the characters that'll be at the "spectators" group on the stage.
+	 */
+	var spectators:Array<String>;
 
-    /**
-     * All the characters that'll be at the "opponents" group on the stage.
-     */
-    var opponents:Array<String>;
+	/**
+	 * All the characters that'll be at the "opponents" group on the stage.
+	 */
+	var opponents:Array<String>;
 
-    /**
-     * The noteskin in which the game will use. Defaults to v-slice.
-     */
-    var ?noteskin:String;
+	/**
+	 * The noteskin in which the game will use. Defaults to v-slice.
+	 */
+	var ?noteskin:String;
 
-    /**
-     * Whether or not should the song do a countdown on the beginning.
-     */
-    var ?hasCountdown:Bool;
+	/**
+	 * Whether or not should the song do a countdown on the beginning.
+	 */
+	var ?hasCountdown:Bool;
 
-    // -- Other data
+	// -- Other data
 
-    /**
-     * The song name that'll be displayed in menus.
-     */
-    var displayName:String;
+	/**
+	 * The song name that'll be displayed in menus.
+	 */
+	var displayName:String;
 
-    /**
-     * The album in which this song belongs to.
-     */
-    var album:String;
+	/**
+	 * The album in which this song belongs to.
+	 */
+	var album:String;
 
-    /**
-     * The artist in which made the song.
-     */
-    var artist:String;
+	/**
+	 * The artist in which made the song.
+	 */
+	var artist:String;
 
-    /**
-     * The charter in which charted the song.
-     */
-    var charter:String;
+	/**
+	 * The charter in which charted the song.
+	 */
+	var charter:String;
 
-    /**
-     * The song preview. First value is where it starts, and last value is where it ends.
-     */
-    var preview:Array<Float>;
-    
-    // -- MISC
+	/**
+	 * The song preview. First value is where it starts, and last value is where it ends.
+	 */
+	var preview:Array<Float>;
 
-    /**
-     * Shows if this chart was generated by the game, or converted using moon-chart.
-     */
-    var generatedBy:String;
+	// -- MISC
 
-    /**
-     * The version of the game this chart was made in.
-     */
-    var version:String;
+	/**
+	 * Shows if this chart was generated by the game, or converted using moon-chart.
+	 */
+	var generatedBy:String;
 
-    // -- Difficulty-specific extras
+	/**
+	 * The version of the game this chart was made in.
+	 */
+	var version:String;
 
-    /**
-     * Multiplier for health gain/loss. Defaults to 1.0.
-     */
-    var ?healthMultiplier:Float;
+	// -- Difficulty-specific extras
 
-    /**
-     * Manual override for the auto-calculated difficulty rating (0-20).
-     * If null, the rating is calculated automatically.
-     */
-    var ?difficultyRating:Int;
+	/**
+	 * Multiplier for health gain/loss. Defaults to 1.0.
+	 */
+	var ?healthMultiplier:Float;
+
+	/**
+	 * Manual override for the auto-calculated difficulty rating (0-20).
+	 * If null, the rating is calculated automatically.
+	 */
+	var ?difficultyRating:Int;
 };
 
 /**
  * Structure for the entire Chart.
- **/
+**/
 typedef ChartStruct =
 {
-    /**
-     * The chart's metadata.
-     * Can be null if metadata is stored in a separate file.
-     */
-    var ?meta:MetadataStruct;
+	/**
+	 * The chart's metadata.
+	 * Can be null if metadata is stored in a separate file.
+	 */
+	var ?meta:MetadataStruct;
 
-    /**
-     * The chart's notes.
-     */
-    var notes:Array<NoteStruct>;
+	/**
+	 * The chart's notes.
+	 */
+	var notes:Array<NoteStruct>;
 
-    /**
-     * The chart's bookmarks, only displayed in the chart editor.
-     */
-    var ?bookmarks:Array<BookmarkStruct>;
+	/**
+	 * The chart's bookmarks, only displayed in the chart editor.
+	 */
+	var ?bookmarks:Array<BookmarkStruct>;
 };
 
 /**
  * Class used for handling ingame charts.
- **/
+**/
 class Chart
 {
-    /**
-     * All the chart formats supported for converting.
-     */
-    public static final SUPPORTED_FORMATS:Array<String> = 
-    [
-        //TODO: add other formats in here.
-        'legacy',
-        'psych',
-        'codename',
-        'v-slice',
-        'osu',
-        'kade',
-        'fps-plus'
-    ];
-
-    /**
-     * All of the chart content, except for the events.
-     */
-    public var content:ChartStruct;
-
-    /**
-     * All of the chart's events.
-     */
-    public var events:Array<EventStruct>;
-
-    /**
-     * The song's name. (not displayName!)
-     */
-    public var song:String;
-
-    /**
-     * The song's difficulty.
-     */
-    public var difficulty:String;
-
-    /**
-     * The song's mix.
-     */
-    public var mix:String;
-
-    /**
-     * Loads a chart from a path.
-     *
-     * @param song        The song's name. (e.g. satin panties)
-     * @param difficulty  The song's difficulty. (e.g. hard)
-     * @param mix         The song's mix. (e.g. bf)
-     */
-    public function new(song:String, difficulty:String = 'hard', mix:String = 'bf')
-    {
-        this.song = song;
-        this.difficulty = difficulty;
-        this.mix = mix;
-
-        // Determines the file suffix from the Difficulty config.
-        final suffix = getDifficultySuffix(difficulty);
-        events = loadEventsWithSuffix(song, mix, suffix);
-
-        // Load Chart Content (notes + optional embedded meta) --
-        content = Paths.JSON('songs/$song/$mix/chart-$difficulty');
-        if (content == null)
-        {
-            trace('[CHART] Chart file not found: songs/$song/$mix/chart-$difficulty.json', "WARNING");
-            content = {notes: []};
-        }
-        
-        if (content.notes == null)
-            content.notes = [];
-
-        content.meta = loadMetadata(song, mix, suffix, difficulty, content.meta);
-        content.meta.hasCountdown ??= true;
-        content.meta.healthMultiplier ??= 1.0;
-
-        removeDuplicateNotes();
-    }
-
-    /**
-     * Loads events for a song, trying the suffix-specific file first.
-     */
-    private function loadEventsWithSuffix(song:String, mix:String, suffix:String):Array<EventStruct>
-    {
-        if (suffix != '' && Paths.exists('songs/$song/$mix/events$suffix.json'))
-            return cast Paths.JSON('songs/$song/$mix/events$suffix') ?? [];
-
-        if (Paths.exists('songs/$song/$mix/events.json'))
-            return cast Paths.JSON('songs/$song/$mix/events') ?? [];
-
-        return [];
-    }
-
-    /**
-     * Loads and resolves metadata for a song.
-     */
-    private function loadMetadata(song:String, mix:String, suffix:String, difficulty:String, embeddedMeta:MetadataStruct):MetadataStruct
-    {
-        var meta:Dynamic = embeddedMeta;
-
-        // Load base metadata
-        if (Paths.exists('songs/$song/$mix/meta.json'))
-        {
-            final baseMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta');
-            meta = mergeMetadata(meta, baseMeta);
-        }
-
-        // Load suffix-specific metadata
-        if (suffix != '' && Paths.exists('songs/$song/$mix/meta$suffix.json'))
-        {
-            final suffixMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta$suffix');
-            meta = mergeMetadata(meta, suffixMeta);
-        }
-
-        if (meta == null)
-        {
-            trace('[CHART] WARNING: No metadata found for $song/$mix/$difficulty, using defaults!', "WARNING");
-            meta = getDefaultMetadata();
-        }
-
-        return resolveMetadata(meta, difficulty);
-    }
-
-    /**
-     * Resolves a metadata structure, expanding any per-difficulty map values
-     * to their concrete values for the given difficulty.
-     */
-    private function resolveMetadata(meta:Dynamic, difficulty:String):MetadataStruct
-    {
-        final resolved:MetadataStruct = {
-            bpm: resolveVal(meta.bpm, difficulty, 120.0),
-            timeSignature: resolveVal(meta.timeSignature, difficulty, [4, 4]),
-            scrollSpd: resolveVal(meta.scrollSpd, difficulty, 2.0),
-            stage: resolveVal(meta.stage, difficulty, 'stage'),
-            lanes: resolveVal(meta.lanes, difficulty, ["opponent", "p1"]),
-            players: resolveVal(meta.players, difficulty, ["bf"]),
-            spectators: resolveVal(meta.spectators, difficulty, ["gf"]),
-            opponents: resolveVal(meta.opponents, difficulty, ["dad"]),
-            noteskin: resolveVal(meta.noteskin, difficulty, 'v-slice'),
-            hasCountdown: resolveVal(meta.hasCountdown, difficulty, true),
-            displayName: resolveVal(meta.displayName, difficulty, song),
-            album: resolveVal(meta.album, difficulty, ''),
-            artist: resolveVal(meta.artist, difficulty, ''),
-            charter: resolveVal(meta.charter, difficulty, ''),
-            preview: cast resolveVal(meta.preview, difficulty, [0, 0]),
-            generatedBy: resolveVal(meta.generatedBy, difficulty, 'Moon Engine'),
-            version: resolveVal(meta.version, difficulty, '1.0.0'),
-        };
-
-        resolved.healthMultiplier =  resolveVal(meta.healthMultiplier, difficulty, 1.0);
-        resolved.difficultyRating = resolveVal(meta.difficultyRating, difficulty, -1);
-
-        return resolved;
-    }
-
-    /**
-     * Resolves a single value that might be a per-difficulty map.
-     */
-    private static function resolveVal<T>(value:Dynamic, difficulty:String, defaultValue:T):T
-    {
-        if (value == null) return defaultValue;
-
-        // Check if it's a per-difficulty map...
-        if (Type.typeof(value) == TObject)
-        {
-            if (Reflect.hasField(value, difficulty))
-            {
-                final v = Reflect.field(value, difficulty);
-                if (v != null) return v;
-            }
-
-            if (Reflect.hasField(value, 'default'))
-            {
-                final v = Reflect.field(value, 'default');
-                if (v != null) return v;
-            }
-
-            return defaultValue;
-        }
-
-        return value;
-    }
-
-    /**
-     * Deep-merges two metadata objects. Fields in `overrider` take priority.
-     * Nested anonymous objects are merged recursively! Everything else is replaced.
-     */
-    private static function mergeMetadata(base:Dynamic, overrider:Dynamic):Dynamic
-    {
-        if (base == null) return overrider;
-        if (overrider == null) return base;
-
-        final result:Dynamic = Reflect.copy(base);
-
-        for (field in Reflect.fields(overrider))
-        {
-            final overrideVal = Reflect.field(overrider, field);
-            final baseVal = Reflect.field(base, field);
-
-            // If both are anonymous objects, deep-merge them
-            if (Type.typeof(overrideVal) == TObject && Type.typeof(baseVal) == TObject)
-                Reflect.setField(result, field, mergeMetadata(baseVal, overrideVal));
-            else
-                Reflect.setField(result, field, overrideVal);
-        }
-
-        return result;
-    }
-
-    /**
-     * Returns a default MetadataStruct with sensible fallback values.
-     */
-    private function getDefaultMetadata():MetadataStruct
-    {
-        return {
-            bpm: 120.0,
-            timeSignature: [4, 4],
-            scrollSpd: 2.0,
-            stage: 'stage',
-            lanes: ["opponent", "p1"],
-            players: ["bf"],
-            spectators: ["gf"],
-            opponents: ["dad"],
-            noteskin: 'v-slice',
-            hasCountdown: true,
-            displayName: song,
-            album: '',
-            artist: '',
-            charter: '',
-            preview: [0, 0],
-            generatedBy: 'Moon Engine',
-            version: '1.0.0',
-            healthMultiplier: 1.0,
-        };
-    }
-
-    /**
-     * Gets the file suffix for a given difficulty from the SongLibrary.
-     * @param difficulty The difficulty name (e.g. "erect")
-     * @return The suffix string (e.g. "-erect") or empty string
-     */
-    public static function getDifficultySuffix(difficulty:String):String
-    {
-        final diff = SongLibrary.getDifficulty(difficulty);
-        return diff?.suffix ?? '';
-    }
-
-    /**
-     * Returns the difficulty rating for this chart.
-     * Uses the manual override from metadata if set, otherwise calculates automatically.
-     */
-    public function getDifficultyRating():Int
-    {
-        if (content.meta.difficultyRating != null && content.meta.difficultyRating >= 0)
-            return content.meta.difficultyRating;
-        return calculateDifficultyRating(content.notes, content.meta.bpm);
-    }
-
-    /**
-     * Removes duplicate notes from the chart content.
-     * Notes are considered duplicates if they share the same time, data, and lane.
-     */
-    private function removeDuplicateNotes():Void
-    {
-        if (content.notes == null || content.notes.length == 0) return;
-
-        var seen = new Map<String, Bool>();
-        var unique:Array<NoteStruct> = [];
-        var duplicatesFound:Int = 0;
-
-        for (note in content.notes)
-        {
-            final key = '${note.time}_${note.data}_${note.lane}';
-
-            if (!seen.exists(key))
-            {
-                seen.set(key, true);
-                unique.push(note);
-            }
-            else duplicatesFound++;
-        }
-
-        content.notes = unique;
-
-        if (duplicatesFound > 0)
-            trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
-    }
-
-    /**
-     * Calculates a clean 0-20 difficulty rating based on NPS, chords, and jacks.
-     * @param notes The array containing all notes.
-     * @param bpm   The BPM value.
-     */
-    public static function calculateDifficultyRating(notes:Array<NoteStruct>, bpm:Float):Int
-    {
-        if (notes == null || notes.length == 0) return 0;
-
-        var p1Notes:Array<NoteStruct> = [];
-        for (note in notes)
-            if (note.lane == "p1") p1Notes.push(note);
-
-        if (p1Notes.length == 0) return 0;
-
-        p1Notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-
-        final songDuration:Float = p1Notes[p1Notes.length - 1].time - p1Notes[0].time;
-        if (songDuration <= 0) return 0;
-
-        // first step is to do some sliding 1-second window NPS analysis
-        final WINDOW_MS:Float = 1000.0;
-        var npsValues:Array<Float> = [];
-        var windowStart:Int = 0;
-
-        for (i in 0...p1Notes.length)
-        {
-            while (p1Notes[i].time - p1Notes[windowStart].time > WINDOW_MS)
-                windowStart++;
-
-            // normalize to per-second so units stay consistent
-            npsValues.push((i - windowStart + 1) * (1000.0 / WINDOW_MS));
-        }
-
-        npsValues.sort((a, b) -> a < b ? -1 : a > b ? 1 : 0);
-
-        final peakNPS:Float = npsValues[npsValues.length - 1];
-        final p90NPS:Float  = npsValues[Std.int(npsValues.length * 0.90)];
-        var avgNPS:Float = 0.0;
-        for (v in npsValues) avgNPS += v;
-        avgNPS /= npsValues.length;
-
-        // peak and sustained matter more than average
-        final blendedNPS:Float = (peakNPS * 0.45) + (p90NPS * 0.45) + (avgNPS * 0.10);
-
-        // now we go for the 2nd step, check for chord bonus (multiple notes at nearly the same time)
-        var chordNotes:Int = 0;
-        for (i in 1...p1Notes.length)
-        {
-            if (Math.abs(p1Notes[i].time - p1Notes[i - 1].time) < 15.0)
-                chordNotes++;
-        }
-
-        // up to 25% bonus for chord-heavy charts
-        final chordFactor:Float = 1.0 + (chordNotes / p1Notes.length) * 0.25;
-
-        // now for the 3rd step: jack factor! (same column hit twice quickly if u didnt know)
-        var jackNotes:Int = 0;
-        for (i in 1...p1Notes.length)
-        {
-            final gap:Float = p1Notes[i].time - p1Notes[i - 1].time;
-            if (p1Notes[i].data == p1Notes[i - 1].data && gap > 15.0 && gap < 250.0)
-                jackNotes++;
-        }
-
-        // up to +15% bonus for jack-heavy charts
-        final jackFactor:Float = 1.0 + (jackNotes / p1Notes.length) * 0.15;
-
-        // now the last step! map to 0-20 via tanh curve
-        final bpmFactor:Float = 1.0 + Math.max(0.0, (bpm - 120.0) / 120.0) * 0.20;
-        final adjustedNPS:Float = blendedNPS * chordFactor * jackFactor * bpmFactor;
-        final normalized:Float = Math.pow(adjustedNPS / 16.0, 2.0);
-        final e2x:Float = Math.exp(2.0 * normalized);
-
-        final rating:Float = 20.0 * (e2x - 1.0) / (e2x + 1.0);
-
-        return Std.int(Math.min(20, Math.max(0, Math.round(rating))));
-    }
-
-    /**
-     * Returns all notes of a specific type.
-     * @param notes
-     * @param type 
-     */
-    public static function getNotesByType(notes:Array<NoteStruct>, type:String):Array<NoteStruct>
-        return notes.filter(n -> n.type == type);
-
-    /**
-     * Returns all notes on a specific lane.
-     * @param notes 
-     * @param lane
-     */
-    public static function getNotesByLane(notes:Array<NoteStruct>, lane:String):Array<NoteStruct>
-        return notes.filter(n -> n.lane == lane);
-
-    /**
-     * Changes an array of notes to a specific type.
-     * @param notes 
-     * @param oldType 
-     * @param newType 
-     */
-    public static function changeNoteType(notes:Array<NoteStruct>, oldType:String, newType:String):Void
-        for (n in notes) if (n.type == oldType) n.type = newType;
-
-    /**
-     * Changes an array of notes to a specific lane.
-     * @param notes 
-     * @param fromLane 
-     * @param toLane 
-     */
-    public static function changeNoteLane(notes:Array<NoteStruct>, fromLane:String, toLane:String):Void
-        for (n in notes) if (n.lane == fromLane) n.lane = toLane;
-
-    public static function findCompanionFile(chartPath:String, suffix:String):Null<String>
-    {
-        #if !sys return null; #end
-
-        final dir = Path.directory(chartPath);
-        final name = Path.withoutExtension(Path.withoutDirectory(chartPath));
-
-        final candidates = [
-            '$dir/$name$suffix', '$dir/$name-$suffix', '$dir/$suffix',
-            '$dir/events$suffix', '$dir/meta$suffix'
-        ];
-
-        for (c in candidates)
-        {
-            final jsonPath = c.endsWith(".json") ? c : '$c.json';
-            if (Paths.exists(jsonPath)) return jsonPath;
-        }
-
-        if (FileSystem.exists(dir) && FileSystem.isDirectory(dir))
-        {
-            for (f in FileSystem.readDirectory(dir))
-                if (f.toLowerCase().contains(suffix.toLowerCase()) && f.endsWith(".json"))
-                    return Path.join([dir, f]);
-        }
-        
-        return null;
-    }
-
-    /**
-     * Converts a chart type to Moon Engine's chart type.
-     * 
-     * @param type       The chart type you're converting from
-     * @param path       The chart's path
-     * @param difficulty The chart's difficulty
-     * @param metaPath   Optional metadata path (for formats that use separate meta files)
-     */
-    public static function convert(type:String, path:String, difficulty:String, ?metaPath:String):ConvertResult
-    {
-        #if sys
-        // So first, we'll get the chart format and convert 'em to
-        // vslice, because vslice will be our main 'base' for converting.
-
-        final chart = switch (type)
-        {
-            case 'psych': new FNFVSlice().fromFormat(new FNFPsych().fromFile(path, null, difficulty));
-            case 'codename': new FNFVSlice().fromFormat(new FNFCodename().fromFile(path, metaPath, difficulty));
-            case 'legacy': new FNFVSlice().fromFormat(new FNFLegacy().fromFile(path, null, difficulty));
-            case 'osu': new FNFVSlice().fromFormat(new OsuMania().fromFile(path, null, difficulty));
-            case 'fps-plus': new FNFVSlice().fromFormat(new FNFFpsPlus().fromFile(path, null, difficulty));
-            case 'kade': new FNFVSlice().fromFormat(new FNFKade().fromFile(path, null, difficulty));
-            default: new FNFVSlice().fromFile(path, metaPath, difficulty);
-        };
-
-        final data = Json.parse(chart.stringify().data);
-        final metadata = Json.parse(chart.stringify().meta);
-
-        // Now we create variables for the converted chart and metadata.
-        // Metadata is now separate from the chart!
-        var convertedChart:ChartStruct = {notes: []};
-        var convertedMeta:MetadataStruct = null;
-        var convertedEvents:Array<EventStruct> = [];
-
-        // -- Convert notes --
-        if (Reflect.hasField(data.notes, difficulty))
-        {
-            final noteArray:Array<Dynamic> = Reflect.field(data.notes, difficulty);
-            for (note in noteArray)
-            {
-                convertedChart.notes.push({
-                    time: note.t,
-                    data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
-                    lane: (note.d > 3) ? 'opponent' : 'p1',
-                    type: (note.k == null || note.k == '') ? null : note.k,
-                    duration: note.l ?? 0.0,
-                    values: {}
-                });
-            }
-        }
-
-        convertedChart.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-
-        // -- Convert events --
-        final events:Array<Dynamic> = data.events;
-        for(event in events)
-        {
-            var convertedEvent:EventStruct = switch(event.e)
-            {
-                case 'FocusCamera': {
-                    tag: 'Move Camera',
-                    values: {
-                        character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player', 
-                        duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
-                        ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
-                        x: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
-                        y: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
-                    },
-                    lane: 0, time: event.t
-                };
-
-                case 'ZoomCamera': {
-                    tag: 'Set Zoom',
-                    values: {
-                        zoom: Std.parseFloat(event.v.zoom),
-                        duration: event?.v?.duration ?? 8,
-                        ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
-                        mode: event?.v?.mode ?? 'absolute',
-                    },
-                    lane:1, time: event.t                    
-                };
-
-                case 'SetCameraBop': {
-                    tag: 'Customized Pulse Timing',
-                    values: event.v,
-                    lane:2, time: event.t                    
-                };
-
-                case 'PlayAnimation': {
-                    tag: 'Play Character Animation',
-                    time: event.t,
-                    lane: 3,
-                    values: {
-                        anim:event.v.anim,
-                        target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',
-                        force: event?.v?.force ?? true,
-                        forceOverride: true,
-                        reversed: false,
-                        frame: 0
-                    }
-                };
-
-                case 'ScrollSpeed': {
-                    tag: 'Set Lane Scroll Speed',
-                    time: event.t,
-                    lane: 1,
-                    values: {
-                        duration: event.v.duration,
-                        strumline: event.v.strumline,
-                        ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
-                        scroll: event.v.scroll,
-                        absolute: event.v.absolute
-                    }
-                };
-                
-                default: {
-                    tag: event.e, values: event.v,
-                    time: event.t, lane: FlxG.random.int(0, 7)
-                };
-            }
-
-            convertedEvents.push(convertedEvent);
-        }
-
-        final tChanges = metadata.timeChanges;
-        
-        // Convert time signature/bpm changes
-        for (i in 0...tChanges.length)
-        {
-            // because the first time change is applied to the metadata instead
-            if(i != 0)
-            {
-                final event:EventStruct = {
-                    tag: 'Change Playback Settings',
-                    values: {
-                        bpm: tChanges[i].bpm,
-                        timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]
-                    },
-                    time: tChanges[i].t
-                };
-
-                convertedEvents.push(event);
-            }
-        }
-
-        convertedEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-
-        // -- Convert metadata (now separate from chart) --
-        final scrollSpd = (data.scrollSpeed != null)
-            ? resolveVal(data.scrollSpeed, difficulty, 2.0)
-            : 2.0;
-
-        convertedMeta = {
-            bpm: metadata.timeChanges[0].bpm,
-            timeSignature: [metadata.timeChanges[0]?.n ?? 4, metadata.timeChanges[0]?.d ?? 4],
-            scrollSpd: scrollSpd,
-            stage: metadata.playData.stage,
-            lanes: ["opponent", "p1"],
-            players: [metadata.playData.characters.player],
-            spectators: [metadata.playData.characters.girlfriend],
-            opponents: [metadata.playData.characters.opponent],
-            noteskin: 'v-slice',
-            hasCountdown: true,
-
-            displayName: metadata.songName,
-            album: metadata.playData.album,
-            artist: metadata.artist,
-            charter: metadata.charter,
-            preview: [metadata.playData.previewStart, metadata.playData.previewEnd],
-
-            generatedBy: metadata.generatedBy,
-            version: metadata.version
-        };
-
-        return {
-            chartJson: Json.stringify(convertedChart, "\t"),
-            eventsJson: Json.stringify(convertedEvents, "\t"),
-            metaJson: Json.stringify(convertedMeta, "\t"),
-        };
-        #else
-        throw 'Chart conversion is currently only available for Desktop.';
-        return null;
-        #end
-    }
+	/**
+	 * All the chart formats supported for converting.
+	 */
+	public static final SUPPORTED_FORMATS:Array<String> = [
+		// TODO: add other formats in here.
+		'legacy',
+		'psych',
+		'codename',
+		'v-slice',
+		'osu',
+		'kade',
+		'fps-plus'
+	];
+
+	/**
+	 * All of the chart content, except for the events.
+	 */
+	public var content:ChartStruct;
+
+	/**
+	 * All of the chart's events.
+	 */
+	public var events:Array<EventStruct>;
+
+	/**
+	 * The song's name. (not displayName!)
+	 */
+	public var song:String;
+
+	/**
+	 * The song's difficulty.
+	 */
+	public var difficulty:String;
+
+	/**
+	 * The song's mix.
+	 */
+	public var mix:String;
+
+	/**
+	 * Loads a chart from a path.
+	 *
+	 * @param song        The song's name. (e.g. satin panties)
+	 * @param difficulty  The song's difficulty. (e.g. hard)
+	 * @param mix         The song's mix. (e.g. bf)
+	 */
+	public function new(song:String, difficulty:String = 'hard', mix:String = 'bf')
+	{
+		this.song = song;
+		this.difficulty = difficulty;
+		this.mix = mix;
+
+		// Determines the file suffix from the Difficulty config.
+		final suffix = getDifficultySuffix(difficulty);
+		events = loadEventsWithSuffix(song, mix, suffix);
+
+		// Load Chart Content (notes + optional embedded meta) --
+		content = Paths.JSON('songs/$song/$mix/chart-$difficulty');
+		if (content == null)
+		{
+			trace('[CHART] Chart file not found: songs/$song/$mix/chart-$difficulty.json', "WARNING");
+			content = {
+				notes: []
+			};
+		}
+
+		if (content.notes == null) content.notes = [];
+
+		content.meta = loadMetadata(song, mix, suffix, difficulty, content.meta);
+		content.meta.hasCountdown ??= true;
+		content.meta.healthMultiplier ??= 1.0;
+
+		removeDuplicateNotes();
+	}
+
+	/**
+	 * Loads events for a song, trying the suffix-specific file first.
+	 */
+	private function loadEventsWithSuffix(song:String, mix:String, suffix:String):Array<EventStruct>
+	{
+		if (suffix != '' && Paths.exists('songs/$song/$mix/events$suffix.json')) return cast Paths.JSON('songs/$song/$mix/events$suffix') ?? [];
+
+		if (Paths.exists('songs/$song/$mix/events.json')) return cast Paths.JSON('songs/$song/$mix/events') ?? [];
+
+		return [];
+	}
+
+	/**
+	 * Loads and resolves metadata for a song.
+	 */
+	private function loadMetadata(song:String, mix:String, suffix:String, difficulty:String, embeddedMeta:MetadataStruct):MetadataStruct
+	{
+		var meta:Dynamic = embeddedMeta;
+
+		// Load base metadata
+		if (Paths.exists('songs/$song/$mix/meta.json'))
+		{
+			final baseMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta');
+			meta = mergeMetadata(meta, baseMeta);
+		}
+
+		// Load suffix-specific metadata
+		if (suffix != '' && Paths.exists('songs/$song/$mix/meta$suffix.json'))
+		{
+			final suffixMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta$suffix');
+			meta = mergeMetadata(meta, suffixMeta);
+		}
+
+		if (meta == null)
+		{
+			trace('[CHART] WARNING: No metadata found for $song/$mix/$difficulty, using defaults!', "WARNING");
+			meta = getDefaultMetadata();
+		}
+
+		return resolveMetadata(meta, difficulty);
+	}
+
+	/**
+	 * Resolves a metadata structure, expanding any per-difficulty map values
+	 * to their concrete values for the given difficulty.
+	 */
+	private function resolveMetadata(meta:Dynamic, difficulty:String):MetadataStruct
+	{
+		final resolved:MetadataStruct = {
+			bpm: resolveVal(meta.bpm, difficulty, 120.0),
+			timeSignature: resolveVal(meta.timeSignature, difficulty, [4, 4]),
+			scrollSpd: resolveVal(meta.scrollSpd, difficulty, 2.0),
+			stage: resolveVal(meta.stage, difficulty, 'stage'),
+			lanes: resolveVal(meta.lanes, difficulty, ["opponent", "p1"]),
+			players: resolveVal(meta.players, difficulty, ["bf"]),
+			spectators: resolveVal(meta.spectators, difficulty, ["gf"]),
+			opponents: resolveVal(meta.opponents, difficulty, ["dad"]),
+			noteskin: resolveVal(meta.noteskin, difficulty, 'v-slice'),
+			hasCountdown: resolveVal(meta.hasCountdown, difficulty, true),
+			displayName: resolveVal(meta.displayName, difficulty, song),
+			album: resolveVal(meta.album, difficulty, ''),
+			artist: resolveVal(meta.artist, difficulty, ''),
+			charter: resolveVal(meta.charter, difficulty, ''),
+			preview: cast resolveVal(meta.preview, difficulty, [0, 0]),
+			generatedBy: resolveVal(meta.generatedBy, difficulty, 'Moon Engine'),
+			version: resolveVal(meta.version, difficulty, '1.0.0'),
+		};
+
+		resolved.healthMultiplier = resolveVal(meta.healthMultiplier, difficulty, 1.0);
+		resolved.difficultyRating = resolveVal(meta.difficultyRating, difficulty, -1);
+
+		return resolved;
+	}
+
+	/**
+	 * Resolves a single value that might be a per-difficulty map.
+	 */
+	private static function resolveVal<T>(value:Dynamic, difficulty:String, defaultValue:T):T
+	{
+		if (value == null) return defaultValue;
+
+		// Check if it's a per-difficulty map...
+		if (Type.typeof(value) == TObject)
+		{
+			if (Reflect.hasField(value, difficulty))
+			{
+				final v = Reflect.field(value, difficulty);
+				if (v != null) return v;
+			}
+
+			if (Reflect.hasField(value, 'default'))
+			{
+				final v = Reflect.field(value, 'default');
+				if (v != null) return v;
+			}
+
+			return defaultValue;
+		}
+
+		return value;
+	}
+
+	/**
+	 * Deep-merges two metadata objects. Fields in `overrider` take priority.
+	 * Nested anonymous objects are merged recursively! Everything else is replaced.
+	 */
+	private static function mergeMetadata(base:Dynamic, overrider:Dynamic):Dynamic
+	{
+		if (base == null) return overrider;
+		if (overrider == null) return base;
+
+		final result:Dynamic = Reflect.copy(base);
+
+		for (field in Reflect.fields(overrider))
+		{
+			final overrideVal = Reflect.field(overrider, field);
+			final baseVal = Reflect.field(base, field);
+
+			// If both are anonymous objects, deep-merge them
+			if (Type.typeof(overrideVal) == TObject && Type.typeof(baseVal) == TObject) Reflect.setField(result, field, mergeMetadata(baseVal, overrideVal));
+			else
+				Reflect.setField(result, field, overrideVal);
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns a default MetadataStruct with sensible fallback values.
+	 */
+	private function getDefaultMetadata():MetadataStruct
+	{
+		return {
+			bpm: 120.0,
+			timeSignature: [4, 4],
+			scrollSpd: 2.0,
+			stage: 'stage',
+			lanes: ["opponent", "p1"],
+			players: ["bf"],
+			spectators: ["gf"],
+			opponents: ["dad"],
+			noteskin: 'v-slice',
+			hasCountdown: true,
+			displayName: song,
+			album: '',
+			artist: '',
+			charter: '',
+			preview: [0, 0],
+			generatedBy: 'Moon Engine',
+			version: '1.0.0',
+			healthMultiplier: 1.0,
+		};
+	}
+
+	/**
+	 * Gets the file suffix for a given difficulty from the SongLibrary.
+	 * @param difficulty The difficulty name (e.g. "erect")
+	 * @return The suffix string (e.g. "-erect") or empty string
+	 */
+	public static function getDifficultySuffix(difficulty:String):String
+	{
+		final diff = SongLibrary.getDifficulty(difficulty);
+		return diff?.suffix ?? '';
+	}
+
+	/**
+	 * Returns the difficulty rating for this chart.
+	 * Uses the manual override from metadata if set, otherwise calculates automatically.
+	 */
+	public function getDifficultyRating():Int
+	{
+		if (content.meta.difficultyRating != null && content.meta.difficultyRating >= 0) return content.meta.difficultyRating;
+		return calculateDifficultyRating(content.notes, content.meta.bpm);
+	}
+
+	/**
+	 * Removes duplicate notes from the chart content.
+	 * Notes are considered duplicates if they share the same time, data, and lane.
+	 */
+	private function removeDuplicateNotes():Void
+	{
+		if (content.notes == null || content.notes.length == 0) return;
+
+		var seen = new Map<String, Bool>();
+		var unique:Array<NoteStruct> = [];
+		var duplicatesFound:Int = 0;
+
+		for (note in content.notes)
+		{
+			final key = '${note.time}_${note.data}_${note.lane}';
+
+			if (!seen.exists(key))
+			{
+				seen.set(key, true);
+				unique.push(note);
+			}
+			else
+				duplicatesFound++;
+		}
+
+		content.notes = unique;
+
+		if (duplicatesFound > 0) trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
+	}
+
+	/**
+	 * Calculates a clean 0-20 difficulty rating based on NPS, chords, and jacks.
+	 * @param notes The array containing all notes.
+	 * @param bpm   The BPM value.
+	 */
+	public static function calculateDifficultyRating(notes:Array<NoteStruct>, bpm:Float):Int
+	{
+		if (notes == null || notes.length == 0) return 0;
+
+		var p1Notes:Array<NoteStruct> = [];
+		for (note in notes) if (note.lane == "p1") p1Notes.push(note);
+
+		if (p1Notes.length == 0) return 0;
+
+		p1Notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+		final songDuration:Float = p1Notes[p1Notes.length - 1].time - p1Notes[0].time;
+		if (songDuration <= 0) return 0;
+
+		// first step is to do some sliding 1-second window NPS analysis
+		final WINDOW_MS:Float = 1000.0;
+		var npsValues:Array<Float> = [];
+		var windowStart:Int = 0;
+
+		for (i in 0...p1Notes.length)
+		{
+			while (p1Notes[i].time - p1Notes[windowStart].time > WINDOW_MS)
+				windowStart++;
+
+			// normalize to per-second so units stay consistent
+			npsValues.push((i - windowStart + 1) * (1000.0 / WINDOW_MS));
+		}
+
+		npsValues.sort((a, b) -> a < b ? -1 : a > b ? 1 : 0);
+
+		final peakNPS:Float = npsValues[npsValues.length - 1];
+		final p90NPS:Float = npsValues[Std.int(npsValues.length * 0.90)];
+		var avgNPS:Float = 0.0;
+		for (v in npsValues) avgNPS += v;
+		avgNPS /= npsValues.length;
+
+		// peak and sustained matter more than average
+		final blendedNPS:Float = (peakNPS * 0.45) + (p90NPS * 0.45) + (avgNPS * 0.10);
+
+		// now we go for the 2nd step, check for chord bonus (multiple notes at nearly the same time)
+		var chordNotes:Int = 0;
+		for (i in 1...p1Notes.length)
+		{
+			if (Math.abs(p1Notes[i].time - p1Notes[i - 1].time) < 15.0) chordNotes++;
+		}
+
+		// up to 25% bonus for chord-heavy charts
+		final chordFactor:Float = 1.0 + (chordNotes / p1Notes.length) * 0.25;
+
+		// now for the 3rd step: jack factor! (same column hit twice quickly if u didnt know)
+		var jackNotes:Int = 0;
+		for (i in 1...p1Notes.length)
+		{
+			final gap:Float = p1Notes[i].time - p1Notes[i - 1].time;
+			if (p1Notes[i].data == p1Notes[i - 1].data && gap > 15.0 && gap < 250.0) jackNotes++;
+		}
+
+		// up to +15% bonus for jack-heavy charts
+		final jackFactor:Float = 1.0 + (jackNotes / p1Notes.length) * 0.15;
+
+		// now the last step! map to 0-20 via tanh curve
+		final bpmFactor:Float = 1.0 + Math.max(0.0, (bpm - 120.0) / 120.0) * 0.20;
+		final adjustedNPS:Float = blendedNPS * chordFactor * jackFactor * bpmFactor;
+		final normalized:Float = Math.pow(adjustedNPS / 16.0, 2.0);
+		final e2x:Float = Math.exp(2.0 * normalized);
+
+		final rating:Float = 20.0 * (e2x - 1.0) / (e2x + 1.0);
+
+		return Std.int(Math.min(20, Math.max(0, Math.round(rating))));
+	}
+
+	/**
+	 * Returns all notes of a specific type.
+	 * @param notes
+	 * @param type 
+	 */
+	public static function getNotesByType(notes:Array<NoteStruct>, type:String):Array<NoteStruct> return notes.filter(n -> n.type == type);
+
+	/**
+	 * Returns all notes on a specific lane.
+	 * @param notes 
+	 * @param lane
+	 */
+	public static function getNotesByLane(notes:Array<NoteStruct>, lane:String):Array<NoteStruct> return notes.filter(n -> n.lane == lane);
+
+	/**
+	 * Changes an array of notes to a specific type.
+	 * @param notes 
+	 * @param oldType 
+	 * @param newType 
+	 */
+	public static function changeNoteType(notes:Array<NoteStruct>, oldType:String, newType:String):Void for (n in notes) if (n.type == oldType)
+		n.type = newType;
+
+	/**
+	 * Changes an array of notes to a specific lane.
+	 * @param notes 
+	 * @param fromLane 
+	 * @param toLane 
+	 */
+	public static function changeNoteLane(notes:Array<NoteStruct>, fromLane:String, toLane:String):Void for (n in notes) if (n.lane == fromLane)
+		n.lane = toLane;
+
+	public static function findCompanionFile(chartPath:String, suffix:String):Null<String>
+	{
+		#if !sys return null; #end
+
+		final dir = Path.directory(chartPath);
+		final name = Path.withoutExtension(Path.withoutDirectory(chartPath));
+
+		final candidates = [
+			'$dir/$name$suffix',
+			'$dir/$name-$suffix',
+			'$dir/$suffix',
+			'$dir/events$suffix',
+			'$dir/meta$suffix'
+		];
+
+		for (c in candidates)
+		{
+			final jsonPath = c.endsWith(".json") ? c : '$c.json';
+			if (Paths.exists(jsonPath)) return jsonPath;
+		}
+
+		if (FileSystem.exists(dir) && FileSystem.isDirectory(dir))
+		{
+			for (f in FileSystem.readDirectory(dir)) if (f.toLowerCase().contains(suffix.toLowerCase()) && f.endsWith(".json")) return Path.join([dir, f]);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Converts a chart type to Moon Engine's chart type.
+	 * 
+	 * @param type       The chart type you're converting from
+	 * @param path       The chart's path
+	 * @param difficulty The chart's difficulty
+	 * @param metaPath   Optional metadata path (for formats that use separate meta files)
+	 */
+	public static function convert(type:String, path:String, difficulty:String, ?metaPath:String):ConvertResult
+	{
+		#if sys
+		// So first, we'll get the chart format and convert 'em to
+		// vslice, because vslice will be our main 'base' for converting.
+
+		final chart = switch (type)
+		{
+			case 'psych':
+				new FNFVSlice().fromFormat(new FNFPsych().fromFile(path, null, difficulty));
+			case 'codename':
+				new FNFVSlice().fromFormat(new FNFCodename().fromFile(path, metaPath, difficulty));
+			case 'legacy':
+				new FNFVSlice().fromFormat(new FNFLegacy().fromFile(path, null, difficulty));
+			case 'osu':
+				new FNFVSlice().fromFormat(new OsuMania().fromFile(path, null, difficulty));
+			case 'fps-plus':
+				new FNFVSlice().fromFormat(new FNFFpsPlus().fromFile(path, null, difficulty));
+			case 'kade':
+				new FNFVSlice().fromFormat(new FNFKade().fromFile(path, null, difficulty));
+			default:
+				new FNFVSlice().fromFile(path, metaPath, difficulty);
+		};
+
+		final data = Json.parse(chart.stringify().data);
+		final metadata = Json.parse(chart.stringify().meta);
+
+		// Now we create variables for the converted chart and metadata.
+		// Metadata is now separate from the chart!
+		var convertedChart:ChartStruct = {
+			notes: []
+		};
+		var convertedMeta:MetadataStruct = null;
+		var convertedEvents:Array<EventStruct> = [];
+
+		// -- Convert notes --
+		if (Reflect.hasField(data.notes, difficulty))
+		{
+			final noteArray:Array<Dynamic> = Reflect.field(data.notes, difficulty);
+			for (note in noteArray)
+			{
+				convertedChart.notes.push({
+					time: note.t,
+					data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
+					lane: (note.d > 3) ? 'opponent' : 'p1',
+					type: (note.k == null || note.k == '') ? null : note.k,
+					duration: note.l ?? 0.0,
+					values: {
+					}
+				});
+			}
+		}
+
+		convertedChart.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+		// -- Convert events --
+		final events:Array<Dynamic> = data.events;
+		for (event in events)
+		{
+			var convertedEvent:EventStruct = switch (event.e)
+			{
+				case 'FocusCamera':
+					{
+						tag: 'Move Camera',
+						values: {
+							character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player',
+							duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
+							ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
+							x: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
+							y: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
+						},
+						lane: 0,
+						time: event.t
+					};
+
+				case 'ZoomCamera':
+					{
+						tag: 'Set Zoom',
+						values: {
+							zoom: Std.parseFloat(event.v.zoom),
+							duration: event?.v?.duration ?? 8,
+							ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+							mode: event?.v?.mode ?? 'absolute',
+						},
+						lane: 1,
+						time: event.t
+					};
+
+				case 'SetCameraBop':
+					{
+						tag: 'Customized Pulse Timing',
+						values: event.v,
+						lane: 2,
+						time: event.t
+					};
+
+				case 'PlayAnimation':
+					{
+						tag: 'Play Character Animation',
+						time: event.t,
+						lane: 3,
+						values: {
+							anim: event.v.anim,
+							target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',
+							force: event?.v?.force ?? true,
+							forceOverride: true,
+							reversed: false,
+							frame: 0
+						}
+					};
+
+				case 'ScrollSpeed':
+					{
+						tag: 'Set Lane Scroll Speed',
+						time: event.t,
+						lane: 1,
+						values: {
+							duration: event.v.duration,
+							strumline: event.v.strumline,
+							ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+							scroll: event.v.scroll,
+							absolute: event.v.absolute
+						}
+					};
+
+				default:
+					{
+						tag: event.e,
+						values: event.v,
+						time: event.t,
+						lane: FlxG.random.int(0, 7)
+					};
+			}
+
+			convertedEvents.push(convertedEvent);
+		}
+
+		final tChanges = metadata.timeChanges;
+
+		// Convert time signature/bpm changes
+		for (i in 0...tChanges.length)
+		{
+			// because the first time change is applied to the metadata instead
+			if (i != 0)
+			{
+				final event:EventStruct = {
+					tag: 'Change Playback Settings',
+					values: {
+						bpm: tChanges[i].bpm,
+						timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]
+					},
+					time: tChanges[i].t
+				};
+
+				convertedEvents.push(event);
+			}
+		}
+
+		convertedEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+		// -- Convert metadata (now separate from chart) --
+		final scrollSpd = (data.scrollSpeed != null) ? resolveVal(data.scrollSpeed, difficulty, 2.0) : 2.0;
+
+		convertedMeta = {
+			bpm: metadata.timeChanges[0].bpm,
+			timeSignature: [
+				metadata.timeChanges[0]?.n ?? 4,
+				metadata.timeChanges[0]?.d ?? 4
+			],
+			scrollSpd: scrollSpd,
+			stage: metadata.playData.stage,
+			lanes: ["opponent", "p1"],
+			players: [metadata.playData.characters.player],
+			spectators: [metadata.playData.characters.girlfriend],
+			opponents: [metadata.playData.characters.opponent],
+			noteskin: 'v-slice',
+			hasCountdown: true,
+
+			displayName: metadata.songName,
+			album: metadata.playData.album,
+			artist: metadata.artist,
+			charter: metadata.charter,
+			preview: [
+				metadata.playData.previewStart,
+				metadata.playData.previewEnd
+			],
+
+			generatedBy: metadata.generatedBy,
+			version: metadata.version
+		};
+
+		return {
+			chartJson: Json.stringify(convertedChart, "\t"),
+			eventsJson: Json.stringify(convertedEvents, "\t"),
+			metaJson: Json.stringify(convertedMeta, "\t"),
+		};
+		#else
+		throw 'Chart conversion is currently only available for Desktop.';
+		return null;
+		#end
+	}
 }
 
 @:dox(hide)
 typedef ConvertResult =
 {
-    /**
-     * The chart JSON (notes + bookmarks only, no metadata).
-     */
-    var chartJson:String;
+	/**
+	 * The chart JSON (notes + bookmarks only, no metadata).
+	 */
+	var chartJson:String;
 
-    /**
-     * The events JSON.
-     */
-    var eventsJson:String;
+	/**
+	 * The events JSON.
+	 */
+	var eventsJson:String;
 
-    /**
-     * The metadata JSON.
-     */
-    var ?metaJson:String;
+	/**
+	 * The metadata JSON.
+	 */
+	var ?metaJson:String;
 };

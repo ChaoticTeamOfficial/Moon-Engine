@@ -145,10 +145,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 95
 		},
 		"tag": "Change Playback Settings",
@@ -156,10 +153,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 100
 		},
 		"tag": "Change Playback Settings",
@@ -179,10 +173,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 105
 		},
 		"tag": "Change Playback Settings",
@@ -349,10 +340,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 105
 		},
 		"tag": "Change Playback Settings",
@@ -360,10 +348,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 107.5
 		},
 		"tag": "Change Playback Settings",
@@ -371,10 +356,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 110
 		},
 		"tag": "Change Playback Settings",
@@ -382,10 +364,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 95
 		},
 		"tag": "Change Playback Settings",
@@ -636,10 +615,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 132
 		},
 		"tag": "Change Playback Settings",
@@ -689,10 +665,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 132
 		},
 		"tag": "Change Playback Settings",
@@ -700,10 +673,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 119.5
 		},
 		"tag": "Change Playback Settings",
@@ -711,10 +681,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 107
 		},
 		"tag": "Change Playback Settings",
@@ -722,10 +689,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 132
 		},
 		"tag": "Change Playback Settings",
@@ -733,10 +697,7 @@
 	},
 	{
 		"values": {
-			"timeSignature": [
-				4,
-				4
-			],
+			"timeSignature": [4, 4],
 			"bpm": 120
 		},
 		"tag": "Change Playback Settings",

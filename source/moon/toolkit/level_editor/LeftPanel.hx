@@ -12,313 +12,319 @@ using StringTools;
 
 class LeftPanel extends FlxSpriteGroup
 {
-    var panelBehind:MoonSprite;
-    var bg:MoonSprite;
+	var panelBehind:MoonSprite;
+	var bg:MoonSprite;
+	var headerBox:HBox;
+	var headerTitle:Label;
+	var backButton:Button;
+	var buttons:Array<IconButton> = [];
+	var buttonMap:Map<String, IconButton> = [];
+	var keybinds:Array<
+		{modifiers:Array<String>, key:String, action:String}> = [];
+	var pageMap:Map<String, PanelPage> = [];
+	var pageStack:Array<PanelPage> = [];
+	var editor:LevelEditor = null;
 
-    var headerBox:HBox;
-    var headerTitle:Label;
-    var backButton:Button;
+	public var panelOpen:Bool = false;
+	public var curPanel:String = '';
 
-    var buttons:Array<IconButton> = [];
-    var buttonMap:Map<String, IconButton> = [];
-    var keybinds:Array<{modifiers:Array<String>, key:String, action:String}> = [];
+	static inline final PANEL_W:Int = 360;
+	static inline final HEADER_H:Int = 40;
 
-    var pageMap:Map<String, PanelPage> = [];
+	public function new(editor:LevelEditor, ?list:Array<String>)
+	{
+		super();
 
-    var pageStack:Array<PanelPage> = [];
+		this.editor = editor;
 
-    var editor:LevelEditor = null;
-    public var panelOpen:Bool = false;
-    public var curPanel:String = '';
+		panelBehind = new MoonSprite().makeGraphic(PANEL_W, FlxG.height, 0xFF0b0b0b);
+		add(panelBehind);
+		panelBehind.x = -panelBehind.width;
 
-    static inline final PANEL_W:Int  = 360;
-    static inline final HEADER_H:Int = 40;
+		bg = new MoonSprite().makeGraphic(80, FlxG.height, 0xFF181818);
+		add(bg);
+		bg.active = panelBehind.active = false;
 
-    public function new(editor:LevelEditor, ?list:Array<String>)
-    {
-        super();
+		_buildHeader();
 
-        this.editor = editor;
+		// Build icon buttons
+		if (list == null || list.length <= 0)
+		{
+			list = [
+				'menu',
+				'separator',
+				'joystick',
+				'videoSettings',
+				'separator',
+				'editDocument',
+				'openFolder',
+				'lightbulb',
+				'space-196',
+				'settings',
+				'openDoor',
+				'space-399999',
+				'saveL'
+			];
+		}
 
-        panelBehind = new MoonSprite().makeGraphic(PANEL_W, FlxG.height, 0xFF0b0b0b);
-        add(panelBehind);
-        panelBehind.x = -panelBehind.width;
+		var curY:Float = 24;
+		final gap:Float = 10;
 
-        bg = new MoonSprite().makeGraphic(80, FlxG.height, 0xFF181818);
-        add(bg);
-        bg.active = panelBehind.active = false;
+		for (i in 0...list.length)
+		{
+			if (list[i].startsWith('space-')) curY += Std.parseFloat(list[i].split('-')[1]);
+			else if (list[i] == 'separator')
+			{
+				var separator = new MoonSprite().makeGraphic(60, 1, FlxColor.WHITE);
+				separator.setPosition(bg.x + bg.width / 2 - separator.width / 2, curY);
+				separator.active = false;
+				separator.alpha = 0.15;
+				add(separator);
 
-        _buildHeader();
+				curY += 2 + gap;
+			}
+			else
+			{
+				var thing = new IconButton(0, 0, 40, 40, list[i]);
+				thing.invertShader = editor?.invertColors ?? new InvertColor();
+				add(thing);
+				thing.setPosition(bg.x + bg.width / 2 - thing.width / 2, curY);
 
-        // Build icon buttons
-        if (list == null || list.length <= 0)
-        {
-            list = [
-                'menu', 'separator', 'joystick', 'videoSettings', 'separator',
-                'editDocument', 'openFolder', 'lightbulb', 'space-196',
-                'settings', 'openDoor', 'space-399999', 'saveL'
-            ];
-        }
+				thing.callback = () -> selectButton(thing, list[i]);
+				buttons.push(thing);
+				buttonMap.set(list[i], thing);
 
-        var curY:Float = 24;
-        final gap:Float = 10;
+				curY += 48 + gap;
+			}
+		}
 
-        for (i in 0...list.length)
-        {
-            if (list[i].startsWith('space-'))
-                curY += Std.parseFloat(list[i].split('-')[1]);
-            else if (list[i] == 'separator')
-            {
-                var separator = new MoonSprite().makeGraphic(60, 1, FlxColor.WHITE);
-                separator.setPosition(bg.x + bg.width / 2 - separator.width / 2, curY);
-                separator.active = false;
-                separator.alpha = 0.15;
-                add(separator);
+		panelOpen = false;
 
-                curY += 2 + gap;
-            }
-            else
-            {
-                var thing = new IconButton(0, 0, 40, 40, list[i]);
-                thing.invertShader = editor?.invertColors ?? new InvertColor();
-                add(thing);
-                thing.setPosition(bg.x + bg.width / 2 - thing.width / 2, curY);
+		keybinds = [
+			{
+				modifiers: ["CONTROL"],
+				key: "O",
+				action: "openFolder"
+			},
+			{
+				modifiers: ["CONTROL"],
+				key: "S",
+				action: "saveL"
+			}
+		];
 
-                thing.callback = () -> selectButton(thing, list[i]);
-                buttons.push(thing);
-                buttonMap.set(list[i], thing);
+		registerPage('menu', new MainPage());
+	}
 
-                curY += 48 + gap;
-            }
-        }
+	public function registerPage(buttonName:String, page:PanelPage):Void
+	{
+		page.panel = this;
+		pageMap.set(buttonName, page);
+	}
 
-        panelOpen = false;
+	public function push(page:PanelPage):Void
+	{
+		if (pageStack.length > 0) pageStack[pageStack.length - 1].hide();
 
-        keybinds = [
-            {modifiers: ["CONTROL"], key: "O", action: "openFolder"},
-            {modifiers: ["CONTROL"], key: "S", action: "saveL"}
-        ];
+		page.panel = this;
+		pageStack.push(page);
+		_showTopPage();
+		_refreshHeader();
+	}
 
-        registerPage('menu', new MainPage());
-    }
+	public function pop():Void
+	{
+		if (pageStack.length == 0) return;
 
-    public function registerPage(buttonName:String, page:PanelPage):Void
-    {
-        page.panel = this;
-        pageMap.set(buttonName, page);
-    }
+		final top = pageStack.pop();
+		top.hide();
 
-    public function push(page:PanelPage):Void
-    {
-        if (pageStack.length > 0)
-            pageStack[pageStack.length - 1].hide();
+		if (pageStack.length > 0)
+		{
+			_showTopPage();
+			_refreshHeader();
+		}
+		else
+			close();
+	}
 
-        page.panel = this;
-        pageStack.push(page);
-        _showTopPage();
-        _refreshHeader();
-    }
+	public function selectButton(selected:IconButton, name:String):Void
+	{
+		for (btn in buttons) if (btn != selected) btn.isPressed = false;
 
-    public function pop():Void
-    {
-        if (pageStack.length == 0) return;
+		switch (name)
+		{
+			case 'menu', 'layers', 'designServices':
+				_openPageForButton(name);
 
-        final top = pageStack.pop();
-        top.hide();
+			case 'openFolder':
+				new FlxTimer().start(0.1, _ -> selected.isPressed = false);
 
-        if (pageStack.length > 0)
-        {
-            _showTopPage();
-            _refreshHeader();
-        }
-        else
-            close();
-    }
+				if (editor != null)
+				{
+					editor.sfx('popupSMALL', true);
+					System.openFile(System.applicationDirectory + Paths.getPath('songs/${editor.song}/${editor.mix}'));
+				}
+				else
+				{
+					Paths.playSFX('toolkit/general/popupSMALL.wav', false);
+					System.openFile('${System.applicationDirectory}assets/stages/stage');
+				}
 
-    public function selectButton(selected:IconButton, name:String):Void
-    {
-        for (btn in buttons)
-            if (btn != selected)
-                btn.isPressed = false;
+			case 'settings':
+				if (editor != null)
+				{
+					editor.playback.state = PAUSE;
+					editor.sustainLoopOpp.pause();
+					editor.sustainLoopP1.pause();
 
-        switch (name)
-        {
-            case 'menu', 'layers', 'designServices':
-                _openPageForButton(name);
+					var stt = new Settings();
+					stt.camera = editor.camFRONT;
+					FlxG.state.openSubState(stt);
+				}
 
-            case 'openFolder':
-                new FlxTimer().start(0.1, _ -> selected.isPressed = false);
+			case 'saveL':
+				if (editor != null) editor.saveLevel();
+		}
+	}
 
-                if (editor != null)
-                {
-                    editor.sfx('popupSMALL', true);
-                    System.openFile(System.applicationDirectory + Paths.getPath('songs/${editor.song}/${editor.mix}'));
-                }
-                else
-                {
-                    Paths.playSFX('toolkit/general/popupSMALL.wav', false);
-                    System.openFile('${System.applicationDirectory}assets/stages/stage');
-                }
+	public function close():Void
+	{
+		for (page in pageStack) page.hide();
+		pageStack = [];
 
-            case 'settings':
-                if(editor != null)
-                {
-                    editor.playback.state = PAUSE;
-                    editor.sustainLoopOpp.pause();
-                    editor.sustainLoopP1.pause();
+		for (btn in buttons) btn.isPressed = false;
 
-                    var stt = new Settings();
-                    stt.camera = editor.camFRONT;
-                    FlxG.state.openSubState(stt);
-                }
+		panelOpen = false;
+		curPanel = '';
 
-            case 'saveL':
-                if (editor != null)
-                    editor.saveLevel();
-        }
-    }
+		headerBox.visible = false;
+	}
 
-    public function close():Void
-    {
-        for (page in pageStack)
-            page.hide();
-        pageStack = [];
+	override public function update(elapsed:Float):Void
+	{
+		super.update(elapsed);
 
-        for (btn in buttons)
-            btn.isPressed = false;
+		if (editor != null) editor.allowEditing = !panelOpen;
 
-        panelOpen = false;
-        curPanel  = '';
+		if (panelOpen && curPanel != '' && pageStack.length == 0)
+		{
+			final btn = buttonMap.get(curPanel);
+			if (btn != null && !btn.isPressed) close();
+		}
 
-        headerBox.visible = false;
-    }
+		panelBehind.x = FlxMath.lerp(panelBehind.x, panelOpen ? bg.x + bg.width : -panelBehind.width, 0.2);
 
-    override public function update(elapsed:Float):Void
-    {
-        super.update(elapsed);
+		_positionHeader();
 
-        if (editor != null) editor.allowEditing = !panelOpen;
+		for (kb in keybinds)
+		{
+			var modsPressed:Bool = true;
+			for (mod in kb.modifiers)
+			{
+				if (!Reflect.getProperty(FlxG.keys.pressed, mod))
+				{
+					modsPressed = false;
+					break;
+				}
+			}
 
-        if (panelOpen && curPanel != '' && pageStack.length == 0)
-        {
-            final btn = buttonMap.get(curPanel);
-            if (btn != null && !btn.isPressed)
-                close();
-        }
+			if (modsPressed && Reflect.getProperty(FlxG.keys.justPressed, kb.key))
+			{
+				final btn = buttonMap.get(kb.action);
+				if (btn != null) selectButton(btn, kb.action);
+			}
+		}
 
-        panelBehind.x = FlxMath.lerp(panelBehind.x, panelOpen ? bg.x + bg.width : -panelBehind.width, 0.2);
+		if (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this, this.camera)) close();
+	}
 
-        _positionHeader();
+	function _buildHeader():Void
+	{
+		headerBox = new HBox();
+		headerBox.styleString = "background-color: #111111; border: none; padding: 4px; spacing: 6px; vertical-align: center;";
+		headerBox.height = HEADER_H;
+		headerBox.visible = false;
 
-        for (kb in keybinds)
-        {
-            var modsPressed:Bool = true;
-            for (mod in kb.modifiers)
-            {
-                if (!Reflect.getProperty(FlxG.keys.pressed, mod))
-                {
-                    modsPressed = false;
-                    break;
-                }
-            }
+		backButton = new Button();
+		backButton.text = '‹';
+		backButton.width = 28;
+		backButton.height = 28;
+		backButton.styleString = "font-size: 18px;";
+		backButton.onClick = _ -> pop();
+		headerBox.addComponent(backButton);
 
-            if (modsPressed && Reflect.getProperty(FlxG.keys.justPressed, kb.key))
-            {
-                final btn = buttonMap.get(kb.action);
-                if (btn != null) selectButton(btn, kb.action);
-            }
-        }
+		headerTitle = new Label();
+		headerTitle.text = '';
+		headerTitle.styleString = "font-size: 13px; color: #cccccc; vertical-align: center;";
+		headerBox.addComponent(headerTitle);
 
-        if (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this, this.camera))
-            close();
-    }
+		Screen.instance.addComponent(headerBox);
+	}
 
-    function _buildHeader():Void
-    {
-        headerBox = new HBox();
-        headerBox.styleString = "background-color: #111111; border: none; padding: 4px; spacing: 6px; vertical-align: center;";
-        headerBox.height = HEADER_H;
-        headerBox.visible = false;
+	function _positionHeader():Void
+	{
+		final px = panelBehind.x;
+		headerBox.left = px;
+		headerBox.top = 0;
+		headerBox.width = PANEL_W;
 
-        backButton = new Button();
-        backButton.text = '‹';
-        backButton.width = 28;
-        backButton.height = 28;
-        backButton.styleString = "font-size: 18px;";
-        backButton.onClick = _ -> pop();
-        headerBox.addComponent(backButton);
+		for (page in pageStack)
+		{
+			if (page.root != null && page.root.visible)
+			{
+				page.root.left = px;
+				page.root.top = HEADER_H;
+				page.root.width = PANEL_W;
+				page.root.height = FlxG.height - HEADER_H;
+				page.content.width = PANEL_W;
+			}
+		}
+	}
 
-        headerTitle = new Label();
-        headerTitle.text = '';
-        headerTitle.styleString = "font-size: 13px; color: #cccccc; vertical-align: center;";
-        headerBox.addComponent(headerTitle);
+	function _refreshHeader():Void
+	{
+		if (pageStack.length == 0)
+		{
+			headerBox.visible = false;
+			return;
+		}
 
-        Screen.instance.addComponent(headerBox);
-    }
+		headerBox.visible = true;
+		headerTitle.text = pageStack[pageStack.length - 1].title;
+		backButton.visible = (pageStack.length > 1);
+	}
 
-    function _positionHeader():Void
-    {
-        final px = panelBehind.x;
-        headerBox.left = px;
-        headerBox.top = 0;
-        headerBox.width = PANEL_W;
+	function _showTopPage():Void
+	{
+		if (pageStack.length == 0) return;
+		final top = pageStack[pageStack.length - 1];
+		final px = panelBehind.x;
+		top.show(px, HEADER_H, PANEL_W, FlxG.height - HEADER_H);
+	}
 
-        for (page in pageStack)
-        {
-            if (page.root != null && page.root.visible)
-            {
-                page.root.left = px;
-                page.root.top = HEADER_H;
-                page.root.width  = PANEL_W;
-                page.root.height = FlxG.height - HEADER_H;
-                page.content.width = PANEL_W;
-            }
-        }
-    }
+	function _openPageForButton(name:String):Void
+	{
+		if (panelOpen && curPanel == name)
+		{
+			close();
+			return;
+		}
 
-    function _refreshHeader():Void
-    {
-        if (pageStack.length == 0)
-        {
-            headerBox.visible = false;
-            return;
-        }
+		for (page in pageStack) page.hide();
+		pageStack = [];
 
-        headerBox.visible = true;
-        headerTitle.text = pageStack[pageStack.length - 1].title;
-        backButton.visible = (pageStack.length > 1);
-    }
+		curPanel = name;
+		panelOpen = true;
 
-    function _showTopPage():Void
-    {
-        if (pageStack.length == 0) return;
-        final top = pageStack[pageStack.length - 1];
-        final px  = panelBehind.x;
-        top.show(px, HEADER_H, PANEL_W, FlxG.height - HEADER_H);
-    }
+		final page = pageMap.get(name);
+		if (page != null)
+		{
+			page.panel = this;
+			pageStack.push(page);
+			_showTopPage();
+		}
 
-    function _openPageForButton(name:String):Void
-    {
-        if (panelOpen && curPanel == name)
-        {
-            close();
-            return;
-        }
-
-        for (page in pageStack) page.hide();
-        pageStack = [];
-
-        curPanel = name;
-        panelOpen = true;
-
-        final page = pageMap.get(name);
-        if (page != null)
-        {
-            page.panel = this;
-            pageStack.push(page);
-            _showTopPage();
-        }
-        
-        _refreshHeader();
-    }
+		_refreshHeader();
+	}
 }

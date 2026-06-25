@@ -1,0 +1,50 @@
+{
+	"editor.insertSpaces": false,
+	"prettier.configPath": ".prettierrc.json",
+
+	"[haxe]": {
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "nadako.vshaxe"
+	},
+	"[json]": {
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+  "[xml]": {
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "redhat.vscode-xml"
+  },
+
+  "xml.format.enabled": true,
+  "xml.format.legacy": false,
+  "xml.format.emptyElements": "collapse",
+  "xml.preferences.quoteStyle": "double",
+  "xml.format.enforceQuoteStyle": "preferred",
+  "xml.format.preserveAttributeLineBreaks": false,
+  "xml.format.preservedNewlines": 0,
+  "xml.format.splitAttributes": "preserve",
+  "xml.format.joinCDATALines": true,
+  "xml.format.preserveEmptyContent": false,
+  "xml.format.joinCommentLines": false,
+  "xml.format.joinContentLines": false,
+  "xml.format.spaceBeforeEmptyCloseTag": true,
+  "xml.format.xsiSchemaLocationSplit": "onPair",
+  "xml.format.splitAttributesIndentSize": 2,
+  "xml.format.closingBracketNewLine": false,
+  "xml.format.preserveSpace": [
+    "xsl:text",
+    "xsl:comment",
+    "xsl:processing-instruction",
+    "literallayout",
+    "programlisting",
+    "screen",
+    "synopsis",
+    "pre",
+    "xd:pre"
+  ],
+  "xml.format.maxLineWidth": 0,
+  "xml.format.grammarAwareFormatting": true,
+}

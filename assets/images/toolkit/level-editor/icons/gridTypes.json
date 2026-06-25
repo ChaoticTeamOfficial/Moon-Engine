@@ -1,58 +1,58 @@
 {
 	"frames": [
 		{
-            "name": "type-notes-normal-0",
-            "pos": [0, 0],
-            "size": [88, 88]
-        },
+			"name": "type-notes-normal-0",
+			"pos": [0, 0],
+			"size": [88, 88]
+		},
 		{
-            "name": "type-notes-click-0",
-            "pos": [88, 0],
-            "size": [88, 88]
-        },
-		
+			"name": "type-notes-click-0",
+			"pos": [88, 0],
+			"size": [88, 88]
+		},
+
 		{
-            "name": "type-sounds-normal-0",
-            "pos": [176, 0],
-            "size": [88, 88]
-        },
+			"name": "type-sounds-normal-0",
+			"pos": [176, 0],
+			"size": [88, 88]
+		},
 		{
-            "name": "type-sounds-click-0",
-            "pos": [264, 0],
-            "size": [88, 88]
-        },
-		
+			"name": "type-sounds-click-0",
+			"pos": [264, 0],
+			"size": [88, 88]
+		},
+
 		{
-            "name": "type-visuals-normal-0",
-            "pos": [0, 88],
-            "size": [88, 88]
-        },
+			"name": "type-visuals-normal-0",
+			"pos": [0, 88],
+			"size": [88, 88]
+		},
 		{
-            "name": "type-visuals-click-0",
-            "pos": [88, 88],
-            "size": [88, 88]
-        },
-		
+			"name": "type-visuals-click-0",
+			"pos": [88, 88],
+			"size": [88, 88]
+		},
+
 		{
-            "name": "type-characters-normal-0",
-            "pos": [176, 88],
-            "size": [88, 88]
-        },
+			"name": "type-characters-normal-0",
+			"pos": [176, 88],
+			"size": [88, 88]
+		},
 		{
-            "name": "type-characters-click-0",
-            "pos": [264, 88],
-            "size": [88, 88]
-        },
-		
+			"name": "type-characters-click-0",
+			"pos": [264, 88],
+			"size": [88, 88]
+		},
+
 		{
-            "name": "type-gimmicks-normal-0",
-            "pos": [0, 176],
-            "size": [88, 88]
-        },
+			"name": "type-gimmicks-normal-0",
+			"pos": [0, 176],
+			"size": [88, 88]
+		},
 		{
-            "name": "type-gimmicks-click-0",
-            "pos": [88, 176],
-            "size": [88, 88]
-        }
+			"name": "type-gimmicks-click-0",
+			"pos": [88, 176],
+			"size": [88, 88]
+		}
 	]
 }

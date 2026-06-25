@@ -7,6 +7,7 @@ class DefaultVideoUI extends FlxGroup
 	var bottomB:MoonSprite = new MoonSprite(0, FlxG.height + 64).makeGraphic(FlxG.width + 69, 232, FlxColor.BLACK);
 
 	public var paused(default, set):Bool = false;
+
 	public function new()
 	{
 		super();
@@ -31,11 +32,15 @@ class DefaultVideoUI extends FlxGroup
 	}
 
 	var bgTwn:FlxTween;
-	@:noCompletion public function set_paused(paused:Bool):Bool
+
+	@:noCompletion
+	public function set_paused(paused:Bool):Bool
 	{
 		this.paused = paused;
 		TweenUtils.cancelTwn(bgTwn);
-		bgTwn = FlxTween.tween(bg, {alpha: paused ? 0.8 : 0}, 0.08);
+		bgTwn = FlxTween.tween(bg, {
+			alpha: paused ? 0.8 : 0
+		}, 0.08);
 
 		return this.paused;
 	}

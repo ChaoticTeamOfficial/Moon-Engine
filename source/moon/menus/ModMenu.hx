@@ -4,8 +4,8 @@ package moon.menus;
 import sys.FileSystem;
 #end
 
-//TODOS:
-//Check why this class causes a memory leak when putting a mod up or down in priority
+// TODOS:
+// Check why this class causes a memory leak when putting a mod up or down in priority
 // documment this class too ofc
 // and lastly uhhh polish it up.
 
@@ -26,73 +26,77 @@ class ModObj extends FlxSpriteGroup
 
 	public function new(mod:Mod)
 	{
-	    super();
-	    this.mod = mod;
+		super();
+		this.mod = mod;
 
-	    highlight = new MoonSprite(0, -8);
-	    highlight.makeGraphic(Std.int(WIDTH), 64, FlxColor.TRANSPARENT);
-	    highlight.visible = highlight.active = false;
-	    add(highlight);
+		highlight = new MoonSprite(0, -8);
+		highlight.makeGraphic(Std.int(WIDTH), 64, FlxColor.TRANSPARENT);
+		highlight.visible = highlight.active = false;
+		add(highlight);
 
-	    icon = new MoonSprite(16, 8);
-	    final iconPath = mod.getAsset("icon.png");
-	    #if sys
-	    if (iconPath != null && FileSystem.exists(iconPath))
-	    {
-	        final bmp = openfl.display.BitmapData.fromFile(iconPath);
-	        if (bmp != null) icon.loadGraphic(flixel.graphics.FlxGraphic.fromBitmapData(bmp, false, iconPath, false));
-	        else icon.makeGraphic(32, 32, FlxColor.WHITE);
-	    }
-	    else icon.makeGraphic(32, 32, FlxColor.WHITE);
-	    #else
-	    icon.makeGraphic(32, 32, FlxColor.WHITE);
-	    #end
-	    icon.setGraphicSize(32, 32);
-	    icon.updateHitbox();
-	    icon.active = icon.antialiasing = false;
-	    add(icon);
+		icon = new MoonSprite(16, 8);
+		final iconPath = mod.getAsset("icon.png");
+		#if sys
+		if (iconPath != null && FileSystem.exists(iconPath))
+		{
+			final bmp = openfl.display.BitmapData.fromFile(iconPath);
+			if (bmp != null) icon.loadGraphic(flixel.graphics.FlxGraphic.fromBitmapData(bmp, false, iconPath, false));
+			else
+				icon.makeGraphic(32, 32, FlxColor.WHITE);
+		}
+		else
+			icon.makeGraphic(32, 32, FlxColor.WHITE);
+		#else
+		icon.makeGraphic(32, 32, FlxColor.WHITE);
+		#end
+		icon.setGraphicSize(32, 32);
+		icon.updateHitbox();
+		icon.active = icon.antialiasing = false;
+		add(icon);
 
-	    nameTxt = new ScrollingText(64, 5, WIDTH - 85, (mod.metadata.name != null && mod.metadata.name != "None") ? mod.metadata.name : mod.name, 32);
-	    nameTxt.textField.setFormat(Paths.font('phantomuff/full.ttf'), 20, FlxColor.WHITE, LEFT);
-	    nameTxt.textField.antialiasing = true;
-	    add(nameTxt);
+		nameTxt = new ScrollingText(64, 5, WIDTH - 85, (mod.metadata.name != null && mod.metadata.name != "None") ? mod.metadata.name : mod.name, 32);
+		nameTxt.textField.setFormat(Paths.font('phantomuff/full.ttf'), 20, FlxColor.WHITE, LEFT);
+		nameTxt.textField.antialiasing = true;
+		add(nameTxt);
 
-	    var authorStr = "BY: ";
-	    authorStr += (mod.metadata.team != null && mod.metadata.team.length > 0) ? mod.metadata.team.map(t -> t.name).join(", ") : "UNKNOWN";
+		var authorStr = "BY: ";
+		authorStr += (mod.metadata.team != null && mod.metadata.team.length > 0) ? mod.metadata.team.map(t -> t.name).join(", ") : "UNKNOWN";
 
-	    byTxt = new ScrollingText(nameTxt.x, 26, WIDTH - 85, authorStr.toUpperCase(), 19);
-	    byTxt.textField.setFormat(Paths.font('CRIKEY SQUATS REGULAR.TTF'), 20, FlxColor.GRAY, LEFT);
-	    byTxt.textField.antialiasing = true;
-	    add(byTxt);
+		byTxt = new ScrollingText(nameTxt.x, 26, WIDTH - 85, authorStr.toUpperCase(), 19);
+		byTxt.textField.setFormat(Paths.font('CRIKEY SQUATS REGULAR.TTF'), 20, FlxColor.GRAY, LEFT);
+		byTxt.textField.antialiasing = true;
+		add(byTxt);
 
-	    FlxSpriteUtil.drawRoundRect(highlight, 0, 0, highlight.width, highlight.height, 16, 16, FlxColor.TRANSPARENT, {thickness: 4, color: FlxColor.WHITE});
+		FlxSpriteUtil.drawRoundRect(highlight, 0, 0, highlight.width, highlight.height, 16, 16, FlxColor.TRANSPARENT, {
+			thickness: 4,
+			color: FlxColor.WHITE
+		});
 
-	    dragging = false;
+		dragging = false;
 	}
 
-	private function refreshColor():Void
-	    nameTxt.textField.color = (isActive ? 0xFFFFA500 : FlxColor.WHITE);
+	private function refreshColor():Void nameTxt.textField.color = (isActive ? 0xFFFFA500 : FlxColor.WHITE);
 
 	public function set_selected(sel:Bool):Bool
 	{
-	    selected = sel;
-	    highlight.visible = sel;
-	    refreshColor();
-	    return sel;
+		selected = sel;
+		highlight.visible = sel;
+		refreshColor();
+		return sel;
 	}
 
 	public function set_dragging(drag:Bool):Bool
 	{
-	    dragging = drag;
-	    refreshColor();
-	    return drag;
+		dragging = drag;
+		refreshColor();
+		return drag;
 	}
 
 	public function set_isActive(ia:Bool):Bool
 	{
-	    isActive = ia;
-	    refreshColor();
-	    return ia;
+		isActive = ia;
+		refreshColor();
+		return ia;
 	}
 }
 
@@ -102,10 +106,8 @@ class ModMenu extends FlxTransitionableState
 	private var activeList:Array<Mod> = [];
 	private var inactiveObjs:Array<ModObj> = [];
 	private var activeObjs:Array<ModObj> = [];
-
 	private var currentSide:Int = 0;
 	private var selectedIndex:Array<Int> = [0, 0];
-
 	private var confirmingActivate:Bool = false;
 	private var reorderingActive:Bool = false;
 	private var scroll:Array<Float> = [0, 0];
@@ -118,20 +120,25 @@ class ModMenu extends FlxTransitionableState
 		var bg = new MoonSprite().loadGraphic(Paths.image('menus/background'));
 		add(bg);
 		bg.alpha = 0.0001;
-		FlxTween.tween(bg, {alpha: 1}, 0.9);
+		FlxTween.tween(bg, {
+			alpha: 1
+		}, 0.9);
 
 		var mid = new MoonSprite().makeGraphic(5, FlxG.height - 38, FlxColor.WHITE);
 		add(mid);
 		mid.screenCenter();
 		mid.scale.set(1, 0);
-		FlxTween.tween(mid.scale, {y: 1}, 1, {ease: FlxEase.expoOut});
+		FlxTween.tween(mid.scale, {
+			y: 1
+		}, 1, {
+			ease: FlxEase.expoOut
+		});
 
 		Mods.scanMods();
 		refreshLists();
 
 		var colors = [FlxColor.BLACK];
-		for (i in 0...4)
-			colors.push(FlxColor.TRANSPARENT);
+		for (i in 0...4) colors.push(FlxColor.TRANSPARENT);
 		colors.push(FlxColor.BLACK);
 		add(FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, colors));
 
@@ -144,7 +151,9 @@ class ModMenu extends FlxTransitionableState
 			t.antialiasing = true;
 			t.y = 32;
 			t.alpha = 0.00001;
-			FlxTween.tween(t, {alpha: 1}, 1);
+			FlxTween.tween(t, {
+				alpha: 1
+			}, 1);
 			t.x = (FlxG.width * (i == 0 ? 0.25 : 0.75)) - (t.width / 2);
 		}
 	}
@@ -157,9 +166,7 @@ class ModMenu extends FlxTransitionableState
 		activeObjs = [];
 
 		inactiveList = [];
-		for (m in Mods.allMods)
-			if (!Mods.config.enabled.contains(m.name))
-				inactiveList.push(m);
+		for (m in Mods.allMods) if (!Mods.config.enabled.contains(m.name)) inactiveList.push(m);
 
 		activeList = Mods.activeMods;
 
@@ -214,17 +221,14 @@ class ModMenu extends FlxTransitionableState
 		for (obj in inactiveObjs) obj.selected = false;
 		for (obj in activeObjs) obj.selected = false;
 
-		if (currentSide == 0 && inactiveObjs.length > 0)
-			inactiveObjs[selectedIndex[0]].selected = true;
-		else if (currentSide == 1 && activeObjs.length > 0)
-			activeObjs[selectedIndex[1]].selected = true;
+		if (currentSide == 0 && inactiveObjs.length > 0) inactiveObjs[selectedIndex[0]].selected = true;
+		else if (currentSide == 1 && activeObjs.length > 0) activeObjs[selectedIndex[1]].selected = true;
 	}
 
 	private function updateDraggingVisuals():Void
 	{
 		final active = reorderingActive && currentSide == 1;
-		for (i in 0...activeObjs.length)
-			activeObjs[i].dragging = active && i == selectedIndex[1];
+		for (i in 0...activeObjs.length) activeObjs[i].dragging = active && i == selectedIndex[1];
 	}
 
 	private function changeSelection(dir:Int):Void
@@ -258,45 +262,49 @@ class ModMenu extends FlxTransitionableState
 
 		if (reorderingActive)
 		{
-		    if (MoonInput.justPressed(UI_UP) || MoonInput.justPressed(UI_DOWN))
-		    {
-		        final up = MoonInput.justPressed(UI_UP);
-		        Paths.playSFX('menus/mods/mod${up ? "Higher" : "Lower"}.wav');
-		        final newIdx = selectedIndex[1] + (up ? -1 : 1);
-		        if (newIdx >= 0 && newIdx < activeList.length)
-		        {
-		            swapActiveOrder(selectedIndex[1], newIdx);
-		            selectedIndex[1] = newIdx;
-		            refreshLists();
-		            updateSelectionVisuals();
-		            updateScrollTarget(currentSide);
-		        }
-		    }
+			if (MoonInput.justPressed(UI_UP) || MoonInput.justPressed(UI_DOWN))
+			{
+				final up = MoonInput.justPressed(UI_UP);
+				Paths.playSFX('menus/mods/mod${up ? "Higher" : "Lower"}.wav');
+				final newIdx = selectedIndex[1] + (up ? -1 : 1);
+				if (newIdx >= 0 && newIdx < activeList.length)
+				{
+					swapActiveOrder(selectedIndex[1], newIdx);
+					selectedIndex[1] = newIdx;
+					refreshLists();
+					updateSelectionVisuals();
+					updateScrollTarget(currentSide);
+				}
+			}
 
-		    if (MoonInput.justPressed(UI_LEFT))
-		    {
-		        final modName = activeList[selectedIndex[1]].name;
-		        Mods.toggleMod(modName);
-		        refreshLists();
+			if (MoonInput.justPressed(UI_LEFT))
+			{
+				final modName = activeList[selectedIndex[1]].name;
+				Mods.toggleMod(modName);
+				refreshLists();
 
-		        var newIndex = -1;
-		        for (i in 0...inactiveList.length)
-		            if (inactiveList[i].name == modName) { newIndex = i; break; }
+				var newIndex = -1;
+				for (i in 0...inactiveList.length) if (inactiveList[i].name == modName)
+				{
+					newIndex = i;
+					break;
+				}
 
-		        if (newIndex != -1)
-		        {
-		            currentSide = 0;
-		            selectedIndex[0] = newIndex;
-		            reorderingActive = false;
-		            confirmingActivate = true;
-		        }
-		        else reorderingActive = false;
+				if (newIndex != -1)
+				{
+					currentSide = 0;
+					selectedIndex[0] = newIndex;
+					reorderingActive = false;
+					confirmingActivate = true;
+				}
+				else
+					reorderingActive = false;
 
-		        updateSelectionVisuals();
-		        updateScrollTarget(currentSide);
+				updateSelectionVisuals();
+				updateScrollTarget(currentSide);
 
-		        Paths.playSFX('menus/mods/modInactive.wav');
-		    }
+				Paths.playSFX('menus/mods/modInactive.wav');
+			}
 		}
 		else if (confirmingActivate)
 		{
@@ -309,8 +317,11 @@ class ModMenu extends FlxTransitionableState
 				refreshLists();
 
 				var newIndex = -1;
-				for (i in 0...activeList.length)
-					if (activeList[i].name == mod.name) { newIndex = i; break; }
+				for (i in 0...activeList.length) if (activeList[i].name == mod.name)
+				{
+					newIndex = i;
+					break;
+				}
 
 				if (newIndex != -1)
 				{
@@ -319,7 +330,8 @@ class ModMenu extends FlxTransitionableState
 					confirmingActivate = false;
 					reorderingActive = true;
 				}
-				else confirmingActivate = false;
+				else
+					confirmingActivate = false;
 
 				updateSelectionVisuals();
 				updateScrollTarget(currentSide);
@@ -352,8 +364,7 @@ class ModMenu extends FlxTransitionableState
 				updateScrollTarget(currentSide);
 			}
 
-			if (MoonInput.justPressed(UI_UP) || MoonInput.justPressed(UI_DOWN))
-				changeSelection(MoonInput.justPressed(UI_UP) ? -1 : 1);
+			if (MoonInput.justPressed(UI_UP) || MoonInput.justPressed(UI_DOWN)) changeSelection(MoonInput.justPressed(UI_UP) ? -1 : 1);
 
 			if (MoonInput.justPressed(ACCEPT))
 			{
@@ -364,7 +375,7 @@ class ModMenu extends FlxTransitionableState
 				Paths.playSFX('menus/mods/modHold.wav');
 			}
 
-			if(MoonInput.justPressed(BACK)) FlxG.switchState(() -> new MainMenu());
+			if (MoonInput.justPressed(BACK)) FlxG.switchState(() -> new MainMenu());
 		}
 
 		updateDraggingVisuals();
@@ -372,12 +383,12 @@ class ModMenu extends FlxTransitionableState
 
 	private function swapActiveOrder(idxA:Int, idxB:Int):Void
 	{
-	    final posA = Mods.loadOrder.indexOf(activeList[idxA].name);
-	    final posB = Mods.loadOrder.indexOf(activeList[idxB].name);
-	    final tmp = Mods.loadOrder[posA];
-	    Mods.loadOrder[posA] = Mods.loadOrder[posB];
-	    Mods.loadOrder[posB] = tmp;
-	    Mods.rebuildActiveMods();
-	    Mods.saveConfig();
+		final posA = Mods.loadOrder.indexOf(activeList[idxA].name);
+		final posB = Mods.loadOrder.indexOf(activeList[idxB].name);
+		final tmp = Mods.loadOrder[posA];
+		Mods.loadOrder[posA] = Mods.loadOrder[posB];
+		Mods.loadOrder[posB] = tmp;
+		Mods.rebuildActiveMods();
+		Mods.saveConfig();
 	}
 }
