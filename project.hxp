@@ -130,8 +130,9 @@ class Project extends HXProject
 		setHaxedef("message.reporting", "pretty");
 		setHaxedef("FM_ENGINE", "MOON");
 		setHaxedef("FM_ENGINE_VERSION", "1.0.0");
-		
+
 		// We set haxeflags here!
+		addHaxeFlag('-dce no');
 		addHaxeMacro('modchart.backend.macros.Macro.includeFiles()');
 	}
 
