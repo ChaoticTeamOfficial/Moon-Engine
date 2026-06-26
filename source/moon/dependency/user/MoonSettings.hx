@@ -292,6 +292,9 @@ class MoonSettings
 
 		final f = colorFilters.get(callSetting('Colorblind Filters'));
 		FlxG.game.setFilters(f != null ? [f] : []);
+
+		// update the in-game shaders.
+		if (MoonShaderHandler.instances.length > 0) for (instance in MoonShaderHandler.instances) instance.refresh();
 	}
 
 	static function updateWindow():Void

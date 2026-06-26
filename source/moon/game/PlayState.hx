@@ -23,6 +23,7 @@ import openfl.filters.ShaderFilter;
 
 using StringTools;
 
+// TODO: HAVE A LIST OF PRE-SET SHADERS THAT CAN BE USED FROM THE EDITOR.
 class PlayState extends FlxTransitionableState
 {
 	/**
@@ -576,6 +577,9 @@ class PlayState extends FlxTransitionableState
 		instance = null;
 		PlayField.instance = null;
 		Countdown.onStart.removeAll();
+
+		// clears all shader instances.
+		if (MoonShaderHandler.instances.length > 0) for (instance in MoonShaderHandler.instances) instance.destroy();
 
 		if (toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else

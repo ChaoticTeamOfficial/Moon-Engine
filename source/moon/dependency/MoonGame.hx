@@ -23,6 +23,7 @@ class MoonGame extends FlxGame
 		Tilemap.addAtlas('mainUI', 'toolkit/ui/uiStuff');
 		FlxSprite.defaultAntialiasing = true;
 
+		// TODO: uhhh look into this? haha???
 		#if !android
 		Mods.scanMods();
 		#end
