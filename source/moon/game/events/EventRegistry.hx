@@ -2,6 +2,7 @@ package moon.game.events;
 
 import moon.dependency.scripting.MoonEvent;
 import moon.game.PlayState;
+import moon.game.events.visuals.WindowEvents;
 
 /**
  * Registry for managing hardcoded event types.
@@ -24,6 +25,12 @@ class EventRegistry
 			'Set Camera Mode' => SetCameraMode,
 			'Pulse Camera' => PulseCameraEvent,
 			'Show Subtitle' => ShowSubtitleEvent,
+
+			// window events (maybe will be a separate category?)
+			'Window Movement' => WindowMoveEvent,
+			'Window Resize' => WindowResizeEvent,
+			'Window Opacity' => WindowOpacityEvent,
+			'Window Properties' => WindowPropertiesEvent,
 
 			// CHARACTERS
 			'Play Character Animation' => PlayCharacterAnimEvent,
