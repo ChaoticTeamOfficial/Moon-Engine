@@ -63,11 +63,6 @@
 			"url": "https://github.com/haxeui/haxeui-flixel"
 		},
 		{
-			"name": "hscript-iris",
-			"type": "haxelib",
-			"version": "1.1.3"
-		},
-		{
 			"name": "hxcpp",
 			"type": "git",
 			"dir": null,

@@ -59,7 +59,7 @@ class MoonEvent extends MoonScript
 	{
 		if (valid)
 		{
-			return (exists('editorData')) ? code.get('editorData') : {
+			return exists('editorData') ? get('editorData') : {
 				name: 'Unknown',
 				description: 'Unknown event data.',
 				category: VISUALS
@@ -79,7 +79,7 @@ class MoonEvent extends MoonScript
 
 	public function retrieveEditorFields():Array<EventFieldDef>
 	{
-		if (valid) return (exists('editorFields')) ? code.get('editorFields') : [];
+		if (valid) return exists('editorFields') ? get('editorFields') : [];
 		else if (EventRegistry.isHardcoded(tag)) return EventRegistry.getEditorFields(tag);
 
 		return [];
@@ -90,7 +90,7 @@ class MoonEvent extends MoonScript
 	{
 		PRESET_VARIABLES = vars;
 
-		if (valid) for (variableName => variableValue in PRESET_VARIABLES) code.set(variableName, variableValue);
+		if (valid) for (variableName => variableValue in PRESET_VARIABLES) set(variableName, variableValue);
 
 		return vars;
 	}

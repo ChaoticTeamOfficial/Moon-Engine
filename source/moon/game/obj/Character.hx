@@ -167,7 +167,7 @@ class Character extends MoonSprite
 		origin.set(width / 2, height);
 
 		script.load('characters/${this.character}/script.hx');
-		if (script.code != null)
+		if (script.initialized)
 		{
 			script.set('char', this);
 			if (script.exists('onCharCreate')) script.call('onCharCreate');
@@ -182,7 +182,7 @@ class Character extends MoonSprite
 	{
 		super.destroy();
 
-		if (script.code != null) Global.unregisterScript('script-${this.character}-${script?.get("scriptID") ?? 0}');
+		if (script.initialized) Global.unregisterScript('script-${this.character}-${script?.get("scriptID") ?? 0}');
 
 		conductor = null;
 	}
