@@ -1,15 +1,16 @@
 package moon.game.obj.dialogue.effects;
 
 /**
- * Randomly offsets position each frame.
+ * Randomly shakes characters each frame.
  */
 class ShakeEffect extends TextEffect
 {
+	public function new(values:Dynamic) super(values);
+
 	override public function applyDynamic(sprite:FlxText, elapsed:Float, globalTime:Float, localTime:Float):Void
 	{
-		final intensity = getValue("intensity", 1.0, 0);
-
-		sprite.x += FlxG.random.float(-intensity, intensity);
-		sprite.y += FlxG.random.float(-intensity, intensity);
+		final intensity:Float = getValue("intensity", 3.0, 0);
+		sprite.x += (Math.random() * 2 - 1) * intensity;
+		sprite.y += (Math.random() * 2 - 1) * intensity;
 	}
 }

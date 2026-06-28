@@ -162,6 +162,8 @@ class TestState extends FlxState
 				duration: 5
 			}
 		});
+
+		testParser();
 	}
 
 	var vinyl:MoonSprite;
@@ -233,7 +235,7 @@ class TestState extends FlxState
 		box.visible = true;
 		box.show();
 
-		FlxG.sound.playMusic(Paths.sound('bittersweet sunset/luna/Inst.ogg', 'songs'));
+		FlxG.sound.playMusic(Paths.sound('dadbattle/bf/Inst-erect.ogg', 'songs'));
 	}
 
 	override public function update(elapsed:Float)

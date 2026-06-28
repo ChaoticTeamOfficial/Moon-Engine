@@ -47,12 +47,6 @@ class DialogueBox extends FlxSpriteGroup
 	private var typer:TextTyper;
 	private var nameplate:FlxText;
 
-	/**
-	 * Creates the Dialogue Box.
-	 * @param x X Position.
-	 * @param y Y Position.
-	 * @param skin The dialogue box skin.
-	 */
 	public function new(x:Float = 0, y:Float = 0, skin:String = 'default', dialoguePath:String)
 	{
 		super(x, y);
@@ -60,7 +54,6 @@ class DialogueBox extends FlxSpriteGroup
 		portraitsGrp.setPosition(x, y);
 
 		data = Dialogue.getDialogue(dialoguePath);
-		// trace(data);
 
 		for (dialogue in data.lines)
 		{
@@ -75,8 +68,6 @@ class DialogueBox extends FlxSpriteGroup
 			}
 		}
 
-		// trace(characters);
-
 		box = new MoonSprite().loadGraphic(Paths.image('ingame/dialogue-box/$skin/box'));
 		add(box);
 
@@ -87,6 +78,8 @@ class DialogueBox extends FlxSpriteGroup
 		typer.lineHeight = 30;
 		typer.lineWidth = box.width - typer.x - typer.defaultSize;
 		typer.spacing = -3;
+
+		typer.typingAnimation = FADE;
 		add(typer);
 
 		for (a => c in chars)
@@ -97,11 +90,10 @@ class DialogueBox extends FlxSpriteGroup
 			});
 		}
 
-		nameplate = new FlxText(64, 0, 0, 'Dummy');
+		nameplate = new FlxText(64, 0, 0, '');
 		nameplate.setFormat(Paths.font('CRIKEY SQUATS REGULAR.TTF'), 48, FlxColor.WHITE);
 		add(nameplate);
 		nameplate.y = -nameplate.height + 48;
-		nameplate.text = '';
 
 		this.visible = false;
 	}
@@ -129,10 +121,15 @@ class DialogueBox extends FlxSpriteGroup
 		final line = data.lines[index];
 		final char = chars.get(line.character);
 
-		// TODO: make this better...
 		final schema:Map<String, Array<String>> = [
 			"wave" => ["intensity", "frequency", "delay"],
 			"shake" => ["intensity"],
+			"bounce" => ["height", "duration", "stiffness"],
+			"jitter" => ["intensity", "frequency"],
+			"fadein" => ["duration"],
+			"rainbow" => ["speed", "spread"],
+			"shadow" => ["color", "size"],
+			"outline" => ["color", "size"],
 			"size" => ["size"],
 			"color" => ["color"],
 			"font" => ["path"]
@@ -144,6 +141,7 @@ class DialogueBox extends FlxSpriteGroup
 			line?.color[1] ?? 255,
 			line?.color[2] ?? 255
 		) : (char != null) ? char.getColor() : 0xFFFFFFFF;
+
 		box.color = colorr;
 
 		// TODO: Make box and typer default properties softcoded by a json!
@@ -156,9 +154,7 @@ class DialogueBox extends FlxSpriteGroup
 		typer.antialiasing = true;
 		typer.resetTyper();
 
-		// typer.onType.addOnce(()->{
-		for (ye in typer.members) if (Std.isOfType(ye, FlxText)) cast(ye, FlxText).setBorderStyle(SHADOW, colorr, 2);
-		// });
+		// for (ye in typer.members) if (Std.isOfType(ye, FlxText)) cast(ye, FlxText).setBorderStyle(SHADOW, colorr, 2);
 
 		for (name => charac in chars)
 		{
@@ -173,6 +169,5 @@ class DialogueBox extends FlxSpriteGroup
 			char.visible = true;
 			char.doAnim(line.anim ?? NONE);
 		}
-		// trace(char.animation.getNameList());
 	}
 }

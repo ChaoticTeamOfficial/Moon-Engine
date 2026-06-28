@@ -22,7 +22,7 @@ class Constants
 	static final SONGDATA_SAVE_BIND:String = 'MoonEngine-SongData';
 	static final ACHIEVEMENTS_SAVE_BIND:String = 'MoonEngine-Achievements';
 	static inline final FALLBACK_LANG:String = 'en-US';
-	static final INITIAL_STATE:Class<FlxState> = Title;
+	static final INITIAL_STATE:Class<FlxState> = TestState;
 	/// ------- MENUS RELATED CONSTANTS
 	// - Title
 

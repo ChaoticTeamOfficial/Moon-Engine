@@ -60,7 +60,7 @@ class Portrait extends MoonSprite
 		// trace(data.animations);
 		if (!Paths.exists('characters/$char/dialogue/portraits.png'))
 		{
-			trace('Portraits for "$char" does not exist!', "ERROR");
+			trace('[PORTRAIT] Portraits for "$char" does not exist!', "ERROR");
 			strID = 'noAnim';
 			return;
 		}
