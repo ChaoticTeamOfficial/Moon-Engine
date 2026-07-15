@@ -29,6 +29,10 @@ class MoonScriptedState extends FlxState
 		super();
 		script.load('data/states/$stateName.hx');
 		script.set('state', this);
+		script.set('add', this.add);
+		script.set('remove', this.remove);
+		script.set('insert', this.insert);
+		script.set('bgColor', this.bgColor);
 		this.stateName = stateName;
 	}
 

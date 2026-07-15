@@ -10,17 +10,17 @@ function onCreate()
 	trace('I got created!');
 
 	var squishey = new MoonSprite().loadGraphic(Paths.image('oi'));
-	state.add(squishey);
+	add(squishey);
 	squishey.scale.x = 4;
 
 	veryCoolImg = new MoonSprite().loadGraphic(Paths.image('jerma'));
-	state.add(veryCoolImg);
+	add(veryCoolImg);
 	veryCoolImg.screenCenter();
 
 	var welcome = new FlxText();
 	welcome.setFormat(Paths.font('ARI-W9500-DISPLAY.TTF'), 48);
 	welcome.text = 'I love haxeing my moon engine';
-	state.add(welcome);
+	add(welcome);
 	welcome.screenCenter();
 	welcome.y += 64;
 
