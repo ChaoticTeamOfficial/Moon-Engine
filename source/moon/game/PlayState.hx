@@ -317,7 +317,7 @@ class PlayState extends FlxTransitionableState
 
 		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
 
-		if (FlxG.keys.justPressed.NINE) FlxG.switchState(() -> new ChartConvert());
+		// if (FlxG.keys.justPressed.NINE) FlxG.switchState(() -> new ChartConvert());
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			Global.clearScriptList();

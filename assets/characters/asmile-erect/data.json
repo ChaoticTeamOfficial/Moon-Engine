@@ -4,7 +4,9 @@
 	"flipX": false,
 	"camOffsets": [219, -120],
 	"extraOffsets": [-64, -200],
-	"healthbarColors": [210, 210, 3],
+	"icon": {
+		"color": [210, 210, 3]
+	},
 	"danceFrequency": 2,
 	"animations": [
 		{ "name": "idle-0", "prefix": "idle", "x": 0, "y": 0, "fps": 24 },

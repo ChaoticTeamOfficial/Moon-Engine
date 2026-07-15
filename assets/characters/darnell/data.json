@@ -1,7 +1,9 @@
 {
 	"camOffsets": [-64, -196],
 	"extraOffsets": [96, -120],
-	"healthbarColors": [115, 94, 176],
+	"icon": {
+		"color": [115, 94, 176]
+	},
 	"type": "atlas",
 	"animations": [
 		{

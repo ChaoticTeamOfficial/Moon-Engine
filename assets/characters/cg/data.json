@@ -3,7 +3,9 @@
 	"scale": 1,
 	"flipX": false,
 	"camOffsets": [210, -60],
-	"healthbarColors": [69, 85, 200],
+	"icon": {
+		"color": [175, 102, 206]
+	},
 	"danceFrequency": 2,
 	"animations": [
 		{

@@ -91,7 +91,7 @@ class HealthBar extends FlxSpriteGroup
 
 		playerIcon = new HealthIcon();
 		playerIcon.scale.set(iconScale, iconScale);
-		playerIcon.flipX = true;
+		playerIcon.baseFlipX = true;
 		playerIcon.y = bar.y - (playerIcon.height * 0.5);
 		playerIcon.updateHitbox();
 
@@ -136,8 +136,8 @@ class HealthBar extends FlxSpriteGroup
 					});
 				case 1:
 					for (ico in [oppIcon, playerIcon]) FlxTween.tween(ico.scale, {
-						x: iconScale,
-						y: iconScale
+						x: iconScale + ico.extraScale,
+						y: iconScale + ico.extraScale
 					}, conductor.crochet / 1000, {
 						ease: FlxEase.backOut
 					});
@@ -170,11 +170,13 @@ class HealthBar extends FlxSpriteGroup
 		if (!transitioning)
 		{
 			final scaleSpeed = elapsed * 18;
-			oppIcon.scale.x = oppIcon.scale.y = FlxMath.lerp(oppIcon.scale.x, iconScale, scaleSpeed);
-			playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale, scaleSpeed);
+			oppIcon.scale.x = oppIcon.scale.y = FlxMath.lerp(oppIcon.scale.x, iconScale + oppIcon.extraScale, scaleSpeed);
+			playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale + playerIcon.extraScale, scaleSpeed);
 		}
 
 		updateBarPos();
+
+		if (FlxG.keys.justPressed.NINE) playerIcon.useOldIcon = !playerIcon.useOldIcon;
 	}
 
 	public function updateBarPos(instant:Bool = false)
@@ -217,29 +219,30 @@ class HealthBar extends FlxSpriteGroup
 		oppIcon.alpha = playerIcon.alpha = (MoonSettings.callSetting('Icons') == 'At Healthbar') ? bar.alpha : 1;
 
 		oppIcon.visible = playerIcon.visible = (MoonSettings.callSetting('Icons') != 'Off');
+
+		barBG.screenCenter(X);
+		bar.screenCenter(X);
 	}
 
 	public function updateBarStats()
 	{
 		playerIcon.icon = player;
 		oppIcon.icon = opponent;
-
-		playerIcon.antialiasing = getData(player)?.antialiasing ?? true;
-		oppIcon.antialiasing = getData(opponent)?.antialiasing ?? true;
 	}
 
 	public function bump()
 	{
 		if (transitioning) return;
 
-		oppIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
-		playerIcon.scale.set(iconScale + 0.15, iconScale + 0.15);
+		oppIcon.scale.set(iconScale + oppIcon.extraScale + 0.15, iconScale + oppIcon.extraScale + 0.15);
+		playerIcon.scale.set(iconScale + playerIcon.extraScale + 0.15, iconScale + playerIcon.extraScale + 0.15);
 	}
 
 	public function getRGBData(character:String)
 	{
+		// TODO: jarvis, this broke again
 		final data:Character.CharacterData = getData(character);
-		final c = (data != null) ? data.healthbarColors : [80, 80, 80];
+		final c = data?.icon?.color ?? [80, 80, 80];
 		return FlxColor.fromRGB(c[0], c[1], c[2]);
 	}
 

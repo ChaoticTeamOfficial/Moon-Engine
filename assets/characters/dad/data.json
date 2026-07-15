@@ -4,7 +4,9 @@
 	"flipX": false,
 	"camOffsets": [280, -100],
 	"extraOffsets": [0, -364],
-	"healthbarColors": [175, 102, 206],
+	"icon": {
+		"color": [175, 102, 206]
+	},
 	"danceFrequency": 2,
 	"animations": [
 		{

@@ -44,7 +44,7 @@ class Portrait extends MoonSprite
 				playType: rs?.playType ?? 'order',
 				pitchIntensity: rs?.pitchIntensity ?? 0.03
 			},
-			color: dataInfo?.color ?? chardata?.healthbarColors ?? [255, 255, 255],
+			color: dataInfo?.color ?? chardata?.icon.color ?? [255, 255, 255],
 			antialiasing: dataInfo?.antialiasing ?? true,
 			position: dataInfo?.position ?? [],
 			animations: dataInfo?.animations ?? []

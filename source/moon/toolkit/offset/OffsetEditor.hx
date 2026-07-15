@@ -464,9 +464,9 @@ class OffsetEditor extends FlxState
 		var hbRow = new HBox();
 		hbRow.width = vbox.width;
 		hbRow.styleString = 'spacing: 4px;';
-		hbColorRField = _smallNumber(0, 255, 1, char?.data?.healthbarColors[0] ?? 80);
-		hbColorGField = _smallNumber(0, 255, 1, char?.data?.healthbarColors[1] ?? 80);
-		hbColorBField = _smallNumber(0, 255, 1, char?.data?.healthbarColors[2] ?? 80);
+		hbColorRField = _smallNumber(0, 255, 1, char?.data?.icon.color[0] ?? 80);
+		hbColorGField = _smallNumber(0, 255, 1, char?.data?.icon.color[1] ?? 80);
+		hbColorBField = _smallNumber(0, 255, 1, char?.data?.icon.color[2] ?? 80);
 		hbRow.addComponent(hbColorRField);
 		hbRow.addComponent(hbColorGField);
 		hbRow.addComponent(hbColorBField);
@@ -711,7 +711,7 @@ class OffsetEditor extends FlxState
 		d.flipX = flipXToggle?.selected ?? d.flipX;
 		d.camOffsets = [camOffsetXField?.value ?? 0, camOffsetYField?.value ?? 0];
 		d.extraOffsets = [extraOffsetXField?.value ?? 0, extraOffsetYField?.value ?? 0];
-		d.healthbarColors = [
+		d.icon.color = [
 			Std.int(hbColorRField?.value ?? 80),
 			Std.int(hbColorGField?.value ?? 80),
 			Std.int(hbColorBField?.value ?? 80)
@@ -773,9 +773,9 @@ class OffsetEditor extends FlxState
 		if (camOffsetYField != null) camOffsetYField.value = d?.camOffsets[1] ?? 0;
 		if (extraOffsetXField != null) extraOffsetXField.value = d?.extraOffsets[0] ?? 0;
 		if (extraOffsetYField != null) extraOffsetYField.value = d?.extraOffsets[1] ?? 0;
-		if (hbColorRField != null) hbColorRField.value = d?.healthbarColors[0] ?? 80;
-		if (hbColorGField != null) hbColorGField.value = d?.healthbarColors[1] ?? 80;
-		if (hbColorBField != null) hbColorBField.value = d?.healthbarColors[2] ?? 80;
+		if (hbColorRField != null) hbColorRField.value = d?.icon.color[0] ?? 80;
+		if (hbColorGField != null) hbColorGField.value = d?.icon.color[1] ?? 80;
+		if (hbColorBField != null) hbColorBField.value = d?.icon.color[2] ?? 80;
 		if (danceFreqField != null) danceFreqField.value = d?.danceFrequency ?? 2;
 		if (holdDurField != null) holdDurField.value = d?.holdDuration ?? 8;
 		if (gameoverColorField != null) gameoverColorField.text = d?.gameoverColorScheme ?? '0xFF4924FF';

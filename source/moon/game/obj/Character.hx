@@ -6,6 +6,17 @@ import moon.dependency.scripting.*;
 
 using StringTools;
 
+typedef HealthIconData =
+{
+	var ?icon:String;
+	var ?old:String;
+	var ?scale:Float;
+	var ?color:Array<Int>;
+	var ?antialiasing:Bool;
+	var ?flipX:Bool;
+	var ?flipY:Bool;
+}
+
 typedef CharacterData =
 {
 	var ?antialiasing:Bool;
@@ -16,7 +27,7 @@ typedef CharacterData =
 	var ?flipX:Bool;
 	var ?camOffsets:Array<Float>;
 	var ?extraOffsets:Array<Float>;
-	var ?healthbarColors:Array<Int>;
+	var ?icon:HealthIconData;
 	var ?danceFrequency:Int;
 	var ?holdDuration:Int;
 	var ?gameoverColorScheme:String;
