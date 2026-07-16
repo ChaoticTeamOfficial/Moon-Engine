@@ -15,6 +15,7 @@ class MoonGame extends FlxGame
 
 		FlxG.signals.preStateCreate.add(_ ->
 		{
+			SongLibrary.destroy();
 			if (!AssetManager.skipNextCleanup) AssetManager.clearUnused();
 
 			AssetManager.skipNextCleanup = false;
