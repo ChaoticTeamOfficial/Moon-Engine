@@ -280,7 +280,7 @@ class FreeplaySongSelector extends FlxGroup
 
 		for (song in songList)
 		{
-			final songData = SongData.retrieveData(song.song, song.difficulty, song.mix);
+			final songData = SongData.retrieveData(song);
 			if (songData != null)
 			{
 				final rank = Timings.getRank(songData.accuracy).rank;
@@ -534,7 +534,7 @@ class FreeplaySongSelector extends FlxGroup
 	function updateItemSelection(index:Int, songIdx:Int, item:FreeplaySongItem, relIdx:Int):Void
 	{
 		final song = songList[songIdx];
-		final scoreData = SongData.retrieveData(song.song, song.difficulty, song.mix);
+		final scoreData = SongData.retrieveData(song);
 
 		item.setSelected(relIdx == 0, scoreData?.score ?? -1, scoreData?.accuracy ?? -1);
 		item.bg.alpha = (relIdx == 0) ? 0.9 : 0;

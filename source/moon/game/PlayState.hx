@@ -492,7 +492,8 @@ class PlayState extends FlxTransitionableState
 		final stat = playField.inputHandlers.get('p1').stats;
 
 		var saved:Bool = false;
-		if (VALID_SCORE) saved = SongData.saveData(songData.song, songData.difficulty, songData.mix, stat.score, stat.misses, stat.accuracy);
+		final data = SongData.saveData(songData, stat.score, stat.misses, stat.accuracy);
+		if (VALID_SCORE) saved = data.contains('score') || data.contains('new');
 
 		// saves replay stuff
 		final p1Handler = playField.inputHandlers.get('p1');

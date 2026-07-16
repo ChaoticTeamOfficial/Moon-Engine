@@ -4,7 +4,7 @@
 	"flipX": false,
 	"camOffsets": [-169, -135],
 	"icon": {
-		"color": [49, 176, 209],
+		"color": [49, 176, 209]
 	},
 	"extraOffsets": [0, 0],
 	"danceFrequency": 2,

@@ -150,7 +150,7 @@ class PauseScreen extends FlxSubState
 
 		regenItems(DEFAULT_ITEMS);
 
-		final sData = SongData.retrieveData(pf.song, pf.difficulty, pf.mix);
+		final sData = SongData.retrieveData(PlayState.songData);
 		bestGroup = new BestScoreGroup(meta.players[0], Std.int(pausedL.width) - 96, sData);
 		add(bestGroup);
 		bestGroup.x = -400;

@@ -310,7 +310,12 @@ class Story extends FlxState
 		var totalTracks:String = '';
 		for (idx => track in curWeek.tracks)
 		{
-			var trackData:SongScoreData = SongData.retrieveData(track, 'hard', curWeek.mainMix);
+			var trackData:SongScoreData = SongData.retrieveData({
+				song: track,
+				difficulty: 'hard',
+				mix: curWeek.mainMix
+			});
+
 			var chartData:Chart = new Chart(track, 'hard', curWeek.mainMix);
 			totalScore += trackData?.score ?? 0;
 
