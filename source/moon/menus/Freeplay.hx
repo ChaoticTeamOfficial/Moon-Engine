@@ -134,7 +134,9 @@ class Freeplay extends FlxSubState
 		add(infoText);
 		infoText.antialiasing = false;
 		updateInfoText();
+
 		infoText.x = -infoText.width - 16;
+
 		FlxTween.tween(infoText, {
 			x: playerIcon.x + playerIcon.width + 32
 		}, Constants.FREEPLAY_TRANSITION_DURATION, {
@@ -144,7 +146,7 @@ class Freeplay extends FlxSubState
 		topBar.y -= topBar.height + 8;
 		FlxTween.tween(topBar, {
 			y: 0
-		}, Constants.FREEPLAY_TRANSITION_DURATION, {
+		}, Constants.FREEPLAY_TRANSITION_DURATION / 2, {
 			ease: FlxEase.circInOut,
 			onComplete: _ ->
 			{

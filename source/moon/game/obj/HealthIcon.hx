@@ -52,6 +52,7 @@ class HealthIcon extends MoonSprite
 	public function set_icon(val:String)
 	{
 		final char = (Paths.exists('characters/$val/icon.png')) ? val : 'asmile-erect';
+		if (this.icon == char) return char;
 		this.icon = char;
 
 		centerAnimations = true;
@@ -67,7 +68,7 @@ class HealthIcon extends MoonSprite
 
 		scrollFactor.set();
 
-		return val;
+		return char;
 	}
 
 	@:noCompletion

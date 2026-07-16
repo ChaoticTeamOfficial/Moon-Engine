@@ -62,7 +62,7 @@ class HealthBar extends FlxSpriteGroup
 	/**
 	 * The distance between both icons.
 	 */
-	public var iconDistance:Float = 42;
+	public var iconDistance:Float = 58;
 
 	/**
 	 * Creates a healthbar.
@@ -108,6 +108,8 @@ class HealthBar extends FlxSpriteGroup
 		health = bar.value = 50;
 		playerIcon.screenCenter(X);
 		oppIcon.screenCenter(X);
+
+		updateBarStats();
 	}
 
 	var count:Int = 4;
@@ -176,7 +178,11 @@ class HealthBar extends FlxSpriteGroup
 
 		updateBarPos();
 
-		if (FlxG.keys.justPressed.NINE) playerIcon.useOldIcon = !playerIcon.useOldIcon;
+		if (FlxG.keys.justPressed.NINE)
+		{
+			playerIcon.useOldIcon = !playerIcon.useOldIcon;
+			updateBarStats();
+		}
 	}
 
 	public function updateBarPos(instant:Bool = false)
@@ -222,12 +228,21 @@ class HealthBar extends FlxSpriteGroup
 
 		barBG.screenCenter(X);
 		bar.screenCenter(X);
+
+		// playerIcon.updateHitbox();
+		// oppIcon.updateHitbox();
 	}
 
 	public function updateBarStats()
 	{
 		playerIcon.icon = player;
 		oppIcon.icon = opponent;
+
+		playerIcon.updateHitbox();
+		oppIcon.updateHitbox();
+
+		playerIcon.origin.set(-8, playerIcon.height / 2);
+		oppIcon.origin.set(oppIcon.width + 8, oppIcon.height / 2);
 	}
 
 	public function bump()
