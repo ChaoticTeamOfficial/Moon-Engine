@@ -104,6 +104,31 @@ class Setting
 	}
 
 	public function reset():Void value = defaultValue;
+
+	/**
+	 * Checks whether `value` is an acceptable value for this setting, based on its type/options.
+	 * Used to reject corrupted or stale save data.
+	 */
+	public function isValidValue(v:Dynamic):Bool
+	{
+		return switch (type)
+		{
+			case CHECKMARK:
+				(v is Bool);
+			case SLIDER:
+				// oh my god the formatter :heartbroken:
+				if (!(v is Int) && !(v is Float)) false; else
+				{
+					final bounds:Array<Dynamic> = options;
+					v >= bounds[0] && v <= bounds[1]
+					;
+				}
+			case UNCAP_SLIDER: (v is Int) || (v is Float);
+			case SELECTOR: final list:Array<Dynamic> = options; list != null && list.contains(v);
+			case SELECTABLE, INFO:
+				true;
+		}
+	}
 }
 
 @:publicFields
@@ -114,6 +139,7 @@ class MoonSettings
 	 */
 	static var categories:Map<String, Array<Setting>> = new Map();
 
+	static var settingsByName:Map<String, Setting> = new Map();
 	static var save:FlxSave = new FlxSave();
 
 	/**
@@ -135,23 +161,46 @@ class MoonSettings
 		"Interface Settings", "Graphic Settings",   "Engine Settings"
 	];
 
+	static function getCategoryNames():Array<String> return[for (cat in categoryOrder) if (categories.exists(cat)) cat];
+
+	/**
+	 * Single source of truth for window resolutions, in ascending display order.
+	 */
+	static final resolutionOptions:Array<String> = [
+		"800x600",
+		"1024x768",
+		"1280x720",
+		"1280x800",
+		"1366x768",
+		"1440x900",
+		"1600x900",
+		"1680x1050",
+		"1920x1080",
+		"2560x1440",
+		"3840x2160"
+	];
+
+	static final defaultResolution:String = "1280x720";
+
+	static function parseResolution(res:String):Null<Array<Int>>
+	{
+		if (res == null) return null;
+
+		final parts = res.split('x');
+		if (parts.length != 2) return null;
+
+		final w = Std.parseInt(parts[0]);
+		final h = Std.parseInt(parts[1]);
+		if (w == null || h == null) return null;
+
+		return [w, h];
+	}
+
 	private static function buildSettings():Void
 	{
 		categories.set("Video Settings", [
 			new Setting("Screen Mode", SELECTOR, ["Windowed", "Fullscreen", "Borderless Fullscreen"], "Windowed"),
-			new Setting("Window Resolution", SELECTOR, [
-				"800x600",
-				"1024x768",
-				"1280x720",
-				"1280x800",
-				"1366x768",
-				"1440x900",
-				"1600x900",
-				"1680x1050",
-				"1920x1080",
-				"2560x1440",
-				"3840x2160"
-			], "1280x720")
+			new Setting("Window Resolution", SELECTOR, resolutionOptions, defaultResolution)
 		]);
 
 		categories.set("Sound Settings", [
@@ -252,6 +301,9 @@ class MoonSettings
 			new Setting('Combo Despawn Animation', SELECTOR, JudgementsCombo.getDespawnList(), 'fade'),
 			new Setting('Combo Rolls', CHECKMARK, null, true)
 		]);
+
+		settingsByName = new Map();
+		for (cat in categories.keys()) for (s in categories.get(cat)) settingsByName.set(s.name.trim(), s);
 	}
 
 	/**
@@ -299,24 +351,17 @@ class MoonSettings
 
 	static function updateWindow():Void
 	{
-		// Resolutions depending on the current, this is the best way I could think of.
-		// yea biggie map
-		final resolutions:Map<String, Array<Int>> = [
-			"800x600" => [800, 600],
-			"1024x768" => [1024, 768],
-			"1280x720" => [1280, 720],
-			"1280x800" => [1280, 800],
-			"1366x768" => [1366, 768],
-			"1440x900" => [1440, 900],
-			"1600x900" => [1600, 900],
-			"1680x1050" => [1680, 1050],
-			"1920x1080" => [1920, 1080],
-			"2560x1440" => [2560, 1440],
-			"3840x2160" => [3840, 2160]
-		];
+		var curRes:String = callSetting("Window Resolution");
+		var resArr = parseResolution(curRes);
 
-		var curRes = callSetting("Window Resolution");
-		var resArr = resolutions.get(curRes);
+		// Corrupted/stale save value, or a resolution that no longer exists — fall back safely
+		// instead of indexing into a null array further down.
+		if (resArr == null)
+		{
+			setSetting("Window Resolution", defaultResolution);
+			curRes = defaultResolution;
+			resArr = parseResolution(curRes);
+		}
 
 		final screenW = Capabilities.screenResolutionX;
 		final screenH = Capabilities.screenResolutionY;
@@ -324,7 +369,7 @@ class MoonSettings
 		{
 			setSetting("Window Resolution", "800x600");
 			curRes = "800x600";
-			resArr = resolutions.get(curRes);
+			resArr = parseResolution(curRes);
 		}
 
 		// very neat borderless fullscreen workaround by tracedinpurple (A.K.A Tiago.hx, thanks man!!)
@@ -387,9 +432,7 @@ class MoonSettings
 
 	private static function findSetting(name:String):Null<Setting>
 	{
-		for (cat in categories.keys()) for (s in categories.get(cat)) if (s.name.trim() == name.trim()) return s;
-
-		return null;
+		return settingsByName.get(name.trim());
 	}
 
 	static function saveSettings():Void
@@ -412,7 +455,13 @@ class MoonSettings
 		for (key in loaded.keys())
 		{
 			final s = findSetting(key);
-			if (s != null && s.type != INFO) s.value = loaded.get(key).value;
+			if (s == null || s.type == INFO) continue;
+
+			final loadedValue = loaded.get(key).value;
+
+			if (s.isValidValue(loadedValue)) s.value = loadedValue;
+			else
+				trace('[SETTINGS] Ignored invalid saved value for "$key", keeping default.', "WARNING");
 		}
 	}
 
