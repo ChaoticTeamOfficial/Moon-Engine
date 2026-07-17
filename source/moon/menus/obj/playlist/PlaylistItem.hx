@@ -22,7 +22,7 @@ class PlaylistItem extends FlxSpriteGroup
 	public var box:MoonSprite;
 	public var songIcon:PixelIcon;
 	public var songText:FlxText;
-	public var numberText:FlxText;
+	public var numbers:Array<FlxText> = [];
 
 	public var selected:Bool = false;
 
@@ -62,10 +62,6 @@ class PlaylistItem extends FlxSpriteGroup
 		songText.setFormat(Paths.font('phantomuff/full.ttf'), 20);
 		songText.setPosition(50, (box.height - songText.height) / 2);
 		add(songText);
-
-		numberText = new FlxText(box.width - 25, 5, 0, '1', 20);
-		numberText.setFormat(Paths.font('phantomuff/full.ttf'), 20);
-		add(numberText);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -76,15 +72,51 @@ class PlaylistItem extends FlxSpriteGroup
 		{
 			this.scale.x = FlxMath.lerp(box.scale.x, selectedBoxScale, lerpSpeed);
 			this.scale.y = FlxMath.lerp(box.scale.y, selectedBoxScale, lerpSpeed);
-			songText.color = numberText.color = selectedTextColor;
+			songText.color = selectedTextColor;
+			for(number in numbers) number.color = selectedTextColor;
 			box.color = selectedBoxColor;
 		}
 		else
 		{
 			this.scale.x = FlxMath.lerp(box.scale.x, unselectedBoxScale, lerpSpeed);
 			this.scale.y = FlxMath.lerp(box.scale.y, unselectedBoxScale, lerpSpeed);
-			songText.color = numberText.color = unselectedTextColor;
+			songText.color = unselectedTextColor;
+			for(number in numbers) number.color = unselectedTextColor;
 			box.color = unselectedBoxColor;
 		}
+	}
+
+	public function added(id:Int):FlxText
+	{
+		var numberText = new FlxText(box.width, 5, 0, '$id', 20);
+		numberText.setFormat(Paths.font('phantomuff/full.ttf'), 20);
+		numbers.push(numberText);
+		add(numberText);
+
+		for (number in numbers) FlxTween.tween(number, {
+			x: number.x - (numberText.width + 5)
+		}, 0.1);
+
+		return numberText;
+	}
+
+	public function removed():Void
+	{
+		var numberText:FlxText = numbers.pop();
+
+		for (number in numbers) 
+			FlxTween.tween(number, {
+				x: number.x + (numberText.width + 5)
+			}, 0.1);
+
+		FlxTween.tween(numberText, {
+			alpha: 0
+		}, 0.1, {
+			onComplete: _ -> 
+			{
+				remove(numberText);
+				numberText.destroy();
+			}
+		});
 	}
 }

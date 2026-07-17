@@ -19,22 +19,22 @@ class PlaylistMode extends FlxSubState
 	/**
 	 * A variable that contains an alphabetically ordered list of all the songs.
 	 */
-	var songList:Array<SongBase>;
+	public var songList:Array<SongBase>;
 
 	/**
 	 * A group that contains all the song items.
 	 */
-	var songGroup:FlxTypedSpriteGroup<PlaylistItem>;
+	public var songGroup:FlxTypedSpriteGroup<PlaylistItem>;
 	
 	/**
 	 * The current list of songs to be played.
 	 */
-	var songsQueue:Array<{song:PlaylistItem, difficulty:String}> = [];	
+	public var songsQueue:Array<{song:PlaylistItem, difficulty:String, number:FlxText}> = [];	
 
 	/**
 	 * A group that contains the details of the current track selected, it's shown at the right
 	 */
-	var infoGroup:PlaylistTrackDetails;
+	public var infoGroup:PlaylistTrackDetails;
 
 	/**
 	 * The difficulty selector below the info group
@@ -47,6 +47,10 @@ class PlaylistMode extends FlxSubState
 	public var hint:FlxText;
 	
 	var curSelected:Int = -1;
+	var canSelect:Bool = false;
+
+	final ACCEPT_THRESHOLD:Float = 0.5; // Amount of time holding space to confirm the song.
+	final SELECTION_LIMIT:Int = 20; // Max amount of times a song can be re-added to the queue.
 
 	public function new()
 	{
@@ -139,14 +143,15 @@ class PlaylistMode extends FlxSubState
 		FlxTween.tween(infoGroup, {
 			x: 850
 		}, 1.25, {
-			ease: FlxEase.expoOut
+			ease: FlxEase.expoOut,
+			onComplete: _ -> canSelect = true
 		});
 
 		difficultySelector = new FreeplayDifficultySelector();
 		difficultySelector.setPos(1000, infoGroup.y + infoGroup.height + 80);
 		add(difficultySelector);
 
-		hint = new FlxText(0, 0, 0, 'Press [ENTER] to Play your set\nHold [SPACE] on a song to add/remove it from the set');
+		hint = new FlxText(0, 0, 0, 'Press [ENTER] to Play your set\nPress [SPACE] on a song to add/remove it from the set.\nHold [SPACE] and [SHIFT] to re-add a song in the set.');
 		hint.setFormat(Paths.font('phantomuff/full.ttf'), 14, 0xFFAAAAAA, FlxTextAlign.CENTER);
 		hint.y = infoGroup.y + infoGroup.height + 140;
 		hint.x = 800;
@@ -158,21 +163,21 @@ class PlaylistMode extends FlxSubState
 		trace(songList);
 	}
 
+	var holdSpace:Float = 0;
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		SongPreview.update(elapsed);
 
-		for(i => song in songGroup.members) 
-		{
-			song.numberText.text = '';
-		}
-		for(i => item in songsQueue) {
-			item.song.numberText.text = '${i + 1}';				
-		}
+		if (!canSelect) return;
 
-		if (MoonInput.justPressed(ACCEPT) && FlxG.keys.pressed.SHIFT) confirm();
-		else if (MoonInput.justPressed(ACCEPT)) confirmSong();
+		holdSpace = FlxG.keys.pressed.SPACE ? holdSpace + elapsed : 0;
+		if (FlxG.keys.justPressed.ENTER && songsQueue.length != 0) confirm();
+		if (holdSpace >= ACCEPT_THRESHOLD) 
+		{
+			confirmSong(FlxG.keys.pressed.SHIFT);
+			holdSpace = 0;
+		}
 		if (MoonInput.justPressed(BACK)) close();
 
 		if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
@@ -251,14 +256,10 @@ class PlaylistMode extends FlxSubState
 
 	function confirmSong(force:Bool = false):Void
 	{		
-		var curSong:Dynamic = songGroup.members[curSelected];
+		var curSong:PlaylistItem = songGroup.members[curSelected];
 		var selectorDifficulty:Difficulty = SongLibrary.getDifficulty(difficultySelector.getSelected());
 
-		for(item in songsQueue) 
-			if(item.song == curSong && !force) {
-				removeSong(curSong);
-				return;
-			}
+		if(!force && tryRemoveSong(curSong)) return;
 
 		if (!curSong.difficulties.contains(selectorDifficulty))
 		{
@@ -270,16 +271,81 @@ class PlaylistMode extends FlxSubState
 		addSong(curSong);
 	}
 
-	function removeSong(song:PlaylistItem):Void
+	public function refreshNumbers():Void
 	{
-		Paths.playSFX('toolkit/general/grabHold.wav');
-		for(item in songsQueue) 
-			if(item.song == song) songsQueue.remove(item);
+		for(i => song in songsQueue)
+			song.number.text = '${i + 1}';
+	}
+
+	function tryRemoveSong(song:PlaylistItem):Bool
+	{
+		for (i in 0...songsQueue.length)
+		{
+			var item = songsQueue[songsQueue.length - i - 1];	//In inverse order, so it works kinda like a pop()
+			if (item.song == song)
+			{
+				Paths.playSFX('toolkit/general/grabHold.wav');
+
+				songsQueue.remove(item);
+				item.song.removed();
+
+				refreshNumbers();
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	function addSong(song:PlaylistItem):Void
 	{
 		Paths.playSFX('toolkit/general/grabRelease.wav');
-		songsQueue.push({song: song, difficulty: difficultySelector.getSelected()});
+
+		if (song.numbers.length >= SELECTION_LIMIT) return me();
+
+		var num:FlxText = song.added(songsQueue.length + 1);
+		songsQueue.push({song: song, difficulty: difficultySelector.getSelected(), number: num});
+	}
+
+	private function me():Void 
+	{
+		canSelect = false;
+
+		var curSong:PlaylistItem = songGroup.members[curSelected];
+		var mee:MoonSprite = new MoonSprite(700, -100).loadGraphic(Paths.image('rema'));
+		add(mee);
+
+		Paths.playSFX('menus/playlist/snd_fall2.wav');
+		FlxTween.tween(mee, { y: curSong.y - mee.height	}, 0.8, {
+			ease: FlxEase.cubeIn, 
+			onComplete: _ -> 
+			{
+				Paths.playSFX('menus/playlist/bump.wav');
+				for(number in curSong.numbers) 
+				{
+					for(song in songsQueue) if(song.song == curSong) songsQueue.remove(song);
+					refreshNumbers();
+					FlxTween.tween(number, {
+						x: number.x + FlxG.random.int(-100, 100),
+						y: number.y + FlxG.height
+					}, FlxG.random.float(0.8, 1.5), {
+						ease: FlxEase.cubeIn,
+						onComplete: _ ->
+						{
+							curSong.numbers.remove(number); 
+							curSong.remove(number); 
+							number.destroy();
+						}
+					});
+				}
+			}
+		});
+		FlxTween.tween(mee, { y: curSong.y - mee.height - 30 }, 0.25, {ease: FlxEase.sineOut, startDelay: 0.8});
+		FlxTween.tween(mee, { y: FlxG.height }, 1, {ease: FlxEase.sineIn, startDelay: 1.05, onComplete: _ -> 
+		{
+			canSelect = true;
+			remove(mee);
+			mee.destroy();
+		}});
 	}
 }
