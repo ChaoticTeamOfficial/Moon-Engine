@@ -12,6 +12,7 @@ class SongPreview
 	static var previewEnd:Float;
 	static var isLooping:Bool = false;
 	static var isActive:Bool = false;
+	static var songVolume:Float = 0.75;
 	private static var loadGeneration:Int = 0;
 	private static var currentSoundKey:String = null;
 
@@ -22,6 +23,7 @@ class SongPreview
 	{
 		cancelCurrentFade();
 		isLooping = false;
+		songVolume = MoonSettings.callSetting('Music Volume') / 100;
 
 		final gen = ++loadGeneration;
 
@@ -47,7 +49,7 @@ class SongPreview
 
 			FlxG.sound.music.volume = 0;
 			FlxG.sound.music.play();
-			FlxG.sound.music.fadeIn(1, 0, Freeplay.instance.songVolume);
+			FlxG.sound.music.fadeIn(1, 0, songVolume);
 
 			updateConductor(chart);
 
@@ -76,7 +78,7 @@ class SongPreview
 
 				isLooping = false;
 				loopTarget.time = previewStart;
-				loopTarget.fadeIn(1, 0, Freeplay.instance.songVolume);
+				loopTarget.fadeIn(1, 0, songVolume);
 			});
 		}
 	}
