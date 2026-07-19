@@ -23,6 +23,8 @@ class MainMenu extends FlxTransitionableState
 	var curSelected:Int = 0;
 	var maxVisible:Int = 2;
 
+	public static var init:Bool = false;
+
 	override public function create()
 	{
 		super.create();
@@ -64,6 +66,12 @@ class MainMenu extends FlxTransitionableState
 
 		PlayState.replaysToSave = [];
 		if (PlayState.instance != null) PlayState.instance.destroy();
+
+		if (!init) new FlxTimer().start(0.5, _ ->
+		{
+			openSubState(new IndevPopup());
+			init = true;
+		});
 	}
 
 	override public function update(elapsed:Float)

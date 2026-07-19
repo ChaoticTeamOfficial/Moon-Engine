@@ -14,7 +14,7 @@ function createReceptor(direction)
 	judgementsSkin = 'moon-engine';
 
 	// <SETUP STRUMNOTE> //
-	strumNote.frames = Paths.getSparrowAtlas(p + 'strumline');
+	strumNote.frames = Paths.getSparrowAtlas(p + 'notes');
 
 	strumNote.animation.addByPrefix(direction + '-static', direction + '-static', 24, true);
 	strumNote.animation.addByPrefix(direction + '-press', direction + '-press', 24, false);
@@ -61,7 +61,7 @@ function createStaticNote(skin, direction)
 {
 	if (!useQuantization)
 	{
-		staticNote.frames = Paths.getSparrowAtlas(p + 'staticArrows');
+		staticNote.frames = Paths.getSparrowAtlas(p + 'notes');
 
 		staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
 		staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
