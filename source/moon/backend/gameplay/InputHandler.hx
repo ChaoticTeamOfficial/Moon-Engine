@@ -292,7 +292,7 @@ class InputHandler
 					strumline.members[i].strumNote.playAnim('${MoonUtils.intToDir(i)}-press', true);
 					if (!ghostTapping)
 					{
-						if (attachedChar != null) attachedChar.playAnim('sing${MoonUtils.intToDir(i).toUpperCase()}-miss', true);
+						if (attachedChar != null) attachedChar.playAnim('sing${MoonUtils.intToDir(i, true)}-miss', true);
 						onMiss(null);
 					}
 				}
@@ -327,7 +327,7 @@ class InputHandler
 
 	private function onHit(note:Note, ID:Int, timing:Judgement, isCPU:Bool, ?isSustain:Bool = false):Void
 	{
-		final convertedDir = MoonUtils.intToDir(note.direction);
+		final convertedDir = MoonUtils.intToDir(note.direction, true);
 		final isTyped = note.type != null && note.type != 'default';
 
 		if (!isSustain)
@@ -353,7 +353,7 @@ class InputHandler
 		// trace(stats.judgementsCounter, "DEBUG");
 
 		// even though this is here, notetypes can play a specific
-		if (attachedChar != null && !isTyped) attachedChar.playAnim('sing${convertedDir.toUpperCase()}', true);
+		if (attachedChar != null && !isTyped) attachedChar.playAnim('sing${convertedDir}', true);
 
 		// dispatch a note hit on the note registry!
 		if (isTyped && game != null) NoteTypeRegistry.executeHit(game, note, timing, isSustain);
@@ -372,7 +372,7 @@ class InputHandler
 
 			final isTyped = note.type != null && note.type != 'default';
 
-			if (attachedChar != null && !isTyped) attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction).toUpperCase()}-miss', true);
+			if (attachedChar != null && !isTyped) attachedChar.playAnim('sing${MoonUtils.intToDir(note.direction, true)}-miss', true);
 
 			if (isTyped && game != null) NoteTypeRegistry.executeMiss(game, note);
 		}

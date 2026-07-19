@@ -16,7 +16,7 @@ class MoonUtils
 	 * Returns a integer number to a arrow direction.
 	 * @param int The number in which will be used for getting the direction.
 	 */
-	inline static function intToDir(int:Int)
+	inline static function intToDir(int:Int, ?uppercase:Bool = false)
 	{
 		// Repeat 2 times 'cause theres 4 more, usually for opponent.
 		final directions = [

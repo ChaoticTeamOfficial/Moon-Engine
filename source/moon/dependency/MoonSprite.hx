@@ -139,7 +139,7 @@ class MoonSprite extends FlxAnimate
 
 		if (!animation.exists(playName))
 		{
-			// trace('Tried to play animation $playName, but it doesn\'t exist!', "WARNING");
+			trace('Tried to play animation $playName, but it doesn\'t exist!', "WARNING");
 			return;
 		}
 

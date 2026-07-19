@@ -2,6 +2,7 @@ package moon.game.obj;
 
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
+import flixel.graphics.frames.FlxFramesCollection;
 import moon.dependency.scripting.*;
 
 using StringTools;
@@ -162,6 +163,8 @@ class Character extends MoonSprite
 				// TODO: quality configs?
 				this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$atlasName') /*, {filterQuality: HIGH}*/);
 		}
+
+		AnimationUtils.mergeExtraSheets(this, data.animations, character, 'characters', data.type);
 
 		camOffsets = data?.camOffsets ?? [0, 0];
 		overrideAnims = data?.overrideAnims ?? [];

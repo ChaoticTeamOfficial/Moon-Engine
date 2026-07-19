@@ -73,6 +73,74 @@ class AnimationUtils
 		rememberAnimData(target, anim);
 	}
 
+	/**
+	 * Merges any extra spritesheets referenced by individual animations
+	 * into a sprite's existing frame collection.
+	 * Extra sheets are expected to live in the same folder as `basePath`,
+	 * just under a different filename.
+	 *
+	 * @param target     The sprite whose `.frames` will receive the merged frames.
+	 * @param animations The animation list to scan for `sheet` references.
+	 * @param basePath   Folder path each sheet name is appended to (e.g. the character or stage folder).
+	 * @param from       Sub-folder inside `assets/` (`'characters'`, `'stages'`, etc).
+	 * @param type       The atlas format of the extra sheets (`SPARROW`, `PACKED`, or `ATLAS`).
+	 */
+	public static function mergeExtraSheets(target:FlxSprite, animations:Array<Paths.AnimationData>, basePath:String, from:String, type:AtlasType):Void
+	{
+		if (target == null || target.frames == null || animations == null) return;
+		if (type != SPARROW && type != PACKED && type != ATLAS) return; // lol
+
+		var seen:Map<String, Bool> = [];
+		for (anim in animations)
+		{
+			if (anim.sheet == null || seen.exists(anim.sheet)) continue;
+			seen.set(anim.sheet, true);
+
+			switch (type)
+			{
+				case SPARROW, PACKED:
+					final extraFrames:FlxFramesCollection = (type == SPARROW) ? Paths.getSparrowAtlas(
+						'$basePath/${anim.sheet}',
+						from
+					) : Paths.getPackerAtlas('$basePath/${anim.sheet}', from);
+
+					if (extraFrames == null)
+					{
+						trace('[AnimationUtils] Extra sheet "$basePath/${anim.sheet}" for anim "${anim.name}" could not be loaded!', "WARNING");
+						continue;
+					}
+
+					for (frame in extraFrames.frames) target.frames.pushFrame(frame);
+
+				case ATLAS:
+					// this is becoming a mess, lemme separate it to a function...
+					mergeExtraAtlas(target, basePath, from, anim.sheet, anim.name);
+
+				default:
+			}
+		}
+	}
+
+	private static function mergeExtraAtlas(target:FlxSprite, basePath:String, from:String, sheet:String, animName:String):Void
+	{
+		if (!Std.isOfType(target.frames, FlxAnimateFrames))
+		{
+			trace('[AnimationUtils] Cannot merge ATLAS sheet "$sheet"! target\'s frames aren\'t a FlxAnimateFrames collection!', "WARNING");
+			return;
+		}
+
+		final baseAtlas:FlxAnimateFrames = cast target.frames;
+
+		final extraAtlas:FlxAnimateFrames = FlxAnimateFrames.fromAnimate(Paths.getPath('$from/$basePath/$sheet'));
+		if (extraAtlas == null)
+		{
+			trace('[AnimationUtils] Extra atlas "$basePath/$sheet" for anim "$animName" could not be loaded!', "WARNING");
+			return;
+		}
+
+		baseAtlas.addAtlas(extraAtlas);
+	}
+
 	/** Adds a batch of atlas/spritesheet animations via `addAtlasAnimation`. */
 	public static function addAtlasAnimations(target:FlxSprite, animations:Array<AnimationData>, type:AtlasType = SPARROW):Void
 	{

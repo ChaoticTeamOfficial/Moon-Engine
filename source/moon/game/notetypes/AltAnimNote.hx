@@ -33,7 +33,7 @@ class AltAnimNote extends BaseNoteType
 			name: 'anim',
 			label: 'Animation Name',
 			type: TEXT,
-			defaultValue: 'sing${MoonUtils.intToDir(note?.direction ?? 0).toUpperCase()}-alt'
+			defaultValue: 'sing${MoonUtils.intToDir(note?.direction ?? 0, true)}-alt'
 		}];
 	}
 }

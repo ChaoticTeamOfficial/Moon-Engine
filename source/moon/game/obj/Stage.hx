@@ -171,6 +171,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/${objData.name}'));
 				}
 
+				AnimationUtils.mergeExtraSheets(sprite, objData.animations, stg, 'stages', objType);
+
 				if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
 				if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
 

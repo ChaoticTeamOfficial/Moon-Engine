@@ -395,6 +395,12 @@ typedef AnimationData =
 	 * The animation type, used for animate atlas sprites.
 	 */
 	var ?animType:TextureAtlasAnimType;
+
+	/**
+	 * Optional name of an alternate spritesheet (in the same folder as the
+	 * sprite's main sheet) that this specific animation's frames live on.
+	 */
+	var ?sheet:String;
 }
 
 /**
