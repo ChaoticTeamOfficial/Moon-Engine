@@ -59,7 +59,11 @@ class Shortcuts
 	 * Returns a `PlayerStats` from the playfield.
 	 * @param player The player name. Must match all the available players in playfield. (opponent counts as one.)
 	 */
-	static function getStats(player:String = 'p1'):moon.backend.gameplay.PlayerStats return PlayField.instance.inputHandlers.get(player).stats;
+	static function getStats(player:String = 'p1'):moon.backend.gameplay.PlayerStats
+	{
+		if (PlayField.instance == null) return null;
+		return PlayField.instance.inputHandlers.get(player).stats;
+	}
 
 	/**
 	 * Returns chart content from the game's PlayField.

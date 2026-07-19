@@ -1,5 +1,6 @@
 package moon.dependency;
 
+import moon.backend.gameplay.modifiers.ModifierManager;
 import moon.global_obj.Alphabet;
 import moon.dependency.user.MoonLang;
 import flixel.input.keyboard.FlxKey;
@@ -37,6 +38,7 @@ class MoonGame extends FlxGame
 		MoonAchievements.init();
 		SongData.init();
 		Alphabet.init();
+		ModifierManager.init();
 
 		#if !doc
 		FlxG.plugins.addPlugin(new flixel.addons.plugin.ScreenShotPlugin());

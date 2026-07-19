@@ -1,5 +1,7 @@
 package moon.backend.gameplay;
 
+import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
+import moon.backend.gameplay.modifiers.ModifierManager;
 import moon.backend.gameplay.Timings.Judgement;
 import moon.game.obj.Character;
 import moon.game.obj.notes.Note.NoteState;
@@ -342,7 +344,8 @@ class InputHandler
 			}
 		}
 
-		stats.health += (!isSustain) ? Timings.get(timing).healthGain : 0.5;
+		if (!ModifierManager.isActive(ModifierIds.NO_HEALING)) stats.health += (!isSustain) ? Timings.get(timing).healthGain : 0.5;
+
 		stats.score += (!isSustain) ? Timings.get(timing).score : 2;
 		stats.combo++;
 		strumline.members[note.direction].onNoteHit(note, timing, isSustain);

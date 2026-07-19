@@ -1,6 +1,8 @@
 package moon.game.obj.notes;
 
 import moon.dependency.scripting.MoonScript;
+import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
+import moon.backend.gameplay.modifiers.ModifierManager;
 import openfl.filters.ColorMatrixFilter;
 
 /**
@@ -88,6 +90,7 @@ class Note extends MoonSprite
 	public var script:MoonScript;
 
 	private static var sharedScripts:Map<String, MoonScript> = new Map();
+	static inline var FOG_FADE_DISTANCE:Float = 470;
 
 	public function new(direction:Int, time:Float, ?type:String = "default", ?skinName:String = "v-slice", duration:Float = 0, conductor:Conductor = null)
 	{
@@ -159,8 +162,21 @@ class Note extends MoonSprite
 			y = FlxMath.lerp(y, ypos, 0.9);
 			x = receptor.x + (receptor.width - width) * 0.5;
 
-			if (child != null) child.downscroll = MoonSettings.callSetting('Downscroll');
+			updateFog(timeDiff);
+
+			if (child != null)
+			{
+				child.downscroll = MoonSettings.callSetting('Downscroll');
+				child.alpha = this.alpha;
+			}
 		}
+	}
+
+	function updateFog(timeDiff:Float):Void
+	{
+		if (!ModifierManager.isActive(ModifierIds.FOG)) return;
+
+		alpha = FlxMath.lerp(alpha, FlxMath.lerp(1, 0, FlxMath.bound((Math.abs(timeDiff)) / FOG_FADE_DISTANCE, 0, 1)), 0.9);
 	}
 
 	function set_receptor(receptor:Receptor):Receptor

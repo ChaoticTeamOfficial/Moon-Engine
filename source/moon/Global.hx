@@ -77,4 +77,7 @@ class Global
 		trace('[SCRIPTS] CLEARING SCRIPT LIST!', "WARNING");
 		for (name => script in scripts) unregisterScript(name);
 	}
+
+	// --- MODIFIERS
+	static var scrollSpeedMult:Float = 1;
 }

@@ -38,6 +38,8 @@ class Freeplay extends FlxSubState
 	public var selector:FreeplaySongSelector;
 	public var stars:DifficultyStars;
 	public var diffSelector:FreeplayDifficultySelector;
+	public var modifiersMenu:ModifiersMenu;
+	public var modTmr:Float = 0;
 
 	var topBar:MoonSprite;
 
@@ -158,6 +160,11 @@ class Freeplay extends FlxSubState
 			}
 		});
 
+		modifiersMenu = new ModifiersMenu();
+		add(modifiersMenu);
+
+		// trace(SongData.sessionLog, "DEBUG");
+
 		Global.scriptCall('onCreate');
 	}
 
@@ -240,6 +247,14 @@ class Freeplay extends FlxSubState
 		infoText.y = topBar.y + topBar.height / 2 - infoText.height / 2;
 	}
 
+	public function revealRank(song:SongBase)
+	{
+		// Global.allowInputs = false;
+		// trace(song);
+
+		// TODO :'D
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -260,11 +275,22 @@ class Freeplay extends FlxSubState
 			}
 		}
 
+		modTmr += elapsed;
+		if (modifiersMenu.isOpen) return;
+
 		if (MoonInput.justPressed(UI_DOWN)) change(1);
 		if (MoonInput.justPressed(UI_UP)) change(-1);
 
 		if (MoonInput.justPressed(UI_LEFT)) changeDiff(-1);
 		if (MoonInput.justPressed(UI_RIGHT)) changeDiff(1);
+
+		if (FlxG.keys.justPressed.TAB && modTmr > 0.04)
+		{
+			modTmr = 0;
+			if (modifiersMenu.isOpen) modifiersMenu.close();
+			else
+				modifiersMenu.open();
+		}
 
 		if (FlxG.mouse.wheel != 0) change(-FlxG.mouse.wheel);
 
@@ -323,6 +349,10 @@ class Freeplay extends FlxSubState
 				}
 			});
 		}
+
+		// DEBUG!
+		// TODO remove
+		if (FlxG.keys.justPressed.EIGHT) revealRank(selector.getSelected());
 
 		Global.scriptCall('onUpdate', [elapsed]);
 	}

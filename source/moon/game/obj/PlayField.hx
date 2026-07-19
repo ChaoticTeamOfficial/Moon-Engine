@@ -1,5 +1,7 @@
 package moon.game.obj;
 
+import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
+import moon.backend.gameplay.modifiers.ModifierManager;
 import moon.backend.gameplay.Timings.Judgement;
 import moon.menus.Freeplay;
 import flixel.tweens.FlxTween;
@@ -82,6 +84,7 @@ class PlayField extends FlxGroup
 
 		conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
 		conductor.onBeat.add(beatHit);
+		conductor.onStep.add(stepHit);
 
 		playback = new Song(song, mix, difficulty, conductor);
 		playback.state = PAUSE;
@@ -162,8 +165,15 @@ class PlayField extends FlxGroup
 		// obv loss, but whatev
 		previousRank = Timings.getRank(inputHandlers.get('p1').stats.accuracy).rank;
 
+		setModifiers();
+
 		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
 		inCountdown = true;
+	}
+
+	function setModifiers()
+	{
+		if (ModifierManager.isActive(ModifierIds.PLAYBACK_RATE)) playback.pitch = ModifierManager.getValue(ModifierIds.PLAYBACK_RATE);
 	}
 
 	function setupNotes()
@@ -178,7 +188,9 @@ class PlayField extends FlxGroup
 		}
 
 		noteSpawner = new NoteSpawner(chart.content.notes, strumlines, conductor);
-		noteSpawner.scrollSpeed = chart.content.meta.scrollSpd;
+
+		final multi = ModifierManager.isActive(ModifierIds.SCROLL_SPEED_MULT) ? Global.scrollSpeedMult : 1;
+		noteSpawner.scrollSpeed = chart.content.meta.scrollSpd * multi;
 		add(noteSpawner);
 
 		// Set each input handler's notes.
@@ -204,6 +216,8 @@ class PlayField extends FlxGroup
 
 			strum.strumBG.setPosition(strum.x - (strum.strumBG.width / 2), 0);
 			strum.strumBG.alpha = MoonSettings.callSetting('Lane Background Visibility');
+
+			strum.repositionReceptors();
 
 			// oppStrum.visible = oppStrum.strumBG.visible = playerStrum.visible = playerStrum.strumBG.visible = false;
 		}
@@ -252,9 +266,8 @@ class PlayField extends FlxGroup
 			handler.update();
 		}
 
-		// TODO: REMOVE, PLACEHOLDER.
-		if (FlxG.keys.justPressed.I) playback.pitch -= 0.05;
-		else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
+		// if (FlxG.keys.justPressed.I) playback.pitch -= 0.05;
+		// else if (FlxG.keys.justPressed.O) playback.pitch += 0.05;
 		// if(FlxG.keys.justPressed.O) noteSpawner.scrollSpeed = FlxG.random.float(0.2, 4);
 
 		// update health based on p1's health.
@@ -386,6 +399,14 @@ class PlayField extends FlxGroup
 
 			onSongCountdown.dispatch(Std.int(beat));
 		}
+	}
+
+	function stepHit(step:Float):Void
+	{
+		final stat = Shortcuts.getStats();
+
+		if (stat == null) return;
+		if (ModifierManager.isActive(ModifierIds.POISON) && stat.health > 10) stat.health -= 0.5;
 	}
 
 	public var botPlay(default, set):Bool = false;
