@@ -29,7 +29,9 @@ class MoonUtils
 			'up',
 			'right'
 		];
-		return directions[int];
+		final str = directions[int];
+		if (uppercase) return str.toUpperCase();
+		return str;
 	}
 
 	/**
