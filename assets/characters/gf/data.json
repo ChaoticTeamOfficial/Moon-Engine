@@ -1,51 +1,91 @@
 {
-	"camOffsets": [10, 40],
+	"camOffsets": [12, 50],
 	"icon": {
 		"color": [243, 255, 110]
 	},
-	"extraOffsets": [3, -316],
+	"extraOffsets": [-12, -320],
 	"type": "atlas",
 	"animations": [
 		{
 			"name": "idle-0",
-			"prefix": "GF Dancing Beat",
-			"indices": [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-			"fps": 24,
-			"x": -26,
-			"y": -9
+			"prefix": "Idle",
+			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+			"animType": "framelabel"
 		},
 		{
 			"name": "idle-1",
-			"prefix": "GF Dancing Beat",
-			"indices": [
-				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
-			],
-			"fps": 24,
-			"x": -26,
-			"y": -9
+			"prefix": "Idle",
+			"indices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+			"animType": "framelabel"
 		},
 		{
-			"name": "comboBreak",
-			"prefix": "gf sad",
-			"finishAnim": "idle",
-			"fps": 24,
-			"x": -28,
-			"y": -27
+			"name": "singLEFT",
+			"prefix": "Left",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singDOWN",
+			"prefix": "Down",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singUP",
+			"prefix": "Up",
+			"animType": "framelabel"
+		},
+		{
+			"name": "singRIGHT",
+			"prefix": "Right",
+			"animType": "framelabel"
+		},
+		{
+			"name": "cheer",
+			"prefix": "Cheer",
+			"animType": "framelabel"
 		},
 		{
 			"name": "combo50",
-			"prefix": "GF Cheer",
-			"finishAnim": "idle",
-			"fps": 24,
-			"x": -26,
-			"y": -24
+			"prefix": "Cheer",
+			"animType": "framelabel",
+			"finishAnim": "idle"
+		},
+		{
+			"name": "combo200",
+			"prefix": "Cheer 200",
+			"animType": "framelabel",
+			"finishAnim": "idle"
+		},
+		{
+			"name": "comboBreak",
+			"prefix": "Crying",
+			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+			"animType": "framelabel",
+			"finishAnim": "idle"
+		},
+		{
+			"name": "hairBlow",
+			"prefix": "Idle (Hair blowing)",
+			"indices": [0, 1, 2, 3],
+			"animType": "framelabel"
+		},
+		{
+			"name": "hairFall",
+			"prefix": "Hair landing",
+			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+			"animType": "framelabel"
+		},
+		{
+			"name": "scared",
+			"prefix": "Fear",
+			"indices": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3],
+			"animType": "framelabel",
+			"finishAnim": "idle"
 		}
 	],
-	"overrideAnims": ["combo50", "comboBreak"],
 	"antialiasing": true,
 	"danceFrequency": 1,
 	"flipX": false,
 	"scale": 1,
 	"holdDuration": 8,
-	"gameoverColorScheme": "0xFF4924FF"
+	"overrideAnims": ["cheer", "combo50", "combo200", "comboBreak", "scared"]
 }
