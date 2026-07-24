@@ -239,4 +239,16 @@ class Conductor
 		changeBpmAt(0, initialBpm, initialNumerator, initialDenominator);
 		active = true;
 	}
+
+	// other
+
+	/**
+	 * Converts a given time (in ms) into the step it falls on.
+	 * @param t The time to convert.
+	 * @return Float
+	 */
+	inline function getStepAtTime(t:Float):Float
+	{
+		return stepOffset + (t - offsetTime) / stepCrochet;
+	}
 }

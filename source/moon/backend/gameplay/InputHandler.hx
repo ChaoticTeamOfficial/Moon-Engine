@@ -340,7 +340,7 @@ class InputHandler
 			if (note.duration > 0)
 			{
 				heldSustains.set(ID, note);
-				lastSustainStep.set(ID, conductor.curStep);
+				lastSustainStep.set(ID, Math.max(conductor.getStepAtTime(note.time), conductor.curStep));
 			}
 		}
 
@@ -410,7 +410,6 @@ class InputHandler
 						while (step <= conductor.curStep)
 						{
 							onHit(heldNote, direction, null, CPUMode, true);
-							stats.score += 2;
 							step++;
 						}
 						lastSustainStep.set(direction, conductor.curStep);
