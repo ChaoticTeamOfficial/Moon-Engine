@@ -18,6 +18,7 @@ import openfl.ui.Mouse;
 import openfl.ui.MouseCursor;
 import moon.game.events.EventRegistry;
 import haxe.ui.components.*;
+import moon.dependency.MoonSound.MusicType;
 #if sys
 import sys.io.File;
 #end
@@ -141,6 +142,8 @@ class LevelEditor extends FlxState
 	var sectionStarts:Array<
 		{num:Int, y:Float}> = [];
 	var graphicCache:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
+	var hitsoundEnabled:Map<String, Bool> = ["opponent" => true, "p1" => true];
+	var vocalsEnabled:Map<String, Bool> = ["opponent" => true, "p1" => true, 'inst' => true];
 
 	public var loadedEvents:Map<GridType, Array<EventInfo>> = [
 		NOTES => [],
@@ -507,33 +510,7 @@ class LevelEditor extends FlxState
 		copySectionBtn.top = 54 + 38;
 		copySectionBtn.width = 80;
 		copySectionBtn.text = "Copy Section";
-		copySectionBtn.onClick = (_) ->
-		{
-			final curSec = getCurSection();
-			final sourceSec = curSec + Std.int(sectionStepper.value);
-			if (sourceSec < 0) return;
-
-			for (n in getSectionNotes(sourceSec))
-			{
-				final pasted:NoteStruct = {
-					time: n.time - getSectionStartTime(sourceSec) + getSectionStartTime(curSec),
-					data: n.data,
-					lane: n.lane,
-					type: n.type,
-					duration: n.duration,
-					values: n.values
-				};
-
-				if (!Lambda.exists(chart.content.notes, e -> Math.abs(e.time - pasted.time) < 0.01 && e.data == pasted.data && e.lane == pasted.lane))
-				{
-					chart.content.notes.push(pasted);
-					createNote(pasted);
-					History.pushNotePlace(pasted);
-				}
-			}
-			chart.content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-			sfx('copySection');
-		};
+		copySectionBtn.onClick = (_) -> copySection();
 		add(copySectionBtn);
 
 		swapSectionBtn = new Button();
@@ -609,6 +586,32 @@ class LevelEditor extends FlxState
 						updateNotesFilter();
 					}
 				}
+
+				if (FlxG.keys.pressed.SHIFT)
+				{
+					if (FlxG.keys.justPressed.O)
+					{
+						final newVal = !vocalsEnabled.get('opponent');
+						vocalsEnabled.set('opponent', newVal);
+						playback.muteStatus(Voices_Opponent, !newVal);
+						sfx('noteSelect', false, true);
+					}
+					else if (FlxG.keys.justPressed.P)
+					{
+						final newVal = !vocalsEnabled.get('p1');
+						vocalsEnabled.set('p1', newVal);
+						playback.muteStatus(Voices_Player, !newVal);
+						sfx('noteSelect', false, true);
+					}
+					else if (FlxG.keys.justPressed.I)
+					{
+						final newVal = !vocalsEnabled.get('inst');
+						vocalsEnabled.set('inst', newVal);
+						playback.muteStatus(Inst, !newVal);
+						sfx('noteSelect', false, true);
+					}
+					else if (FlxG.keys.justPressed.C) copySection();
+				}
 			}
 			else
 			{
@@ -617,6 +620,22 @@ class LevelEditor extends FlxState
 
 				if (MoonInput.justPressed(UI_LEFT)) playback.time -= advanceSecs;
 				else if (MoonInput.justPressed(UI_RIGHT)) playback.time += advanceSecs;
+			}
+
+			if (FlxG.keys.pressed.ALT)
+			{
+				if (FlxG.keys.justPressed.O)
+				{
+					final newVal = !hitsoundEnabled.get('opponent');
+					hitsoundEnabled.set('opponent', newVal);
+					sfx('noteSelect', false, true);
+				}
+				else if (FlxG.keys.justPressed.P)
+				{
+					final newVal = !hitsoundEnabled.get('p1');
+					hitsoundEnabled.set('p1', newVal);
+					sfx('noteSelect', false, true);
+				}
 			}
 
 			if (FlxG.keys.justPressed.SPACE)
@@ -704,7 +723,7 @@ class LevelEditor extends FlxState
 				{
 					n.strID = 'h';
 					strum.onHit(n);
-					Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav', true);
+					if (hitsoundEnabled.get(n.lane)) Paths.playSFX('toolkit/level-editor/hitsound-${n.lane.toLowerCase()}.wav', true);
 				}
 
 				if (n.strID == 'h' && conductor.time < n.time) n.strID = 'a';
@@ -837,7 +856,7 @@ class LevelEditor extends FlxState
 
 		// plays hold sfx for the opp side.
 		final wasOpp = sustainLoopOpp != null && sustainLoopOpp.playing;
-		if (activeOpp && !wasOpp)
+		if (activeOpp && !wasOpp && hitsoundEnabled.get('opponent'))
 		{
 			sustainLoopOpp.volume = MoonSettings.callSetting('SFX Volume') / 100;
 			sustainLoopOpp.play();
@@ -850,7 +869,7 @@ class LevelEditor extends FlxState
 
 		// plays hold sfx for the player
 		final wasP1 = sustainLoopP1 != null && sustainLoopP1.playing;
-		if (activeP1 && !wasP1)
+		if (activeP1 && !wasP1 && hitsoundEnabled.get('p1'))
 		{
 			sustainLoopP1.volume = MoonSettings.callSetting('SFX Volume') / 100;
 			sustainLoopP1.play();
@@ -981,10 +1000,16 @@ class LevelEditor extends FlxState
 								duration: 0.0,
 								values: (library.form != null) ? NoteTypeRegistry.processNoteValues(selectedType, library.form.getValues()) : null
 							};
-							createNote(n);
+							final placedNote = createNote(n);
 							chart.content.notes.push(n);
 							History.pushNotePlace(n);
 							sfx('place-${FlxG.random.int(1, 6)}');
+
+							// select the note we just placed
+							deselectAll();
+							selectedNotes.push(placedNote);
+							placedNote.brightness = 0.4;
+							refreshHandleVis();
 						}
 
 					// huh... I think the switch isn't very needed here lmao
@@ -1198,7 +1223,7 @@ class LevelEditor extends FlxState
 		}
 	}
 
-	public function createNote(n:NoteStruct)
+	public function createNote(n:NoteStruct):Note
 	{
 		var note = new Note(n.data, n.time, n.type, "mooncharter", n.duration, conductor);
 		note.state = CHART_EDITOR;
@@ -1217,7 +1242,7 @@ class LevelEditor extends FlxState
 		note.makeHandle();
 		noteGroup.add(note.sustainHandle);
 
-		if (note.type != null)
+		if (note.type != null && note.type != 'default')
 		{
 			note.makeTypeMarker();
 			noteGroup.add(note.typeMarker);
@@ -1234,6 +1259,8 @@ class LevelEditor extends FlxState
 		});
 
 		EditorSync.onNoteAdded(n);
+
+		return note;
 	}
 
 	public function createEvent(ev:EventStruct)
@@ -1349,6 +1376,34 @@ class LevelEditor extends FlxState
 			conductor.changeBpmAt(ch.time, ch.bpm, ch.numerator, ch.denominator);
 			changeIndex++;
 		}
+	}
+
+	function copySection():Void
+	{
+		final curSec = getCurSection();
+		final sourceSec = curSec + Std.int(sectionStepper.value);
+		if (sourceSec < 0) return;
+
+		for (n in getSectionNotes(sourceSec))
+		{
+			final pasted:NoteStruct = {
+				time: n.time - getSectionStartTime(sourceSec) + getSectionStartTime(curSec),
+				data: n.data,
+				lane: n.lane,
+				type: n.type,
+				duration: n.duration,
+				values: n.values
+			};
+
+			if (!Lambda.exists(chart.content.notes, e -> Math.abs(e.time - pasted.time) < 0.01 && e.data == pasted.data && e.lane == pasted.lane))
+			{
+				chart.content.notes.push(pasted);
+				createNote(pasted);
+				History.pushNotePlace(pasted);
+			}
+		}
+		chart.content.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+		sfx('copySection');
 	}
 
 	function timeToY(time:Float):Float
@@ -1778,11 +1833,7 @@ class LevelEditor extends FlxState
 
 	public function saveLevel()
 	{
-		// TODO: support for the difficulty system
-		File.saveContent(Paths.getPath('songs/$song/$mix/chart-$diff.json'), haxe.Json.stringify(chart.content, null, "\t"));
-		File.saveContent(Paths.getPath('songs/$song/$mix/events.json'), haxe.Json.stringify(chart.events, null, "\t"));
-
-		// trace('shit got saved ayooooo');
+		chart.save();
 
 		sfx('save${FlxG.random.bool(0.5) ? "-secret" : ""}', false, true);
 	}

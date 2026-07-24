@@ -42,6 +42,11 @@ class SongLibrary
 	 */
 	var allSongs:Array<SongBase> = [];
 
+	/**
+	 * Ordered list of category (week) ids, always starting with "all".
+	 */
+	var categoryOrder:Array<String> = [];
+
 	@:dox(hide)
 	function new()
 	{
@@ -76,6 +81,7 @@ class SongLibrary
 	private function scanSongs()
 	{
 		allSongs = [];
+		categoryOrder = ['all'];
 
 		// we scan for all available songs.
 		for (songFolder in Paths.readDir('songs/'))
@@ -122,6 +128,7 @@ class SongLibrary
 				}
 
 				songsByWeek.set(weekFile, wSongs);
+				categoryOrder.push(weekFile);
 			}
 		}
 	}
@@ -196,6 +203,19 @@ class SongLibrary
 		final diff = getDifficulty(name);
 		if (diff?.voicesSuffix != null) return diff.voicesSuffix;
 		return diff?.suffix ?? '';
+	}
+
+	/**
+	 * Returns a display name for a category (week) id.
+	 */
+	static function getCategoryDisplayName(id:String):String
+	{
+		if (id == 'all') return 'All Songs';
+
+		final wd:Week = Week.get(id);
+		if (wd != null && wd.displayName != null) return wd.displayName;
+
+		return id;
 	}
 }
 

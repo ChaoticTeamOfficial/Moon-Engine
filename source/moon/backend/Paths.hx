@@ -112,10 +112,28 @@ class Paths
 	{
 		#if sys
 		final resolved = getPath(path, library);
+		// final dir = haxe.io.Path.directory(resolved);
+
+		// if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
+
+		File.saveContent(resolved, content);
+		trace('[PATHS] Saved to: $resolved');
+		#else
+		trace("Saving only works on desktop!", "ERROR");
+		#end
+	}
+
+	/**
+	 * Saves content directly under a known root folder, bypassing mod resolution.
+	 * Used when multiple related files must be written to the same location
+	 * regardless of which of them individually exist yet.
+	 */
+	public static function saveFileContentTo(root:String, path:String, content:String):Void
+	{
+		#if sys
+		final resolved = '$root/$path';
 		final dir = haxe.io.Path.directory(resolved);
-
 		if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
-
 		File.saveContent(resolved, content);
 		trace('[PATHS] Saved to: $resolved');
 		#else

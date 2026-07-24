@@ -130,4 +130,20 @@ class Mods
 		#end
 		return Paths.getVanillaPath(originalPath, library);
 	}
+
+	/**
+	 * Returns the root folder of the first active mod that contains `originalPath`,
+	 * or null if no active mod has it (meaning it lives in vanilla `assets/`).
+	 */
+	static function getOwningModRoot(originalPath:String, ?library:String):Null<String>
+	{
+		#if sys
+		for (mod in activeMods)
+		{
+			final modPath = mod.getAsset(originalPath, library);
+			if (modPath != null) return mod.root;
+		}
+		#end
+		return null;
+	}
 }

@@ -653,6 +653,38 @@ class Chart
 	}
 
 	/**
+	 * Saves this chart's notes, events, and metadata back to their respective files,
+	 * mirroring the same suffix logic used when loading.
+	 *
+	 * @param saveBookmarks Whether to persist bookmarks into the chart file. Defaults to true.
+	 */
+	public function save(saveBookmarks:Bool = true):Void
+	{
+		#if sys
+		final suffix = getDifficultySuffix(difficulty);
+
+		final chartToSave:ChartStruct = {
+			notes: content.notes
+		};
+		if (saveBookmarks && content.bookmarks != null) chartToSave.bookmarks = content.bookmarks;
+
+		final chartKey = 'songs/$song/$mix/chart-$difficulty.json';
+		writeJson('songs/$song/$mix/chart-$difficulty', chartToSave);
+
+		final baseRoot = Mods.getOwningModRoot(chartKey) ?? Paths.getVanillaPath('');
+
+		Paths.saveFileContentTo(baseRoot, 'songs/$song/$mix/${(suffix != '') ? 'events$suffix' : 'events'}.json', Json.stringify(events, "\t"));
+		Paths.saveFileContentTo(baseRoot, 'songs/$song/$mix/${(suffix != '') ? 'meta$suffix' : 'meta'}.json', Json.stringify(content.meta, "\t"));
+
+		trace('[CHART] Saved chart $song/$mix/$difficulty', "DEBUG");
+		#else
+		throw 'Saving charts is not available in this platform!';
+		#end
+	}
+
+	private static function writeJson(path:String, data:Dynamic):Void Paths.saveFileContent(path + '.json', Json.stringify(data, "\t"));
+
+	/**
 	 * Converts a chart type to Moon Engine's chart type.
 	 * 
 	 * @param type       The chart type you're converting from
