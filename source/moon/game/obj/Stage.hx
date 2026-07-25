@@ -152,7 +152,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				var sprite = new MoonSprite(objData.position[0], objData.position[1]);
 				sprite.strID = objData.name;
 
-				final assetPath = '$stg/${objData.name}';
+				final assetPath = '${objData?.from ?? stg}/${objData.name}';
 				final objType:AtlasType = objData?.type ?? NONE;
 
 				switch (objType)
@@ -354,6 +354,7 @@ typedef StageObject =
 	var ?animations:Array<AnimationData>;
 	var ?animBehavior:AnimBehavior;
 	var ?startAnim:String;
+	var ?from:String;
 }
 
 typedef StageCharacter =

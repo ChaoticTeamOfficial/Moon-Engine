@@ -15,6 +15,7 @@ import moon.game.obj.*;
 import moon.game.*;
 import moon.game.obj.notes.*;
 import moon.backend.data.Chart.NoteStruct;
+import moon.menus.MainMenu;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -188,6 +189,7 @@ class OffsetEditor extends FlxState
 		}
 
 		if (ghost.visible) ghost.setPosition(char.x, char.y);
+		if (FlxG.keys.justPressed.BACKSPACE) FlxG.switchState(() -> new MainMenu());
 	}
 
 	private function _buildLeftPanel():Void

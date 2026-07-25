@@ -66,14 +66,12 @@ class NoteSpawner extends FlxGroup
 		updateCachedSettings();
 		updateSpawnThreshold();
 
-		super.update(dt);
-
-		final spawnTime = conductor.time + spawnThreshold;
 		var i = nextNoteIndex;
-		while (i < _notes.length && _notes[i].time <= spawnTime)
+		while (i < _notes.length && _notes[i].time <= (conductor.time + spawnThreshold))
 			recycleNote(_notes[i++]);
 
 		nextNoteIndex = i;
+		super.update(dt);
 	}
 
 	inline function updateCachedSettings():Void
@@ -84,7 +82,7 @@ class NoteSpawner extends FlxGroup
 
 	inline function updateSpawnThreshold():Void
 	{
-		final newThreshold = (scrollSpeed <= 0.9) ? 3000 : (scrollSpeed <= 0.4) ? 5000 : 700;
+		final newThreshold = (scrollSpeed <= 0.4) ? 5000 : (scrollSpeed <= 0.9) ? 3000 : 700;
 		if (spawnThreshold != newThreshold) spawnThreshold = newThreshold;
 	}
 

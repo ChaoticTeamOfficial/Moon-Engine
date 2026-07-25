@@ -1,0 +1,34 @@
+{
+	"players": [
+		"bf"
+	],
+	"spectators": [
+		"gf"
+	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"opponents": [
+		"dad"
+	],
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"artist": "Saruky",
+	"hasCountdown": true,
+	"version": "2.2.4",
+	"preview": [
+		0,
+		0
+	],
+	"scrollSpd": 2.7,
+	"charter": "fabs + Spazkid",
+	"timeSignature": [
+		4,
+		4
+	],
+	"displayName": "Eggnog Erect",
+	"stage": "mall-erect",
+	"bpm": 140,
+	"album": "expansion1",
+	"noteskin": "v-slice"
+}

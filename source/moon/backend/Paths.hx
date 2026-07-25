@@ -112,9 +112,9 @@ class Paths
 	{
 		#if sys
 		final resolved = getPath(path, library);
-		// final dir = haxe.io.Path.directory(resolved);
+		final dir = haxe.io.Path.directory(resolved);
 
-		// if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
+		if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
 
 		File.saveContent(resolved, content);
 		trace('[PATHS] Saved to: $resolved');
