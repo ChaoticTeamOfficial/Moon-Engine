@@ -220,6 +220,13 @@ class ChartConverterSubState extends FlxSubState
 		noteRulesContainer.addComponent(rule.root);
 	}
 
+	override public function update(elapsed)
+	{
+		super.update(elapsed);
+
+		if (MoonInput.justPressed(BACK)) close();
+	}
+
 	function doConversion()
 	{
 		if (_chartPath == null)
@@ -383,12 +390,6 @@ class ChartConverterSubState extends FlxSubState
 		dlg.onSelect.add(onSelect);
 		dlg.browse(OPEN, ext, Sys.getCwd(), title);
 		#end
-	}
-
-	override public function closeSubState()
-	{
-		if (root != null) Screen.instance.removeComponent(root);
-		super.closeSubState();
 	}
 }
 

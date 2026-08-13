@@ -1,7 +1,6 @@
 package;
 
 import moon.backend.data.JudgementsCombo.AppearAnim;
-import moon.toolkit.ChartConvert;
 import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.display.Sprite;

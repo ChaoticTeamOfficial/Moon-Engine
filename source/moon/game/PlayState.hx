@@ -12,7 +12,6 @@ import moon.game.submenus.*;
 import moon.game.obj.*;
 import moon.toolkit.level_editor.*;
 import moon.backend.gameplay.*;
-import moon.toolkit.ChartConvert;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseScreen;
 import moon.game.events.EventRegistry;
@@ -20,6 +19,7 @@ import moon.game.obj.Character.CharacterType;
 import moon.game.obj.SubtitleDisplay;
 import moon.hardcoded_shaders.RainShader;
 import openfl.filters.ShaderFilter;
+import moon.backend.gameplay.mechanics.*;
 
 using StringTools;
 
@@ -114,6 +114,7 @@ class PlayState extends FlxTransitionableState
 		Global.allowInputs = true;
 
 		EventRegistry.init();
+		MechanicRegister.init();
 
 		if (replay != null)
 		{
@@ -291,6 +292,7 @@ class PlayState extends FlxTransitionableState
 	override public function update(elapsed:Float):Void
 	{
 		Global.scriptCall('onUpdate', [elapsed]);
+		MechanicRegister.updateAll(elapsed);
 		super.update(elapsed);
 
 		// camGAME.rotation += 0.5;
