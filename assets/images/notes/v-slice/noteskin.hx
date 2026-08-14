@@ -24,7 +24,7 @@ function createReceptor(direction)
 
 	strumNote.animation.onFinish.add(function(animation:String)
 	{
-		if (animation == direction + '-confirm') strumNote.playAnim((!strumNote.isCPU) ? direction + '-press' : direction + '-static');
+		if (animation == direction + '-confirm' && strumNote.isCPU) strumNote.playAnim(direction + '-static');
 	});
 
 	// Rescale the note cause its big af

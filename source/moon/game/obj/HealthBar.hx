@@ -2,11 +2,9 @@ package moon.game.obj;
 
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
-import haxe.Json;
 import flixel.ui.FlxBar;
 import flixel.group.FlxSpriteGroup;
 
-// TODO: take a further look on this, the healthbar is not correctly centered.
 class HealthBar extends FlxSpriteGroup
 {
 	/**
@@ -65,13 +63,20 @@ class HealthBar extends FlxSpriteGroup
 	public var iconDistance:Float = 58;
 
 	/**
+	 * The conductor driving this healthbar's icon bops and transitions.
+	 */
+	public var conductor:Conductor;
+
+	/**
 	 * Creates a healthbar.
 	 * @param opponent the opponent name.
 	 * @param player the player name.
 	 */
-	public function new(opponent:String, player:String)
+	public function new(opponent:String, player:String, ?conductor:Conductor)
 	{
 		super();
+
+		this.conductor = conductor;
 
 		barBG = cast new MoonSprite().loadGraphic(Paths.image('ingame/UI/healthbar'));
 		barBG.scale.set(0.9, 0.9);
@@ -109,13 +114,26 @@ class HealthBar extends FlxSpriteGroup
 		playerIcon.screenCenter(X);
 		oppIcon.screenCenter(X);
 
+		if (this.conductor != null)
+		{
+			this.conductor.onStep.add(step ->
+			{
+				// if (transitioning) return;
+				oppIcon.onStepHit(step, iconScale + oppIcon.extraScale);
+				playerIcon.onStepHit(step, iconScale + playerIcon.extraScale);
+			});
+		}
+
 		updateBarStats();
 	}
 
 	var count:Int = 4;
 
-	public function performTransition(conductor:Conductor)
+	public function performTransition()
 	{
+		return;
+		if (conductor == null) return;
+
 		transitioning = true;
 		count = 4;
 		bar.scale.set(0, 1);
@@ -131,8 +149,10 @@ class HealthBar extends FlxSpriteGroup
 			switch (count)
 			{
 				case 3, 2:
+					final target = (count == 3) ? 0.9 : 1;
 					FlxTween.tween((count == 3 ? barBG : bar).scale, {
-						x: (count == 3) ? 0.9 : 1
+						x: target,
+						y: target
 					}, conductor.crochet / 1000, {
 						ease: FlxEase.expoOut
 					});
@@ -168,13 +188,6 @@ class HealthBar extends FlxSpriteGroup
 		if (health > 98) health = 101;
 		// if(bar.value != health) trace(health);
 		bar.value = FlxMath.lerp(bar.value, health, 0.2);
-
-		if (!transitioning)
-		{
-			final scaleSpeed = elapsed * 18;
-			oppIcon.scale.x = oppIcon.scale.y = FlxMath.lerp(oppIcon.scale.x, iconScale + oppIcon.extraScale, scaleSpeed);
-			playerIcon.scale.x = playerIcon.scale.y = FlxMath.lerp(playerIcon.scale.x, iconScale + playerIcon.extraScale, scaleSpeed);
-		}
 
 		updateBarPos();
 
@@ -228,9 +241,6 @@ class HealthBar extends FlxSpriteGroup
 
 		barBG.screenCenter(X);
 		bar.screenCenter(X);
-
-		// playerIcon.updateHitbox();
-		// oppIcon.updateHitbox();
 	}
 
 	public function updateBarStats()
@@ -245,17 +255,15 @@ class HealthBar extends FlxSpriteGroup
 		oppIcon.origin.set(oppIcon.width + 8, oppIcon.height / 2);
 	}
 
-	public function bump()
-	{
-		if (transitioning) return;
+	/*public function bump()
+		{
+			if (transitioning) return;
 
-		oppIcon.scale.set(iconScale + oppIcon.extraScale + 0.15, iconScale + oppIcon.extraScale + 0.15);
-		playerIcon.scale.set(iconScale + playerIcon.extraScale + 0.15, iconScale + playerIcon.extraScale + 0.15);
-	}
-
+			oppIcon.scale.set(iconScale + oppIcon.extraScale + 0.15, iconScale + oppIcon.extraScale + 0.15);
+			playerIcon.scale.set(iconScale + playerIcon.extraScale + 0.15, iconScale + playerIcon.extraScale + 0.15);
+	}*/
 	public function getRGBData(character:String)
 	{
-		// TODO: jarvis, this broke again
 		final data:Character.CharacterData = getData(character);
 		final c = data?.icon?.color ?? [80, 80, 80];
 		return FlxColor.fromRGB(c[0], c[1], c[2]);

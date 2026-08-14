@@ -192,7 +192,7 @@ class PlayState extends FlxTransitionableState
 
 			Countdown.onStart.addOnce(() ->
 			{
-				playField.healthBar.performTransition(conductor);
+				playField.healthBar.performTransition();
 				playField.healthBar.visible = true;
 			});
 		}

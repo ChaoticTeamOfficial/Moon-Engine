@@ -244,6 +244,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					setType(spectators, SPECTATOR);
 			}
 		}
+
+		updateScale();
 	}
 
 	private function addGroupAtLayer(group:FlxSpriteGroup, charData:StageCharacter, objMap:Map<String, MoonSprite>)
@@ -253,7 +255,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		group.x = charData?.position[0] ?? 0.0;
 		group.y = charData?.position[1] ?? 0.0;
 		group.angle = charData?.angle ?? 0.0;
-		if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
+		// if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
 
 		for (obj in group.members) if (Std.isOfType(obj, Character)) if (charData.camOffsets != null) cast(obj, Character).camOffsets = charData.camOffsets;
 
@@ -265,6 +267,14 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		}
 		insert(insertIndex, group);
 		// add(group);
+	}
+
+	/**
+	 * Updates all the characters scales.
+	 */
+	public function updateScale()
+	{
+		for (group in [opponents, spectators, players]) for (spr in group.members) if (Std.isOfType(spr, Character)) cast(spr, Character).updateScale();
 	}
 
 	var index:Int = 0;
@@ -363,6 +373,5 @@ typedef StageCharacter =
 	var position:Array<Float>;
 	var objectBehind:String;
 	var ?camOffsets:Array<Float>;
-	var ?scale:Array<Float>;
 	var ?angle:Float;
 }

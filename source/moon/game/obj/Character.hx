@@ -16,6 +16,8 @@ typedef HealthIconData =
 	var ?antialiasing:Bool;
 	var ?flipX:Bool;
 	var ?flipY:Bool;
+	var ?x:Float;
+	var ?y:Float;
 }
 
 typedef CharacterData =
@@ -25,6 +27,7 @@ typedef CharacterData =
 	var ?type:AtlasType;
 	var ?frameWidth:Int;
 	var ?frameHeight:Int;
+	var ?extendIdleDuration:Bool;
 	var ?flipX:Bool;
 	var ?camOffsets:Array<Float>;
 	var ?extraOffsets:Array<Float>;
@@ -47,6 +50,7 @@ class Character extends MoonSprite
 	public var gameoverColorScheme:FlxColor;
 	public var camOffsets:Array<Float> = [];
 	public var type:CharacterType;
+	public var extendIdleDuration:Bool = false;
 
 	/**
 	 * Creates a character on the screen.
@@ -109,11 +113,19 @@ class Character extends MoonSprite
 
 	override public function update(elapsed:Float)
 	{
-		if (conductor != null && animationHold >= conductor.stepCrochet / 1000 * holdDuration)
+		if (conductor != null)
 		{
-			dance(true);
-			animationHold = 0;
-			animation.curAnim.curFrame = animation.curAnim.frames[animation.curAnim.frames.length - 1];
+			if (extendIdleDuration && animation.curAnim != null && animation.curAnim.name == 'idle-0')
+			{
+				animation.curAnim.frameRate = animation.curAnim.frames.length * (conductor.bpm / danceFrequency) / 60.0;
+			}
+
+			if (animationHold >= conductor.stepCrochet / 1000 * holdDuration)
+			{
+				dance(true);
+				animationHold = 0;
+				animation.curAnim.curFrame = animation.curAnim.frames[animation.curAnim.frames.length - 1];
+			}
 		}
 		super.update(elapsed);
 	}
@@ -123,6 +135,12 @@ class Character extends MoonSprite
 		super.playAnim(animName, force, reversed, frame);
 
 		if (animation.curAnim != null) if (animation.curAnim.name.startsWith('idle') || animation.curAnim.name.startsWith('sing')) animationHold = 0;
+	}
+
+	public function updateScale()
+	{
+		if (data == null) return;
+		this.scale.set(data?.scale ?? 1, data?.scale ?? 1);
 	}
 
 	@:noCompletion
@@ -172,13 +190,15 @@ class Character extends MoonSprite
 		danceFrequency = data?.danceFrequency ?? 2;
 		holdDuration = data?.holdDuration ?? 8;
 		gameoverColorScheme = FlxColor.fromString(data?.gameoverColorScheme ?? '0xFF4924ff');
+		extendIdleDuration = data?.extendIdleDuration ?? false;
 
 		this.antialiasing = data?.antialiasing ?? true;
-		this.scale.set(data?.scale ?? 1, data?.scale ?? 1);
+
 		this.updateHitbox();
 		this.playAnim("idle-0");
 		this.flipX = data?.flipX ?? false;
 		origin.set(width / 2, height);
+		updateScale();
 
 		script.load('characters/${this.character}/script.hx');
 		if (script.code != null)

@@ -100,7 +100,7 @@ class PlayField extends FlxGroup
 		}
 
 		// < -- HEALTHBAR SETUP -- >//
-		healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]);
+		healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0], conductor);
 		add(healthBar);
 		healthBar.setPosition(0, 0);
 		healthBar.screenCenter(X);
@@ -382,7 +382,7 @@ class PlayField extends FlxGroup
 
 	function beatHit(beat:Float):Void
 	{
-		healthBar.bump();
+		// healthBar.bump();
 
 		// <- COUNTDOWN STUFF -> //
 		if (inCountdown && !inCutscene)
