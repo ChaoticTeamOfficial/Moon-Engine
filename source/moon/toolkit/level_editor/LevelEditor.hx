@@ -179,7 +179,6 @@ class LevelEditor extends FlxState
 		PlayState.instance = null;
 		PlayField.instance = null;
 
-		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 		FlxG.cameras.add(camBACK, true);
 		FlxG.cameras.add(camMID, false);
 		FlxG.cameras.add(camFRONT, false);
@@ -469,12 +468,17 @@ class LevelEditor extends FlxState
 			typeButtons.set(gType, button);
 		}
 
+		UIOverlay.init();
+
 		library = new Library();
 		add(library);
 
 		leftpanel = new LeftPanel(this);
 		leftpanel.camera = camFRONT;
 		add(leftpanel);
+
+		UIOverlay.layer.camera = camFRONT;
+		add(UIOverlay.layer);
 
 		/*for(i in 0...60)
 			{
@@ -531,6 +535,8 @@ class LevelEditor extends FlxState
 
 		History.reset();
 		Global.allowInputs = true;
+
+		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	}
 
 	var changeIndex:Int = 1;

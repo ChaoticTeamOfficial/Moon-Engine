@@ -20,9 +20,9 @@ function createReceptor(direction)
 	strumNote.animation.addByPrefix(direction + '-confirm', direction + '-confirm', 24, false);
 	strumNote.playAnim(direction + '-static', true);
 
-	strumNote.animation.onFinish.add((animation) ->
+	strumNote.animation.onFinish.add(function(animation:String)
 	{
-		if (animation == direction + '-confirm') strumNote.playAnim((!strumNote.isCPU) ? direction + '-press' : direction + '-static');
+		if (animation == direction + '-confirm' && strumNote.isCPU) strumNote.playAnim(direction + '-static');
 	});
 	strumNote.scale.set(scale, scale);
 
@@ -31,8 +31,8 @@ function createReceptor(direction)
 	splash.animation.addByPrefix('splash', direction + '0', 48, false);
 	splash.animation.onFrameChange.add(_ -> splash.alpha = 0.8);
 	splash.playRandom = false;
-	splash.scale.set(scale + 0.2, scale + 0.2);
-	// splash.blend = 0;
+	splash.scale.set(scale, scale);
+	splash.blend = 0;
 
 	// sustain splash
 	sustainSplash.frames = Paths.getSparrowAtlas(p + 'holdSplash');
@@ -47,7 +47,8 @@ function createReceptor(direction)
 	});
 	sustainSplash.scale.set(scale, scale);
 	sustainSplash.updateHitbox();
-	sustainSplash.extraOffset.y = -16;
+	sustainSplash.extraOffset.y = 18;
+	//sustainSplash.blend = 0;
 
 	splash.antialiasing = strumNote.antialiasing = sustainSplash.antialiasing = false;
 }

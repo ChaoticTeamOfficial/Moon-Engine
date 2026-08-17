@@ -1,143 +1,97 @@
 package moon.toolkit.level_editor;
 
-import haxe.ui.components.*;
-import haxe.ui.components.popups.*;
-import haxe.ui.containers.*;
-import haxe.ui.core.Component;
-import haxe.ui.core.Screen;
+import flixel.util.FlxColor;
+import moon.toolkit.ui.*;
 import moon.game.events.EventFieldDef;
 
 using StringTools;
 
 // TODO: document
-
-/**
- * A class that handles how events should look like in the library!
- * Basically, it takes the events editable fields and converts to haxeui stuff!!
- */
-class EventFormUI
+class EventFormUI extends UIScrollPage
 {
-	public var root:VBox;
-
-	private var _scroll:ScrollView;
-	private var _placeBtn:Button;
 	private var _fields:Array<EventFieldDef>;
-	private var _widgets:Map<String, Component>;
-
-	static inline final BTN_H:Float = 32;
-	static inline final GAP:Float = 32;
-
+	private var _widgets:Map<String, UIComponent>;
 	private var _initialValues:Dynamic;
 
 	public function new(x:Float, y:Float, w:Float, h:Float, fields:Array<EventFieldDef>, ?initialValues:Dynamic)
 	{
+		super(x, y, w, h);
+
+		visible = true;
+		active = true;
+
 		_fields = fields ?? [];
 		_widgets = [];
 		_initialValues = initialValues;
 
-		_scroll = new ScrollView();
-		_scroll.left = x;
-		_scroll.top = y;
-		_scroll.width = w;
-		_scroll.height = h - BTN_H + GAP;
-
-		_scroll.styleString = "background-color: #0d0c0d; border: none; padding: 0;";
-
-		root = new VBox();
-		root.width = w - 32;
-		root.styleString = "background-color: #0d0c0d; border: none; padding: 4px; spacing: 5px;";
-		_scroll.addComponent(root);
-
 		for (field in _fields) _buildRow(field);
 
-		Screen.instance.addComponent(_scroll);
+		layoutVertical();
 	}
 
 	private function _buildRow(field:EventFieldDef):Void
 	{
-		var row = new HBox();
-		row.width = root.width;
-		row.styleString = "spacing: 6px;";
-
-		var lbl = new Label();
-		lbl.text = field.label;
-		lbl.width = 108;
-		lbl.styleString = "font-size: 12px; color: #cccccc; vertical-align: center;";
-		row.addComponent(lbl);
-
 		final hasOverride = _initialValues != null && Reflect.hasField(_initialValues, field.name);
 		final overrideVal:Dynamic = hasOverride ? Reflect.field(_initialValues, field.name) : null;
 
-		var widget:Component = null;
+		var widget:UIComponent = null;
 		switch (field.type)
 		{
 			case TEXT:
-				var tf = new TextField();
-				tf.text = hasOverride ? Std.string(overrideVal) : ((field.defaultValue != null) ? Std.string(field.defaultValue) : '');
-				tf.percentWidth = 100;
-				widget = tf;
+				var tb = new UITextBox(0, 0, viewWidth, field.label);
+				tb.text = hasOverride ? Std.string(overrideVal) : ((field.defaultValue != null) ? Std.string(field.defaultValue) : '');
+				widget = tb;
 
 			case NUMBER:
-				var ns = new NumberStepper();
-				ns.value = hasOverride ? Std.parseFloat(
+				final min = field.min ?? 0;
+				final max = field.max ?? 100;
+				final step = field.step ?? 1;
+				final defVal = hasOverride ? Std.parseFloat(
 					Std.string(overrideVal)
-				) : ((field.defaultValue != null) ? Std.parseFloat(Std.string(field.defaultValue)) : 0);
-				if (field.min != null) ns.min = field.min;
-				if (field.max != null) ns.max = field.max;
-				if (field.step != null) ns.step = field.step;
-				ns.percentWidth = 100;
-				widget = ns;
+				) : ((field.defaultValue != null) ? Std.parseFloat(Std.string(field.defaultValue)) : min);
+				var sl = new UISlider(0, 0, viewWidth, field.label, min, max, defVal, step);
+				widget = sl;
 
 			case DROPDOWN:
-				var dd = new DropDown();
-				dd.percentWidth = 100;
-				if (field.options != null) for (opt in field.options) dd.dataSource.add({
-					text: opt
-				});
-
+				final opts = field.options ?? [];
 				final wanted = hasOverride ? Std.string(overrideVal) : ((field.defaultValue != null) ? Std.string(field.defaultValue) : null);
-				if (wanted != null && field.options != null)
+				var startIndex = 0;
+				if (wanted != null)
 				{
-					final idx = field.options.indexOf(wanted);
-					if (idx >= 0) dd.selectedIndex = idx;
+					final idx = opts.indexOf(wanted);
+					if (idx >= 0) startIndex = idx;
 				}
+				var dd = new UIDropdown(0, 0, viewWidth, field.label, opts, null, startIndex);
 				widget = dd;
 
 			case CHECKBOX:
-				var cb = new CheckBox();
-				cb.selected = hasOverride ? (overrideVal == true) : ((field.defaultValue != null) ? (field.defaultValue == true) : false);
+				final isChecked = hasOverride ? (overrideVal == true) : ((field.defaultValue != null) ? (field.defaultValue == true) : false);
+				var cb = new UICheckbox(0, 0, viewWidth, field.label, isChecked);
 				widget = cb;
 
 			case COLOR:
-				var colorP = new ColorPickerPopup();
-				colorP.percentWidth = 100;
-				colorP.liveTracking = true;
-
 				final raw:Dynamic = hasOverride ? overrideVal : field.defaultValue;
+				var col:FlxColor = FlxColor.WHITE;
 				if (raw != null)
 				{
-					var colorStr:String = null;
 					if (Std.isOfType(raw, String))
 					{
-						colorStr = cast raw;
+						var colorStr:String = cast raw;
 						if (!colorStr.startsWith("#")) colorStr = "#" + colorStr;
+						col = FlxColor.fromString(colorStr);
 					}
 					else
-						colorStr = "#" + StringTools.hex(Std.int(raw), 6);
-
-					if (colorStr != null) colorP.selectedItem = haxe.ui.util.Color.fromString(colorStr);
+						col = Std.int(raw);
 				}
-
-				widget = colorP;
+				var cp = new UIColorPicker(0, 0, viewWidth, field.label, col);
+				widget = cp;
 		}
 
 		if (widget != null)
 		{
 			_widgets.set(field.name, widget);
-			row.addComponent(widget);
+			addComponent(widget);
 		}
-
-		root.addComponent(row);
 	}
 
 	public function getValues():Dynamic
@@ -151,27 +105,21 @@ class EventFormUI
 			switch (field.type)
 			{
 				case TEXT:
-					Reflect.setField(result, field.name, cast(w, TextField).text);
+					Reflect.setField(result, field.name, cast(w, UITextBox).text);
 				case NUMBER:
-					Reflect.setField(result, field.name, cast(w, NumberStepper).value);
+					Reflect.setField(result, field.name, cast(w, UISlider).value);
 				case DROPDOWN:
-					final dd = cast(w, DropDown);
-					Reflect.setField(result, field.name, (dd.selectedItem != null) ? dd.selectedItem.text : Std.string(field.defaultValue ?? ''));
+					final dd = cast(w, UIDropdown);
+					final val = (
+						dd.selectedIndex >= 0
+						&& dd.selectedIndex < dd.options.length
+					) ? dd.options[dd.selectedIndex] : Std.string(field.defaultValue ?? '');
+					Reflect.setField(result, field.name, val);
 				case CHECKBOX:
-					Reflect.setField(result, field.name, cast(w, CheckBox).selected);
+					Reflect.setField(result, field.name, cast(w, UICheckbox).checked);
 				case COLOR:
-					// Reflect.setField(result, field.name, Std.int(cast(w, ColorPicker).currentColor));
-					final colorP = cast(w, ColorPickerPopup);
-					var colorValue:Dynamic = null;
-
-					if (colorP.selectedItem != null)
-					{
-						final col = colorP.selectedItem;
-						colorValue = "#" + StringTools.hex(col, 6);
-					}
-					else
-						colorValue = "#FFFFFF";
-
+					final cp = cast(w, UIColorPicker);
+					final colorValue = "#" + StringTools.hex(cp.value, 6);
 					Reflect.setField(result, field.name, colorValue);
 			}
 		}
@@ -180,17 +128,12 @@ class EventFormUI
 
 	public function dispose():Void
 	{
-		if (_scroll != null)
-		{
-			Screen.instance.removeComponent(_scroll);
-			_scroll = null;
-		}
-		if (_placeBtn != null)
-		{
-			Screen.instance.removeComponent(_placeBtn);
-			_placeBtn = null;
-		}
-		root = null;
+		destroy();
+	}
+
+	override public function destroy():Void
+	{
+		super.destroy();
 		_widgets = [];
 	}
 }

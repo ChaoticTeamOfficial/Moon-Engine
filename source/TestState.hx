@@ -1,250 +1,289 @@
 package;
 
-import flixel.math.FlxMath;
-import moon.game.obj.PlayField;
-import flixel.addons.display.waveform.FlxWaveform;
-import moon.game.obj.judgements.ComboNumbers;
-import flixel.FlxG;
-import flixel.FlxState;
-import sys.io.File;
-import haxe.io.Path;
-import haxe.zip.Writer;
-import haxe.zip.Entry;
-import haxe.io.Bytes;
-import haxe.ds.List;
-import sys.Http;
-import openfl.net.URLRequest;
-import openfl.net.URLLoader;
-import openfl.net.URLLoaderDataFormat;
-import openfl.events.Event;
-import openfl.events.IOErrorEvent;
-import openfl.events.ProgressEvent;
-import moon.global_obj.PixelIcon;
-import moon.backend.data.Dialogue.DialogueParser;
-import moon.game.obj.dialogue.*;
-import moon.game.obj.notes.*;
-import moon.game.obj.*;
-import moon.backend.gameplay.*;
 import moon.toolkit.ui.*;
-import moon.toolkit.*;
-import moon.game.obj.results.*;
-import flixel.util.FlxSpriteUtil;
 
 using StringTools;
 
 class TestState extends FlxState
 {
-	var waveform:FlxWaveform;
-	var playfield:PlayField;
-	var note:Note;
-	var sustain:NoteSustain;
+	var pageManager:UIPageManager;
+	var sidebarButtons:Array<FlxSprite> = [];
+	var sidebarLabels:Array<FlxText> = [];
+	var pageIds:Array<String> = ["rendering", "notes", "create", "scroll"];
+	var statusText:FlxText;
+
+	static inline final SIDEBAR_WIDTH:Float = 64;
 
 	override public function create():Void
 	{
 		super.create();
-		FlxG.mouse.useSystemCursor = true;
-		// FlxG.switchState(() -> new moon.game.ResultsState(new PlayerStats('p1')));
-		// addons file test
-		/*var files = new Map<String, Bytes>();
-			files.set("nya/text.txt", Bytes.ofString("Hello world! I am here to spread an important message.\nI got created by code.\nYes.\nThat's right.\n\n\nIsn't that cool?"));
-			files.set("data.json", Bytes.ofString('{"hi": true}'));
-			MZip.create(files, "test.mzip"); */
-		// var fileList = MZip.listFiles("test.mzip");
-		// trace('Files: $fileList', "DEBUG");
-		// var fileContent = MZip.extract(Paths.getPath("test.mzip", null), "nya/text.txt");
-		// trace('Content of text: ${fileContent.toString()}', "DEBUG");
-		// var request = new URLRequest('(link)');
-		// var loader = new URLLoader();
-		// loader.dataFormat = URLLoaderDataFormat.BINARY;
-		// files download test
-		/*loader.addEventListener(Event.COMPLETE, function(e:Event)
-			{
-				File.saveBytes('assets/video foda do luis.mp4', cast(loader.data, Bytes));
-				trace('gg', "DEBUG");
-			});
-			loader.addEventListener(ProgressEvent.PROGRESS, function(e:ProgressEvent)
-			{
-				final mbLoaded = e.bytesLoaded / 1048576;
-				final mbTotal = e.bytesTotal / 1048576;
-				final percent = (e.bytesLoaded / e.bytesTotal) * 100;
-				var display = 'Progress: $formatFloat(percent)% ($formatFloat(mbLoaded) MB / $formatFloat(mbTotal) MB)';
-				trace(display);
-			});
-			loader.load(request); */
-		// reading a json file
-		/*var loader = new URLLoader();
-			loader.dataFormat = URLLoaderDataFormat.TEXT;
-			loader.addEventListener(Event.COMPLETE, function(e:Event)
-			{
-				trace('gg', "DEBUG");
-				var raw:String = cast(e.target, URLLoader).data;
-				try
-				{
-					var list:Array<String> = haxe.Json.parse(raw).teste;
-					for (file in list)
-						trace(file, "DEBUG");
-				}
-				catch (e) {trace(e, "ERROR");}
-			});
-			loader.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent)
-			{
-				trace('a: ${e.text}', "ERROR");
-			});
-			loader.load(new URLRequest('link')); */
-		// var displayIcon = new PixelIcon('dummy');
-		// add(displayIcon);
-		// displayIcon.playAnim('select', true);
-		// trace();
-		// testMod();
-		// testParser();
-		add(new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY));
+		FlxG.cameras.bgColor = 0xFF2E2543;
+		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 
-		// i'm so relieved to find out they batch.
-		/*for(i in 0...2000)
-			{
-				var indicator = new FlxSprite(0.3 * i).makeGraphic(10, 10, FlxColor.TRANSPARENT);
-				FlxSpriteUtil.drawRoundRect(indicator, 0, 0, 10, 10, 5, 5, FlxColor.BLACK);
-				add(indicator);
-				indicator.alpha = 0.3;
-				indicator.active = false;
-		}*/
-		/*Tilemap.addAtlas('btnIcons', 'toolkit/level-editor/icons/googleIcons');
-			for(i in 0...100)
-			{
-				final a = new InvertColor();
-				var thing = new IconButton(0.3 * i, 20, 64, 64, 'speed');
-				thing.invertShader = a;
-				add(thing);
-		}*/
+		var sidebarBg = new FlxSprite(0, 0);
+		sidebarBg.loadGraphic(RoundedRectCache.get(Std.int(SIDEBAR_WIDTH), Std.int(FlxG.height), 0, FlxColor.WHITE));
+		sidebarBg.color = UITheme.SIDEBAR_BG;
+		add(sidebarBg);
 
-		// note = new Note(0,0,"default", "v-slice", 0, null);
-		// note.state = CHART_EDITOR;
+		var icons = ["Render", "Notes", "Chart", "Scroll"];
+		for (i in 0...icons.length)
+		{
+			var btn = new FlxSprite(8, 16 + i * 56);
+			btn.loadGraphic(RoundedRectCache.get(48, 48, 8, FlxColor.WHITE));
+			btn.color = UITheme.CONTROL_BG;
+			add(btn);
+			sidebarButtons.push(btn);
 
-		// sustain = new NoteSustain(note);
-
-		// add(sustain);
-		// add(note);
-
-		// var vis = new ABotVisualizer();
-		// add(vis);
-		// vis.screenCenter();
-
-		// var conductor = new Conductor(160, 4, 4);
-		// var song = new Song('thorns', 'noimix', false, conductor);
-		// song.state = PLAY;
-
-		// FlxG.sound.music = ;
-
-		// vis.setAudioSource(song.inst[0]);
-		// song.muteStatus(Voices_Opponent, true);
-		// song.muteStatus(Voices_Player, true);
-
-		vinyl = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/placeholder'));
-		vinyl.screenCenter();
-		vinyl.shader = new VinylDiskShader();
-		add(vinyl);
-
-		// testParser();
-
-		var replay = new SaveReplayNotif(16, 16);
-		add(replay);
-		replay.parameters = {
-			text: 'Hold [TAB] to save a replay!',
-			color: 0xFF7117d5,
-			duration: 5
+			var lbl = new FlxText(btn.x, btn.y + 16, 48, icons[i].substr(0, 1), 18);
+			lbl.font = UITheme.FONT;
+			lbl.color = UITheme.TEXT_COLOR;
+			lbl.alignment = CENTER;
+			add(lbl);
+			sidebarLabels.push(lbl);
 		}
 
-		replay.onFinish.add(() ->
-		{
-			replay.parameters = {
-				text: 'Replay saved!\n"replay_foda.mrp"',
-				color: 0xFFd98617,
-				duration: 5
-			}
-		});
+		var version = new FlxText(SIDEBAR_WIDTH + 8, 4, 200, "0.5.0");
+		version.font = UITheme.FONT;
+		version.color = UITheme.TEXT_DIM;
+		version.size = 12;
+		add(version);
 
-		testParser();
+		statusText = new FlxText(SIDEBAR_WIDTH + 8, FlxG.height - 24, FlxG.width - SIDEBAR_WIDTH - 16, "");
+		statusText.font = UITheme.FONT;
+		statusText.color = UITheme.TEXT_DIM;
+		statusText.size = 12;
+		add(statusText);
+
+		pageManager = new UIPageManager();
+		add(pageManager);
+
+		buildRenderingSettingsPage();
+		buildNoteSettingsPage();
+		buildCreateChartPage();
+		buildScrollTestPage();
+
+		add(UIOverlay.init());
+
+		pageManager.switchTo("rendering", FadeOnly);
+		highlightSidebar(0);
 	}
 
-	var vinyl:MoonSprite;
-
-	// helper 'w'
-
-	/*function formatFloat(val:Float, decimals:Int = 2):String
-		{
-			var factor = Math.pow(10, decimals);
-			return (Math.round(val * factor) / factor) + "";
-	}*/
-	function testMod()
-	{
-		/*MZip.loadMod('mods/test.mzip');
-			trace(MZip.listFiles('mods/test.mzip'));
-			var image = new MoonSprite().loadGraphic(Paths.image('curMod/oie'));
-			add(image); */
-		// var popup = new Popup(500, 164);
-		// popup.screenCenter();
-		// add(popup);
-	}
-
-	function testParser()
-	{
-		// this could be awesome for making custom events!
-		// oh my god the potential...
-		// -- TEST FOR PARSING INFO -- //
-		/*final schema:Map<String, Array<String>> = [
-				"wave" => ["intensity", "duration"],
-				"shake" => ["intensity"]
-			];
-			final raw = 'I have the <wave=0.3, 1>feeling</wave> that this dialogue is <shake=0.5>very cool</shake>';
-			final parsed = DialogueParser.parseTaggedText(raw, schema);
-			trace('raw text: $raw', "DEBUG");
-			trace('clean text: ${parsed.text}', "DEBUG");
-			for (e in parsed.events)
-				trace('event: ${e.name} chars= ${e.range} values= ${e.values}', "DEBUG");
-		 */
-
-		// -- TEST FOR ACTUAL TEXT RENDERING -- //
-		/*final rawDialogue = "I hate this <color=pink>fucking</color> typer\n" +
-			"Ok these should <wave=3>float</wave> in a nice sine\n" +
-			"<shake=0.8>ooooo i shake</shake>\n" +
-			"suck my <size=48>WOAH</size> <size=16>stop swearing dude...</size>\n" +
-			"I can just <font=DS-DIGI.TTF>change my font</font> whether you <font=KodeMono-Bold.ttf>like</font> <font=5by7_b.ttf>or</font> <font=phantomuff/full.ttf>not</font>.\n" +
-			"I can also: <color=red><shake=1.2><wave=0.5>COMBO VERY <size=56>COOL</size> EFFECTS!</wave></shake></color>\n";
-
-			final schema:Map<String, Array<String>> = [
-				"wave" => ["intensity", "frequency", "delay"],
-				"shake" => ["intensity"],
-				"size" => ["size"],
-				"color" => ["color"],
-				"font" => ["path"]
-			];
-
-			final parsed = DialogueParser.parseTaggedText(rawDialogue, schema);
-			var typer = new TextTyper(0, 0, parsed.text, parsed.events, 45);
-			typer.defaultFont = 'vcr.ttf';
-			typer.defaultSize = 32;
-			typer.defaultColor = 0xFFFFFFFF;
-			typer.lineHeight = 48;
-			add(typer); */
-
-		var box = new DialogueBox(10, 10, 'default', 'data/myCoolDialogue');
-		add(box.portraitsGrp);
-		add(box);
-		box.screenCenter(X);
-		box.y = FlxG.height - box.height - 32;
-		box.visible = true;
-		box.show();
-
-		FlxG.sound.playMusic(Paths.sound('dadbattle/bf/Inst-erect.ogg', 'songs'));
-	}
-
-	override public function update(elapsed:Float)
+	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		vinyl.angle += elapsed * 24;
-		// if(FlxG.keys.justPressed.R) FlxG.resetState();
 
-		// if(FlxG.keys.pressed.LEFT) note.duration += 0.5;
-		// else if(FlxG.keys.pressed.RIGHT) note.duration -= 0.5;
+		if (FlxG.mouse.justPressed)
+		{
+			var mp = FlxG.mouse.getWorldPosition();
+			for (i in 0...sidebarButtons.length)
+			{
+				var b = sidebarButtons[i];
+				if (mp.x >= b.x && mp.x <= b.x + b.width && mp.y >= b.y && mp.y <= b.y + b.height)
+				{
+					pageManager.switchTo(pageIds[i]);
+					highlightSidebar(i);
+					break;
+				}
+			}
+		}
+	}
+
+	function highlightSidebar(index:Int):Void
+	{
+		for (i in 0...sidebarButtons.length)
+		{
+			sidebarButtons[i].color = i == index ? UITheme.ACCENT : UITheme.CONTROL_BG;
+			sidebarLabels[i].color = i == index ? FlxColor.WHITE : UITheme.TEXT_COLOR;
+		}
+	}
+
+	function header(text:String):FlxText
+	{
+		var t = new FlxText(0, 0, 400, text, 20);
+		t.font = UITheme.FONT;
+		t.color = UITheme.TEXT_COLOR;
+		t.antialiasing = UITheme.FONT_ANTIALIASING;
+		return t;
+	}
+
+	function report(msg:String):Void
+	{
+		trace(msg);
+		if (statusText != null) statusText.text = msg;
+	}
+
+	function buildRenderingSettingsPage():Void
+	{
+		var page = new UIPage(SIDEBAR_WIDTH + 30, 40, "Rendering Settings");
+
+		page.add(header("Rendering Settings"));
+
+		var dRenderBg = new UIDropdown(0, 40, 380, "Render Background:", ["Off", "On"]);
+		var dRenderChars = new UIDropdown(0, 0, 380, "Render Characters:", ["Off", "On"], null, 1);
+		var dRenderEvents = new UIDropdown(0, 0, 380, "Render Events:", ["Off", "Only Camera (Box)", "On"], null, 1);
+		var dRenderUI = new UIDropdown(0, 0, 380, "Render UI and Playtest:", ["Off", "On"]);
+
+		dRenderBg.onChange = (v) -> report('Render Background -> $v');
+		dRenderChars.onChange = (v) -> report('Render Characters -> $v');
+		dRenderEvents.onChange = (v) -> report('Render Events -> $v');
+		dRenderUI.onChange = (v) -> report('Render UI and Playtest -> $v');
+
+		page.addComponent(dRenderBg);
+		page.addComponent(dRenderChars);
+		page.addComponent(dRenderEvents);
+		page.addComponent(dRenderUI);
+
+		var vsync = new UICheckbox(0, 0, 380, "V-Sync Enabled:", true);
+		vsync.onChange = (v) -> report('V-Sync Enabled -> $v');
+		page.addComponent(vsync);
+
+		var msaa = new UIStepper(0, 0, 380, "MSAA Samples:", 0, 8, 4, 2);
+		msaa.onChange = (v) -> report('MSAA Samples -> $v');
+		page.addComponent(msaa);
+
+		page.layoutVertical(40);
+
+		pageManager.registerPage("rendering", page);
+	}
+
+	function buildNoteSettingsPage():Void
+	{
+		var page = new UIPage(SIDEBAR_WIDTH + 30, 40, "Normal Note Settings");
+
+		page.add(header("Normal Note Settings"));
+
+		var scrollSpeed = new UIDropdown(0, 40, 320, "Scroll Speed:", ["None", "Slow", "Normal", "Fast"]);
+		var bonusPoints = new UIDropdown(0, 0, 320, "Bonus Points:", ["None", "Small", "Large"]);
+		var damageBoost = new UIDropdown(0, 0, 320, "Damage Boost:", ["None", "x1.5", "x2"]);
+
+		scrollSpeed.onChange = (v) -> report('Scroll Speed -> $v');
+		bonusPoints.onChange = (v) -> report('Bonus Points -> $v');
+		damageBoost.onChange = (v) -> report('Damage Boost -> $v');
+
+		page.addComponent(scrollSpeed);
+		page.addComponent(bonusPoints);
+		page.addComponent(damageBoost);
+
+		var botPlay = new UICheckbox(0, 0, 320, "Bot Play:", false);
+		botPlay.onChange = (v) -> report('Bot Play -> $v');
+		page.addComponent(botPlay);
+
+		var comboMult = new UIStepper(0, 0, 320, "Max Combo Multiplier:", 1, 10, 4, 1);
+		comboMult.onChange = (v) -> report('Max Combo Multiplier -> $v');
+		page.addComponent(comboMult);
+
+		page.layoutVertical(40);
+
+		pageManager.registerPage("notes", page);
+	}
+
+	function buildCreateChartPage():Void
+	{
+		var page = new UIPage(SIDEBAR_WIDTH + 30, 20, "Create a New Chart");
+
+		page.add(header("Create a New Chart"));
+
+		var sub1 = header("Display Settings");
+		sub1.size = 16;
+		sub1.y = 40;
+		page.add(sub1);
+
+		var songName = new UITextBox(0, 70, 380, "Song's Name:");
+		var songIcon = new UITextBox(0, 0, 380, "Song's Icon (Freeplay):");
+		var songWeek = new UITextBox(0, 0, 380, "Song's Week (Story):");
+
+		songName.onChange = (v) -> report('Song Name -> $v');
+		songIcon.onChange = (v) -> report('Song Icon -> $v');
+		songWeek.onChange = (v) -> report('Song Week -> $v');
+		songName.onEnter = (v) -> report('Song Name confirmed -> $v');
+
+		page.addComponent(songName);
+		page.addComponent(songIcon);
+		page.addComponent(songWeek);
+
+		var featured = new UICheckbox(0, 0, 380, "Featured Chart:", false);
+		featured.onChange = (v) -> report('Featured Chart -> $v');
+		page.addComponent(featured);
+
+		var difficultyNumber = new UIStepper(0, 0, 380, "Difficulty Number:", 1, 10, 3, 1);
+		difficultyNumber.onChange = (v) -> report('Difficulty Number -> $v');
+		page.addComponent(difficultyNumber);
+
+		var highlightColor = new UIColorPicker(0, 0, 380, "Chart Highlight Color:", UITheme.ACCENT);
+		highlightColor.onChange = (c) -> report('Chart Highlight Color -> 0x' + StringTools.hex(c, 6));
+		page.addComponent(highlightColor);
+
+		page.layoutVertical(70);
+
+		var sub2 = header("Difficulty Settings:");
+		sub2.size = 16;
+		sub2.y = difficultyNumber.y + difficultyNumber.rowHeight + 30;
+		page.add(sub2);
+
+		var diffButtons = new UIButtonList(0, sub2.y + 30, ["Easy", "Normal", "Hard", "Erect"], Horizontal, 1, true);
+		diffButtons.onSelect = (i, label) -> report('Difficulty -> $label');
+		diffButtons.onExtra = () -> report('Add custom difficulty requested');
+		page.add(diffButtons);
+
+		var sub3 = header("Starcount Settings:");
+		sub3.size = 16;
+		sub3.y = diffButtons.y + 50;
+		page.add(sub3);
+
+		var starButtons = new UIButtonList(0, sub3.y + 30, ["Automatic", "Custom", "Disabled"], Horizontal, 0);
+		starButtons.onSelect = (i, label) -> report('Starcount Mode -> $label');
+		page.add(starButtons);
+
+		var starSlider = new UISlider(0, starButtons.y + 50, 432, "RODA O CU", 0.5, 2.0, 1.0, 0.1);
+		starSlider.onChange = (v) -> report('RODA A BOLA -> ${Math.round(v * 100) / 100}');
+		page.add(starSlider);
+
+		pageManager.registerPage("create", page);
+	}
+
+	function buildScrollTestPage():Void
+	{
+		var page = new UIScrollPage(SIDEBAR_WIDTH + 30, 40, 420, 320, "Scroll Test");
+
+		page.addComponent(new UICheckbox(0, 0, 420, "Row 1 - Checkbox:", true));
+
+		var dd = new UIDropdown(0, 0, 420, "Row 2 - Dropdown:", ["Alpha", "Beta", "Gamma", "Delta"]);
+		dd.onChange = (v) -> report('Row 2 Dropdown -> $v');
+		page.addComponent(dd);
+
+		var stepper = new UIStepper(0, 0, 420, "Row 3 - Stepper:", 0, 20, 5, 1);
+		stepper.onChange = (v) -> report('Row 3 Stepper -> $v');
+		page.addComponent(stepper);
+
+		var slider = new UISlider(0, 0, 420, "Row 4 - Slider:", 0, 10, 3, 0.5);
+		slider.onChange = (v) -> report('Row 4 Slider -> ${Math.round(v * 100) / 100}');
+		page.addComponent(slider);
+
+		var color = new UIColorPicker(0, 0, 420, "Row 5 - Color Picker:", UITheme.ACCENT);
+		color.onChange = (c) -> report('Row 5 Color -> 0x' + StringTools.hex(c, 6));
+		page.addComponent(color);
+
+		for (i in 6...16)
+		{
+			var cb = new UICheckbox(0, 0, 420, 'Row $i - Checkbox:', i % 2 == 0);
+			final row = i;
+			cb.onChange = (v) -> report('Row $row -> $v');
+			page.addComponent(cb);
+		}
+
+		var textBox = new UITextBox(0, 0, 420, "Row 16 - Text Box:");
+		textBox.onChange = (v) -> report('Row 16 Text -> $v');
+		page.addComponent(textBox);
+
+		page.layoutVertical();
+
+		pageManager.registerPage("scroll", page);
+	}
+
+	public function goTo(id:String):Void
+	{
+		final idx = pageIds.indexOf(id);
+		if (idx >= 0) highlightSidebar(idx);
+		pageManager.switchTo(id);
 	}
 }

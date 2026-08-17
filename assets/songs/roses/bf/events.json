@@ -5,7 +5,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -26,7 +26,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -38,7 +38,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -50,7 +50,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -72,7 +72,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -84,7 +84,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -180,7 +180,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -203,7 +203,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -215,7 +215,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -227,7 +227,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -251,7 +251,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -272,7 +272,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -328,7 +328,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -436,7 +436,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -457,7 +457,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -478,7 +478,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -490,7 +490,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -511,7 +511,7 @@
 			"x": 0,
 			"character": "opponent",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -567,7 +567,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",
@@ -655,7 +655,7 @@
 			"x": 0,
 			"character": "player",
 			"y": 0,
-			"ease": "expo"
+			"ease": "expoOut"
 		},
 		"lane": 0,
 		"tag": "Move Camera",

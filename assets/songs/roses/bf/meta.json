@@ -3,7 +3,7 @@
 		"bfPixel"
 	],
 	"spectators": [
-		"gf-pixel"
+		"gfPixel"
 	],
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
@@ -27,8 +27,8 @@
 		4
 	],
 	"displayName": "Roses Erect",
-	"stage": "schoolErect",
+	"stage": "school-erect",
 	"bpm": 128,
 	"album": "volume3",
-	"noteskin": "v-slice"
+	"noteskin": "pixel"
 }

@@ -4,7 +4,6 @@ import moon.toolkit.level_editor.LevelEditor.EventInfo;
 import moon.game.events.EventRegistry;
 import moon.game.notetypes.NoteTypeRegistry;
 
-// TODO: Fix haxeUI items being interactable when the side bar is open.
 class Library extends FlxGroup
 {
 	public var bg:MoonSprite;
@@ -268,6 +267,7 @@ class Library extends FlxGroup
 			final fields = (curType == NOTES) ? NoteTypeRegistry.getEditorFields(selectedInfo.name) : EventRegistry.getEditorFields(selectedInfo.name);
 
 			form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, fields, editingValues);
+			add(form);
 		}
 
 		_applyScroll();
@@ -312,6 +312,7 @@ class Library extends FlxGroup
 	private function _clearForm():Void
 	{
 		if (form == null) return;
+		remove(form, true);
 		form.dispose();
 		form = null;
 	}

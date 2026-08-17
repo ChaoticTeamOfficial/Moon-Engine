@@ -1,0 +1,73 @@
+{
+  "camSettings": {
+    "zoom": 1,
+    "startX": -451,
+    "startY": 0
+  },
+  "objects": [
+    {
+      "name": "weebSky",
+      "position": [226, 16],
+      "scale": [6, 6],
+	  "antialiasing":false,
+      "scroll": [0.2, 0.2]
+    },
+    {
+      "name": "weebBackTrees",
+      "position": [-842, 80],
+      "scale": [6, 6],
+	  "antialiasing":false,
+      "scroll": [0.5, 0.5]
+    },
+    {
+      "name": "weebSchool",
+      "position": [-432, 40],
+      "scale": [6, 6],
+	  "antialiasing":false,
+      "scroll": [0.75, 0.75]
+    },
+    {
+      "name": "weebStreet",
+      "position": [-662, 6],
+      "scale": [6, 6],
+	  "antialiasing":false,
+      "scroll": [1, 1]
+    },
+    {
+      "name": "weebTreesBack",
+      "position": [-500, 6],
+      "scale": [6, 6],
+	  "antialiasing":false,
+      "scroll": [1, 1]
+    },
+    {
+      "name": "weebTrees",
+      "position": [-606, -150],
+      "scale": [6, 6],
+      "scroll": [1, 1],
+      "type": "packed",
+      "startAnim": "treeLoop",
+	  "antialiasing":false,
+      "animations": [
+        { "name": "treeLoop", "indices": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18], "looped": true, "flipX": false, "flipY": false, "fps": 12, "x": 0, "y": 0 }
+      ]	
+    },
+    {
+      "name": "petals",
+      "position": [-20, -40],
+      "scale": [6, 6],
+      "scroll": [0.85, 0.85],
+      "type": "sparrow",
+      "startAnim": "leaves",
+	  "antialiasing":false,
+      "animations": [
+        { "name": "leaves", "prefix": "PETALS ALL", "looped": true, "flipX": false, "flipY": false, "fps": 24, "x": 0, "y": 0 }
+      ]
+    }
+  ],
+  "characters": [
+    { "type": "opponent", "position": [-920, 60], "objectBehind": null},
+    { "type": "player", "position": [-48, 60], "objectBehind": null},
+    { "type": "spectator", "position": [-734, 53], "objectBehind": null}
+  ]
+}
