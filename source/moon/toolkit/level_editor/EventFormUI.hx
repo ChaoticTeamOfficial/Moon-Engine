@@ -1,19 +1,19 @@
 package moon.toolkit.level_editor;
 
-import flixel.util.FlxColor;
 import moon.toolkit.ui.*;
 import moon.game.events.EventFieldDef;
 
 using StringTools;
 
-// TODO: document
 class EventFormUI extends UIScrollPage
 {
 	private var _fields:Array<EventFieldDef>;
 	private var _widgets:Map<String, UIComponent>;
 	private var _initialValues:Dynamic;
+	private var _showRunOnLoadToggle:Bool;
+	private var _runOnLoadCheckbox:UICheckbox;
 
-	public function new(x:Float, y:Float, w:Float, h:Float, fields:Array<EventFieldDef>, ?initialValues:Dynamic)
+	public function new(x:Float, y:Float, w:Float, h:Float, fields:Array<EventFieldDef>, ?initialValues:Dynamic, showRunOnLoadToggle:Bool = false, runOnLoadDefault:Bool = true)
 	{
 		super(x, y, w, h);
 
@@ -23,8 +23,15 @@ class EventFormUI extends UIScrollPage
 		_fields = fields ?? [];
 		_widgets = [];
 		_initialValues = initialValues;
+		_showRunOnLoadToggle = showRunOnLoadToggle;
 
 		for (field in _fields) _buildRow(field);
+
+		if (_showRunOnLoadToggle)
+		{
+			_runOnLoadCheckbox = new UICheckbox(0, 0, viewWidth, "Start after loading song", runOnLoadDefault);
+			addComponent(_runOnLoadCheckbox);
+		}
 
 		layoutVertical();
 	}
@@ -94,6 +101,10 @@ class EventFormUI extends UIScrollPage
 		}
 	}
 
+	public function getRunOnLoad():Bool return (_runOnLoadCheckbox != null) ? _runOnLoadCheckbox.checked : false;
+
+	public function setRunOnLoad(v:Bool):Void if (_runOnLoadCheckbox != null) _runOnLoadCheckbox.checked = v;
+
 	public function getValues():Dynamic
 	{
 		var result:Dynamic = {};
@@ -135,5 +146,6 @@ class EventFormUI extends UIScrollPage
 	{
 		super.destroy();
 		_widgets = [];
+		_runOnLoadCheckbox = null;
 	}
 }

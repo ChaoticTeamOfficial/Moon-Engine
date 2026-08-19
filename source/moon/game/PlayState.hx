@@ -187,7 +187,7 @@ class PlayState extends FlxTransitionableState
 
 		if (chartMeta.hasCountdown)
 		{
-			playField.healthBar.visible = false;
+			// playField.healthBar.visible = false;
 			Countdown.perform();
 
 			Countdown.onStart.addOnce(() ->
@@ -262,8 +262,26 @@ class PlayState extends FlxTransitionableState
 	public function setEvents()
 	{
 		// < -- EVENTS SETUP -- >//
+		var onLoadEvents = playField.chart.events.filter((e) -> e.runOnLoad == true);
+		onLoadEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+
+		for (event in onLoadEvents)
+		{
+			var ev = new MoonEvent(event.tag, event.values);
+			ev.PRESET_VARIABLES = ['game' => this, 'stage' => stage, 'playField' => playField];
+			ev.time = event.time;
+
+			Global.scriptCall('onEvent', [ev.tag]);
+
+			if (ev.valid) ev.exec();
+			else
+				EventRegistry.executeEvent(this, ev);
+		}
+
 		for (event in playField.chart.events)
 		{
+			if (event.runOnLoad == true) continue;
+
 			var ev = new MoonEvent(event.tag, event.values);
 			ev.PRESET_VARIABLES = ['game' => this, 'stage' => stage, 'playField' => playField];
 			ev.time = event.time;

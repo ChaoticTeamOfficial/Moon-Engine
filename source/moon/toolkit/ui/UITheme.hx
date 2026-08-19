@@ -20,11 +20,11 @@ class UITheme
 	static final TEXT_COLOR:FlxColor = 0xFFF2F2F2;
 	static final TEXT_DIM:FlxColor = 0xFF8A8A8F;
 	// Sizing
-	static final CORNER_RADIUS:Float = 10;
-	static final ROW_HEIGHT:Float = 28;
-	static final ROW_SPACING:Float = 10;
+	static final CORNER_RADIUS:Float = 12;
+	static final ROW_HEIGHT:Float = 32;
+	static final ROW_SPACING:Float = 2;
 	static final ICON_SIZE:Float = 16;
-	static final PADDING:Float = 12;
+	static final PADDING:Float = 5;
 	static final FONT:String = Paths.font("Consolas/CONSOLAB.TTF");
 	static final FONT_SIZE:Int = 14;
 	static final FONT_ANTIALIASING:Bool = true;

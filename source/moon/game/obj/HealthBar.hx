@@ -60,7 +60,7 @@ class HealthBar extends FlxSpriteGroup
 	/**
 	 * The distance between both icons.
 	 */
-	public var iconDistance:Float = 58;
+	public var iconDistance:Float = 38;
 
 	/**
 	 * The conductor driving this healthbar's icon bops and transitions.
@@ -194,6 +194,7 @@ class HealthBar extends FlxSpriteGroup
 		if (FlxG.keys.justPressed.NINE)
 		{
 			playerIcon.useOldIcon = !playerIcon.useOldIcon;
+			playerIcon.onStepHit(playerIcon.bopEvery, iconScale + playerIcon.extraScale);
 			updateBarStats();
 		}
 	}
@@ -251,8 +252,11 @@ class HealthBar extends FlxSpriteGroup
 		playerIcon.updateHitbox();
 		oppIcon.updateHitbox();
 
-		playerIcon.origin.set(-8, playerIcon.height / 2);
-		oppIcon.origin.set(oppIcon.width + 8, oppIcon.height / 2);
+		// playerIcon.origin.set(-8, playerIcon.height / 2);
+		// oppIcon.origin.set(oppIcon.width + 8, oppIcon.height / 2);
+
+		oppIcon.onStepHit(conductor?.curStep ?? 0, iconScale + oppIcon.extraScale);
+		playerIcon.onStepHit(conductor?.curStep ?? 0, iconScale + playerIcon.extraScale);
 	}
 
 	/*public function bump()

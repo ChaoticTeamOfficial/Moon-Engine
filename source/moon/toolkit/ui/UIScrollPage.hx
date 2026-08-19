@@ -52,9 +52,9 @@ class UIScrollPage extends UIPage
 		this.viewHeight = viewHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		panelBg = new FlxSprite();
-		panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
-		add(panelBg);
+		// panelBg = new FlxSprite();
+		// panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
+		// add(panelBg);
 
 		content = new FlxSpriteGroup();
 		add(content);
@@ -110,7 +110,7 @@ class UIScrollPage extends UIPage
 		viewHeight = newHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
+		// panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
 		scrollTrack.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.CONTROL_BG));
 		scrollTrack.x = x + scrollbarX;
 

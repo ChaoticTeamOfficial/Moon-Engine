@@ -75,7 +75,7 @@ class OffsetEditor extends FlxState
 	static inline final STYLE_INPUT = 'background-color: #101020; color: white; border: 1px solid #333355; border-radius: 4px; font-size: 12px;';
 	static inline final STYLE_PANEL = 'background-color: #101020; border: none; padding: 4px; spacing: 8px;';
 
-	public function new(?character:String = 'darnell')
+	public function new(?character:String = 'spirit')
 	{
 		super();
 		this.characterName = character;

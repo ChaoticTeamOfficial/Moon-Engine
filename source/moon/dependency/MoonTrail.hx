@@ -1,10 +1,18 @@
 package moon.dependency;
 
+import flixel.FlxSprite;
 import flixel.animation.FlxAnimation;
 import flixel.group.*;
+import flixel.math.FlxPoint;
 import flixel.system.FlxAssets;
 import flixel.util.FlxArrayUtil;
+import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
+#if flash
+import flash.display.BlendMode;
+#else
+import openfl.display.BlendMode;
+#end
 
 /**
  * A modified version of FlxTrail with some cool additions.
@@ -34,12 +42,14 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 	public var trailVelocity:Array<Float> = [0, 0];
 
 	/**
-	 * Whether to check for x changes or not.
+	 * Whether to check for x changes or not. When false, trail sprites are
+	 * emitted at this container's own x position instead of the target's.
 	 */
 	public var xEnabled:Bool = true;
 
 	/**
-	 * Whether to check for y changes or not.
+	 * Whether to check for y changes or not. When false, trail sprites are
+	 * emitted at this container's own y position instead of the target's.
 	 */
 	public var yEnabled:Bool = true;
 
@@ -59,9 +69,37 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 	public var framesEnabled:Bool = true;
 
 	/**
+	 * Whether trail sprites should inherit the target's color/tint.
+	 */
+	public var colorsEnabled:Bool = true;
+
+	/**
+	 * Whether trail sprites should inherit the target's blend mode.
+	 * Ignored if `overrideBlend` is set.
+	 */
+	public var blendsEnabled:Bool = true;
+
+	/**
+	 * If set, forces every trail sprite to use this blend mode instead of
+	 * whatever the target is currently using.
+	 */
+	public var overrideBlend:Null<BlendMode> = null;
+
+	/**
+	 * If set, forces every trail sprite to use this color instead of
+	 * whatever the target is currently using.
+	 */
+	public var overrideColor:Null<FlxColor> = null;
+
+	/**
 	 * The maximum number of trail sprites.
 	 */
 	public var trailLength:Int = 10;
+
+	/**
+	 * The trail's additive offsets.
+	 */
+	public var offsets:Array<Float> = [0, 0];
 
 	var _counter:Int = 0;
 	var _graphic:flixel.system.FlxAssets.FlxGraphicAsset;
@@ -71,7 +109,7 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 
 	/**
 	 * Creates a Trail effect for a FlxSprite.
-	 * 
+	 *
 	 * @param target The FlxSprite the trail will be attached to.
 	 * @param graphic The image to use for the Trail Sprites. If none, will use the FlxSprite's graphic.
 	 * @param length The maximum amount of sprites the trail can have.
@@ -109,6 +147,13 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 
 	override public function update(elapsed:Float):Void
 	{
+		// bail early if the target has been destroyed out from under us
+		if (target == null)
+		{
+			super.update(elapsed);
+			return;
+		}
+
 		_counter++;
 
 		if (_counter >= delay && countLiving() < trailLength)
@@ -129,7 +174,7 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 			if (countLiving() < trailLength && !paused) emitTrailSprite();
 		}
 
-		// enforces max length killing oldes if exceeded
+		// enforces max length, killing oldest if exceeded
 		while (countLiving() > trailLength)
 			killOldest();
 
@@ -142,14 +187,13 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 		trailSprite.active = true;
 		trailSprite.solid = solid;
 		trailSprite.alpha = _initialAlpha;
-		trailSprite.offset.copyFrom(target.offset);
-		trailSprite.setPosition(target.x, target.y);
 
-		if (rotationsEnabled)
-		{
-			trailSprite.angle = target.angle;
-			trailSprite.origin.copyFrom(_spriteOrigin);
-		}
+		trailSprite.x = xEnabled ? target.x : this.x;
+		trailSprite.y = yEnabled ? target.y : this.y;
+
+		if (rotationsEnabled) trailSprite.angle = target.angle;
+
+		if (rotationsEnabled || scalesEnabled) trailSprite.origin.copyFrom(_spriteOrigin);
 
 		if (scalesEnabled) trailSprite.scale.copyFrom(target.scale);
 
@@ -162,13 +206,27 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 				trailSprite.animation.curAnim.frameRate = 0;
 				trailSprite.flipX = target.flipX;
 				trailSprite.flipY = target.flipY;
-				// trailSprite.animation.curAnim = target.animation.curAnim;
 			}
 		}
 		else
 			trailSprite.loadGraphic(_graphic);
 
-		trailSprite.velocity.copyFrom(FlxPoint.get(trailVelocity[0], trailVelocity[1]));
+		trailSprite.offset.copyFrom(target.offset);
+		trailSprite.offset.x += offsets[0];
+		trailSprite.offset.y += offsets[1];
+
+		if (overrideColor != null) trailSprite.color = overrideColor;
+		else if (colorsEnabled) trailSprite.color = target.color;
+		else
+			trailSprite.color = FlxColor.WHITE;
+
+		if (overrideBlend != null) trailSprite.blend = overrideBlend;
+		else if (blendsEnabled) trailSprite.blend = target.blend;
+		else
+			trailSprite.blend = null;
+
+		trailSprite.velocity.set(trailVelocity[0], trailVelocity[1]);
+
 		trailSprite.exists = true;
 	}
 
@@ -185,5 +243,11 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 		}
 	}
 
-	public function resetTrail():Void group.kill();
+	/**
+	 * Kills every trail sprite currently alive.
+	 */
+	public function resetTrail():Void
+	{
+		kill();
+	}
 }

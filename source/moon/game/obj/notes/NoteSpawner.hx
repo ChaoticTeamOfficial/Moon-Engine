@@ -2,6 +2,8 @@ package moon.game.obj.notes;
 
 import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
 import moon.backend.gameplay.modifiers.ModifierManager;
+import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
+import moon.backend.gameplay.modifiers.ModifierManager;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import moon.backend.data.Chart.NoteStruct;
 import flixel.group.FlxGroup;
@@ -13,6 +15,9 @@ class NoteSpawner extends FlxGroup
 
 	final _notes:Array<Note> = [];
 	final _strumlineMap:Map<String, Strumline> = new Map();
+
+	public var strumlineSpeeds:Map<String, Float> = new Map();
+
 	var conductor:Conductor;
 	var nextNoteIndex:Int = 0;
 
@@ -66,12 +71,14 @@ class NoteSpawner extends FlxGroup
 		updateCachedSettings();
 		updateSpawnThreshold();
 
+		super.update(dt);
+
+		final spawnTime = conductor.time + spawnThreshold;
 		var i = nextNoteIndex;
-		while (i < _notes.length && _notes[i].time <= (conductor.time + spawnThreshold))
+		while (i < _notes.length && _notes[i].time <= spawnTime)
 			recycleNote(_notes[i++]);
 
 		nextNoteIndex = i;
-		super.update(dt);
 	}
 
 	inline function updateCachedSettings():Void
@@ -82,7 +89,7 @@ class NoteSpawner extends FlxGroup
 
 	inline function updateSpawnThreshold():Void
 	{
-		final newThreshold = (scrollSpeed <= 0.4) ? 5000 : (scrollSpeed <= 0.9) ? 3000 : 700;
+		final newThreshold = (scrollSpeed <= 0.4) ? 7000 : (scrollSpeed <= 0.9) ? 4000 : 1200;
 		if (spawnThreshold != newThreshold) spawnThreshold = newThreshold;
 	}
 
@@ -94,11 +101,13 @@ class NoteSpawner extends FlxGroup
 		final group = strum.members[note.direction];
 		if (group?.notesGroup == null) return;
 
+		final noteSpeed = strumlineSpeeds.exists(note.lane) ? strumlineSpeeds.get(note.lane) : scrollSpeed;
+
 		group.notesGroup.recycle(Note, () ->
 		{
 			note.receptor = strum.members[note.direction];
 			note.visible = false;
-			note.speed = scrollSpeed;
+			note.speed = noteSpeed;
 			note.state = NONE;
 			if (note.duration > 0) recycleSustain(note, group.sustainsGroup);
 			return note;
@@ -133,7 +142,7 @@ class NoteSpawner extends FlxGroup
 
 		final note = new Note(dir, struct.time + _noteOffset, struct.type, strum.members[struct.data].skin, struct.duration, conductor);
 		note.values = struct.values;
-		note.speed = scrollSpeed;
+		note.speed = strumlineSpeeds.exists(struct.lane) ? strumlineSpeeds.get(struct.lane) : scrollSpeed;
 		note.lane = struct.lane;
 		note.quantColor = getQuantColor(struct.time, conductor);
 		NoteTypeRegistry.executeSpawn(note);
@@ -201,15 +210,33 @@ class NoteSpawner extends FlxGroup
 		for (note in _notes) note.updateNotePos();
 	}
 
+	public function resetSpeeds():Void
+	{
+		strumlineSpeeds.clear();
+		for (note in _notes) note.speed = scrollSpeed;
+	}
+
 	inline function get_notes():Array<Note> return _notes;
+
+	public function getStrumlineSpeed(lane:String):Float return strumlineSpeeds.exists(lane) ? strumlineSpeeds.get(lane) * 2.4 : scrollSpeed * 2.4;
 
 	function get_noteOffset():Float return _noteOffset;
 
 	function set_scrollSpeed(sp:Float):Float
 	{
 		scrollSpeed = sp / 2.4; // adoro sao paulo...
-		for (note in _notes) note.speed = scrollSpeed;
+
+		for (note in _notes) if (!strumlineSpeeds.exists(note.lane)) note.speed = scrollSpeed;
+
 		return scrollSpeed;
+	}
+
+	public function setStrumlineSpeed(lane:String, rawSpeed:Float):Void
+	{
+		final converted = (rawSpeed / 2.4) * (ModifierManager.isActive(ModifierIds.SCROLL_SPEED_MULT) ? Global.scrollSpeedMult : 1);
+		strumlineSpeeds.set(lane, converted);
+
+		for (note in _notes) if (note.lane == lane) note.speed = converted;
 	}
 
 	function set_noteOffset(value:Float):Float

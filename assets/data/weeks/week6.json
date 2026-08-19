@@ -1,7 +1,7 @@
 {
 	"displayName": "Week 6",
 	"description": "Homophobic Guy",
-	"tracks": ["roses"],
+	"tracks": ["roses", "thorns"],
 	"color": [0, 0, 0],
 	"mainMix": "bf"
 }

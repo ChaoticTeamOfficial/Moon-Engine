@@ -1,0 +1,74 @@
+{
+	"extraOffsets": [
+		0,
+		50
+	],
+	"danceFrequency": 4,
+	"icon": {
+		"antialiasing": false,
+		"color": [
+			255,
+			60,
+			110
+		]
+	},
+	"camOffsets": [
+		264,
+		-96
+	],
+	"gameoverColorScheme": "0xFF4924FF",
+	"type": "packed",
+	"scale": 6,
+	"extendIdleDuration": true,
+	"holdDuration": 8,
+	"flipX": false,
+	"antialiasing": false,
+	"overrideAnims": [],
+	"animations": [
+		{
+			"finishAnim": null,
+			"x": 0,
+			"fps": 24,
+			"y": 0,
+			"prefix": "idle spirit_",
+			"looped": false,
+			"name": "idle-0"
+		},
+		{
+			"finishAnim": null,
+			"x": 52,
+			"fps": 24,
+			"y": -2,
+			"prefix": "left_",
+			"looped": false,
+			"name": "singLEFT"
+		},
+		{
+			"finishAnim": null,
+			"x": 385,
+			"fps": 24,
+			"y": 346,
+			"prefix": "spirit down_",
+			"looped": false,
+			"name": "singDOWN"
+		},
+		{
+			"finishAnim": null,
+			"x": 0,
+			"fps": 24,
+			"y": 60,
+			"prefix": "up_",
+			"looped": false,
+			"name": "singUP"
+		},
+		{
+			"finishAnim": null,
+			"x": -23,
+			"fps": 24,
+			"y": 1,
+			"prefix": "right_",
+			"looped": false,
+			"name": "singRIGHT"
+		}
+	]
+}

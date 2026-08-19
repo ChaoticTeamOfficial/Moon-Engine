@@ -38,7 +38,8 @@ class MoonScript
 		"DropShadowShader" => DropShadowShader,
 		"ABotVisualizer" => moon.game.obj.ABotVisualizer,
 		"RainShader" => moon.hardcoded_shaders.RainShader,
-		"ShaderFilter" => openfl.filters.ShaderFilter
+		"ShaderFilter" => openfl.filters.ShaderFilter,
+		"WiggleEffect" => moon.hardcoded_shaders.WiggleEffect
 	];
 
 	public function new()

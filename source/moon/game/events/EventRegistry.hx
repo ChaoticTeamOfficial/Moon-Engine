@@ -74,8 +74,7 @@ class EventRegistry
 	/**
 	 * Get editor data for a hardcoded event.
 	 */
-	public static function getEditorData(tag:String):Null<
-		{name:String, description:String, category:GridType}>
+	public static function getEditorData(tag:String):Null<EventInfo>
 	{
 		if (eventMap == null) init();
 

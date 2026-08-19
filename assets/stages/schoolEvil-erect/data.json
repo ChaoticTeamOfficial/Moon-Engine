@@ -1,0 +1,42 @@
+{
+	"camSettings": {
+		"zoom": 1,
+		"startX": -451,
+		"startY": 0
+	},
+	"objects": [
+		{
+			"name": "weebBackSpikes",
+			"position": [-700, -64],
+			"scale": [6, 6],
+			"antialiasing": false,
+			"scroll": [0.5, 0.5]
+		},
+		{
+			"name": "weebSchool",
+			"position": [-440, -38],
+			"scale": [6, 6],
+			"antialiasing": false,
+			"scroll": [0.75, 0.75]
+		},
+		{
+			"name": "backSpike",
+			"position": [1416, 464],
+			"scale": [6, 6],
+			"antialiasing": false,
+			"scroll": [0.85, 0.85]
+		},
+		{
+			"name": "weebStreet",
+			"position": [-662, 6],
+			"scale": [6, 6],
+			"antialiasing": false,
+			"scroll": [1, 1]
+		}
+	],
+	"characters": [
+		{ "type": "opponent", "position": [-920, 60], "objectBehind": null },
+		{ "type": "player", "position": [-48, 60], "objectBehind": null },
+		{ "type": "spectator", "position": [-734, 53], "objectBehind": null }
+	]
+}

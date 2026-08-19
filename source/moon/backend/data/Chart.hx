@@ -73,6 +73,12 @@ typedef EventStruct =
 	 * The event's lane, used for the chart editor.
 	 */
 	var ?lane:Int;
+
+	/**
+	 * If true, this event will be executed a single time, immediately once
+	 * PlayState finishes loading.
+	 */
+	var ?runOnLoad:Bool;
 };
 
 /**

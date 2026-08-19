@@ -41,11 +41,31 @@ enum abstract PlacementMode(String)
 	var EDIT = 'Editing';
 }
 
+/**
+ * A typedef which holds all information an event needs.
+ */
 typedef EventInfo =
 {
+	/**
+	 * The event's name.
+	 */
 	var name:String;
+
+	/**
+	 * The event's description.
+	 */
 	var description:String;
+
+	/**
+	 * The event's category, which can be Visuals, Characters, Gimmicks or Sounds.
+	 */
 	var category:GridType;
+
+	/**
+	 * Whether or not this event can be marked as "execute on create", which allows it to run as PlayState loads.
+	 * Defaults to true.
+	 */
+	var ?canRunOnCreate:Bool;
 }
 
 class LevelEditor extends FlxState
@@ -122,6 +142,7 @@ class LevelEditor extends FlxState
 	private var dragOGlengths:Map<Note, Float> = null;
 	private var editSelectedNotes:Array<Note> = [];
 	private var editSelectedEvents:Array<EventSpr> = [];
+	private var runOnLoadMarkers:Map<EventSpr, MoonSprite> = new Map();
 	private var editNote:Note = null;
 	private var editNoteStruct:NoteStruct = null;
 	private var editEvent:EventSpr = null;
@@ -179,6 +200,7 @@ class LevelEditor extends FlxState
 		PlayState.instance = null;
 		PlayField.instance = null;
 
+		// FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 		FlxG.cameras.add(camBACK, true);
 		FlxG.cameras.add(camMID, false);
 		FlxG.cameras.add(camFRONT, false);
@@ -197,6 +219,10 @@ class LevelEditor extends FlxState
 		// Thanks rapper for letting me know about FlxAtlas!
 		// nice lil thing we can use to batch events.
 		eventAtlas = new FlxAtlas("eventAtlas");
+
+		// indicator for events that'll run on create!
+		eventAtlas.addNode(Paths.image('toolkit/level-editor/icons/runOnCreateMarker').bitmap, '__onCreateMarker');
+
 		for (dir in [
 			'CHARACTERS',
 			'VISUALS',
@@ -696,9 +722,18 @@ class LevelEditor extends FlxState
 			}
 		}
 
-		for (event in eventsGroup) if (Std.isOfType(event, EventSpr)) event.visible = event.isOnScreen() && cast(event, EventSpr).category == curType;
-		else
-			event.visible = event.isOnScreen() && cast(event, EventHold).category == curType;
+		for (event in eventsGroup)
+		{
+			if (Std.isOfType(event, EventSpr))
+			{
+				final spr = cast(event, EventSpr);
+				event.visible = event.isOnScreen() && spr.category == curType;
+
+				final marker = runOnLoadMarkers.get(spr);
+				if (marker != null) marker.visible = event.visible;
+			}
+			else if (Std.isOfType(event, EventHold)) event.visible = event.isOnScreen() && cast(event, EventHold).category == curType;
+		}
 
 		for (member in gridGroup.members)
 		{
@@ -1025,7 +1060,8 @@ class LevelEditor extends FlxState
 							tag: library.selectedInfo.name,
 							values: EventRegistry.processEventValues(library.selectedInfo.name, library.form.getValues()),
 							time: snappedTime,
-							lane: laneNum
+							lane: laneNum,
+							runOnLoad: library.form.getRunOnLoad()
 						};
 
 						chart.events.push(ev);
@@ -1286,7 +1322,40 @@ class LevelEditor extends FlxState
 
 		if (spr.duration > 0) eventsGroup.add(new EventHold(spr));
 		eventsGroup.add(spr);
+
+		if (ev.runOnLoad == true) _syncEventMarkers(spr, true);
+
 		EditorSync.onEventAdded(ev);
+	}
+
+	private function _syncEventMarkers(spr:EventSpr, on:Bool):Void
+	{
+		var marker = runOnLoadMarkers.get(spr);
+
+		if (on && marker == null)
+		{
+			final frames = eventAtlas.getAtlasFrames();
+
+			marker = new MoonSprite(0, 0);
+			marker.frames = frames;
+			marker.animation.frameName = '__onCreateMarker';
+			marker.antialiasing = false;
+			marker.active = false;
+			// marker.setGraphicSize(16, 16);
+			marker.updateHitbox();
+			eventsGroup.add(marker);
+
+			marker.x = spr.x + spr.width - marker.width;
+			marker.y = spr.y;
+
+			runOnLoadMarkers.set(spr, marker);
+		}
+		else if (!on && marker != null)
+		{
+			eventsGroup.remove(marker, true);
+			marker.destroy();
+			runOnLoadMarkers.remove(spr);
+		}
 	}
 
 	public function removeNoteSpr(n:moon.backend.data.Chart.NoteStruct):Void
@@ -1349,6 +1418,8 @@ class LevelEditor extends FlxState
 			eventsGroup.remove(toRemoveHold, true);
 			toRemoveHold.destroy();
 		}
+
+		_syncEventMarkers(toRemoveSpr, false);
 
 		eventsGroup.remove(toRemoveSpr, true);
 		toRemoveSpr.destroy();
@@ -1649,7 +1720,14 @@ class LevelEditor extends FlxState
 				break;
 			}
 
-			library.editingValues = (editEventStruct != null) ? editEventStruct.values : {};
+			var combined:Dynamic = {};
+			if (
+				editEventStruct != null
+				&& editEventStruct.values != null
+			) for (f in Reflect.fields(editEventStruct.values)) Reflect.setField(combined, f, Reflect.field(editEventStruct.values, f));
+			Reflect.setField(combined, "runOnLoad", editEventStruct != null && editEventStruct.runOnLoad == true);
+
+			library.editingValues = combined;
 			library.selectedInfo = _findEventInfo(spr.category, spr.event);
 			library.editing = true;
 			library.refreshLibrary();
@@ -1678,7 +1756,12 @@ class LevelEditor extends FlxState
 		if (editNoteStruct == null && editEventStruct == null) return;
 
 		final raw = library.form.getValues();
-		final snapshot = haxe.Json.stringify(raw);
+		final runOnLoadNow = (editEventStruct != null) ? library.form.getRunOnLoad() : false;
+
+		final snapshot = haxe.Json.stringify({
+			fields: raw,
+			runOnLoad: runOnLoadNow
+		});
 		if (snapshot == _lastEditSnapshot) return;
 		_lastEditSnapshot = snapshot;
 
@@ -1692,6 +1775,12 @@ class LevelEditor extends FlxState
 		{
 			final processed = EventRegistry.processEventValues(library.selectedInfo.name, raw);
 			editEventStruct.values = processed;
+
+			if (editEventStruct.runOnLoad != runOnLoadNow)
+			{
+				editEventStruct.runOnLoad = runOnLoadNow;
+				if (editEvent != null) _syncEventMarkers(editEvent, runOnLoadNow);
+			}
 
 			if (editEvent != null && processed != null && Reflect.hasField(processed, 'duration'))
 			{

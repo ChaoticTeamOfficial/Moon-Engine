@@ -266,7 +266,15 @@ class Library extends FlxGroup
 			final formY = bg2.y + PAD + headerH + 8;
 			final fields = (curType == NOTES) ? NoteTypeRegistry.getEditorFields(selectedInfo.name) : EventRegistry.getEditorFields(selectedInfo.name);
 
-			form = new EventFormUI(bg2.x + 8, formY, bg2.width - 16, (bg2.y + bg2.height) - formY - 8, fields, editingValues);
+			form = new EventFormUI(
+				bg2.x + 8,
+				formY,
+				bg2.width - 16,
+				(bg2.y + bg2.height) - formY - 8,
+				fields,
+				editingValues, curType != NOTES && (selectedInfo.canRunOnCreate ?? true),
+				false
+			);
 			add(form);
 		}
 
