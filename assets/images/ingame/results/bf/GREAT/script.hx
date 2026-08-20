@@ -25,7 +25,7 @@ function onPostCreate()
 	bf.antialiasing = gf.antialiasing = true;
 	gf.scale.x = gf.scale.y = bf.scale.x = bf.scale.y = 0.93;
 
-	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
+	//FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
 }
 
 function onIntroEnd()

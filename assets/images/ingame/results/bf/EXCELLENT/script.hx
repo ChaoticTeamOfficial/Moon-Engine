@@ -16,8 +16,8 @@ function onPostCreate()
 	fuckers.anim.onFinish.add(() -> fuckers.anim.play("intro", true, false, 29));
 	fuckers.antialiasing = true;
 
-	FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT-intro.ogg', 'music'), 1, false);
-	FlxG.sound.music.onComplete = () -> FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT.ogg', 'music'));
+	//FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT-intro.ogg', 'music'), 1, false);
+	//FlxG.sound.music.onComplete = () -> FlxG.sound.playMusic(Paths.sound('results/bf/EXCELLENT.ogg', 'music'));
 }
 
 function onIntroEnd()

@@ -198,6 +198,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					}
 				}
 
+				// trace('added ${objData.name} onto the stage');
 				add(sprite);
 				objMap.set(objData.name, sprite);
 			}

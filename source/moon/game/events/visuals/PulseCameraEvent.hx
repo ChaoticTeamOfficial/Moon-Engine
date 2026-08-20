@@ -13,7 +13,8 @@ class PulseCameraEvent extends BaseEvent
 		return {
 			name: 'Pulse Camera',
 			description: 'Pulses each of the cameras.',
-			category: VISUALS
+			category: VISUALS,
+			canRunOnCreate: false
 		};
 	}
 

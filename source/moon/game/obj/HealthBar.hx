@@ -60,7 +60,7 @@ class HealthBar extends FlxSpriteGroup
 	/**
 	 * The distance between both icons.
 	 */
-	public var iconDistance:Float = 38;
+	public var iconDistance:Float = 44;
 
 	/**
 	 * The conductor driving this healthbar's icon bops and transitions.

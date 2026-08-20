@@ -12,7 +12,8 @@ class ChangePlaybackSettingsEvent extends BaseEvent
 		return {
 			name: 'Change Playback Settings',
 			description: 'Allows you to change the BPM and Time Signature.',
-			category: SOUNDS
+			category: SOUNDS,
+			canRunOnCreate: false
 		};
 	}
 

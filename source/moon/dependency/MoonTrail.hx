@@ -19,12 +19,12 @@ import openfl.display.BlendMode;
  * I made this for FlxDeltarune, but I'll have it here too XD
  * @author Gama11 (Original FlxTrail)
  */
-class MoonTrail extends flixel.group.FlxSpriteContainer
+class MoonTrail extends flixel.group.FlxSpriteContainer.FlxTypedSpriteContainer<MoonSprite>
 {
 	/**
-	 * Stores the FlxSprite the trail is attached to.
+	 * Stores the MoonSprite the trail is attached to.
 	 */
-	public var target(default, null):FlxSprite;
+	public var target(default, null):MoonSprite;
 
 	/**
 	 * How often to update the trail
@@ -108,16 +108,16 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 	var _spriteOrigin:FlxPoint;
 
 	/**
-	 * Creates a Trail effect for a FlxSprite.
+	 * Creates a Trail effect for a MoonSprite.
 	 *
-	 * @param target The FlxSprite the trail will be attached to.
+	 * @param target The MoonSprite the trail will be attached to.
 	 * @param graphic The image to use for the Trail Sprites. If none, will use the FlxSprite's graphic.
 	 * @param length The maximum amount of sprites the trail can have.
 	 * @param delay How often to update the trail. 0 will update it every frame.
 	 * @param alpha The initial alpha value for newly created sprites for the trail.
 	 * @param diff How much to decrement the alpha of existing sprites when a new one is added
 	 */
-	public function new(target:FlxSprite, ?graphic:flixel.system.FlxAssets.FlxGraphicAsset, length = 10, delay = 3, alpha = 0.4, diff = 0.05):Void
+	public function new(target:MoonSprite, ?graphic:flixel.system.FlxAssets.FlxGraphicAsset, length = 10, delay = 3, alpha = 0.4, diff = 0.05):Void
 	{
 		super();
 
@@ -183,7 +183,8 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 
 	private function emitTrailSprite():Void
 	{
-		var trailSprite:FlxSprite = recycle(FlxSprite);
+		// TODO: animations not playing properly on animate sprites
+		var trailSprite:MoonSprite = recycle(MoonSprite);
 		trailSprite.active = true;
 		trailSprite.solid = solid;
 		trailSprite.alpha = _initialAlpha;
@@ -200,12 +201,25 @@ class MoonTrail extends flixel.group.FlxSpriteContainer
 		if (_graphic == null)
 		{
 			trailSprite.loadGraphicFromSprite(target);
+			if (target.frames != null) trailSprite.frames = target.frames;
+
+			trailSprite.animation.copyFrom(target.animation);
+
+			if (target.isAnimate)
+			{
+				target.useRenderTexture = true;
+				trailSprite.useRenderTexture = true;
+			}
+
+			trailSprite.brightness = target.brightness;
+
 			if (framesEnabled && target.animation.curAnim != null)
 			{
-				trailSprite.animation.frameIndex = target.animation.frameIndex;
-				trailSprite.animation.curAnim.frameRate = 0;
+				final curAnim = target.animation.curAnim;
 				trailSprite.flipX = target.flipX;
 				trailSprite.flipY = target.flipY;
+				trailSprite.forcePlayAnim(curAnim.name, true, false, curAnim.curFrame);
+				// trailSprite.animation.curAnim.frameRate = 0;
 			}
 		}
 		else

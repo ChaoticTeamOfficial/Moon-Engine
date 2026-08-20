@@ -391,8 +391,8 @@ class ResultsState extends FlxState
 						});
 					}
 				});
-				openSubState(new StickerSubState(new MainMenu()));
 			}
+			openSubState(new StickerSubState(new MainMenu()));
 		}
 	}
 

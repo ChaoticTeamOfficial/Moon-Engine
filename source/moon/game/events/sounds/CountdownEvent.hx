@@ -11,7 +11,8 @@ class CountdownEvent extends BaseEvent
 		return {
 			name: 'Countdown',
 			description: 'Performs the in-game countdown.',
-			category: SOUNDS
+			category: SOUNDS,
+			canRunOnCreate: false
 		};
 	}
 

@@ -28,7 +28,7 @@ function onPostCreate()
 	bf.visible = gf.visible = false;
 	bf.antialiasing = gf.antialiasing = true;
 
-	FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
+	//FlxG.sound.playMusic(Paths.sound('results/bf/NORMAL.ogg', 'music'));
 }
 
 function onIntroEnd()
