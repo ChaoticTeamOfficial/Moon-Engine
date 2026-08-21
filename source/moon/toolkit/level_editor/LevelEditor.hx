@@ -17,7 +17,6 @@ import openfl.filters.ColorMatrixFilter;
 import openfl.ui.Mouse;
 import openfl.ui.MouseCursor;
 import moon.game.events.EventRegistry;
-import haxe.ui.components.*;
 import moon.dependency.MoonSound.MusicType;
 #if sys
 import sys.io.File;
@@ -89,10 +88,12 @@ class LevelEditor extends FlxState
 
 	public var eventAtlas:FlxAtlas;
 
-	// these two are placeholders!!!
-	var sectionStepper:NumberStepper;
-	var copySectionBtn:Button;
-	var swapSectionBtn:Button;
+	var sectionStepper:UIStepper;
+	var copySectionBtn:UIActionButton;
+	var swapSectionBtn:UIActionButton;
+
+	public var tooltip:UITooltip;
+
 	private var gridGroup:FlxSpriteGroup;
 	// private var sectionTexts:FlxSpriteGroup;
 	private var noteGroup:FlxSpriteGroup;
@@ -526,35 +527,26 @@ class LevelEditor extends FlxState
 		playback.state = PAUSE;
 		curType = NOTES;
 
-		// TODO: these are placeholders for now! eventually add the proper stuff.
 		final gridRight = gridGroup.x + (LANE_WIDTH * (NUM_LANES + 1)) + 40 + scrollbar.width + 24;
-		sectionStepper = new NumberStepper();
-		sectionStepper.left = gridRight;
-		sectionStepper.top = 54;
-		sectionStepper.width = 80;
-		sectionStepper.value = 1;
-		sectionStepper.step = 1;
+		sectionStepper = new UIStepper(gridRight, 54, 120, "Sec", -99, 99, 1, 1);
+		sectionStepper.camera = camFRONT;
 		add(sectionStepper);
 
-		copySectionBtn = new Button();
-		copySectionBtn.left = gridRight;
-		copySectionBtn.top = 54 + 38;
-		copySectionBtn.width = 80;
-		copySectionBtn.text = "Copy Section";
-		copySectionBtn.onClick = (_) -> copySection();
+		copySectionBtn = new UIActionButton(gridRight, 54 + 38, 120, "Copy Section", () -> copySection());
+		copySectionBtn.camera = camFRONT;
 		add(copySectionBtn);
 
-		swapSectionBtn = new Button();
-		swapSectionBtn.left = gridRight;
-		swapSectionBtn.top = 54 + 38 + 38;
-		swapSectionBtn.width = 80;
-		swapSectionBtn.text = "Swap Section";
-		swapSectionBtn.onClick = (_) ->
+		swapSectionBtn = new UIActionButton(gridRight, 54 + 38 + 38, 120, "Swap Section", () ->
 		{
 			swapCurrentSection();
 			sfx('laneSwap${FlxG.random.bool(0.5) ? "-secret" : ""}', false, true);
-		};
+		});
+		swapSectionBtn.camera = camFRONT;
 		add(swapSectionBtn);
+
+		tooltip = new UITooltip();
+		tooltip.camera = camFRONT;
+		add(tooltip);
 
 		frontOverlay = new MoonSprite().makeGraphic(FlxG.width + 16, FlxG.height + 16, FlxColor.BLACK);
 		frontOverlay.camera = camMID;
@@ -572,6 +564,7 @@ class LevelEditor extends FlxState
 
 	override public function update(elapsed:Float)
 	{
+		if (tooltip != null) tooltip.hide();
 		super.update(elapsed);
 
 		frontOverlay.alpha = FlxMath.lerp(frontOverlay.alpha, allowEditing ? 0 : 0.6, elapsed * 4);
@@ -587,7 +580,7 @@ class LevelEditor extends FlxState
 		library.active = !leftpanel.panelOpen;
 
 		// ----- Input Stuff ----- //
-		uiBusy = haxe.ui.focus.FocusManager.instance.focus != null || UIEditFocus.isBusy();
+		uiBusy = UIEditFocus.isBusy();
 
 		updateCursor();
 
@@ -978,6 +971,28 @@ class LevelEditor extends FlxState
 							for (t in targets) dragOGlengths.set(t, t.duration);
 						}
 					}
+					break;
+				}
+			}
+		}
+
+		// Hover tooltip for notes
+		if (tooltip != null && curType == NOTES && allowEditing)
+		{
+			for (yeah in noteGroup.members)
+			{
+				if (!Std.isOfType(yeah, Note)) continue;
+				final n:Note = cast yeah;
+				if (!n.visible) continue;
+				if (FlxG.mouse.overlaps(n) || (n.sustainHandle != null && n.sustainHandle.visible && FlxG.mouse.overlaps(n.sustainHandle)))
+				{
+					final lines = [
+						'Type: ${n.type}',
+						'Time: ${Math.round(n.time)}ms',
+						'Dir: ${n.direction}  Lane: ${n.lane}',
+					];
+					if (n.duration > 0) lines.push('Duration: ${Math.round(n.duration)}ms');
+					tooltip.show(lines.join("\n"));
 					break;
 				}
 			}

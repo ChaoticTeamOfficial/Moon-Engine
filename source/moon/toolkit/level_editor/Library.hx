@@ -127,11 +127,17 @@ class Library extends FlxGroup
 				if (member.overlapsPoint(FlxG.mouse.getViewPosition(), false))
 				{
 					member.alpha = 1;
+					final info = cast(member, EventSpr).info;
+					if (info != null && LevelEditor.instance != null && LevelEditor.instance.tooltip != null)
+					{
+						final desc = (info.description != null && info.description.length > 0) ? ("\n" + info.description) : "";
+						LevelEditor.instance.tooltip.show(info.name + desc);
+					}
 					if (FlxG.mouse.justPressed)
 					{
 						editing = false;
 						editingValues = null;
-						selectedInfo = cast(member, EventSpr).info;
+						selectedInfo = info;
 						refreshLibrary();
 						break;
 					}

@@ -1,10 +1,8 @@
 package moon.toolkit.level_editor;
 
-import haxe.ui.components.Button;
-import haxe.ui.components.Label;
-import haxe.ui.containers.HBox;
-import haxe.ui.core.Screen;
 import lime.system.System;
+import moon.toolkit.ui.UIActionButton;
+import moon.toolkit.ui.UITheme;
 import moon.toolkit.level_editor.pages.*;
 import moon.menus.*;
 
@@ -14,9 +12,9 @@ class LeftPanel extends FlxSpriteGroup
 {
 	var panelBehind:MoonSprite;
 	var bg:MoonSprite;
-	var headerBox:HBox;
-	var headerTitle:Label;
-	var backButton:Button;
+	var headerBox:FlxSpriteGroup;
+	var headerTitle:FlxText;
+	var backButton:UIActionButton;
 	var buttons:Array<IconButton> = [];
 	var buttonMap:Map<String, IconButton> = [];
 	var keybinds:Array<
@@ -241,33 +239,31 @@ class LeftPanel extends FlxSpriteGroup
 
 	function _buildHeader():Void
 	{
-		headerBox = new HBox();
-		headerBox.styleString = "background-color: #111111; border: none; padding: 4px; spacing: 6px; vertical-align: center;";
-		headerBox.height = HEADER_H;
+		headerBox = new FlxSpriteGroup();
 		headerBox.visible = false;
+		add(headerBox);
 
-		backButton = new Button();
-		backButton.text = '‹';
-		backButton.width = 28;
-		backButton.height = 28;
-		backButton.styleString = "font-size: 18px;";
-		backButton.onClick = _ -> pop();
-		headerBox.addComponent(backButton);
+		final headerBg = new MoonSprite().makeGraphic(PANEL_W, HEADER_H, 0xFF111111);
+		headerBg.active = false;
+		headerBox.add(headerBg);
 
-		headerTitle = new Label();
-		headerTitle.text = '';
-		headerTitle.styleString = "font-size: 13px; color: #cccccc; vertical-align: center;";
-		headerBox.addComponent(headerTitle);
+		backButton = new UIActionButton(4, (HEADER_H - 28) / 2, 28, "<", () -> pop(), null, 28);
+		headerBox.add(backButton);
 
-		Screen.instance.addComponent(headerBox);
+		headerTitle = new FlxText(40, 0, PANEL_W - 48, "", 13);
+		headerTitle.font = UITheme.FONT;
+		headerTitle.color = 0xFFCCCCCC;
+		headerTitle.antialiasing = true;
+		headerTitle.active = false;
+		headerTitle.y = (HEADER_H - headerTitle.height) / 2;
+		headerBox.add(headerTitle);
 	}
 
 	function _positionHeader():Void
 	{
 		final px = panelBehind.x;
-		headerBox.left = px;
-		headerBox.top = 0;
-		headerBox.width = PANEL_W;
+		headerBox.x = px;
+		headerBox.y = 0;
 
 		for (page in pageStack)
 		{
