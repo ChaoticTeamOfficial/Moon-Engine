@@ -26,6 +26,8 @@ class EventRegistry
 			'Pulse Camera' => PulseCameraEvent,
 			'Show Subtitle' => ShowSubtitleEvent,
 			'Set Filter' => SetFilterEvent,
+			'Fade' => FadeEvent,
+			'Flash' => FlashEvent,
 
 			// window events (maybe will be a separate category?)
 			'Window Movement' => WindowMoveEvent,

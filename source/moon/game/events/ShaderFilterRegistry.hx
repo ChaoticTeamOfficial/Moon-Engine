@@ -224,7 +224,6 @@ class ShaderFilterRegistry
 			}
 		});
 
-		// ColorSwap is a wrapper; the actual filter is ColorSwapShader.
 		register({
 			id: 'colorSwap',
 			label: 'Color Swap',

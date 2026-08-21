@@ -619,14 +619,9 @@ class PlayState extends FlxTransitionableState
 		}
 	}
 
-	/**
-	 * Returns (and creates if needed) the MoonShaderHandler for a camera target name.
-	 */
-	public function getCameraShaderHandler(target:String):Null<MoonShaderHandler>
+	public function getCamera(target:String):Null<MoonCamera>
 	{
-		if (cameraShaderHandlers.exists(target)) return cameraShaderHandlers.get(target);
-
-		final cam = switch (target)
+		return switch (target)
 		{
 			case 'camHUD':
 				camHUD;
@@ -637,6 +632,16 @@ class PlayState extends FlxTransitionableState
 			default:
 				null;
 		};
+	}
+
+	/**
+	 * Returns (and creates if needed) the MoonShaderHandler for a camera target name.
+	 */
+	public function getCameraShaderHandler(target:String):Null<MoonShaderHandler>
+	{
+		if (cameraShaderHandlers.exists(target)) return cameraShaderHandlers.get(target);
+
+		final cam = getCamera(target);
 
 		if (cam == null)
 		{
