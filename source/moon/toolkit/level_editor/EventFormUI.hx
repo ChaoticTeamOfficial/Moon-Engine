@@ -129,9 +129,7 @@ class EventFormUI extends UIScrollPage
 				case CHECKBOX:
 					Reflect.setField(result, field.name, cast(w, UICheckbox).checked);
 				case COLOR:
-					final cp = cast(w, UIColorPicker);
-					final colorValue = "#" + StringTools.hex(cp.value, 6);
-					Reflect.setField(result, field.name, colorValue);
+					Reflect.setField(result, field.name, cast(w, UIColorPicker).value.toWebString());
 			}
 		}
 		return result;

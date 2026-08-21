@@ -34,6 +34,7 @@ class EventRegistry
 
 			// CHARACTERS
 			'Play Character Animation' => PlayCharacterAnimEvent,
+			'Tint Character' => TintCharacterEvent,
 
 			// SOUNDS
 			'Change Playback Settings' => ChangePlaybackSettingsEvent,
