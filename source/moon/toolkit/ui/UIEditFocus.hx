@@ -39,4 +39,10 @@ class UIEditFocus
 	 * Releases ownership only if `target` is the one that currently holds it.
 	 */
 	public static function release(target:ITextEditable):Void if (current == target) request(null);
+
+	/**
+	 * True when any text-editable control owns keyboard focus, or any
+	 * transient overlay UI (dropdown list / color picker) is open.
+	 */
+	public static function isBusy():Bool return current != null || UIDropdown.isAnyOpen() || UIColorPicker.isAnyOpen();
 }

@@ -5,11 +5,12 @@ import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import moon.toolkit.ui.UIEditFocus.IEditorChromeHideable;
 
 /**
  * A simple UI dropdown.
  */
-class UIDropdown extends UIComponent
+class UIDropdown extends UIComponent implements IEditorChromeHideable
 {
 	public var options:Array<String>;
 	public var selectedIndex(default, null):Int = 0;
@@ -30,6 +31,7 @@ class UIDropdown extends UIComponent
 	var scrollValue:Float = 0;
 	var draggingListThumb:Bool = false;
 	var listDragGrabOffset:Float = 0;
+	var defaultIndex:Int = 0;
 
 	static inline final VALUE_BOX_WIDTH:Float = 130;
 	static inline final LIST_SCROLLBAR_WIDTH:Float = 6;
@@ -63,6 +65,7 @@ class UIDropdown extends UIComponent
 		super(x, y, width, labelText, iconGraphic);
 		this.options = options;
 		this.maxVisibleItems = maxVisibleItems;
+		this.defaultIndex = defaultIndex;
 		selectedIndex = defaultIndex;
 		optH = rowHeight - 6;
 
@@ -255,6 +258,26 @@ class UIDropdown extends UIComponent
 				scrollValue -= FlxG.mouse.wheel * optH;
 				applyListScroll();
 			}
+
+			updateListRowClipping();
+		}
+
+		if (FlxG.mouse.justPressedMiddle)
+		{
+			final mouse = FlxG.mouse.getWorldPosition();
+			if (containsPoint(mouse.x, mouse.y, valueBox.x, valueBox.y, valueBox.width, valueBox.height))
+			{
+				if (isOpen) toggleOpen(false);
+				if (selectedIndex != defaultIndex && defaultIndex >= 0 && defaultIndex < options.length)
+				{
+					final previous = selectedIndex;
+					selectedIndex = defaultIndex;
+					valueText.text = options[defaultIndex];
+					refreshSelectedColor(previous);
+					if (onChange != null) onChange(options[defaultIndex]);
+				}
+			}
+			return;
 		}
 
 		if (!FlxG.mouse.justPressed) return;
@@ -330,6 +353,11 @@ class UIDropdown extends UIComponent
 		valueText.text = options[index];
 		refreshSelectedColor(previous);
 		if (onChange != null) onChange(options[index]);
+	}
+
+	public function forceHideEditorChrome():Void
+	{
+		if (isOpen) toggleOpen(false);
 	}
 
 	override public function destroy():Void

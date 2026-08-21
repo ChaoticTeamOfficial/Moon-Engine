@@ -318,7 +318,7 @@ class Paths
 	public static function preloadSound(key:String, from:String = 'music', ?library:String):Void
 	{
 		if (AssetManager.sounds.exists(key)) return;
-		final snd = new FlxSound().loadEmbedded(getSound('$from/$key', library), false, false);
+		final snd = new FlxSound().load(getSound('$from/$key', library)).setup();
 		snd.volume = 0;
 		snd.play();
 		snd.stop();
@@ -342,13 +342,14 @@ class Paths
 		var snd = _sfxCache.get(src);
 		if (snd == null)
 		{
-			snd = FlxG.sound.load(src, 1.0, false, null, false, false);
+			// Flixel 6.2+: FlxG.sound.load is deprecated
+			snd = FlxG.sound.create(src).setup(1.0, false, false);
+			snd.persist = true;
 			_sfxCache.set(src, snd);
 		}
 
 		if (snd.playing) snd.stop();
 		snd.volume = MoonSettings.callSetting('SFX Volume') / 100;
-		snd.persist = true;
 		snd.pitch = pitch;
 		return snd.play(true);
 	}

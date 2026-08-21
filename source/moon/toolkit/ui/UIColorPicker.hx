@@ -1,11 +1,13 @@
 package moon.toolkit.ui;
 
+import moon.toolkit.ui.UIEditFocus.IEditorChromeHideable;
+
 /**
  * A swatch that opens a popup with an interactive saturation/value color
  * box, a hue strip, preset colors, and R/G/B steppers for custom values.
  * TODO: make the preset colors modifiable by the user.
  */
-class UIColorPicker extends UIComponent
+class UIColorPicker extends UIComponent implements IEditorChromeHideable
 {
 	public var value(get, set):FlxColor;
 
@@ -72,10 +74,12 @@ class UIColorPicker extends UIComponent
 	];
 
 	var _mp:flixel.math.FlxPoint = flixel.math.FlxPoint.get();
+	var defaultColor:FlxColor;
 
 	public function new(x:Float, y:Float, width:Float, labelText:String, defaultColor:FlxColor, ?iconGraphic:Dynamic)
 	{
 		super(x, y, width, labelText, iconGraphic);
+		this.defaultColor = defaultColor;
 
 		swatch = new FlxSprite();
 		swatch.loadGraphic(
@@ -163,6 +167,7 @@ class UIColorPicker extends UIComponent
 		rStepper = new UIStepper(PANEL_PADDING, stepperY, stepperWidth, "R:", 0, 255, 255, 5);
 		gStepper = new UIStepper(PANEL_PADDING, stepperY + stepperStride, stepperWidth, "G:", 0, 255, 255, 5);
 		bStepper = new UIStepper(PANEL_PADDING, stepperY + stepperStride * 2, stepperWidth, "B:", 0, 255, 255, 5);
+		rStepper.allowDuringColorPicker = gStepper.allowDuringColorPicker = bStepper.allowDuringColorPicker = true;
 
 		rStepper.onChange = (_) -> applyFromSteppers();
 		gStepper.onChange = (_) -> applyFromSteppers();
@@ -398,6 +403,22 @@ class UIColorPicker extends UIComponent
 			}
 		}
 
+		if (FlxG.mouse.justPressedMiddle)
+		{
+			final mp = FlxG.mouse.getWorldPosition(null, _mp);
+			if (containsPoint(mp, swatch.x, swatch.y, swatch.width, swatch.height))
+			{
+				if (isOpen) toggleOpen(false);
+				if (_value != defaultColor)
+				{
+					applyColor(defaultColor, true, true);
+					positionCursors();
+					if (onChange != null) onChange(_value);
+				}
+			}
+			return;
+		}
+
 		if (!FlxG.mouse.justPressed) return;
 		if (clickAlreadyConsumed()) return;
 		if (
@@ -499,6 +520,11 @@ class UIColorPicker extends UIComponent
 			if (openPicker == this) openPicker = null;
 			if (UIOverlay.layer != null) UIOverlay.layer.remove(popup, true);
 		}
+	}
+
+	public function forceHideEditorChrome():Void
+	{
+		if (isOpen) toggleOpen(false);
 	}
 
 	override public function destroy():Void

@@ -20,8 +20,11 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 	public var maxLength:Int = 64;
 
 	var _text:String = "";
+	var defaultText:String = "";
+	var defaultCaptured:Bool = false;
 	var box:FlxSprite;
 	var textDisplay:FlxText;
+	var textClip:FlxSprite;
 	var caret:FlxSprite;
 	var selectionHighlight:FlxSprite;
 	var focused:Bool = false;
@@ -30,13 +33,16 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 	var cursorIndex:Int = 0;
 	var selectionAnchor:Int = -1;
 	var isSelecting:Bool = false;
+	var scrollX:Float = 0;
 
 	static inline final BOX_WIDTH:Float = 160;
+	static inline final TEXT_PAD:Float = 8;
 
 	public function new(x:Float, y:Float, width:Float, labelText:String, placeholder:String = "", ?iconGraphic:Dynamic)
 	{
 		super(x, y, width, labelText, iconGraphic);
 		this.placeholder = placeholder;
+		this.defaultText = "";
 
 		box = new FlxSprite();
 		box.loadGraphic(
@@ -54,14 +60,21 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 		selectionHighlight.visible = selectionHighlight.active = false;
 		add(selectionHighlight);
 
-		textDisplay = new FlxText(box.x + 8, 0, BOX_WIDTH - 16, placeholder, UITheme.FONT_SIZE);
+		textDisplay = new FlxText(0, 0, 0, placeholder, UITheme.FONT_SIZE);
 		textDisplay.font = UITheme.FONT;
 		textDisplay.color = UITheme.TEXT_DIM;
 		textDisplay.wordWrap = false;
-		textDisplay.y = (rowHeight - textDisplay.height) / 2;
 		textDisplay.active = false;
+		textDisplay.visible = false;
 		textDisplay.antialiasing = UITheme.FONT_ANTIALIASING;
 		add(textDisplay);
+
+		textClip = new FlxSprite(box.x + TEXT_PAD, 0);
+		textClip.makeGraphic(Std.int(textAreaWidth()), Std.int(rowHeight - 6), FlxColor.TRANSPARENT, true);
+		textClip.y = (rowHeight - textClip.height) / 2;
+		textClip.active = false;
+		textClip.antialiasing = UITheme.FONT_ANTIALIASING;
+		add(textClip);
 
 		caret = new FlxSprite();
 		caret.loadGraphic(RoundedRectCache.getSolidPixel());
@@ -79,6 +92,11 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 
 	function set_text(v:String):String
 	{
+		if (!defaultCaptured)
+		{
+			defaultText = v;
+			defaultCaptured = true;
+		}
 		_text = v;
 		cursorIndex = _text.length;
 		selectionAnchor = -1;
@@ -112,6 +130,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 	public function forceHideEditorChrome():Void
 	{
 		if (focused) applyFocus(false);
+		UIEditFocus.release(this);
 		isSelecting = false;
 		caret.visible = false;
 		selectionHighlight.visible = false;
@@ -126,22 +145,26 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 	{
 		super.update(elapsed);
 
-		if (focused && UIEditFocus.current != this)
+		if (focused && UIEditFocus.current != this) applyFocus(false);
+
+		if (FlxG.mouse.justPressedMiddle && !UIDropdown.isAnyOpen() && !UIColorPicker.isAnyOpen())
 		{
-			focused = false;
-			isSelecting = false;
-			selectionAnchor = -1;
-			caret.visible = false;
-			selectionHighlight.visible = false;
+			var mp = FlxG.mouse.getWorldPosition();
+			if (containsPoint(mp.x, mp.y, box.x, box.y, box.width, box.height))
+			{
+				if (focused) UIEditFocus.release(this);
+				if (_text != defaultText) text = defaultText;
+			}
+			return;
 		}
 
-		if (FlxG.mouse.justPressed)
+		if (FlxG.mouse.justPressed && !UIDropdown.isAnyOpen() && !UIColorPicker.isAnyOpen())
 		{
 			var mp = FlxG.mouse.getWorldPosition();
 			if (containsPoint(mp.x, mp.y, box.x, box.y, box.width, box.height))
 			{
 				requestFocus();
-				cursorIndex = indexFromLocalX(mp.x - (box.x + 8));
+				cursorIndex = indexFromLocalX(mp.x - (box.x + TEXT_PAD) + scrollX);
 				selectionAnchor = cursorIndex;
 				isSelecting = true;
 				resetCaretBlink();
@@ -154,7 +177,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 			if (FlxG.mouse.pressed)
 			{
 				var mp = FlxG.mouse.getWorldPosition();
-				var newIndex = indexFromLocalX(mp.x - (box.x + 8));
+				var newIndex = indexFromLocalX(mp.x - (box.x + TEXT_PAD) + scrollX);
 				if (newIndex != cursorIndex)
 				{
 					cursorIndex = newIndex;
@@ -203,6 +226,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 		{
 			selectionAnchor = -1;
 			isSelecting = false;
+			scrollX = 0;
 		}
 		resetCaretBlink();
 		setBackgroundState(f ? Active : Normal);
@@ -217,6 +241,21 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 			)
 		);
 		refreshDisplay();
+	}
+
+	inline function textAreaWidth():Float return BOX_WIDTH - TEXT_PAD * 2;
+
+	static inline final SCROLL_EDGE_PAD:Float = 4;
+
+	function ensureCaretVisible():Void
+	{
+		final area = textAreaWidth();
+		final total = Math.max(measureWidth(_text), textDisplay.frameWidth > 0 ? textDisplay.frameWidth : 0);
+		final caretOff = (cursorIndex >= _text.length) ? total : measureWidth(_text.substring(0, cursorIndex));
+
+		if (caretOff - scrollX > area - SCROLL_EDGE_PAD) scrollX = caretOff - (area - SCROLL_EDGE_PAD);
+		if (caretOff - scrollX < 0) scrollX = caretOff;
+		scrollX = Math.max(0, Math.min(Math.max(0, total - area + SCROLL_EDGE_PAD), scrollX));
 	}
 
 	inline function resetCaretBlink():Void
@@ -259,24 +298,59 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 
 	function updateCaretAndSelection():Void
 	{
-		final textX = box.x + 8;
+		if (focused) ensureCaretVisible();
+		else
+			scrollX = 0;
+
+		final viewL = box.x + TEXT_PAD;
+		final viewR = box.x + BOX_WIDTH - TEXT_PAD;
 		final caretH = Math.max(10, textDisplay.height > 0 ? textDisplay.height : rowHeight - 10);
 		final topY = box.y + (box.height - caretH) / 2;
 
-		caret.setPosition(textX + measureWidth(_text.substring(0, cursorIndex)), topY);
+		bakeTextClip(viewL, textAreaWidth());
+
+		final caretWorldX = viewL + measureWidth(_text.substring(0, cursorIndex)) - scrollX;
+		caret.setPosition(caretWorldX, topY);
 		caret.scale.set(2, caretH);
-		caret.visible = focused && caretVisible && !hasSelection();
+		caret.visible = focused && caretVisible && !hasSelection() && caretWorldX >= viewL - 1 && caretWorldX <= viewR + 1;
 
 		if (hasSelection())
 		{
-			final sX = textX + measureWidth(_text.substring(0, selStart()));
-			final eX = textX + measureWidth(_text.substring(0, selEnd()));
-			selectionHighlight.setPosition(sX, topY);
-			selectionHighlight.scale.set(Math.max(1, eX - sX), caretH);
-			selectionHighlight.visible = focused;
+			final visL = Math.max(viewL + measureWidth(_text.substring(0, selStart())) - scrollX, viewL);
+			final visR = Math.min(viewL + measureWidth(_text.substring(0, selEnd())) - scrollX, viewR);
+			if (visR > visL)
+			{
+				selectionHighlight.setPosition(visL, topY);
+				selectionHighlight.scale.set(visR - visL, caretH);
+				selectionHighlight.visible = focused;
+			}
+			else
+				selectionHighlight.visible = false;
 		}
 		else
 			selectionHighlight.visible = false;
+	}
+
+	function bakeTextClip(viewL:Float, areaW:Float):Void
+	{
+		final w = Std.int(Math.max(1, Math.ceil(areaW)));
+		final h = Std.int(Math.max(1, rowHeight - 6));
+
+		if (textClip.pixels == null || textClip.pixels.width != w || textClip.pixels.height != h) textClip.makeGraphic(w, h, FlxColor.TRANSPARENT, true);
+		else
+			textClip.pixels.fillRect(textClip.pixels.rect, FlxColor.TRANSPARENT);
+
+		textClip.x = viewL;
+		textClip.y = box.y + (box.height - h) / 2;
+
+		if (textDisplay.graphic != null && textDisplay.frameWidth > 0)
+		{
+			textDisplay.drawFrame(true);
+			final stampX = -Math.round(scrollX);
+			final stampY = Std.int(Math.max(0, (h - textDisplay.frameHeight) / 2));
+			textClip.stamp(textDisplay, stampX, stampY);
+		}
+		textClip.dirty = true;
 	}
 
 	static var measurer:FlxText;
@@ -328,6 +402,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 					cursorIndex -= 1;
 					commitText(newText);
 				}
+				Paths.playSFX('toolkit/moon-ui/typer/erase.wav', 'sounds', true, FlxG.random.float(0.85, 1.2));
 				resetCaretBlink();
 
 			case 46: // delete
@@ -338,6 +413,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 					commitText(newText);
 				}
 				resetCaretBlink();
+				Paths.playSFX('toolkit/moon-ui/typer/erase.wav', 'sounds', true, FlxG.random.float(0.85, 1.2));
 
 			case 37: // left
 				if (e.shiftKey)
@@ -350,6 +426,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 					cursorIndex = hasSelection() ? selStart() : Std.int(Math.max(0, cursorIndex - 1));
 					selectionAnchor = -1;
 				}
+				Paths.playSFX('toolkit/moon-ui/typer/move.wav', 'sounds', true, FlxG.random.float(0.85, 1.2));
 				resetCaretBlink();
 				updateCaretAndSelection();
 
@@ -364,6 +441,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 					cursorIndex = hasSelection() ? selEnd() : Std.int(Math.min(_text.length, cursorIndex + 1));
 					selectionAnchor = -1;
 				}
+				Paths.playSFX('toolkit/moon-ui/typer/move.wav', 'sounds', true, FlxG.random.float(0.85, 1.2));
 				resetCaretBlink();
 				updateCaretAndSelection();
 
@@ -416,6 +494,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 	function onTextInput(e:TextEvent):Void
 	{
 		if (!focused) return;
+		Paths.playSFX('toolkit/moon-ui/typer/type${FlxG.random.int(1, 11)}.wav', 'sounds');
 		insertAtCursor(e.text);
 		resetCaretBlink();
 	}

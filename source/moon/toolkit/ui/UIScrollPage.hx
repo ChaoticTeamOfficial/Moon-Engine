@@ -1,13 +1,14 @@
 package moon.toolkit.ui;
 
+import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 
 /**
- * A `UIPage` that clips its content to a fixed `viewWidth` x `viewHeight`
- * window and lets you scroll tharough content taller than that window!
+ * A `UIPage` that clips its content. Simple!
  */
 class UIScrollPage extends UIPage
 {
@@ -52,10 +53,6 @@ class UIScrollPage extends UIPage
 		this.viewHeight = viewHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		// panelBg = new FlxSprite();
-		// panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
-		// add(panelBg);
-
 		content = new FlxSpriteGroup();
 		add(content);
 
@@ -80,8 +77,7 @@ class UIScrollPage extends UIPage
 	}
 
 	/**
-	 * Lay out content components in a vertical stack, then recompute the
-	 * scrollable range and scrollbar thumb size/visibility.
+	 * Lay out content components in a vertical stack.
 	 */
 	override public function layoutVertical(startY:Float = 0):Void
 	{
@@ -97,7 +93,7 @@ class UIScrollPage extends UIPage
 
 		contentHeight = Math.max(0, localY - UITheme.ROW_SPACING);
 		refreshScrollbar();
-		content.y -= scrollY;
+		if (scrollY != 0) content.y -= scrollY;
 		updateRowClipping();
 	}
 
@@ -110,7 +106,6 @@ class UIScrollPage extends UIPage
 		viewHeight = newHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		// panelBg.loadGraphic(RoundedRectCache.get(Std.int(viewWidth), Std.int(viewHeight), UITheme.CORNER_RADIUS, UITheme.PANEL_BG));
 		scrollTrack.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.CONTROL_BG));
 		scrollTrack.x = x + scrollbarX;
 
@@ -147,7 +142,7 @@ class UIScrollPage extends UIPage
 
 		final thumbHeight = Math.max(SCROLLBAR_MIN_THUMB, viewHeight * (viewHeight / contentHeight));
 		scrollThumb.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(thumbHeight), SCROLLBAR_WIDTH / 2, UITheme.ACCENT));
-		scrollThumb.x = x + scrollbarX; // world x = page's x + local scrollbar offset
+		scrollThumb.x = x + scrollbarX;
 		updateThumbPosition();
 	}
 
@@ -159,33 +154,92 @@ class UIScrollPage extends UIPage
 		scrollThumb.y = y + travel * ratio;
 	}
 
-	/**
-	 * Hides (and deactivates, so they stop taking input) any content
-	 * components.
-	 */
 	function updateRowClipping():Void
 	{
-		final top = y;
-		final bottom = y + viewHeight;
+		final viewTop = y;
+		final viewBottom = y + viewHeight;
+		final viewLeft = x;
+		final viewW = viewWidth;
 
 		for (member in content.members)
 		{
 			if (member == null) continue;
-			final centerY = member.y + (Std.isOfType(member, UIComponent) ? cast(member, UIComponent).rowHeight : member.height) / 2;
-			final onScreen = centerY >= top && centerY <= bottom;
 
-			if (member.visible && !onScreen) UIPage.forceHideChromeRecursive(member);
+			final rowH = Std.isOfType(member, UIComponent) ? cast(member, UIComponent).rowHeight : member.height;
+			final rowTop = member.y;
+			final rowBottom = member.y + rowH;
 
-			member.visible = onScreen;
-			member.active = onScreen;
+			final fullyOutside = rowBottom <= viewTop || rowTop >= viewBottom;
+
+			if (fullyOutside)
+			{
+				UIPage.forceHideChromeRecursive(member);
+				applyClipRecursive(member, viewLeft, viewTop, viewW, 0);
+				member.active = false;
+				continue;
+			}
+
+			member.active = true;
+
+			final clipTop = Math.max(rowTop, viewTop);
+			final clipH = Math.min(rowBottom, viewBottom) - clipTop;
+			applyClipRecursive(member, viewLeft, clipTop, viewW, clipH);
 		}
+	}
+
+	static function applyClipRecursive(obj:FlxBasic, worldX:Float, worldY:Float, worldW:Float, worldH:Float):Void
+	{
+		if (obj == null) return;
+
+		if (Std.isOfType(obj, FlxSpriteGroup))
+		{
+			final grp:FlxSpriteGroup = cast obj;
+			for (m in grp.members) applyClipRecursive(m, worldX, worldY, worldW, worldH);
+			return;
+		}
+
+		if (!Std.isOfType(obj, FlxSprite)) return;
+
+		final spr:FlxSprite = cast obj;
+		if (worldW <= 0 || worldH <= 0)
+		{
+			setClip(spr, 0, 0, 0, 0);
+			return;
+		}
+
+		final localX = worldX - spr.x;
+		final localY = worldY - spr.y;
+
+		final ix = Math.max(0, localX);
+		final iy = Math.max(0, localY);
+		final iw = Math.min(spr.width, localX + worldW) - ix;
+		final ih = Math.min(spr.height, localY + worldH) - iy;
+
+		if (iw <= 0 || ih <= 0)
+		{
+			setClip(spr, 0, 0, 0, 0);
+			return;
+		}
+
+		setClip(spr, ix, iy, iw, ih);
+	}
+
+	static function setClip(spr:FlxSprite, cx:Float, cy:Float, cw:Float, ch:Float):Void
+	{
+		if (spr.clipRect == null) spr.clipRect = FlxRect.get();
+		spr.clipRect.set(cx, cy, cw, ch);
+		spr.clipRect = spr.clipRect;
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		super.update(elapsed);
+		if (!visible || !active)
+		{
+			super.update(elapsed);
+			return;
+		}
 
-		if (!visible || !active) return;
+		updateRowClipping();
 
 		final mp = FlxG.mouse.getWorldPosition(FlxG.camera, _mp);
 		final localX = mp.x - x;
@@ -211,7 +265,9 @@ class UIScrollPage extends UIPage
 
 		if (draggingThumb) jumpThumbTo(localY - dragGrabOffset);
 
-		if (overBackground && FlxG.mouse.wheel != 0 && !UIDropdown.isAnyOpen()) scrollY -= FlxG.mouse.wheel * scrollSpeed;
+		if (overBackground && FlxG.mouse.wheel != 0 && !UIEditFocus.isBusy()) scrollY -= FlxG.mouse.wheel * scrollSpeed;
+
+		super.update(elapsed);
 	}
 
 	function jumpThumbTo(thumbY:Float):Void

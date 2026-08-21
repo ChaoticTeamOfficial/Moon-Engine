@@ -7,12 +7,14 @@ class UICheckbox extends UIComponent
 
 	var box:FlxSprite;
 	var checkMark:FlxSprite;
+	var defaultChecked:Bool;
 
 	static inline var BOX_SIZE:Float = 20;
 
 	public function new(x:Float, y:Float, width:Float, labelText:String, defaultChecked:Bool = false, ?iconGraphic:Dynamic)
 	{
 		super(x, y, width, labelText, iconGraphic);
+		this.defaultChecked = defaultChecked;
 
 		box = new FlxSprite();
 		box.loadGraphic(RoundedRectCache.get(Std.int(BOX_SIZE), Std.int(BOX_SIZE), 5, UITheme.CONTROL_BG_HOVER, UITheme.CONTROL_BORDER, 1));
@@ -40,7 +42,18 @@ class UICheckbox extends UIComponent
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		if (UIColorPicker.isAnyOpen()) return;
+		if (UIEditFocus.isBusy()) return;
+
+		if (FlxG.mouse.justPressedMiddle && box.getScreenBounds().containsPoint(FlxG.mouse.getViewPosition()))
+		{
+			if (checked != defaultChecked)
+			{
+				checked = defaultChecked;
+				if (onChange != null) onChange(checked);
+			}
+			return;
+		}
+
 		if (FlxG.mouse.justPressed && box.getScreenBounds().containsPoint(FlxG.mouse.getViewPosition()))
 		{
 			checked = !checked;

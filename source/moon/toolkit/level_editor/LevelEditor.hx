@@ -155,6 +155,7 @@ class LevelEditor extends FlxState
 	public var mix:String = '';
 	// --- OTHER/MISC --- //
 	public var allowEditing:Bool = true;
+	public var uiBusy:Bool = false;
 
 	var changes:Array<
 		{time:Float, bpm:Float, numerator:Float, denominator:Float}>;
@@ -586,13 +587,13 @@ class LevelEditor extends FlxState
 		library.active = !leftpanel.panelOpen;
 
 		// ----- Input Stuff ----- //
-		final haxeUIFocused = haxe.ui.focus.FocusManager.instance.focus != null;
+		uiBusy = haxe.ui.focus.FocusManager.instance.focus != null || UIEditFocus.isBusy();
 
 		updateCursor();
 
 		if (curPlacementMode == EDIT) updateEditingValues();
 
-		if (!haxeUIFocused && allowEditing)
+		if (!uiBusy && allowEditing)
 		{
 			if (FlxG.keys.pressed.CONTROL)
 			{
@@ -822,7 +823,7 @@ class LevelEditor extends FlxState
 				if (dragOGlengths != null) dragOGlengths.clear();
 			}
 		}
-		else if (!haxeUIFocused)
+		else if (!uiBusy)
 		{
 			if (selectedNotes.length > 0)
 			{
@@ -926,7 +927,7 @@ class LevelEditor extends FlxState
 
 	private function updateCursor():Void
 	{
-		if (libFocus || !allowEditing) return;
+		if (libFocus || !allowEditing || UIEditFocus.isBusy()) return;
 		final TOTAL_LANES:Int = NUM_LANES + 1;
 		final relX = FlxG.mouse.viewX - gridGroup.x;
 		final relY = FlxG.mouse.viewY - gridGroup.y - 18;
@@ -990,7 +991,7 @@ class LevelEditor extends FlxState
 		// WOHOOOOO NO MORE THINKING ABOUT OVERLAPPING SHIT!!!
 
 		// Anyways, place stuff!
-		if (FlxG.mouse.justPressed && curPlacementMode == PLACE && draggingNote == null)
+		if (!uiBusy && allowEditing && FlxG.mouse.justPressed && curPlacementMode == PLACE && draggingNote == null)
 		{
 			// TODO: when not on placement mode, only on editing mode?
 			// uhhh
@@ -1101,7 +1102,7 @@ class LevelEditor extends FlxState
 				}
 			}
 		}
-		else if (FlxG.mouse.justPressed && curPlacementMode == EDIT && draggingNote == null)
+		else if (!uiBusy && allowEditing && FlxG.mouse.justPressed && curPlacementMode == EDIT && draggingNote == null)
 		{
 			final shiftHeld = FlxG.keys.pressed.SHIFT;
 
@@ -1181,7 +1182,7 @@ class LevelEditor extends FlxState
 
 		// Delete stuff!!!
 		// or remove, eh, whatever!
-		if (FlxG.mouse.pressedRight && draggingNote == null)
+		if (!uiBusy && allowEditing && FlxG.mouse.pressedRight && draggingNote == null)
 		{
 			deselectAll();
 

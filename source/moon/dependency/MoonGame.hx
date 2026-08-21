@@ -58,9 +58,7 @@ class MoonGame extends FlxGame
 			// got from FE, by crowplexus and nebulazorua
 			if (kc == FlxKey.ENTER && e.altKey) e.stopImmediatePropagation();
 
-			// update volume settings when the volume is changed.
-			// TODO: fix the fact that when holding a key it fucks up.
-			if ((kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) || (kc == FlxKey.MINUS || kc == FlxKey.NUMPADMINUS))
+			if (!UIEditFocus.isBusy() && ((kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) || (kc == FlxKey.MINUS || kc == FlxKey.NUMPADMINUS)))
 			{
 				final change:Float = (kc == FlxKey.PLUS || kc == FlxKey.NUMPADPLUS) ? 0.05 : -0.05;
 				MoonSettings.setSetting("Master Volume", FlxMath.bound(FlxG.sound.volume + change, 0, 1) * 100);
