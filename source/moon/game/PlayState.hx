@@ -4,7 +4,6 @@ import sys.FileSystem;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import modchart.Manager;
-import openfl.filters.ShaderFilter;
 import moon.dependency.scripting.MoonScript;
 import moon.game.obj.Character;
 import moon.menus.*;
@@ -17,13 +16,12 @@ import moon.game.submenus.PauseScreen;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
 import moon.game.obj.SubtitleDisplay;
-import moon.hardcoded_shaders.RainShader;
-import openfl.filters.ShaderFilter;
+import moon.dependency.MoonShaderHandler;
+import moon.game.events.ShaderFilterRegistry;
 import moon.backend.gameplay.mechanics.*;
 
 using StringTools;
 
-// TODO: HAVE A LIST OF PRE-SET SHADERS THAT CAN BE USED FROM THE EDITOR.
 class PlayState extends FlxTransitionableState
 {
 	/**
@@ -77,13 +75,20 @@ class PlayState extends FlxTransitionableState
 
 	public var camFollower:FlxObject = new FlxObject();
 
+	/**
+	 * Per-camera shader handlers used by the Set Filter event!
+	 */
+	public var cameraShaderHandlers:Map<String, MoonShaderHandler> = [];
+
 	// -- Some other values --
 	// Events (a array containing every MoonEvent, not the raw events from chart.)
 	public static var events:Array<MoonEvent> = [];
 
 	public var songScript:MoonScript = new MoonScript();
 
-	/** If the score is valid or not. Sets to false if on practice mode, botplay, or different pitch. */
+	/** 
+	 * If the score is valid or not. Sets to false if on practice mode, botplay...
+	 */
 	public static var VALID_SCORE:Bool = true;
 
 	public var canPause:Bool = true;
@@ -261,6 +266,8 @@ class PlayState extends FlxTransitionableState
 
 	public function setEvents()
 	{
+		preloadCameraShaders();
+
 		// < -- EVENTS SETUP -- >//
 		var onLoadEvents = playField.chart.events.filter((e) -> e.runOnLoad == true);
 		onLoadEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
@@ -311,6 +318,7 @@ class PlayState extends FlxTransitionableState
 	{
 		Global.scriptCall('onUpdate', [elapsed]);
 		MechanicRegister.updateAll(elapsed);
+		if (cameraShaderHandlers != null) for (handler in cameraShaderHandlers) handler.update(elapsed);
 		super.update(elapsed);
 
 		// camGAME.rotation += 0.5;
@@ -577,6 +585,70 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onSongPause');
 	}
 
+	public function preloadCameraShaders():Void
+	{
+		ShaderFilterRegistry.init();
+
+		final needed:Map<String, Array<String>> = [];
+
+		for (e in playField.chart.events)
+		{
+			if (e.tag != 'Set Filter') continue;
+
+			final target:String = e.values?.target ?? 'camGAME';
+			final def = ShaderFilterRegistry.getByLabel(e.values?.filter) ?? ShaderFilterRegistry.get(e.values?.filter);
+			if (def == null) continue;
+
+			if (!needed.exists(target)) needed.set(target, []);
+			final list = needed.get(target);
+			if (list.indexOf(def.id) == -1) list.push(def.id);
+		}
+
+		for (target => ids in needed)
+		{
+			final handler = getCameraShaderHandler(target);
+			if (handler == null) continue;
+
+			for (id in ids)
+			{
+				if (handler.getShader(id) != null) continue;
+				final def = ShaderFilterRegistry.get(id);
+				if (def == null) continue;
+				handler.add(id, def.create(), false);
+			}
+		}
+	}
+
+	/**
+	 * Returns (and creates if needed) the MoonShaderHandler for a camera target name.
+	 */
+	public function getCameraShaderHandler(target:String):Null<MoonShaderHandler>
+	{
+		if (cameraShaderHandlers.exists(target)) return cameraShaderHandlers.get(target);
+
+		final cam = switch (target)
+		{
+			case 'camHUD':
+				camHUD;
+			case 'camALT':
+				camALT;
+			case 'camGAME':
+				camGAME;
+			default:
+				null;
+		};
+
+		if (cam == null)
+		{
+			trace('[PlayState] Unknown camera target: $target', "WARNING");
+			return null;
+		}
+
+		final handler = new MoonShaderHandler(cam);
+		cameraShaderHandlers.set(target, handler);
+		return handler;
+	}
+
 	public function resumeGame()
 	{
 		paused = false;
@@ -601,6 +673,7 @@ class PlayState extends FlxTransitionableState
 
 		// clears all shader instances.
 		if (MoonShaderHandler.instances.length > 0) for (instance in MoonShaderHandler.instances) instance.destroy();
+		cameraShaderHandlers.clear();
 
 		if (toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else

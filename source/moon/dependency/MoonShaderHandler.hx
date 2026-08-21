@@ -1,5 +1,6 @@
 package moon.dependency;
 
+import moon.game.events.ShaderFilterRegistry;
 import openfl.display.Shader;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
@@ -177,6 +178,35 @@ class MoonShaderHandler
 	public function getFilter(id:String):ShaderFilter return _filters.get(id);
 
 	/**
+	 * Accumulated time while this handler is alive (seconds).
+	 */
+	public var time:Float = 0;
+
+	/**
+	 * Advances time on every currently enabled shader.
+	 */
+	public function update(elapsed:Float):Void
+	{
+		time += elapsed;
+
+		var cam:FlxCamera = null;
+		for (t in targets)
+		{
+			if (Std.isOfType(t, FlxCamera))
+			{
+				cam = cast t;
+				break;
+			}
+		}
+
+		for (id => shader in shaders)
+		{
+			if (_enabled.get(id) != true) continue;
+			ShaderFilterRegistry.updateShader(id, shader, elapsed, time, cam);
+		}
+	}
+
+	/**
 	 * Re-applies filters/shaders to all targets, taking the shaders setting in account.
 	 */
 	public function refresh():MoonShaderHandler
@@ -192,17 +222,34 @@ class MoonShaderHandler
 	{
 		if (targets.length == 0) return;
 
-		var isGlobalEnabled = (MoonSettings.callSetting('Shaders') ?? true);
+		final isGlobalEnabled = (MoonSettings.callSetting('Shaders') ?? true);
 
 		for (t in targets)
 		{
-			var hasDirectShader = Reflect.hasField(t, "shader");
-			var hasFilters = Reflect.hasField(t, "filters");
+			// Cameras always use BitmapFilter[] via .filters (post-process)...
+			// lemme fix that!
+			if (Std.isOfType(t, FlxCamera))
+			{
+				final cam:FlxCamera = cast t;
+				final cameraFilters:Array<BitmapFilter> = [];
+
+				for (id => filter in _filters)
+				{
+					if (!isGlobalEnabled || !_enabled.get(id)) continue;
+					cameraFilters.push(filter);
+				}
+
+				cam.filtersEnabled = true;
+				cam.filters = cameraFilters.length > 0 ? cameraFilters : null;
+				continue;
+			}
+
+			final hasDirectShader = Reflect.hasField(t, "shader");
+			final hasFilters = Reflect.hasField(t, "filters");
 
 			if (hasDirectShader)
 			{
-				// TARGET IS LIKELY A SPRITE
-				var applicableRawShaders:Array<Shader> = [];
+				final applicableRawShaders:Array<Shader> = [];
 
 				for (id => filter in _filters)
 				{
@@ -219,7 +266,7 @@ class MoonShaderHandler
 				}
 				else if (applicableRawShaders.length > 1)
 				{
-					var fArr:Array<BitmapFilter> = [];
+					final fArr:Array<BitmapFilter> = [];
 					for (s in applicableRawShaders) fArr.push(new ShaderFilter(s));
 
 					if (hasFilters) Reflect.setField(t, "filters", fArr);
@@ -233,8 +280,7 @@ class MoonShaderHandler
 			}
 			else if (hasFilters)
 			{
-				// TARGET IS LIKELY A CAMERA
-				var cameraFilters:Array<BitmapFilter> = [];
+				final cameraFilters:Array<BitmapFilter> = [];
 
 				for (id => filter in _filters)
 				{

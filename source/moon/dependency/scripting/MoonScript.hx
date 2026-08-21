@@ -39,7 +39,8 @@ class MoonScript
 		"ABotVisualizer" => moon.game.obj.ABotVisualizer,
 		"RainShader" => moon.hardcoded_shaders.RainShader,
 		"ShaderFilter" => openfl.filters.ShaderFilter,
-		"WiggleEffect" => moon.hardcoded_shaders.WiggleEffect
+		"WiggleEffect" => moon.hardcoded_shaders.WiggleEffect,
+		"ShaderFilterRegistry" => moon.game.events.ShaderFilterRegistry
 	];
 
 	public function new()

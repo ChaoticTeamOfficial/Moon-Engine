@@ -265,6 +265,7 @@ class Library extends FlxGroup
 
 			final formY = bg2.y + PAD + headerH + 8;
 			final fields = (curType == NOTES) ? NoteTypeRegistry.getEditorFields(selectedInfo.name) : EventRegistry.getEditorFields(selectedInfo.name);
+			final dynamicProvider = (curType == NOTES) ? null : EventRegistry.getDynamicFieldsProvider(selectedInfo.name);
 
 			form = new EventFormUI(
 				bg2.x + 8,
@@ -273,7 +274,8 @@ class Library extends FlxGroup
 				(bg2.y + bg2.height) - formY - 8,
 				fields,
 				editingValues, curType != NOTES && (selectedInfo.canRunOnCreate ?? true),
-				false
+				false,
+				dynamicProvider
 			);
 			add(form);
 		}

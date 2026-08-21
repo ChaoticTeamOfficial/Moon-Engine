@@ -25,6 +25,7 @@ class EventRegistry
 			'Set Camera Mode' => SetCameraMode,
 			'Pulse Camera' => PulseCameraEvent,
 			'Show Subtitle' => ShowSubtitleEvent,
+			'Set Filter' => SetFilterEvent,
 
 			// window events (maybe will be a separate category?)
 			'Window Movement' => WindowMoveEvent,
@@ -122,5 +123,22 @@ class EventRegistry
 		]).processValues(raw);
 
 		return raw;
+	}
+
+	/**
+	 * Returns the dynamic-fields provider for a hardcoded event, or null.
+	 */
+	public static function getDynamicFieldsProvider(tag:String):Null<String->Array<EventFieldDef>>
+	{
+		if (eventMap == null) init();
+
+		final cls = eventMap.get(tag);
+		if (cls != null) return Type.createInstance(cls, [
+			null,
+			new MoonEvent(tag, {
+			})
+		]).getDynamicFieldsProvider();
+
+		return null;
 	}
 }

@@ -5,29 +5,51 @@ package moon.game.events;
  */
 typedef EventFieldDef =
 {
-	/** The key used in the event's values object, must match what execute() reads. **/
+	/** 
+	 * The key used in the event's values object, must match what execute() reads. 
+	 */
 	var name:String;
 
-	/** Display label shown next to the input widget. **/
+	/**
+	 * Display label shown next to the input widget. 
+	 */
 	var label:String;
 
-	/** The input widget type to render. **/
+	/**
+	 * The input widget type to render. 
+	 */
 	var type:EventFieldType;
 
-	/** Default value pre-filled when the form opens. **/
+	/**
+	 * Default value pre-filled when the form opens. 
+	 */
 	var ?defaultValue:Dynamic;
 
-	/** Option strings for DROPDOWN fields. **/
+	/**
+	 * Option strings for DROPDOWN fields.
+	 */
 	var ?options:Array<String>;
 
-	/** Minimum value for NUMBER fields. **/
+	/** 
+	 * Minimum value for NUMBER fields
+	 */
 	var ?min:Float;
 
-	/** Maximum value for NUMBER fields. **/
+	/** 
+	 * Maximum value for NUMBER fields.
+	 */
 	var ?max:Float;
 
-	/** Step increment for NUMBER fields. **/
+	/**
+	 * Step increment for NUMBER fields.
+	 */
 	var ?step:Float;
+
+	/**
+	 * When true on a DROPDOWN, changing its value rebuilds the dynamic field
+	 * section below it.
+	 */
+	var ?controlsDynamicFields:Bool;
 }
 
 /**
@@ -35,18 +57,28 @@ typedef EventFieldDef =
  */
 enum abstract EventFieldType(String) from String to String
 {
-	/** Single-line text input. **/
+	/**
+	 * Single-line text input.
+	 */
 	var TEXT = 'text';
 
-	/** Numeric stepper (left/right arrows). **/
+	/**
+	 * Numeric stepper (left/right arrows).
+	 */
 	var NUMBER = 'number';
 
-	/** Dropdown selector; requires `options`. **/
+	/**
+	 * Dropdown selector; requires `options`.
+	 */
 	var DROPDOWN = 'dropdown';
 
-	/** Boolean toggle checkbox. **/
+	/**
+	 * Boolean toggle checkbox.
+	 */
 	var CHECKBOX = 'checkbox';
 
-	/** RGB color swatch picker. **/
+	/**
+	 * RGB color swatch picker. 
+	 */
 	var COLOR = 'color';
 }

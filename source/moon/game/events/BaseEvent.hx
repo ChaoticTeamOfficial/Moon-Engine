@@ -42,6 +42,12 @@ class BaseEvent
 	public function getEditorFields():Array<EventFieldDef> return [];
 
 	/**
+	 * Optional provider for fields that depend on a controlling dropdown
+	 * (marked with `controlsDynamicFields`).
+	 */
+	public function getDynamicFieldsProvider():Null<String->Array<EventFieldDef>> return null;
+
+	/**
 	 * Converts the flat values object produced by `EventFormUI.getValues()` into the
 	 * format expected by `execute()` (i.e. `event.values`).
 	 */

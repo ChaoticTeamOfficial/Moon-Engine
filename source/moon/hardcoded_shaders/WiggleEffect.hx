@@ -77,4 +77,21 @@ class WiggleEffect extends FlxRuntimeShader
 		// The setter tied to this value automatically propagates the value to the shader.
 		this.time += elapsed;
 	}
+
+	public function byString(name:String):Null<WiggleEffectType>
+	{
+		return switch (name.toLowerCase())
+		{
+			case 'wavy':
+				WAVY;
+			case 'horizontal heat wave':
+				HEAT_WAVE_HORIZONTAL;
+			case 'vertical heat wave':
+				HEAT_WAVE_VERTICAL;
+			case 'flag':
+				FLAG;
+			default:
+				DREAMY;
+		}
+	}
 }
