@@ -258,6 +258,7 @@ class MoonSettings
 			new Setting("Language", SELECTOR, MoonLang.getDisplayNames(), MoonLang.getDisplayNames()[0]),
 			new Setting("Healthbar Visibility", SELECTOR, ["On", "Below 100%", "Off"], "On"),
 			new Setting("Show Accuracy", SELECTOR, ["Off", "Approximate", "Full"], "Full"),
+			new Setting("Accuracy Bar", CHECKMARK, null, true),
 			new Setting("Stats Position", SELECTOR, ["On HP-Bar", "On Player Lane"], "On HP-Bar"),
 			new Setting("Icons", SELECTOR, ["Off", "At Healthbar", "On Lanes"], "At Healthbar"),
 			new Setting("Show FPS", CHECKMARK, null, false)

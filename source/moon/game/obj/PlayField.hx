@@ -32,6 +32,7 @@ class PlayField extends FlxGroup
 	var playerStrum:Strumline;
 	var oppStrum:Strumline;
 	var healthBar:HealthBar;
+	var accuracyBar:AccuracyBar;
 	var stats:FlxText;
 	var judgements:JudgementSprite;
 	var combo:ComboNumbers;
@@ -104,6 +105,10 @@ class PlayField extends FlxGroup
 		add(healthBar);
 		healthBar.setPosition(0, 0);
 		healthBar.screenCenter(X);
+
+		// < -- ACCURACY BAR SETUP -- >//
+		accuracyBar = new AccuracyBar();
+		add(accuracyBar);
 
 		// < -- COMBO AND JUDGEMENTS SETUP -- >//
 		// TODO: skins dammit
@@ -228,6 +233,10 @@ class PlayField extends FlxGroup
 		healthBar.y = (downscroll) ? 64 : FlxG.height - 78;
 		healthBar.updateBarPos(true);
 
+		accuracyBar.visible = MoonSettings.callSetting('Accuracy Bar');
+		accuracyBar.x = FlxG.width - accuracyBar.width - 16;
+		accuracyBar.screenCenter(Y);
+
 		// also this is just so much offsetted it looks like ASS
 		stats.y =
 			(MoonSettings.callSetting(
@@ -318,6 +327,8 @@ class PlayField extends FlxGroup
 			// if(timing != null) setStatsColor(Timings.getParameters(timing)[4]);
 			updateP1Stats(timing);
 			playback.muteStatus(Voices_Player, false);
+
+			if (!isSustain && accuracyBar != null && accuracyBar.visible) accuracyBar.pushHit(note.time - conductor.time);
 		}
 
 		// final input = inputHandlers.get(playerID);
@@ -346,6 +357,8 @@ class PlayField extends FlxGroup
 			Paths.playSFX('game/missnote${FlxG.random.int(1, 3)}.ogg');
 
 			playback.muteStatus(Voices_Player, MoonSettings.callSetting('Mute Voices on Miss'));
+
+			if (accuracyBar != null && accuracyBar.visible) accuracyBar.pushMiss(note != null ? note.time - conductor.time : Timings.get(MISS).maxMs);
 		}
 		onNoteMiss.dispatch(playerID, note);
 	}
