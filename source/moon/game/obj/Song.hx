@@ -40,6 +40,7 @@ class Song extends FlxTypedGroup<MoonSound>
 
 	public var inst:Array<MoonSound> = [];
 	public var voices:Array<MoonSound> = [];
+	public var isLegacyVocals:Bool = false;
 	public final onFinish = new FlxTypedSignal<Void->Void>();
 
 	private var conductor:Conductor;
@@ -83,6 +84,28 @@ class Song extends FlxTypedGroup<MoonSound>
 					FlxG.sound.list.add(cast aud);
 
 					(aud.type == Inst) ? inst.push(aud) : voices.push(aud);
+					return aud;
+				});
+			}
+		}
+
+		if (voices.length == 0) // no vocals found! try legacy format
+		{
+			var path = '$song/$char/Voices$voicesSfx';
+			if (voicesSfx != '' && !Paths.exists('songs/$path.ogg')) path = '$song/$char/Voices';
+
+			if (Paths.exists('songs/$path.ogg'))
+			{
+				this.recycle(MoonSound, function():MoonSound
+				{
+					var aud = cast new MoonSound().loadEmbedded(Paths.sound('$path.ogg', 'songs'), false, true);
+					aud.type = Voices_Player;
+					isLegacyVocals = true;
+					aud.strID = song;
+					aud.onComplete = finish;
+					FlxG.sound.list.add(cast aud);
+
+					voices.push(aud);
 					return aud;
 				});
 			}
