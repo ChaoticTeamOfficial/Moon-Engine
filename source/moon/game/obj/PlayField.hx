@@ -330,6 +330,11 @@ class PlayField extends FlxGroup
 
 			if (!isSustain && accuracyBar != null && accuracyBar.visible) accuracyBar.pushHit(note.time - conductor.time);
 		}
+		else if (playback.isLegacyVocals)
+		{
+			// unmute the vocals since it's only one audio file
+			playback.muteStatus(Voices_Player, false);
+		}
 
 		// final input = inputHandlers.get(playerID);
 		// input.attachedChar
