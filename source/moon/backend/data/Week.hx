@@ -29,6 +29,12 @@ typedef WeekFile =
 	 * The week's main mix.
 	 */
 	var ?mainMix:String;
+
+	/**
+	 * Sorting order for the menus.
+	 * Lower values appear first. Defaults to 999 if unset.
+	 */
+	var ?order:Int;
 }
 
 @:publicFields

@@ -3,5 +3,6 @@
 	"description": "DADDY DEAREST",
 	"tracks": ["bopeebo", "fresh", "dadbattle"],
 	"color": [175, 102, 206],
-	"mainMix": "bf"
+	"mainMix": "bf",
+	"order": 1
 }

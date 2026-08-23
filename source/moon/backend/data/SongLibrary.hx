@@ -94,7 +94,7 @@ class SongLibrary
 				final dir = 'songs/$songFolder/$mix/';
 				final registered = new Map<String, Bool>();
 
-				// Shared multi-diff chart.json.
+				// Shared multi-diff chart.
 				if (Paths.exists(dir + 'chart.json'))
 				{
 					final shared:Dynamic = Paths.JSON('$dir/chart');
@@ -115,7 +115,7 @@ class SongLibrary
 					}
 				}
 
-				// Per-difficulty chart-{name}.json files.
+				// Per-difficulty chart-{name} files.
 				for (chartFile in Paths.readDir(dir, ['.json'], true))
 				{
 					if (chartFile.startsWith('chart-')) pushSongEntry(songFolder, mix, chartFile.substr(6), registered);
@@ -123,25 +123,70 @@ class SongLibrary
 			}
 		}
 
+		// Collect weeks then sort by order
+		final weeks:Array<
+			{id:String, data:Week}> = [];
 		for (weekFile in Paths.readDir('data/weeks/', ['.json'], true))
 		{
 			final wd:Week = Week.get(weekFile);
-			if (wd != null && wd.tracks != null)
-			{
-				final wSongs:Array<SongBase> = [];
+			if (wd != null && wd.tracks != null) weeks.push({
+				id: weekFile,
+				data: wd
+			});
+		}
 
-				for (track in wd.tracks)
+		weeks.sort((a, b) ->
+		{
+			final aOrder = a.data.order ?? 999;
+			final bOrder = b.data.order ?? 999;
+			return aOrder - bOrder;
+		});
+
+		final seenInWeeks = new Map<String, Bool>();
+
+		for (w in weeks)
+		{
+			final wSongs:Array<SongBase> = [];
+
+			for (track in w.data.tracks)
+			{
+				for (song in allSongs)
 				{
-					for (song in allSongs)
+					if (song.song.toLowerCase() == track.toLowerCase())
 					{
-						if (song.song.toLowerCase() == track.toLowerCase()) wSongs.push(song);
+						wSongs.push(song);
+						seenInWeeks.set('${song.song}/${song.mix}/${song.difficulty}', true);
 					}
 				}
+			}
 
-				songsByWeek.set(weekFile, wSongs);
-				categoryOrder.push(weekFile);
+			songsByWeek.set(w.id, wSongs);
+			categoryOrder.push(w.id);
+		}
+
+		final orderedAll:Array<SongBase> = [];
+		final added = new Map<String, Bool>();
+		for (w in weeks)
+		{
+			final list = songsByWeek.get(w.id);
+			if (list == null) continue;
+			for (s in list)
+			{
+				final key = '${s.song}/${s.mix}/${s.difficulty}';
+				if (added.exists(key)) continue;
+				added.set(key, true);
+				orderedAll.push(s);
 			}
 		}
+		for (song in allSongs)
+		{
+			final key = '${song.song}/${song.mix}/${song.difficulty}';
+			if (added.exists(key)) continue;
+			orderedAll.push(song);
+		}
+
+		allSongs = orderedAll;
+		songsByWeek.set('all', orderedAll);
 	}
 
 	private function pushSongEntry(song:String, mix:String, difficulty:String, registered:Map<String, Bool>):Void

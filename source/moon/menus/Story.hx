@@ -230,7 +230,7 @@ class Story extends FlxState
 	function initializeWeeks():Void
 	{
 		var index:Int = 0;
-		for (week in SongLibrary.get().songsByWeek.keys())
+		for (week in SongLibrary.get().categoryOrder)
 		{
 			if (week == 'all') continue;
 			trace('week: $week');
