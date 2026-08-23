@@ -56,6 +56,8 @@
 		"setting.Mechanics.desc": "Ativa mecânicas específicas de cada música (Ex: Espaço para Desviar).",
 		"setting.Modchart.name": "Modchart",
 		"setting.Modchart.desc": "Ativa modcharts (notas animadas/em movimento).",
+		"setting.Auto Pause.name": "Pausar Automaticamente",
+		"setting.Auto Pause.desc": "Altera se o jogo deve pausar automaticamente quando não focado.",
 
 		"setting.Language.name": "Idioma",
 		"setting.Language.desc": "Altera o idioma de exibição do jogo.",

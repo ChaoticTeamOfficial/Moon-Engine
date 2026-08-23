@@ -58,6 +58,7 @@
 		"setting.Mechanics.desc": "Toggles song-specific mechanics (such as dodging).",
 		"setting.Modchart.name": "Modchart",
 		"setting.Modchart.desc": "Toggles modcharts (animated/moving notes).",
+		"setting.Auto Pause.desc": "Whether should the game auto-pause when unfocused or not.",
 
 		"setting.Language.name": "Language",
 		"setting.Language.desc": "Changes the game's display language.",

@@ -237,7 +237,8 @@ class MoonSettings
 			], 0),
 			new Setting("Ghost Tapping", CHECKMARK, null, true, true),
 			new Setting("Mechanics", CHECKMARK, null, true, true),
-			new Setting("Modchart", CHECKMARK, null, true, true)
+			new Setting("Modchart", CHECKMARK, null, true, true),
+			new Setting("Auto Pause", CHECKMARK, null, true)
 		]);
 
 		categories.set("Graphic Settings", [
