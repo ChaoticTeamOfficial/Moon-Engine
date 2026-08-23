@@ -420,6 +420,12 @@ typedef AnimationData =
 	 * sprite's main sheet) that this specific animation's frames live on.
 	 */
 	var ?sheet:String;
+
+	/**
+	 * Optional atlas/spritesheet format for this animation's sheet.
+	 * Falls back to the sprite's main type when omitted.
+	 */
+	var ?type:AtlasType;
 }
 
 /**

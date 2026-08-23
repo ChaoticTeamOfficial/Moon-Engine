@@ -1,12 +1,9 @@
 package moon.utils;
 
-import flixel.FlxSprite;
+import moon.backend.Paths.TextureAtlasAnimType;
 import flixel.graphics.frames.FlxFramesCollection;
 import animate.FlxAnimate;
 import animate.*;
-import moon.dependency.MoonSprite;
-import moon.backend.Paths;
-import moon.backend.Paths;
 
 using StringTools;
 
@@ -79,16 +76,15 @@ class AnimationUtils
 	 * Extra sheets are expected to live in the same folder as `basePath`,
 	 * just under a different filename.
 	 *
-	 * @param target     The sprite whose `.frames` will receive the merged frames.
-	 * @param animations The animation list to scan for `sheet` references.
-	 * @param basePath   Folder path each sheet name is appended to (e.g. the character or stage folder).
-	 * @param from       Sub-folder inside `assets/` (`'characters'`, `'stages'`, etc).
-	 * @param type       The atlas format of the extra sheets (`SPARROW`, `PACKED`, or `ATLAS`).
+	 * @param target      The sprite whose `.frames` will receive the merged frames.
+	 * @param animations  The animation list to scan for `sheet` references.
+	 * @param basePath    Folder path each bare sheet name is appended to.
+	 * @param from        Sub-folder inside `assets/` (`'characters'`, `'stages'`, etc).
+	 * @param defaultType Fallback atlas format when an animation omits `type`.
 	 */
-	public static function mergeExtraSheets(target:FlxSprite, animations:Array<Paths.AnimationData>, basePath:String, from:String, type:AtlasType):Void
+	public static function mergeExtraSheets(target:FlxSprite, animations:Array<Paths.AnimationData>, basePath:String, from:String, defaultType:AtlasType):Void
 	{
 		if (target == null || target.frames == null || animations == null) return;
-		if (type != SPARROW && type != PACKED && type != ATLAS) return; // lol
 
 		var seen:Map<String, Bool> = [];
 		for (anim in animations)
@@ -96,45 +92,52 @@ class AnimationUtils
 			if (anim.sheet == null || seen.exists(anim.sheet)) continue;
 			seen.set(anim.sheet, true);
 
-			switch (type)
-			{
-				case SPARROW, PACKED:
-					final extraFrames:FlxFramesCollection = (type == SPARROW) ? Paths.getSparrowAtlas(
-						'$basePath/${anim.sheet}',
-						from
-					) : Paths.getPackerAtlas('$basePath/${anim.sheet}', from);
+			final animType = anim.type ?? defaultType;
+			final sheetKey = (anim.sheet.indexOf('/') != -1) ? anim.sheet : '$basePath/${anim.sheet}';
 
+			switch (animType)
+			{
+				case SPARROW:
+					final extraFrames = Paths.getSparrowAtlas(sheetKey, from);
 					if (extraFrames == null)
 					{
-						trace('[AnimationUtils] Extra sheet "$basePath/${anim.sheet}" for anim "${anim.name}" could not be loaded!', "WARNING");
+						trace('[AnimationUtils] Extra sheet "$sheetKey" for anim "${anim.name}" could not be loaded!', "WARNING");
+						continue;
+					}
+					for (frame in extraFrames.frames) target.frames.pushFrame(frame);
+
+				case PACKED:
+					final extraFrames = Paths.getPackerAtlas(sheetKey, from);
+					if (extraFrames == null)
+					{
+						trace('[AnimationUtils] Extra sheet "$sheetKey" for anim "${anim.name}" could not be loaded!', "WARNING");
 						continue;
 					}
 
 					for (frame in extraFrames.frames) target.frames.pushFrame(frame);
 
 				case ATLAS:
-					// this is becoming a mess, lemme separate it to a function...
-					mergeExtraAtlas(target, basePath, from, anim.sheet, anim.name);
+					mergeExtraAtlas(target, sheetKey, from, anim.name);
 
 				default:
+					trace('[AnimationUtils] Extra sheet "$sheetKey" for anim "${anim.name}" uses unsupported type "$animType".', "WARNING");
 			}
 		}
 	}
 
-	private static function mergeExtraAtlas(target:FlxSprite, basePath:String, from:String, sheet:String, animName:String):Void
+	private static function mergeExtraAtlas(target:FlxSprite, sheetKey:String, from:String, animName:String):Void
 	{
 		if (!Std.isOfType(target.frames, FlxAnimateFrames))
 		{
-			trace('[AnimationUtils] Cannot merge ATLAS sheet "$sheet"! target\'s frames aren\'t a FlxAnimateFrames collection!', "WARNING");
+			trace('[AnimationUtils] Cannot merge ATLAS sheet "$sheetKey"! target\'s frames aren\'t a FlxAnimateFrames collection!', "WARNING");
 			return;
 		}
 
 		final baseAtlas:FlxAnimateFrames = cast target.frames;
-
-		final extraAtlas:FlxAnimateFrames = FlxAnimateFrames.fromAnimate(Paths.getPath('$from/$basePath/$sheet'));
+		final extraAtlas:FlxAnimateFrames = FlxAnimateFrames.fromAnimate(Paths.getPath('$from/$sheetKey'));
 		if (extraAtlas == null)
 		{
-			trace('[AnimationUtils] Extra atlas "$basePath/$sheet" for anim "$animName" could not be loaded!', "WARNING");
+			trace('[AnimationUtils] Extra atlas "$sheetKey" for anim "$animName" could not be loaded!', "WARNING");
 			return;
 		}
 
@@ -156,7 +159,7 @@ class AnimationUtils
 
 		final frameRate:Int = anim?.fps ?? 24;
 		final looped:Bool = anim?.looped ?? false;
-		final animType:TextureAtlasAnimType = anim?.animType ?? SYMBOL;
+		final animType:TextureAtlasAnimType = anim?.animType ?? FRAMELABEL;
 		final controller:FlxAnimateController = cast target.animation;
 
 		if (anim.indices != null && anim.indices.length > 0)
@@ -266,6 +269,7 @@ class AnimationUtils
 
 	/**
 	 * Registers every animation, plus offsets, idle grouping, and finish-animation chaining.
+	 * Each animation may override the atlas format via its own `type` field.
 	 * @return The base (no-suffix) idle animation names, for chaining convenience.
 	 */
 	public static function loadAnimations(target:MoonSprite, animations:Array<AnimationData>, type:AtlasType = SPARROW):Array<String>
@@ -274,9 +278,10 @@ class AnimationUtils
 
 		for (anim in animations)
 		{
-			if (type == ATLAS) addTextureAtlasAnimation(target, anim);
+			final animType = anim.type ?? type;
+			if (animType == ATLAS) addTextureAtlasAnimation(target, anim);
 			else
-				addAtlasAnimation(target, anim, type);
+				addAtlasAnimation(target, anim, animType);
 
 			target.addOffset(anim.name, anim?.x ?? 0, anim?.y ?? 0);
 			registerDances(target, anim);

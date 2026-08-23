@@ -74,7 +74,9 @@ class Song extends FlxTypedGroup<MoonSound>
 			{
 				this.recycle(MoonSound, function():MoonSound
 				{
-					var aud = cast new MoonSound().loadEmbedded(Paths.sound('$path.ogg', 'songs'), false, true);
+					var aud = new MoonSound().load(Paths.sound('$path.ogg', 'songs'));
+					aud.autoDestroy = true;
+					aud.looped = false;
 					aud.type = item;
 					aud.strID = song;
 					aud.onComplete = finish;

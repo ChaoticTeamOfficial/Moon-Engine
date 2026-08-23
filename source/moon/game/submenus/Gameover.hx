@@ -1,5 +1,6 @@
 package moon.game.submenus;
 
+import moon.game.PlayState;
 import moon.game.obj.*;
 import moon.backend.gameplay.*;
 import flixel.group.FlxGroup;
@@ -7,6 +8,7 @@ import flixel.group.FlxGroup;
 /**
  * The Gameover sub state! Everything Gameover-wise is handled in here.
  * TODO: Custom camera offsets for gameovers since vslice has those.
+ * TODO: properly get the current character stuff from a gameover field in the json!
  */
 class Gameover extends FlxSubState
 {
@@ -51,20 +53,19 @@ class Gameover extends FlxSubState
 	public var buttons:FlxTypedGroup<UIButton> = new FlxTypedGroup<UIButton>();
 
 	final items:Array<String> = ['Retry Track', 'Exit'];
+
 	// TODO: hmm... maybe make a way to have more than one character game over?
 	// yeah I'll have to figure this out later for P2 support.
-
 	/**
 	 * The character string.
 	 */
-	final char:String = Shortcuts.getChart().meta.players[0];
+	// final char:String = Shortcuts.getChart().meta.players[0];
 
 	/**
 	 * Whether or not to force the fakeout. Set this to true if you're simply messing around, or testing it!
 	 * Don't forget that it must be set before the Gameover SubState is opened.
-	 * (technically, I could make a setter for it, but I'm lazy.)
 	 */
-	public static var forceFakeout:Bool = false;
+	public static var forceFakeout:Bool = true;
 
 	/**
 	 * The default color scheme used for most objects. Defaults to BF's color.
@@ -95,13 +96,8 @@ class Gameover extends FlxSubState
 
 		// fakeout thing = FlxG.random.bool((1 / 4096) * 100)
 
-		// uhh we should have BF as a fallback.
-		// we handle it differently for sounds tho.
-		// so, here we load the character.
-		var actualChar:String = 'bf';
-
 		// now we load the song.
-		final songStr = (Paths.exists('characters/$char/gameover/gameOverSong.ogg')) ? '$char/gameover/gameOverSong.ogg' : 'bf/gameover/gameOverSong.ogg';
+		final songStr = (Paths.exists('characters/bf/gameover/gameOverSong.ogg')) ? 'bf/gameover/gameOverSong.ogg' : 'bf/gameover/gameOverSong.ogg';
 		music = new MoonSound().loadSoundAndMeta(songStr, 'characters', false);
 		music.volume = MoonSettings.callSetting('Music Volume') / 100;
 		FlxG.sound.list.add(music);
@@ -113,15 +109,14 @@ class Gameover extends FlxSubState
 		backGradient.scrollFactor.set();
 		add(backGradient);
 
-		if (Paths.exists('characters/$char/gameover/data.json')) actualChar = char;
-		charSpr = new Character(Shortcuts.getPlayer().x, Shortcuts.getPlayer().y, '$actualChar/gameover', conductor);
+		charSpr = Shortcuts.getPlayer();
 		add(charSpr);
 
 		backGradient.color = colorScheme = charSpr.gameoverColorScheme;
 
 		playerIcon = new HealthIcon();
 		playerIcon.scale.set(0.5, 0.5);
-		playerIcon.icon = char;
+		playerIcon.icon = 'bf';
 		playerIcon.updateAnim(0);
 		playerIcon.camera = ch;
 		playerIcon.alpha = 0.00001;
@@ -147,7 +142,7 @@ class Gameover extends FlxSubState
 		stats.x -= 296;
 		stats.y = FlxG.height - stats.height - 164;
 
-		playerIcon.setPosition(stats.x + stats.width / 2 - playerIcon.width / 2, stats.y - playerIcon.height - 16);
+		playerIcon.setPosition(stats.x + stats.width / 2 - playerIcon.width / 2, stats.y - playerIcon.height + 16);
 
 		// now we setup the selecatblehh items,
 		buttons.camera = ch;
@@ -200,7 +195,7 @@ class Gameover extends FlxSubState
 		// and lastly, we setup the animations and the actions, such as the fakeout.
 		if (forceFakeout || FlxG.random.bool((1 / 4096) * 100))
 		{
-			charSpr.playAnim('fakeout', true);
+			charSpr.playAnim('gameover-fakeout', true);
 			sfx('fakeout');
 
 			Global.scriptCall('onGameOverFakeout', [instance]);
@@ -212,16 +207,17 @@ class Gameover extends FlxSubState
 		{
 			switch (anim)
 			{
-				case 'fakeout':
+				case 'gameover-fakeout':
 					triggerDeath();
-				case 'death':
+				case 'gameover':
 					music.play();
 			}
 		});
 
 		conductor.onBeat.add(beat ->
 		{
-			charSpr.dance(true);
+			// charSpr.dance(true);
+			charSpr.playAnim('gameover-loop');
 			playerIcon.scale.set(0.6, 0.6);
 		});
 
@@ -234,7 +230,7 @@ class Gameover extends FlxSubState
 		sfx('lossSFX');
 		cg.flash(FlxColor.RED, 0.38);
 		cg.shake(0.025, 0.24);
-		charSpr.playAnim('death', true);
+		charSpr.playAnim('gameover', true);
 
 		// now we allow inputs
 		Global.allowInputs = true;
@@ -294,7 +290,7 @@ class Gameover extends FlxSubState
 				pressed = true;
 				music.stop();
 
-				charSpr.playAnim('confirm', true);
+				charSpr.playAnim('death-confirm', true);
 				sfx('gameOverSongEnd');
 				hudAlpha = 0;
 
@@ -314,11 +310,15 @@ class Gameover extends FlxSubState
 				{
 					ch.fade(FlxColor.BLACK, 1.45, false, () ->
 					{
-						PlayState.instance.persistentDraw = true;
-						PlayState.instance.gameOverRestart();
+						// PlayState.instance.persistentDraw = true;
+						// PlayState.instance.gameOverRestart();
 
-						ch.fade(FlxColor.BLACK, 1.5, true);
+						// ch.fade(FlxColor.BLACK, 1.5, true);
 						FlxG.sound.list.remove(music);
+
+						Global.clearScriptList();
+						AssetManager.skipNextCleanup = true;
+						FlxG.resetState();
 						close();
 					});
 
@@ -347,7 +347,7 @@ class Gameover extends FlxSubState
 
 	private function sfx(audio:String)
 	{
-		if (Paths.exists('characters/$char/gameover/$audio.ogg')) Paths.playSFX('$char/gameover/$audio.ogg', 'characters', true);
+		if (Paths.exists('characters/bf/gameover/$audio.ogg')) Paths.playSFX('bf/gameover/$audio.ogg', 'characters', true);
 		else
 			Paths.playSFX('bf/gameover/$audio.ogg', 'characters', true);
 	}

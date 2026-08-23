@@ -48,6 +48,9 @@ class MoonSound extends FlxSound
 	 */
 	public var strID:String;
 
+	@:inheritDoc(FlxSound.load)
+	override public function load(asset:FlxSoundAsset, allowCache = true):MoonSound return cast super.load(asset, allowCache);
+
 	@:inheritDoc(FlxSound.loadEmbedded)
 	override public function loadEmbedded(EmbeddedSound:FlxSoundAsset, Looped:Bool = false, AutoDestroy:Bool = false, ?OnComplete:() -> Void):MoonSound
 		return cast super.loadEmbedded(
@@ -62,7 +65,6 @@ class MoonSound extends FlxSound
 	 * if a file named `key-metadata.json` exists.
 	 * @param key The same key you would pass to Paths.sound()
 	 * @param from The folder it loads from. Defaults to music.
-	 * @param looped Whether the sound should loop
 	 * @param autoDestroy Auto destroy flag
 	 */
 	public function loadSoundAndMeta(key:String, ?from:String = 'music', autoDestroy:Bool = false):MoonSound
@@ -70,7 +72,9 @@ class MoonSound extends FlxSound
 		final metaKey = '${from}/' + (key.endsWith('.ogg') ? key.substring(0, key.length - 4) : key);
 		if (Paths.exists(metaKey + '-metadata.json')) metadata = Paths.JSON(metaKey + '-metadata', 'json');
 
-		loadEmbedded(Paths.sound(key, from), metadata?.looped ?? true, autoDestroy);
+		load(Paths.sound(key, from));
+		looped = metadata?.looped ?? true;
+		this.autoDestroy = autoDestroy;
 		return this;
 	}
 

@@ -38,7 +38,8 @@ class SyncPlaylist
 			final sound = Paths.sound('${dir.startsWith("music/") ? dir.substr(6) : dir}/$file.ogg', "music");
 			if (sound == null) continue;
 
-			final snd = new MoonSound().loadEmbedded(sound, true);
+			final snd = new MoonSound().load(sound);
+			snd.looped = true;
 			snd.strID = file;
 			FlxG.sound.list.add(snd);
 

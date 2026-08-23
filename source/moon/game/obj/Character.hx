@@ -35,6 +35,7 @@ typedef CharacterData =
 	var ?danceFrequency:Int;
 	var ?holdDuration:Int;
 	var ?gameoverColorScheme:String;
+	var ?spritesheet:String;
 	var animations:Array<Paths.AnimationData>;
 	var ?overrideAnims:Array<String>;
 }
@@ -172,17 +173,21 @@ class Character extends MoonSprite
 			atlasName = parts[parts.length - 1];
 		}
 
+		final sheetKey = data.spritesheet ?? '$character/$atlasName';
+
 		switch (data.type)
 		{
 			case SPARROW:
-				this.frames = Paths.getSparrowAtlas('$character/$atlasName', 'characters');
+				this.frames = Paths.getSparrowAtlas(sheetKey, 'characters');
 			case PACKED:
-				this.frames = Paths.getPackerAtlas('$character/$atlasName', 'characters');
+				this.frames = Paths.getPackerAtlas(sheetKey, 'characters');
 			case NONE:
-				this.loadGraphic(Paths.image('$character/$atlasName', 'characters'), true, data?.frameWidth ?? 0, data?.frameHeight ?? 0);
+				this.loadGraphic(Paths.image(sheetKey, 'characters'), true, data?.frameWidth ?? 0, data?.frameHeight ?? 0);
 			case ATLAS:
 				// TODO: quality configs?
-				this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$character/$atlasName') /*, {filterQuality: HIGH}*/);
+				this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$sheetKey'), {
+					filterQuality: HIGH
+				});
 		}
 
 		AnimationUtils.mergeExtraSheets(this, data.animations, character, 'characters', data.type);

@@ -3,68 +3,84 @@
 	"icon": {
 		"color": [49, 176, 209]
 	},
+	"gameoverColorScheme": "0xFF4924ff",
 	"animations": [
 		{
 			"name": "idle-0",
-			"prefix": "Idle",
-			"animType": "framelabel"
+			"prefix": "Idle"
 		},
 		{
 			"name": "singLEFT",
-			"prefix": "Left",
-			"animType": "framelabel"
+			"prefix": "Left"
 		},
 		{
 			"name": "singDOWN",
-			"prefix": "Down",
-			"animType": "framelabel"
+			"prefix": "Down"
 		},
 		{
 			"name": "singUP",
-			"prefix": "Up",
-			"animType": "framelabel"
+			"prefix": "Up"
 		},
 		{
 			"name": "singRIGHT",
-			"prefix": "Right",
-			"animType": "framelabel"
+			"prefix": "Right"
 		},
 		{
-			"name": "singLEFTmiss",
-			"prefix": "Left Miss",
-			"animType": "framelabel"
+			"name": "singLEFT-miss",
+			"prefix": "Left Miss"
 		},
 		{
-			"name": "singDOWNmiss",
-			"prefix": "Down Miss",
-			"animType": "framelabel"
+			"name": "singDOWN-miss",
+			"prefix": "Down Miss"
 		},
 		{
-			"name": "singUPmiss",
-			"prefix": "Up Miss",
-			"animType": "framelabel"
+			"name": "singUP-miss",
+			"prefix": "Up Miss"
 		},
 		{
-			"name": "singRIGHTmiss",
-			"prefix": "Right Miss",
-			"animType": "framelabel"
+			"name": "singRIGHT-miss",
+			"prefix": "Right Miss"
 		},
 		{
 			"name": "hey",
 			"prefix": "Hey",
-			"finishAnim": "idle-0",
-			"animType": "framelabel"
+			"finishAnim": "idle-0"
 		},
 		{
 			"name": "cheer",
 			"prefix": "Cheer",
-			"finishAnim": "idle-0",
-			"animType": "framelabel"
+			"finishAnim": "idle-0"
+		},
+		{
+			"sheet": "bf-death",
+			"name": "gameover",
+			"prefix": "Death Intro",
+			"x": 22,
+			"y": 15
+		},
+		{
+			"sheet": "bf-death",
+			"name": "gameover-loop",
+			"prefix": "Death Loop",
+			"looped": false,
+			"x": 22, "y": 15
+		},
+		{
+			"sheet": "bf-death",
+			"name": "death-confirm",
+			"prefix": "Death Confirm",
+			"x": 22, "y": 15
+		},
+		{
+			"sheet": "bfFakeOut",
+			"name": "gameover-fakeout",
+			"prefix": "fake out death BF",
+			"animType": "symbol",
+			"x": -3, "y": -65
 		},
 		{
 			"name": "scared",
-			"prefix": "Scared",
-			"animType": "framelabel"
+			"prefix": "Scared"
 		}
 	],
 	"overrideAnims": ["hey", "cheer"]

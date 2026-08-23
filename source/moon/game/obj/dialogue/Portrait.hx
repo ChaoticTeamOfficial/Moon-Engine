@@ -144,7 +144,7 @@ class Portrait extends MoonSprite
 		final basePath = '$char/dialogue/${chosenSound}';
 		// trace('characters/$basePath');
 		// trace(Paths.exists('characters/$basePath'));
-		beep.loadEmbedded(Paths.exists('characters/$basePath') ? Paths.sound(basePath, 'characters') : Paths.sound('ui/dialogue/narrator.wav', 'sounds'));
+		beep.load(Paths.exists('characters/$basePath') ? Paths.sound(basePath, 'characters') : Paths.sound('ui/dialogue/narrator.wav', 'sounds'));
 
 		if (pitchIntensity > 0)
 		{
