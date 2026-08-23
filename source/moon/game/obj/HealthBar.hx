@@ -92,19 +92,23 @@ class HealthBar extends FlxSpriteGroup
 		oppIcon = new HealthIcon();
 		oppIcon.scale.set(iconScale, iconScale);
 		oppIcon.y = bar.y - (oppIcon.height * 0.5);
-		oppIcon.updateHitbox();
 
 		playerIcon = new HealthIcon();
 		playerIcon.scale.set(iconScale, iconScale);
 		playerIcon.baseFlipX = true;
 		playerIcon.y = bar.y - (playerIcon.height * 0.5);
-		playerIcon.updateHitbox();
 
 		add(oppIcon);
 		add(playerIcon);
 
 		icons.push(oppIcon);
 		icons.push(playerIcon);
+
+		// playerIcon.origin.set(0, playerIcon.height / 2);
+		// oppIcon.origin.set(oppIcon.width, oppIcon.height / 2);
+
+		playerIcon.updateHitbox();
+		oppIcon.updateHitbox();
 
 		this.opponent = opponent;
 		this.player = player;
@@ -125,12 +129,14 @@ class HealthBar extends FlxSpriteGroup
 		}
 
 		updateBarStats();
+		updateBarPos(true);
 	}
 
 	var count:Int = 4;
 
 	public function performTransition()
 	{
+		// disabled for now, sorrey :P
 		return;
 		if (conductor == null) return;
 
@@ -219,16 +225,10 @@ class HealthBar extends FlxSpriteGroup
 					}
 
 				default:
-					final targetPercent = 1 - (health / 100);
-					lerpPercent = FlxMath.lerp(lerpPercent, targetPercent, 0.2);
+					final divisionX = bar.x + (bar.width * (1 - (bar.value / 100)));
 
-					final divisionX = bar.x + (bar.width * lerpPercent);
-
-					final px = divisionX + iconDistance - playerIcon.width / 2;
-					playerIcon.x = (instant) ? px : FlxMath.lerp(playerIcon.x, px, 0.2);
-
-					final ox = divisionX - iconDistance - oppIcon.width / 2;
-					oppIcon.x = (instant) ? ox : FlxMath.lerp(oppIcon.x, ox, 0.2);
+					playerIcon.x = divisionX + iconDistance - playerIcon.width / 2;
+					oppIcon.x = divisionX - iconDistance - oppIcon.width / 2;
 
 					oppIcon.y = bar.y - (oppIcon.height * 0.5);
 					playerIcon.y = bar.y - (playerIcon.height * 0.5);
