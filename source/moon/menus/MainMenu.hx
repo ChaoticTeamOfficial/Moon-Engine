@@ -16,6 +16,7 @@ class MainMenu extends FlxTransitionableState
 		'convert chart yeah',
 		'mods',
 		'settings',
+		'archipelago',
 		'test script state'
 	];
 	var buttons:Array<UIButton> = [];
@@ -30,6 +31,14 @@ class MainMenu extends FlxTransitionableState
 
 		Global.clearScriptList();
 		Global.allowInputs = true;
+
+		if (moon.backend.archipelago.ArchipelagoManager.isConnected) for (toRemoveOpt in [
+			'test replay',
+			'test playlist',
+			'story menu',
+			'freeplay',
+			'mods'
+		]) opt.remove(toRemoveOpt);
 
 		var bg = new MoonSprite().loadGraphic(Paths.image('menus/menuDesat'));
 		bg.color = 0xFFffd863;
@@ -52,7 +61,7 @@ class MainMenu extends FlxTransitionableState
 
 		for (i in 0...opt.length)
 		{
-			var btn = new UIButton(20, 128 + 64 * i, opt[i].toUpperCase());
+			var btn = new UIButton(20, 64 + 64 * i, opt[i].toUpperCase());
 			add(btn);
 			buttons.push(btn);
 		}
@@ -112,6 +121,8 @@ class MainMenu extends FlxTransitionableState
 					openSubState(new Freeplay('bf'));
 				case 'settings':
 					openSubState(new Settings());
+				case 'archipelago':
+					FlxG.switchState(() -> new ArchipelagoMenu());
 				case 'convert chart yeah': // FlxG.switchState(()->new ChartConvert());
 					openSubState(new moon.toolkit.ChartConverterSubState());
 				case 'blabla':

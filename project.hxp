@@ -30,7 +30,7 @@ class Project extends HXProject
 		"FLX_NO_HEALTH", "HXCPP_STACK_TRACE", "hscriptPos",
 		"openfl-enable-handle-error", 
 		"HXCPP_CHECK_POINTER", "HXCPP_STACK_LINE", "HXCPP_STACK_TRACE",
-		"FLX_NO_FOCUS_LOST_SCREEN", "FLX_NO_SOUND_TRAY"
+		"FLX_NO_FOCUS_LOST_SCREEN", "FLX_NO_SOUND_TRAY", "AP_PREFER_UNENCRYPTED"
 	];
 
 	// same thing I said above applies to libraries.
@@ -38,7 +38,7 @@ class Project extends HXProject
 		"lime", "openfl", "flixel", "flixel-addons",
 		"hscript-iris", "moonchart", "flixel-animate",
 		"funkin.vis", "flixel-waveform", "flixel-screenshot-plugin", 
-		"funkin-modchart", "haxeui-flixel", "haxeui-core"
+		"funkin-modchart", "haxeui-flixel", "haxeui-core", "hxArchipelago"
 	];
 
     public function new()

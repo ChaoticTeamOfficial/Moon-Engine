@@ -205,7 +205,6 @@ class PlayState extends FlxTransitionableState
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostStageCreate');
-		setEvents();
 
 		playField.onGhostTap.add((keyDir) -> Global.scriptCall('onGhostTap', [keyDir]));
 		playField.onNoteHit.add((playerID, note, timing, isSustain) ->
@@ -251,6 +250,7 @@ class PlayState extends FlxTransitionableState
 
 		MoonSettings.restartPending = false;
 
+		setEvents();
 		Global.scriptCall('onPostCreate');
 
 		// make sure we clean everything unused up
@@ -267,6 +267,14 @@ class PlayState extends FlxTransitionableState
 	public function setEvents()
 	{
 		preloadCameraShaders();
+
+		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
+		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
+		isDead = false;
+		allowGameBop = true;
+
+		bopRate = Constants.DEFAULT_BOP_RATE;
+		bopIntensity = Constants.DEFAULT_BOP_INTENSITY - 1;
 
 		// < -- EVENTS SETUP -- >//
 		var onLoadEvents = playField.chart.events.filter((e) -> e.runOnLoad == true);
@@ -296,14 +304,6 @@ class PlayState extends FlxTransitionableState
 		}
 
 		events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
-
-		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
-		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
-		isDead = false;
-		allowGameBop = true;
-
-		bopRate = Constants.DEFAULT_BOP_RATE;
-		bopIntensity = Constants.DEFAULT_BOP_INTENSITY - 1;
 	}
 
 	public function gameOverRestart()
@@ -369,6 +369,9 @@ class PlayState extends FlxTransitionableState
 				ease: FlxEase.expoOut
 			});
 			openSubState(new Gameover());
+
+			final reasons = ['got blueballed', 'has skill issue', 'gave up', 'freakin sucks'];
+			moon.backend.archipelago.ArchipelagoManager.sendDeathLink(reasons[FlxG.random.int(0, reasons.length - 1)]);
 		}
 
 		// TODO: REMOVE, THIS IS DEBUGGIN
@@ -570,7 +573,7 @@ class PlayState extends FlxTransitionableState
 	{
 		super.onFocusLost();
 
-		if (playField != null) pauseGame();
+		if (playField != null && MoonSettings.callSetting('Auto Pause')) pauseGame();
 	}
 
 	public function pauseGame()

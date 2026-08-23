@@ -214,6 +214,9 @@ class Title extends FlxTransitionableState
 		trace('[TITLE] Text of the day: $randomText', "DEBUG");
 
 		prepareAD();
+
+		// was testing ehehe
+		// moon.backend.archipelago.ArchipelagoManager.connect("localhost", 38281, "fodase", "");
 	}
 
 	function updateConductor(songMeta:Dynamic)

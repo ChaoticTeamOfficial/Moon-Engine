@@ -1,0 +1,26 @@
+# Test YAML for Moon Engine (mod-friendly)
+name: Player1
+game: Moon Engine
+description: Test multiworld for Moon Engine AP support
+
+Moon Engine:
+  unlock_mode: songs
+  song_clear_count: 15
+  week_clear_count: 5
+  starting_song_unlocks: 1
+  starting_week_unlocks: 1
+
+  song_clear_by_difficulty: false
+  song_clear_by_mix: false
+  song_clear_by_character: false
+  song_clear_by_week: false
+  difficulties_as_checks: false
+  unlockable_difficulties: false
+  randomize_stages: false
+
+  goal: all_song_clears
+  goal_percent: 80
+  death_link: false
+
+  progression_balancing: 50
+  accessibility: full

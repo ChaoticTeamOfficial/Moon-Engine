@@ -1,5 +1,7 @@
 package moon.game;
 
+import moon.backend.archipelago.ArchipelagoManager;
+import moon.backend.archipelago.ArchipelagoProgress;
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
 import moon.backend.gameplay.*;
@@ -67,6 +69,10 @@ class ResultsState extends FlxState
 	override public function create()
 	{
 		super.create();
+
+		// archipelago check
+		final songName = (PlayState.songData != null) ? PlayState.songData.song : null;
+		if (songName != null) ArchipelagoProgress.reportSongClear(songName, diff);
 
 		// rank = 'PERFECT';
 		rankData = Timings.getRank(stats.accuracy);
@@ -392,7 +398,9 @@ class ResultsState extends FlxState
 					}
 				});
 			}
-			openSubState(new StickerSubState(new MainMenu()));
+
+			final state = ArchipelagoManager.isConnected ? new ArchipelagoPlayMenu() : new MainMenu();
+			openSubState(new StickerSubState(state));
 		}
 	}
 

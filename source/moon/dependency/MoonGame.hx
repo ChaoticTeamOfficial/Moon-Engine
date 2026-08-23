@@ -1,5 +1,6 @@
 package moon.dependency;
 
+import moon.backend.archipelago.ArchipelagoManager;
 import moon.backend.gameplay.modifiers.ModifierManager;
 import moon.global_obj.Alphabet;
 import moon.dependency.user.MoonLang;
@@ -39,6 +40,7 @@ class MoonGame extends FlxGame
 		SongData.init();
 		Alphabet.init();
 		ModifierManager.init();
+		ArchipelagoManager.init();
 
 		#if !doc
 		FlxG.plugins.addPlugin(new flixel.addons.plugin.ScreenShotPlugin());
