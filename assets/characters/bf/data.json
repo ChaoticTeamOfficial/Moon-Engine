@@ -1,85 +1,71 @@
 {
-	"antialiasing": true,
-	"scale": 1,
-	"flipX": false,
-	"camOffsets": [-169, -135],
+	"type": "atlas",
 	"icon": {
 		"color": [49, 176, 209]
 	},
-	"extraOffsets": [0, 0],
-	"danceFrequency": 2,
 	"animations": [
 		{
 			"name": "idle-0",
-			"prefix": "BF idle dance",
-			"x": -5,
-			"y": 0,
-			"fps": 24
-		},
-		{
-			"name": "hey",
-			"prefix": "BF HEY!!",
-			"x": -5,
-			"y": 0,
-			"fps": 24,
-			"finishAnim": "idle"
+			"prefix": "Idle",
+			"animType": "framelabel"
 		},
 		{
 			"name": "singLEFT",
-			"prefix": "BF NOTE LEFT0",
-			"x": 12,
-			"y": -6,
-			"fps": 24
+			"prefix": "Left",
+			"animType": "framelabel"
 		},
 		{
 			"name": "singDOWN",
-			"prefix": "BF NOTE DOWN0",
-			"x": -10,
-			"y": -50,
-			"fps": 24
+			"prefix": "Down",
+			"animType": "framelabel"
 		},
 		{
 			"name": "singUP",
-			"prefix": "BF NOTE UP0",
-			"x": -29,
-			"y": 27,
-			"fps": 24
+			"prefix": "Up",
+			"animType": "framelabel"
 		},
 		{
 			"name": "singRIGHT",
-			"prefix": "BF NOTE RIGHT0",
-			"x": -38,
-			"y": -7,
-			"fps": 24
+			"prefix": "Right",
+			"animType": "framelabel"
 		},
 		{
-			"name": "singLEFT-miss",
-			"prefix": "BF NOTE LEFT MISS",
-			"x": 12,
-			"y": 24,
-			"fps": 24
+			"name": "singLEFTmiss",
+			"prefix": "Left Miss",
+			"animType": "framelabel"
 		},
 		{
-			"name": "singDOWN-miss",
-			"prefix": "BF NOTE DOWN MISS",
-			"x": -11,
-			"y": -19,
-			"fps": 24
+			"name": "singDOWNmiss",
+			"prefix": "Down Miss",
+			"animType": "framelabel"
 		},
 		{
-			"name": "singUP-miss",
-			"prefix": "BF NOTE UP MISS",
-			"x": -29,
-			"y": 27,
-			"fps": 24
+			"name": "singUPmiss",
+			"prefix": "Up Miss",
+			"animType": "framelabel"
 		},
 		{
-			"name": "singRIGHT-miss",
-			"prefix": "BF NOTE RIGHT MISS",
-			"x": -30,
-			"y": 21,
-			"fps": 24
+			"name": "singRIGHTmiss",
+			"prefix": "Right Miss",
+			"animType": "framelabel"
+		},
+		{
+			"name": "hey",
+			"prefix": "Hey",
+			"finishAnim": "idle-0",
+			"animType": "framelabel"
+		},
+		{
+			"name": "cheer",
+			"prefix": "Cheer",
+			"finishAnim": "idle-0",
+			"animType": "framelabel"
+		},
+		{
+			"name": "scared",
+			"prefix": "Scared",
+			"animType": "framelabel"
 		}
 	],
-	"overrideAnims": ["hey"]
+	"overrideAnims": ["hey", "cheer"]
 }
