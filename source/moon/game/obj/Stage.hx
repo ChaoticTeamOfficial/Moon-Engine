@@ -149,7 +149,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			for (objData in json.objects)
 			{
-				var sprite = new MoonSprite(objData.position[0], objData.position[1]);
+				var sprite = new MoonSprite();
 				sprite.strID = objData.name;
 
 				final assetPath = '${objData?.from ?? stg}/${objData.name}';
@@ -174,6 +174,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				AnimationUtils.mergeExtraSheets(sprite, objData.animations, stg, 'stages', objType);
 
 				if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
+				sprite.updateHitbox();
+
 				if (objData.scroll != null) sprite.scrollFactor.set(objData.scroll[0], objData.scroll[1]);
 
 				sprite.angle = objData?.angle ?? 0;
@@ -199,6 +201,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				}
 
 				// trace('added ${objData.name} onto the stage');
+				sprite.setPosition(objData.position[0], objData.position[1]);
 				add(sprite);
 				objMap.set(objData.name, sprite);
 			}
