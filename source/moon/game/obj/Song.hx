@@ -62,23 +62,20 @@ class Song extends FlxTypedGroup<MoonSound>
 		final instSfx = SongLibrary.getInstSuffix(difficulty);
 		final voicesSfx = SongLibrary.getVoicesSuffix(difficulty);
 
-		var audList = [Voices_Opponent, Voices_Player, Inst];
-
-		for (i in 0...audList.length)
+		for (item in [Voices_Opponent, Voices_Player, Inst])
 		{
-			final item = audList[i];
 			final sfx = (item == Inst) ? instSfx : voicesSfx;
 
 			// Try with suffix first, then fall back to non-suffixed
-			var path = '$song/$char/${audList[i]}$sfx';
-			if (sfx != '' && !Paths.exists('songs/$path.ogg')) path = '$song/$char/${audList[i]}';
+			var path = '$song/$char/$item$sfx';
+			if (sfx != '' && !Paths.exists('songs/$path.ogg')) path = '$song/$char/$item';
 
 			if (Paths.exists('songs/$path.ogg'))
 			{
 				this.recycle(MoonSound, function():MoonSound
 				{
 					var aud = cast new MoonSound().loadEmbedded(Paths.sound('$path.ogg', 'songs'), false, true);
-					aud.type = audList[i];
+					aud.type = item;
 					aud.strID = song;
 					aud.onComplete = finish;
 					FlxG.sound.list.add(cast aud);

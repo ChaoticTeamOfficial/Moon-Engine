@@ -8,11 +8,11 @@ import flixel.tweens.FlxEase;
 
 using StringTools;
 
-enum MusicType
+enum abstract MusicType(String) from String to String
 {
-	Inst;
-	Voices_Player;
-	Voices_Opponent;
+	var Inst = 'Inst';
+	var Voices_Player = 'Voices-player';
+	var Voices_Opponent = 'Voices-opponent';
 }
 
 typedef Metadata =
