@@ -1,5 +1,6 @@
 package moon.game.obj;
 
+import moon.game.obj.Character;
 import moon.backend.gameplay.InputHandler;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
@@ -261,7 +262,18 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		group.angle = charData?.angle ?? 0.0;
 		// if (charData.scale != null) group.scale.set(charData?.scale[0] ?? 1, charData?.scale[1] ?? 1);
 
-		for (obj in group.members) if (Std.isOfType(obj, Character)) if (charData.camOffsets != null) cast(obj, Character).camOffsets = charData.camOffsets;
+		for (obj in group.members)
+		{
+			if (Std.isOfType(obj, Character))
+			{
+				if (charData.camOffsets != null)
+				{
+					final char = cast(obj, Character);
+					char.camOffsets[0] += charData?.camOffsets[0] ?? 0;
+					char.camOffsets[1] += charData?.camOffsets[1] ?? 0;
+				}
+			}
+		}
 
 		var insertIndex:Int = length;
 		if (charData.objectBehind != null)
