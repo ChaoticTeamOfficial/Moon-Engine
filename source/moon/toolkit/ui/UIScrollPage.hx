@@ -56,15 +56,16 @@ class UIScrollPage extends UIPage
 		content = new FlxSpriteGroup();
 		add(content);
 
-		scrollTrack = new FlxSprite(scrollbarX, 0);
-		scrollTrack.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.CONTROL_BG));
+		scrollTrack = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.CONTROL_BG);
+		scrollTrack.setPosition(scrollbarX, 0);
 		scrollTrack.visible = false;
 		add(scrollTrack);
 
-		scrollThumb = new FlxSprite(scrollbarX, 0);
-		scrollThumb.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.ACCENT));
-		scrollThumb.visible = false;
+		scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.ACCENT);
+		scrollThumb.setPosition(scrollbarX, 0);
+		scrollThumb.visible = scrollThumb.active = false;
 		add(scrollThumb);
+		scrollTrack.active = false;
 	}
 
 	/**
@@ -106,7 +107,7 @@ class UIScrollPage extends UIPage
 		viewHeight = newHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		scrollTrack.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.CONTROL_BG));
+		scrollTrack = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.CONTROL_BG);
 		scrollTrack.x = x + scrollbarX;
 
 		refreshScrollbar();
@@ -136,12 +137,12 @@ class UIScrollPage extends UIPage
 
 		if (!needsScroll)
 		{
-			scrollThumb.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), SCROLLBAR_WIDTH / 2, UITheme.ACCENT));
+			scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.ACCENT);
 			return;
 		}
 
 		final thumbHeight = Math.max(SCROLLBAR_MIN_THUMB, viewHeight * (viewHeight / contentHeight));
-		scrollThumb.loadGraphic(RoundedRectCache.get(Std.int(SCROLLBAR_WIDTH), Std.int(thumbHeight), SCROLLBAR_WIDTH / 2, UITheme.ACCENT));
+		scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(thumbHeight), UITheme.ACCENT);
 		scrollThumb.x = x + scrollbarX;
 		updateThumbPosition();
 	}

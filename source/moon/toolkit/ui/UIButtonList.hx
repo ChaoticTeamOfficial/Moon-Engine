@@ -36,9 +36,9 @@ class UIButtonList extends FlxSpriteGroup
 		for (i in 0...labels.length)
 		{
 			final w = estimateTextWidth(labels[i]);
-			var pill = new FlxSprite();
+			var pill = RoundedRectCache.create(Std.int(w), Std.int(pillHeight), FlxColor.WHITE);
 			final isSel = i == defaultIndex;
-			pill.loadGraphic(RoundedRectCache.get(Std.int(w), Std.int(pillHeight), pillHeight / 2, FlxColor.WHITE));
+
 			pill.color = isSel ? UITheme.ACCENT : UITheme.CONTROL_BG;
 			pill.active = false;
 
@@ -71,8 +71,7 @@ class UIButtonList extends FlxSpriteGroup
 
 		if (showExtraButton)
 		{
-			extraBtn = new FlxSprite();
-			extraBtn.loadGraphic(RoundedRectCache.get(Std.int(pillHeight), Std.int(pillHeight), pillHeight / 2, FlxColor.WHITE));
+			extraBtn = RoundedRectCache.create(Std.int(pillHeight), Std.int(pillHeight), FlxColor.WHITE);
 			extraBtn.color = UITheme.CONTROL_BG_HOVER;
 			extraBtn.active = false;
 

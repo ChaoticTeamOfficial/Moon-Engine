@@ -16,13 +16,11 @@ class UICheckbox extends UIComponent
 		super(x, y, width, labelText, iconGraphic);
 		this.defaultChecked = defaultChecked;
 
-		box = new FlxSprite();
-		box.loadGraphic(RoundedRectCache.get(Std.int(BOX_SIZE), Std.int(BOX_SIZE), 5, UITheme.CONTROL_BG_HOVER, UITheme.CONTROL_BORDER, 1));
+		box = RoundedRectCache.create(Std.int(BOX_SIZE), Std.int(BOX_SIZE), UITheme.CONTROL_BG_HOVER);
 		addValueWidget(box, BOX_SIZE);
 		box.y = (rowHeight - box.height) / 2;
 
-		checkMark = new FlxSprite();
-		checkMark.loadGraphic(RoundedRectCache.get(Std.int(BOX_SIZE - 8), Std.int(BOX_SIZE - 8), 3, FlxColor.WHITE));
+		checkMark = RoundedRectCache.create(Std.int(BOX_SIZE - 8), Std.int(BOX_SIZE - 8), FlxColor.WHITE);
 		checkMark.color = UITheme.ACCENT;
 		checkMark.x = box.x + 4;
 		checkMark.y = box.y + 4;

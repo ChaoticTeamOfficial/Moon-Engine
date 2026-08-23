@@ -69,17 +69,7 @@ class UIDropdown extends UIComponent implements IEditorChromeHideable
 		selectedIndex = defaultIndex;
 		optH = rowHeight - 6;
 
-		valueBox = new FlxSprite();
-		valueBox.loadGraphic(
-			RoundedRectCache.get(
-				Std.int(VALUE_BOX_WIDTH),
-				Std.int(rowHeight - 6),
-				UITheme.CORNER_RADIUS - 2,
-				UITheme.CONTROL_BG_HOVER,
-				UITheme.CONTROL_BORDER,
-				1
-			)
-		);
+		valueBox = RoundedRectCache.create(Std.int(VALUE_BOX_WIDTH), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
 		valueBox.y = (rowHeight - valueBox.height) / 2;
 		addValueWidget(valueBox, VALUE_BOX_WIDTH);
 
@@ -126,10 +116,7 @@ class UIDropdown extends UIComponent implements IEditorChromeHideable
 		final needsScroll = options.length > visibleCount;
 		final textWidth = VALUE_BOX_WIDTH - 16 - (needsScroll ? LIST_SCROLLBAR_WIDTH + 4 : 0);
 
-		var panel = new FlxSprite();
-		panel.loadGraphic(
-			RoundedRectCache.get(Std.int(VALUE_BOX_WIDTH), Std.int(listHeight), UITheme.CORNER_RADIUS - 2, UITheme.PANEL_BG, UITheme.CONTROL_BORDER, 1)
-		);
+		var panel = RoundedRectCache.create(Std.int(VALUE_BOX_WIDTH), Std.int(listHeight), UITheme.PANEL_BG);
 		optionList.add(panel);
 
 		rowsContainer = new FlxSpriteGroup();
@@ -146,15 +133,13 @@ class UIDropdown extends UIComponent implements IEditorChromeHideable
 
 		if (needsScroll)
 		{
-			listScrollTrack = new FlxSprite(VALUE_BOX_WIDTH - LIST_SCROLLBAR_WIDTH, 0);
-			listScrollTrack.loadGraphic(
-				RoundedRectCache.get(Std.int(LIST_SCROLLBAR_WIDTH), Std.int(listHeight), LIST_SCROLLBAR_WIDTH / 2, UITheme.CONTROL_BG)
-			);
+			listScrollTrack = RoundedRectCache.create(Std.int(LIST_SCROLLBAR_WIDTH), Std.int(listHeight), UITheme.CONTROL_BG);
+			listScrollTrack.setPosition(VALUE_BOX_WIDTH - LIST_SCROLLBAR_WIDTH, 0);
 			optionList.add(listScrollTrack);
 
 			final thumbH = Math.max(16, listHeight * (visibleCount / options.length));
-			listScrollThumb = new FlxSprite(VALUE_BOX_WIDTH - LIST_SCROLLBAR_WIDTH, 0);
-			listScrollThumb.loadGraphic(RoundedRectCache.get(Std.int(LIST_SCROLLBAR_WIDTH), Std.int(thumbH), LIST_SCROLLBAR_WIDTH / 2, UITheme.ACCENT));
+			listScrollThumb = RoundedRectCache.create(Std.int(LIST_SCROLLBAR_WIDTH), Std.int(thumbH), UITheme.ACCENT);
+			listScrollThumb.setPosition(VALUE_BOX_WIDTH - LIST_SCROLLBAR_WIDTH, 0);
 			optionList.add(listScrollThumb);
 		}
 		else

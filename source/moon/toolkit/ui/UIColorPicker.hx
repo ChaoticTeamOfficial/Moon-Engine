@@ -81,10 +81,7 @@ class UIColorPicker extends UIComponent implements IEditorChromeHideable
 		super(x, y, width, labelText, iconGraphic);
 		this.defaultColor = defaultColor;
 
-		swatch = new FlxSprite();
-		swatch.loadGraphic(
-			RoundedRectCache.get(Std.int(SWATCH_WIDTH), Std.int(rowHeight - 6), UITheme.CORNER_RADIUS - 2, FlxColor.WHITE, UITheme.CONTROL_BORDER, 1)
-		);
+		swatch = RoundedRectCache.create(Std.int(SWATCH_WIDTH), Std.int(rowHeight - 6), FlxColor.WHITE);
 		swatch.y = (rowHeight - swatch.height) / 2;
 		addValueWidget(swatch, SWATCH_WIDTH);
 
@@ -118,10 +115,7 @@ class UIColorPicker extends UIComponent implements IEditorChromeHideable
 		final stepperRowH = UITheme.ROW_HEIGHT + UITheme.ROW_SPACING;
 		popupHeight = PANEL_PADDING + SV_BOX_H + PANEL_PADDING + gridHeight + PANEL_PADDING + stepperRowH * 3 - UITheme.ROW_SPACING + PANEL_PADDING;
 
-		var panel = new FlxSprite();
-		panel.loadGraphic(
-			RoundedRectCache.get(Std.int(POPUP_WIDTH), Std.int(popupHeight), UITheme.CORNER_RADIUS - 2, UITheme.PANEL_BG, UITheme.CONTROL_BORDER, 1)
-		);
+		var panel = RoundedRectCache.create(Std.int(POPUP_WIDTH), Std.int(popupHeight), UITheme.PANEL_BG);
 		popup.add(panel);
 
 		svBox = new FlxSprite(PANEL_PADDING, PANEL_PADDING);
@@ -133,18 +127,15 @@ class UIColorPicker extends UIComponent implements IEditorChromeHideable
 		hueBar.pixels = buildHueBarBitmap();
 		popup.add(hueBar);
 
-		svCursor = new FlxSprite();
-		svCursor.loadGraphic(RoundedRectCache.get(10, 10, 5, FlxColor.TRANSPARENT, FlxColor.WHITE, 2));
+		svCursor = RoundedRectCache.create(10, 10, FlxColor.TRANSPARENT);
 		popup.add(svCursor);
 
-		hueCursor = new FlxSprite();
-		hueCursor.loadGraphic(RoundedRectCache.get(Std.int(HUE_BAR_W + 4), 4, 2, FlxColor.TRANSPARENT, FlxColor.WHITE, 2));
+		hueCursor = RoundedRectCache.create(Std.int(HUE_BAR_W + 4), 4, FlxColor.TRANSPARENT);
 		popup.add(hueCursor);
 
 		final gridY = PANEL_PADDING + SV_BOX_H + PANEL_PADDING;
 
-		selectionRing = new FlxSprite();
-		selectionRing.loadGraphic(RoundedRectCache.get(Std.int(GRID_SWATCH + 6), Std.int(GRID_SWATCH + 6), 6, FlxColor.WHITE, UITheme.CONTROL_BORDER, 2));
+		selectionRing = RoundedRectCache.create(Std.int(GRID_SWATCH + 6), Std.int(GRID_SWATCH + 6), FlxColor.WHITE);
 		selectionRing.color = UITheme.ACCENT;
 		selectionRing.visible = false;
 		popup.add(selectionRing);
@@ -153,8 +144,8 @@ class UIColorPicker extends UIComponent implements IEditorChromeHideable
 		{
 			final col = i % GRID_COLS;
 			final row = Std.int(i / GRID_COLS);
-			var sw = new FlxSprite(PANEL_PADDING + col * (GRID_SWATCH + GRID_SPACING), gridY + row * (GRID_SWATCH + GRID_SPACING));
-			sw.loadGraphic(RoundedRectCache.get(Std.int(GRID_SWATCH), Std.int(GRID_SWATCH), 5, FlxColor.WHITE, UITheme.CONTROL_BORDER, 1));
+			var sw = RoundedRectCache.create(Std.int(GRID_SWATCH), Std.int(GRID_SWATCH), FlxColor.WHITE);
+			sw.setPosition(PANEL_PADDING + col * (GRID_SWATCH + GRID_SPACING), gridY + row * (GRID_SWATCH + GRID_SPACING));
 			sw.color = presets[i];
 			popup.add(sw);
 			swatches.push(sw);

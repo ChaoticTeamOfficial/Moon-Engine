@@ -44,10 +44,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 		this.placeholder = placeholder;
 		this.defaultText = "";
 
-		box = new FlxSprite();
-		box.loadGraphic(
-			RoundedRectCache.get(Std.int(BOX_WIDTH), Std.int(rowHeight - 6), UITheme.CORNER_RADIUS - 2, UITheme.CONTROL_BG_HOVER, UITheme.CONTROL_BORDER, 1)
-		);
+		box = RoundedRectCache.create(Std.int(BOX_WIDTH), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
 		box.y = (rowHeight - box.height) / 2;
 		addValueWidget(box, BOX_WIDTH);
 		box.active = false;
@@ -230,16 +227,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 		}
 		resetCaretBlink();
 		setBackgroundState(f ? Active : Normal);
-		box.loadGraphic(
-			RoundedRectCache.get(
-				Std.int(BOX_WIDTH),
-				Std.int(rowHeight - 6),
-				UITheme.CORNER_RADIUS - 2,
-				UITheme.CONTROL_BG_HOVER,
-				f ? UITheme.ACCENT : UITheme.CONTROL_BORDER,
-				1
-			)
-		);
+		box = RoundedRectCache.create(Std.int(BOX_WIDTH), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
 		refreshDisplay();
 	}
 

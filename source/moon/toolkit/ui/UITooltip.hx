@@ -22,8 +22,6 @@ class UITooltip extends FlxSpriteGroup
 		super();
 
 		bg = new FlxSprite();
-		bg.makeGraphic(1, 1, FlxColor.WHITE);
-		bg.color = 0xE018181C;
 		bg.active = false;
 		add(bg);
 
@@ -62,7 +60,7 @@ class UITooltip extends FlxSpriteGroup
 
 		final bw = Std.int(Math.ceil(label.width + PAD * 2));
 		final bh = Std.int(Math.ceil(label.height + PAD * 2));
-		bg.loadGraphic(RoundedRectCache.get(bw, bh, RADIUS, FlxColor.WHITE));
+		bg = RoundedRectCache.create(bw, bh, FlxColor.WHITE);
 		bg.color = 0xE018181C;
 		bg.setGraphicSize(bw, bh);
 		bg.updateHitbox();

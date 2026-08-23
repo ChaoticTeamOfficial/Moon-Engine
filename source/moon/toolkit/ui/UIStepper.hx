@@ -73,10 +73,9 @@ class UIStepper extends UIComponent implements ITextEditable implements IEditorC
 		var totalWidth = BTN_SIZE * 2 + VALUE_WIDTH;
 		var startX = rowWidth - UITheme.PADDING - totalWidth;
 
-		minusBtn = new FlxSprite(startX, 0);
-		minusBtn.loadGraphic(RoundedRectCache.get(Std.int(BTN_SIZE), Std.int(BTN_SIZE), 5, FlxColor.WHITE));
+		minusBtn = RoundedRectCache.create(Std.int(BTN_SIZE), Std.int(BTN_SIZE), FlxColor.WHITE);
 		minusBtn.color = UITheme.CONTROL_BG_HOVER;
-		minusBtn.y = (rowHeight - BTN_SIZE) / 2;
+		minusBtn.setPosition(startX, (rowHeight - BTN_SIZE) / 2);
 		minusBtn.active = false;
 		add(minusBtn);
 
@@ -88,11 +87,8 @@ class UIStepper extends UIComponent implements ITextEditable implements IEditorC
 		add(minusLabel);
 		centerLabelOnButton(minusLabel, minusBtn);
 
-		editBox = new FlxSprite(minusBtn.x + BTN_SIZE, 0);
-		editBox.loadGraphic(
-			RoundedRectCache.get(Std.int(VALUE_WIDTH), Std.int(rowHeight - 6), UITheme.CORNER_RADIUS - 2, UITheme.CONTROL_BG_HOVER, UITheme.ACCENT, 1)
-		);
-		editBox.y = (rowHeight - editBox.height) / 2;
+		editBox = RoundedRectCache.create(Std.int(VALUE_WIDTH), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
+		editBox.setPosition(minusBtn.x + BTN_SIZE, (rowHeight - editBox.height) / 2);
 		editBox.visible = false;
 		editBox.active = false;
 		add(editBox);
@@ -122,10 +118,9 @@ class UIStepper extends UIComponent implements ITextEditable implements IEditorC
 		editCaret.active = false;
 		add(editCaret);
 
-		plusBtn = new FlxSprite(minusBtn.x + BTN_SIZE + VALUE_WIDTH, 0);
-		plusBtn.loadGraphic(RoundedRectCache.get(Std.int(BTN_SIZE), Std.int(BTN_SIZE), 5, FlxColor.WHITE));
+		plusBtn = RoundedRectCache.create(Std.int(BTN_SIZE), Std.int(BTN_SIZE), FlxColor.WHITE);
 		plusBtn.color = UITheme.CONTROL_BG_HOVER;
-		plusBtn.y = (rowHeight - BTN_SIZE) / 2;
+		plusBtn.setPosition(minusBtn.x + BTN_SIZE + VALUE_WIDTH, (rowHeight - BTN_SIZE) / 2);
 		plusBtn.active = false;
 		add(plusBtn);
 

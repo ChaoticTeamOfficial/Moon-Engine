@@ -20,16 +20,16 @@ class TestState extends FlxState
 		FlxG.cameras.bgColor = 0xFF2E2543;
 		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 
-		var sidebarBg = new FlxSprite(0, 0);
-		sidebarBg.loadGraphic(RoundedRectCache.get(Std.int(SIDEBAR_WIDTH), Std.int(FlxG.height), 0, FlxColor.WHITE));
+		var sidebarBg = RoundedRectCache.create(Std.int(SIDEBAR_WIDTH), Std.int(FlxG.height), FlxColor.WHITE);
 		sidebarBg.color = UITheme.SIDEBAR_BG;
 		add(sidebarBg);
 
 		var icons = ["Render", "Notes", "Chart", "Scroll"];
 		for (i in 0...icons.length)
 		{
-			var btn = new FlxSprite(8, 16 + i * 56);
-			btn.loadGraphic(RoundedRectCache.get(48, 48, 8, FlxColor.WHITE));
+			var btn = RoundedRectCache.create(48, 48, FlxColor.WHITE);
+			btn.setPosition(8, 16 + i * 56);
+
 			btn.color = UITheme.CONTROL_BG;
 			add(btn);
 			sidebarButtons.push(btn);

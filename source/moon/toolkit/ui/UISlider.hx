@@ -56,8 +56,8 @@ class UISlider extends UIComponent implements ITextEditable implements IEditorCh
 
 		var startX = rowWidth - UITheme.PADDING - (trackWidth + 10 + 50);
 
-		track = new FlxSprite(startX, 0);
-		track.loadGraphic(RoundedRectCache.get(Std.int(trackWidth), Std.int(TRACK_HEIGHT), TRACK_HEIGHT / 2, FlxColor.WHITE));
+		track = RoundedRectCache.create(Std.int(trackWidth), Std.int(TRACK_HEIGHT), FlxColor.WHITE);
+		track.x = startX;
 		track.color = UITheme.CONTROL_BG_ACTIVE;
 		track.y = (rowHeight - TRACK_HEIGHT) / 2;
 		add(track);
@@ -68,18 +68,14 @@ class UISlider extends UIComponent implements ITextEditable implements IEditorCh
 		fill.color = UITheme.ACCENT;
 		add(fill);
 
-		handle = new FlxSprite();
-		handle.loadGraphic(RoundedRectCache.get(Std.int(HANDLE_SIZE / 2), Std.int(HANDLE_SIZE), HANDLE_SIZE / 2, UITheme.ACCENT));
+		handle = RoundedRectCache.create(Std.int(HANDLE_SIZE / 2), Std.int(HANDLE_SIZE), UITheme.ACCENT);
 		handle.y = (rowHeight - HANDLE_SIZE) / 2;
 		add(handle);
 
 		var valueTextWidth = rowWidth - UITheme.PADDING - (track.x + trackWidth + 10);
 
-		editBox = new FlxSprite(track.x + trackWidth + 6, 0);
-		editBox.loadGraphic(
-			RoundedRectCache.get(Std.int(valueTextWidth + 8), Std.int(rowHeight - 6), UITheme.CORNER_RADIUS - 2, UITheme.CONTROL_BG_HOVER, UITheme.ACCENT, 1)
-		);
-		editBox.y = (rowHeight - editBox.height) / 2;
+		editBox = RoundedRectCache.create(Std.int(valueTextWidth + 8), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
+		editBox.setPosition(track.x + trackWidth + 6, (rowHeight - editBox.height) / 2);
 		editBox.visible = false;
 		add(editBox);
 

@@ -28,8 +28,7 @@ class UIActionButton extends FlxSpriteGroup
 		this.onClick = onClick;
 		labelText = text;
 
-		bg = new FlxSprite();
-		bg.loadGraphic(RoundedRectCache.get(Std.int(_w), Std.int(_h), UITheme.CORNER_RADIUS, FlxColor.WHITE));
+		bg = RoundedRectCache.create(Std.int(_w), Std.int(_h), FlxColor.WHITE);
 		bg.color = UITheme.CONTROL_BG;
 		bg.active = false;
 		add(bg);

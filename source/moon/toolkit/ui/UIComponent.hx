@@ -22,8 +22,7 @@ class UIComponent extends FlxSpriteGroup
 		rowWidth = width;
 		rowHeight = height > 0 ? height : UITheme.ROW_HEIGHT;
 
-		background = new FlxSprite();
-		background.loadGraphic(RoundedRectCache.get(Std.int(rowWidth), Std.int(rowHeight), UITheme.CORNER_RADIUS, FlxColor.WHITE));
+		background = RoundedRectCache.create(Std.int(rowWidth), Std.int(rowHeight), FlxColor.WHITE);
 		background.color = UITheme.CONTROL_BG;
 		background.active = false;
 		add(background);
