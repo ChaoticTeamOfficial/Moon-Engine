@@ -20,8 +20,7 @@ class UICheckbox extends UIComponent
 		addValueWidget(box, BOX_SIZE);
 		box.y = (rowHeight - box.height) / 2;
 
-		checkMark = RoundedRectCache.create(Std.int(BOX_SIZE - 8), Std.int(BOX_SIZE - 8), FlxColor.WHITE);
-		checkMark.color = UITheme.ACCENT;
+		checkMark = RoundedRectCache.create(Std.int(BOX_SIZE - 8), Std.int(BOX_SIZE - 8), UITheme.ACCENT);
 		checkMark.x = box.x + 4;
 		checkMark.y = box.y + 4;
 		add(checkMark);
