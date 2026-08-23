@@ -84,6 +84,15 @@ class MoonSprite extends FlxAnimate
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
 	public var danceFrequency:Int = 2;
+
+	/**
+	 * True while playing a non-idle animation that was reached via an idle/dance
+	 * `finishAnim` (typically a looped hold). Allows `checkDance` to restart the
+	 * idle cycle on the next dance beat even though the current anim name is
+	 * not itself an idle.
+	 */
+	public var idleHold:Bool = false;
+
 	public var twn:FlxTween;
 
 	/**
@@ -210,6 +219,8 @@ class MoonSprite extends FlxAnimate
 
 	public function dance(?force:Bool = false)
 	{
+		idleHold = false;
+
 		final group = idleAnimsMap.exists(animationSuffix) ? idleAnimsMap.get(animationSuffix) : (idleAnimsMap.exists("") ? idleAnimsMap.get("") : []);
 
 		if (group != null && group.length > 0)

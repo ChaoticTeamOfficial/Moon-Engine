@@ -100,11 +100,9 @@ class Character extends MoonSprite
 		if (animation.curAnim == null) return;
 
 		final beatInt = Std.int(curBeat);
-		if
-			((animation.curAnim.name.startsWith("idle") || animation.curAnim.name.startsWith("dance"))
-				&& (beatInt % danceFrequency == 0)
-				&& (beatInt != lastDanceBeat)
-			)
+		final name = animation.curAnim.name;
+
+		if ((name.startsWith("idle") || name.startsWith("dance") || idleHold) && (beatInt % danceFrequency == 0) && (beatInt != lastDanceBeat))
 		{
 			lastDanceBeat = beatInt;
 			this.dance(true);
@@ -134,7 +132,12 @@ class Character extends MoonSprite
 	{
 		super.playAnim(animName, force, reversed, frame);
 
-		if (animation.curAnim != null) if (animation.curAnim.name.startsWith('idle') || animation.curAnim.name.startsWith('sing')) animationHold = 0;
+		if (animation.curAnim != null)
+		{
+			final name = animation.curAnim.name;
+			if (name.startsWith('idle') || name.startsWith('sing')) animationHold = 0;
+			if (name.startsWith('sing') || name.startsWith('miss')) idleHold = false;
+		}
 	}
 
 	public function updateScale()

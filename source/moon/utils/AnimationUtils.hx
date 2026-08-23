@@ -253,7 +253,12 @@ class AnimationUtils
 						target.animation.curAnim.curFrame = target.animation.curAnim.frames[target.animation.curAnim.frames.length - 1];
 					}
 					else
+					{
+						// Idle/dance finished into a non-idle anim whichhh usually is a looped hold.
+						if (anim.name.startsWith("idle") || anim.name.startsWith("dance")) target.idleHold = true;
+
 						target.playAnim(anim.finishAnim, true);
+					}
 				}
 			});
 		}
