@@ -150,8 +150,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			for (objData in json.objects)
 			{
+				final name = objData?.id ?? objData.name;
 				var sprite = new MoonSprite();
-				sprite.strID = objData.name;
+				sprite.strID = name;
 
 				final assetPath = '${objData?.from ?? stg}/${objData.name}';
 				final objType:AtlasType = objData?.type ?? NONE;
@@ -169,7 +170,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 							objData?.frameHeight ?? 0
 						);
 					case ATLAS:
-						sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/${objData.name}'));
+						sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/$assetPath'));
 				}
 
 				AnimationUtils.mergeExtraSheets(sprite, objData.animations, stg, 'stages', objType);
@@ -204,7 +205,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				// trace('added ${objData.name} onto the stage');
 				sprite.setPosition(objData.position[0], objData.position[1]);
 				add(sprite);
-				objMap.set(objData.name, sprite);
+				objMap.set(name, sprite);
 			}
 		}
 
@@ -366,6 +367,7 @@ typedef StageObject =
 	// and document too...
 	var name:String;
 	var position:Array<Float>;
+	var ?id:String;
 	var ?type:AtlasType;
 	var ?frameWidth:Int;
 	var ?frameHeight:Int;
