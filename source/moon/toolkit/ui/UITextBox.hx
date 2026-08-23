@@ -227,7 +227,7 @@ class UITextBox extends UIComponent implements ITextEditable implements IEditorC
 		}
 		resetCaretBlink();
 		setBackgroundState(f ? Active : Normal);
-		box = RoundedRectCache.create(Std.int(BOX_WIDTH), Std.int(rowHeight - 6), UITheme.CONTROL_BG_HOVER);
+		box.color = f ? UITheme.ACCENT : UITheme.CONTROL_BG_HOVER;
 		refreshDisplay();
 	}
 

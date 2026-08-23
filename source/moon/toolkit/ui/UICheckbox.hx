@@ -41,7 +41,8 @@ class UICheckbox extends UIComponent
 		super.update(elapsed);
 		if (UIEditFocus.isBusy()) return;
 
-		if (FlxG.mouse.justPressedMiddle && box.getScreenBounds().containsPoint(FlxG.mouse.getViewPosition()))
+		final mp = FlxG.mouse.getWorldPosition();
+		if (FlxG.mouse.justPressedMiddle && containsPoint(mp.x, mp.y, box.x, box.y, box.width, box.height))
 		{
 			if (checked != defaultChecked)
 			{
@@ -51,10 +52,16 @@ class UICheckbox extends UIComponent
 			return;
 		}
 
-		if (FlxG.mouse.justPressed && box.getScreenBounds().containsPoint(FlxG.mouse.getViewPosition()))
+		if (FlxG.mouse.justPressed && containsPoint(mp.x, mp.y, box.x, box.y, box.width, box.height))
 		{
 			checked = !checked;
 			if (onChange != null) onChange(checked);
 		}
 	}
+
+	inline function containsPoint(px:Float, py:Float, rx:Float, ry:Float, rw:Float, rh:Float):Bool return
+		px >= rx
+		&& px <= rx + rw
+		&& py >= ry
+		&& py <= ry + rh;
 }

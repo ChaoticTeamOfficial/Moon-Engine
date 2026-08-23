@@ -33,8 +33,8 @@ class UIScrollPage extends UIPage
 	public var content(default, null):FlxSpriteGroup;
 
 	var panelBg:FlxSprite;
-	var scrollTrack:FlxSprite;
-	var scrollThumb:FlxSprite;
+	var scrollTrack:flixel.addons.display.FlxSliceSprite;
+	var scrollThumb:flixel.addons.display.FlxSliceSprite;
 
 	static inline var SCROLLBAR_WIDTH:Float = 8;
 	static inline var SCROLLBAR_GAP:Float = 4;
@@ -56,16 +56,15 @@ class UIScrollPage extends UIPage
 		content = new FlxSpriteGroup();
 		add(content);
 
-		scrollTrack = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.CONTROL_BG);
-		scrollTrack.setPosition(scrollbarX, 0);
+		scrollTrack = RoundedRectCache.create(SCROLLBAR_WIDTH, viewHeight, UITheme.CONTROL_BG);
+		scrollTrack.x = scrollbarX;
 		scrollTrack.visible = false;
 		add(scrollTrack);
 
-		scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.ACCENT);
-		scrollThumb.setPosition(scrollbarX, 0);
-		scrollThumb.visible = scrollThumb.active = false;
+		scrollThumb = RoundedRectCache.create(SCROLLBAR_WIDTH, viewHeight, UITheme.ACCENT);
+		scrollThumb.x = scrollbarX;
+		scrollThumb.visible = false;
 		add(scrollThumb);
-		scrollTrack.active = false;
 	}
 
 	/**
@@ -107,7 +106,7 @@ class UIScrollPage extends UIPage
 		viewHeight = newHeight;
 		scrollbarX = viewWidth + SCROLLBAR_GAP;
 
-		scrollTrack = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.CONTROL_BG);
+		RoundedRectCache.resize(scrollTrack, SCROLLBAR_WIDTH, viewHeight);
 		scrollTrack.x = x + scrollbarX;
 
 		refreshScrollbar();
@@ -137,12 +136,11 @@ class UIScrollPage extends UIPage
 
 		if (!needsScroll)
 		{
-			scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(viewHeight), UITheme.ACCENT);
+			RoundedRectCache.resize(scrollThumb, SCROLLBAR_WIDTH, viewHeight);
 			return;
 		}
 
-		final thumbHeight = Math.max(SCROLLBAR_MIN_THUMB, viewHeight * (viewHeight / contentHeight));
-		scrollThumb = RoundedRectCache.create(Std.int(SCROLLBAR_WIDTH), Std.int(thumbHeight), UITheme.ACCENT);
+		RoundedRectCache.resize(scrollThumb, SCROLLBAR_WIDTH, Math.max(SCROLLBAR_MIN_THUMB, viewHeight * (viewHeight / contentHeight)));
 		scrollThumb.x = x + scrollbarX;
 		updateThumbPosition();
 	}
@@ -200,6 +198,7 @@ class UIScrollPage extends UIPage
 		}
 
 		if (!Std.isOfType(obj, FlxSprite)) return;
+		if (Std.isOfType(obj, flixel.text.FlxText)) return;
 
 		final spr:FlxSprite = cast obj;
 		if (worldW <= 0 || worldH <= 0)

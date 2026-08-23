@@ -23,6 +23,12 @@ class RoundedRectCache
 		return sprite;
 	}
 
+	public static function resize(sprite:FlxSliceSprite, width:Float, height:Float):Void
+	{
+		sprite.width = width;
+		sprite.height = height;
+	}
+
 	static var solidPixel:FlxGraphic;
 
 	public static function getSolidPixel():FlxGraphic
