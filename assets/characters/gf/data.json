@@ -1,10 +1,9 @@
 {
-	"camOffsets": [12, 50],
+	"type": "atlas",
+	"danceFrequency": 1,
 	"icon": {
 		"color": [243, 255, 110]
 	},
-	"extraOffsets": [-12, -320],
-	"type": "atlas",
 	"animations": [
 		{
 			"name": "idle-0",
@@ -82,10 +81,5 @@
 			"finishAnim": "idle"
 		}
 	],
-	"antialiasing": true,
-	"danceFrequency": 1,
-	"flipX": false,
-	"scale": 1,
-	"holdDuration": 8,
 	"overrideAnims": ["cheer", "combo50", "combo200", "comboBreak", "scared"]
 }

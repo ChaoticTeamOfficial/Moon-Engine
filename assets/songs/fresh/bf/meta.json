@@ -1,0 +1,19 @@
+{
+	"players": ["bf"],
+	"spectators": ["gf"],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"opponents": ["dad"],
+	"lanes": ["opponent", "p1"],
+	"artist": "Kawai Sprite",
+	"hasCountdown": true,
+	"version": "2.2.4",
+	"preview": [0, 0],
+	"scrollSpd": { "easy": 1.4, "normal": 1.6, "hard": 1.8 },
+	"charter": "ninjamuffin99 + MtH",
+	"timeSignature": [4, 4],
+	"displayName": "Fresh",
+	"stage": "mainStage",
+	"bpm": 120,
+	"album": "volume1",
+	"noteskin": "v-slice"
+}
