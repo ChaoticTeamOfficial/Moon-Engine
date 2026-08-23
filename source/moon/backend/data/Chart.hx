@@ -121,7 +121,7 @@ typedef MetadataStruct =
 	var timeSignature:Array<Int>;
 
 	/**
-	 * The song's scroll speed. 
+	 * The song's scroll speed.
 	 * Do note that it feels a bit more faster in Moon Engine rather than V-Slice, for example.
 	 */
 	var scrollSpd:Float;
@@ -236,6 +236,12 @@ typedef ChartStruct =
 	var ?bookmarks:Array<BookmarkStruct>;
 };
 
+typedef MultiChartFile =
+{
+	var notes:Dynamic;
+	var ?bookmarks:Dynamic;
+};
+
 /**
  * Class used for handling ingame charts.
 **/
@@ -245,7 +251,6 @@ class Chart
 	 * All the chart formats supported for converting.
 	 */
 	public static final SUPPORTED_FORMATS:Array<String> = [
-		// TODO: add other formats in here.
 		'legacy',
 		'psych',
 		'codename',
@@ -253,6 +258,17 @@ class Chart
 		'osu',
 		'kade',
 		'fps-plus'
+	];
+
+	/**
+	 * Fields that are commonly difficulty-specific and should be stored as maps.
+	 */
+	public static final DIFF_SPECIFIC_META_FIELDS:Array<String> = [
+		'scrollSpd',
+		'healthMultiplier',
+		'difficultyRating',
+		'noteskin',
+		'hasCountdown'
 	];
 
 	/**
@@ -293,27 +309,90 @@ class Chart
 		this.difficulty = difficulty;
 		this.mix = mix;
 
-		// Determines the file suffix from the Difficulty config.
 		final suffix = getDifficultySuffix(difficulty);
 		events = loadEventsWithSuffix(song, mix, suffix);
-
-		// Load Chart Content (notes + optional embedded meta) --
-		content = Paths.JSON('songs/$song/$mix/chart-$difficulty');
-		if (content == null)
-		{
-			trace('[CHART] Chart file not found: songs/$song/$mix/chart-$difficulty.json', "WARNING");
-			content = {
-				notes: []
-			};
-		}
-
-		if (content.notes == null) content.notes = [];
-
+		content = loadChartContent(song, mix, difficulty, suffix);
 		content.meta = loadMetadata(song, mix, suffix, difficulty, content.meta);
 		content.meta.hasCountdown ??= true;
 		content.meta.healthMultiplier ??= 1.0;
 
-		removeDuplicateNotes();
+		if (content.notes == null || content.notes.length == 0) return;
+
+		var seen = new Map<String, Bool>();
+		var unique:Array<NoteStruct> = [];
+		var duplicatesFound:Int = 0;
+
+		for (note in content.notes)
+		{
+			final key = '${note.time}_${note.data}_${note.lane}';
+			if (!seen.exists(key))
+			{
+				seen.set(key, true);
+				unique.push(note);
+			}
+			else
+				duplicatesFound++;
+		}
+
+		content.notes = unique;
+		if (duplicatesFound > 0) trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
+	}
+
+	private function loadChartContent(song:String, mix:String, difficulty:String, suffix:String):ChartStruct
+	{
+		if (suffix == '')
+		{
+			final shared:Dynamic = Paths.JSON('songs/$song/$mix/chart');
+			if (shared != null)
+			{
+				final notes = extractDifficultyArray(shared.notes, difficulty);
+				if (notes != null)
+				{
+					return {
+						notes: cast notes,
+						bookmarks: cast extractDifficultyArray(shared.bookmarks, difficulty),
+						meta: shared.meta
+					};
+				}
+			}
+		}
+
+		final single:Dynamic = Paths.JSON('songs/$song/$mix/chart-$difficulty');
+		if (single != null)
+		{
+			// Support both legacy flat notes array and keyed multi format inside chart-X.json
+			// NOTE: i'm doing this because at time of writing there's some mods that use moon engine
+			// and I don't wanna re-convert everything...
+			final notes = extractDifficultyArray(single.notes, difficulty);
+			return {
+				notes: cast(notes ?? (Std.isOfType(single.notes, Array) ? cast single.notes : [])),
+				bookmarks: cast(extractDifficultyArray(
+					single.bookmarks,
+					difficulty
+				) ?? (Std.isOfType(single.bookmarks, Array) ? cast single.bookmarks : null)),
+				meta: single.meta
+			};
+		}
+
+		trace('[CHART] Chart file not found for $song/$mix/$difficulty', "WARNING");
+		return {
+			notes: []
+		};
+	}
+
+	/**
+	 * Pulls an array for a difficulty from either a plain array or a difficulty-keyed object.
+	 */
+	private static function extractDifficultyArray(value:Dynamic, difficulty:String):Null<Array<Dynamic>>
+	{
+		if (value == null) return null;
+		if (Std.isOfType(value, Array)) return cast value;
+		if (Type.typeof(value) == TObject && Reflect.hasField(value, difficulty))
+		{
+			final field = Reflect.field(value, difficulty);
+			if (Std.isOfType(field, Array)) return cast field;
+		}
+		return null;
 	}
 
 	/**
@@ -335,19 +414,9 @@ class Chart
 	{
 		var meta:Dynamic = embeddedMeta;
 
-		// Load base metadata
-		if (Paths.exists('songs/$song/$mix/meta.json'))
-		{
-			final baseMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta');
-			meta = mergeMetadata(meta, baseMeta);
-		}
+		if (Paths.exists('songs/$song/$mix/meta.json')) meta = mergeMetadata(meta, Paths.JSON('songs/$song/$mix/meta'));
 
-		// Load suffix-specific metadata
-		if (suffix != '' && Paths.exists('songs/$song/$mix/meta$suffix.json'))
-		{
-			final suffixMeta:Dynamic = Paths.JSON('songs/$song/$mix/meta$suffix');
-			meta = mergeMetadata(meta, suffixMeta);
-		}
+		if (suffix != '' && Paths.exists('songs/$song/$mix/meta$suffix.json')) meta = mergeMetadata(meta, Paths.JSON('songs/$song/$mix/meta$suffix'));
 
 		if (meta == null)
 		{
@@ -397,7 +466,6 @@ class Chart
 	{
 		if (value == null) return defaultValue;
 
-		// Check if it's a per-difficulty map...
 		if (Type.typeof(value) == TObject)
 		{
 			if (Reflect.hasField(value, difficulty))
@@ -434,7 +502,6 @@ class Chart
 			final overrideVal = Reflect.field(overrider, field);
 			final baseVal = Reflect.field(base, field);
 
-			// If both are anonymous objects, deep-merge them
 			if (Type.typeof(overrideVal) == TObject && Type.typeof(baseVal) == TObject) Reflect.setField(result, field, mergeMetadata(baseVal, overrideVal));
 			else
 				Reflect.setField(result, field, overrideVal);
@@ -465,13 +532,13 @@ class Chart
 			charter: '',
 			preview: [0, 0],
 			generatedBy: 'Moon Engine',
-			version: '1.0.0',
+			version: Constants.INDEV_VERSION,
 			healthMultiplier: 1.0,
 		};
 	}
 
 	/**
-	 * Gets the file suffix for a given difficulty from the SongLibrary.
+	 * Gets the file suffix for a given difficulty.
 	 * @param difficulty The difficulty name (e.g. "erect")
 	 * @return The suffix string (e.g. "-erect") or empty string
 	 */
@@ -482,43 +549,44 @@ class Chart
 	}
 
 	/**
+	 * Whether this difficulty uses the shared multi-diff chart/meta files (no suffix).
+	 */
+	public static function isSharedDifficulty(difficulty:String):Bool return getDifficultySuffix(difficulty) == '';
+
+	/**
+	 * Relative path for the chart file of a difficulty.
+	 */
+	public static function chartPath(song:String, mix:String, difficulty:String):String
+	{
+		if (isSharedDifficulty(difficulty)) return 'songs/$song/$mix/chart';
+		return 'songs/$song/$mix/chart-$difficulty';
+	}
+
+	/**
+	 * Relative path for events of a difficulty.
+	 */
+	public static function eventsPath(song:String, mix:String, difficulty:String):String
+	{
+		final suffix = getDifficultySuffix(difficulty);
+		return suffix != '' ? 'songs/$song/$mix/events$suffix' : 'songs/$song/$mix/events';
+	}
+
+	/**
+	 * Relative path for metadata of a difficulty.
+	 */
+	public static function metaPath(song:String, mix:String, difficulty:String):String
+	{
+		final suffix = getDifficultySuffix(difficulty);
+		return suffix != '' ? 'songs/$song/$mix/meta$suffix' : 'songs/$song/$mix/meta';
+	}
+
+	/**
 	 * Returns the difficulty rating for this chart.
-	 * Uses the manual override from metadata if set, otherwise calculates automatically.
 	 */
 	public function getDifficultyRating():Int
 	{
 		if (content.meta.difficultyRating != null && content.meta.difficultyRating >= 0) return content.meta.difficultyRating;
 		return calculateDifficultyRating(content.notes, content.meta.bpm);
-	}
-
-	/**
-	 * Removes duplicate notes from the chart content.
-	 * Notes are considered duplicates if they share the same time, data, and lane.
-	 */
-	private function removeDuplicateNotes():Void
-	{
-		if (content.notes == null || content.notes.length == 0) return;
-
-		var seen = new Map<String, Bool>();
-		var unique:Array<NoteStruct> = [];
-		var duplicatesFound:Int = 0;
-
-		for (note in content.notes)
-		{
-			final key = '${note.time}_${note.data}_${note.lane}';
-
-			if (!seen.exists(key))
-			{
-				seen.set(key, true);
-				unique.push(note);
-			}
-			else
-				duplicatesFound++;
-		}
-
-		content.notes = unique;
-
-		if (duplicatesFound > 0) trace('Removed $duplicatesFound duplicate note(s) from chart $song/$mix/$difficulty', "DEBUG");
 	}
 
 	/**
@@ -540,7 +608,6 @@ class Chart
 		final songDuration:Float = p1Notes[p1Notes.length - 1].time - p1Notes[0].time;
 		if (songDuration <= 0) return 0;
 
-		// first step is to do some sliding 1-second window NPS analysis
 		final WINDOW_MS:Float = 1000.0;
 		var npsValues:Array<Float> = [];
 		var windowStart:Int = 0;
@@ -549,8 +616,6 @@ class Chart
 		{
 			while (p1Notes[i].time - p1Notes[windowStart].time > WINDOW_MS)
 				windowStart++;
-
-			// normalize to per-second so units stay consistent
 			npsValues.push((i - windowStart + 1) * (1000.0 / WINDOW_MS));
 		}
 
@@ -562,20 +627,13 @@ class Chart
 		for (v in npsValues) avgNPS += v;
 		avgNPS /= npsValues.length;
 
-		// peak and sustained matter more than average
 		final blendedNPS:Float = (peakNPS * 0.45) + (p90NPS * 0.45) + (avgNPS * 0.10);
 
-		// now we go for the 2nd step, check for chord bonus (multiple notes at nearly the same time)
 		var chordNotes:Int = 0;
-		for (i in 1...p1Notes.length)
-		{
-			if (Math.abs(p1Notes[i].time - p1Notes[i - 1].time) < 15.0) chordNotes++;
-		}
+		for (i in 1...p1Notes.length) if (Math.abs(p1Notes[i].time - p1Notes[i - 1].time) < 15.0) chordNotes++;
 
-		// up to 25% bonus for chord-heavy charts
 		final chordFactor:Float = 1.0 + (chordNotes / p1Notes.length) * 0.25;
 
-		// now for the 3rd step: jack factor! (same column hit twice quickly if u didnt know)
 		var jackNotes:Int = 0;
 		for (i in 1...p1Notes.length)
 		{
@@ -583,48 +641,33 @@ class Chart
 			if (p1Notes[i].data == p1Notes[i - 1].data && gap > 15.0 && gap < 250.0) jackNotes++;
 		}
 
-		// up to +15% bonus for jack-heavy charts
 		final jackFactor:Float = 1.0 + (jackNotes / p1Notes.length) * 0.15;
-
-		// now the last step! map to 0-20 via tanh curve
 		final bpmFactor:Float = 1.0 + Math.max(0.0, (bpm - 120.0) / 120.0) * 0.20;
 		final adjustedNPS:Float = blendedNPS * chordFactor * jackFactor * bpmFactor;
 		final normalized:Float = Math.pow(adjustedNPS / 16.0, 2.0);
 		final e2x:Float = Math.exp(2.0 * normalized);
 
-		final rating:Float = 20.0 * (e2x - 1.0) / (e2x + 1.0);
-
-		return Std.int(Math.min(20, Math.max(0, Math.round(rating))));
+		return Std.int(Math.min(20, Math.max(0, Math.round(20.0 * (e2x - 1.0) / (e2x + 1.0)))));
 	}
 
 	/**
 	 * Returns all notes of a specific type.
-	 * @param notes
-	 * @param type 
 	 */
 	public static function getNotesByType(notes:Array<NoteStruct>, type:String):Array<NoteStruct> return notes.filter(n -> n.type == type);
 
 	/**
 	 * Returns all notes on a specific lane.
-	 * @param notes 
-	 * @param lane
 	 */
 	public static function getNotesByLane(notes:Array<NoteStruct>, lane:String):Array<NoteStruct> return notes.filter(n -> n.lane == lane);
 
 	/**
 	 * Changes an array of notes to a specific type.
-	 * @param notes 
-	 * @param oldType 
-	 * @param newType 
 	 */
 	public static function changeNoteType(notes:Array<NoteStruct>, oldType:String, newType:String):Void for (n in notes) if (n.type == oldType)
 		n.type = newType;
 
 	/**
 	 * Changes an array of notes to a specific lane.
-	 * @param notes 
-	 * @param fromLane 
-	 * @param toLane 
 	 */
 	public static function changeNoteLane(notes:Array<NoteStruct>, fromLane:String, toLane:String):Void for (n in notes) if (n.lane == fromLane)
 		n.lane = toLane;
@@ -659,8 +702,7 @@ class Chart
 	}
 
 	/**
-	 * Saves this chart's notes, events, and metadata back to their respective files,
-	 * mirroring the same suffix logic used when loading.
+	 * Saves this chart's notes, events, and metadata back to their respective files.
 	 *
 	 * @param saveBookmarks Whether to persist bookmarks into the chart file. Defaults to true.
 	 */
@@ -668,19 +710,18 @@ class Chart
 	{
 		#if sys
 		final suffix = getDifficultySuffix(difficulty);
-
-		final chartToSave:ChartStruct = {
-			notes: content.notes
-		};
-		if (saveBookmarks && content.bookmarks != null) chartToSave.bookmarks = content.bookmarks;
-
-		final chartKey = 'songs/$song/$mix/chart-$difficulty.json';
-		writeJson('songs/$song/$mix/chart-$difficulty', chartToSave);
-
+		final chartKey = chartPath(song, mix, difficulty) + '.json';
 		final baseRoot = Mods.getOwningModRoot(chartKey) ?? Paths.getVanillaPath('');
 
-		Paths.saveFileContentTo(baseRoot, 'songs/$song/$mix/${(suffix != '') ? 'events$suffix' : 'events'}.json', Json.stringify(events, "\t"));
-		Paths.saveFileContentTo(baseRoot, 'songs/$song/$mix/${(suffix != '') ? 'meta$suffix' : 'meta'}.json', Json.stringify(content.meta, "\t"));
+		if (suffix == '') saveSharedChart(baseRoot, saveBookmarks);
+		else
+			saveSingleChart(baseRoot, saveBookmarks);
+
+		Paths.saveFileContentTo(baseRoot, eventsPath(song, mix, difficulty) + '.json', Json.stringify(events, "\t"));
+
+		if (suffix == '') saveSharedMeta(baseRoot);
+		else
+			Paths.saveFileContentTo(baseRoot, metaPath(song, mix, difficulty) + '.json', Json.stringify(content.meta, "\t"));
 
 		trace('[CHART] Saved chart $song/$mix/$difficulty', "DEBUG");
 		#else
@@ -688,23 +729,441 @@ class Chart
 		#end
 	}
 
+	#if sys
+	private function saveSharedChart(baseRoot:String, saveBookmarks:Bool):Void
+	{
+		final path = 'songs/$song/$mix/chart.json';
+		var file:Dynamic = {};
+
+		if (Paths.exists(path))
+		{
+			final existing = Paths.JSON('songs/$song/$mix/chart');
+			if (existing != null) file = existing;
+		}
+
+		// Promote legacy flat array into a difficulty map if needed.
+		if (file.notes == null) file.notes = {};
+		else if (Std.isOfType(file.notes, Array))
+		{
+			final legacy:Array<Dynamic> = cast file.notes;
+			file.notes = {};
+			Reflect.setField(file.notes, difficulty, legacy);
+		}
+
+		Reflect.setField(file.notes, difficulty, content.notes);
+
+		if (saveBookmarks && content.bookmarks != null)
+		{
+			if (file.bookmarks == null) file.bookmarks = {};
+			else if (Std.isOfType(file.bookmarks, Array))
+			{
+				final legacyBm:Array<Dynamic> = cast file.bookmarks;
+				file.bookmarks = {};
+				Reflect.setField(file.bookmarks, difficulty, legacyBm);
+			}
+			Reflect.setField(file.bookmarks, difficulty, content.bookmarks);
+		}
+
+		Paths.saveFileContentTo(baseRoot, path, Json.stringify(file, "\t"));
+	}
+
+	private function saveSingleChart(baseRoot:String, saveBookmarks:Bool):Void
+	{
+		final chartToSave:Dynamic = {
+			notes: content.notes
+		};
+		if (saveBookmarks && content.bookmarks != null) chartToSave.bookmarks = content.bookmarks;
+
+		Paths.saveFileContentTo(baseRoot, 'songs/$song/$mix/chart-$difficulty.json', Json.stringify(chartToSave, "\t"));
+	}
+
+	private function saveSharedMeta(baseRoot:String):Void
+	{
+		final path = 'songs/$song/$mix/meta.json';
+		var file:Dynamic = {};
+
+		if (Paths.exists(path))
+		{
+			final existing = Paths.JSON('songs/$song/$mix/meta');
+			if (existing != null) file = existing;
+		}
+
+		// Shared fields
+		// BRO THIS FORMATTERRRR
+		final sharedFields = [
+			        'bpm', 'timeSignature',  'stage',   'lanes', 'players',  'spectators', 'opponents',
+			'displayName',         'album', 'artist', 'charter', 'preview', 'generatedBy',   'version'
+		];
+		for (field in sharedFields) Reflect.setField(file, field, Reflect.field(content.meta, field));
+
+		// difficulty-specific fields stored as maps keyed by difficulty name.
+		for (field in DIFF_SPECIFIC_META_FIELDS)
+		{
+			final value = Reflect.field(content.meta, field);
+			if (value == null) continue;
+
+			var map:Dynamic = Reflect.field(file, field);
+			if (map == null || Type.typeof(map) != TObject || Std.isOfType(map, Array)) map = {};
+
+			Reflect.setField(map, difficulty, value);
+			Reflect.setField(file, field, map);
+		}
+
+		Paths.saveFileContentTo(baseRoot, path, Json.stringify(file, "\t"));
+	}
+	#end
+
 	private static function writeJson(path:String, data:Dynamic):Void Paths.saveFileContent(path + '.json', Json.stringify(data, "\t"));
 
 	/**
-	 * Converts a chart type to Moon Engine's chart type.
-	 * 
-	 * @param type       The chart type you're converting from
-	 * @param path       The chart's path
-	 * @param difficulty The chart's difficulty
-	 * @param metaPath   Optional metadata path (for formats that use separate meta files)
+	 * Converts a chart type to Moon Engine's format for a single difficulty.
 	 */
-	public static function convert(type:String, path:String, difficulty:String, ?metaPath:String):ConvertResult
+	public static function convert(type:String, path:String, difficulty:String, ?metaPath:String, applyNoteRules:Bool = true):ConvertResult
+	{
+		final batch = convertMany(type, path, [difficulty], metaPath, applyNoteRules);
+		if (batch == null || batch.results.length == 0) return null;
+		return batch.results[0];
+	}
+
+	/**
+	 * Converts one or more difficulties from a source chart into Moon Engine format.
+	 *
+	 * @param type           Source format id (see SUPPORTED_FORMATS)
+	 * @param path           Path to the source chart file
+	 * @param difficulties   Difficulties to convert (must exist in the source, or erect←nightmare)
+	 * @param metaPath       Optional companion meta path for formats that need it
+	 * @param applyNoteRules Whether to remap note kinds via NOTE_TYPE_RULES
+	 * @param rawScrollMap   Optional pre-parsed scrollSpeed map from the raw chart JSON
+	 */
+	public static function convertMany(type:String, path:String, difficulties:Array<String>, ?metaPath:String, applyNoteRules:Bool = true, ?rawScrollMap:Dynamic):ConvertBatch
 	{
 		#if sys
-		// So first, we'll get the chart format and convert 'em to
-		// vslice, because vslice will be our main 'base' for converting.
+		if (difficulties == null || difficulties.length == 0) throw 'convertMany requires at least one difficulty';
 
-		final chart = switch (type)
+		final loadDiff = difficulties[0] == 'erect' ? 'nightmare' : difficulties[0];
+		final vslice = loadAsVSlice(type, path, metaPath, loadDiff).stringify();
+		final data:Dynamic = Json.parse(vslice.data);
+		final metadata:Dynamic = Json.parse(vslice.meta);
+
+		// Prefer the full per-difficulty scroll map.
+		if (rawScrollMap != null) data.scrollSpeed = rawScrollMap;
+		else if (path != null && FileSystem.exists(path))
+		{
+			try
+			{
+				final raw:Dynamic = Json.parse(File.getContent(path));
+				if (
+					raw != null
+					&& raw.scrollSpeed != null
+					&& Type.typeof(raw.scrollSpeed) == TObject
+					&& !Std.isOfType(raw.scrollSpeed, Array)
+				) data.scrollSpeed = raw.scrollSpeed;
+			}
+			catch (_)
+			{
+			}
+		}
+
+		final results:Array<ConvertResult> = [];
+		final sharedNotes:Dynamic = {};
+		final sharedMetaMaps:Map<String, Dynamic> = new Map();
+		var sharedEvents:Array<EventStruct> = null;
+		var baseMeta:MetadataStruct = null;
+
+		for (diff in difficulties)
+		{
+			final notes = convertNotesForDifficulty(data, diff, applyNoteRules);
+			final events = convertEvents(data, metadata);
+			final meta = convertMetadata(data, metadata, diff);
+
+			results.push({
+				difficulty: diff,
+				chartJson: Json.stringify({
+					notes: notes
+				}, "\t"),
+				eventsJson: Json.stringify(events, "\t"),
+				metaJson: Json.stringify(meta, "\t"),
+				notes: notes,
+				events: events,
+				meta: meta
+			});
+
+			if (isSharedDifficulty(diff))
+			{
+				Reflect.setField(sharedNotes, diff, notes);
+				if (sharedEvents == null) sharedEvents = events;
+				if (baseMeta == null) baseMeta = meta;
+
+				for (field in DIFF_SPECIFIC_META_FIELDS)
+				{
+					if (!sharedMetaMaps.exists(field)) sharedMetaMaps.set(field, {
+					});
+					Reflect.setField(sharedMetaMaps.get(field), diff, Reflect.field(meta, field));
+				}
+			}
+		}
+
+		var sharedChartJson:String = null;
+		var sharedEventsJson:String = null;
+		var sharedMetaJson:String = null;
+
+		if (baseMeta != null)
+		{
+			sharedChartJson = Json.stringify({
+				notes: sharedNotes
+			}, "\t");
+			sharedEventsJson = Json.stringify(sharedEvents ?? [], "\t");
+
+			final metaOut:Dynamic = Reflect.copy(baseMeta);
+			for (field => map in sharedMetaMaps) Reflect.setField(metaOut, field, map);
+			sharedMetaJson = Json.stringify(metaOut, "\t");
+		}
+
+		return {
+			results: results,
+			sharedChartJson: sharedChartJson,
+			sharedEventsJson: sharedEventsJson,
+			sharedMetaJson: sharedMetaJson
+		};
+		#else
+		throw 'Chart conversion is currently only available for Desktop.';
+		return null;
+		#end
+	}
+
+	/**
+	 * Converts an entire song folder and returns one batch per mix.
+	 */
+	public static function convertFolder(type:String, folderPath:String, difficulties:Array<String>, applyNoteRules:Bool = true):Array<FolderConvertResult>
+	{
+		#if sys
+		if (!FileSystem.exists(folderPath) || !FileSystem.isDirectory(folderPath)) throw 'Folder not found: $folderPath';
+
+		return switch (type)
+		{
+			case 'v-slice':
+				convertVSliceFolder(folderPath, difficulties, applyNoteRules);
+			case 'codename':
+				convertCodenameFolder(folderPath, difficulties, applyNoteRules);
+			default:
+				throw 'Folder conversion is only set up for v-slice and codename (got $type). Sorry brah!';
+		};
+		#else
+		throw 'Chart conversion is currently only available for Desktop.';
+		return null;
+		#end
+	}
+
+	#if sys
+	private static function convertVSliceFolder(folder:String, difficulties:Array<String>, applyNoteRules:Bool):Array<FolderConvertResult>
+	{
+		final files = FileSystem.readDirectory(folder);
+		final chartFiles:Array<String> = [];
+		for (f in files) if (f.endsWith('.json') && f.contains('-chart')) chartFiles.push(f);
+
+		if (chartFiles.length == 0) throw 'No V-Slice *-chart*.json files found in $folder';
+
+		// song id text before "-chart"
+		final songId = chartFiles[0].substring(0, chartFiles[0].indexOf('-chart'));
+		final out:Array<FolderConvertResult> = [];
+
+		for (chartFile in chartFiles)
+		{
+			// self notes dont mind me..
+			// Patterns: id-chart.json | id-chart-erect.json | id-chart-pico.json | id-chart-pico-erect.json
+			var rest = chartFile.substring(songId.length + '-chart'.length);
+			if (rest.endsWith('.json')) rest = rest.substr(0, rest.length - 5);
+
+			var mix = 'bf';
+			var variation = ''; // "" or "erect"
+			if (rest == '' || rest == '-erect')
+			{
+				mix = 'bf';
+				variation = rest == '-erect' ? 'erect' : '';
+			}
+			else
+			{
+				// -pico or -pico-erect whatever
+				final parts = rest.substr(1).split('-'); // drop leading '-' lol
+				if (parts.length >= 1 && parts[parts.length - 1] == 'erect')
+				{
+					variation = 'erect';
+					parts.pop();
+				}
+				mix = parts.join('-');
+				if (mix == '') mix = 'bf';
+			}
+
+			final chartPath = Path.join([folder, chartFile]);
+			final metaName = variation == '' ? '$songId-metadata.json' : (mix == 'bf' ? '$songId-metadata-erect.json' : '$songId-metadata-$mix${variation != "" ? "-" + variation : ""}.json');
+			var metaPath = Path.join([folder, metaName]);
+			if (!FileSystem.exists(metaPath))
+			{
+				final alt = [
+					Path.join([folder, '$songId-metadata-$mix.json']),
+					Path.join([folder, '$songId-metadata.json']),
+					Path.join([
+						folder,
+						variation == 'erect' ? '$songId-metadata-erect.json' : '$songId-metadata.json'
+					])
+				];
+				metaPath = null;
+				for (a in alt) if (FileSystem.exists(a))
+				{
+					metaPath = a;
+					break;
+				}
+			}
+
+			final diffsForFile = difficulties.filter(d ->
+			{
+				if (variation == 'erect') return d == 'erect';
+				return d != 'erect' && isSharedDifficulty(d);
+			});
+			if (diffsForFile.length == 0) continue;
+
+			final batch = convertMany('v-slice', chartPath, diffsForFile, metaPath, applyNoteRules);
+			out.push({
+				song: songId,
+				mix: mix,
+				batch: batch,
+				sourceChart: chartPath
+			});
+		}
+
+		final merged:Map<String, FolderConvertResult> = new Map();
+		for (entry in out)
+		{
+			final key = entry.mix;
+			if (!merged.exists(key))
+			{
+				merged.set(key, entry);
+				continue;
+			}
+
+			final existing = merged.get(key);
+			for (r in entry.batch.results) existing.batch.results.push(r);
+
+			if (entry.batch.sharedChartJson != null && existing.batch.sharedChartJson == null)
+			{
+				existing.batch.sharedChartJson = entry.batch.sharedChartJson;
+				existing.batch.sharedEventsJson = entry.batch.sharedEventsJson;
+				existing.batch.sharedMetaJson = entry.batch.sharedMetaJson;
+			}
+		}
+
+		return[for (v in merged) v];
+	}
+
+	private static function convertCodenameFolder(folder:String, difficulties:Array<String>, applyNoteRules:Bool):Array<FolderConvertResult>
+	{
+		final chartsDir = Path.join([folder, 'charts']);
+		if (!FileSystem.exists(chartsDir) || !FileSystem.isDirectory(chartsDir)) throw 'Codename folder needs a charts/ directory: $folder';
+
+		var metaPath:String = null;
+		for (name in ['meta.json', 'data.json', 'Meta.json'])
+		{
+			final p = Path.join([folder, name]);
+			if (FileSystem.exists(p))
+			{
+				metaPath = p;
+				break;
+			}
+		}
+
+		final songId = Path.withoutDirectory(folder);
+		final results:Array<ConvertResult> = [];
+		final sharedNotes:Dynamic = {};
+		final sharedMetaMaps:Map<String, Dynamic> = new Map();
+		var sharedEvents:Array<EventStruct> = null;
+		var baseMeta:MetadataStruct = null;
+
+		for (diff in difficulties)
+		{
+			final chartFile = Path.join([chartsDir, '$diff.json']);
+			if (!FileSystem.exists(chartFile)) continue;
+
+			final one = convertMany('codename', chartFile, [diff], metaPath, applyNoteRules);
+			if (one == null || one.results.length == 0) continue;
+
+			final r = one.results[0];
+			results.push(r);
+
+			if (isSharedDifficulty(diff))
+			{
+				Reflect.setField(sharedNotes, diff, r.notes);
+				if (sharedEvents == null) sharedEvents = r.events;
+				if (baseMeta == null) baseMeta = r.meta;
+				for (field in DIFF_SPECIFIC_META_FIELDS)
+				{
+					if (!sharedMetaMaps.exists(field)) sharedMetaMaps.set(field, {
+					});
+					Reflect.setField(sharedMetaMaps.get(field), diff, Reflect.field(r.meta, field));
+				}
+			}
+		}
+
+		if (results.length == 0) throw 'No Codename chart files matched the selected difficulties in $chartsDir';
+
+		var sharedChartJson:String = null;
+		var sharedEventsJson:String = null;
+		var sharedMetaJson:String = null;
+		if (baseMeta != null)
+		{
+			sharedChartJson = Json.stringify({
+				notes: sharedNotes
+			}, "\t");
+			sharedEventsJson = Json.stringify(sharedEvents ?? [], "\t");
+			final metaOut:Dynamic = Reflect.copy(baseMeta);
+			for (field => map in sharedMetaMaps) Reflect.setField(metaOut, field, map);
+			sharedMetaJson = Json.stringify(metaOut, "\t");
+		}
+
+		return [{
+			song: songId,
+			mix: 'bf',
+			batch: {
+				results: results,
+				sharedChartJson: sharedChartJson,
+				sharedEventsJson: sharedEventsJson,
+				sharedMetaJson: sharedMetaJson
+			},
+			sourceChart: chartsDir
+		}];
+	}
+	#end
+
+	public static function writeConvertBatch(batch:ConvertBatch, song:String, mix:String, ?root:String):Void
+	{
+		#if sys
+		final baseRoot = root ?? Paths.getVanillaPath('');
+		final dir = 'songs/$song/$mix';
+
+		if (batch.sharedChartJson != null)
+		{
+			Paths.saveFileContentTo(baseRoot, '$dir/chart.json', batch.sharedChartJson);
+			if (batch.sharedEventsJson != null) Paths.saveFileContentTo(baseRoot, '$dir/events.json', batch.sharedEventsJson);
+			if (batch.sharedMetaJson != null) Paths.saveFileContentTo(baseRoot, '$dir/meta.json', batch.sharedMetaJson);
+		}
+
+		for (result in batch.results)
+		{
+			if (isSharedDifficulty(result.difficulty)) continue;
+
+			final suffix = getDifficultySuffix(result.difficulty);
+			Paths.saveFileContentTo(baseRoot, '$dir/chart-${result.difficulty}.json', result.chartJson);
+			Paths.saveFileContentTo(baseRoot, '$dir/events$suffix.json', result.eventsJson);
+			if (result.metaJson != null) Paths.saveFileContentTo(baseRoot, '$dir/meta$suffix.json', result.metaJson);
+		}
+		#else
+		throw 'Chart conversion is currently only available for Desktop.';
+		#end
+	}
+
+	#if sys
+	private static function loadAsVSlice(type:String, path:String, metaPath:Null<String>, difficulty:String):Dynamic
+	{
+		return switch (type)
 		{
 			case 'psych':
 				new FNFVSlice().fromFormat(new FNFPsych().fromFile(path, null, difficulty));
@@ -721,191 +1180,230 @@ class Chart
 			default:
 				new FNFVSlice().fromFile(path, metaPath, difficulty);
 		};
+	}
 
-		final data = Json.parse(chart.stringify().data);
-		final metadata = Json.parse(chart.stringify().meta);
+	/**
+	 * Maps source difficulty keys when consolidating charts.
+	 */
+	private static function resolveSourceDifficulty(notesObj:Dynamic, difficulty:String):String
+	{
+		if (notesObj == null) return difficulty;
+		if (Reflect.hasField(notesObj, difficulty)) return difficulty;
+		if (difficulty == 'erect' && Reflect.hasField(notesObj, 'nightmare')) return 'nightmare';
+		return difficulty;
+	}
 
-		// Now we create variables for the converted chart and metadata.
-		// Metadata is now separate from the chart!
-		var convertedChart:ChartStruct = {
-			notes: []
-		};
-		var convertedMeta:MetadataStruct = null;
-		var convertedEvents:Array<EventStruct> = [];
+	// TODO: take a deeper look onto all kinds?
 
-		// -- Convert notes --
-		if (Reflect.hasField(data.notes, difficulty))
+	/**
+	 * Note-type remap rules applied during conversion.
+	 */
+	public static final NOTE_TYPE_RULES:Map<String, String> = [
+		'Alt Animation' => 'Alt Animation Note',
+		'No Animation' => 'No Animation Note',
+		'No Anim' => 'No Animation Note',
+		'GF Sing' => 'GF Sing',
+		'Girlfriend Sing' => 'GF Sing',
+		'Hurt Note' => 'Hurt Note',
+		'Instakill Note' => 'Instakill Note',
+		'Phantom Note' => 'Phantom Note'
+	];
+
+	private static function applyNoteTypeRule(kind:Null<String>):Null<String>
+	{
+		if (kind == null || kind == '') return null;
+		if (NOTE_TYPE_RULES.exists(kind)) return NOTE_TYPE_RULES.get(kind);
+		return kind;
+	}
+
+	private static function convertNotesForDifficulty(data:Dynamic, difficulty:String, applyRules:Bool = true):Array<NoteStruct>
+	{
+		final out:Array<NoteStruct> = [];
+		var noteArray:Array<Dynamic> = null;
+
+		if (data.notes != null)
 		{
-			final noteArray:Array<Dynamic> = Reflect.field(data.notes, difficulty);
-			for (note in noteArray)
+			if (Std.isOfType(data.notes, Array)) noteArray = cast data.notes;
+			else
 			{
-				convertedChart.notes.push({
-					time: note.t,
-					data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
-					lane: (note.d > 3) ? 'opponent' : 'p1',
-					type: (note.k == null || note.k == '') ? null : note.k,
-					duration: note.l ?? 0.0,
-					values: {
-					}
-				});
+				final sourceDiff = resolveSourceDifficulty(data.notes, difficulty);
+				if (Reflect.hasField(data.notes, sourceDiff)) noteArray = Reflect.field(data.notes, sourceDiff);
 			}
 		}
 
-		convertedChart.notes.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+		if (noteArray == null) return out;
 
-		// -- Convert events --
-		final events:Array<Dynamic> = data.events;
-		for (event in events)
+		for (note in noteArray)
 		{
-			var convertedEvent:EventStruct = switch (event.e)
-			{
-				case 'FocusCamera':
-					{
-						tag: 'Move Camera',
-						values: {
-							character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player',
-							duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
-							ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
-							x: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
-							y: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
-						},
-						lane: 0,
-						time: event.t
-					};
-
-				case 'ZoomCamera':
-					{
-						tag: 'Set Zoom',
-						values: {
-							zoom: Std.parseFloat(event.v.zoom),
-							duration: event?.v?.duration ?? 8,
-							ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
-							mode: event?.v?.mode ?? 'absolute',
-						},
-						lane: 1,
-						time: event.t
-					};
-
-				case 'SetCameraBop':
-					{
-						tag: 'Customized Pulse Timing',
-						values: event.v,
-						lane: 2,
-						time: event.t
-					};
-
-				case 'PlayAnimation':
-					{
-						tag: 'Play Character Animation',
-						time: event.t,
-						lane: 3,
-						values: {
-							anim: event.v.anim,
-							target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',
-							force: event?.v?.force ?? true,
-							forceOverride: true,
-							reversed: false,
-							frame: 0
-						}
-					};
-
-				case 'ScrollSpeed':
-					{
-						tag: 'Set Lane Scroll Speed',
-						time: event.t,
-						lane: 1,
-						values: {
-							duration: event.v.duration,
-							strumline: event.v.strumline,
-							ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
-							scroll: event.v.scroll,
-							absolute: event.v.absolute
-						}
-					};
-
-				default:
-					{
-						tag: event.e,
-						values: event.v,
-						time: event.t,
-						lane: FlxG.random.int(0, 7)
-					};
-			}
-
-			convertedEvents.push(convertedEvent);
+			final rawKind:Null<String> = (note.k == null || note.k == '') ? null : note.k;
+			out.push({
+				time: note.t,
+				data: (note.d > 3) ? Std.int(note.d - 4) : note.d,
+				lane: (note.d > 3) ? 'opponent' : 'p1',
+				type: applyRules ? applyNoteTypeRule(rawKind) : rawKind,
+				duration: note.l ?? 0.0,
+				values: {
+				}
+			});
 		}
 
-		final tChanges = metadata.timeChanges;
+		out.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+		return out;
+	}
 
-		// Convert time signature/bpm changes
-		for (i in 0...tChanges.length)
+	private static function convertEvents(data:Dynamic, metadata:Dynamic):Array<EventStruct>
+	{
+		final converted:Array<EventStruct> = [];
+		final events:Array<Dynamic> = data.events ?? [];
+
+		for (event in events) converted.push(mapEvent(event));
+
+		final tChanges:Array<Dynamic> = metadata.timeChanges ?? [];
+		for (i in 1...tChanges.length)
 		{
-			// because the first time change is applied to the metadata instead
-			if (i != 0)
-			{
-				final event:EventStruct = {
-					tag: 'Change Playback Settings',
+			converted.push({
+				tag: 'Change Playback Settings',
+				values: {
+					bpm: tChanges[i].bpm,
+					timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]
+				},
+				time: tChanges[i].t
+			});
+		}
+
+		converted.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+		return converted;
+	}
+
+	private static function mapEvent(event:Dynamic):EventStruct
+	{
+		return switch (event.e)
+		{
+			case 'FocusCamera':
+				{
+					tag: 'Move Camera',
 					values: {
-						bpm: tChanges[i].bpm,
-						timeSignature: [tChanges[i]?.n ?? 4, tChanges[i]?.d ?? 4]
+						character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player',
+						duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
+						ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
+						x: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
+						y: Std.parseFloat('${event?.v?.y ?? "0"}') ?? 0,
 					},
-					time: tChanges[i].t
+					lane: 0,
+					time: event.t
 				};
 
-				convertedEvents.push(event);
-			}
-		}
+			case 'ZoomCamera':
+				{
+					tag: 'Set Zoom',
+					values: {
+						zoom: Std.parseFloat(event.v.zoom),
+						duration: event?.v?.duration ?? 8,
+						ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? "Out"}' ?? 'circOut',
+						mode: event?.v?.mode ?? 'absolute',
+					},
+					lane: 1,
+					time: event.t
+				};
 
-		convertedEvents.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+			case 'SetCameraBop':
+				{
+					tag: 'Customized Pulse Timing',
+					values: event.v,
+					lane: 2,
+					time: event.t
+				};
 
-		// -- Convert metadata (now separate from chart) --
-		final scrollSpd = (data.scrollSpeed != null) ? resolveVal(data.scrollSpeed, difficulty, 2.0) : 2.0;
+			case 'PlayAnimation':
+				{
+					tag: 'Play Character Animation',
+					time: event.t,
+					lane: 3,
+					values: {
+						anim: event.v.anim,
+						target: (event.v.target == 'dad') ? 'opponent' : (event.v.target == 'boyfriend') ? 'player' : 'spectator',
+						force: event?.v?.force ?? true,
+						forceOverride: true,
+						reversed: false,
+						frame: 0
+					}
+				};
 
-		convertedMeta = {
-			bpm: metadata.timeChanges[0].bpm,
-			timeSignature: [
-				metadata.timeChanges[0]?.n ?? 4,
-				metadata.timeChanges[0]?.d ?? 4
-			],
-			scrollSpd: scrollSpd,
-			stage: metadata.playData.stage,
-			lanes: ["opponent", "p1"],
-			players: [metadata.playData.characters.player],
-			spectators: [metadata.playData.characters.girlfriend],
-			opponents: [metadata.playData.characters.opponent],
-			noteskin: 'v-slice',
-			hasCountdown: true,
+			case 'ScrollSpeed':
+				{
+					tag: 'Set Lane Scroll Speed',
+					time: event.t,
+					lane: 1,
+					values: {
+						duration: event.v.duration,
+						strumline: event.v.strumline,
+						ease: '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}' ?? 'circOut',
+						scroll: event.v.scroll,
+						absolute: event.v.absolute
+					}
+				};
 
-			displayName: metadata.songName,
-			album: metadata.playData.album,
-			artist: metadata.artist,
-			charter: metadata.charter,
-			preview: [
-				metadata.playData.previewStart,
-				metadata.playData.previewEnd
-			],
-
-			generatedBy: metadata.generatedBy,
-			version: metadata.version
+			default:
+				{
+					tag: event.e,
+					values: event.v,
+					time: event.t,
+					lane: 0
+				};
 		};
+	}
+
+	private static function convertMetadata(data:Dynamic, metadata:Dynamic, difficulty:String):MetadataStruct
+	{
+		final t0 = (metadata.timeChanges != null && metadata.timeChanges.length > 0) ? metadata.timeChanges[0] : null;
+		final playData = metadata.playData;
+		final chars = playData.characters;
+
+		// Prefer nightmare scroll values when converting erect (V-Slice consolidation).
+		var scrollDiff = difficulty;
+		if (
+			difficulty == 'erect'
+			&& data.scrollSpeed != null
+			&& Type.typeof(data.scrollSpeed) == TObject
+			&& !Std.isOfType(data.scrollSpeed, Array)
+			&& Reflect.hasField(data.scrollSpeed, 'nightmare')
+			&& !Reflect.hasField(data.scrollSpeed, 'erect')
+		) scrollDiff = 'nightmare';
 
 		return {
-			chartJson: Json.stringify(convertedChart, "\t"),
-			eventsJson: Json.stringify(convertedEvents, "\t"),
-			metaJson: Json.stringify(convertedMeta, "\t"),
+			bpm: t0?.bpm ?? 120.0,
+			timeSignature: [t0?.n ?? 4, t0?.d ?? 4],
+			scrollSpd: (data.scrollSpeed != null) ? resolveVal(data.scrollSpeed, scrollDiff, 2.0) : 2.0,
+			stage: playData.stage ?? 'stage',
+			lanes: ["opponent", "p1"],
+			players: [chars.player ?? 'bf'],
+			spectators: [chars.girlfriend ?? 'gf'],
+			opponents: [chars.opponent ?? 'dad'],
+			noteskin: 'v-slice',
+			hasCountdown: true,
+			displayName: metadata.songName ?? '',
+			album: playData.album ?? '',
+			artist: metadata.artist ?? '',
+			charter: metadata.charter ?? '',
+			preview: [playData.previewStart ?? 0, playData.previewEnd ?? 150000],
+			generatedBy: metadata.generatedBy ?? 'Moon Engine Converter',
+			version: metadata.version ?? '1.0.0',
+			healthMultiplier: 1.0
 		};
-		#else
-		throw 'Chart conversion is currently only available for Desktop.';
-		return null;
-		#end
 	}
+	#end
 }
 
 @:dox(hide)
 typedef ConvertResult =
 {
 	/**
-	 * The chart JSON (notes + bookmarks only, no metadata).
+	 * Difficulty this result belongs to.
+	 */
+	var ?difficulty:String;
+
+	/**
+	 * The chart JSON.
 	 */
 	var chartJson:String;
 
@@ -918,4 +1416,43 @@ typedef ConvertResult =
 	 * The metadata JSON.
 	 */
 	var ?metaJson:String;
+
+	/**
+	 * Parsed notes.
+	 */
+	var ?notes:Array<NoteStruct>;
+
+	/**
+	 * Parsed events.
+	 */
+	var ?events:Array<EventStruct>;
+
+	/**
+	 * Parsed metadata.
+	 */
+	var ?meta:MetadataStruct;
+};
+
+/**
+ * Result of converting several difficulties at once.
+ */
+@:dox(hide)
+typedef ConvertBatch =
+{
+	var results:Array<ConvertResult>;
+	var ?sharedChartJson:String;
+	var ?sharedEventsJson:String;
+	var ?sharedMetaJson:String;
+};
+
+/**
+ * One mix produced by folder conversion.
+ */
+@:dox(hide)
+typedef FolderConvertResult =
+{
+	var song:String;
+	var mix:String;
+	var batch:ConvertBatch;
+	var ?sourceChart:String;
 };

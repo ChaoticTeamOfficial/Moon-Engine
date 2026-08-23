@@ -546,7 +546,7 @@ class FreeplaySongSelector extends FlxGroup
 	{
 		final chart = preloadedCharts[songIdx];
 
-		Freeplay.instance.stars.difficulty = Chart.calculateDifficultyRating(chart.content.notes, chart.content.meta.bpm);
+		Freeplay.instance.stars.difficulty = chart.getDifficultyRating();
 
 		try
 		{

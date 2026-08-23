@@ -1,502 +1,353 @@
 package moon.toolkit;
 
-import haxe.ui.containers.*;
-import haxe.ui.components.*;
-import haxe.ui.core.Screen;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.FlxSubState;
 import haxe.io.Path;
+import haxe.ui.components.Button;
+import haxe.ui.components.CheckBox;
+import haxe.ui.components.DropDown;
+import haxe.ui.components.Label;
+import haxe.ui.components.TextArea;
+import haxe.ui.components.TextField;
+import haxe.ui.containers.HBox;
+import haxe.ui.containers.ScrollView;
+import haxe.ui.containers.VBox;
+import haxe.ui.core.Component;
+import haxe.ui.core.Screen;
+import haxe.ui.data.ArrayDataSource;
 import lime.ui.FileDialog;
+import lime.ui.FileDialogType;
 import moon.backend.data.Chart;
 import moon.backend.data.SongLibrary;
-import moon.backend.data.SrtParser;
-import moon.backend.Conductor;
+#if sys
+import sys.FileSystem;
+#end
 
 using StringTools;
 
 class ChartConverterSubState extends FlxSubState
 {
-	var root:HBox;
-	var sidebar:VBox;
-	var contentArea:VBox;
-	var formatDropdown:DropDown;
-	var diffDropdown:DropDown;
-	var chartPathField:TextField;
-	var metaPathField:TextField;
-	var srtPathField:TextField;
+	var dim:FlxSprite;
+	var root:VBox;
+	var formatDrop:DropDown;
+	var folderField:TextField;
+	var songField:TextField;
 	var mixField:TextField;
+	var selectAllBox:CheckBox;
+	var writeSharedBox:CheckBox;
+	var overwriteBox:CheckBox;
+	var applyNoteRulesBox:CheckBox;
 	var statusLabel:Label;
-	var noteEditorBox:VBox;
-	var noteRulesContainer:VBox;
-	var noteRules:Array<NoteRule> = [];
-	var _chartPath:String;
-	var _metaPath:String;
-	var _srtPath:String;
-	var _format:String = 'legacy';
+	var logArea:TextArea;
+	var diffChecks:Array<
+		{name:String, box:CheckBox}> = [];
 
-	override public function create()
+	override public function create():Void
 	{
 		super.create();
 		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 
-		var overlay = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, 0xCC000000);
-		overlay.scrollFactor.set();
-		add(overlay);
+		dim = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xCC000000);
+		dim.scrollFactor.set();
+		add(dim);
 
-		root = new HBox();
-		root.percentWidth = 100;
-		root.percentHeight = 100;
-		root.styleString = "padding: 0; spacing: 0;";
-		Screen.instance.addComponent(root);
+		root = new VBox();
+		root.width = 600;
+		root.padding = 16;
+		root.styleString = "background-color: #141417; border-radius: 8px;";
+		root.left = (FlxG.width - 600) / 2;
+		root.top = 20;
 
-		buildSidebar();
-		buildContent();
-	}
+		final title = new Label();
+		title.text = "Chart Converter";
+		title.styleString = "font-size: 20px; color: #F2F2F2; font-bold: true;";
+		root.addComponent(title);
 
-	function buildSidebar()
-	{
-		sidebar = new VBox();
-		sidebar.width = 220;
-		sidebar.percentHeight = 100;
-		sidebar.styleString = "background-color: #111116; padding: 16px; spacing: 12px;";
-		root.addComponent(sidebar);
+		root.addComponent(labeledField("Source Format", formatDrop = makeFormatDrop()));
+		// formatDrop.onChange = function(_) updateFormatHints();
 
-		var logo = new Label();
-		logo.text = "Moon Chart\nConverter";
-		logo.antialiasing = false;
-		logo.styleString = "font-size: 22px; color: #a78bfa; font-weight: bold;";
-		sidebar.addComponent(logo);
+		root.addComponent(pathRow("Song Folder", folderField = makeTextField("path/to/song-folder"), () -> pickFolder()));
 
-		addSidebarDivider();
+		root.addComponent(labeledField("Song Name", songField = makeTextField("auto from folder")));
+		root.addComponent(labeledField("Mix Override", mixField = makeTextField("bf (v-slice auto)")));
 
-		addSidebarSection("SOURCE");
+		final diffHeader = new Label();
+		diffHeader.text = "Difficulties to convert";
+		diffHeader.styleString = "color: #F2F2F2; margin-top: 8px;";
+		root.addComponent(diffHeader);
 
-		formatDropdown = addLabeledDropdown(sidebar, "Format", Chart.SUPPORTED_FORMATS);
-		formatDropdown.selectedIndex = 0;
-		_format = Chart.SUPPORTED_FORMATS[0];
-		formatDropdown.onChange = _ ->
+		selectAllBox = new CheckBox();
+		selectAllBox.text = "Select all registered difficulties";
+		selectAllBox.selected = true;
+		selectAllBox.onChange = function(_) for (d in diffChecks) d.box.selected = selectAllBox.selected;
+		root.addComponent(selectAllBox);
+
+		final diffScroll = new ScrollView();
+		diffScroll.width = 568;
+		diffScroll.height = 110;
+		diffScroll.percentContentWidth = 100;
+		final diffList = new VBox();
+		diffList.percentWidth = 100;
+
+		for (diff in SongLibrary.getDifficultyList())
 		{
-			if (formatDropdown.selectedItem != null) _format = formatDropdown.selectedItem.text;
-		};
+			final suffixHint = (diff.suffix ?? '') == '' ? " (shared)" : ' (${diff.suffix})';
+			final box = new CheckBox();
+			box.text = '${diff.displayName ?? diff.name}$suffixHint';
+			box.selected = true;
+			diffChecks.push({
+				name: diff.name,
+				box: box
+			});
+			diffList.addComponent(box);
+		}
 
-		var diffNames:Array<String> = [for (d in SongLibrary.getDifficultyList()) d.name];
-		if (diffNames.length == 0) diffNames = ["easy", "normal", "hard", "erect"];
+		diffScroll.addComponent(diffList);
+		root.addComponent(diffScroll);
 
-		diffNames.push("nightmare");
+		writeSharedBox = new CheckBox();
+		writeSharedBox.text = "Write shared chart.json for non-suffixed";
+		writeSharedBox.selected = true;
+		root.addComponent(writeSharedBox);
 
-		diffDropdown = addLabeledDropdown(sidebar, "Difficulty", diffNames);
-		var hardIdx = diffNames.indexOf("hard");
-		diffDropdown.selectedIndex = hardIdx >= 0 ? hardIdx : 0;
+		overwriteBox = new CheckBox();
+		overwriteBox.text = "Overwrite existing files";
+		overwriteBox.selected = true;
+		root.addComponent(overwriteBox);
 
-		mixField = addLabeledField(sidebar, "Mix name", "bf");
+		applyNoteRulesBox = new CheckBox();
+		applyNoteRulesBox.text = "Apply note type rules";
+		applyNoteRulesBox.selected = true;
+		root.addComponent(applyNoteRulesBox);
 
-		addSidebarDivider();
-		addSidebarSection("FILES");
+		final buttons = new HBox();
+		buttons.styleString = "margin-top: 8px;";
 
-		chartPathField = addBrowseRow(sidebar, "Chart JSON", () -> browseFile("json", "Select Chart JSON", p ->
-		{
-			_chartPath = p;
-			chartPathField.text = Path.withoutDirectory(p);
+		final convertBtn = new Button();
+		convertBtn.text = "Convert & Save";
+		convertBtn.onClick = function(_) runConvert();
+		buttons.addComponent(convertBtn);
 
-			final companion = Chart.findCompanionFile(p, "meta");
-			if (companion != null)
-			{
-				_metaPath = companion;
-				metaPathField.text = Path.withoutDirectory(companion);
-			}
-		}));
+		final closeBtn = new Button();
+		closeBtn.text = "Close";
+		closeBtn.onClick = function(_) close();
+		buttons.addComponent(closeBtn);
 
-		metaPathField = addBrowseRow(sidebar, "Metadata (opt.)", () -> browseFile("json", "Select Metadata JSON", p ->
-		{
-			_metaPath = p;
-			metaPathField.text = Path.withoutDirectory(p);
-		}));
-
-		srtPathField = addBrowseRow(sidebar, "Subtitles (opt.)", () -> browseFile("srt", "Select SRT File", p ->
-		{
-			_srtPath = p;
-			srtPathField.text = Path.withoutDirectory(p);
-		}));
-
-		addSidebarDivider();
-
-		var convertBtn = new Button();
-		convertBtn.text = "> CONVERT";
-		convertBtn.percentWidth = 100;
-		convertBtn.styleString = "background-color: #7c3aed; color: #fff; font-size: 15px; font-weight: bold; border-radius: 8px; padding: 10px;";
-		convertBtn.onClick = _ -> doConversion();
-		sidebar.addComponent(convertBtn);
+		root.addComponent(buttons);
 
 		statusLabel = new Label();
-		statusLabel.antialiasing = false;
-		statusLabel.percentWidth = 100;
-		statusLabel.wordWrap = true;
-		statusLabel.styleString = "font-size: 11px; color: #94a3b8;";
-		sidebar.addComponent(statusLabel);
+		statusLabel.text = "Ready.";
+		statusLabel.styleString = "color: #8A8A8F; margin-top: 8px;";
+		root.addComponent(statusLabel);
+
+		logArea = new TextArea();
+		logArea.width = 568;
+		logArea.height = 70;
+		logArea.disabled = true;
+		logArea.styleString = "margin-top: 4px;";
+		root.addComponent(logArea);
+
+		// updateFormatHints();
+		Screen.instance.addComponent(root);
 	}
 
-	function buildContent()
+	function makeFormatDrop():DropDown
 	{
-		contentArea = new VBox();
-		contentArea.percentWidth = 100;
-		contentArea.percentHeight = 100;
-		contentArea.styleString = "background-color: #0f0f14; padding: 24px; spacing: 20px;";
-		root.addComponent(contentArea);
-
-		var header = new Label();
-		header.antialiasing = false;
-		header.text = "Note Post-Processing Rules";
-		header.styleString = "font-size: 18px; color: #e2e8f0; font-weight: bold;";
-		contentArea.addComponent(header);
-
-		var subHeader = new Label();
-		subHeader.antialiasing = false;
-		subHeader.text = "Rules are applied in order after conversion. You can retype, relane, or filter notes.";
-		subHeader.styleString = "font-size: 12px; color: #64748b;";
-		contentArea.addComponent(subHeader);
-
-		var addRuleRow = new HBox();
-		addRuleRow.styleString = "spacing: 8px;";
-		contentArea.addComponent(addRuleRow);
-
-		for (ruleType in ["Retype Notes", "Relane Notes", "Remove Note Type", "Remove Lane"])
-		{
-			var btn = new Button();
-			btn.text = '+ $ruleType';
-			btn.styleString = "background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 6px; font-size: 11px;";
-			btn.onClick = _ -> addRule(ruleType);
-			addRuleRow.addComponent(btn);
-		}
-
-		var divider = new MoonSprite().makeGraphic(1, 1, 0xFF334155);
-		var sep = new Label();
-		sep.antialiasing = false;
-		sep.percentWidth = 100;
-		sep.styleString = "border-top: 1px solid #334155; margin-top: 4px; margin-bottom: 4px;";
-		contentArea.addComponent(sep);
-
-		noteRulesContainer = new VBox();
-		noteRulesContainer.percentWidth = 100;
-		noteRulesContainer.styleString = "spacing: 8px;";
-		contentArea.addComponent(noteRulesContainer);
-
-		buildPreviewSection();
+		final drop = new DropDown();
+		drop.width = 360;
+		drop.dataSource = ArrayDataSource.fromArray(Chart.SUPPORTED_FORMATS.copy());
+		final idx = Chart.SUPPORTED_FORMATS.indexOf('v-slice');
+		drop.selectedIndex = idx >= 0 ? idx : 0;
+		return drop;
 	}
 
-	function buildPreviewSection()
+	function makeTextField(placeholder:String):TextField
 	{
-		var previewHeader = new Label();
-		previewHeader.text = "Conversion Preview";
-		previewHeader.antialiasing = false;
-		previewHeader.styleString = "font-size: 14px; color: #94a3b8; margin-top: 16px;";
-		contentArea.addComponent(previewHeader);
-
-		var previewBox = new VBox();
-		previewBox.percentWidth = 100;
-		previewBox.styleString = "background-color: #1e293b; border-radius: 8px; padding: 16px; spacing: 6px;";
-		contentArea.addComponent(previewBox);
-
-		for (item in [
-			"Output path: assets/songs/{name}/{mix}/chart-{diff}.json",
-			"Metadata path: assets/songs/{name}/{mix}/meta{suffix}.json",
-			"Events path: assets/songs/{name}/{mix}/events{suffix}.json",
-			"SRT subtitles -> Show Subtitle events (if provided)",
-			"Note rules are applied after base conversion!"
-		])
-		{
-			var lbl = new Label();
-			lbl.text = "* " + item;
-			lbl.styleString = "font-size: 11px; color: #475569;";
-			lbl.antialiasing = false;
-			previewBox.addComponent(lbl);
-		}
+		final field = new TextField();
+		field.width = 320;
+		field.placeholder = placeholder;
+		return field;
 	}
 
-	function addRule(type:String)
+	function labeledField(labelText:String, field:Component):HBox
 	{
-		var rule = new NoteRule(type, () ->
+		final row = new HBox();
+		row.percentWidth = 100;
+		row.styleString = "margin-top: 4px;";
+
+		final label = new Label();
+		label.text = labelText;
+		label.width = 130;
+		label.styleString = "color: #F2F2F2; vertical-align: center;";
+		row.addComponent(label);
+		row.addComponent(field);
+		return row;
+	}
+
+	function pathRow(labelText:String, field:TextField, onBrowse:Void->Void):HBox
+	{
+		final row = labeledField(labelText, field);
+		final browse = new Button();
+		browse.text = "Browse…";
+		browse.onClick = function(_) onBrowse();
+		row.addComponent(browse);
+		return row;
+	}
+
+	function pickFolder():Void
+	{
+		#if sys
+		final dialog = new FileDialog();
+		dialog.onSelect.add(function(path:String)
 		{
-			noteRules.remove(noteRules[noteRules.length - 1]);
+			if (path == null || path == '') return;
+			folderField.text = path;
+			if ((songField.text ?? '').trim() == '' || songField.placeholder == songField.text) songField.text = Path.withoutDirectory(path);
+			setStatus('Folder: $path');
 		});
-		noteRules.push(rule);
-		noteRulesContainer.addComponent(rule.root);
+		dialog.onCancel.add(function() setStatus("Folder pick cancelled."));
+		if (!dialog.browse(FileDialogType.OPEN_DIRECTORY, null, null, "Select song folder")) setStatus("Folder dialog is not supported on this platform.");
+		#else
+		setStatus("Folder picking is only available on desktop.");
+		#end
 	}
 
-	override public function update(elapsed)
+	function selectedDifficulties():Array<String>
 	{
-		super.update(elapsed);
-
-		if (MoonInput.justPressed(BACK)) close();
+		final out:Array<String> = [];
+		for (d in diffChecks) if (d.box.selected) out.push(d.name);
+		return out;
 	}
 
-	function doConversion()
+	function runConvert():Void
 	{
-		if (_chartPath == null)
-		{
-			setStatus("Please select a chart file first.", "#f59e0b");
-			return;
-		}
-		if (_format == null)
-		{
-			setStatus("Please select a format.", "#f59e0b");
-			return;
-		}
+		#if !sys
+		setStatus("Conversion is only available on desktop builds.");
+		return;
+		#end
 
-		setStatus("Converting...", "#94a3b8");
+		final folder = (folderField.text ?? '').trim();
+		final diffs = selectedDifficulties();
+		final format = Chart.SUPPORTED_FORMATS[formatDrop.selectedIndex];
+		var song = (songField.text ?? '').trim();
+		final mixOverride = (mixField.text ?? '').trim();
+
+		if (folder == '' || !FileSystem.exists(folder))
+		{
+			setStatus("Invalid song folder.");
+			return;
+		}
+		if (diffs.length == 0)
+		{
+			setStatus("Select at least one difficulty.");
+			return;
+		}
 
 		try
 		{
-			final diff = diffDropdown.selectedItem?.text ?? 'hard';
-			final mix = mixField.text.trim().length > 0 ? mixField.text.trim() : 'bf';
-			final songName = Path.withoutDirectory(Path.directory(_chartPath));
-			final suffix = Chart.getDifficultySuffix(diff);
+			setStatus('Converting ($format)…');
 
-			final result = Chart.convert(_format, _chartPath, diff, _metaPath);
-
-			var chartData:Dynamic = haxe.Json.parse(result.chartJson);
-			var eventsData:Array<Dynamic> = haxe.Json.parse(result.eventsJson);
-			var metaData:Dynamic = result.metaJson != null ? haxe.Json.parse(result.metaJson) : null;
-
-			if (chartData.notes != null)
+			if (format == 'v-slice' || format == 'codename')
 			{
-				var notes:Array<Dynamic> = chartData.notes;
-				for (rule in noteRules) notes = rule.apply(notes);
-				chartData.notes = notes;
-			}
+				if (!FileSystem.isDirectory(folder))
+				{
+					setStatus("V-Slice / Codename need a folder, not a single file.");
+					return;
+				}
 
-			if (_srtPath != null)
+				final entries = Chart.convertFolder(format, folder, diffs, applyNoteRulesBox.selected);
+				if (entries == null || entries.length == 0)
+				{
+					setStatus("Nothing converted.");
+					return;
+				}
+
+				final lines:Array<String> = [];
+				for (entry in entries)
+				{
+					final outSong = song != '' && song != 'auto from folder' ? song : entry.song;
+					final outMix = (mixOverride != '' && mixOverride != 'bf (v-slice auto)') ? mixOverride : entry.mix;
+
+					if (!overwriteBox.selected && Paths.exists(Chart.chartPath(outSong, outMix, entry.batch.results[0].difficulty) + '.json'))
+					{
+						setStatus('Refusing to overwrite: $outSong/$outMix');
+						return;
+					}
+
+					if (!writeSharedBox.selected)
+					{
+						for (r in entry.batch.results)
+						{
+							final dir = 'songs/$outSong/$outMix';
+							final rootPath = Paths.getVanillaPath('');
+							Paths.saveFileContentTo(rootPath, '$dir/chart-${r.difficulty}.json', r.chartJson);
+							Paths.saveFileContentTo(rootPath, Chart.eventsPath(outSong, outMix, r.difficulty) + '.json', r.eventsJson);
+							if (r.metaJson != null) Paths.saveFileContentTo(rootPath, Chart.metaPath(outSong, outMix, r.difficulty) + '.json', r.metaJson);
+						}
+					}
+					else
+						Chart.writeConvertBatch(entry.batch, outSong, outMix);
+
+					lines.push('$outSong/$outMix → ${entry.batch.results.length} diff(s)');
+				}
+
+				logArea.text = lines.join("\n");
+				setStatus("Done.");
+			}
+			else
 			{
-				#if sys
-				try
+				if (song == '' || song == 'auto from folder') song = Path.withoutExtension(Path.withoutDirectory(folder));
+				final mix = (mixOverride != '' && mixOverride != 'bf (v-slice auto)') ? mixOverride : 'bf';
+				final batch = Chart.convertMany(format, folder, diffs, null, applyNoteRulesBox.selected);
+				if (batch == null || batch.results.length == 0)
 				{
-					final srtContent = sys.io.File.getContent(_srtPath);
-					final bpm:Float = metaData?.bpm ?? 120.0;
-					final timeSig:Array<Dynamic> = metaData?.timeSignature ?? [4, 4];
-					final tempConductor = new Conductor(bpm, timeSig[0], timeSig[1]);
-					final subtitleEvents = SrtParser.parse(srtContent, tempConductor);
-					for (e in subtitleEvents) eventsData.push(e);
-					eventsData.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+					setStatus("Conversion returned no results.");
+					return;
 				}
-				catch (e:Dynamic)
-				{
-					setStatus('SRT parse failed: $e', "#f59e0b");
-				}
-				#end
+				Chart.writeConvertBatch(batch, song, mix);
+				logArea.text = 'Output: songs/$song/$mix/';
+				setStatus("Done.");
 			}
-
-			final chartJson = haxe.Json.stringify(chartData, null, "\t");
-			final eventsJson = haxe.Json.stringify(eventsData, null, "\t");
-			final metaJson = metaData != null ? haxe.Json.stringify(metaData, null, "\t") : null;
-
-			Paths.saveFileContent('songs/$songName/$mix/chart-$diff.json', chartJson);
-			Paths.saveFileContent('songs/$songName/$mix/events$suffix.json', eventsJson);
-
-			if (metaJson != null) Paths.saveFileContent('songs/$songName/$mix/meta$suffix.json', metaJson);
-
-			setStatus('Done! Saved to assets/songs/$songName/$mix/', "#4ade80");
 		}
 		catch (e:Dynamic)
 		{
-			setStatus('Error: $e', "#f87171");
+			setStatus('Error: $e');
+			logArea.text = Std.string(e);
+			trace('[CHART-CONVERTER] $e', "ERROR");
 		}
 	}
 
-	function setStatus(msg:String, color:String)
+	function setStatus(msg:String):Void
 	{
 		statusLabel.text = msg;
-		statusLabel.styleString = 'font-size: 11px; color: $color;';
+		trace('[CHART-CONVERTER] $msg', "DEBUG");
 	}
 
-	function addSidebarSection(title:String)
+	override public function update(elapsed:Float):Void
 	{
-		var lbl = new Label();
-		lbl.text = title;
-		lbl.antialiasing = false;
-		lbl.styleString = "font-size: 10px; color: #475569; font-weight: bold; letter-spacing: 2px;";
-		sidebar.addComponent(lbl);
+		super.update(elapsed);
+		if (FlxG.keys.justPressed.ESCAPE) close();
 	}
 
-	function addSidebarDivider()
+	override public function close():Void
 	{
-		var sep = new Label();
-		sep.percentWidth = 100;
-		sep.antialiasing = false;
-		sep.styleString = "border-top: 1px solid #1e293b; margin-top: 2px; margin-bottom: 2px;";
-		sidebar.addComponent(sep);
-	}
-
-	function addLabeledDropdown(parent:VBox, label:String, options:Array<String>):DropDown
-	{
-		var lbl = new Label();
-		lbl.text = label;
-		lbl.antialiasing = false;
-		lbl.styleString = "font-size: 11px; color: #64748b;";
-		parent.addComponent(lbl);
-
-		var dd = new DropDown();
-		dd.percentWidth = 100;
-		for (o in options) dd.dataSource.add({
-			text: o
-		});
-		parent.addComponent(dd);
-		return dd;
-	}
-
-	function addLabeledField(parent:VBox, label:String, placeholder:String = ""):TextField
-	{
-		var lbl = new Label();
-		lbl.text = label;
-		lbl.antialiasing = false;
-		lbl.styleString = "font-size: 11px; color: #64748b;";
-		parent.addComponent(lbl);
-
-		var tf = new TextField();
-		tf.percentWidth = 100;
-		tf.text = placeholder;
-		parent.addComponent(tf);
-		return tf;
-	}
-
-	function addBrowseRow(parent:VBox, label:String, onBrowse:Void->Void):TextField
-	{
-		var lbl = new Label();
-		lbl.text = label;
-		lbl.antialiasing = false;
-		lbl.styleString = "font-size: 11px; color: #64748b;";
-		parent.addComponent(lbl);
-
-		var row = new HBox();
-		row.percentWidth = 100;
-		row.styleString = "spacing: 4px;";
-		parent.addComponent(row);
-
-		var tf = new TextField();
-		tf.percentWidth = 100;
-		tf.placeholder = "None selected";
-		row.addComponent(tf);
-
-		var btn = new Button();
-		btn.text = "…";
-		btn.width = 28;
-		btn.styleString = "background-color: #334155; color: #94a3b8; border-radius: 4px;";
-		btn.onClick = _ -> onBrowse();
-		row.addComponent(btn);
-
-		return tf;
-	}
-
-	function browseFile(ext:String, title:String, onSelect:String->Void)
-	{
-		#if sys
-		var dlg = new FileDialog();
-		dlg.onSelect.add(onSelect);
-		dlg.browse(OPEN, ext, Sys.getCwd(), title);
-		#end
-	}
-}
-
-class NoteRule
-{
-	public var root:HBox;
-
-	var type:String;
-	var fromField:TextField;
-	var toField:TextField;
-
-	public function new(type:String, onRemove:Void->Void)
-	{
-		this.type = type;
-
-		root = new HBox();
-		root.percentWidth = 100;
-		root.styleString = "background-color: #1e293b; border-radius: 6px; padding: 8px; spacing: 8px;";
-
-		var typeLbl = new Label();
-		typeLbl.text = type;
-		typeLbl.antialiasing = false;
-		typeLbl.width = 140;
-		typeLbl.styleString = "font-size: 11px; color: #a78bfa; font-weight: bold;";
-		root.addComponent(typeLbl);
-
-		switch (type)
+		if (root != null)
 		{
-			case "Retype Notes":
-				addField("From type", "default");
-				var arrow = new Label();
-				arrow.text = "->";
-				arrow.styleString = "color: #475569;";
-				arrow.antialiasing = false;
-				root.addComponent(arrow);
-				addField("To type", "alt");
-
-			case "Relane Notes":
-				addField("From lane", "opponent");
-				var arrow = new Label();
-				arrow.text = "->";
-				arrow.styleString = "color: #475569;";
-				arrow.antialiasing = false;
-				root.addComponent(arrow);
-				addField("To lane", "p1");
-
-			case "Remove Note Type":
-				addField("Type to remove", "default");
-
-			case "Remove Lane":
-				addField("Lane to remove", "opponent");
+			Screen.instance.removeComponent(root);
+			root = null;
 		}
-
-		var removeBtn = new Button();
-		removeBtn.text = "X";
-		removeBtn.width = 24;
-		removeBtn.styleString = "background-color: #450a0a; color: #f87171; border-radius: 4px; font-size: 11px;";
-		removeBtn.onClick = _ ->
-		{
-			root.parentComponent?.removeComponent(root);
-			onRemove();
-		};
-		root.addComponent(removeBtn);
+		FlxG.mouse.visible = false;
+		super.close();
 	}
 
-	function addField(placeholder:String, defaultVal:String):TextField
+	override public function destroy():Void
 	{
-		var tf = new TextField();
-		tf.width = 100;
-		tf.text = defaultVal;
-		tf.placeholder = placeholder;
-		if (fromField == null) fromField = tf;
-		else
-			toField = tf;
-		root.addComponent(tf);
-		return tf;
-	}
-
-	public function apply(notes:Array<Dynamic>):Array<Dynamic>
-	{
-		final from = fromField?.text ?? '';
-		final to = toField?.text ?? '';
-
-		return switch (type)
+		if (root != null)
 		{
-			case "Retype Notes":
-				[for (n in notes)
-				{
-					if (n.type == from) n.type = to;
-					n;
-				}];
-
-			case "Relane Notes":
-				[for (n in notes)
-				{
-					if (n.lane == from) n.lane = to;
-					n;
-				}];
-
-			case "Remove Note Type":
-				notes.filter(n -> n.type != from);
-
-			case "Remove Lane":
-				notes.filter(n -> n.lane != from);
-
-			default:
-				notes;
-		};
+			Screen.instance.removeComponent(root);
+			root = null;
+		}
+		super.destroy();
 	}
 }

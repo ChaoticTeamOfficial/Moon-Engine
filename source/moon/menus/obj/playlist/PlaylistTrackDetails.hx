@@ -31,7 +31,6 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 	public var separator:MoonSprite;
 	public var infoText:FlxText;
 	public var infoValues:FlxText;
-
 	public var bpm:Float = 0;
 	public var duration:Float = 0;
 	public var difficulty:Int = 0;
@@ -39,7 +38,6 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 
 	var nullChart:Bool = false;
 	var _prevMusic:FlxSound;
-
 	var curAlb:Null<String>;
 	var diffLerp:Float = 0;
 	var durLerp:Float = 0;
@@ -80,7 +78,7 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 		songArtist.setFormat(Paths.font('phantomuff/full.ttf'), 12, FlxColor.WHITE);
 		songArtist.y = trackName.y + trackName.height + 2;
 		add(songArtist);
-		
+
 		bestRank = new FreeplayRank(0);
 		bestRank.updateHitbox();
 		bestRank.y = trackName.y + trackName.height - 20;
@@ -120,17 +118,20 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 
 		var songBpm:Float = chart.content.meta.bpm;
 		var scroll:Float = chart.content.meta.scrollSpd;
-		var difficultyAmount:Int = Chart.calculateDifficultyRating(chart.content.notes, songBpm);
+		var difficultyAmount:Int = chart.getDifficultyRating();
 
 		SongPreview.loadAndPlay(chart);
 
-		var savedData:SongScoreData = SongData.retrieveData(
-			{
-				song: chart.song,
-				difficulty: chart.difficulty,
-				mix: chart.mix
-			});
-		savedData ??= {score: 0, misses: 0,	accuracy: 0};
+		var savedData:SongScoreData = SongData.retrieveData({
+			song: chart.song,
+			difficulty: chart.difficulty,
+			mix: chart.mix
+		});
+		savedData ??= {
+			score: 0,
+			misses: 0,
+			accuracy: 0
+		};
 		bestRank.setRank(Timings.getRank(savedData.accuracy).rank);
 		bestRank.visible = savedData.accuracy > 0;
 
@@ -157,7 +158,13 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 			album.alpha = album.angle = 0;
 			album.offset.y = delta == 1 ? 50 : -50;
 			FlxTween.cancelTweensOf(album);
-			FlxTween.tween(album, {"offset.y": 0, angle: FlxG.random.int(-8, 8), alpha: 1}, 0.35, {ease: FlxEase.circOut});
+			FlxTween.tween(album, {
+				"offset.y": 0,
+				angle: FlxG.random.int(-8, 8),
+				alpha: 1
+			}, 0.35, {
+				ease: FlxEase.circOut
+			});
 
 			if (!albumName.contains('placeholder'))
 			{
@@ -191,7 +198,7 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 	{
 		super.update(elapsed);
 
-		if(nullChart) 
+		if (nullChart)
 		{
 			trackName.text = '------------';
 			songArtist.text = 'By: ---------';
@@ -200,7 +207,7 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 			return;
 		}
 
-		if (_prevMusic != FlxG.sound.music && FlxG.sound.music?.length != 0) 
+		if (_prevMusic != FlxG.sound.music && FlxG.sound.music?.length != 0)
 		{
 			_prevMusic = FlxG.sound.music;
 			duration = FlxG.sound.music?.length / 1000;

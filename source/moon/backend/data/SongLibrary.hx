@@ -8,7 +8,7 @@ using StringTools;
 /**
  * The SongLibrary class basically handles the entire game Song List!
  * It separates weeks onto categories.
-**/
+ */
 class SongLibrary
 {
 	@:dox(hide)
@@ -83,35 +83,46 @@ class SongLibrary
 		allSongs = [];
 		categoryOrder = ['all'];
 
-		// we scan for all available songs.
+		if (!songsByWeek.exists('all')) songsByWeek.set('all', []);
+
 		for (songFolder in Paths.readDir('songs/'))
 		{
 			for (mix in Paths.readDir('songs/$songFolder'))
 			{
-				// skip non-mix directories (e.g. shared assets)
 				if (mix == 'events') continue;
 
-				for (chartFile in Paths.readDir('songs/$songFolder/$mix/', ['.json'], true))
+				final dir = 'songs/$songFolder/$mix/';
+				final registered = new Map<String, Bool>();
+
+				// Shared multi-diff chart.json.
+				if (Paths.exists(dir + 'chart.json'))
 				{
-					if (chartFile.startsWith('chart-'))
+					final shared:Dynamic = Paths.JSON('$dir/chart');
+					if (shared != null && shared.notes != null && Type.typeof(shared.notes) == TObject && !Std.isOfType(shared.notes, Array))
 					{
-						final entry:SongBase = {
-							song: songFolder,
-							mix: mix,
-							difficulty: chartFile.substr(6)
-						};
-
-						allSongs.push(entry);
-
-						if (!songsByWeek.exists('all')) songsByWeek.set('all', []);
-
-						songsByWeek.get('all').push(entry);
+						for (diffName in Reflect.fields(shared.notes))
+						{
+							pushSongEntry(songFolder, mix, diffName, registered);
+						}
 					}
+					else
+					{
+						// Legacy flat chart.json as it register every empty-suffix difficulty.
+						for (diff in allDifficulties)
+						{
+							if ((diff.suffix ?? '') == '') pushSongEntry(songFolder, mix, diff.name, registered);
+						}
+					}
+				}
+
+				// Per-difficulty chart-{name}.json files.
+				for (chartFile in Paths.readDir(dir, ['.json'], true))
+				{
+					if (chartFile.startsWith('chart-')) pushSongEntry(songFolder, mix, chartFile.substr(6), registered);
 				}
 			}
 		}
 
-		// now we load actual week files from data/weeks/
 		for (weekFile in Paths.readDir('data/weeks/', ['.json'], true))
 		{
 			final wd:Week = Week.get(weekFile);
@@ -133,6 +144,21 @@ class SongLibrary
 		}
 	}
 
+	private function pushSongEntry(song:String, mix:String, difficulty:String, registered:Map<String, Bool>):Void
+	{
+		final key = '$song/$mix/$difficulty';
+		if (registered.exists(key)) return;
+		registered.set(key, true);
+
+		final entry:SongBase = {
+			song: song,
+			mix: mix,
+			difficulty: difficulty
+		};
+		allSongs.push(entry);
+		songsByWeek.get('all').push(entry);
+	}
+
 	/**
 	 * Returns all available difficulties for a song.
 	 * @param song The song's name.
@@ -141,10 +167,22 @@ class SongLibrary
 	function availableDifficulties(song:String, mix:String):Array<Difficulty>
 	{
 		final available:Array<Difficulty> = [];
+		final shared:Dynamic = Paths.exists('songs/$song/$mix/chart.json') ? Paths.JSON('songs/$song/$mix/chart') : null;
 
 		for (diff in allDifficulties)
 		{
-			if (Paths.exists('songs/$song/$mix/chart-${diff.name}.json')) available.push(diff);
+			if (Paths.exists('songs/$song/$mix/chart-${diff.name}.json'))
+			{
+				available.push(diff);
+				continue;
+			}
+
+			// Shared multi-diff chart
+			if (shared != null && shared.notes != null)
+			{
+				if (Std.isOfType(shared.notes, Array) && (diff.suffix ?? '') == '') available.push(diff);
+				else if (Type.typeof(shared.notes) == TObject && Reflect.hasField(shared.notes, diff.name)) available.push(diff);
+			}
 		}
 
 		return available;
