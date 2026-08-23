@@ -188,9 +188,6 @@ class LevelEditor extends FlxState
 		DiscordRPC.updatePresence(EDITOR, '', '', true);
 	}
 
-	// TODO: take a look on event and note deletion, it seems to get stuck sometimes?
-	// I suck at this lolll
-
 	override public function create()
 	{
 		// --- SETUP BACKEND STUFF --- //
@@ -1153,19 +1150,7 @@ class LevelEditor extends FlxState
 			}
 			else
 			{
-				var hitSpr:EventSpr = null;
-				for (member in eventsGroup.members)
-				{
-					if (Std.isOfType(member, EventSpr) && cast(member, EventSpr).category == curType)
-					{
-						final spr:EventSpr = cast member;
-						if (FlxG.mouse.overlaps(spr))
-						{
-							hitSpr = spr;
-							break;
-						}
-					}
-				}
+				final hitSpr = getEventSprAtCursor(unsnappedTime, laneNum);
 
 				if (hitSpr != null)
 				{
@@ -1196,13 +1181,12 @@ class LevelEditor extends FlxState
 		}
 
 		// Delete stuff!!!
-		// or remove, eh, whatever!
-		if (!uiBusy && allowEditing && FlxG.mouse.pressedRight && draggingNote == null)
+		if (!uiBusy && allowEditing && draggingNote == null)
 		{
-			deselectAll();
-
-			if (curType == NOTES)
+			if (curType == NOTES && FlxG.mouse.pressedRight)
 			{
+				deselectAll();
+
 				final hit = getNoteAtCursor(snappedTime, laneNum);
 				if (hit != null)
 				{
@@ -1226,30 +1210,15 @@ class LevelEditor extends FlxState
 					if (editSelectedNotes.remove(hit)) refreshEditTarget();
 				}
 			}
-			else
+			else if (curType != NOTES && FlxG.mouse.justPressedRight)
 			{
-				var toRemoveSpr:EventSpr = null;
+				deselectAll();
 
-				for (member in eventsGroup.members)
-				{
-					if (Std.isOfType(member, EventSpr) && cast(member, EventSpr).category == curType)
-					{
-						final spr = cast(member, EventSpr);
-						if (FlxG.mouse.overlaps(spr))
-						{
-							toRemoveSpr = spr;
-							break;
-						}
-					}
-				}
-
+				final toRemoveSpr = getEventSprAtCursor(unsnappedTime, laneNum);
 				if (toRemoveSpr != null)
 				{
-					final evTime = yToTime(toRemoveSpr.y - gridGroup.y);
-
 					var deletedEvStruct:EventStruct = null;
-
-					for (e in chart.events) if (e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50)
+					for (e in chart.events) if (e.tag == toRemoveSpr.event && Math.abs(e.time - toRemoveSpr.time) < 0.01)
 					{
 						deletedEvStruct = e;
 						break;
@@ -1271,11 +1240,11 @@ class LevelEditor extends FlxState
 						}
 						changes.sort((a, b) -> Std.int(a.time - b.time));
 						recalcChangeIndex();
-					}
 
-					chart.events = chart.events.filter(e -> !(e.tag == toRemoveSpr.event && Math.abs(e.time - evTime) < 50));
-					sfx('delete', false, true);
-					if (editSelectedEvents.remove(toRemoveSpr)) refreshEditTarget();
+						chart.events = chart.events.filter(e -> !(e.tag == toRemoveSpr.event && Math.abs(e.time - toRemoveSpr.time) < 0.01));
+						sfx('delete', false, true);
+						if (editSelectedEvents.remove(toRemoveSpr)) refreshEditTarget();
+					}
 				}
 			}
 		}
@@ -1327,6 +1296,8 @@ class LevelEditor extends FlxState
 		for (cat => sht in loadedEvents) for (evt in sht) if (evt.name == ev.tag) category = cat;
 
 		var spr = new EventSpr(ev.tag, category);
+		spr.time = ev.time;
+		spr.lane = ev.lane;
 		spr.setGraphicSize(LANE_WIDTH, LANE_HEIGHT);
 		spr.updateHitbox();
 		spr.x = ev.lane * LANE_WIDTH;
@@ -1416,7 +1387,7 @@ class LevelEditor extends FlxState
 			if (Std.isOfType(member, EventSpr))
 			{
 				final spr:EventSpr = cast member;
-				if (spr.event == e.tag && Math.abs(yToTime(spr.y - gridGroup.y) - e.time) < 50)
+				if (spr.event == e.tag && Math.abs(spr.time - e.time) < 0.01)
 				{
 					toRemoveSpr = spr;
 					break;
@@ -1657,6 +1628,46 @@ class LevelEditor extends FlxState
 		return null;
 	}
 
+	/**
+	 * Picks the event under the cursor for deletion/selection.
+	 * Considers both the event head and its hold body. Prefers the same lane,
+	 * then closest time; later group members win ties (drawn on top).
+	 */
+	private function getEventSprAtCursor(mouseTime:Float, mouseLane:Int):EventSpr
+	{
+		var best:EventSpr = null;
+		var bestScore:Float = Math.POSITIVE_INFINITY;
+
+		for (member in eventsGroup.members)
+		{
+			var spr:EventSpr = null;
+			var hit = false;
+
+			if (Std.isOfType(member, EventSpr))
+			{
+				spr = cast member;
+				hit = spr.category == curType && spr.visible && FlxG.mouse.overlaps(spr);
+			}
+			else if (Std.isOfType(member, EventHold))
+			{
+				final hold:EventHold = cast member;
+				spr = hold.parent;
+				hit = spr != null && spr.category == curType && spr.visible && FlxG.mouse.overlaps(hold);
+			}
+
+			if (!hit || spr == null) continue;
+
+			final score = (spr.lane == mouseLane ? 0.0 : 1e6) + Math.abs(spr.time - mouseTime);
+			if (score <= bestScore)
+			{
+				bestScore = score;
+				best = spr;
+			}
+		}
+
+		return best;
+	}
+
 	private function deselectAll():Void
 	{
 		for (n in selectedNotes) if (n != null) n.brightness = 0;
@@ -1728,9 +1739,8 @@ class LevelEditor extends FlxState
 			editNoteStruct = null;
 			_lastEditSnapshot = null;
 
-			final evTime = yToTime(spr.y - gridGroup.y);
 			editEventStruct = null;
-			for (e in chart.events) if (e.tag == spr.event && Math.abs(e.time - evTime) < 50)
+			for (e in chart.events) if (e.tag == spr.event && Math.abs(e.time - spr.time) < 0.01)
 			{
 				editEventStruct = e;
 				break;

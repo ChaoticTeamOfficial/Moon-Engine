@@ -1,253 +1,295 @@
 [
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 0
-	},
-	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "opponent",
-			"y": 0,
-			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 5333.33333333333
-	},
-	{
-		"values": {
-			"ease": "quintInOut",
-			"duration": 12,
-			"zoom": 1.05,
-			"mode": "direct"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
+		"lane": 1,
+		"values": {
+			"duration": 12,
+			"ease": "quintInOut",
+			"mode": "direct",
+			"zoom": 1.05
+		},
 		"time": 10083.3333333333
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 10666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 10666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 13333
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 13333.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 16000
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 16000,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 18666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 18666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 21666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 21666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 27000
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 27000,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"runOnLoad": false,
+		"lane": 2,
+		"time": 31916.6666666667,
 		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 32166
+			"rate": 2,
+			"intensity": 1.015
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 42833
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 32166.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 53333
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 42833.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"runOnLoad": false,
+		"lane": 2,
+		"time": 47916.6666666667,
 		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 56000
+			"rate": 1,
+			"intensity": 1.015
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"runOnLoad": false,
+		"lane": 2,
+		"time": 53250,
 		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 58666
+			"rate": 4,
+			"intensity": 1.015
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 61333
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 53333.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 64333
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 56000,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 69666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 58666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 74666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 61333.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 77333
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 64333.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 80000
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 69666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expo"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 82666
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 74666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 77333.3333333333,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 80000,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "opponent",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"runOnLoad": false,
+		"lane": 0,
+		"time": 82666.6666666667,
+		"values": {
+			"x": 0,
+			"duration": 26,
+			"y": 0,
+			"character": "player",
+			"rotation": 0,
+			"ease": "expoOut"
+		}
 	}
 ]
