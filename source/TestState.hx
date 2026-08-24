@@ -6,8 +6,6 @@ using StringTools;
 
 class TestState extends FlxState
 {
-	static inline final SIDEBAR_WIDTH:Float = 64;
-
 	override public function create():Void
 	{
 		super.create();
