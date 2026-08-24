@@ -248,19 +248,16 @@ class Story extends FlxState
 		{
 			if (!curDifficultySelector.ready) return;
 
-			var weekSonglist = SongLibrary.instance.weekSonglist(currentLevelId);
-			var difficultyId:String = curDifficultySelector.currentDifficulty ?? 'hard';
+			final difficultyId = curDifficultySelector.currentDifficulty ?? 'hard';
+			final source = SongLibrary.instance.weekSonglist(currentLevelId);
 
-			for (song in weekSonglist)
-			{
-				song.difficulty = difficultyId;
-				// song.mix = currentMixId;
-			}
-			trace('Week selrcsted!: $currentLevelId, Playlist: ${weekSonglist}');
+			PlayState.queuePlaylist([for (s in source) {
+				song: s.song,
+				difficulty: difficultyId,
+				mix: s.mix
+			}], currentLevelId);
 
-			PlayState.queuePlaylist(SongLibrary.instance.weekSonglist(currentLevelId));
 			FlxG.switchState(() -> new LoadingScreen());
-
 			return;
 		}
 

@@ -150,13 +150,22 @@ class SongLibrary
 
 			for (track in w.data.tracks)
 			{
+				var best:SongBase = null;
 				for (song in allSongs)
 				{
-					if (song.song.toLowerCase() == track.toLowerCase())
+					if (song.song.toLowerCase() != track.toLowerCase()) continue;
+
+					if (w.data.mainMix != null && song.mix == w.data.mainMix)
 					{
-						wSongs.push(song);
-						seenInWeeks.set('${song.song}/${song.mix}/${song.difficulty}', true);
+						best = song;
+						break;
 					}
+					if (best == null) best = song;
+				}
+				if (best != null)
+				{
+					wSongs.push(best);
+					seenInWeeks.set('${best.song}/${best.mix}/${best.difficulty}', true);
 				}
 			}
 

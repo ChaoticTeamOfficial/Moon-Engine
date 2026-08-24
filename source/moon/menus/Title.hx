@@ -244,8 +244,6 @@ class Title extends FlxTransitionableState
 			final curVid = vidDir[lastVidIndex];
 			trace('[TITLE] AD has been chosen: $curVid', "DEBUG");
 
-			trace(curVid);
-
 			// we must cancel inputs here.
 			// I mean, not really, though I think it's nice to.
 			Global.allowInputs = false;
@@ -256,7 +254,7 @@ class Title extends FlxTransitionableState
 				// this.visible = this.active = false;
 				FlxG.sound.music.pause();
 				openSubState(new VideoSubState({
-					path: Paths.video('videos/titleADs/$curVid'),
+					path: Paths.video('titleADs/$curVid'),
 					onStart: () ->
 					{
 						FlxG.camera.fade(FlxColor.BLACK, 1, true);
@@ -267,7 +265,7 @@ class Title extends FlxTransitionableState
 						prepareAD();
 						FlxG.camera.fade(FlxColor.BLACK, 1, true);
 						FlxG.sound.music.resume();
-						FlxG.sound.music.fadeIn(140, 0, MoonSettings.callSetting('Music Volume'));
+						FlxG.sound.music.fadeIn(1, 0, MoonSettings.callSetting('Music Volume') / 100);
 						@:privateAccess backVis.setAudioSource(cast FlxG.sound.music._channel.__audioSource);
 					},
 
@@ -317,26 +315,26 @@ class Title extends FlxTransitionableState
 		if (FlxG.sound.music != null) conductor.time = FlxG.sound.music.time;
 
 		// GlobalMusic.update();
-		if (MoonInput.justPressed(ACCEPT)) (!onTitle)
-		?endIntro
-		() :
+		if (MoonInput.justPressed(ACCEPT))
+		{
+			if (!onTitle) endIntro();
+			else
 			{
-				if
-				(!transitioning)
+				if (!transitioning)
 				{
 					// gotta put it back to null, otherwise I think it'd crash the game on other states.
 					// I'm not sure, but I gotta make sure hahah
 					FlxG.sound.music.onComplete = null;
 					transitioning = true;
 
-					FlxG.camera.fade
-					(FlxColor.WHITE, 0.6, true);
-					Paths.playSFX
-					('ui/confirmMenu.ogg');
-					FlxFlicker.flicker
-					(displayTxt, 1.3, 0.05, true, true, (flicker) -> FlxG.switchState(() -> new MainMenu()));
+					TweenUtils.cancelTmr(vidTimer);
+
+					FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
+					Paths.playSFX('ui/confirmMenu.ogg');
+					FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker) -> FlxG.switchState(() -> new MainMenu()));
 				}
 			}
+		}
 
 		if (onTitle)
 		{
@@ -459,7 +457,6 @@ class Title extends FlxTransitionableState
 		});
 
 		MoonAchievements.unlock('startGame');
-
 		if (Constants.isFridayNight) MoonAchievements.unlock('fridayNight');
 	}
 

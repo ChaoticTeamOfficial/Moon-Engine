@@ -1285,7 +1285,7 @@ class Chart
 					values: {
 						character: (event?.v?.char == 1 ?? 0) ? 'opponent' : (event?.v?.char == 2 ?? 0) ? 'spectator' : (event?.v?.char == -1 ?? 0) ? 'none' : 'player',
 						duration: (event.v.ease == 'CLASSIC') ? 26 : event?.v?.duration ?? 26,
-						ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? ""}',
+						ease: (event.v.ease == 'CLASSIC') ? 'expoOut' : '${event?.v?.ease ?? "expo"}${event?.v?.easeDir ?? "Out"}',
 						x: Std.parseFloat('${event?.v?.x ?? "0"}') ?? 0,
 						y: Std.parseFloat('${event?.v?.y ?? "0"}') ?? 0,
 					},

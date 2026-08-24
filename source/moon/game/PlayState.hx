@@ -22,6 +22,14 @@ import moon.backend.gameplay.mechanics.*;
 
 using StringTools;
 
+enum abstract GameMode(String) from String to String
+{
+	var STORY = 'Story Mode';
+	var FREEPLAY = 'Freeplay';
+	var PLAYLIST = 'Playlist Mode';
+	var CHARTING = 'Charting Mode';
+}
+
 class PlayState extends FlxTransitionableState
 {
 	/**
@@ -102,11 +110,20 @@ class PlayState extends FlxTransitionableState
 	};
 	public static var playlist:Array<SongBase> = [];
 	public static var playlistIndex:Int = 0;
+	public static var playlistWeekId:Null<String> = null;
+	public static var cumulativeStats:PlayerStats = new PlayerStats();
 
-	public static function queuePlaylist(songs:Array<SongBase>)
+	public static function queuePlaylist(songs:Array<SongBase>, ?weekId:String)
 	{
-		playlist = songs != null ? songs.copy() : [];
+		playlist = [for (s in (songs ?? [])) {
+			song: s.song,
+			difficulty: s.difficulty,
+			mix: s.mix,
+			displayName: s.displayName
+		}];
 		playlistIndex = 0;
+		playlistWeekId = weekId;
+		cumulativeStats.reset();
 		if (playlist.length > 0) songData = playlist[0];
 	}
 
@@ -516,6 +533,9 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onSongEnd');
 		final stat = playField.inputHandlers.get('p1').stats;
 
+		// accumulate for multi-song runs
+		if (playlist.length > 0) cumulativeStats.addStats(stat);
+
 		var saved:Bool = false;
 		final data = SongData.saveData(songData, stat.score, stat.misses, stat.accuracy);
 		if (VALID_SCORE) saved = data.contains('score') || data.contains('new');
@@ -554,7 +574,11 @@ class PlayState extends FlxTransitionableState
 			setCameraFocus('spectator', [], conductor.crochet / 1000 * 2, {
 				ease: FlxEase.circOut
 			});
-			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, () -> exit(false, saved));
+			camHUD.fade(FlxColor.BLACK, conductor.crochet / 1000 * 2, false, () ->
+			{
+				final resultsStats = (playlist.length > 0) ? cumulativeStats : playField.inputHandlers.get('p1').stats;
+				exit(false, saved, resultsStats);
+			});
 		}
 	}
 
@@ -664,7 +688,7 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onSongResume');
 	}
 
-	public function exit(toMenu:Bool = true, savedData:Bool = false)
+	public function exit(toMenu:Bool = true, savedData:Bool = false, ?resultsStats:PlayerStats)
 	{
 		// jus to make sure
 		AssetManager.skipNextCleanup = false;
@@ -679,7 +703,7 @@ class PlayState extends FlxTransitionableState
 
 		if (toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else
-			FlxG.switchState(() -> new ResultsState(playField.inputHandlers.get('p1').stats, playField.chart.content.meta, playField.difficulty, savedData));
+			FlxG.switchState(() -> new ResultsState(resultsStats, playField.chart.content.meta, playField.difficulty, savedData));
 	}
 
 	static public function saveReplays()

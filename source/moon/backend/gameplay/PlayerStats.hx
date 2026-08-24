@@ -86,6 +86,20 @@ class PlayerStats
 		reset();
 	}
 
+	function addStats(other:PlayerStats):Void
+	{
+		score += other.score;
+		totalNotes += other.totalNotes;
+		accuracyCount += other.accuracyCount;
+
+		if (other.highestCombo > highestCombo) highestCombo = other.highestCombo;
+		if (other.noSustainHighestCombo > noSustainHighestCombo) noSustainHighestCombo = other.noSustainHighestCombo;
+
+		for (judge => count in other.judgementsCounter) judgementsCounter.set(judge, judgementsCounter.get(judge) + count);
+
+		misses = judgementsCounter.get(MISS);
+	}
+
 	/**
 	 * Function called for updating the accuracy based on everything.
 	 */

@@ -82,6 +82,7 @@ class MoonAchievements
 		loadAchievements();
 
 		// trace(all);
+		// trace(unlocked);
 	}
 
 	private static function loadAchievements():Void
@@ -98,10 +99,9 @@ class MoonAchievements
 		{
 			final data:AchievementData = Paths.JSON('achievements/$file');
 
-			// mannn wheres my ??=
-			data.secret = data?.secret ?? false;
-			data.hideName = data?.hideName ?? false;
-			data.hideDesc = data?.hideDesc ?? false;
+			data.secret ??= false;
+			data.hideName ??= false;
+			data.hideDesc ??= false;
 
 			all.set(data.id, data);
 
@@ -115,8 +115,9 @@ class MoonAchievements
 	/**
 	 * Unlocks an achievement if locked.
 	 * @param id The achievement's ID.
+	 * @param delay The delay for the popup to show up.
 	 */
-	static function unlock(id:String):Void
+	static function unlock(id:String, ?delay:Float = 0):Void
 	{
 		// no need to unlock if already unlocked, duhh!!
 		if (!all.exists(id) || isUnlocked(id)) return;
@@ -126,7 +127,9 @@ class MoonAchievements
 		save.data.unlocked = unlocked;
 		save.flush();
 
-		// TODO: make a popup ingame? :eyes:
+		if (delay > 0) new FlxTimer().start(delay, _ -> AchievementUnlockPopup.show(all.get(id)));
+		else
+			AchievementUnlockPopup.show(all.get(id));
 		trace('[ACHIEVEMENTS] Unlocked an achievement: ${all.get(id).name}');
 	}
 

@@ -4,5 +4,6 @@
 	"tracks": ["senpai", "roses", "thorns"],
 	"color": [0, 0, 0],
 	"mainMix": "bf",
-	"order": 6
+	"order": 6,
+	"beatAchievement": "beatWeek6"
 }

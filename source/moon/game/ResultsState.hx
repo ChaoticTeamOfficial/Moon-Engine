@@ -16,6 +16,8 @@ class ResultsState extends FlxState
 	public var chartMeta:Chart.MetadataStruct;
 	public var diff:String;
 	public var newScore:Bool;
+	public var titleText:String = '';
+	public var week:Week = null;
 
 	// The order for each text
 	final textOrder:Array<String> = [
@@ -102,6 +104,19 @@ class ResultsState extends FlxState
 				break;
 			}
 		}
+
+		if (PlayState.playlistWeekId != null)
+		{
+			week = Week.get(PlayState.playlistWeekId);
+		}
+
+		titleText = if (week != null)
+		{
+			final week = Week.get(PlayState.playlistWeekId);
+			'${week.displayName}  //  ${week.description}';
+		}
+		else if (PlayState.playlist.length > 1) 'PLAYLIST MODE'; else '${chartMeta.displayName} by ${chartMeta.artist}';
+
 		script.load('images/ingame/results/$character/$tryRank/script.hx');
 		Global.scriptSet('results', this);
 
@@ -220,6 +235,8 @@ class ResultsState extends FlxState
 
 		score.scale.set(1.6, 1.6);
 		score.alpha = 0.00001;
+
+		if (week != null && week.beatAchievement != null) MoonAchievements.unlock(week.beatAchievement, 0.5);
 
 		Global.scriptCall('onPostCreate');
 
@@ -364,7 +381,8 @@ class ResultsState extends FlxState
 							}, 1, {
 								ease: FlxEase.backOut
 							});
-							textInfo.setText('${diff.toUpperCase()}  //  ${stats.accuracy}%  //  ${chartMeta.displayName} by ${chartMeta.artist}');
+
+							textInfo.setText('${diff.toUpperCase()}  //  ${stats.accuracy}%  //  ${titleText}');
 
 							Global.scriptCall('onIntroEnd');
 						}

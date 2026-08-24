@@ -25,11 +25,12 @@ class PlaylistMode extends FlxSubState
 	 * A group that contains all the song items.
 	 */
 	public var songGroup:FlxTypedSpriteGroup<PlaylistItem>;
-	
+
 	/**
 	 * The current list of songs to be played.
 	 */
-	public var songsQueue:Array<{song:PlaylistItem, difficulty:String, number:FlxText}> = [];	
+	public var songsQueue:Array<
+		{song:PlaylistItem, difficulty:String, number:FlxText}> = [];
 
 	/**
 	 * A group that contains the details of the current track selected, it's shown at the right
@@ -45,10 +46,9 @@ class PlaylistMode extends FlxSubState
 	 * The text that indicates the keybinds :]
 	 */
 	public var hint:FlxText;
-	
+
 	var curSelected:Int = -1;
 	var canSelect:Bool = false;
-
 	final ACCEPT_THRESHOLD:Float = 0.5; // Amount of time holding space to confirm the song.
 	final SELECTION_LIMIT:Int = 20; // Max amount of times a song can be re-added to the queue.
 
@@ -151,7 +151,12 @@ class PlaylistMode extends FlxSubState
 		difficultySelector.setPos(1000, infoGroup.y + infoGroup.height + 80);
 		add(difficultySelector);
 
-		hint = new FlxText(0, 0, 0, 'Press [ENTER] to Play your set\nPress [SPACE] on a song to add/remove it from the set.\nHold [SPACE] and [SHIFT] to re-add a song in the set.');
+		hint = new FlxText(
+			0,
+			0,
+			0,
+			'Press [ENTER] to Play your set\nPress [SPACE] on a song to add/remove it from the set.\nHold [SPACE] and [SHIFT] to re-add a song in the set.'
+		);
 		hint.setFormat(Paths.font('phantomuff/full.ttf'), 14, 0xFFAAAAAA, FlxTextAlign.CENTER);
 		hint.y = infoGroup.y + infoGroup.height + 140;
 		hint.x = 800;
@@ -164,6 +169,7 @@ class PlaylistMode extends FlxSubState
 	}
 
 	var holdSpace:Float = 0;
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -173,7 +179,7 @@ class PlaylistMode extends FlxSubState
 
 		holdSpace = FlxG.keys.pressed.SPACE ? holdSpace + elapsed : 0;
 		if (FlxG.keys.justPressed.ENTER && songsQueue.length != 0) confirm();
-		if (holdSpace >= ACCEPT_THRESHOLD) 
+		if (holdSpace >= ACCEPT_THRESHOLD)
 		{
 			confirmSong(FlxG.keys.pressed.SHIFT);
 			holdSpace = 0;
@@ -189,11 +195,11 @@ class PlaylistMode extends FlxSubState
 
 	function loadSongs():Void
 	{
-		for (i => song in songList) 
+		for (i => song in songList)
 		{
 			var skip:Bool = false;
-			for(item in songGroup.members) if(item.song == song.song && item.mix == song.mix) skip = true;
-			if(skip) continue; 
+			for (item in songGroup.members) if (item.song == song.song && item.mix == song.mix) skip = true;
+			if (skip) continue;
 
 			var song:PlaylistItem = new PlaylistItem(song.song, song.difficulty, song.mix);
 			songGroup.add(song);
@@ -222,7 +228,8 @@ class PlaylistMode extends FlxSubState
 		if (songGroup.members[curSelected] != null) songGroup.members[curSelected].selected = true;
 		infoGroup.updateTrackDetails(songGroup.members[curSelected].songDatas.get(difficultySelector.getSelected()), guh);
 
-		if(curSelected >= 3) {
+		if (curSelected >= 3)
+		{
 			FlxTween.tween(songGroup, {
 				x: (curSelected - 3) * -PlaylistItem.itemSkew,
 				y: (curSelected - 3) * -45
@@ -230,7 +237,7 @@ class PlaylistMode extends FlxSubState
 				ease: FlxEase.cubeOut
 			});
 		}
-		else 
+		else
 		{
 			FlxTween.tween(songGroup, {
 				x: 0,
@@ -244,9 +251,8 @@ class PlaylistMode extends FlxSubState
 	function confirm():Void
 	{
 		Paths.playSFX('ui/confirmMenu.ogg');
-		
-		PlayState.queuePlaylist([for (item in songsQueue)
-		{
+
+		PlayState.queuePlaylist([for (item in songsQueue) {
 			song: item.song.song,
 			difficulty: item.difficulty,
 			mix: item.song.mix
@@ -255,11 +261,11 @@ class PlaylistMode extends FlxSubState
 	}
 
 	function confirmSong(force:Bool = false):Void
-	{		
+	{
 		var curSong:PlaylistItem = songGroup.members[curSelected];
 		var selectorDifficulty:Difficulty = SongLibrary.getDifficulty(difficultySelector.getSelected());
 
-		if(!force && tryRemoveSong(curSong)) return;
+		if (!force && tryRemoveSong(curSong)) return;
 
 		if (!curSong.difficulties.contains(selectorDifficulty))
 		{
@@ -273,15 +279,14 @@ class PlaylistMode extends FlxSubState
 
 	public function refreshNumbers():Void
 	{
-		for(i => song in songsQueue)
-			song.number.text = '${i + 1}';
+		for (i => song in songsQueue) song.number.text = '${i + 1}';
 	}
 
 	function tryRemoveSong(song:PlaylistItem):Bool
 	{
 		for (i in 0...songsQueue.length)
 		{
-			var item = songsQueue[songsQueue.length - i - 1];	//In inverse order, so it works kinda like a pop()
+			var item = songsQueue[songsQueue.length - i - 1]; // In inverse order, so it works kinda like a pop()
 			if (item.song == song)
 			{
 				Paths.playSFX('toolkit/general/grabHold.wav');
@@ -304,10 +309,14 @@ class PlaylistMode extends FlxSubState
 		if (song.numbers.length >= SELECTION_LIMIT) return me();
 
 		var num:FlxText = song.added(songsQueue.length + 1);
-		songsQueue.push({song: song, difficulty: difficultySelector.getSelected(), number: num});
+		songsQueue.push({
+			song: song,
+			difficulty: difficultySelector.getSelected(),
+			number: num
+		});
 	}
 
-	private function me():Void 
+	private function me():Void
 	{
 		canSelect = false;
 
@@ -316,14 +325,16 @@ class PlaylistMode extends FlxSubState
 		add(mee);
 
 		Paths.playSFX('menus/playlist/snd_fall2.wav');
-		FlxTween.tween(mee, { y: curSong.y - mee.height	}, 0.8, {
-			ease: FlxEase.cubeIn, 
-			onComplete: _ -> 
+		FlxTween.tween(mee, {
+			y: curSong.y - mee.height
+		}, 0.8, {
+			ease: FlxEase.cubeIn,
+			onComplete: _ ->
 			{
 				Paths.playSFX('menus/playlist/bump.wav');
-				for(number in curSong.numbers) 
+				for (number in curSong.numbers)
 				{
-					for(song in songsQueue) if(song.song == curSong) songsQueue.remove(song);
+					for (song in songsQueue) if (song.song == curSong) songsQueue.remove(song);
 					refreshNumbers();
 					FlxTween.tween(number, {
 						x: number.x + FlxG.random.int(-100, 100),
@@ -332,20 +343,31 @@ class PlaylistMode extends FlxSubState
 						ease: FlxEase.cubeIn,
 						onComplete: _ ->
 						{
-							curSong.numbers.remove(number); 
-							curSong.remove(number); 
+							curSong.numbers.remove(number);
+							curSong.remove(number);
 							number.destroy();
 						}
 					});
 				}
 			}
 		});
-		FlxTween.tween(mee, { y: curSong.y - mee.height - 30 }, 0.25, {ease: FlxEase.sineOut, startDelay: 0.8});
-		FlxTween.tween(mee, { y: FlxG.height }, 1, {ease: FlxEase.sineIn, startDelay: 1.05, onComplete: _ -> 
-		{
-			canSelect = true;
-			remove(mee);
-			mee.destroy();
-		}});
+		FlxTween.tween(mee, {
+			y: curSong.y - mee.height - 30
+		}, 0.25, {
+			ease: FlxEase.sineOut,
+			startDelay: 0.8
+		});
+		FlxTween.tween(mee, {
+			y: FlxG.height
+		}, 1, {
+			ease: FlxEase.sineIn,
+			startDelay: 1.05,
+			onComplete: _ ->
+			{
+				canSelect = true;
+				remove(mee);
+				mee.destroy();
+			}
+		});
 	}
 }

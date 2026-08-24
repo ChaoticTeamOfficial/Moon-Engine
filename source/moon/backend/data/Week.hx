@@ -35,6 +35,11 @@ typedef WeekFile =
 	 * Lower values appear first. Defaults to 999 if unset.
 	 */
 	var ?order:Int;
+
+	/**
+	 * An optional achievement the user will unlock after beating this week in any difficulty.
+	 */
+	var ?beatAchievement:String;
 }
 
 @:publicFields
