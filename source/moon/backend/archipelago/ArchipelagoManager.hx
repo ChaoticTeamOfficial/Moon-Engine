@@ -59,8 +59,15 @@ class ArchipelagoManager
 	static var pendingClearIndex:Int = 0;
 	static var pendingClearIsWeek:Bool = false;
 
-	/** When true, local death will not be broadcast (set when killed by remote DeathLink). */
-	static var ignoreNextDeathLink:Bool = false;
+	/**
+	 * Unix time of the last DeathLink we sent
+	 */
+	static var lastDeathLinkTime:Float = 0;
+
+	/**
+	 * Pending remote DeathLink payload.
+	 */
+	static var pendingRemoteDeath:Dynamic = null;
 
 	static function init():Void
 	{
@@ -111,7 +118,17 @@ class ArchipelagoManager
 	/**
 	 * Must be called every frame while a client exists.
 	 */
-	static function update():Void if (client != null) client.poll();
+	static function update():Void
+	{
+		if (client != null) client.poll();
+
+		if (pendingRemoteDeath != null)
+		{
+			final data = pendingRemoteDeath;
+			pendingRemoteDeath = null;
+			applyRemoteDeathLink(data);
+		}
+	}
 
 	/**
 	 * Sends one or more location checks. Already-checked IDs are filtered out.
@@ -139,10 +156,14 @@ class ArchipelagoManager
 	static function checkLocation(id:Int):Void checkLocations([id]);
 
 	/**
-	 * Sends a DeathLink Bounce.
+	 * True when this client is participating in DeathLink.
 	 */
 	static function isDeathLinkEnabled():Bool
 	{
+		if (client != null)
+		{
+			for (t in client.tags) if (t == "DeathLink") return true;
+		}
 		if (slotData == null) return false;
 		final v:Dynamic = slotData.death_link;
 		return v == true || v == 1;
@@ -153,18 +174,48 @@ class ArchipelagoManager
 	 */
 	static function sendDeathLink(cause:String = "died"):Void
 	{
-		if (client == null || !isConnected || !isDeathLinkEnabled()) return;
-		if (ignoreNextDeathLink)
+		if (client == null || !isConnected) return;
+		if (!isDeathLinkEnabled())
 		{
-			ignoreNextDeathLink = false;
+			trace('[AP] DeathLink send skipped (not enabled).', "WARNING");
 			return;
 		}
 
-		if (client.Bounce({
-			source: slot,
-			cause: cause,
-			time: Date.now().getTime() / 1000
-		}, [], [], ["DeathLink"])) trace('[AP] DeathLink sent ($cause).', "INFO");
+		final now = Date.now().getTime() / 1000;
+		lastDeathLinkTime = now;
+		try
+		{
+			if (client.Bounce({
+				source: slot,
+				cause: cause,
+				time: now
+			}, [], [], ["DeathLink"])) trace('[AP] DeathLink sent ($cause).', "INFO");
+			else
+				trace('[AP] DeathLink Bounce failed to queue.', "WARNING");
+		}
+		catch (e:Dynamic)
+		{
+			trace('[AP] DeathLink Bounce threw: $e', "ERROR");
+		}
+	}
+
+	/**
+	 * Queue a remote DeathLink for the next update tick.
+	 */
+	static function queueRemoteDeathLink(data:Dynamic):Void
+	{
+		if (data == null) return;
+
+		final source:String = (data.source != null) ? Std.string(data.source) : "";
+		if (source != "" && source.toLowerCase() == slot.toLowerCase()) return;
+
+		if (data.time != null)
+		{
+			final t:Float = Std.parseFloat(Std.string(data.time));
+			if (!Math.isNaN(t) && Math.abs(t - lastDeathLinkTime) < 0.5) return;
+		}
+
+		pendingRemoteDeath = data;
 	}
 
 	/**
@@ -172,27 +223,27 @@ class ArchipelagoManager
 	 */
 	static function applyRemoteDeathLink(data:Dynamic):Void
 	{
-		trace('pass deathlink enabled');
-		if (!isDeathLinkEnabled()) return;
-
-		trace('pass source check');
-		final source:String = (data != null && data.source != null) ? Std.string(data.source) : "";
-		if (source != "" && source.toLowerCase() == slot.toLowerCase()) return;
-
-		trace('now the rest.');
 		final ps = moon.game.PlayState.instance;
 		if (ps == null || ps.isDead) return;
 
-		if (ps.subState != null) ps.subState.close();
-		ps.paused = false;
+		try
+		{
+			if (ps.subState != null) ps.subState.close();
+			ps.paused = false;
+			ps.isDead = true;
 
-		ignoreNextDeathLink = true;
-		ps.isDead = true;
-		if (ps.playField != null && ps.playField.playback != null) ps.playField.playback.state = PAUSE;
-		ps.openSubState(new moon.game.submenus.Gameover());
+			if (ps.playField != null && ps.playField.playback != null) ps.playField.playback.state = PAUSE;
 
-		final cause = (data != null && data.cause != null) ? Std.string(data.cause) : "DeathLink";
-		trace('[AP] DeathLink from $source ($cause).', "INFO");
+			ps.openSubState(new moon.game.submenus.Gameover());
+
+			final source:String = (data != null && data.source != null) ? Std.string(data.source) : "?";
+			final cause:String = (data != null && data.cause != null) ? Std.string(data.cause) : "DeathLink";
+			trace('[AP] DeathLink from $source ($cause).', "INFO");
+		}
+		catch (e:Dynamic)
+		{
+			trace('[AP] applyRemoteDeathLink failed: $e', "ERROR");
+		}
 	}
 
 	/**
@@ -227,10 +278,11 @@ class ArchipelagoManager
 				ArchipelagoSave.data.seed = client.seed;
 				ArchipelagoSave.flush();
 			}
+			client.ConnectUpdate(null, ["DeathLink", "AP"]);
 
 			if (ArchipelagoSave.data != null && ArchipelagoSave.data.checkedLocations.length > 0) client.LocationChecks(ArchipelagoSave.data.checkedLocations);
 
-			trace('[AP] Connected to slot "${client.slot}" (seed ${client.seed}).', "INFO");
+			trace('[AP] Connected to slot "${client.slot}" (seed ${client.seed}, tags ${client.tags.join(",")}).', "INFO");
 			onConnected.dispatch();
 		});
 
@@ -267,7 +319,7 @@ class ArchipelagoManager
 
 		client.onBounced.add((data:Dynamic) ->
 		{
-			applyRemoteDeathLink(data);
+			queueRemoteDeathLink(data);
 			onBounced.dispatch(data);
 		});
 

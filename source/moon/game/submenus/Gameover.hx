@@ -65,7 +65,7 @@ class Gameover extends FlxSubState
 	 * Whether or not to force the fakeout. Set this to true if you're simply messing around, or testing it!
 	 * Don't forget that it must be set before the Gameover SubState is opened.
 	 */
-	public static var forceFakeout:Bool = true;
+	public static var forceFakeout:Bool = false;
 
 	/**
 	 * The default color scheme used for most objects. Defaults to BF's color.
