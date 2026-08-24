@@ -238,11 +238,13 @@ class Title extends FlxTransitionableState
 		vidTimer = new FlxTimer().start(Constants.TITLE_VIDEO_DELAY, _ ->
 		{
 			// now we get a random video.
-			final vidDir = Paths.readDir('videos/titleADs', [".mp4"]);
+			final vidDir = Paths.readDir('videos/titleADs', [".mp4", ".mkv"], false);
 			if (lastVidIndex >= vidDir.length) lastVidIndex = 0;
 
 			final curVid = vidDir[lastVidIndex];
 			trace('[TITLE] AD has been chosen: $curVid', "DEBUG");
+
+			trace(curVid);
 
 			// we must cancel inputs here.
 			// I mean, not really, though I think it's nice to.
@@ -254,7 +256,7 @@ class Title extends FlxTransitionableState
 				// this.visible = this.active = false;
 				FlxG.sound.music.pause();
 				openSubState(new VideoSubState({
-					path: Paths.mp4('videos/titleADs/$curVid'),
+					path: Paths.video('videos/titleADs/$curVid'),
 					onStart: () ->
 					{
 						FlxG.camera.fade(FlxColor.BLACK, 1, true);
@@ -455,6 +457,10 @@ class Title extends FlxTransitionableState
 			ease: FlxEase.quadInOut,
 			type: PINGPONG
 		});
+
+		MoonAchievements.unlock('startGame');
+
+		if (Constants.isFridayNight) MoonAchievements.unlock('fridayNight');
 	}
 
 	public function getRandomTXT()

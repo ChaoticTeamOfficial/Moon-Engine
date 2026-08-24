@@ -139,6 +139,7 @@ class PlayState extends FlxTransitionableState
 		// Paths.clearStoredMemory();
 		instance = this;
 		events = [];
+		isDead = false;
 
 		Global.registerScript("songScript", songScript);
 		songScript.load('songs/${songData.song}/${songData.mix}/script.hx');
@@ -306,14 +307,6 @@ class PlayState extends FlxTransitionableState
 		events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
 	}
 
-	public function gameOverRestart()
-	{
-		isDead = false;
-		Global.clearScriptList();
-		AssetManager.skipNextCleanup = true;
-		FlxG.resetState();
-	}
-
 	override public function update(elapsed:Float):Void
 	{
 		Global.scriptCall('onUpdate', [elapsed]);
@@ -376,6 +369,7 @@ class PlayState extends FlxTransitionableState
 
 		// TODO: REMOVE, THIS IS DEBUGGIN
 		if (FlxG.keys.justPressed.EIGHT) endSong();
+		// if (FlxG.keys.justPressed.T) triggerVideoTrap();
 
 		if (FlxG.keys.justPressed.F5)
 		{
@@ -734,5 +728,81 @@ class PlayState extends FlxTransitionableState
 		}
 		#end
 		return null;
+	}
+
+	// ---------------- ARCHIPELAGO STUFF
+	/// -traps
+
+	public function triggerVideoTrap()
+	{
+		if (subState != null) subState.close();
+		if (FlxG.sound.music != null) FlxG.sound.music.stop();
+
+		// TODO: make this a helper on paths?
+		final exts = [".mp4", ".mkv", ".mov"];
+		final videos:Array<String> = [];
+
+		#if desktop
+		function collect(rel:String)
+		{
+			for (mod in Mods.activeMods)
+			{
+				final modDir = '${mod.root}/$rel';
+				if (!FileSystem.exists(modDir) || !FileSystem.isDirectory(modDir)) continue;
+				for (entry in FileSystem.readDirectory(modDir))
+				{
+					final full = '$modDir/$entry';
+					if (FileSystem.isDirectory(full)) collect('$rel/$entry');
+					else
+						for (ext in exts) if (entry.endsWith(ext))
+						{
+							videos.push('$rel/$entry');
+							break;
+						}
+				}
+			}
+
+			final vanilla = Paths.getVanillaPath(rel);
+			if (FileSystem.exists(vanilla) && FileSystem.isDirectory(vanilla)) for (entry in FileSystem.readDirectory(vanilla))
+			{
+				final full = '$vanilla/$entry';
+				if (FileSystem.isDirectory(full)) collect('$rel/$entry');
+				else
+					for (ext in exts) if (entry.endsWith(ext))
+					{
+						videos.push('$rel/$entry');
+						break;
+					}
+			}
+		}
+
+		collect('videos');
+		#end
+
+		if (videos.length == 0) return;
+
+		final curVid = videos[FlxG.random.int(0, videos.length - 1)];
+		trace('[ARCHIPELAGO] AD has been chosen: $curVid', "DEBUG");
+
+		canPause = false;
+		Global.allowInputs = false;
+		paused = true;
+		activeTweens(false);
+		if (playField.playback.state == PLAY) playField.playback.state = PAUSE;
+
+		openSubState(new VideoSubState({
+			path: Paths.getPath(curVid),
+			canPause: false,
+			camera: camALT,
+			onComplete: () ->
+			{
+				canPause = true;
+				Global.allowInputs = true;
+				paused = false;
+				activeTweens(true);
+				playField.playback.state = PLAY;
+			},
+			infoText: ":)"
+		}));
 	}
 }

@@ -5,6 +5,7 @@ import hxvlc.flixel.FlxVideoSprite;
 
 class VideoSubState extends FlxSubState
 {
+	var params:VideoParams;
 	var video:FlxVideoSprite;
 	var ui:DefaultVideoUI = new DefaultVideoUI();
 
@@ -13,7 +14,9 @@ class VideoSubState extends FlxSubState
 		super();
 		// TODO: Finish and document this class.
 
-		this.camera = params.camera ?? FlxG.camera;
+		this.params = params;
+
+		this.camera = params?.camera ?? FlxG.camera;
 
 		// if(params.path == null) params.path = Paths.mp4('videos/titleVideos/boyfriendEverywhere');
 		// var bg = new MoonSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -27,6 +30,8 @@ class VideoSubState extends FlxSubState
 
 		// why ts so laggy on my trashy pc,...., augh
 		// note: it actually doesn't now wow
+
+		params.canPause ??= true;
 
 		video.bitmap.onFormatSetup.add(() ->
 		{
@@ -78,6 +83,8 @@ class VideoSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
+		if (!params.canPause) return;
+
 		if (MoonInput.justPressed(PAUSE) && !ui.paused)
 		{
 			ui.paused = true;
@@ -110,5 +117,6 @@ typedef VideoParams =
 	var ?onStart:Void->Void;
 	var ?onComplete:Void->Void;
 	var ?camera:FlxCamera;
+	var ?canPause:Bool;
 	var ?infoText:String;
 };

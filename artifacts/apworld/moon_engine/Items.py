@@ -23,16 +23,18 @@ DIFFICULTY_NAMES = [
     "Nightmare",
 ]
 
-# Fixed named items
 item_table: Dict[str, ItemData] = {
     "Extra Health": ItemData(9000, ItemClassification.useful),
     "Filler Note": ItemData(9001, ItemClassification.filler),
+    "Health Drain Trap": ItemData(9100, ItemClassification.trap),
+    "Video Trap": ItemData(9101, ItemClassification.trap),
 }
 
-# Static full maps so the datapackage always has names
 item_name_to_id: Dict[str, int] = {
     "Extra Health": 9000,
     "Filler Note": 9001,
+    "Health Drain Trap": 9100,
+    "Video Trap": 9101,
 }
 
 for i in range(1, MAX_SONGS + 1):

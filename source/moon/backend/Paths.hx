@@ -189,8 +189,8 @@ class Paths
 	/** Returns the resolved path to a font file inside `assets/fonts/`. */
 	public static function font(key:String, ?library:String):String return getPath('fonts/$key', library);
 
-	/** Returns the resolved path to a `.mp4` file. */
-	public static function mp4(key:String, ?library:String):String return getPath('$key.mp4', library);
+	/** Returns the resolved path to a video file. Must include format. */
+	public static function video(key:String, from:String = 'videos', ?library:String):String return getPath('$from/$key', library);
 
 	/** Returns trimmed text content from a `.txt` file. */
 	public static function text(key:String, ?library:String):String return getFileContent('$key.txt', library).trim();
