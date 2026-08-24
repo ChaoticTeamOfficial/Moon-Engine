@@ -5,10 +5,10 @@
 	"spectators": [
 		"gf"
 	],
-	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
 		"dad"
 	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"lanes": [
 		"opponent",
 		"p1"
@@ -27,8 +27,8 @@
 	],
 	"scrollSpd": {
 		"easy": 1.6,
-		"normal": 1.8,
-		"hard": 2.3
+		"hard": 2.3,
+		"normal": 1.8
 	},
 	"charter": "ninjamuffin99 + MtH",
 	"timeSignature": [
@@ -40,9 +40,9 @@
 	},
 	"displayName": "DadBattle",
 	"stage": "mainStage",
-	"album": "volume1",
-	"bpm": 180,
 	"noteskin": {
 		"hard": "v-slice"
-	}
+	},
+	"bpm": 180,
+	"album": "volume1"
 }

@@ -1,0 +1,314 @@
+[
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 0,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 3333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 6666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 8333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 10000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 11666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 13750,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 20000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 26666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 28333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 30000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 31666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 40000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 46666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 53333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 56666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 60000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 61666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 63333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 65000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 66666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 70000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 73333,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 76666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 80000,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "opponent",
+			"ease": "expo"
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 86666,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expo"
+		}
+	}
+]

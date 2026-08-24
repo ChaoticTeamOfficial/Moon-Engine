@@ -1,13 +1,13 @@
 {
 	"players": [
-		"bf"
+		"bf-pixel"
 	],
 	"spectators": [
-		"gf"
+		"gf-pixel"
 	],
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
-		"dad"
+		"senpai"
 	],
 	"lanes": [
 		"opponent",
@@ -15,20 +15,24 @@
 	],
 	"artist": "Kawai Sprite",
 	"hasCountdown": {
-		"hard": true
+		"easy": true,
+		"hard": true,
+		"normal": true
 	},
 	"difficultyRating": {
-		"hard": -1
+		"easy": null,
+		"hard": null,
+		"normal": null
 	},
 	"version": "2.2.4",
 	"preview": [
 		0,
-		0
+		150000
 	],
 	"scrollSpd": {
-		"easy": 1.2,
-		"normal": 1.3,
-		"hard": 1.6
+		"easy": 2.1,
+		"hard": 2.4,
+		"normal": 2.2
 	},
 	"charter": "ninjamuffin99 + MtH",
 	"timeSignature": [
@@ -36,13 +40,17 @@
 		4
 	],
 	"healthMultiplier": {
-		"hard": 1
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
 	},
-	"displayName": "Bopeebo",
-	"stage": "mainStage",
-	"album": "volume1",
-	"bpm": 100,
+	"displayName": "Senpai",
+	"stage": "school",
 	"noteskin": {
-		"hard": "v-slice"
-	}
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
+	},
+	"bpm": 144,
+	"album": "volume2"
 }
