@@ -342,7 +342,6 @@ class Paths
 		var snd = _sfxCache.get(src);
 		if (snd == null)
 		{
-			// Flixel 6.2+: FlxG.sound.load is deprecated
 			snd = FlxG.sound.create(src).setup(1.0, false, false);
 			snd.persist = true;
 			_sfxCache.set(src, snd);

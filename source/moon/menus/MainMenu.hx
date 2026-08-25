@@ -2,7 +2,7 @@ package moon.menus;
 
 import moon.menus.obj.main.*;
 import moon.dependency.scripting.MoonEvent;
-import moon.game.submenus.PauseScreen;
+import moon.game.submenus.PauseMenu;
 import moon.game.*;
 import moon.toolkit.level_editor.LevelEditor;
 

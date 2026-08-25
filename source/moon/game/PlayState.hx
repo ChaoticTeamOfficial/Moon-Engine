@@ -12,7 +12,7 @@ import moon.game.obj.*;
 import moon.toolkit.level_editor.*;
 import moon.backend.gameplay.*;
 import moon.dependency.scripting.MoonEvent;
-import moon.game.submenus.PauseScreen;
+import moon.game.submenus.PauseMenu;
 import moon.game.events.EventRegistry;
 import moon.game.obj.Character.CharacterType;
 import moon.game.obj.SubtitleDisplay;
@@ -600,7 +600,7 @@ class PlayState extends FlxTransitionableState
 
 		paused = true;
 		activeTweens(false);
-		openSubState(new PauseScreen(camALT));
+		openSubState(new PauseMenu(camALT));
 		if (playField.playback.state == PLAY) playField.playback.state = PAUSE;
 
 		Global.scriptCall('onSongPause');

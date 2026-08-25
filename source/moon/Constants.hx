@@ -34,7 +34,7 @@ class Constants
 	/**
 	 * Time it takes to play a video on TitleState.
 	 */
-	static final TITLE_VIDEO_DELAY:Float = 27.5;
+	static final TITLE_VIDEO_DELAY:Float = 37.5;
 
 	// - Freeplay
 	static final FREEPLAY_TRANSITION_DURATION:Float = 0.6;

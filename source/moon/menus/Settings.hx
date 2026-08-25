@@ -1,7 +1,7 @@
 package moon.menus;
 
 import flixel.util.FlxGradient;
-import moon.game.submenus.PauseScreen;
+import moon.game.submenus.PauseMenu;
 import moon.game.PlayState;
 import moon.menus.obj.MenuPage;
 import moon.menus.obj.settings.OptionInfo;
@@ -101,7 +101,7 @@ class Settings extends FlxSubState
 		{
 			Paths.playSFX('menus/settings/settingsLeave.wav', 'sounds', true);
 			close();
-			if (PlayState.instance != null) PlayState.instance.openSubState(new PauseScreen(PlayState.instance.camALT));
+			if (PlayState.instance != null) PlayState.instance.openSubState(new PauseMenu(PlayState.instance.camALT));
 		}
 	}
 

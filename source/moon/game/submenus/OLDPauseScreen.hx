@@ -12,7 +12,7 @@ import openfl.display.BlendMode;
  * A group for the best score display elements.
  * ... that lowkey sounds funny LOL
  */
-class BestScoreGroup extends FlxSpriteGroup
+class OLDBestScoreGroup extends FlxSpriteGroup
 {
 	public var bestBG:MoonSprite;
 	public var playerIcon:PixelIcon;
@@ -64,7 +64,7 @@ class BestScoreGroup extends FlxSpriteGroup
 /**
  * Ahh yes the pause menu, this code is kinda shitty btw.
  */
-class PauseScreen extends FlxSubState
+class OLDPauseScreen extends FlxSubState
 {
 	private final DEFAULT_ITEMS:Array<String> = ['Resume', 'Restart Track', 'Settings', 'Exit'];
 	private final ACCESSIBILITY_ITEMS:Array<String> = ['botplay', 'practice mode', 'change difficulty', 'back'];
@@ -77,7 +77,7 @@ class PauseScreen extends FlxSubState
 	private var backGradient:FlxSprite;
 	private var paused:MoonSprite;
 	private var back:MoonSprite;
-	private var bestGroup:BestScoreGroup;
+	private var bestGroup:OLDBestScoreGroup;
 
 	public var oppIcon:PixelIcon;
 	public var pauseItems:FlxTypedGroup<UIButton> = new FlxTypedGroup<UIButton>();
@@ -151,7 +151,7 @@ class PauseScreen extends FlxSubState
 		regenItems(DEFAULT_ITEMS);
 
 		final sData = SongData.retrieveData(PlayState.songData);
-		bestGroup = new BestScoreGroup(meta.players[0], Std.int(pausedL.width) - 96, sData);
+		bestGroup = new OLDBestScoreGroup(meta.players[0], Std.int(pausedL.width) - 96, sData);
 		add(bestGroup);
 		bestGroup.x = -400;
 		bestGroup.y = pauseItems.members[pauseItems.members.length - 1].y + 90;
