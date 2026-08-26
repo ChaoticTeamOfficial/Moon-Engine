@@ -1,8 +1,9 @@
 {
 	"antialiasing": false,
-	"scale": 6,
 	"flipX": false,
 	"extendIdleDuration": true,
+	"isPlayer": true,
+	"scale": 6,
 	"camOffsets": [-169, 35],
 	"icon": {
 		"color": [49, 176, 209],

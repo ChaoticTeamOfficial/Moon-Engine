@@ -23,6 +23,7 @@ typedef HealthIconData =
 typedef CharacterData =
 {
 	var ?antialiasing:Bool;
+	var ?isPlayer:Bool;
 	var ?scale:Float;
 	var ?type:AtlasType;
 	var ?frameWidth:Int;
@@ -50,9 +51,10 @@ class Character extends MoonSprite
 	public var holdDuration:Int = 8;
 	public var gameoverColorScheme:FlxColor;
 	public var camOffsets:Array<Float> = [];
-	public var type:CharacterType;
+	public var type(default, set):CharacterType;
 	public var extendIdleDuration:Bool = false;
 	public var holding:Bool = false;
+	public var isPlayer:Bool = false;
 
 	/**
 	 * Creates a character on the screen.
@@ -86,14 +88,16 @@ class Character extends MoonSprite
 
 	public function flipLeftRight():Void
 	{
-		final oldRight = animation.getByName('singRIGHT').frames;
-		animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
-		animation.getByName('singLEFT').frames = oldRight;
-		if (animation.getByName('singRIGHTmiss') != null)
+		for (name in animation.getNameList())
 		{
-			final oldMiss = animation.getByName('singRIGHTmiss').frames;
-			animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
-			animation.getByName('singLEFTmiss').frames = oldMiss;
+			if (!name.contains('singLEFT')) continue;
+
+			final rightName = name.replace('singLEFT', 'singRIGHT');
+			if (!animation.exists(rightName)) continue;
+
+			final oldRight = animation.getByName(rightName).frames;
+			animation.getByName(rightName).frames = animation.getByName(name).frames;
+			animation.getByName(name).frames = oldRight;
 		}
 	}
 
@@ -200,6 +204,7 @@ class Character extends MoonSprite
 		holdDuration = data?.holdDuration ?? 8;
 		gameoverColorScheme = FlxColor.fromString(data?.gameoverColorScheme ?? '0xFF4924ff');
 		extendIdleDuration = data?.extendIdleDuration ?? false;
+		isPlayer = data?.isPlayer ?? false;
 
 		this.antialiasing = data?.antialiasing ?? true;
 
@@ -228,6 +233,20 @@ class Character extends MoonSprite
 		if (script.code != null) Global.unregisterScript('script-${this.character}-${script?.get("scriptID") ?? 0}');
 
 		conductor = null;
+	}
+
+	@:noCompletion
+	public function set_type(type:CharacterType):CharacterType
+	{
+		this.type = type;
+
+		if ((isPlayer && type == OPPONENT) || (!isPlayer && type == PLAYER))
+		{
+			flipX = !flipX;
+			flipLeftRight();
+		}
+
+		return type;
 	}
 }
 
