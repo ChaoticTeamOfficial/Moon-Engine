@@ -14,6 +14,16 @@ typedef ArchipelagoSaveData =
 	var checkedLocations:Array<Int>;
 
 	/**
+	 * All the seen songs.
+	 */
+	var seenSongs:Array<Int>;
+
+	/**
+	 * All the seen weeks.
+	 */
+	var seenWeeks:Array<Int>;
+
+	/**
 	 * Item IDs the client has already processed (with counts for progressive items).
 	 */
 	var receivedItems:Map<Int, Int>;
@@ -66,6 +76,8 @@ class ArchipelagoSave
 		{
 			data = {
 				checkedLocations: cast raw.checkedLocations ?? [],
+				seenSongs: cast raw.seenSongs ?? [],
+				seenWeeks: cast raw.seenWeeks ?? [],
 				receivedItems: raw.receivedItems != null ? mapFromDynamic(raw.receivedItems) : new Map(),
 				pendingItems: cast raw.pendingItems ?? [],
 				slotData: raw.slotData,
@@ -76,6 +88,8 @@ class ArchipelagoSave
 		{
 			data = {
 				checkedLocations: [],
+				seenSongs: [],
+				seenWeeks: [],
 				receivedItems: new Map(),
 				pendingItems: [],
 				slotData: null,
@@ -95,6 +109,8 @@ class ArchipelagoSave
 
 		Reflect.setField(save.data.saves, currentKey, {
 			checkedLocations: data.checkedLocations,
+			seenSongs: data.seenSongs,
+			seenWeeks: data.seenWeeks,
 			receivedItems: mapToDynamic(data.receivedItems),
 			pendingItems: data.pendingItems,
 			slotData: data.slotData,
@@ -118,6 +134,24 @@ class ArchipelagoSave
 	 * Returns true if the location was already checked according to our save.
 	 */
 	static function isLocationChecked(id:Int):Bool return data != null && data.checkedLocations.indexOf(id) != -1;
+
+	static function isSongSeen(index:Int):Bool return data != null && data.seenSongs.indexOf(index) != -1;
+
+	static function isWeekSeen(index:Int):Bool return data != null && data.seenWeeks.indexOf(index) != -1;
+
+	static function markSongSeen(index:Int):Void
+	{
+		if (data == null || data.seenSongs.indexOf(index) != -1) return;
+		data.seenSongs.push(index);
+		flush();
+	}
+
+	static function markWeekSeen(index:Int):Void
+	{
+		if (data == null || data.seenWeeks.indexOf(index) != -1) return;
+		data.seenWeeks.push(index);
+		flush();
+	}
 
 	/**
 	 * Records that an item has been received and queues it for application.

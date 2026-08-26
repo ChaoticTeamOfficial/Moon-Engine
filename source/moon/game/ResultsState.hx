@@ -74,7 +74,12 @@ class ResultsState extends FlxState
 
 		// archipelago check
 		final songName = (PlayState.songData != null) ? PlayState.songData.song : null;
-		if (songName != null) ArchipelagoProgress.reportSongClear(songName, diff);
+		if (ArchipelagoManager.pendingClearIsWeek) ArchipelagoProgress.reportWeekClear();
+		else
+		{
+			final songName = (PlayState.songData != null) ? PlayState.songData.song : null;
+			if (songName != null) ArchipelagoProgress.reportSongClear(songName, diff);
+		}
 
 		// rank = 'PERFECT';
 		rankData = Timings.getRank(stats.accuracy);

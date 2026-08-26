@@ -252,7 +252,7 @@ class ArchipelagoProgress
 	}
 
 	/**
-	 * Call when the player successfully clears a song.
+	 * Called when the player successfully clears a song.
 	 */
 	static function reportSongClear(songName:String, ?difficulty:String):Void
 	{
@@ -273,4 +273,30 @@ class ArchipelagoProgress
 		ArchipelagoManager.pendingClearIndex = 0;
 		ArchipelagoManager.pendingClearIsWeek = false;
 	}
+
+	/**
+	 * Called when the player successfully clears a week.
+	 */
+	static function reportWeekClear():Void
+	{
+		if (!ArchipelagoManager.isConnected) return;
+
+		final index = ArchipelagoManager.pendingClearIndex;
+		if (index <= 0)
+		{
+			trace('[AP] No clear index for week, skipping location check.', "WARNING");
+			return;
+		}
+
+		final locId = weekClearLocationId(index);
+		ArchipelagoManager.checkLocation(locId);
+		trace('[AP] Checked location Week Clear ${index} (id ${locId}).', "INFO");
+
+		ArchipelagoManager.pendingClearIndex = 0;
+		ArchipelagoManager.pendingClearIsWeek = false;
+	}
+
+	static function isSongNew(index:Int):Bool return isSongUnlocked(index) && !ArchipelagoSave.isSongSeen(index);
+
+	static function isWeekNew(index:Int):Bool return isWeekUnlocked(index) && !ArchipelagoSave.isWeekSeen(index);
 }

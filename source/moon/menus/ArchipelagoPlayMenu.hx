@@ -1,7 +1,6 @@
 package moon.menus;
 
-import moon.backend.archipelago.ArchipelagoManager;
-import moon.backend.archipelago.ArchipelagoProgress;
+import moon.backend.archipelago.*;
 import moon.backend.data.SongLibrary;
 import moon.backend.data.SongBase;
 import moon.backend.data.Week;
@@ -214,8 +213,11 @@ class ArchipelagoPlayMenu extends FlxTransitionableState
 
 			final locked = listLocked[idx];
 			final selected = (idx == curSelected && focus == 0);
-			t.text = (selected ? "> " : "  ") + (locked ? "[LOCKED] " : "") + listNames[idx];
-			t.color = locked ? 0xFF666666 : (selected ? 0xFFffd863 : FlxColor.WHITE);
+			final isNew = !locked && (viewMode == VIEW_SONGS ? ArchipelagoProgress.isSongNew(idx + 1) : ArchipelagoProgress.isWeekNew(idx + 1));
+
+			t.text = (selected ? "> " : "  ") + (locked ? "[LOCKED] " : (isNew ? "[NEW] " : "")) + listNames[idx];
+
+			t.color = locked ? 0xFF666666 : isNew ? 0xFF66ff99 : (selected ? 0xFFffd863 : FlxColor.WHITE);
 		}
 
 		diffText.text = "DIFF: " + (difficulties.length > 0 ? difficulties[curDiff] : "-");
@@ -357,6 +359,14 @@ class ArchipelagoPlayMenu extends FlxTransitionableState
 
 	function toggleView()
 	{
+		// TODO fix this l8r im lazy......
+		if (!listLocked[curSelected])
+		{
+			if (viewMode == VIEW_SONGS) ArchipelagoSave.markSongSeen(curSelected + 1);
+			else
+				ArchipelagoSave.markWeekSeen(curSelected + 1);
+		}
+
 		viewMode = (viewMode == VIEW_SONGS) ? VIEW_WEEKS : VIEW_SONGS;
 		curSelected = 0;
 		rebuildList();
@@ -383,35 +393,32 @@ class ArchipelagoPlayMenu extends FlxTransitionableState
 		final mix = mixes[curMix];
 		var songName:String;
 
-		if (viewMode == VIEW_SONGS) songName = listNames[curSelected];
+		if (viewMode == VIEW_SONGS)
+		{
+			songName = listNames[curSelected];
+			PlayState.songData = {
+				song: songName,
+				difficulty: diff,
+				mix: mix
+			};
+		}
 		else
 		{
-			// Play first track of the week that matches mix/diff if possible
 			final weekId = ArchipelagoProgress.weekPool[curSelected];
 			final tracks = SongLibrary.get().weekSonglist(weekId);
-			songName = null;
-			for (entry in tracks)
-			{
-				if (entry.mix == mix && entry.difficulty == diff)
-				{
-					songName = entry.song;
-					break;
-				}
-			}
-			if (songName == null && tracks.length > 0) songName = tracks[0].song;
-			if (songName == null)
+			final playlist:Array<SongBase> = [];
+			for (entry in tracks) if (entry.mix == mix && entry.difficulty == diff) playlist.push(entry);
+
+			if (playlist.length == 0)
 			{
 				infoText.text = "Week has no playable tracks.";
 				infoText.color = 0xFFff6666;
 				return;
 			}
-		}
 
-		PlayState.songData = {
-			song: songName,
-			difficulty: diff,
-			mix: mix
-		};
+			PlayState.queuePlaylist(playlist);
+			songName = playlist[0].song;
+		}
 
 		final clearIndex = (viewMode == VIEW_SONGS) ? ArchipelagoProgress.indexForSong(songName) : (curSelected + 1);
 		ArchipelagoManager.pendingClearIndex = clearIndex;
