@@ -52,6 +52,7 @@ class Character extends MoonSprite
 	public var camOffsets:Array<Float> = [];
 	public var type:CharacterType;
 	public var extendIdleDuration:Bool = false;
+	public var holding:Bool = false;
 
 	/**
 	 * Creates a character on the screen.
@@ -119,7 +120,7 @@ class Character extends MoonSprite
 				animation.curAnim.frameRate = animation.curAnim.frames.length * (conductor.bpm / danceFrequency) / 60.0;
 			}
 
-			if (animationHold >= conductor.stepCrochet / 1000 * holdDuration)
+			if (animationHold >= conductor.stepCrochet / 1000 * holdDuration && !holding)
 			{
 				dance(true);
 				animationHold = 0;

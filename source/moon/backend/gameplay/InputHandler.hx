@@ -187,6 +187,8 @@ class InputHandler
 		checkSustains();
 		onLateMiss();
 		// stats.health = FlxMath.bound(stats.health, 0, 101);
+
+		if (attachedChar != null) attachedChar.holding = pressed.contains(true);
 	}
 
 	private function processReplayInputs():Void

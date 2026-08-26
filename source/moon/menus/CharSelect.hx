@@ -31,8 +31,9 @@ class CharSelect extends FlxState
 		player = new Character(0, 0, 'bf/bfChill', conductor);
 		background.add(player);
 		player.screenCenter();
-		player.overrideAnims = ['select', 'deselect', 'slide-in'];
 		player.holdDuration = 4;
+		player.x += 432;
+		player.y += 44;
 
 		cursor = new Cursor();
 		add(cursor);
@@ -107,7 +108,7 @@ class CharSelect extends FlxState
 	private function generateBackground():Void
 	{
 		back = new MoonSprite(-150, -160).loadGraphic(Paths.image('menus/charSelect/BG'));
-		back.scale.set(1.4, 1.4);
+		back.scale.set(1.2, 1.2);
 		back.scrollFactor.set(0.8, 0.8);
 		add(back);
 		back.active = false;
