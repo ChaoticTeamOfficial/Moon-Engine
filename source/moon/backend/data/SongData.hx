@@ -90,12 +90,9 @@ class SongData
 		final rest = key.substring(mixEnd + 1);
 		final lastDash = rest.lastIndexOf('-');
 
-		final songName = (lastDash != -1) ? rest.substring(0, lastDash) : rest;
-		final difficulty = (lastDash != -1) ? rest.substring(lastDash + 1) : '';
-
 		return {
-			song: songName,
-			difficulty: difficulty,
+			song: (lastDash != -1) ? rest.substring(0, lastDash) : rest,
+			difficulty: (lastDash != -1) ? rest.substring(lastDash + 1) : '',
 			mix: key.substring(1, mixEnd)
 		};
 	}

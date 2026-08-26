@@ -216,7 +216,7 @@ typedef MetadataStruct =
 
 /**
  * Structure for the entire Chart.
-**/
+ */
 typedef ChartStruct =
 {
 	/**
@@ -840,7 +840,7 @@ class Chart
 		#if sys
 		if (difficulties == null || difficulties.length == 0) throw 'convertMany requires at least one difficulty';
 
-		final loadDiff = difficulties[0] == 'erect' ? 'nightmare' : difficulties[0];
+		final loadDiff = difficulties.indexOf('erect') != -1 ? null : difficulties[0];
 		final vslice = loadAsVSlice(type, path, metaPath, loadDiff).stringify();
 		final data:Dynamic = Json.parse(vslice.data);
 		final metadata:Dynamic = Json.parse(vslice.meta);
@@ -946,7 +946,7 @@ class Chart
 			case 'codename':
 				convertCodenameFolder(folderPath, difficulties, applyNoteRules);
 			default:
-				throw 'Folder conversion is only set up for v-slice and codename (got $type). Sorry brah!';
+				throw 'Folder conversion is only set up for v-slice and codename (got $type).';
 		};
 		#else
 		throw 'Chart conversion is currently only available for Desktop.';
@@ -1188,8 +1188,8 @@ class Chart
 	private static function resolveSourceDifficulty(notesObj:Dynamic, difficulty:String):String
 	{
 		if (notesObj == null) return difficulty;
-		if (Reflect.hasField(notesObj, difficulty)) return difficulty;
 		if (difficulty == 'erect' && Reflect.hasField(notesObj, 'nightmare')) return 'nightmare';
+		if (Reflect.hasField(notesObj, difficulty)) return difficulty;
 		return difficulty;
 	}
 
@@ -1201,12 +1201,7 @@ class Chart
 	public static final NOTE_TYPE_RULES:Map<String, String> = [
 		'Alt Animation' => 'Alt Animation Note',
 		'No Animation' => 'No Animation Note',
-		'No Anim' => 'No Animation Note',
-		'GF Sing' => 'GF Sing',
-		'Girlfriend Sing' => 'GF Sing',
-		'Hurt Note' => 'Hurt Note',
-		'Instakill Note' => 'Instakill Note',
-		'Phantom Note' => 'Phantom Note'
+		'No Anim' => 'No Animation Note'
 	];
 
 	private static function applyNoteTypeRule(kind:Null<String>):Null<String>
@@ -1359,7 +1354,10 @@ class Chart
 		final playData = metadata.playData;
 		final chars = playData.characters;
 
-		// Prefer nightmare scroll values when converting erect (V-Slice consolidation).
+		// Alright lemme... write this better? lol
+		// We are completely getting rid of nightmare, and instead making it the main "Erect" difficulty.
+		// we asked around people if they were fine with it and most said so!
+		// so yeah, we doing that.
 		var scrollDiff = difficulty;
 		if (
 			difficulty == 'erect'
@@ -1367,7 +1365,6 @@ class Chart
 			&& Type.typeof(data.scrollSpeed) == TObject
 			&& !Std.isOfType(data.scrollSpeed, Array)
 			&& Reflect.hasField(data.scrollSpeed, 'nightmare')
-			&& !Reflect.hasField(data.scrollSpeed, 'erect')
 		) scrollDiff = 'nightmare';
 
 		return {
@@ -1394,48 +1391,20 @@ class Chart
 	#end
 }
 
+// my slow ass documented these before but completely forgot I did @:dox(hide) beforehand XD
+
 @:dox(hide)
 typedef ConvertResult =
 {
-	/**
-	 * Difficulty this result belongs to.
-	 */
 	var ?difficulty:String;
-
-	/**
-	 * The chart JSON.
-	 */
 	var chartJson:String;
-
-	/**
-	 * The events JSON.
-	 */
 	var eventsJson:String;
-
-	/**
-	 * The metadata JSON.
-	 */
 	var ?metaJson:String;
-
-	/**
-	 * Parsed notes.
-	 */
 	var ?notes:Array<NoteStruct>;
-
-	/**
-	 * Parsed events.
-	 */
 	var ?events:Array<EventStruct>;
-
-	/**
-	 * Parsed metadata.
-	 */
 	var ?meta:MetadataStruct;
 };
 
-/**
- * Result of converting several difficulties at once.
- */
 @:dox(hide)
 typedef ConvertBatch =
 {
@@ -1445,9 +1414,6 @@ typedef ConvertBatch =
 	var ?sharedMetaJson:String;
 };
 
-/**
- * One mix produced by folder conversion.
- */
 @:dox(hide)
 typedef FolderConvertResult =
 {

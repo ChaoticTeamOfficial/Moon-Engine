@@ -45,12 +45,20 @@ class ArchipelagoManager
 	 */
 	static final onPrintJSON = new FlxTypedSignal<Array<Dynamic>->Void>();
 
+	/**
+	 * The current loaded client.
+	 */
 	static var client:Client;
+
 	static var host:String = "";
 	static var port:Int = 38281;
 	static var slot:String = "";
 	static var password:String = "";
 	static var slotData:Dynamic;
+
+	/**
+	 * Whether the current client is connected to an archipelago server.
+	 */
 	static var isConnected(get, never):Bool;
 
 	static function get_isConnected():Bool return client != null && client.state == State.SLOT_CONNECTED;
