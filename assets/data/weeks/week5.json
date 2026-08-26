@@ -1,0 +1,9 @@
+{
+	"displayName": "Week 5",
+	"description": "RED SNOW",
+	"tracks": ["cocoa", "eggnog", "winter-horrorland"],
+	"color": [216, 85, 142],
+	"mainMix": "bf",
+	"order": 5,
+	"beatAchievement": "beatWeek5"
+}

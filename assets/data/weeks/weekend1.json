@@ -1,0 +1,9 @@
+{
+	"displayName": "Weekend 1",
+	"description": "DUE DEBTS",
+	"tracks": ["darnell", "lit-up", "2hot", "blazin"],
+	"color": [115, 94, 176],
+	"mainMix": "pico",
+	"order": 8,
+	"beatAchievement": "beatWeekend1"
+}

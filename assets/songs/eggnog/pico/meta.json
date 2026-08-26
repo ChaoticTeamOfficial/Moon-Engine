@@ -1,0 +1,56 @@
+{
+	"players": [
+		"bf-christmas"
+	],
+	"spectators": [
+		"gf-christmas"
+	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"opponents": [
+		"parents-christmas"
+	],
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"artist": "Kawai Sprite",
+	"hasCountdown": {
+		"easy": true,
+		"hard": true,
+		"normal": true
+	},
+	"difficultyRating": {
+		"easy": null,
+		"hard": null,
+		"normal": null
+	},
+	"version": "2.2.4",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": {
+		"easy": 2.3,
+		"hard": 2.7,
+		"normal": 2.5
+	},
+	"charter": "ninjamuffin99 + MtH",
+	"timeSignature": [
+		4,
+		4
+	],
+	"healthMultiplier": {
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
+	},
+	"displayName": "Eggnog",
+	"stage": "mallXmas",
+	"noteskin": {
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
+	},
+	"bpm": 150,
+	"album": "volume1"
+}

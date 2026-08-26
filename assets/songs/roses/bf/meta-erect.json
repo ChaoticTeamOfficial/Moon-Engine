@@ -1,0 +1,35 @@
+{
+	"stage": "schoolErect",
+	"players": [
+		"bf-pixel"
+	],
+	"opponents": [
+		"senpai-angry"
+	],
+	"artist": "Kawai Sprite",
+	"charter": "Jenny Crowe + fabs + Spazkid",
+	"spectators": [
+		"gf-pixel"
+	],
+	"hasCountdown": true,
+	"bpm": 128,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "volume3",
+	"displayName": "Roses Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.6,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

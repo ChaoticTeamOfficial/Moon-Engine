@@ -5,25 +5,29 @@
 	"spectators": [
 		"gf"
 	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
 		"dad"
 	],
-	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"lanes": [
 		"opponent",
 		"p1"
 	],
 	"artist": "Kawai Sprite",
 	"hasCountdown": {
-		"hard": true
+		"easy": true,
+		"hard": true,
+		"normal": true
 	},
 	"difficultyRating": {
-		"hard": -1
+		"easy": null,
+		"hard": null,
+		"normal": null
 	},
 	"version": "2.2.4",
 	"preview": [
 		0,
-		0
+		150000
 	],
 	"scrollSpd": {
 		"easy": 1.6,
@@ -36,12 +40,16 @@
 		4
 	],
 	"healthMultiplier": {
-		"hard": 1
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
 	},
 	"displayName": "DadBattle",
 	"stage": "mainStage",
 	"noteskin": {
-		"hard": "v-slice"
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
 	},
 	"bpm": 180,
 	"album": "volume1"

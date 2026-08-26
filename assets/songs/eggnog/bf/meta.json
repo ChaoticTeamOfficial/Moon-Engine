@@ -1,34 +1,56 @@
 {
 	"players": [
-		"bf"
+		"bf-christmas"
 	],
 	"spectators": [
-		"gf"
+		"gf-christmas"
 	],
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
-		"dad"
+		"parents-christmas"
 	],
 	"lanes": [
 		"opponent",
 		"p1"
 	],
-	"artist": "Saruky",
-	"hasCountdown": true,
+	"artist": "Kawai Sprite",
+	"hasCountdown": {
+		"easy": true,
+		"hard": true,
+		"normal": true
+	},
+	"difficultyRating": {
+		"easy": null,
+		"hard": null,
+		"normal": null
+	},
 	"version": "2.2.4",
 	"preview": [
 		0,
-		0
+		150000
 	],
-	"scrollSpd": 2.7,
-	"charter": "fabs + Spazkid",
+	"scrollSpd": {
+		"easy": 1.5,
+		"hard": 1.9,
+		"normal": 1.7
+	},
+	"charter": "ninjamuffin99 + MtH",
 	"timeSignature": [
 		4,
 		4
 	],
-	"displayName": "Eggnog Erect",
-	"stage": "mall-erect",
-	"bpm": 140,
-	"album": "expansion1",
-	"noteskin": "v-slice"
+	"healthMultiplier": {
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
+	},
+	"displayName": "Eggnog",
+	"stage": "mallXmas",
+	"noteskin": {
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
+	},
+	"bpm": 150,
+	"album": "volume1"
 }

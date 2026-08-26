@@ -1,0 +1,35 @@
+{
+	"stage": "limoRideErect",
+	"players": [
+		"bf-car"
+	],
+	"opponents": [
+		"mom-car"
+	],
+	"artist": "Kawai Sprite",
+	"charter": "fabs + Spazkid",
+	"spectators": [
+		"gf-car"
+	],
+	"hasCountdown": true,
+	"bpm": 135,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "expansion1",
+	"displayName": "Satin Panties Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.6,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

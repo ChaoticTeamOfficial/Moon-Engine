@@ -1,9 +1,7 @@
 {
-	"difficultyRating": -1,
-	"healthMultiplier": 1,
-	"stage": "schoolEvil-erect",
+	"stage": "schoolEvilErect",
 	"players": [
-		"bfPixel"
+		"bf-pixel"
 	],
 	"opponents": [
 		"spirit"
@@ -11,10 +9,11 @@
 	"artist": "Kawai Sprite (feat. Saster)",
 	"charter": "Jenny Crowe + fabs",
 	"spectators": [
-		"gfPixel"
+		"gf-pixel"
 	],
 	"hasCountdown": true,
 	"bpm": 190,
+	"healthMultiplier": 1,
 	"timeSignature": [
 		4,
 		4
@@ -23,7 +22,7 @@
 	"displayName": "Thorns Erect",
 	"preview": [
 		0,
-		0
+		150000
 	],
 	"scrollSpd": 2.7,
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
@@ -31,6 +30,6 @@
 		"opponent",
 		"p1"
 	],
-	"noteskin": "pixel",
+	"noteskin": "v-slice",
 	"version": "2.2.4"
 }

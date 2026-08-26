@@ -8,7 +8,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -20,7 +20,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -32,7 +32,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -44,7 +44,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -56,7 +56,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -68,7 +68,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -80,7 +80,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -92,7 +92,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -104,7 +104,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -116,7 +116,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -128,7 +128,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -140,7 +140,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -152,7 +152,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -164,7 +164,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -176,7 +176,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -188,7 +188,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -200,7 +200,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -212,7 +212,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -224,7 +224,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -236,7 +236,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -248,7 +248,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -260,7 +260,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -272,7 +272,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -284,7 +284,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -296,7 +296,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "opponent",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -308,7 +308,7 @@
 			"y": 0,
 			"duration": 26,
 			"character": "player",
-			"ease": "expo"
+			"ease": "expoOut"
 		}
 	}
 ]

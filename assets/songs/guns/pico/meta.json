@@ -1,0 +1,56 @@
+{
+	"players": [
+		"bf"
+	],
+	"spectators": [
+		"gf-tankmen"
+	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"opponents": [
+		"tankman"
+	],
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"artist": "Kawai Sprite",
+	"hasCountdown": {
+		"easy": true,
+		"hard": true,
+		"normal": true
+	},
+	"difficultyRating": {
+		"easy": null,
+		"hard": null,
+		"normal": null
+	},
+	"version": "2.2.4",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": {
+		"easy": 2.1,
+		"hard": 2.6,
+		"normal": 2.3
+	},
+	"charter": "MtH",
+	"timeSignature": [
+		4,
+		4
+	],
+	"healthMultiplier": {
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
+	},
+	"displayName": "Guns",
+	"stage": "tankmanBattlefield",
+	"noteskin": {
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
+	},
+	"bpm": 185,
+	"album": "volume2"
+}

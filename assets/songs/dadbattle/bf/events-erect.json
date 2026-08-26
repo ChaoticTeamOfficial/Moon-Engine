@@ -1,785 +1,785 @@
 [
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 0,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 0
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 2526.31578947368,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "player",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 2526.31578947368
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 5052.63157894737,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 5052.63157894737
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 7578.94736842105,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "player",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 7578.94736842105
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 10105.2631578947,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 10105.2631578947
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 15157.8947368421,
 		"values": {
-			"duration": 26,
 			"x": 0,
-			"character": "player",
 			"y": 0,
+			"duration": 26,
+			"character": "player",
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 15157.8947368421
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 20131.5789473684,
 		"values": {
 			"rate": 2,
 			"intensity": 1.1
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 20131.5789473684
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 20210.5263157895,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 20210.5263157895
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 24000,
 		"values": {
-			"duration": 26,
 			"x": 0,
-			"character": "player",
 			"y": 0,
+			"duration": 26,
+			"character": "player",
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 24000
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 25184.2105263158,
 		"values": {
 			"rate": 2,
 			"intensity": 1.2
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 25184.2105263158
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 30236.8421052632,
 		"values": {
 			"rate": 1,
 			"intensity": 1.3
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 30236.8421052632
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 30315.7894736842
+		"lane": 1,
+		"time": 30315.7894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 35289.4736842105,
 		"values": {
 			"rate": 1,
 			"intensity": 1.4
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 35289.4736842105
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.2,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 35368.7894736842
+		"lane": 1,
+		"time": 35368.7894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.2
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 37815.7894736842,
 		"values": {
 			"rate": 1,
 			"intensity": 1.5
-		},
-		"lane": 2,
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 37894.7894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.3
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 39157.7894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.35
+		}
+	},
+	{
 		"tag": "Customized Pulse Timing",
-		"time": 37815.7894736842
-	},
-	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.3,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 37894.7894736842
-	},
-	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.35,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 39157.7894736842
-	},
-	{
+		"lane": 2,
+		"time": 40342.1052631579,
 		"values": {
 			"rate": 1,
 			"intensity": 1.2
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 40342.1052631579
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 40421.0526315789,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 40421.0526315789
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 40421.0526315789
-	},
-	{
+		"lane": 1,
+		"time": 40421.0526315789,
 		"values": {
 			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 41368,
+		"values": {
 			"x": -100,
+			"y": 30,
+			"duration": 32,
 			"character": "spectator",
-			"y": -100,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 41368
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 0.95,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 41368.4210526316
-	},
-	{
+		"lane": 1,
+		"time": 41368.4210526316,
 		"values": {
 			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 0.95
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 45473,
+		"values": {
 			"x": -20,
-			"character": "spectator",
-			"y": -20,
-			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 45473
-	},
-	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 49263.1578947368
-	},
-	{
-		"values": {
-			"ease": "expoOut",
+			"y": 30,
 			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 49263.1578947368
+			"character": "spectator",
+			"ease": "expoOut"
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 49263.1578947368,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 49263.1578947368,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1
+		}
+	},
+	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 55500,
 		"values": {
 			"rate": 1,
 			"intensity": 1.3
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 55500
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 55578.7894736842
-	},
-	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.2,
-			"mode": "stage"
-		},
 		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 58263.1578947368
-	},
-	{
+		"time": 55578.7894736842,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 1.3,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 59368.4210526316
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 58263.1578947368,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.2
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 59368.4210526316,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.3
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 60315.7894736842,
+		"values": {
 			"duration": 8,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 60315.7894736842
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 60552.6315789474,
 		"values": {
 			"rate": 1,
 			"intensity": 1.2
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 60552.6315789474
+		}
 	},
 	{
-		"values": {
-			"duration": 32,
-			"x": -100,
-			"character": "spectator",
-			"y": -100,
-			"ease": "expoOut"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 60631
+		"lane": 0,
+		"time": 60631,
+		"values": {
+			"x": -100,
+			"y": 30,
+			"duration": 32,
+			"character": "spectator",
+			"ease": "expoOut"
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 0.9,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 60631.5789473684
-	},
-	{
+		"lane": 1,
+		"time": 60631.5789473684,
 		"values": {
 			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 0.9
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 63157,
+		"values": {
 			"x": -20,
+			"y": 30,
+			"duration": 32,
 			"character": "spectator",
-			"y": -20,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 63157
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 65684,
 		"values": {
-			"duration": 32,
 			"x": -100,
+			"y": 30,
+			"duration": 32,
 			"character": "spectator",
-			"y": -100,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 65684
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 68210,
 		"values": {
-			"duration": 32,
 			"x": -20,
-			"character": "spectator",
-			"y": -20,
-			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 68210
-	},
-	{
-		"values": {
+			"y": 30,
 			"duration": 32,
-			"x": -100,
 			"character": "spectator",
-			"y": -100,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 70736
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 70736,
+		"values": {
+			"x": -100,
+			"y": 30,
+			"duration": 32,
+			"character": "spectator",
+			"ease": "expoOut"
+		}
+	},
+	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 75710.5263157895,
 		"values": {
 			"rate": 1,
 			"intensity": 1.3
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 75710.5263157895
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expoOut"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 75789.1578947368
-	},
-	{
+		"lane": 0,
+		"time": 75789.1578947368,
 		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 75789.4736842105
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 75789.4736842105,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 78315.7894736842
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 78315.7894736842,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 1.2,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 79578.7894736842
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 79578.7894736842,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 0.9,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 80210.7894736842
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.2
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 80210.7894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 0.9
+		}
+	},
+	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 80763.1578947368,
 		"values": {
 			"rate": 1,
 			"intensity": 1.2
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 80763.1578947368
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 80842.7894736842
-	},
-	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 0.9,
-			"mode": "stage"
-		},
 		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 85894.7894736842
-	},
-	{
+		"time": 80842.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 90947.7894736842
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 85894.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 96000.7894736842
+			"mode": "stage",
+			"zoom": 0.9
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 90947.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.2,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 98526.7894736842
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 96000.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 99473.7894736842
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 98526.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.3,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 99789.7894736842
+			"mode": "stage",
+			"zoom": 1.2
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 99473.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.2,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 100736.789473684
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 99789.7894736842,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 101052.789473684
+			"mode": "stage",
+			"zoom": 1.3
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 100736.789473684,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 103578.789473684
+			"mode": "stage",
+			"zoom": 1.2
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 101052.789473684,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 103894.789473684
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 103578.789473684,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 106105.789473684
+			"mode": "stage",
+			"zoom": 1.1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 103894.789473684,
 		"values": {
+			"duration": 32,
 			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 106421.789473684
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 106105.789473684,
 		"values": {
 			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 106421.789473684,
+		"values": {
+			"duration": 32,
+			"ease": "expoOut",
+			"mode": "stage",
+			"zoom": 1
+		}
+	},
+	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 111157,
+		"values": {
 			"x": -100,
+			"y": 30,
+			"duration": 32,
 			"character": "spectator",
-			"y": -100,
-			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 111157
+			"ease": "expoOutOut"
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 0.9,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 111157.894736842
+		"lane": 1,
+		"time": 111157.894736842,
+		"values": {
+			"duration": 32,
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 0.9
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 116210.526315789,
 		"values": {
-			"duration": 26,
 			"x": 0,
-			"character": "player",
 			"y": 0,
+			"duration": 26,
+			"character": "player",
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 116210.526315789
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 0.95,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 116210.951219512
-	},
-	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
 		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 118736.951219512
-	},
-	{
+		"time": 116210.951219512,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 0.9,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 119684.951219512
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 0.95
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 118736.951219512,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 1.1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 120000.951219512
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 119684.951219512,
 		"values": {
-			"ease": "expoOut",
 			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
-		"tag": "Set Zoom",
-		"time": 120947.951219512
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 0.9
+		}
 	},
 	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 120000.951219512,
+		"values": {
+			"duration": 32,
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 1.1
+		}
+	},
+	{
+		"tag": "Set Zoom",
+		"lane": 1,
+		"time": 120947.951219512,
+		"values": {
+			"duration": 32,
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 1
+		}
+	},
+	{
+		"tag": "Customized Pulse Timing",
+		"lane": 2,
+		"time": 121184.361445783,
 		"values": {
 			"rate": 4,
 			"intensity": 1
-		},
-		"lane": 2,
-		"tag": "Customized Pulse Timing",
-		"time": 121184.361445783
+		}
 	},
 	{
-		"values": {
-			"ease": "expoOut",
-			"duration": 32,
-			"zoom": 1,
-			"mode": "stage"
-		},
-		"lane": 1,
 		"tag": "Set Zoom",
-		"time": 121262.789473684
+		"lane": 1,
+		"time": 121262.789473684,
+		"values": {
+			"duration": 32,
+			"ease": "expoOutOut",
+			"mode": "stage",
+			"zoom": 1
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 121263.157894737,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 121263.157894737
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 123789.634146342,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "player",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 123789.634146342
+		}
 	},
 	{
+		"tag": "Move Camera",
+		"lane": 0,
+		"time": 126315.634146342,
 		"values": {
-			"duration": 26,
 			"x": 0,
+			"y": 0,
+			"duration": 26,
 			"character": "opponent",
-			"y": 0,
 			"ease": "expoOut"
-		},
-		"lane": 0,
-		"tag": "Move Camera",
-		"time": 126315.634146342
+		}
 	},
 	{
-		"values": {
-			"duration": 26,
-			"x": 0,
-			"character": "player",
-			"y": 0,
-			"ease": "expoOut"
-		},
-		"lane": 0,
 		"tag": "Move Camera",
-		"time": 128842.634146342
+		"lane": 0,
+		"time": 128842.634146342,
+		"values": {
+			"x": 0,
+			"y": 0,
+			"duration": 26,
+			"character": "player",
+			"ease": "expoOut"
+		}
 	}
 ]

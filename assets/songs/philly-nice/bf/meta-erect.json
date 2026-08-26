@@ -1,0 +1,35 @@
+{
+	"stage": "phillyTrainErect",
+	"players": [
+		"bf"
+	],
+	"opponents": [
+		"pico"
+	],
+	"artist": "Kawai Sprite (feat. Saruky)",
+	"charter": "Spazkid + fabs",
+	"spectators": [
+		"gf"
+	],
+	"hasCountdown": true,
+	"bpm": 175,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "volume3",
+	"displayName": "Philly Nice Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.5,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

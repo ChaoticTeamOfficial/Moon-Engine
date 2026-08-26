@@ -1,0 +1,35 @@
+{
+	"stage": "spookyMansionErect",
+	"players": [
+		"bf-dark"
+	],
+	"opponents": [
+		"spooky-dark"
+	],
+	"artist": "Kawai Sprite (feat. Saruky)",
+	"charter": "Spazkid + fabs",
+	"spectators": [
+		"gf-dark"
+	],
+	"hasCountdown": true,
+	"bpm": 177,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "volume3",
+	"displayName": "South Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.7,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

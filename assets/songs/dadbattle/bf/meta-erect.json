@@ -1,34 +1,35 @@
 {
+	"stage": "mainStageErect",
 	"players": [
 		"bf"
 	],
-	"spectators": [
-		"gf"
-	],
-	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
 		"dad"
 	],
-	"lanes": [
-		"opponent",
-		"p1"
-	],
 	"artist": "Kawai Sprite",
-	"hasCountdown": true,
-	"version": "2.2.4",
-	"preview": [
-		0,
-		15000
-	],
-	"scrollSpd": 2.6,
 	"charter": "Jenny Crowe + fabs + Spazkid",
+	"spectators": [
+		"gf"
+	],
+	"hasCountdown": true,
+	"bpm": 190,
+	"healthMultiplier": 1,
 	"timeSignature": [
 		4,
 		4
 	],
-	"displayName": "DadBattle Erect",
-	"stage": "stage-erect",
-	"bpm": 190,
 	"album": "volume3",
-	"noteskin": "v-slice"
+	"displayName": "DadBattle Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.6,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
 }

@@ -1,0 +1,35 @@
+{
+	"stage": "limoRideErect",
+	"players": [
+		"bf-car"
+	],
+	"opponents": [
+		"mom-car"
+	],
+	"artist": "Kohta Takahashi (feat. Kawai Sprite)",
+	"charter": "PhantomArcade + fabs + Spazkid",
+	"spectators": [
+		"gf-car"
+	],
+	"hasCountdown": true,
+	"bpm": 125,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "volume3",
+	"displayName": "High Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.4,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

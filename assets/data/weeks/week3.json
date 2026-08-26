@@ -1,0 +1,9 @@
+{
+	"displayName": "Week 3",
+	"description": "PICO",
+	"tracks": ["pico", "philly-nice", "blammed"],
+	"color": [183, 216, 85],
+	"mainMix": "bf",
+	"order": 3,
+	"beatAchievement": "beatWeek3"
+}

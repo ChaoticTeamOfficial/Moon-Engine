@@ -1,0 +1,35 @@
+{
+	"stage": "mainStageErect",
+	"players": [
+		"bf"
+	],
+	"opponents": [
+		"dad"
+	],
+	"artist": "Kawai Sprite (feat. Saruky)",
+	"charter": "Jenny Crowe + fabs + Spazkid",
+	"spectators": [
+		"gf"
+	],
+	"hasCountdown": true,
+	"bpm": 123,
+	"healthMultiplier": 1,
+	"timeSignature": [
+		4,
+		4
+	],
+	"album": "volume3",
+	"displayName": "Bopeebo Erect",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": 2.2,
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"noteskin": "v-slice",
+	"version": "2.2.4"
+}

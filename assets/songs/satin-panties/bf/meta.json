@@ -1,0 +1,56 @@
+{
+	"players": [
+		"bf-car"
+	],
+	"spectators": [
+		"gf-car"
+	],
+	"generatedBy": "Friday Night Funkin' - v0.8.1",
+	"opponents": [
+		"mom-car"
+	],
+	"lanes": [
+		"opponent",
+		"p1"
+	],
+	"artist": "Kawai Sprite",
+	"hasCountdown": {
+		"easy": true,
+		"hard": true,
+		"normal": true
+	},
+	"difficultyRating": {
+		"easy": null,
+		"hard": null,
+		"normal": null
+	},
+	"version": "2.2.4",
+	"preview": [
+		0,
+		150000
+	],
+	"scrollSpd": {
+		"easy": 1.6,
+		"hard": 1.8,
+		"normal": 1.6
+	},
+	"charter": "ninjamuffin99 + MtH + Spazkid",
+	"timeSignature": [
+		4,
+		4
+	],
+	"healthMultiplier": {
+		"easy": 1,
+		"hard": 1,
+		"normal": 1
+	},
+	"displayName": "Satin Panties",
+	"stage": "limoRide",
+	"noteskin": {
+		"easy": "v-slice",
+		"hard": "v-slice",
+		"normal": "v-slice"
+	},
+	"bpm": 110,
+	"album": "volume1"
+}

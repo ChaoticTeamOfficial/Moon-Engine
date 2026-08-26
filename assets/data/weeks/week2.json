@@ -1,0 +1,9 @@
+{
+	"displayName": "Week 2",
+	"description": "SPOOKY MONTH",
+	"tracks": ["spookeez", "south", "monster"],
+	"color": [213, 126, 0],
+	"mainMix": "bf",
+	"order": 2,
+	"beatAchievement": "beatWeek2"
+}

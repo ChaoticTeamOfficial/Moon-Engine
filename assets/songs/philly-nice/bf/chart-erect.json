@@ -1,0 +1,6340 @@
+{
+	"notes": [
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 171.428571428283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 342.857142856854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 300,
+			"data": 1,
+			"lane": "opponent",
+			"time": 685.714285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571427,
+			"data": 3,
+			"lane": "opponent",
+			"time": 1028.57142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 1542.85714285685,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 1714.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 299.999999999997,
+			"data": 1,
+			"lane": "opponent",
+			"time": 2057.14285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571718,
+			"data": 3,
+			"lane": "opponent",
+			"time": 2399.99999999971,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 2914.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 3085.71428571399,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 300.000000000288,
+			"data": 1,
+			"lane": "opponent",
+			"time": 3428.57142857114,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.57142857172,
+			"data": 3,
+			"lane": "opponent",
+			"time": 3771.42857142828,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 4071.42857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 4114.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 4285.71428571399,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 4457.14285714256,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 4800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 5142.85714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 5314.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 5657.14285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 5828.57142857114,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 300.000000000291,
+			"data": 1,
+			"lane": "p1",
+			"time": 6171.42857142828,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 6514.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 6685.71428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 7028.57142857114,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 7114.28571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 7200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 7371.42857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 7542.85714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 7885.71428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 8057.14285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "p1",
+			"time": 8400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 8571.42857142828,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 8742.85714285685,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 8828.57142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 8914.28571428542,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 9085.71428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 9257.14285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 9428.57142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 9599.99999999971,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 9771.42857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 9857.14285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 9942.85714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 10114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 10200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 10285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 10457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 10628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 10799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 10971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 11014.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 11142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 11314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 11314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 11571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 11657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 11999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 12171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 12514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 12685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 12857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 12857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 13028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 13200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 13371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 13371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 13542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 13714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 13757.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 13885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 14057.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 14057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 14142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 0,
+			"lane": "p1",
+			"time": 14228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 14228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 14400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 14571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 14742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 14914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 15000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 15085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 15257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 15428.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 15685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 15771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 16114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 16285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 16628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 16800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 16971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 17142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 17314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 17485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 17657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 18000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 18085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 18171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 18342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 18342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 18514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 18685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 18857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 2,
+			"lane": "p1",
+			"time": 19028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 19200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 19371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 19542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 19714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 19799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 19885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 20057.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 20228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 20399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 20485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 20571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 20742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 20914.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 21085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 21257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 150.000000000229,
+			"data": 1,
+			"lane": "p1",
+			"time": 21428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 21771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 21771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 21942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 22114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 22285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 22542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 22628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 22971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 23142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 23485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 23657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 23828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 23999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 24342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 24514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 24857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 25028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 25114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 25199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 25371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 25542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 25714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 25885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 25971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 26057.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 26228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 26400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 26657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 26742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 26742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 27085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 27085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 27257.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 27257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 27599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 27771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 27942.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 28028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 28114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 28285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 28457.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 28628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 28971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 29142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 29314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 29485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 29657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 29742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 29828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 30000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 30171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 30342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 30514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 30600,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 30685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 30857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 31028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 31114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 31199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 31371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 31542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 31628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 31714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 31885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 32057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 32142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 32228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 32399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 32571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 32742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 32800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 32857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 32914.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 32914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 33085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 33214.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 33257.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 33257.1428571427,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 33428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 33599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 33599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 33771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 33942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 33942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 34114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 34285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 34285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 34457.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 34628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 34628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 34671.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 34799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 34971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 34971.4285714284,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 35142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 35314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 35314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 35485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 35657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 35657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 35828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 35999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 35999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 36171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 36342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 36342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 36514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 36685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 36685.7142857141,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 36857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 37028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 37028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 37199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 37371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 37371.4285714284,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 37500,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 37542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 37714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 37714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 37885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 38057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 0,
+			"lane": "opponent",
+			"time": 38228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 38228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 38314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 38399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 38571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 38742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 38914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 39085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 39257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 39428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 39599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 39771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 39857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 39942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 40028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 40114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 40199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 40285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 40371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 40457.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 40542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 40628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 40714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 40800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 40971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 41142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 41314.2857142856,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 41485.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 41657.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 41828.5714285716,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 42000.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 42171.4285714285,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 42342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 42514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 42599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 42685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 42771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 42857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 42942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 43028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 43114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 43199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 43285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 43371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 43457.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 43542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 43714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 43885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 43885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 107.142857142886,
+			"data": 2,
+			"lane": "p1",
+			"time": 43928.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 44057.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 44185.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 44228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 150.000000000029,
+			"data": 1,
+			"lane": "p1",
+			"time": 44228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 44399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 44571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 44742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 44914.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 45085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 45257.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 45428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 45557.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 45599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 45771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 45942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 46114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 46285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 46457.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 46628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 46799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 46971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 47142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 47314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 47485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 47657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 47828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 47999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 48171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 48342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 48471.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 48514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 48685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 48857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 49028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 0,
+			"lane": "opponent",
+			"time": 49199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 49371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 49542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 49714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 49885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 50057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 50228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 50400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 50571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 50657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 50742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 50828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 50914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 51000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 51085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 51171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 51257.1428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 51342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 51428.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 51514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 51600,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 51685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 51771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 51857.1428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 51942.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 52028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 52114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 52285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 52457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 52628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 52799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 52971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 53142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 53314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 53400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 53485.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 53571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 53657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 53742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 53828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 53914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 54000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 54085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 54171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 54257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 54342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 54428.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 54514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 54600,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 54685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 54771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 54857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 55028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 55199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 55371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 55542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "opponent",
+			"time": 55714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 55885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 56057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 56228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 56399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 56485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 56571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 56742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 56914.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "opponent",
+			"time": 57085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 57257.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 57428.5714285711,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 57599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 57771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 57857.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 57942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 58114.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 58285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 58457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 0,
+			"lane": "opponent",
+			"time": 58628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 58800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 58971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 59142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 59314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 59571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 171.428571428825,
+			"data": 2,
+			"lane": "opponent",
+			"time": 59657.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 59999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 59999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 60171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 60171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 60342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 60514.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 60599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 60685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 60857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 61028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 61199.9999999997,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 61542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 61628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 61714.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 61885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 61971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 62057.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 62228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 62400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571692,
+			"data": 2,
+			"lane": "p1",
+			"time": 62571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571672,
+			"data": 0,
+			"lane": "p1",
+			"time": 62742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 62914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 63085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 63257.1428571426,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 63342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 63428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 63599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 63685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 63771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 63942.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 64114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 64285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 64457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 64628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 64799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 64971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 65142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571643,
+			"data": 0,
+			"lane": "p1",
+			"time": 65314.2857142855,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 65485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 65657.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 65828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 2,
+			"lane": "p1",
+			"time": 65828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 0,
+			"lane": "p1",
+			"time": 65828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 66171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 66342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 66342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 66514.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 66514.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 85.7142857142662,
+			"data": 1,
+			"lane": "p1",
+			"time": 66685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 66857.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 67028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 67028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 67157.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 67199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 67371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 67371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 67542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 67714.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 67714.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 67799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 67885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 67885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 68057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 68228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 68399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 68528.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 68571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 68571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 68614.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 68742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 68742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 68914.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 68914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 69085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 69085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 69257.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 69257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 69428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 69599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 69771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 69771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 69900,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 69942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 70114.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 70114.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 70114.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 70285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 70457.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 70457.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 70542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 70628.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 70628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 70800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 70971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 70971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 71014.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 71142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 71142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 71314.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 71485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 71657.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 71828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 72171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 72342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 72514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 72857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 73028.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 73200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 73371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 73542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 73714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 73885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 74057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 74228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 74400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 74571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 74742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 74828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 74914.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 75085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 75257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 75428.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 75600,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571438,
+			"data": 3,
+			"lane": "p1",
+			"time": 75771.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571419,
+			"data": 0,
+			"lane": "p1",
+			"time": 75942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571419,
+			"data": 2,
+			"lane": "p1",
+			"time": 76114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571438,
+			"data": 3,
+			"lane": "p1",
+			"time": 76285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571419,
+			"data": 0,
+			"lane": "p1",
+			"time": 76457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 76628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 76799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 385.714285714266,
+			"data": 2,
+			"lane": "p1",
+			"time": 76800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 76971.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 77142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 77400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 77485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 77828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 77999.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 78342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 78514.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 78685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 78857.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 79199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 79371.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 79714.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 79885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 79971.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 80057.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 80228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 80399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 80571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 80742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 80828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 80914.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 81085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 81257.1428571424,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 81514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 81599.9999999997,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 81942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 82114.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 82457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 82628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 82800.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 82885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 82971.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 83142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 83314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 83485.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 83828.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 84000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 84171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 84342.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 84514.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 84600,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 84685.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 84857.1428571431,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 85028.5714285717,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 85200.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 85371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 85457.1428571431,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 85542.8571428574,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 85714.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 85885.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 85971.4285714288,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 86057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 86228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 86400.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 86485.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 86571.4285714288,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 86742.8571428574,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 86914.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 87000.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 87085.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 87257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 87428.5714285717,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 87600.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 87657.1428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 87714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 87771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 87771.4285714288,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 87942.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 88071.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 88114.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 88114.2857142858,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 88285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 88457.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 88457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 88628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 88799.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 88800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 88971.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 89142.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 89142.8571428574,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 89314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 89442.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 89485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 89485.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 89657.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 89828.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 89828.5714285715,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 90000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 90171.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 90171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 90342.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 90514.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 90514.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 90685.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 90857.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 90857.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 91028.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 91199.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 91200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 91371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 91542.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 91542.8571428572,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 91714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 91885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 91885.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 92057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 92228.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 92228.5714285715,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 92399.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 92442.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 92571.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 92571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 92742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 92914.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 93085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 93085.7142857145,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 93171.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 93257.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 93428.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 93600.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 93771.4285714288,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 93942.8571428574,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 94114.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 94285.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 94457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 94628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 94714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 94800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 94885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 94971.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 95057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 95142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 95228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 95314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 95400,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 95485.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 95571.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 95657.1428571431,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 96000.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 96171.4285714287,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 96342.8571428576,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 96514.2857142861,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 96685.7142857147,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 96857.1428571433,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 97028.5714285716,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 97200.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 97371.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 97457.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 97542.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 97628.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 97714.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 97800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 97885.7142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 97971.4285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 98057.1428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 98142.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 98228.5714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 98314.2857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 98400.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 98742.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 2,
+			"lane": "p1",
+			"time": 98742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 0,
+			"lane": "p1",
+			"time": 98742.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 98914.2857142854,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 99042.8571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 99085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 99257.1428571425,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 99257.1428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 99428.5714285712,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 99428.5714285713,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 99599.9999999998,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 107.142857142643,
+			"data": 1,
+			"lane": "p1",
+			"time": 99600.0000000002,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 99771.4285714283,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 99942.8571428569,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 99942.8571428573,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 100114.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 100285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 100285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 100414.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 100457.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 100628.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 100628.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 100714.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 100800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 100800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 100971.428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 100971.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 101142.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 101314.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 101485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 101485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 101485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 101657.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 101657.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 101828.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 101828.571428572,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 102000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 102000,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 102171.428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 102171.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 102342.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 102342.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 102514.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 102685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 102685.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 102857.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 103028.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 103028.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 103028.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 103200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "opponent",
+			"time": 103328.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 103371.428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 103371.428571428,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 103457.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "opponent",
+			"time": 103542.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 103542.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 103714.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "opponent",
+			"time": 103714.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "opponent",
+			"time": 103885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 103885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 104057.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 171.428571428571,
+			"data": 0,
+			"lane": "opponent",
+			"time": 104057.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 2,
+			"lane": "p1",
+			"time": 104228.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 214.285714285724,
+			"data": 0,
+			"lane": "p1",
+			"time": 104228.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 104571.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 104742.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 104914.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 85.7142857145586,
+			"data": 1,
+			"lane": "p1",
+			"time": 105085.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 105428.571428572,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 105771.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 105942.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 106114.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 106200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 106285.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 106457.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 106628.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 106800,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 106971.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 106971.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 107142.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 107314.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 107485.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 3,
+			"lane": "p1",
+			"time": 107657.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 107828.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 108171.428571429,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 108514.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 2,
+			"lane": "p1",
+			"time": 108514.285714286,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 108857.142857143,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 108942.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 0,
+			"lane": "p1",
+			"time": 109028.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 0,
+			"data": 1,
+			"lane": "p1",
+			"time": 109200,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "p1",
+			"time": 109542.857142857,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "p1",
+			"time": 109885.714285714,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "p1",
+			"time": 110228.571428571,
+			"type": null,
+			"values": {}
+		},
+		{
+			"duration": 128.571428571429,
+			"data": 3,
+			"lane": "p1",
+			"time": 110571.428571429,
+			"type": null,
+			"values": {}
+		}
+	]
+}

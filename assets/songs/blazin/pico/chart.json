@@ -1,0 +1,10314 @@
+{
+	"notes": {
+		"easy": [
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 0,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 333.333333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 666.666666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 833.333333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 1333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 1666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 2000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 2333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2666.66666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 3166.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3333.33333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 3500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 4333.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 4666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5166.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 5666.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 6000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 6166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6666.66666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 7000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 7333.33333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 7500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 7666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 8000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 8333.33333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 8500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 8666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 8833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 9333.33333333333,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 9666.66666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 10000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 10166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 10333.3333333333,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 10666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 11000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 11166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 11500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 12333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 13333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 13833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 14166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 14666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 15041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 15500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 15666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 16333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 16500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17500,
+				"type": "weekend-1-blocklow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 17666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 18166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 18333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 18666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 19000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 19166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 19500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 20000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 20500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 20833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 21166.6666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 21333.3333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 21666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 22166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 22333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 22666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 23500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 24333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 24500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 25333.3333333334,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 25666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 26166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 26500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26666.6666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27000.0000000001,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 27166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 27500.0000000001,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 28000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 28333.3333333334,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 28833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29111.1111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 29333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 29500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 30166.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 30666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 31166.6666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 31666.6666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 32000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 32500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 32833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 33666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 34000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 34333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 35000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 35166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 35333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 35500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 36333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 36666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36833.3333333334,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 37000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 37166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "opponent",
+				"time": 37666.6666666667,
+				"type": "weekend-1-idle",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 42666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 43000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 43166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 43500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 44333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 45333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 45666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45833.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 46166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 46666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 47500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 47666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48000,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 49000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 49333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 49666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 50166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 50333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 50666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 51000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 51166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 51500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 52000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 52333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 52833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 53000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53166.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53375,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53416.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53458.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 53666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 53833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 54166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 54666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 54833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 55250,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 55500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55666.6666666667,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 57083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57583.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 57666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58416.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 58500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 59166.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 60000,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 60333.3333333333,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 60833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 61000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 61666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 62166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 62666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 63000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 63500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 63666.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 63833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 64083.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 64333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 64500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 65333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 65500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 65666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 65916.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 66166.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 66333.3333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 66666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 67000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 67166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67750,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 68250,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68333.3333333333,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 68666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 68833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 69000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 69166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69333.3333333333,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 69666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69916.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 70166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 70333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 70666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 71666.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 72000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 72333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 72500,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 72833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 73333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 73666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 74166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 74333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74500,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74708.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74750,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74791.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 75000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 75166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 75500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 76166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 76333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 76833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 77000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 77666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 78166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 78416.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78666.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78916.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 79000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 79500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 79666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 79833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 80500,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80666.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 81333.3333333333,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81666.6666666666,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 82166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 82333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 82666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 83000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 83166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 83500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 84000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 84333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 84833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 85000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 85333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 85416.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 85666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 86166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 86666.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 86833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 87000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 87250,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 87500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 87666.6666666666,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 88000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 88333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 88500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 88833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 89083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 89583.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89666.6666666666,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 90166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 90333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90416.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 90500,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 90666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 91000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 91166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 91500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 92333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 93333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 93833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 94166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 94666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 95041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 95500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 95666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 96333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 96500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 97666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 98166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 98333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 98666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 99000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 99166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 99500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 100000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 100500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100666.666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 100833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 101166.666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 101333.333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 101666.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 102166.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 102333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 102666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 103500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 104333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 104500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104833.333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 105333.333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 105666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 106166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 106500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106666.666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 107166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 107500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 108000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 108333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 108833.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109111.111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 109333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 109500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109666.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109833.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 110166.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 110666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 111166.666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 111666.666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 112000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 112500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112666.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 112833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 113333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 113666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 114000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 114333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114666.666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 115166.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115333.333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 115500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 116000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 116500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 117000,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 117333.333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			}
+		],
+		"hard": [
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 0,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 333.333333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 666.666666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 833.333333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 1333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 1666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 2000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 2333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2666.66666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 3166.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3333.33333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 3500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 4333.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 4666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5166.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 5666.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 6000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 6166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6666.66666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 7000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 7333.33333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 7500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 7666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 8000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 8333.33333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 8500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 8666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 8833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 9333.33333333333,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 9666.66666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 10000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 10166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 10333.3333333333,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 10666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 11000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 11166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 11500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 12333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 13333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 13833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 14166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 14666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 15041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 15500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 15666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 16333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 16500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17500,
+				"type": "weekend-1-blocklow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 17666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 18166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 18333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 18666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 19000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 19166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 19500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 20000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 20500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 20833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 21166.6666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 21333.3333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 21666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 22166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 22333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 22666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 23500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 24333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 24500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 25333.3333333334,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 25666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 26166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 26500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26666.6666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27000.0000000001,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 27166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 27500.0000000001,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 28000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 28333.3333333334,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 28833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29111.1111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29222.2222222222,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 29333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 29500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 30166.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 30666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 31166.6666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 31666.6666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 32000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 32500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 32833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 33666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 34000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 34333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 35000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 35166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 35333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 35500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 36333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 36666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36833.3333333334,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 37000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 37083.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 37166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "opponent",
+				"time": 37666.6666666667,
+				"type": "weekend-1-idle",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 42666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 43000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 43166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 43500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 44333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 45333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 45666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45833.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 46166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 46666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 47500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 47666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 47750,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48000,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 48500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 49000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 49333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 49666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 50166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 50333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 50666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 51000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 51166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 51500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 52000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 52333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 52833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 53000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53166.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53375,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53416.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53458.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 53666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 53833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 54166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 54666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 54833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 55250,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 55500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55666.6666666667,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 57083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57583.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 57666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58416.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 58500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 58750,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 58916.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 59166.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 59250,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 60000,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 60333.3333333333,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 60833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 61000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 61666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 62166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 62666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 63000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 63500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 63666.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 63833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 64041.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64083.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 64333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 64500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 65333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 65500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 65666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 65916.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 66166.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 66333.3333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 66666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 67000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 67166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67750,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 68250,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68333.3333333333,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 68666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 68833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 69000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 69083.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 69166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69333.3333333333,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 69666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 69833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69916.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 70166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 70333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 70666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 71666.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 72000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 72333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 72500,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 72833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 73333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 73666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 74166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 74333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74500,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74708.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74750,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74791.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 75000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 75166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 75500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 76166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 76333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 76833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 77000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 77666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 78166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 78416.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78666.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78916.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 79000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 79500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 79666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 79750,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 79833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 80083.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 80250,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80416.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 80500,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 80583.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80666.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 81333.3333333333,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81666.6666666666,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 82166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 82333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 82666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 83000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 83166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 83500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 84000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 84333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 84833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 85000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 85333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 85375,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 85416.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 85666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 86166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 86666.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 86833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 87000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 87250,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 87500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 87666.6666666666,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 88000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 88333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 88500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 88833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 89083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 89583.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89666.6666666666,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 90166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 90333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90416.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 90500,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 90666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 91000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 91166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 91500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 92333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 93333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 93833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 94166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 94666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 95041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 95500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 95666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 96333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 96500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 97666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 98166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 98333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 98666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 99000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 99166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 99500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 100000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 100500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100666.666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 100833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 101166.666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 101333.333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 101666.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 102166.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 102333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 102666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 103500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 104333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 104500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104833.333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 105333.333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 105666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 106166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 106500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106666.666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 107166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 107500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 108000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 108333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 108833.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109111.111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109222.222222222,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 109333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 109500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109666.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109833.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 110166.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 110666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 111166.666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 111666.666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 112000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 112500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112666.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 112833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 113333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 113666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 114000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 114333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114666.666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 115166.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115333.333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 115500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 116000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 116500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 117000,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 117333.333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			}
+		],
+		"normal": [
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 0,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 333.333333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 666.666666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 833.333333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 1333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 1666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 2000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 2333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 2666.66666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 3166.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 3333.33333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 3500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 4333.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 4666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 4833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 5166.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5333.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 5666.66666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 5833.33333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 6000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 6166.66666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6666.66666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 6833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 7000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 7333.33333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 7500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 7666.66666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 8000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 8333.33333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 8500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 8666.66666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 8833.33333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 9333.33333333333,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 9666.66666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 10000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 10166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 10333.3333333333,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 10666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 11000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 11166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 11500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 12333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 12833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 13333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 13666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 13833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 14166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 14666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 15041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 15083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 15500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 15666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 16333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 16500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 16833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 17500,
+				"type": "weekend-1-blocklow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 17666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 18166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 18333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 18666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 19000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 19166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 19500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 20000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 20500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 20666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 20833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 21166.6666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 21333.3333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 21666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 21833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 22166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 22333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 22666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 23500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 23666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 24333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 24500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 24833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 25333.3333333334,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 25666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 26166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 26500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 26666.6666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27000.0000000001,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 27166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 27500.0000000001,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 27666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 28000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 28333.3333333334,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 28833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29111.1111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29222.2222222222,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 29333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 29500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 29666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 29833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 30166.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 30666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 31166.6666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 31666.6666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 32000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 32500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 32666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 32833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 33500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 33666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 34000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 34333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 34666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 35000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 35166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 35333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 35500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 36333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 36666.6666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 36833.3333333334,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 37000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 37166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "opponent",
+				"time": 37666.6666666667,
+				"type": "weekend-1-idle",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 42666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 43000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 43166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 43500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 44333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 44833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 45333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 45666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 45833.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 46166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 46666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 47500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 47666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 47833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48000,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 48500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 48583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 48833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 49000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 49333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 49666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 50166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 50333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 50666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 51000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 51166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 51500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 52000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 52333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 52833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 53000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53166.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53375,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 53416.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 53458.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 53666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 53833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 54166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 54666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 54833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 55250,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 55500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 55666.6666666667,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 56500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 56833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 57083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 57583.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 57666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58416.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 58500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 58666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 58833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 59166.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59333.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 59500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 59666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 60000,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 60333.3333333333,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 60833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 61000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 61666.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 61833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 62166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 62666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 63000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 63500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 63666.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 63833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64000,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 64083.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 64333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 64500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 64833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 65333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 65500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 65666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 65916.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 66166.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 66333.3333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 66666.6666666667,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 67000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 67166.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 67750,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 68250,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 68333.3333333333,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 68666.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 68833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 69000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 69166.6666666667,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69333.3333333333,
+				"type": "weekend-1-punchlowblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 69666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 69833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 69916.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 70166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 70333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 70666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 71500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 71666.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 72000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 72333.3333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 72500,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 72833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 73333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 73666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 74166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 74333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74500,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74708.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 74750,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 74791.6666666666,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 75000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 75166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 75500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 76166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 76333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 76583.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 76833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 77000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77333.3333333333,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 77666.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 77833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 78166.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 78416.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78666.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 78916.6666666666,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 79000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 79500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 79666.6666666666,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 79833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 80500,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 80666.6666666666,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 80833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 81333.3333333333,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 81666.6666666666,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 82166.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 82333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 82666.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 83000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 83166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 83500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 84000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 84333.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 84833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 85000,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 85333.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 85416.6666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 85666.6666666666,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 85833.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 86166.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 86666.6666666666,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 86833.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 87000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 87250,
+				"type": "weekend-1-dodgehigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 87500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 87666.6666666666,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 88000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 88333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 88500,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 88833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 89083.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 89583.3333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 89666.6666666666,
+				"type": "weekend-1-punchhighspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90000,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 90166.6666666666,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 90333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 90416.6666666666,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 90500,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 90666.6666666667,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 91000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 91166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 91500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 92333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 92833.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 93333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 93666.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 93833.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 94166.6666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 94666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 95041.6666666667,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 95083.3333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 95500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 95666.6666666667,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96000,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 96333.3333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 96500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 96833.3333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97333.3333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 97500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 97666.6666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 98166.6666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 98333.3333333333,
+				"type": "weekend-1-hitlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 98666.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 99000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 99166.6666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 99500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 100000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 100500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 100666.666666667,
+				"type": "weekend-1-punchlow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 100833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "opponent",
+				"time": 101166.666666667,
+				"type": "weekend-1-darnelluppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 101333.333333333,
+				"type": "weekend-1-darnelluppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 101666.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 101833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 102166.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 102333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 102666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103000,
+				"type": "weekend-1-punchlowspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 103500,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 103666.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 104333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 104500,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 104833.333333333,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 105333.333333333,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 105666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 106166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 106500,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 106666.666666667,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 107166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 107500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 107666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 108000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 108333.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 108833.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109000,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109111.111111111,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109222.222222222,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 109333.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "opponent",
+				"time": 109500,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 109666.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 109833.333333333,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 110166.666666667,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 110666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 111166.666666667,
+				"type": "weekend-1-fakeout",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 111666.666666667,
+				"type": "weekend-1-taunt",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "opponent",
+				"time": 112000,
+				"type": "weekend-1-hithigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 112500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 112666.666666667,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 112833.333333333,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 113333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 113666.666666667,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 114000,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114166.666666667,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 114333.333333333,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 114666.666666667,
+				"type": "weekend-1-blockspin",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115000,
+				"type": "weekend-1-punchlowdodged",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 115166.666666667,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 115333.333333333,
+				"type": "weekend-1-punchhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 115500,
+				"type": "weekend-1-blockhigh",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 0,
+				"lane": "p1",
+				"time": 116000,
+				"type": "weekend-1-punchhighblocked",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 3,
+				"lane": "p1",
+				"time": 116500,
+				"type": "weekend-1-dodgelow",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 1,
+				"lane": "p1",
+				"time": 117000,
+				"type": "weekend-1-picouppercutprep",
+				"values": {}
+			},
+			{
+				"duration": 0,
+				"data": 2,
+				"lane": "p1",
+				"time": 117333.333333333,
+				"type": "weekend-1-picouppercut",
+				"values": {}
+			}
+		]
+	}
+}
