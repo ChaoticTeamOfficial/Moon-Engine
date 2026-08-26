@@ -7,6 +7,8 @@ import moon.dependency.scripting.*;
 
 using StringTools;
 
+// TODO: when changing some characters (e.g. switching bf over dad and vice versa) seems to fuck up offsets.
+
 typedef HealthIconData =
 {
 	var ?icon:String;

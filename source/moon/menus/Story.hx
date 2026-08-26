@@ -248,15 +248,25 @@ class Story extends FlxState
 		{
 			if (!curDifficultySelector.ready) return;
 
-			final difficultyId = curDifficultySelector.currentDifficulty ?? 'hard';
-			final source = SongLibrary.instance.weekSonglist(currentLevelId);
+			final preferredMix = Week.get(currentLevelId)?.mainMix;
 
-			PlayState.queuePlaylist([for (s in source) {
-				song: s.song,
-				difficulty: difficultyId,
-				mix: s.mix
-			}], currentLevelId);
+			final playlist:Array<SongBase> = [];
+			final seen = new Map<String, Bool>();
 
+			for (s in SongLibrary.get().weekSonglist(currentLevelId))
+			{
+				final key = s.song.toLowerCase();
+				if (seen.exists(key)) continue;
+				seen.set(key, true);
+
+				playlist.push({
+					song: s.song,
+					difficulty: curDifficultySelector.currentDifficulty ?? 'hard',
+					mix: (preferredMix != null) ? preferredMix : s.mix
+				});
+			}
+
+			PlayState.queuePlaylist(playlist, currentLevelId);
 			FlxG.switchState(() -> new LoadingScreen());
 			return;
 		}

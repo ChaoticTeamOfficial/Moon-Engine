@@ -82,8 +82,7 @@ class SongLibrary
 	{
 		allSongs = [];
 		categoryOrder = ['all'];
-
-		if (!songsByWeek.exists('all')) songsByWeek.set('all', []);
+		songsByWeek = ['all' => []];
 
 		for (songFolder in Paths.readDir('songs/'))
 		{
@@ -100,26 +99,21 @@ class SongLibrary
 					final shared:Dynamic = Paths.JSON('$dir/chart');
 					if (shared != null && shared.notes != null && Type.typeof(shared.notes) == TObject && !Std.isOfType(shared.notes, Array))
 					{
-						for (diffName in Reflect.fields(shared.notes))
-						{
-							pushSongEntry(songFolder, mix, diffName, registered);
-						}
+						for (diffName in Reflect.fields(shared.notes)) pushSongEntry(songFolder, mix, diffName, registered);
 					}
 					else
 					{
 						// Legacy flat chart.json as it register every empty-suffix difficulty.
-						for (diff in allDifficulties)
-						{
-							if ((diff.suffix ?? '') == '') pushSongEntry(songFolder, mix, diff.name, registered);
-						}
+						for (diff in allDifficulties) if ((diff.suffix ?? '') == '') pushSongEntry(songFolder, mix, diff.name, registered);
 					}
 				}
 
 				// Per-difficulty chart-{name} files.
-				for (chartFile in Paths.readDir(dir, ['.json'], true))
-				{
-					if (chartFile.startsWith('chart-')) pushSongEntry(songFolder, mix, chartFile.substr(6), registered);
-				}
+				for (chartFile in Paths.readDir(
+					dir,
+					['.json'],
+					true
+				)) if (chartFile.startsWith('chart-')) pushSongEntry(songFolder, mix, chartFile.substr(6), registered);
 			}
 		}
 
@@ -135,12 +129,7 @@ class SongLibrary
 			});
 		}
 
-		weeks.sort((a, b) ->
-		{
-			final aOrder = a.data.order ?? 999;
-			final bOrder = b.data.order ?? 999;
-			return aOrder - bOrder;
-		});
+		weeks.sort((a, b) -> (a.data.order ?? 999) - (b.data.order ?? 999));
 
 		final seenInWeeks = new Map<String, Bool>();
 
@@ -150,22 +139,15 @@ class SongLibrary
 
 			for (track in w.data.tracks)
 			{
-				var best:SongBase = null;
 				for (song in allSongs)
 				{
 					if (song.song.toLowerCase() != track.toLowerCase()) continue;
 
-					if (w.data.mainMix != null && song.mix == w.data.mainMix)
-					{
-						best = song;
-						break;
-					}
-					if (best == null) best = song;
-				}
-				if (best != null)
-				{
-					wSongs.push(best);
-					seenInWeeks.set('${best.song}/${best.mix}/${best.difficulty}', true);
+					final key = '${song.song}/${song.mix}/${song.difficulty}';
+					if (seenInWeeks.exists(key)) continue;
+
+					wSongs.push(song);
+					seenInWeeks.set(key, true);
 				}
 			}
 
@@ -175,6 +157,7 @@ class SongLibrary
 
 		final orderedAll:Array<SongBase> = [];
 		final added = new Map<String, Bool>();
+
 		for (w in weeks)
 		{
 			final list = songsByWeek.get(w.id);
@@ -187,6 +170,7 @@ class SongLibrary
 				orderedAll.push(s);
 			}
 		}
+
 		for (song in allSongs)
 		{
 			final key = '${song.song}/${song.mix}/${song.difficulty}';
