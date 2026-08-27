@@ -65,6 +65,29 @@ class IndevPopup extends FlxSubState
 		understoodLabel.color = FlxColor.WHITE;
 		add(understoodLabel);
 
+		for (i in 0...2)
+		{
+			var arrow = new MoonSprite().loadGraphic(Paths.image('menus/story/belowind'));
+			arrow.flipY = (i == 0);
+			add(arrow);
+			arrow.y = (i == 0) ? contentText.y - arrow.height - 16 : understoodBtn.y;
+			arrow.x = contentText.x + contentText.width - arrow.width;
+			arrow.alpha = 0.00001;
+			FlxTween.tween(arrow, {
+				alpha: 1
+			}, 1, {
+				startDelay: 0.5
+			});
+
+			FlxTween.tween(arrow, {
+				y: (i == 0) ? arrow.y - 16 : arrow.y + 16
+			}, 2, {
+				ease: FlxEase.quadInOut,
+				type: PINGPONG,
+				framerate: 24
+			});
+		}
+
 		panelBg.scale.set(2, 0);
 		stateTwns.push(FlxTween.tween(panelBg.scale, {
 			x: 1,
@@ -80,7 +103,7 @@ class IndevPopup extends FlxSubState
 			startDelay: 0.6
 		}));
 
-		Paths.playSFX('ui/popup.wav', 'sounds', true);
+		Paths.playSFX('ui/popup.wav', 'sounds', true, FlxG.random.float(0.8, 1.3));
 	}
 
 	override public function update(elapsed:Float)
@@ -100,8 +123,15 @@ class IndevPopup extends FlxSubState
 
 	function scroll(amount:Float):Void
 	{
+		FlxTween.cancelTweensOf(contentText);
+		FlxTween.cancelTweensOf(contentText.clipRect);
 		scrollY = FlxMath.bound(scrollY + amount, 0, maxScroll);
-		contentText.y = panelY + 60 - scrollY;
+		FlxTween.tween(contentText, {
+			y: panelY + 60 - scrollY
+		}, 0.5, {
+			ease: FlxEase.expoOut
+		});
+		contentText.alpha = 1;
 		contentText.clipRect.y = scrollY;
 		contentText.clipRect = contentText.clipRect;
 	}
