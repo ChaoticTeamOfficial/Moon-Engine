@@ -285,7 +285,11 @@ class FreeplaySongSelector extends FlxGroup
 			{
 				final rank = Timings.getRank(songData.accuracy).rank;
 				if (rank == 'PERFECT') PRanks++;
-				if (rank == 'PERFECT-GOLD') goldPRanks++;
+				if (rank == 'PERFECT-GOLD')
+				{
+					PRanks++;
+					goldPRanks++;
+				}
 			}
 		}
 	}
