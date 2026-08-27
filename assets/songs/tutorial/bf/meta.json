@@ -3,7 +3,7 @@
 		"bf"
 	],
 	"spectators": [
-		"gf"
+		""
 	],
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
 	"opponents": [
@@ -21,7 +21,7 @@
 	},
 	"difficultyRating": {
 		"easy": null,
-		"hard": null,
+		"hard": -1,
 		"normal": null
 	},
 	"version": "2.2.4",

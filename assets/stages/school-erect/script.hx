@@ -30,7 +30,10 @@ function addShader(character:MoonSprite)
 		{
 			case 'senpai-angry', 'senpai':
 				rim.altMaskImage = Paths.image('school-erect/masks/senpai_mask.png', 'stages').bitmap;
-			default: rim.altMaskImage = Paths.image('school-erect/masks/' + character.character + '_mask.png', 'stages').bitmap;
+			default: 
+				final maskPath = 'school-erect/masks/' + character.character + '_mask.png';
+				if(Paths.exists('stages' + maskPath))
+					rim.altMaskImage = Paths.image(maskPath, 'stages').bitmap;
 		}
 
 		character.animation.onFrameChange.add(() -> rim.updateFrameInfo(character.frame));

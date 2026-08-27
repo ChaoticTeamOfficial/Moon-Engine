@@ -46,11 +46,7 @@
 	},
 	"displayName": "Roses",
 	"stage": "school",
-	"noteskin": {
-		"easy": "v-slice",
-		"hard": "v-slice",
-		"normal": "v-slice"
-	},
+	"noteskin": "pixel",
 	"bpm": 120,
 	"album": "volume2"
 }

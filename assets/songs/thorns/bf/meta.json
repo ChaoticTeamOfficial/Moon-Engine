@@ -46,11 +46,7 @@
 	},
 	"displayName": "Thorns",
 	"stage": "schoolEvil",
-	"noteskin": {
-		"easy": "v-slice",
-		"hard": "v-slice",
-		"normal": "v-slice"
-	},
+	"noteskin": "pixel",
 	"bpm": 190,
 	"album": "volume2"
 }

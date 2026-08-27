@@ -7,14 +7,14 @@
 	"objects": [
 		{
 			"name": "weebBackSpikes",
-			"position": [-700, -64],
+			"position": [-842, -180],
 			"scale": [6, 6],
 			"antialiasing": false,
 			"scroll": [0.5, 0.5]
 		},
 		{
 			"name": "weebSchool",
-			"position": [-440, -38],
+			"position": [-816, -38],
 			"scale": [6, 6],
 			"antialiasing": false,
 			"scroll": [0.75, 0.75]
@@ -35,8 +35,8 @@
 		}
 	],
 	"characters": [
-		{ "type": "opponent", "position": [-920, 60], "objectBehind": null },
-		{ "type": "player", "position": [-48, 60], "objectBehind": null },
-		{ "type": "spectator", "position": [-734, 53], "objectBehind": null }
+		{ "type": "opponent", "position": [0, 648], "objectBehind": null },
+		{ "type": "player", "position": [1168, 900], "objectBehind": null },
+		{ "type": "spectator", "position": [724, 823], "objectBehind": null }
 	]
 }

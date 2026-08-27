@@ -304,6 +304,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	 */
 	public function addCharTo(charName:String, group:FlxSpriteGroup, ?attachedInputs:InputHandler)
 	{
+		if(charName == '') return;
 		group.recycle(Character, function():Character
 		{
 			var char = new Character(0, 0, charName, conductor);

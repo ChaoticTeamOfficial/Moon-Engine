@@ -45,12 +45,8 @@
 		"normal": 1
 	},
 	"displayName": "Senpai",
-	"stage": "school",
-	"noteskin": {
-		"easy": "v-slice",
-		"hard": "v-slice",
-		"normal": "v-slice"
-	},
+	"stage": "school-erect",
+	"noteskin": "pixel",
 	"bpm": 144,
 	"album": "volume2"
 }

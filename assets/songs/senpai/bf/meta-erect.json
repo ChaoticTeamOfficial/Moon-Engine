@@ -1,5 +1,5 @@
 {
-	"stage": "schoolErect",
+	"stage": "school-erect",
 	"players": [
 		"bf-pixel"
 	],
@@ -30,6 +30,6 @@
 		"opponent",
 		"p1"
 	],
-	"noteskin": "v-slice",
+	"noteskin": "pixel",
 	"version": "2.2.4"
 }
