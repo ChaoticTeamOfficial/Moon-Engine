@@ -1,8 +1,8 @@
 {
 	"camSettings": {
 		"zoom": 1,
-		"startX": -451,
-		"startY": 0
+		"startX": 776,
+		"startY": 464
 	},
 	"objects": [
 		{
@@ -35,8 +35,8 @@
 		}
 	],
 	"characters": [
-		{ "type": "opponent", "position": [0, 648], "objectBehind": null },
-		{ "type": "player", "position": [1168, 900], "objectBehind": null },
-		{ "type": "spectator", "position": [724, 823], "objectBehind": null }
+		{ "type": "opponent", "position": [306, 500], "objectBehind": null },
+		{ "type": "player", "position": [1168, 500], "objectBehind": null },
+		{ "type": "spectator", "position": [524, 463], "objectBehind": null }
 	]
 }

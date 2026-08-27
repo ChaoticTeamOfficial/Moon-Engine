@@ -61,7 +61,7 @@
 		},
 		{
 			"name": "orangeLight",
-			"position": [189, 300],
+			"position": [189, -40],
 			"scale": [1, 1700],
 			"scroll": [1, 1],
 			"angle": 0
@@ -83,18 +83,21 @@
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [296, 484],
-			"objectBehind": "orangeLight"
+			"position": [296, 116],
+			"objectBehind": "orangeLight",
+			"camOffsets": [23, 7]
 		},
 		{
 			"type": "opponent",
-			"position": [64, 456],
-			"objectBehind": "orangeLight"
+			"position": [64, 64],
+			"objectBehind": "orangeLight",
+			"camOffsets": [148, -97]
 		},
 		{
 			"type": "player",
 			"position": [916, 456],
-			"objectBehind": "orangeLight"
+			"objectBehind": "orangeLight",
+			"camOffsets": [-135, -78]
 		}
 	]
 }

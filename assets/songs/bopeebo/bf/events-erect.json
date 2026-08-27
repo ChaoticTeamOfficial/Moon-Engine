@@ -215,7 +215,7 @@
 		"time": 33170.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.95
 		}
@@ -226,7 +226,7 @@
 		"time": 35121.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -237,7 +237,7 @@
 		"time": 37317.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.05
 		}
@@ -248,7 +248,7 @@
 		"time": 38048.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.1
 		}
@@ -259,7 +259,7 @@
 		"time": 39024.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -270,7 +270,7 @@
 		"time": 41951.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.95
 		}
@@ -281,7 +281,7 @@
 		"time": 42926.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -301,7 +301,7 @@
 		"time": 46829.2682926829,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -408,7 +408,7 @@
 		"time": 62439.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -419,7 +419,7 @@
 		"time": 66341.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.05
 		}
@@ -430,7 +430,7 @@
 		"time": 67804.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -441,7 +441,7 @@
 		"time": 70243.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.05
 		}
@@ -452,7 +452,7 @@
 		"time": 72195.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.1
 		}
@@ -463,7 +463,7 @@
 		"time": 74146.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1.05
 		}
@@ -474,7 +474,7 @@
 		"time": 76097.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}
@@ -488,7 +488,7 @@
 			"y": 0,
 			"duration": 32,
 			"character": "spectator",
-			"ease": "expoOutOut"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -497,7 +497,7 @@
 		"time": 78048.7804878049,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -511,7 +511,7 @@
 			"y": 0,
 			"duration": 32,
 			"character": "player",
-			"ease": "expoOutOut"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -520,7 +520,7 @@
 		"time": 83902.4390243902,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.95
 		}
@@ -534,7 +534,7 @@
 			"y": 0,
 			"duration": 32,
 			"character": "spectator",
-			"ease": "expoOutOut"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -543,7 +543,7 @@
 		"time": 85853.6585365854,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -557,7 +557,7 @@
 			"y": 0,
 			"duration": 32,
 			"character": "player",
-			"ease": "expoOutOut"
+			"ease": "expoOut"
 		}
 	},
 	{
@@ -566,7 +566,7 @@
 		"time": 92682.9268292683,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -586,7 +586,7 @@
 		"time": 93658.9512195122,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -621,7 +621,7 @@
 		"time": 99512.0975609756,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 0.9
 		}
@@ -632,7 +632,7 @@
 		"time": 101463.414634146,
 		"values": {
 			"duration": 32,
-			"ease": "expoOutOut",
+			"ease": "expoOut",
 			"mode": "stage",
 			"zoom": 1
 		}

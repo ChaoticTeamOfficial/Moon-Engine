@@ -45,7 +45,7 @@
 		"normal": 1
 	},
 	"displayName": "DadBattle",
-	"stage": "mainStage",
+	"stage": "mainStage-erect",
 	"noteskin": {
 		"easy": "v-slice",
 		"hard": "v-slice",

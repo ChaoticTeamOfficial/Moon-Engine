@@ -188,7 +188,7 @@ class InputHandler
 		onLateMiss();
 		// stats.health = FlxMath.bound(stats.health, 0, 101);
 
-		if (attachedChar != null) attachedChar.holding = pressed.contains(true);
+		if (attachedChar != null) attachedChar.holding = (!CPUMode) ? pressed.contains(true) : false;
 	}
 
 	private function processReplayInputs():Void
