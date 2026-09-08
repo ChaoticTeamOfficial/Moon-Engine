@@ -150,4 +150,16 @@ class MoonAchievements
 
 		return list;
 	}
+
+	/**
+	 * Resets all ahievements.
+	 */
+	static function resetUnlocks():Void
+	{
+		save.data.unlocked = null;
+		save.flush();
+		init();
+
+		trace('[ACHIEVEMENTS] Reset all achievements.');
+	}
 }

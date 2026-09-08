@@ -56,7 +56,7 @@ class AchievementUnlockPopup extends FlxSpriteGroup
 		icon = new MoonSprite(
 			ICON_X,
 			ICON_Y
-		).loadGraphic(Paths.image(Paths.exists('achievements/${data.id}-icon.png') ? '${data.id}-icon' : 'placeholder-icon', 'achievements'), true, 250, 250);
+		).loadGraphic(Paths.image(Paths.exists('achievements/${data.id}-icon.png') ? '${data.id}-icon' : 'placeholder-icon', 'achievements'), true);
 		icon.animation.add('unlock', [0], 0, true);
 		icon.playAnim('unlock');
 		icon.setGraphicSize(ICON_SIZE, ICON_SIZE);

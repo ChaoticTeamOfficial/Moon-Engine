@@ -14,6 +14,7 @@ class MainMenu extends FlxTransitionableState
 		'story menu',
 		'freeplay',
 		'convert chart yeah',
+		'trophies',
 		'mods',
 		'settings',
 		'archipelago',
@@ -131,6 +132,8 @@ class MainMenu extends FlxTransitionableState
 					FlxG.switchState(() -> new MoonScriptedState('MyCoolScriptedState'));
 				case 'story menu':
 					FlxG.switchState(() -> new Story());
+				case 'trophies':
+					openSubState(new AchievementsMenu());
 			}
 		}
 
