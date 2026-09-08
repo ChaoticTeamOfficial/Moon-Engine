@@ -236,6 +236,8 @@ class ReplayMenu extends FlxSubState
 		};
 
 		final rep = PlayState.loadReplay('data/replays/${curThingie.replayPath}.mrp');
+
+		PlayState.gamemode = REPLAY;
 		if (rep != null) FlxG.switchState(() -> new PlayState(rep));
 
 		if (FlxG.sound.music != null) FlxG.sound.music.stop();

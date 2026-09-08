@@ -135,10 +135,6 @@ class Title extends FlxTransitionableState
 		// GlobalMusic.song = 'menus/freakyMenu';
 		// GlobalMusic.start(true);
 
-		// ~~TODO:~~ make a better handler for song metadatas
-		// Done! :D
-		// loadSoundAndMeta it is.
-		// TODO: check this, it's broken :P
 		final song = Constants.isFridayNight ? 'freakyMenu-fridayNight' : 'freakyMenu';
 		final music = new MoonSound().loadSoundAndMeta('menus/${song}', 'music', false);
 

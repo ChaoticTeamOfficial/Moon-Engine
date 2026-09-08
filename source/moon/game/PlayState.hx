@@ -28,6 +28,7 @@ enum abstract GameMode(String) from String to String
 	var FREEPLAY = 'Freeplay';
 	var PLAYLIST = 'Playlist Mode';
 	var CHARTING = 'Charting Mode';
+	var REPLAY = 'Replay Mode';
 }
 
 class PlayState extends FlxTransitionableState
@@ -36,6 +37,11 @@ class PlayState extends FlxTransitionableState
 	 * The current active playstate instance.
 	 */
 	public static var instance:PlayState;
+
+	/**
+	 * The current gamemode.
+	 */
+	public static var gamemode:GameMode;
 
 	//-- Gameplay main variables --//
 
@@ -696,6 +702,7 @@ class PlayState extends FlxTransitionableState
 		instance = null;
 		PlayField.instance = null;
 		Countdown.onStart.removeAll();
+		playlist = [];
 
 		// clears all shader instances.
 		if (MoonShaderHandler.instances.length > 0) for (instance in MoonShaderHandler.instances) instance.destroy();

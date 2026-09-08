@@ -193,13 +193,18 @@ class Freeplay extends FlxSubState
 		return filtered;
 	}
 
+	public function weekBGCheck()
+	{
+		// weekBG.loadGraphic()
+	}
+
 	public function change(num:Int = 0)
 	{
 		if (songList.length <= 0) return;
 
 		curSelected = flixel.math.FlxMath.wrap(curSelected + num, 0, songList.length - 1);
 		selector.changeSelection(num);
-		Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
+		if (num != 0) Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
 
 		Global.scriptCall('onScroll');
 	}
@@ -216,7 +221,6 @@ class Freeplay extends FlxSubState
 		currentCategory = categories[categoryIndex];
 
 		songList = getMixSonglist(currentCategory, character, diffSelector.getSelected());
-		curSelected = 0;
 		selector.loadSongs(songList, curSelected);
 
 		categoryText.text = SongLibrary.getCategoryDisplayName(currentCategory);
@@ -225,6 +229,7 @@ class Freeplay extends FlxSubState
 		updateInfoText();
 		Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
 
+		change(0);
 		Global.scriptCall('onCategoryChange');
 	}
 
@@ -263,6 +268,8 @@ class Freeplay extends FlxSubState
 			stars.difficulty = 0;
 			//
 		}
+
+		change(0);
 
 		Global.scriptCall('onDifficultyChange');
 	}
@@ -360,6 +367,7 @@ class Freeplay extends FlxSubState
 						difficulty: selected.difficulty,
 						mix: selected.mix
 					};
+					PlayState.gamemode = FREEPLAY;
 					FlxG.switchState(() -> new LoadingScreen());
 				}
 			});

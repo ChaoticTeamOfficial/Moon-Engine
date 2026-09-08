@@ -29,6 +29,12 @@ class DropShadowShader extends FlxShader
 	public var color(default, set):FlxColor;
 
 	/**
+	 * Multi-layer rim colors, ordered from top to bottom.
+	 * It only supports a max of 8 colors.
+	 */
+	public var rimColors(default, set):Array<FlxColor>;
+
+	/**
 	 * The angle of the drop shadow.
 	 *
 	 * for reference, depending on the angle, the affected side will be:
@@ -236,6 +242,41 @@ class DropShadowShader extends FlxShader
 		return color;
 	}
 
+	function set_rimColors(cols:Array<FlxColor>):Array<FlxColor>
+	{
+		rimColors = cols;
+
+		var n = (cols != null) ? cols.length : 0;
+		if (n > 8) n = 8;
+
+		numRimColors.value = [n];
+
+		inline function setColor(index:Int, uniform:Dynamic):Void
+		{
+			if (index < n)
+			{
+				var c = cols[index];
+				uniform.value = [c.red / 255, c.green / 255, c.blue / 255];
+			}
+			else
+			{
+				uniform.value = [0.0, 0.0, 0.0];
+			}
+		}
+
+		// shrug...
+		setColor(0, rimColor0);
+		setColor(1, rimColor1);
+		setColor(2, rimColor2);
+		setColor(3, rimColor3);
+		setColor(4, rimColor4);
+		setColor(5, rimColor5);
+		setColor(6, rimColor6);
+		setColor(7, rimColor7);
+
+		return cols;
+	}
+
 	function set_angle(val:Float):Float
 	{
 		angle = val;
@@ -378,6 +419,16 @@ class DropShadowShader extends FlxShader
 
       uniform vec3 dropColor;
 
+	  uniform int numRimColors;
+      uniform vec3 rimColor0;
+	  uniform vec3 rimColor1;
+ 	  uniform vec3 rimColor2;
+	  uniform vec3 rimColor3;
+	  uniform vec3 rimColor4;
+	  uniform vec3 rimColor5;
+	  uniform vec3 rimColor6;
+	  uniform vec3 rimColor7;
+
       uniform mat3 hueMatrix;
       uniform float contrast;
       uniform mat3 saturationMatrix;
@@ -479,28 +530,75 @@ class DropShadowShader extends FlxShader
 
         float intensity = smoothstep(threshold - delta, threshold + delta, color3_light);
 
-        float shadowAlpha = 0.0;
-
         vec3 color3_no_effect = color4.a > 0.0 ? color4.rgb / color4.a : color4.rgb;
         vec3 color3 = applyHSBCEffect(color3_no_effect);
 
-        vec2 checked = vec2(
-          uv.x + (dist * angCos * ratio.x),
-          uv.y - (dist * angSin * ratio.y)
-        );
+        int N = numRimColors;
 
-        if (checked.x > uFrameBounds.x &&
-            checked.y > uFrameBounds.y &&
-            checked.x < uFrameBounds.z &&
-            checked.y < uFrameBounds.w)
+        if (N <= 0)
         {
-          shadowAlpha = texture2D(bitmap, checked).a;
+          // Original single-color path
+          float shadowAlpha = 0.0;
+
+          vec2 checked = vec2(
+            uv.x + (dist * angCos * ratio.x),
+            uv.y - (dist * angSin * ratio.y)
+          );
+
+          if (checked.x > uFrameBounds.x &&
+              checked.y > uFrameBounds.y &&
+              checked.x < uFrameBounds.z &&
+              checked.y < uFrameBounds.w)
+          {
+            shadowAlpha = texture2D(bitmap, checked).a;
+          }
+
+          float rim = (1.0 - (shadowAlpha * str)) * intensity;
+          color3 += dropColor * rim;
         }
+        else
+		{
+			float invN = 1.0 / float(N);
+			vec3 rimAccum = vec3(0.0);
 
-        float rim = (1.0 - (shadowAlpha * str)) * intensity;
+			for (int i = 0; i < 8; i++)
+			{
+				if (i >= N) break;
 
-        color3 += dropColor * rim;
+				float frac = float(N - i) / float(N);
+				float d = dist * frac;
 
+				vec2 checked = vec2(
+				uv.x + (d * angCos * ratio.x),
+				uv.y - (d * angSin * ratio.y)
+				);
+
+				float sa = 0.0;
+				if (checked.x > uFrameBounds.x &&
+					checked.y > uFrameBounds.y &&
+					checked.x < uFrameBounds.z &&
+					checked.y < uFrameBounds.w)
+				{
+				sa = texture2D(bitmap, checked).a;
+				}
+
+				float layerRim = (1.0 - (sa * str)) * intensity * invN;
+
+				vec3 col;
+				if (i == 0) col = rimColor0;
+				else if (i == 1) col = rimColor1;
+				else if (i == 2) col = rimColor2;
+				else if (i == 3) col = rimColor3;
+				else if (i == 4) col = rimColor4;
+				else if (i == 5) col = rimColor5;
+				else if (i == 6) col = rimColor6;
+				else col = rimColor7;
+
+				rimAccum += col * layerRim;
+			}
+
+			color3 += rimAccum;
+		}
         return vec4(color3 * color4.a, color4.a);
       }
 
@@ -530,5 +628,17 @@ class DropShadowShader extends FlxShader
 		useAltMask = false;
 
 		angOffset.value = [0];
+
+		rimColors = [];
+		numRimColors.value = [0];
+
+		rimColor0.value = [0, 0, 0];
+		rimColor1.value = [0, 0, 0];
+		rimColor2.value = [0, 0, 0];
+		rimColor3.value = [0, 0, 0];
+		rimColor4.value = [0, 0, 0];
+		rimColor5.value = [0, 0, 0];
+		rimColor6.value = [0, 0, 0];
+		rimColor7.value = [0, 0, 0];
 	}
 }

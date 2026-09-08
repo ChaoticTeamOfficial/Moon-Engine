@@ -266,6 +266,8 @@ class Story extends FlxState
 				});
 			}
 
+			PlayState.gamemode = STORY;
+
 			PlayState.queuePlaylist(playlist, currentLevelId);
 			FlxG.switchState(() -> new LoadingScreen());
 			return;

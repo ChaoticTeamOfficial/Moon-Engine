@@ -257,6 +257,7 @@ class PlaylistMode extends FlxSubState
 			difficulty: item.difficulty,
 			mix: item.song.mix
 		}]);
+		PlayState.gamemode = PLAYLIST;
 		FlxG.switchState(() -> new LoadingScreen());
 	}
 
