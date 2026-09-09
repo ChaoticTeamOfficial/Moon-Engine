@@ -945,13 +945,141 @@ class Chart
 				convertVSliceFolder(folderPath, difficulties, applyNoteRules);
 			case 'codename':
 				convertCodenameFolder(folderPath, difficulties, applyNoteRules);
+			case 'psych' | 'kade' | 'legacy' | 'fps-plus':
+				convertLegacyStyleFolder(type, folderPath, difficulties, applyNoteRules);
 			default:
-				throw 'Folder conversion is only set up for v-slice and codename (got $type).';
+				throw 'Folder conversion is only set up for v-slice, codename, psych, kade, legacy and fps-plus (got $type).';
 		};
 		#else
 		throw 'Chart conversion is currently only available for Desktop.';
 		return null;
 		#end
+	}
+
+	/**
+	 * Handles Psych / Kade / Legacy / FPS+ style folders!
+	 */
+	private static function convertLegacyStyleFolder(type:String, folder:String, difficulties:Array<String>, applyNoteRules:Bool):Array<FolderConvertResult>
+	{
+		final songId = Path.withoutDirectory(folder);
+		final searchDirs = [folder, Path.join([folder, 'data'])];
+
+		final chartFiles:Map<String, String> = new Map();
+		var eventsPath:String = null;
+
+		for (dir in searchDirs)
+		{
+			if (!FileSystem.exists(dir) || !FileSystem.isDirectory(dir)) continue;
+
+			for (f in FileSystem.readDirectory(dir))
+			{
+				if (!f.toLowerCase().endsWith('.json')) continue;
+
+				final full = Path.join([dir, f]);
+				final base = Path.withoutExtension(f).toLowerCase();
+
+				if (base == 'events' || base == 'event')
+				{
+					if (eventsPath == null) eventsPath = full;
+					continue;
+				}
+
+				final prefix = songId.toLowerCase();
+				var diffName:String = null;
+
+				// god I hate this...
+				if (base == prefix || base == 'normal' || base == 'default') diffName = 'normal';
+				else if (base.startsWith(prefix + '-')) diffName = base.substr(prefix.length + 1);
+				else if ([
+					'easy',
+					'hard',
+					'erect',
+					'nightmare',
+					'expert'
+				].contains(base)) diffName = base;
+
+				if (diffName != null)
+				{
+					if (diffName == 'normal' || diffName == 'default') diffName = 'normal';
+					chartFiles.set(diffName, full);
+				}
+			}
+		}
+
+		if (chartFiles.keys().hasNext() == false) throw 'No Psych/Kade/Legacy-style chart files found in $folder (expected $songId[-diff].json)';
+
+		final results:Array<ConvertResult> = [];
+		final sharedNotes:Dynamic = {};
+		final sharedMetaMaps:Map<String, Dynamic> = new Map();
+		var sharedEvents:Array<EventStruct> = null;
+		var baseMeta:MetadataStruct = null;
+
+		for (diff in difficulties)
+		{
+			var sourceDiff = diff;
+			if (diff == 'erect' && !chartFiles.exists('erect') && chartFiles.exists('nightmare')) sourceDiff = 'nightmare';
+			else if (!chartFiles.exists(diff))
+			{
+				if (diff == 'normal' && chartFiles.exists('')) sourceDiff = '';
+				else
+					continue;
+			}
+
+			final chartFile = chartFiles.get(sourceDiff);
+			if (chartFile == null) continue;
+
+			final metaOrEvents = eventsPath;
+
+			final one = convertMany(type, chartFile, [diff], metaOrEvents, applyNoteRules);
+			if (one == null || one.results.length == 0) continue;
+
+			final r = one.results[0];
+			results.push(r);
+
+			if (isSharedDifficulty(diff))
+			{
+				Reflect.setField(sharedNotes, diff, r.notes);
+				if (sharedEvents == null) sharedEvents = r.events;
+				if (baseMeta == null) baseMeta = r.meta;
+
+				for (field in DIFF_SPECIFIC_META_FIELDS)
+				{
+					if (!sharedMetaMaps.exists(field)) sharedMetaMaps.set(field, {
+					});
+					Reflect.setField(sharedMetaMaps.get(field), diff, Reflect.field(r.meta, field));
+				}
+			}
+		}
+
+		if (results.length == 0) throw 'No matching chart files for the selected difficulties in $folder';
+
+		var sharedChartJson:String = null;
+		var sharedEventsJson:String = null;
+		var sharedMetaJson:String = null;
+
+		if (baseMeta != null)
+		{
+			sharedChartJson = Json.stringify({
+				notes: sharedNotes
+			}, "\t");
+			sharedEventsJson = Json.stringify(sharedEvents ?? [], "\t");
+
+			final metaOut:Dynamic = Reflect.copy(baseMeta);
+			for (field => map in sharedMetaMaps) Reflect.setField(metaOut, field, map);
+			sharedMetaJson = Json.stringify(metaOut, "\t");
+		}
+
+		return [{
+			song: songId,
+			mix: 'bf',
+			batch: {
+				results: results,
+				sharedChartJson: sharedChartJson,
+				sharedEventsJson: sharedEventsJson,
+				sharedMetaJson: sharedMetaJson
+			},
+			sourceChart: folder
+		}];
 	}
 
 	#if sys

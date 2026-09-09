@@ -248,11 +248,11 @@ class ChartConverterSubState extends FlxSubState
 		{
 			setStatus('Converting ($format)…');
 
-			if (format == 'v-slice' || format == 'codename')
+			if (format == 'v-slice' || format == 'codename' || format == 'psych' || format == 'kade' || format == 'legacy' || format == 'fps-plus')
 			{
 				if (!FileSystem.isDirectory(folder))
 				{
-					setStatus("V-Slice / Codename need a folder, not a single file.");
+					setStatus("This format needs a song folder, not a single file.");
 					return;
 				}
 
