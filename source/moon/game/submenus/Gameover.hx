@@ -3,6 +3,7 @@ package moon.game.submenus;
 import moon.game.PlayState;
 import moon.game.obj.*;
 import moon.backend.gameplay.*;
+import flixel.sound.FlxSound;
 import flixel.group.FlxGroup;
 
 /**
@@ -82,6 +83,7 @@ class Gameover extends FlxSubState
 	// just to shorten some code because I'm a lazy fuck!
 	final cg = PlayState.instance.camGAME;
 	final ch = PlayState.instance.camHUD;
+	var confirmTimer:FlxTimer;
 
 	public function new()
 	{
@@ -306,34 +308,34 @@ class Gameover extends FlxSubState
 				});
 
 				Global.scriptCall('onGameOverRetry', [instance]);
-				new FlxTimer().start(1.5, _ ->
+				confirmTimer = new FlxTimer().start(1.5, _ ->
 				{
-					ch.fade(FlxColor.BLACK, 1.45, false, () ->
-					{
-						// PlayState.instance.persistentDraw = true;
-						// PlayState.instance.gameOverRestart();
-
-						// ch.fade(FlxColor.BLACK, 1.5, true);
-						FlxG.sound.list.remove(music);
-
-						Global.clearScriptList();
-						AssetManager.skipNextCleanup = true;
-						FlxG.resetState();
-						close();
-					});
-
-					// PlayState.instance.setCameraFocus('player', [0, -164], 1.5, {ease: FlxEase.expoIn, startDelay: 0.01, onComplete: _->{
-
-					// }});
+					ch.fade(FlxColor.BLACK, 1.45, false);
+					confirmTimer.start(1.45, _ -> close());
 				});
 			}
 		}
+		else if (MoonInput.justPressed(ACCEPT) && pressed && confirmTimer != null) close();
 	}
 
-	override public function close()
+	override public function close():Void
 	{
+		FlxG.sound.list.remove(music);
+		destroySfx();
+
+		if (confirmTimer != null)
+		{
+			confirmTimer.cancel();
+			confirmTimer.destroy();
+			confirmTimer = null;
+		}
+
+		Global.clearScriptList();
+		AssetManager.skipNextCleanup = true;
+		FlxG.resetState();
 		super.close();
-		FlxTween.globalManager.cancelTweensOf(loss);
+
+		FlxTween.cancelTweensOf(loss);
 	}
 
 	function changeSelection(change:Int = 0):Void
@@ -345,10 +347,20 @@ class Gameover extends FlxSubState
 		if (change != 0) Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true);
 	}
 
-	private function sfx(audio:String)
+	var sfxSound:FlxSound = null;
+
+	function sfx(audio:String):Void
 	{
-		if (Paths.exists('characters/bf/gameover/$audio.ogg')) Paths.playSFX('bf/gameover/$audio.ogg', 'characters', true);
-		else
-			Paths.playSFX('bf/gameover/$audio.ogg', 'characters', true);
+		destroySfx();
+		sfxSound = Paths.playSFX('bf/gameover/$audio.ogg', 'characters', true);
+		sfxSound.onComplete = destroySfx;
+	}
+
+	function destroySfx():Void
+	{
+		if (sfxSound == null) return;
+
+		sfxSound.destroy();
+		sfxSound = null;
 	}
 }
