@@ -585,6 +585,18 @@ class LevelEditor extends FlxState
 
 		if (!uiBusy && allowEditing)
 		{
+			//PLACEHOLDER
+			if(FlxG.keys.justPressed.N)
+			{
+				sectionStepper.value--;
+				trace(sectionStepper.value);
+			}
+			else if(FlxG.keys.justPressed.M)
+			{
+				sectionStepper.value++;
+				trace(sectionStepper.value);
+			}
+			
 			if (FlxG.keys.pressed.CONTROL)
 			{
 				if (MoonInput.justPressed(UI_LEFT) || MoonInput.justPressed(UI_RIGHT))

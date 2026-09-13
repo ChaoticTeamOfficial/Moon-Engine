@@ -9,10 +9,15 @@ import sys.io.File;
 class Prebuild
 {
 	static inline final BUILD_TIME_FILE:String = '.build_time';
-	// TODO lol
 	public static var compileMsgs:Array<String> = [
 		"We love legacy mods. VS Hex my beloved <3...",
-		"yo nene"
+		"yo nene",
+		"dih",
+		"I'm writing this at 12:30 PM, I'm hungry.",
+		"Hello, World!",
+		"Don't forget to drink some water!",
+		"Why do we brainstorm with ideas only when we're not working?",
+		"I bet you have some awesome ideas stored in."
 	];
 
 	static function main():Void

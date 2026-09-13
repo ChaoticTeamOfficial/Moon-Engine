@@ -28,6 +28,7 @@ class EventRegistry
 			'Set Filter' => SetFilterEvent,
 			'Fade' => FadeEvent,
 			'Flash' => FlashEvent,
+			'Call Custom Method' => CallMethodEvent,
 
 			// window events (maybe will be a separate category?)
 			'Window Movement' => WindowMoveEvent,

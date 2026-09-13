@@ -358,15 +358,13 @@ class PlayState extends FlxTransitionableState
 		}
 
 		if (allowGameBop) camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom, elapsed * 6);
-
 		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
 
 		// if (FlxG.keys.justPressed.NINE) FlxG.switchState(() -> new ChartConvert());
 		if (FlxG.keys.justPressed.SEVEN)
 		{
-			Global.clearScriptList();
-			EditorTransition.transitionToEditor(this);
 			canPause = false;
+			openSubState(new moon.toolkit.level_editor.LevelEditorRecode());
 		}
 
 		if (MoonInput.justPressed(PAUSE)) pauseGame();
@@ -449,7 +447,7 @@ class PlayState extends FlxTransitionableState
 			camGAME.rotation = rotation;
 	}
 
-	var lastZoom:Float;
+	public var lastZoom:Float;
 
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
