@@ -34,7 +34,9 @@ class LevelEditorRecode extends FlxSubState
 		game.persistentUpdate = true;
 		game.persistentDraw = true;
 
-		game.allowGameBop = false;
+		game.allowGameBop = true;
+		game.canPause = true;
+		game.onEditor = true;
 
 		this.camera = game.camALT;
 		game.camALT.bgColor = 0x00000000;
@@ -48,8 +50,11 @@ class LevelEditorRecode extends FlxSubState
 		grid.x -= 96;
 		add(grid);
 
-		grid.addColorRegion(0, 10000, 0, FlxColor.CYAN);
+		// grid.addColorRegion(0, 10000, 0, FlxColor.CYAN);
+		FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	}
+
+	var isPaused:Bool = false;
 
 	override public function update(elapsed:Float):Void
 	{
@@ -57,7 +62,17 @@ class LevelEditorRecode extends FlxSubState
 
 		if (game == null) return;
 
-		if (!_closing && (FlxG.keys.justPressed.ESCAPE || FlxG.keys.justPressed.SEVEN)) closeEditor();
+		if (!_closing && (FlxG.keys.justPressed.ESCAPE)) closeEditor();
+
+		if (FlxG.keys.justPressed.SPACE)
+		{
+			isPaused = !isPaused;
+			if (isPaused) game.pauseGame(false);
+			else
+				game.resumeGame();
+
+			game.persistentUpdate = !game.persistentUpdate;
+		}
 	}
 
 	public function closeEditor():Void
@@ -73,21 +88,18 @@ class LevelEditorRecode extends FlxSubState
 				{
 					game.persistentUpdate = false;
 					game.allowGameBop = true;
-					game.canPause = true;
+					game.onEditor = false;
 				}
 				close();
 			});
 		}
-		else
-		{
-			if (game != null)
-			{
-				game.persistentUpdate = false;
-				game.allowGameBop = true;
-				game.canPause = true;
-			}
-			close();
-		}
+	}
+
+	override function onFocusLost()
+	{
+		super.onFocusLost();
+
+		if (MoonSettings.callSetting('Auto Pause')) isPaused = true;
 	}
 
 	override public function destroy():Void

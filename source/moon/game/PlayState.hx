@@ -70,6 +70,7 @@ class PlayState extends FlxTransitionableState
 	 */
 	public var captions:SubtitleDisplay;
 
+	public var onEditor:Bool = false;
 	// Cameras
 
 	/**
@@ -94,9 +95,14 @@ class PlayState extends FlxTransitionableState
 	 */
 	public var cameraShaderHandlers:Map<String, MoonShaderHandler> = [];
 
-	// -- Some other values --
-	// Events (a array containing every MoonEvent, not the raw events from chart.)
+	// -- Some other stuffies --
+
+	/**
+	 * Events (a array containing every MoonEvent, not the raw events from chart.)
+	 */
 	public static var events:Array<MoonEvent> = [];
+
+	public static var nextEventIndex:Int = 0;
 
 	public var songScript:MoonScript = new MoonScript();
 
@@ -329,6 +335,7 @@ class PlayState extends FlxTransitionableState
 		}
 
 		events.sort((a, b) -> a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
+		nextEventIndex = 0;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -341,21 +348,16 @@ class PlayState extends FlxTransitionableState
 		// camGAME.rotation += 0.5;
 
 		// EVENTS CHECK
-		if (events.length > 0)
+		while (nextEventIndex < events.length && events[nextEventIndex].time <= conductor.time)
 		{
-			for (event in events)
-			{
-				if (event.time <= conductor.time)
-				{
-					Global.scriptCall('onEvent', [event.tag]);
+			final event = events[nextEventIndex];
+			Global.scriptCall('onEvent', [event.tag]);
 
-					if (event.valid) event.exec();
-					else
-						EventRegistry.executeEvent(this, event);
+			if (event.valid) event.exec();
+			else
+				EventRegistry.executeEvent(this, event);
 
-					events.remove(event);
-				}
-			}
+			nextEventIndex++;
 		}
 
 		if (allowGameBop) camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom * zoomScale, elapsed * 6);
@@ -598,19 +600,32 @@ class PlayState extends FlxTransitionableState
 	{
 		super.onFocusLost();
 
-		if (playField != null && MoonSettings.callSetting('Auto Pause')) pauseGame();
+		if (playField != null && MoonSettings.callSetting('Auto Pause')) pauseGame(!onEditor);
 	}
 
-	public function pauseGame()
+	public function pauseGame(shouldOpenMenu:Bool = true)
 	{
 		if (paused || isDead || !canPause) return;
 
 		paused = true;
 		activeTweens(false);
-		openSubState(new PauseMenu(camALT));
+		if (shouldOpenMenu) openSubState(new PauseMenu(camALT));
 		if (playField.playback.state == PLAY) playField.playback.state = PAUSE;
 
 		Global.scriptCall('onSongPause');
+	}
+
+	public function resumeGame()
+	{
+		paused = false;
+		activeTweens(true);
+		if (!playField.inCountdown)
+		{
+			playField.playback.state = PLAY;
+			playField.playback.resync();
+		}
+
+		Global.scriptCall('onSongResume');
 	}
 
 	public function preloadCameraShaders():Void
@@ -680,19 +695,6 @@ class PlayState extends FlxTransitionableState
 		final handler = new MoonShaderHandler(cam);
 		cameraShaderHandlers.set(target, handler);
 		return handler;
-	}
-
-	public function resumeGame()
-	{
-		paused = false;
-		activeTweens(true);
-		if (!playField.inCountdown)
-		{
-			playField.playback.state = PLAY;
-			playField.playback.resync();
-		}
-
-		Global.scriptCall('onSongResume');
 	}
 
 	public function exit(toMenu:Bool = true, savedData:Bool = false, ?resultsStats:PlayerStats)

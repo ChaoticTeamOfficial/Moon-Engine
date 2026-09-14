@@ -1,35 +1,31 @@
 package moon.toolkit.level_editor;
 
 import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
 import openfl.geom.Rectangle;
 import moon.game.PlayState;
+import moon.hardcoded_shaders.MiniViewportShader;
 import moon.toolkit.ui.*;
 
-// TODO: Fix the centering and zooms. It's pretty incorrect but HELL i'm lazy...
+// TODO: take a look into lagspikes related to shaders.
 
-typedef CameraInfo =
-{
-	var x:Float;
-	var y:Float;
-	var width:Int;
-	var height:Int;
-	var zoom:Float;
-	var scrollX:Float;
-	var scrollY:Float;
-};
-
+/**
+ * Level-editor gameplay preview.
+ */
 class MiniPlayer extends FlxSpriteGroup
 {
 	public static var instance:MiniPlayer;
 	public static final MINI_WIDTH:Int = 640;
 	public static final MINI_HEIGHT:Int = 360;
-	public static final MINI_SCALE:Float = 0.4;
+	public static final MINI_SCALE:Float = 0.5;
 	static final TRANSITION_TIME:Float = 0.35;
 	public static var MINI_X:Float = 64;
 	public static var MINI_Y:Float = 64;
@@ -37,38 +33,22 @@ class MiniPlayer extends FlxSpriteGroup
 	var game:PlayState;
 	var previewBorder:MoonSprite;
 	var dimSprites:Array<MoonSprite> = [];
-	var _origCamGame:CameraInfo;
-	var _origCamHUD:CameraInfo;
 	var _transitioning:Bool = true;
 	var _closing:Bool = false;
-	var _tweenGameZoom:Float = 1;
-	var _tweenHUDZoom:Float = 1;
+	var _shaderGame:MiniViewportShader;
+	var _shaderHUD:MiniViewportShader;
+	var _filterGame:ShaderFilter;
+	var _filterHUD:ShaderFilter;
+
+	public var viewScale:Float = 1;
+	public var viewOffX:Float = 0;
+	public var viewOffY:Float = 0;
 
 	public function new(game:PlayState)
 	{
 		super();
 		instance = this;
 		this.game = game;
-
-		_origCamGame = {
-			x: game.camGAME.x,
-			y: game.camGAME.y,
-			width: game.camGAME.width,
-			height: game.camGAME.height,
-			zoom: game.camGAME.zoom,
-			scrollX: game.camGAME.scroll.x,
-			scrollY: game.camGAME.scroll.y
-		};
-
-		_origCamHUD = {
-			x: game.camHUD.x,
-			y: game.camHUD.y,
-			width: game.camHUD.width,
-			height: game.camHUD.height,
-			zoom: game.camHUD.zoom,
-			scrollX: game.camHUD.scroll.x,
-			scrollY: game.camHUD.scroll.y
-		};
 
 		final dimColor = 0xFF5C5C5C;
 		makeDim(0, 0, FlxG.width, Std.int(MINI_Y - 4), dimColor);
@@ -87,6 +67,7 @@ class MiniPlayer extends FlxSpriteGroup
 		previewBorder.alpha = 0;
 		add(previewBorder);
 
+		setupShaders();
 		startOpenTransition();
 	}
 
@@ -101,14 +82,77 @@ class MiniPlayer extends FlxSpriteGroup
 		return s;
 	}
 
+	function setupShaders():Void
+	{
+		_shaderGame = new MiniViewportShader();
+		_shaderHUD = new MiniViewportShader();
+		_filterGame = new ShaderFilter(_shaderGame);
+		_filterHUD = new ShaderFilter(_shaderHUD);
+
+		ensureViewportFilter(game.camGAME, _filterGame);
+		ensureViewportFilter(game.camHUD, _filterHUD);
+
+		viewScale = 1;
+		viewOffX = 0;
+		viewOffY = 0;
+		pushUniforms();
+	}
+
+	function ensureViewportFilter(cam:FlxCamera, filter:ShaderFilter):Void
+	{
+		if (cam == null || filter == null) return;
+
+		final src:Array<BitmapFilter> = cam.filters != null ? cast cam.filters : [];
+		final list:Array<BitmapFilter> = [];
+
+		for (f in src) if (f != filter) list.push(f);
+
+		list.push(filter);
+		cam.filtersEnabled = true;
+		cam.filters = list;
+	}
+
+	function ensureFilters():Void
+	{
+		if (_filterGame != null) ensureViewportFilter(game.camGAME, _filterGame);
+		if (_filterHUD != null) ensureViewportFilter(game.camHUD, _filterHUD);
+	}
+
+	function stripViewportFilter(cam:FlxCamera, filter:ShaderFilter):Void
+	{
+		if (cam == null || filter == null) return;
+
+		final src:Array<BitmapFilter> = cam.filters != null ? cast cam.filters : [];
+		final list:Array<BitmapFilter> = [];
+		for (f in src)
+		{
+			if (f != filter) list.push(f);
+		}
+		cam.filters = list.length > 0 ? list : null;
+	}
+
+	function pushUniforms():Void
+	{
+		if (_shaderGame != null)
+		{
+			_shaderGame.scale = viewScale;
+			_shaderGame.offsetX = viewOffX;
+			_shaderGame.offsetY = viewOffY;
+		}
+		if (_shaderHUD != null)
+		{
+			_shaderHUD.scale = viewScale;
+			_shaderHUD.offsetX = viewOffX;
+			_shaderHUD.offsetY = viewOffY;
+		}
+	}
+
 	function startOpenTransition():Void
 	{
 		_transitioning = true;
 
-		game.zoomScale = MINI_SCALE;
-
-		final targetGameZoom = game.lastZoom * MINI_SCALE;
-		final targetHUDZoom = MINI_SCALE;
+		final targetOffX = MINI_X / FlxG.width;
+		final targetOffY = MINI_Y / FlxG.height;
 
 		for (d in dimSprites) FlxTween.tween(d, {
 			alpha: 0.7
@@ -122,34 +166,20 @@ class MiniPlayer extends FlxSpriteGroup
 			ease: FlxEase.quadOut
 		});
 
-		FlxTween.tween(game.camGAME, {
-			x: MINI_X,
-			y: MINI_Y,
-			width: MINI_WIDTH,
-			height: MINI_HEIGHT,
-			zoom: targetGameZoom
+		FlxTween.tween(this, {
+			viewScale: MINI_SCALE,
+			viewOffX: targetOffX,
+			viewOffY: targetOffY
 		}, TRANSITION_TIME, {
 			ease: FlxEase.expoInOut,
+			onUpdate: (_) -> pushUniforms(),
 			onComplete: (_) ->
 			{
+				viewScale = MINI_SCALE;
+				viewOffX = targetOffX;
+				viewOffY = targetOffY;
+				pushUniforms();
 				_transitioning = false;
-				game.camGAME.setSize(MINI_WIDTH, MINI_HEIGHT);
-				game.camGAME.setPosition(MINI_X, MINI_Y);
-			}
-		});
-
-		FlxTween.tween(game.camHUD, {
-			x: MINI_X - 164,
-			y: MINI_Y - 116,
-			width: MINI_WIDTH,
-			height: MINI_HEIGHT,
-			zoom: targetHUDZoom
-		}, TRANSITION_TIME, {
-			ease: FlxEase.expoInOut,
-			onComplete: (_) ->
-			{
-				game.camHUD.setSize(MINI_WIDTH, MINI_HEIGHT);
-				game.camHUD.scroll.set(0, 0);
 			}
 		});
 	}
@@ -157,6 +187,12 @@ class MiniPlayer extends FlxSpriteGroup
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+
+		if (!_closing)
+		{
+			ensureFilters();
+			pushUniforms();
+		}
 	}
 
 	public function closePreview(onDone:Void->Void):Void
@@ -164,8 +200,6 @@ class MiniPlayer extends FlxSpriteGroup
 		if (_closing) return;
 		_closing = true;
 		_transitioning = true;
-
-		game.zoomScale = 1;
 
 		for (d in dimSprites) FlxTween.tween(d, {
 			alpha: 0
@@ -179,27 +213,20 @@ class MiniPlayer extends FlxSpriteGroup
 			ease: FlxEase.quadIn
 		});
 
-		FlxTween.tween(game.camGAME, {
-			x: _origCamGame.x,
-			y: _origCamGame.y,
-			width: _origCamGame.width,
-			height: _origCamGame.height,
-			zoom: game.lastZoom
-		}, TRANSITION_TIME, {
-			ease: FlxEase.expoInOut
-		});
-
-		FlxTween.tween(game.camHUD, {
-			x: _origCamHUD.x,
-			y: _origCamHUD.y,
-			width: _origCamHUD.width,
-			height: _origCamHUD.height,
-			zoom: 1
+		FlxTween.tween(this, {
+			viewScale: 1,
+			viewOffX: 0,
+			viewOffY: 0
 		}, TRANSITION_TIME, {
 			ease: FlxEase.expoInOut,
+			onUpdate: (_) -> pushUniforms(),
 			onComplete: (_) ->
 			{
-				restoreCameras();
+				viewScale = 1;
+				viewOffX = 0;
+				viewOffY = 0;
+				pushUniforms();
+				removeShaders();
 
 				if (game != null)
 				{
@@ -214,28 +241,23 @@ class MiniPlayer extends FlxSpriteGroup
 		});
 	}
 
-	function restoreCameras():Void
+	function removeShaders():Void
 	{
-		if (game == null || _origCamGame == null) return;
+		if (game == null) return;
 
-		game.zoomScale = 1;
+		stripViewportFilter(game.camGAME, _filterGame);
+		stripViewportFilter(game.camHUD, _filterHUD);
 
-		game.camGAME.setSize(_origCamGame.width, _origCamGame.height);
-		game.camGAME.setPosition(_origCamGame.x, _origCamGame.y);
-		game.camGAME.zoom = game.lastZoom;
-		game.camGAME.scroll.set(_origCamGame.scrollX, _origCamGame.scrollY);
-
-		game.camHUD.setSize(_origCamHUD.width, _origCamHUD.height);
-		game.camHUD.setPosition(_origCamHUD.x, _origCamHUD.y);
-		game.camHUD.zoom = 1;
-		game.camHUD.scroll.set(_origCamHUD.scrollX, _origCamHUD.scrollY);
-
-		game.camGAME.follow(game.camFollower, LOCKON, 1);
-		game.camGAME.focusOn(game.camFollower.getPosition());
+		_shaderGame = null;
+		_shaderHUD = null;
+		_filterGame = null;
+		_filterHUD = null;
 	}
 
 	override public function destroy():Void
 	{
+		if (_filterGame != null || _filterHUD != null) removeShaders();
+
 		instance = null;
 		super.destroy();
 	}

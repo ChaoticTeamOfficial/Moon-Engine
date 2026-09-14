@@ -248,4 +248,81 @@ class NoteSpawner extends FlxGroup
 
 		return value;
 	}
+
+	/**
+	 * Injects a note into the spawner on real time (used on the Level Editor.)
+	 */
+	public function injectNote(struct:NoteStruct):Null<Note>
+	{
+		final note = createNoteFromStruct(struct);
+		if (note == null) return null;
+
+		var idx = 0;
+		while (idx < _notes.length && _notes[idx].time <= note.time)
+			idx++;
+		_notes.insert(idx, note);
+
+		if (idx < nextNoteIndex)
+		{
+			if (note.time <= conductor.time + spawnThreshold) recycleNote(note);
+			nextNoteIndex++;
+		}
+		else if (note.time <= conductor.time + spawnThreshold) nextNoteIndex = idx;
+
+		return note;
+	}
+
+	/**
+	 * Remove a note from the live spawner queue.
+	 */
+	public function removeNoteStruct(time:Float, data:Int, lane:String):Void
+	{
+		for (i in 0..._notes.length)
+		{
+			final n = _notes[i];
+			if (n.lane == lane && n.direction == data && Math.abs(n.time - time) < 0.01)
+			{
+				_notes.splice(i, 1);
+				if (i < nextNoteIndex) nextNoteIndex = Std.int(Math.max(0, nextNoteIndex - 1));
+				return;
+			}
+		}
+	}
+
+	/**
+	 * Jumps the spawner to a specific time.
+	 * @param newTime The new conductor time (ms).
+	 */
+	public function seekTo(newTime:Float):Void
+	{
+		updateSpawnThreshold();
+		for (note in _notes)
+		{
+			if (note.time >= newTime)
+			{
+				note.state = NONE;
+				note.visible = true;
+				note.active = true;
+				if (note.child != null)
+				{
+					note.child.visible = true;
+					note.child.active = true;
+				}
+			}
+		}
+
+		var i = 0;
+		while (i < _notes.length && _notes[i].time <= newTime + spawnThreshold)
+			i++;
+		nextNoteIndex = i;
+
+		i = 0;
+		while (i < _notes.length && _notes[i].time <= newTime + spawnThreshold)
+		{
+			final note = _notes[i];
+			if (note.state == NONE) recycleNote(note);
+			i++;
+		}
+		nextNoteIndex = i;
+	}
 }

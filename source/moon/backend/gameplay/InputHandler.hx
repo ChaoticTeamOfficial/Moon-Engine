@@ -11,9 +11,11 @@ import moon.backend.gameplay.Replay.ReplayInput;
 import moon.game.notetypes.NoteTypeRegistry;
 import flixel.util.FlxSignal;
 
+// TODO: fix strumline anims on replay & ghost tappings not working!
+
 /**
  * Class meant to handle note inputs and player stats in a gameplay scene.
-**/
+ */
 class InputHandler
 {
 	/**
@@ -172,6 +174,41 @@ class InputHandler
 		recording = false;
 		stats.reset();
 		forcedJudgements = [];
+		heldSustains.clear();
+		lastSustainStep.clear();
+	}
+
+	/**
+	 * Jumps the handler to a specific time.
+	 * @param newTime The new conductor time (ms).
+	 */
+	public function seekTo(newTime:Float):Void
+	{
+		heldSustains.clear();
+		lastSustainStep.clear();
+		forcedJudgements = [];
+
+		for (i in 0...4)
+		{
+			justPressed[i] = false;
+			pressed[i] = false;
+			released[i] = false;
+			replayKeyStates[i] = false;
+		}
+
+		if (isReplay)
+		{
+			// rewind the replay cursor to the first input at or after newTime
+			currentReplayIndex = 0;
+			while (currentReplayIndex < replayInputs.length && replayInputs[currentReplayIndex].time < newTime)
+			{
+				// reconstruct key state up to the seek point so holds stay correct
+				final input = replayInputs[currentReplayIndex];
+				if (input.dir >= 0 && input.dir < 4) replayKeyStates[input.dir] = input.press;
+				currentReplayIndex++;
+			}
+			for (i in 0...4) pressed[i] = replayKeyStates[i];
+		}
 	}
 
 	private var forcedJudgements:Map<Int, String> = [];
@@ -211,7 +248,9 @@ class InputHandler
 				justPressed[dir] = true;
 				replayKeyStates[dir] = true;
 
-				if (input.judgement != null) forcedJudgements.set(dir, input.judgement);
+				if (input.judgement != null) forceReplayHit(dir, input.judgement, input.time);
+				else // ghost press
+					forcedJudgements.set(dir, null);
 			}
 			else
 			{
@@ -225,8 +264,42 @@ class InputHandler
 		// keeps pressed state for holds/sustains
 		for (i in 0...4) pressed[i] = replayKeyStates[i];
 
-		// then process regular inputs.
 		processInputs();
+	}
+
+	/**
+	 * Force a note hit during replay with the exact judgement that was recorded.
+	 */
+	private function forceReplayHit(dir:Int, judgement:String, inputTime:Float):Void
+	{
+		var candidates = thisNotes.filter(note -> note.direction == dir && note.lane == playerID && (note.state == NONE || note.state == TOO_LATE));
+
+		if (candidates.length == 0) return;
+
+		// closest note to the recorded press time... (or to its own chart time)
+		candidates.sort((a, b) ->
+		{
+			final da = Math.abs(a.time - inputTime);
+			final db = Math.abs(b.time - inputTime);
+			return da < db ? -1 : da > db ? 1 : 0;
+		});
+
+		final note = candidates[0];
+
+		if (note.state == TOO_LATE)
+		{
+			stats.accuracyCount -= Timings.get(MISS).accuracyCount;
+			stats.score -= Timings.get(MISS).score;
+			stats.health -= Timings.get(MISS).healthGain;
+			stats.misses = Std.int(Math.max(0, stats.misses - 1));
+		}
+
+		// consume any leftover forced slot for this direction
+		forcedJudgements.remove(dir);
+
+		onHit(note, dir, judgement, false);
+		stats.totalNotes++;
+		stats.accuracyCount += Timings.get(judgement).accuracyCount;
 	}
 
 	private function processCPUInputs():Void
@@ -438,12 +511,20 @@ class InputHandler
 		}
 	}
 
-	private function onLateMiss():Void for (note in thisNotes) if (
-		note.state != GOT_HIT
-		&& note.state != TOO_LATE
-		&& note.lane == playerID
-		&& conductor.time > note.time + Timings.get(MISS).maxMs
-	) onMiss(note);
+	private function onLateMiss():Void
+	{
+		for (note in thisNotes)
+		{
+			if (note.state == GOT_HIT || note.state == TOO_LATE) continue;
+			if (note.lane != playerID) continue;
+			if (conductor.time <= note.time + Timings.get(MISS).maxMs) continue;
+
+			// During replay, never late-miss a direction that still has a pending forced judgement!
+			if (isReplay && forcedJudgements.exists(note.direction)) continue;
+
+			onMiss(note);
+		}
+	}
 
 	/**
 	 * Checks if the note is within timing,
@@ -454,10 +535,6 @@ class InputHandler
 	{
 		// during replay, if a forced judgement is waiting for this direction,
 		// always allow the note through regardless of current time.
-		// needed due to toffee's (old) pc being trash and sometimes lag spiking.
-
-		// OKAY I JUST FOUND OUT THAT IT STILL APPLIES THE WRONG JUDGEMENT IF THE GAME LAGSSS
-		// ugh I'll figure this out l8r...
 		if (isReplay && dir >= 0 && forcedJudgements.exists(dir)) return true;
 
 		return checkTiming(note) != null;

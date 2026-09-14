@@ -256,6 +256,30 @@ class PlayField extends FlxGroup
 		botPlay = false;
 	}
 
+	/**
+	 * Seek the song to a new position.
+	 * @param newTime Target time in milliseconds.
+	 */
+	public function seekTo(newTime:Float):Void
+	{
+		final clamped = Math.max(0, newTime);
+
+		// Audio first so resync stays consistent
+		playback.time = clamped;
+		conductor.time = clamped;
+
+		if (noteSpawner != null) noteSpawner.seekTo(clamped);
+		if (PlayState.events != null && PlayState.events.length > 0)
+		{
+			var idx = 0;
+			while (idx < PlayState.events.length && PlayState.events[idx].time < clamped)
+				idx++;
+			PlayState.nextEventIndex = idx;
+		}
+
+		for (handler in inputHandlers.iterator()) handler.seekTo(clamped);
+	}
+
 	override public function update(dt:Float)
 	{
 		// updates some stuff when not in cutscene.
