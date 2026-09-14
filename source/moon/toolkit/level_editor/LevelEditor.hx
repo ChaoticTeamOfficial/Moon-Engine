@@ -585,18 +585,18 @@ class LevelEditor extends FlxState
 
 		if (!uiBusy && allowEditing)
 		{
-			//PLACEHOLDER
-			if(FlxG.keys.justPressed.N)
+			// PLACEHOLDER
+			if (FlxG.keys.justPressed.N)
 			{
 				sectionStepper.value--;
 				trace(sectionStepper.value);
 			}
-			else if(FlxG.keys.justPressed.M)
+			else if (FlxG.keys.justPressed.M)
 			{
 				sectionStepper.value++;
 				trace(sectionStepper.value);
 			}
-			
+
 			if (FlxG.keys.pressed.CONTROL)
 			{
 				if (MoonInput.justPressed(UI_LEFT) || MoonInput.justPressed(UI_RIGHT))
@@ -694,7 +694,7 @@ class LevelEditor extends FlxState
 			if (FlxG.keys.justPressed.ESCAPE)
 			{
 				Global.clearScriptList();
-				EditorTransition.transitionToGameplay(this);
+				// EditorTransition.transitionToGameplay(this);
 			}
 
 			if (FlxG.keys.justPressed.ONE) curType = NOTES;
@@ -1297,7 +1297,7 @@ class LevelEditor extends FlxState
 			ease: FlxEase.backOut
 		});
 
-		EditorSync.onNoteAdded(n);
+		// EditorSync.onNoteAdded(n);
 
 		return note;
 	}
@@ -1324,7 +1324,7 @@ class LevelEditor extends FlxState
 
 		if (ev.runOnLoad == true) _syncEventMarkers(spr, true);
 
-		EditorSync.onEventAdded(ev);
+		// EditorSync.onEventAdded(ev);
 	}
 
 	private function _syncEventMarkers(spr:EventSpr, on:Bool):Void

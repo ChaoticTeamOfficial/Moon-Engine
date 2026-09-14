@@ -293,7 +293,8 @@ class PlayState extends FlxTransitionableState
 		preloadCameraShaders();
 
 		camFollower.setPosition(stage?.cameraSettings?.startX ?? 0, stage?.cameraSettings?.startY ?? 0);
-		camGAME.zoom = lastZoom = stage?.cameraSettings?.zoom ?? 1;
+		lastZoom = stage?.cameraSettings?.zoom ?? 1;
+		camGAME.zoom = lastZoom * zoomScale;
 		isDead = false;
 		allowGameBop = true;
 
@@ -357,8 +358,8 @@ class PlayState extends FlxTransitionableState
 			}
 		}
 
-		if (allowGameBop) camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom, elapsed * 6);
-		camHUD.zoom = FlxMath.lerp(camHUD.zoom, 1, elapsed * 6);
+		if (allowGameBop) camGAME.zoom = FlxMath.lerp(camGAME.zoom, lastZoom * zoomScale, elapsed * 6);
+		camHUD.zoom = FlxMath.lerp(camHUD.zoom, zoomScale, elapsed * 6);
 
 		// if (FlxG.keys.justPressed.NINE) FlxG.switchState(() -> new ChartConvert());
 		if (FlxG.keys.justPressed.SEVEN)
@@ -448,6 +449,7 @@ class PlayState extends FlxTransitionableState
 	}
 
 	public var lastZoom:Float;
+	public var zoomScale:Float = 1;
 
 	public function setCameraZoom(zoom:Float, duration:Float, ?options:Null<TweenOptions>, isInstant:Bool = false)
 	{
@@ -458,18 +460,19 @@ class PlayState extends FlxTransitionableState
 		if (!isInstant)
 		{
 			camZoom = FlxTween.tween(camGAME, {
-				zoom: zoom
+				zoom: zoom * zoomScale
 			}, duration, options);
 			camZoom.onComplete = _ ->
 			{
-				lastZoom = camGAME.zoom;
+				lastZoom = zoom;
 				allowGameBop = true;
 			};
 		}
 		else
 		{
 			allowGameBop = true;
-			camGAME.zoom = lastZoom = zoom;
+			lastZoom = zoom;
+			camGAME.zoom = zoom * zoomScale;
 		}
 	}
 
@@ -515,9 +518,9 @@ class PlayState extends FlxTransitionableState
 	{
 		if (((curBeat % bopRate) == 0) && !playField.inCountdown)
 		{
-			if (allowGameBop) camGAME.zoom += bopIntensity;
+			if (allowGameBop) camGAME.zoom += bopIntensity * zoomScale;
 
-			camHUD.zoom += bopIntensity;
+			camHUD.zoom += bopIntensity * zoomScale;
 			Global.scriptCall('onCameraBop', []);
 		}
 
