@@ -5,6 +5,27 @@ import flixel.util.FlxColor;
 import flixel.ui.FlxBar;
 import flixel.group.FlxSpriteGroup;
 
+/**
+ * A type for icon layouts.
+ */
+enum abstract IconLayout(String) from String to String
+{
+	/**
+	 * Vertical stack with slight horizontal stagger. Usually works well for 2-3 icons.
+	 */
+	var STACK = "stack";
+
+	/**
+	 * Slight diagonal fan.
+	 */
+	var FAN = "fan";
+
+	/**
+	 * Diagonal row.
+	 */
+	var ROW = "row";
+}
+
 class HealthBar extends FlxSpriteGroup
 {
 	/**
@@ -18,32 +39,52 @@ class HealthBar extends FlxSpriteGroup
 	public var bar:FlxBar;
 
 	/**
-	 * The opponent's name. Will automatically update the icon if changed.
+	 * Primary opponent name (first in the opponents list).
 	 */
 	public var opponent(default, set):String;
 
 	/**
-	 * The player's name. Will automatically update the icon if changed.
+	 * Primary player name (first in the players list).
 	 */
 	public var player(default, set):String;
 
 	/**
-	 * An array containing all icons. There's no purpose to it for now, but will be used for a future multi-icon implementation!
+	 * Full list of opponent character names.
+	 */
+	public var opponents(default, set):Array<String> = [];
+
+	/**
+	 * Full list of player character names.
+	 */
+	public var players(default, set):Array<String> = [];
+
+	/**
+	 * All icons currently managed by this healthbar.
 	 */
 	public var icons:Array<HealthIcon> = [];
 
 	/**
-	 * The opponent's icon.
+	 * Opponent-side icons only.
+	 */
+	public var oppIcons:Array<HealthIcon> = [];
+
+	/**
+	 * Player-side icons only.
+	 */
+	public var playerIcons:Array<HealthIcon> = [];
+
+	/**
+	 * Convenience reference to the first opponent icon.
 	 */
 	public var oppIcon:HealthIcon;
 
 	/**
-	 * The player's icon.
+	 * Convenience reference to the first player icon.
 	 */
 	public var playerIcon:HealthIcon;
 
 	/**
-	 * The health ammount, which the healthbar tracks.
+	 * The health amount, which the healthbar tracks.
 	 */
 	public var health(default, set):Float = 50;
 
@@ -58,9 +99,24 @@ class HealthBar extends FlxSpriteGroup
 	public var updateIconsPos:Bool = true;
 
 	/**
-	 * The distance between both icons.
+	 * The distance between the opponent cluster and the player cluster around the health division.
 	 */
 	public var iconDistance:Float = 44;
+
+	/**
+	 * Horizontal offset applied between icons of the same side when laid out side-by-side.
+	 */
+	public var iconSpreadX:Float = 64;
+
+	/**
+	 * Vertical offset applied between icons of the same side when stacked.
+	 */
+	public var iconSpreadY:Float = 64;
+
+	/**
+	 * How multi-icon groups are arranged.
+	 */
+	public var iconLayout:IconLayout = STACK;
 
 	/**
 	 * The conductor driving this healthbar's icon bops and transitions.
@@ -69,10 +125,10 @@ class HealthBar extends FlxSpriteGroup
 
 	/**
 	 * Creates a healthbar.
-	 * @param opponent the opponent name.
-	 * @param player the player name.
+	 * @param opponent single opponent name, or array of opponent names.
+	 * @param player single player name, or array of player names.
 	 */
-	public function new(opponent:String, player:String, ?conductor:Conductor)
+	public function new(opponent:Dynamic, player:Dynamic, ?conductor:Conductor)
 	{
 		super();
 
@@ -89,47 +145,82 @@ class HealthBar extends FlxSpriteGroup
 		add(bar);
 		add(barBG);
 
-		oppIcon = new HealthIcon();
-		oppIcon.scale.set(iconScale, iconScale);
-		oppIcon.y = bar.y - (oppIcon.height * 0.5);
+		// ok so, we need to ormalize inputs to arrays so single-strings keep working as well!
+		final oppList:Array<String> = (Std.isOfType(opponent, Array)) ? cast opponent : [Std.string(opponent)];
+		final plyList:Array<String> = (Std.isOfType(player, Array)) ? cast player : [Std.string(player)];
 
-		playerIcon = new HealthIcon();
-		playerIcon.scale.set(iconScale, iconScale);
-		playerIcon.baseFlipX = true;
-		playerIcon.y = bar.y - (playerIcon.height * 0.5);
+		rebuildIcons(oppList, plyList);
 
-		add(oppIcon);
-		add(playerIcon);
-
-		icons.push(oppIcon);
-		icons.push(playerIcon);
-
-		// playerIcon.origin.set(0, playerIcon.height / 2);
-		// oppIcon.origin.set(oppIcon.width, oppIcon.height / 2);
-
-		playerIcon.updateHitbox();
-		oppIcon.updateHitbox();
-
-		this.opponent = opponent;
-		this.player = player;
-
-		bar.createFilledBar(getRGBData(opponent), getRGBData(player));
+		bar.createFilledBar(getRGBData(this.opponent), getRGBData(this.player));
 		health = bar.value = 50;
-		playerIcon.screenCenter(X);
-		oppIcon.screenCenter(X);
 
 		if (this.conductor != null)
 		{
 			this.conductor.onStep.add(step ->
 			{
-				// if (transitioning) return;
-				oppIcon.onStepHit(step, iconScale + oppIcon.extraScale);
-				playerIcon.onStepHit(step, iconScale + playerIcon.extraScale);
+				for (ico in icons) ico.onStepHit(step, iconScale + ico.extraScale);
 			});
 		}
 
 		updateBarStats();
 		updateBarPos(true);
+	}
+
+	/**
+	 * Rebuilds all icons from the given character name lists.
+	 */
+	public function rebuildIcons(oppNames:Array<String>, plyNames:Array<String>):Void
+	{
+		for (ico in icons)
+		{
+			remove(ico, true);
+			ico.destroy();
+		}
+		icons = [];
+		oppIcons = [];
+		playerIcons = [];
+		oppIcon = null;
+		playerIcon = null;
+
+		final safeOpp = (oppNames != null && oppNames.length > 0) ? oppNames.copy() : ['dad'];
+		final safePly = (plyNames != null && plyNames.length > 0) ? plyNames.copy() : ['bf'];
+
+		// I'm assigning backing fields directly to avoid setter recursion...
+		// yes I like reflect ok I know it kills android or phones in general but I just cant help it,,
+		Reflect.setField(this, 'opponents', safeOpp);
+		Reflect.setField(this, 'players', safePly);
+		Reflect.setField(this, 'opponent', safeOpp[0]);
+		Reflect.setField(this, 'player', safePly[0]);
+
+		for (name in safeOpp)
+		{
+			final ico = createIcon(name, false);
+			oppIcons.push(ico);
+			icons.push(ico);
+			add(ico);
+		}
+
+		for (name in safePly)
+		{
+			final ico = createIcon(name, true);
+			playerIcons.push(ico);
+			icons.push(ico);
+			add(ico);
+		}
+
+		oppIcon = oppIcons[0];
+		playerIcon = playerIcons[0];
+	}
+
+	function createIcon(charName:String, isPlayerSide:Bool):HealthIcon
+	{
+		final ico = new HealthIcon();
+		ico.scale.set(iconScale, iconScale);
+		ico.baseFlipX = isPlayerSide;
+		ico.icon = charName;
+		ico.updateHitbox();
+		ico.y = bar.y - (ico.height * 0.5);
+		return ico;
 	}
 
 	var count:Int = 4;
@@ -144,7 +235,7 @@ class HealthBar extends FlxSpriteGroup
 		count = 4;
 		bar.scale.set(0, 1);
 		barBG.scale.set(0, 1);
-		oppIcon.scale.x = oppIcon.scale.y = playerIcon.scale.x = playerIcon.scale.y = 0;
+		for (ico in icons) ico.scale.x = ico.scale.y = 0;
 
 		if (PlayField.instance.stats != null) PlayField.instance.stats.visible = false;
 
@@ -163,7 +254,7 @@ class HealthBar extends FlxSpriteGroup
 						ease: FlxEase.expoOut
 					});
 				case 1:
-					for (ico in [oppIcon, playerIcon]) FlxTween.tween(ico.scale, {
+					for (ico in icons) FlxTween.tween(ico.scale, {
 						x: iconScale + ico.extraScale,
 						y: iconScale + ico.extraScale
 					}, conductor.crochet / 1000, {
@@ -192,15 +283,17 @@ class HealthBar extends FlxSpriteGroup
 
 		// uhmm, weird shit :(
 		if (health > 98) health = 101;
-		// if(bar.value != health) trace(health);
 		bar.value = FlxMath.lerp(bar.value, health, 0.2);
 
 		updateBarPos();
 
 		if (FlxG.keys.justPressed.NINE)
 		{
-			playerIcon.useOldIcon = !playerIcon.useOldIcon;
-			playerIcon.onStepHit(playerIcon.bopEvery, iconScale + playerIcon.extraScale);
+			for (ico in playerIcons)
+			{
+				ico.useOldIcon = !ico.useOldIcon;
+				ico.onStepHit(ico.bopEvery, iconScale + ico.extraScale);
+			}
 			updateBarStats();
 		}
 	}
@@ -220,52 +313,127 @@ class HealthBar extends FlxSpriteGroup
 					final d = 169;
 					if (pf != null)
 					{
-						playerIcon.setPosition(pf.playerStrum.x + d, pf.playerStrum.y);
-						oppIcon.setPosition(pf.oppStrum.x - oppIcon.width - d, pf.oppStrum.y);
+						layoutIconCluster(playerIcons, pf.playerStrum.x + d, pf.playerStrum.y, true, true);
+						layoutIconCluster(oppIcons, pf.oppStrum.x - d, pf.oppStrum.y, false, true);
 					}
 
 				default:
 					final divisionX = bar.x + (bar.width * (1 - (bar.value / 100)));
 
-					playerIcon.x = divisionX + iconDistance - playerIcon.width / 2;
-					oppIcon.x = divisionX - iconDistance - oppIcon.width / 2;
-
-					oppIcon.y = bar.y - (oppIcon.height * 0.5);
-					playerIcon.y = bar.y - (playerIcon.height * 0.5);
+					layoutIconCluster(oppIcons, divisionX - iconDistance, bar.y, false, false);
+					layoutIconCluster(playerIcons, divisionX + iconDistance, bar.y, true, false);
 			}
 		}
 
 		barBG.alpha = bar.alpha = instant ? targetAlpha : FlxMath.lerp(bar.alpha, targetAlpha, 0.2);
-		oppIcon.alpha = playerIcon.alpha = (MoonSettings.callSetting('Icons') == 'At Healthbar') ? bar.alpha : 1;
 
-		oppIcon.visible = playerIcon.visible = (MoonSettings.callSetting('Icons') != 'Off');
+		final iconAlpha = (MoonSettings.callSetting('Icons') == 'At Healthbar') ? bar.alpha : 1;
+		final iconVisible = MoonSettings.callSetting('Icons') != 'Off';
+		for (ico in icons)
+		{
+			ico.alpha = iconAlpha;
+			ico.visible = iconVisible;
+		}
 
 		barBG.screenCenter(X);
 		bar.screenCenter(X);
 	}
 
-	public function updateBarStats()
+	/**
+	 * Positions a group of icons around an anchor point using the current layout mode.
+	 * @param cluster the icons to position.
+	 * @param anchorX reference X.
+	 * @param anchorY reference Y.
+	 * @param isPlayerSide whether is a player or not.
+	 * @param onLanes when true, treats anchor as a fixed world position.
+	 */
+	function layoutIconCluster(cluster:Array<HealthIcon>, anchorX:Float, anchorY:Float, isPlayerSide:Bool, onLanes:Bool):Void
 	{
-		playerIcon.icon = player;
-		oppIcon.icon = opponent;
+		if (cluster == null || cluster.length == 0) return;
 
-		playerIcon.updateHitbox();
-		oppIcon.updateHitbox();
+		final n = cluster.length;
 
-		// playerIcon.origin.set(-8, playerIcon.height / 2);
-		// oppIcon.origin.set(oppIcon.width + 8, oppIcon.height / 2);
+		// default layout with only one icon per side
+		if (n == 1)
+		{
+			final ico = cluster[0];
+			if (onLanes)
+			{
+				if (isPlayerSide) ico.setPosition(anchorX, anchorY);
+				else
+					ico.setPosition(anchorX - ico.width, anchorY);
+			}
+			else
+			{
+				ico.x = isPlayerSide ? (anchorX - ico.width / 2) : (anchorX - ico.width / 2);
+				ico.y = anchorY - (ico.height * 0.5);
+			}
+			return;
+		}
 
-		oppIcon.onStepHit(conductor?.curStep ?? 0, iconScale + oppIcon.extraScale);
-		playerIcon.onStepHit(conductor?.curStep ?? 0, iconScale + playerIcon.extraScale);
+		// multi-icon layouts! offsets are relative to the "main" slot so we can still track the health division the same way
+		// a single icon would!
+		for (i in 0...n)
+		{
+			final ico = cluster[i];
+			final t = (n == 1) ? 0.0 : (i / (n - 1) - 0.5);
+
+			var ox:Float = 0;
+			var oy:Float = 0;
+
+			switch (iconLayout)
+			{
+				case ROW:
+					ox = t * iconSpreadX * (n - 1);
+					oy = 0;
+
+				case FAN:
+					final dir = isPlayerSide ? 1 : -1;
+					ox = t * iconSpreadX * (n - 1) * dir;
+					oy = t * iconSpreadY * (n - 1);
+
+				default:
+					final dir = isPlayerSide ? 1 : -1;
+					ox = (i % 2 == 0 ? -1 : 1) * (iconSpreadX * 0.35) * dir;
+					oy = t * iconSpreadY * (n - 1);
+			}
+
+			if (onLanes)
+			{
+				if (isPlayerSide) ico.setPosition(anchorX + ox, anchorY + oy);
+				else
+					ico.setPosition(anchorX - ico.width + ox, anchorY + oy);
+			}
+			else
+			{
+				ico.x = anchorX + ox - ico.width / 2;
+				ico.y = anchorY + oy - (ico.height * 0.5);
+			}
+		}
 	}
 
-	/*public function bump()
+	public function updateBarStats()
+	{
+		for (i in 0...oppIcons.length)
 		{
-			if (transitioning) return;
+			if (i < opponents.length) oppIcons[i].icon = opponents[i];
+			oppIcons[i].updateHitbox();
+			oppIcons[i].onStepHit(conductor?.curStep ?? 0, iconScale + oppIcons[i].extraScale);
+		}
 
-			oppIcon.scale.set(iconScale + oppIcon.extraScale + 0.15, iconScale + oppIcon.extraScale + 0.15);
-			playerIcon.scale.set(iconScale + playerIcon.extraScale + 0.15, iconScale + playerIcon.extraScale + 0.15);
-	}*/
+		for (i in 0...playerIcons.length)
+		{
+			if (i < players.length) playerIcons[i].icon = players[i];
+			playerIcons[i].updateHitbox();
+			playerIcons[i].onStepHit(conductor?.curStep ?? 0, iconScale + playerIcons[i].extraScale);
+		}
+
+		// Bar colors follow the primary characters.
+		// so...
+		// TODO: figure out a way to... enhance the bar itself? idk...
+		if (opponent != null && player != null) bar.createFilledBar(getRGBData(opponent), getRGBData(player));
+	}
+
 	public function getRGBData(character:String)
 	{
 		final data:Character.CharacterData = getData(character);
@@ -281,7 +449,11 @@ class HealthBar extends FlxSpriteGroup
 	public function set_opponent(val:String)
 	{
 		this.opponent = val;
-		updateBarStats();
+		if (opponents.length == 0) opponents = [val];
+		else
+			opponents[0] = val;
+
+		if (oppIcons.length > 0) updateBarStats();
 		return val;
 	}
 
@@ -289,16 +461,46 @@ class HealthBar extends FlxSpriteGroup
 	public function set_player(val:String)
 	{
 		this.player = val;
-		updateBarStats();
+		if (players.length == 0) players = [val];
+		else
+			players[0] = val;
+
+		if (playerIcons.length > 0) updateBarStats();
 		return val;
+	}
+
+	@:noCompletion
+	public function set_opponents(val:Array<String>)
+	{
+		this.opponents = (val != null && val.length > 0) ? val.copy() : ['dad'];
+		this.opponent = this.opponents[0];
+
+		if (oppIcons.length != this.opponents.length || playerIcons.length != players.length) rebuildIcons(this.opponents, this.players);
+		else
+			updateBarStats();
+
+		return this.opponents;
+	}
+
+	@:noCompletion
+	public function set_players(val:Array<String>)
+	{
+		this.players = (val != null && val.length > 0) ? val.copy() : ['bf'];
+		this.player = this.players[0];
+
+		if (oppIcons.length != opponents.length || playerIcons.length != this.players.length) rebuildIcons(this.opponents, this.players);
+		else
+			updateBarStats();
+
+		return this.players;
 	}
 
 	@:noCompletion
 	public function set_health(ammount:Float)
 	{
 		this.health = ammount;
-		playerIcon.updateAnim(ammount);
-		oppIcon.updateAnim(100 - ammount);
+		for (ico in playerIcons) ico.updateAnim(ammount);
+		for (ico in oppIcons) ico.updateAnim(100 - ammount);
 		return ammount;
 	}
 }

@@ -82,7 +82,7 @@ class LoadingScreen extends FlxTransitionableState
 					loadProgress = 30;
 
 					loadText.text = 'Preloading Graphics...';
-					preload(new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0]));
+					preload(new HealthBar(chart.content.meta.opponents, chart.content.meta.players));
 					loadProgress = 40;
 
 					final thing = ['opponent', 'p1'];

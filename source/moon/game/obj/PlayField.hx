@@ -101,7 +101,8 @@ class PlayField extends FlxGroup
 		}
 
 		// < -- HEALTHBAR SETUP -- >//
-		healthBar = new HealthBar(chart.content.meta.opponents[0], chart.content.meta.players[0], conductor);
+		healthBar = new HealthBar(chart.content.meta.opponents, chart.content.meta.players, conductor);
+		// healthBar = new HealthBar(['dad', 'darnell'], ['bf', 'cg', 'monster'], conductor);
 		add(healthBar);
 		healthBar.setPosition(0, 0);
 		healthBar.screenCenter(X);
