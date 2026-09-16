@@ -3,18 +3,18 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import moon.utils.MoonUtils;
 
-final scale = 5;
+final scale = 3;
 
 // TODO: UPDATE
 
 function createReceptor(direction)
 {
 	final p = 'notes/pixel/';
-	spacing = 8;
+	spacing = -4;
 	judgementsSkin = 'moon-pixel';
 
 	// strum notes
-	strumNote.frames = Paths.getSparrowAtlas(p + 'strumline');
+	strumNote.frames = Paths.getSparrowAtlas(p + 'allNotes');
 	strumNote.animation.addByPrefix(direction + '-static', direction + '-static', 24, true);
 	strumNote.animation.addByPrefix(direction + '-press', direction + '-press', 24, false);
 	strumNote.animation.addByPrefix(direction + '-confirm', direction + '-confirm', 24, false);
@@ -31,7 +31,7 @@ function createReceptor(direction)
 	splash.animation.addByPrefix('splash', direction + '0', 48, false);
 	splash.animation.onFrameChange.add(_ -> splash.alpha = 0.8);
 	splash.playRandom = false;
-	splash.scale.set(scale, scale);
+	splash.scale.set(scale + 1, scale + 1);
 	splash.blend = 0;
 
 	// sustain splash
@@ -45,7 +45,7 @@ function createReceptor(direction)
 		if (anim == direction + '-end') sustainSplash.visible = sustainSplash.active = false;
 		else if (anim == 'pre') sustainSplash.playAnim(direction + '-loop', true);
 	});
-	sustainSplash.scale.set(scale, scale);
+	sustainSplash.scale.set(scale + 1, scale + 1);
 	sustainSplash.updateHitbox();
 	sustainSplash.extraOffset.y = 18;
 	//sustainSplash.blend = 0;
@@ -55,11 +55,11 @@ function createReceptor(direction)
 
 function createStaticNote(skin, direction)
 {
-	staticNote.frames = Paths.getSparrowAtlas('notes/pixel/staticNotes');
+	staticNote.frames = Paths.getSparrowAtlas('notes/pixel/allNotes');
 
-	staticNote.animation.addByPrefix(direction, direction + '0', 24, true);
-	staticNote.animation.addByPrefix(direction + '-hold', direction + '-hold0', 24, true);
-	staticNote.animation.addByPrefix(direction + '-holdEnd', direction + '-holdend0', 24, true);
+	staticNote.animation.addByPrefix(direction, 'note-' + direction, 24, true);
+	staticNote.animation.addByPrefix(direction + '-hold', 'sustain-' + direction + '0', 24, true);
+	staticNote.animation.addByPrefix(direction + '-holdEnd', 'sustainEnd-' + direction + '0', 24, true);
 	staticNote.antialiasing = false;
 	staticNote.scale.set(scale, scale);
 	staticNote.updateHitbox();

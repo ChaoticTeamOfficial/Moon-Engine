@@ -495,6 +495,12 @@ class EditorGrid extends FlxSpriteGroup
 
 	function handleMouseInput():Void
 	{
+		if (FlxG.mouse.wheel != 0)
+		{
+			game.playField.seekTo(game.playField.playback.time - FlxG.mouse.wheel * game.conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1));
+			// game.playField.playback.time -= FlxG.mouse.wheel * game.conductor.stepCrochet * (FlxG.keys.pressed.SHIFT ? 4 : 1);
+		}
+
 		if (!FlxG.mouse.justPressed && !FlxG.mouse.justPressedRight) return;
 
 		final lane = {
@@ -515,6 +521,12 @@ class EditorGrid extends FlxSpriteGroup
 		super.update(elapsed);
 
 		if (conductor == null) return;
+
+		final addition = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
+		final advanceSecs = game.conductor.stepCrochet * 2 * addition;
+
+		if (FlxG.keys.justPressed.LEFT) game.playField.seekTo(game.playField.playback.time - advanceSecs);
+		else if (FlxG.keys.justPressed.RIGHT) game.playField.seekTo(game.playField.playback.time + advanceSecs);
 
 		final targetScroll = -timeToY(conductor.time) + PLAYHEAD_OFFSET;
 		_scrollY = FlxMath.lerp(_scrollY, targetScroll, Math.min(1, elapsed * 28));

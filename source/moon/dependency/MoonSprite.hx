@@ -84,6 +84,8 @@ class MoonSprite extends FlxAnimate
 	public var danceIndex:Int = 0;
 	public var lastDanceBeat:Int = -1;
 	public var danceFrequency:Int = 2;
+	
+	public final onDance:FlxSignal = new FlxSignal();
 
 	/**
 	 * True while playing a non-idle animation that was reached via an idle/dance
@@ -233,6 +235,8 @@ class MoonSprite extends FlxAnimate
 			playAnim("idle-0", force);
 			danceIndex = 0;
 		}
+		
+		onDance.dispatch();
 	}
 
 	/**

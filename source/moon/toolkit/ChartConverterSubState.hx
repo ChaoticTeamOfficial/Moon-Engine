@@ -35,11 +35,14 @@ class ChartConverterSubState extends FlxSubState
 	var songField:TextField;
 	var mixField:TextField;
 	var selectAllBox:CheckBox;
+	var autoDetectBox:CheckBox;
 	var writeSharedBox:CheckBox;
 	var overwriteBox:CheckBox;
 	var applyNoteRulesBox:CheckBox;
 	var statusLabel:Label;
 	var logArea:TextArea;
+	var diffScroll:ScrollView;
+	var diffList:VBox;
 	var diffChecks:Array<
 		{name:String, box:CheckBox}> = [];
 
@@ -65,7 +68,7 @@ class ChartConverterSubState extends FlxSubState
 		root.addComponent(title);
 
 		root.addComponent(labeledField("Source Format", formatDrop = makeFormatDrop()));
-		// formatDrop.onChange = function(_) updateFormatHints();
+		formatDrop.onChange = function(_) refreshDifficultyList();
 
 		root.addComponent(pathRow("Song Folder", folderField = makeTextField("path/to/song-folder"), () -> pickFolder()));
 
@@ -77,34 +80,35 @@ class ChartConverterSubState extends FlxSubState
 		diffHeader.styleString = "color: #F2F2F2; margin-top: 8px;";
 		root.addComponent(diffHeader);
 
+		autoDetectBox = new CheckBox();
+		autoDetectBox.text = "Auto-detect from folder (includes custom)";
+		autoDetectBox.selected = true;
+		autoDetectBox.onChange = function(_)
+		{
+			final auto = autoDetectBox.selected;
+			selectAllBox.disabled = auto;
+			for (d in diffChecks) d.box.disabled = auto;
+			if (auto) refreshDifficultyList();
+		};
+		root.addComponent(autoDetectBox);
+
 		selectAllBox = new CheckBox();
-		selectAllBox.text = "Select all registered difficulties";
+		selectAllBox.text = "Select all listed difficulties";
 		selectAllBox.selected = true;
+		selectAllBox.disabled = true;
 		selectAllBox.onChange = function(_) for (d in diffChecks) d.box.selected = selectAllBox.selected;
 		root.addComponent(selectAllBox);
 
-		final diffScroll = new ScrollView();
+		diffScroll = new ScrollView();
 		diffScroll.width = 568;
 		diffScroll.height = 110;
 		diffScroll.percentContentWidth = 100;
-		final diffList = new VBox();
+		diffList = new VBox();
 		diffList.percentWidth = 100;
-
-		for (diff in SongLibrary.getDifficultyList())
-		{
-			final suffixHint = (diff.suffix ?? '') == '' ? " (shared)" : ' (${diff.suffix})';
-			final box = new CheckBox();
-			box.text = '${diff.displayName ?? diff.name}$suffixHint';
-			box.selected = true;
-			diffChecks.push({
-				name: diff.name,
-				box: box
-			});
-			diffList.addComponent(box);
-		}
-
 		diffScroll.addComponent(diffList);
 		root.addComponent(diffScroll);
+
+		rebuildDiffs(registeredDifficultyNames(), []);
 
 		writeSharedBox = new CheckBox();
 		writeSharedBox.text = "Write shared chart.json for non-suffixed";
@@ -124,6 +128,11 @@ class ChartConverterSubState extends FlxSubState
 		final buttons = new HBox();
 		buttons.styleString = "margin-top: 8px;";
 
+		final scanBtn = new Button();
+		scanBtn.text = "Rescan Folder";
+		scanBtn.onClick = function(_) refreshDifficultyList();
+		buttons.addComponent(scanBtn);
+
 		final convertBtn = new Button();
 		convertBtn.text = "Convert & Save";
 		convertBtn.onClick = function(_) runConvert();
@@ -137,7 +146,7 @@ class ChartConverterSubState extends FlxSubState
 		root.addComponent(buttons);
 
 		statusLabel = new Label();
-		statusLabel.text = "Ready.";
+		statusLabel.text = "Ready. Pick a folder to scan difficulties.";
 		statusLabel.styleString = "color: #8A8A8F; margin-top: 8px;";
 		root.addComponent(statusLabel);
 
@@ -148,7 +157,6 @@ class ChartConverterSubState extends FlxSubState
 		logArea.styleString = "margin-top: 4px;";
 		root.addComponent(logArea);
 
-		// updateFormatHints();
 		Screen.instance.addComponent(root);
 	}
 
@@ -205,6 +213,7 @@ class ChartConverterSubState extends FlxSubState
 			folderField.text = path;
 			if ((songField.text ?? '').trim() == '' || songField.placeholder == songField.text) songField.text = Path.withoutDirectory(path);
 			setStatus('Folder: $path');
+			refreshDifficultyList();
 		});
 		dialog.onCancel.add(function() setStatus("Folder pick cancelled."));
 		if (!dialog.browse(FileDialogType.OPEN_DIRECTORY, null, null, "Select song folder")) setStatus("Folder dialog is not supported on this platform.");
@@ -213,8 +222,120 @@ class ChartConverterSubState extends FlxSubState
 		#end
 	}
 
+	function registeredDifficultyNames():Array<String>
+	{
+		final list = SongLibrary.getDifficultyList();
+		if (list == null) return [];
+		return[for (d in list) if (d != null && d.name != null) d.name];
+	}
+
+	function rebuildDiffs(registered:Array<String>, discovered:Array<String>):Void
+	{
+		final previouslySelected = new Map<String, Bool>();
+		for (d in diffChecks) previouslySelected.set(d.name, d.box.selected);
+
+		diffChecks = [];
+		diffList.removeAllComponents();
+
+		final seen = new Map<String, Bool>();
+		final ordered:Array<
+			{name:String, custom:Bool}> = [];
+
+		function add(name:String, custom:Bool):Void
+		{
+			if (name == null || name == '' || seen.exists(name)) return;
+			seen.set(name, true);
+			ordered.push({
+				name: name,
+				custom: custom
+			});
+		}
+
+		for (n in registered) add(n, false);
+		for (n in discovered) add(n, registered.indexOf(n) == -1);
+
+		final auto = autoDetectBox != null && autoDetectBox.selected;
+
+		for (entry in ordered)
+		{
+			final diff = SongLibrary.getDifficulty(entry.name);
+			final display = diff?.displayName ?? entry.name;
+			final suffix = diff?.suffix ?? '';
+			final suffixHint = suffix == '' ? " (shared)" : ' ($suffix)';
+			final customHint = entry.custom ? " [custom]" : "";
+
+			final box = new CheckBox();
+			box.text = '$display$suffixHint$customHint';
+			box.selected = previouslySelected.exists(entry.name) ? previouslySelected.get(entry.name) : true;
+			box.disabled = auto;
+			diffChecks.push({
+				name: entry.name,
+				box: box
+			});
+			diffList.addComponent(box);
+		}
+
+		if (ordered.length == 0)
+		{
+			final empty = new Label();
+			empty.text = "No difficulties listed — pick a folder or disable auto-detect.";
+			empty.styleString = "color: #8A8A8F;";
+			diffList.addComponent(empty);
+		}
+	}
+
+	function refreshDifficultyList():Void
+	{
+		#if sys
+		final folder = (folderField.text ?? '').trim();
+		final format = currentFormat();
+		final registered = registeredDifficultyNames();
+		var discovered:Array<String> = [];
+
+		if (folder != '' && FileSystem.exists(folder))
+		{
+			try
+			{
+				if (FileSystem.isDirectory(folder)) discovered = Chart.listFolderDifficulties(format, folder);
+				else
+					discovered = Chart.listChartDifficulties(format, folder);
+			}
+			catch (e:Dynamic)
+			{
+				setStatus('Scan error: $e');
+				discovered = [];
+			}
+		}
+
+		rebuildDiffs(registered, discovered);
+
+		if (discovered.length > 0)
+		{
+			final custom = [for (d in discovered) if (registered.indexOf(d) == -1) d];
+			final customHint = custom.length > 0 ? ' (custom: ${custom.join(", ")})' : '';
+			setStatus('Found ${discovered.length} diff(s): ${discovered.join(", ")}$customHint');
+			logArea.text = 'Detected: ${discovered.join(", ")}';
+		}
+		else if (folder != '')
+		{
+			setStatus('No difficulties detected in folder for format "$format". Showing registered list.');
+		}
+		#else
+		rebuildDiffs(registeredDifficultyNames(), []);
+		#end
+	}
+
+	function currentFormat():String
+	{
+		final idx = formatDrop.selectedIndex;
+		if (idx < 0 || idx >= Chart.SUPPORTED_FORMATS.length) return Chart.SUPPORTED_FORMATS[0];
+		return Chart.SUPPORTED_FORMATS[idx];
+	}
+
 	function selectedDifficulties():Array<String>
 	{
+		if (autoDetectBox != null && autoDetectBox.selected) return null;
+
 		final out:Array<String> = [];
 		for (d in diffChecks) if (d.box.selected) out.push(d.name);
 		return out;
@@ -225,11 +346,10 @@ class ChartConverterSubState extends FlxSubState
 		#if !sys
 		setStatus("Conversion is only available on desktop builds.");
 		return;
-		#end
-
+		#else
 		final folder = (folderField.text ?? '').trim();
 		final diffs = selectedDifficulties();
-		final format = Chart.SUPPORTED_FORMATS[formatDrop.selectedIndex];
+		final format = currentFormat();
 		var song = (songField.text ?? '').trim();
 		final mixOverride = (mixField.text ?? '').trim();
 
@@ -238,15 +358,16 @@ class ChartConverterSubState extends FlxSubState
 			setStatus("Invalid song folder.");
 			return;
 		}
-		if (diffs.length == 0)
+		if (diffs != null && diffs.length == 0)
 		{
-			setStatus("Select at least one difficulty.");
+			setStatus("Select at least one difficulty, or enable auto-detect.");
 			return;
 		}
 
 		try
 		{
-			setStatus('Converting ($format)…');
+			final diffLabel = diffs == null ? "auto" : diffs.join(", ");
+			setStatus('Converting ($format) [$diffLabel]…');
 
 			if (format == 'v-slice' || format == 'codename' || format == 'psych' || format == 'kade' || format == 'legacy' || format == 'fps-plus')
 			{
@@ -269,7 +390,11 @@ class ChartConverterSubState extends FlxSubState
 					final outSong = song != '' && song != 'auto from folder' ? song : entry.song;
 					final outMix = (mixOverride != '' && mixOverride != 'bf (v-slice auto)') ? mixOverride : entry.mix;
 
-					if (!overwriteBox.selected && Paths.exists(Chart.chartPath(outSong, outMix, entry.batch.results[0].difficulty) + '.json'))
+					if (
+						!overwriteBox.selected
+						&& entry.batch.results.length > 0
+						&& Paths.exists(Chart.chartPath(outSong, outMix, entry.batch.results[0].difficulty) + '.json')
+					)
 					{
 						setStatus('Refusing to overwrite: $outSong/$outMix');
 						return;
@@ -289,7 +414,8 @@ class ChartConverterSubState extends FlxSubState
 					else
 						Chart.writeConvertBatch(entry.batch, outSong, outMix);
 
-					lines.push('$outSong/$outMix → ${entry.batch.results.length} diff(s)');
+					final names = [for (r in entry.batch.results) r.difficulty];
+					lines.push('$outSong/$outMix → ${entry.batch.results.length} diff(s): ${names.join(", ")}');
 				}
 
 				logArea.text = lines.join("\n");
@@ -299,14 +425,15 @@ class ChartConverterSubState extends FlxSubState
 			{
 				if (song == '' || song == 'auto from folder') song = Path.withoutExtension(Path.withoutDirectory(folder));
 				final mix = (mixOverride != '' && mixOverride != 'bf (v-slice auto)') ? mixOverride : 'bf';
-				final batch = Chart.convertMany(format, folder, diffs, null, applyNoteRulesBox.selected);
+				final batch = Chart.convertMany(format, folder, diffs ?? [], null, applyNoteRulesBox.selected);
 				if (batch == null || batch.results.length == 0)
 				{
 					setStatus("Conversion returned no results.");
 					return;
 				}
 				Chart.writeConvertBatch(batch, song, mix);
-				logArea.text = 'Output: songs/$song/$mix/';
+				final names = [for (r in batch.results) r.difficulty];
+				logArea.text = 'Output: songs/$song/$mix/ (${names.join(", ")})';
 				setStatus("Done.");
 			}
 		}
@@ -316,6 +443,7 @@ class ChartConverterSubState extends FlxSubState
 			logArea.text = Std.string(e);
 			trace('[CHART-CONVERTER] $e', "ERROR");
 		}
+		#end
 	}
 
 	function setStatus(msg:String):Void

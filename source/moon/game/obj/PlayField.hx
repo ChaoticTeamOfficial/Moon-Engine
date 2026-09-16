@@ -265,6 +265,7 @@ class PlayField extends FlxGroup
 		final clamped = Math.max(0, newTime);
 
 		// Audio first so resync stays consistent
+		// ALSKJKDHEIU sorry I had a stroke (not really)
 		playback.time = clamped;
 		conductor.time = clamped;
 

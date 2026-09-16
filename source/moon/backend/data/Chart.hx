@@ -826,11 +826,112 @@ class Chart
 	}
 
 	/**
+	 * Lists difficulty keys present in a single source chart file.
+	 */
+	public static function listChartDifficulties(type:String, path:String, ?metaPath:String):Array<String>
+	{
+		#if sys
+		if (path == null || !FileSystem.exists(path)) return [];
+
+		final found:Array<String> = [];
+		final seen = new Map<String, Bool>();
+
+		function add(name:String):Void
+		{
+			if (name == null || name == '') return;
+			final mapped = remapSourceDiff(name);
+			if (seen.exists(mapped)) return;
+			seen.set(mapped, true);
+			found.push(mapped);
+		}
+
+		try
+		{
+			final raw:Dynamic = Json.parse(File.getContent(path));
+			if (raw != null && raw.notes != null)
+			{
+				if (Std.isOfType(raw.notes, Array))
+				{
+					final base = Path.withoutExtension(Path.withoutDirectory(path)).toLowerCase();
+					final prefixGuess = base;
+					add(prefixGuess.contains('-') ? prefixGuess.substring(prefixGuess.lastIndexOf('-') + 1) : 'normal');
+				}
+				else if (Type.typeof(raw.notes) == TObject)
+				{
+					for (key in Reflect.fields(raw.notes)) add(key);
+				}
+			}
+
+			if (found.length == 0)
+			{
+				var probeDiffs = registeredDiffs();
+				if (probeDiffs.length == 0) probeDiffs = ['hard', 'normal', 'easy', 'erect'];
+				for (d in probeDiffs)
+				{
+					try
+					{
+						final vslice = loadAsVSlice(type, path, metaPath, d).stringify();
+						final data:Dynamic = Json.parse(vslice.data);
+						if (data != null && data.notes != null)
+						{
+							if (Std.isOfType(data.notes, Array) && (cast data.notes : Array<Dynamic>).length > 0)
+							{
+								add(d);
+								break;
+							}
+							else if (Type.typeof(data.notes) == TObject)
+							{
+								for (key in Reflect.fields(data.notes)) add(key);
+								break;
+							}
+						}
+					}
+					catch (_)
+					{
+					}
+				}
+			}
+		}
+		catch (_)
+		{
+		}
+
+		return sortDifficultyNames(found);
+		#else
+		return [];
+		#end
+	}
+
+	/**
+	 * Lists difficulties present in a song folder for the given source format.
+	 */
+	public static function listFolderDifficulties(type:String, folderPath:String):Array<String>
+	{
+		#if sys
+		if (folderPath == null || !FileSystem.exists(folderPath) || !FileSystem.isDirectory(folderPath)) return [];
+
+		return switch (type)
+		{
+			case 'v-slice':
+				listVSliceDiffs(folderPath);
+			case 'codename':
+				listCodenameDiffs(folderPath);
+			case 'psych' | 'kade' | 'legacy' | 'fps-plus':
+				listLegacyDiffs(folderPath);
+			default:
+				[];
+		};
+		#else
+		return [];
+		#end
+	}
+
+	/**
 	 * Converts one or more difficulties from a source chart into Moon Engine format.
 	 *
 	 * @param type           Source format id (see SUPPORTED_FORMATS)
 	 * @param path           Path to the source chart file
-	 * @param difficulties   Difficulties to convert (must exist in the source, or erect←nightmare)
+	 * @param difficulties   Difficulties to convert. If null/empty, auto-detects from the source.
 	 * @param metaPath       Optional companion meta path for formats that need it
 	 * @param applyNoteRules Whether to remap note kinds via NOTE_TYPE_RULES
 	 * @param rawScrollMap   Optional pre-parsed scrollSpeed map from the raw chart JSON
@@ -838,9 +939,15 @@ class Chart
 	public static function convertMany(type:String, path:String, difficulties:Array<String>, ?metaPath:String, applyNoteRules:Bool = true, ?rawScrollMap:Dynamic):ConvertBatch
 	{
 		#if sys
-		if (difficulties == null || difficulties.length == 0) throw 'convertMany requires at least one difficulty';
+		var diffs = difficulties;
+		if (diffs == null || diffs.length == 0)
+		{
+			diffs = listChartDifficulties(type, path, metaPath);
+			if (diffs.length == 0) throw 'convertMany could not detect any difficulties in $path';
+		}
 
-		final loadDiff = difficulties.indexOf('erect') != -1 ? null : difficulties[0];
+		// Prefer loading without forcing a specific diff when erect is involved.
+		final loadDiff = (diffs.indexOf('erect') != -1 || diffs.length > 1) ? null : diffs[0];
 		final vslice = loadAsVSlice(type, path, metaPath, loadDiff).stringify();
 		final data:Dynamic = Json.parse(vslice.data);
 		final metadata:Dynamic = Json.parse(vslice.meta);
@@ -870,9 +977,16 @@ class Chart
 		var sharedEvents:Array<EventStruct> = null;
 		var baseMeta:MetadataStruct = null;
 
-		for (diff in difficulties)
+		for (diff in diffs)
 		{
 			final notes = convertNotesForDifficulty(data, diff, applyNoteRules);
+			if (notes == null || notes.length == 0)
+			{
+				final sourceDiff = resolveSourceDiff(data.notes, diff);
+				final hasKey = data.notes != null && Type.typeof(data.notes) == TObject && Reflect.hasField(data.notes, sourceDiff);
+				if (!hasKey && !(data.notes != null && Std.isOfType(data.notes, Array))) continue;
+			}
+
 			final events = convertEvents(data, metadata);
 			final meta = convertMetadata(data, metadata, diff);
 
@@ -933,20 +1047,28 @@ class Chart
 
 	/**
 	 * Converts an entire song folder and returns one batch per mix.
+	 * @param difficulties Difficulties to convert. If null or empty, the folder is scanned and every difficulty found in the source is converted.
 	 */
-	public static function convertFolder(type:String, folderPath:String, difficulties:Array<String>, applyNoteRules:Bool = true):Array<FolderConvertResult>
+	public static function convertFolder(type:String, folderPath:String, ?difficulties:Array<String>, applyNoteRules:Bool = true):Array<FolderConvertResult>
 	{
 		#if sys
 		if (!FileSystem.exists(folderPath) || !FileSystem.isDirectory(folderPath)) throw 'Folder not found: $folderPath';
 
+		var diffs = difficulties;
+		if (diffs == null || diffs.length == 0)
+		{
+			diffs = listFolderDifficulties(type, folderPath);
+			if (diffs.length == 0) throw 'No difficulties found in folder: $folderPath';
+		}
+
 		return switch (type)
 		{
 			case 'v-slice':
-				convertVSliceFolder(folderPath, difficulties, applyNoteRules);
+				convertVSliceFolder(folderPath, diffs, applyNoteRules);
 			case 'codename':
-				convertCodenameFolder(folderPath, difficulties, applyNoteRules);
+				convertCodenameFolder(folderPath, diffs, applyNoteRules);
 			case 'psych' | 'kade' | 'legacy' | 'fps-plus':
-				convertLegacyStyleFolder(type, folderPath, difficulties, applyNoteRules);
+				convertLegacyStyleFolder(type, folderPath, diffs, applyNoteRules);
 			default:
 				throw 'Folder conversion is only set up for v-slice, codename, psych, kade, legacy and fps-plus (got $type).';
 		};
@@ -962,49 +1084,9 @@ class Chart
 	private static function convertLegacyStyleFolder(type:String, folder:String, difficulties:Array<String>, applyNoteRules:Bool):Array<FolderConvertResult>
 	{
 		final songId = Path.withoutDirectory(folder);
-		final searchDirs = [folder, Path.join([folder, 'data'])];
-
-		final chartFiles:Map<String, String> = new Map();
-		var eventsPath:String = null;
-
-		for (dir in searchDirs)
-		{
-			if (!FileSystem.exists(dir) || !FileSystem.isDirectory(dir)) continue;
-
-			for (f in FileSystem.readDirectory(dir))
-			{
-				if (!f.toLowerCase().endsWith('.json')) continue;
-
-				final full = Path.join([dir, f]);
-				final base = Path.withoutExtension(f).toLowerCase();
-
-				if (base == 'events' || base == 'event')
-				{
-					if (eventsPath == null) eventsPath = full;
-					continue;
-				}
-
-				final prefix = songId.toLowerCase();
-				var diffName:String = null;
-
-				// god I hate this...
-				if (base == prefix || base == 'normal' || base == 'default') diffName = 'normal';
-				else if (base.startsWith(prefix + '-')) diffName = base.substr(prefix.length + 1);
-				else if ([
-					'easy',
-					'hard',
-					'erect',
-					'nightmare',
-					'expert'
-				].contains(base)) diffName = base;
-
-				if (diffName != null)
-				{
-					if (diffName == 'normal' || diffName == 'default') diffName = 'normal';
-					chartFiles.set(diffName, full);
-				}
-			}
-		}
+		final scanned = scanLegacyFiles(folder, songId);
+		final chartFiles = scanned.byDiff;
+		final eventsPath = scanned.eventsPath;
 
 		if (chartFiles.keys().hasNext() == false) throw 'No Psych/Kade/Legacy-style chart files found in $folder (expected $songId[-diff].json)';
 
@@ -1016,21 +1098,13 @@ class Chart
 
 		for (diff in difficulties)
 		{
-			var sourceDiff = diff;
-			if (diff == 'erect' && !chartFiles.exists('erect') && chartFiles.exists('nightmare')) sourceDiff = 'nightmare';
-			else if (!chartFiles.exists(diff))
-			{
-				if (diff == 'normal' && chartFiles.exists('')) sourceDiff = '';
-				else
-					continue;
-			}
+			final sourceDiff = resolveLegacySourceDiff(diff, chartFiles);
+			if (sourceDiff == null) continue;
 
 			final chartFile = chartFiles.get(sourceDiff);
 			if (chartFile == null) continue;
 
-			final metaOrEvents = eventsPath;
-
-			final one = convertMany(type, chartFile, [diff], metaOrEvents, applyNoteRules);
+			final one = convertMany(type, chartFile, [diff], eventsPath, applyNoteRules);
 			if (one == null || one.results.length == 0) continue;
 
 			final r = one.results[0];
@@ -1080,6 +1154,152 @@ class Chart
 			},
 			sourceChart: folder
 		}];
+	}
+
+	private static function scanLegacyFiles(folder:String, songId:String):
+		{byDiff:Map<String, String>, eventsPath:Null<String>}
+	{
+		final searchDirs = [folder, Path.join([folder, 'data'])];
+		final chartFiles:Map<String, String> = new Map();
+		var eventsPath:String = null;
+		final prefix = songId.toLowerCase();
+
+		for (dir in searchDirs)
+		{
+			if (!FileSystem.exists(dir) || !FileSystem.isDirectory(dir)) continue;
+
+			for (f in FileSystem.readDirectory(dir))
+			{
+				if (!f.toLowerCase().endsWith('.json')) continue;
+
+				final full = Path.join([dir, f]);
+				final base = Path.withoutExtension(f).toLowerCase();
+
+				if (base == 'events' || base == 'event')
+				{
+					if (eventsPath == null) eventsPath = full;
+					continue;
+				}
+
+				var diffName:String = null;
+
+				if (base == prefix || base == 'normal' || base == 'default') diffName = 'normal';
+				else if (base.startsWith(prefix + '-')) diffName = base.substr(prefix.length + 1);
+				else
+				{
+					if (base != 'meta' && base != 'metadata' && base != 'data' && base != 'config') diffName = base;
+				}
+
+				if (diffName != null)
+				{
+					if (diffName == 'normal' || diffName == 'default') diffName = 'normal';
+					if (!chartFiles.exists(diffName)) chartFiles.set(diffName, full);
+				}
+			}
+		}
+
+		return {
+			byDiff: chartFiles,
+			eventsPath: eventsPath
+		};
+	}
+
+	private static function listLegacyDiffs(folder:String):Array<String>
+	{
+		final songId = Path.withoutDirectory(folder);
+		final scanned = scanLegacyFiles(folder, songId);
+		final names:Array<String> = [];
+		final seen = new Map<String, Bool>();
+		for (key in scanned.byDiff.keys())
+		{
+			final mapped = remapSourceDiff(key);
+			if (seen.exists(mapped)) continue;
+			seen.set(mapped, true);
+			names.push(mapped);
+		}
+		return sortDifficultyNames(names);
+	}
+
+	private static function resolveLegacySourceDiff(diff:String, chartFiles:Map<String, String>):Null<String>
+	{
+		if (chartFiles.exists(diff)) return diff;
+		if (diff == 'erect' && chartFiles.exists('nightmare')) return 'nightmare';
+		if (diff == 'normal' && chartFiles.exists('')) return '';
+		for (k in chartFiles.keys())
+		{
+			if (remapSourceDiff(k) == diff) return k;
+		}
+		return null;
+	}
+
+	private static function listCodenameDiffs(folder:String):Array<String>
+	{
+		final chartsDir = Path.join([folder, 'charts']);
+		if (!FileSystem.exists(chartsDir) || !FileSystem.isDirectory(chartsDir)) return [];
+
+		final names:Array<String> = [];
+		final seen = new Map<String, Bool>();
+		for (f in FileSystem.readDirectory(chartsDir))
+		{
+			if (!f.toLowerCase().endsWith('.json')) continue;
+			final name = remapSourceDiff(Path.withoutExtension(f).toLowerCase());
+			if (seen.exists(name)) continue;
+			seen.set(name, true);
+			names.push(name);
+		}
+		return sortDifficultyNames(names);
+	}
+
+	private static function listVSliceDiffs(folder:String):Array<String>
+	{
+		final files = FileSystem.readDirectory(folder);
+		final names:Array<String> = [];
+		final seen = new Map<String, Bool>();
+
+		function add(name:String):Void
+		{
+			if (name == null || name == '') return;
+			final mapped = remapSourceDiff(name);
+			if (seen.exists(mapped)) return;
+			seen.set(mapped, true);
+			names.push(mapped);
+		}
+
+		for (f in files)
+		{
+			if (!f.endsWith('.json') || !f.contains('-chart')) continue;
+			final chartPath = Path.join([folder, f]);
+			final lower = f.toLowerCase();
+			if (lower.indexOf('-erect') != -1) add('erect');
+
+			try
+			{
+				final raw:Dynamic = Json.parse(File.getContent(chartPath));
+				if (raw != null && raw.notes != null)
+				{
+					if (Std.isOfType(raw.notes, Array))
+					{
+						if (lower.indexOf('-erect') == -1)
+						{
+							for (d in registeredDiffs())
+							{
+								if (isSharedDifficulty(d)) add(d);
+							}
+							if (names.length == 0) add('hard');
+						}
+					}
+					else if (Type.typeof(raw.notes) == TObject)
+					{
+						for (key in Reflect.fields(raw.notes)) add(key);
+					}
+				}
+			}
+			catch (_)
+			{
+			}
+		}
+
+		return sortDifficultyNames(names);
 	}
 
 	#if sys
@@ -1145,8 +1365,14 @@ class Chart
 
 			final diffsForFile = difficulties.filter(d ->
 			{
-				if (variation == 'erect') return d == 'erect';
-				return d != 'erect' && isSharedDifficulty(d);
+				if (variation == 'erect')
+				{
+					if (d == 'erect' || d == 'nightmare') return true;
+					final suf = getDifficultySuffix(d);
+					return suf != null && suf.indexOf('erect') != -1;
+				}
+				if (d == 'erect') return false;
+				return true;
 			});
 			if (diffsForFile.length == 0) continue;
 
@@ -1310,15 +1536,59 @@ class Chart
 		};
 	}
 
-	/**
-	 * Maps source difficulty keys when consolidating charts.
-	 */
-	private static function resolveSourceDifficulty(notesObj:Dynamic, difficulty:String):String
+	private static function resolveSourceDiff(notesObj:Dynamic, difficulty:String):String
 	{
 		if (notesObj == null) return difficulty;
-		if (difficulty == 'erect' && Reflect.hasField(notesObj, 'nightmare')) return 'nightmare';
 		if (Reflect.hasField(notesObj, difficulty)) return difficulty;
+
+		if (difficulty == 'erect' && Reflect.hasField(notesObj, 'nightmare')) return 'nightmare';
+		final fields = Reflect.fields(notesObj);
+		for (f in fields)
+		{
+			if (remapSourceDiff(f) == difficulty) return f;
+		}
 		return difficulty;
+	}
+
+	private static function remapSourceDiff(name:String):String
+	{
+		if (name == null) return name;
+		final lower = name.toLowerCase();
+		return switch (lower)
+		{
+			case 'nightmare':
+				'erect';
+			case 'default':
+				'normal';
+			default:
+				lower;
+		};
+	}
+
+	private static function registeredDiffs():Array<String>
+	{
+		final list = SongLibrary.getDifficultyList();
+		if (list == null || list.length == 0) return [];
+		return[for (d in list) if (d != null && d.name != null) d.name];
+	}
+
+	private static function sortDifficultyNames(names:Array<String>):Array<String>
+	{
+		if (names == null || names.length <= 1) return names ?? [];
+
+		final order = new Map<String, Int>();
+		var i = 0;
+		for (d in registeredDiffs()) order.set(d, i++);
+
+		final copy = names.copy();
+		copy.sort((a, b) ->
+		{
+			final ao = order.exists(a) ? order.get(a) : 1000;
+			final bo = order.exists(b) ? order.get(b) : 1000;
+			if (ao != bo) return ao - bo;
+			return a < b ? -1 : a > b ? 1 : 0;
+		});
+		return copy;
 	}
 
 	// TODO: take a deeper look onto all kinds?
@@ -1349,7 +1619,7 @@ class Chart
 			if (Std.isOfType(data.notes, Array)) noteArray = cast data.notes;
 			else
 			{
-				final sourceDiff = resolveSourceDifficulty(data.notes, difficulty);
+				final sourceDiff = resolveSourceDiff(data.notes, difficulty);
 				if (Reflect.hasField(data.notes, sourceDiff)) noteArray = Reflect.field(data.notes, sourceDiff);
 			}
 		}
@@ -1487,13 +1757,24 @@ class Chart
 		// we asked around people if they were fine with it and most said so!
 		// so yeah, we doing that.
 		var scrollDiff = difficulty;
-		if (
-			difficulty == 'erect'
-			&& data.scrollSpeed != null
-			&& Type.typeof(data.scrollSpeed) == TObject
-			&& !Std.isOfType(data.scrollSpeed, Array)
-			&& Reflect.hasField(data.scrollSpeed, 'nightmare')
-		) scrollDiff = 'nightmare';
+		if (data.scrollSpeed != null && Type.typeof(data.scrollSpeed) == TObject && !Std.isOfType(data.scrollSpeed, Array))
+		{
+			if (!Reflect.hasField(data.scrollSpeed, scrollDiff))
+			{
+				if (difficulty == 'erect' && Reflect.hasField(data.scrollSpeed, 'nightmare')) scrollDiff = 'nightmare';
+				else
+				{
+					for (key in Reflect.fields(data.scrollSpeed))
+					{
+						if (remapSourceDiff(key) == difficulty)
+						{
+							scrollDiff = key;
+							break;
+						}
+					}
+				}
+			}
+		}
 
 		return {
 			bpm: t0?.bpm ?? 120.0,
