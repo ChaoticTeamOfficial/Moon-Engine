@@ -535,6 +535,7 @@ class EditorGrid extends FlxSpriteGroup
 
 		updateGhost();
 		handleMouseInput();
+		game.playField.update(0);
 	}
 
 	override public function destroy():Void

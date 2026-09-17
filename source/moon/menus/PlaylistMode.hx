@@ -49,8 +49,8 @@ class PlaylistMode extends FlxSubState
 
 	var curSelected:Int = -1;
 	var canSelect:Bool = false;
-	final ACCEPT_THRESHOLD:Float = 0.5; // Amount of time holding space to confirm the song.
-	final SELECTION_LIMIT:Int = 20; // Max amount of times a song can be re-added to the queue.
+	static final ACCEPT_THRESHOLD:Float = 0.35; // Amount of time holding space to confirm the song.
+	static final SELECTION_LIMIT:Int = 20; // Max amount of times a song can be re-added to the queue.
 
 	public function new()
 	{
@@ -63,6 +63,7 @@ class PlaylistMode extends FlxSubState
 			final bL = b.song.toLowerCase();
 			return (aL < bL) ? -1 : (aL > bL) ? 1 : 0;
 		});
+		songList.unshift({song: 'Random', difficulty: '', mix: ''});
 
 		var bg = new MoonSprite().loadGraphic(Paths.image('menus/menuDesat'));
 		add(bg);
@@ -199,7 +200,7 @@ class PlaylistMode extends FlxSubState
 		{
 			var skip:Bool = false;
 			for (item in songGroup.members) if (item.song == song.song && item.mix == song.mix) skip = true;
-			if (skip) continue;
+			if (skip) continue;	//This song and variation is already in the list, skip it.
 
 			var song:PlaylistItem = new PlaylistItem(song.song, song.difficulty, song.mix);
 			songGroup.add(song);
@@ -252,11 +253,33 @@ class PlaylistMode extends FlxSubState
 	{
 		Paths.playSFX('ui/confirmMenu.ogg');
 
-		PlayState.queuePlaylist([for (item in songsQueue) {
-			song: item.song.song,
-			difficulty: item.difficulty,
-			mix: item.song.mix
-		}]);
+		var playlistQueue = [];
+		for (item in songsQueue) 
+		{
+			if(item.song.song == 'Random') 
+			{
+				final randomSong = songList[FlxG.random.int(1, songList.length - 1)];
+				final difficulties = SongLibrary.get().availableDifficulties(randomSong.song, randomSong.mix);
+				final itemDiff = SongLibrary.getDifficulty(item.difficulty);
+				final difficulty = difficulties.contains(itemDiff) ? item.difficulty : difficulties[difficulties.length - 1].name;
+				
+				playlistQueue.push({
+					song: randomSong.song,
+					difficulty: difficulty,
+					mix: randomSong.mix
+				});
+			} 
+			else 
+			{
+				playlistQueue.push({
+					song: item.song.song,
+					difficulty: item.difficulty,
+					mix: item.song.mix
+				});
+			}
+		}
+
+		PlayState.queuePlaylist(playlistQueue);
 		PlayState.gamemode = PLAYLIST;
 		FlxG.switchState(() -> new LoadingScreen());
 	}
@@ -268,7 +291,7 @@ class PlaylistMode extends FlxSubState
 
 		if (!force && tryRemoveSong(curSong)) return;
 
-		if (!curSong.difficulties.contains(selectorDifficulty))
+		if (curSong.difficulties != null && !curSong.difficulties.contains(selectorDifficulty))
 		{
 			Paths.playSFX('toolkit/level-editor/delete.wav');
 			FlxTween.shake(difficultySelector.text, 0.03, 0.2);

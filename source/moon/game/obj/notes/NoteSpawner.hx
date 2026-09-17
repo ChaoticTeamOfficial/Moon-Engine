@@ -313,11 +313,6 @@ class NoteSpawner extends FlxGroup
 
 		var i = 0;
 		while (i < _notes.length && _notes[i].time <= newTime + spawnThreshold)
-			i++;
-		nextNoteIndex = i;
-
-		i = 0;
-		while (i < _notes.length && _notes[i].time <= newTime + spawnThreshold)
 		{
 			final note = _notes[i];
 			if (note.state == NONE) recycleNote(note);

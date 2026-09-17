@@ -148,9 +148,7 @@ class PlaylistTrackDetails extends FlxSpriteGroup
 
 	function updateAlbumDisplay(chart:Chart, delta:Int):Void
 	{
-		if (chart?.content == null) return;
-
-		final albumName = Paths.exists('images/menus/freeplay/albums/${chart.content.meta.album}.png') ? chart.content.meta.album : 'placeholder';
+		final albumName = Paths.exists('images/menus/freeplay/albums/${chart?.content?.meta.album}.png') ? chart.content.meta.album : 'placeholder';
 
 		if (curAlb != albumName)
 		{

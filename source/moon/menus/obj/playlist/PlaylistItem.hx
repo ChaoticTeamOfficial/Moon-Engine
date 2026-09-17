@@ -39,23 +39,42 @@ class PlaylistItem extends FlxSpriteGroup
 	{
 		super();
 
+		if(targetSong == 'Random')
+		{
+			this.songName = 'Random';
+			this.song = 'Random';
+			buildItem(null);
+			return;
+		}
+
 		this.difficulties = SongLibrary.get().availableDifficulties(targetSong, targetMix);
 		for (diff in difficulties) songDatas.set(diff.name, new Chart(targetSong, diff.name, targetMix));
 
 		var data:Chart = songDatas[difficulties[0].name];
+		if(data == null)
+		{
+			trace('Error: No chart data found for song $targetSong with mix $targetMix, making a random item.');
+			return;
+		}
 
 		this.song = targetSong;
 		this.songName = data.content.meta.displayName;
 		this.mix = targetMix;
+		buildItem(data);
+	}
 
+	function buildItem(data:Chart):Void
+	{
 		box = new MoonSprite().makeGraphic(700, 40, FlxColor.WHITE);
 		box.skew.x = itemSkew;
 		add(box);
 
-		songIcon = new PixelIcon(data.content.meta.opponents[0]);
-		songIcon.setPosition(0, (box.height - songIcon.height)/2);
+		final pixelIconChar = (data != null) ? data.content.meta.opponents[0] : null;
+		songIcon = new PixelIcon(pixelIconChar);
+		songIcon.setPosition(0, (box.height - songIcon.height) / 2);
 		songIcon.scale.set(1, 1);
 		songIcon.updateHitbox();
+		songIcon.visible = pixelIconChar != null;
 		add(songIcon);
 
 		songText = new FlxText(0, 0, 0, songName);
