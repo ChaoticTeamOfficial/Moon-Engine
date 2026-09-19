@@ -1,58 +1,42 @@
 package moon.dependency.scripting;
 
-import flixel.FlxState;
-
 /**
- * A scripted state, which loads up using a script.
- * Highly inspired on Codename Engine.
+ * A scripted substate, which loads up using a script.
  */
-class MoonScriptedState extends FlxState
+class MoonScriptedSubState extends FlxSubState
 {
-	// alright uhhh let's begin ts
-
-	/**
-	 * The script this state uses.
-	 */
 	public var script:MoonScript = new MoonScript();
-
-	/**
-	 * The state's name.
-	 */
 	public var stateName:String;
 
-	private var createArgs:Array<Dynamic> = [];
-
 	/**
-	 * Loads a state from a script.
-	 * @param stateName The state's name (which is also the script's name).
+	 * @param stateName The substate's name (which is also the script's name).
+	 * @param args Optional arguments that will be passed to the script's `onCreate` function.
 	 */
 	public function new(stateName:String, ?args:Array<Dynamic>)
 	{
 		super();
-		script.load('data/states/$stateName.hx');
+		this.stateName = stateName;
+
+		script.load('data/substates/$stateName.hx');
 		script.set('state', this);
 		script.set('add', this.add);
 		script.set('remove', this.remove);
 		script.set('insert', this.insert);
 		script.set('bgColor', this.bgColor);
-		this.stateName = stateName;
+		script.set('close', this.close);
+		script.set('openSubState', this.openSubState);
 
-		createArgs = args ?? [];
+		if (args != null) script.set('args', args);
 	}
 
-	@:inheritDoc(FlxState.create)
 	override public function create():Void
 	{
-		script.call('onCreate', createArgs);
+		script.call('onCreate');
 		super.create();
-		script.call('onPostCreate', createArgs);
+		script.call('onPostCreate');
 	}
 
-	/**
-	 * Called when the game is updated each frame.
-	 * @param elapsed 
-	 */
-	override public function update(elapsed:Float)
+	override public function update(elapsed:Float):Void
 	{
 		script.call('onUpdate', [elapsed]);
 		super.update(elapsed);
@@ -86,15 +70,19 @@ class MoonScriptedState extends FlxState
 		script.call('draw');
 	}
 
-	@:inheritDoc(FlxState.onFocus)
-	override public function onFocus()
+	override public function close():Void
+	{
+		script.call('onClose');
+		super.close();
+	}
+
+	override public function onFocus():Void
 	{
 		super.onFocus();
 		script.call('onFocus');
 	}
 
-	@:inheritDoc(FlxState.onFocusLost)
-	override public function onFocusLost()
+	override public function onFocusLost():Void
 	{
 		super.onFocusLost();
 		script.call('onFocusLost');
@@ -107,5 +95,5 @@ class MoonScriptedState extends FlxState
 		script.call('onResize', [width, height]);
 	}
 
-	override public function toString():String return 'SCRIPTED STATE: $stateName with ${members.length} members.';
+	override public function toString():String return 'SCRIPTED SUBSTATE: $stateName';
 }

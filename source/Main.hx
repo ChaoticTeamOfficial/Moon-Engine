@@ -120,11 +120,15 @@ class Main extends Sprite
 
 	function onCrash(e:UncaughtErrorEvent):Void
 	{
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
 		#if sys
 		if (!FileSystem.exists("crash/")) FileSystem.createDirectory("crash/");
 		#end
 
 		var message:String = "";
+		var stackOnly:String = "";
 		var path:String;
 		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
 		var dateNow:String = Date.now().toString();
@@ -134,14 +138,16 @@ class Main extends Sprite
 
 		path = 'crash/ME_${dateNow}.txt';
 
-		message += 'Sorry, but an error has occurred.\n\n${e.error}\n\n';
+		message += 'Sorry, but an error has occurred!\n\n${e.error}\n\n';
 
 		for (stackItem in callStack)
 		{
 			switch (stackItem)
 			{
 				case FilePos(s, file, line, column):
-					message += '$file (Line: $line)\n';
+					final lineStr = '$file (Line: $line)\n';
+					message += lineStr;
+					stackOnly += lineStr;
 				default:
 					#if sys
 					Sys.println(stackItem);
@@ -152,12 +158,40 @@ class Main extends Sprite
 		message += '\nReport this error at #playtesting-feedback\nONLY if you think this wasn\'t your mistake.';
 
 		#if sys
-		File.saveContent(path, message + "\n");
-		Sys.println(message);
-		Sys.println('Crash dump saved in ${Path.normalize(path)}');
-		Application.current.window.alert(message, "Error!");
-
-		Sys.exit(1);
+		try
+		{
+			File.saveContent(path, message + "\n");
+			Sys.println(message);
+			Sys.println('Crash dump saved in ${Path.normalize(path)}');
+		}
+		catch (saveErr:Dynamic)
+		{
+			Sys.println('Failed to write crash dump: $saveErr');
+		}
 		#end
+
+		try
+		{
+			if (FlxG.game != null)
+			{
+				FlxG.switchState(() -> new moon.menus.CrashHandler(Std.string(e.error), stackOnly));
+			}
+			else
+			{
+				// Fallback if FlxG isn't usable anymore, which shouldn't happen most of the time but who knows!
+				#if sys
+				Application.current.window.alert(message, "Error!");
+				Sys.exit(1);
+				#end
+			}
+		}
+		catch (switchErr:Dynamic)
+		{
+			// Last resort: show native alert and exit.
+			#if sys
+			Application.current.window.alert(message, "Error!");
+			Sys.exit(1);
+			#end
+		}
 	}
 }

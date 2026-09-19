@@ -309,6 +309,7 @@ class Title extends FlxTransitionableState
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.sound.music != null) conductor.time = FlxG.sound.music.time;
+		if (FlxG.keys.justPressed.F8) throw "test crash";
 
 		// GlobalMusic.update();
 		if (MoonInput.justPressed(ACCEPT))

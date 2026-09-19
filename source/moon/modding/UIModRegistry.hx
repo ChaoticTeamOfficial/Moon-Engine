@@ -1,6 +1,7 @@
 package moon.modding;
 
 @:publicFields
+// TODO: get this to work somewhere!
 /**
  * A registry for moddable objects, mostly being used for UI stuff.
  */

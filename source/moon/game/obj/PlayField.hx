@@ -36,6 +36,8 @@ class PlayField extends FlxGroup
 	var stats:FlxText;
 	var judgements:JudgementSprite;
 	var combo:ComboNumbers;
+	var uiSkin:UISkinData;
+	var uiNoteskin:NoteskinData;
 
 	static var rankLevels:Array<String> = [for (t in Timings.thresholds) t.rank];
 
@@ -82,6 +84,9 @@ class PlayField extends FlxGroup
 
 		// < -- SONG SETUP -- >//
 		chart = new Chart(song, difficulty, mix);
+	
+		uiNoteskin = NoteskinData.get(chart?.content?.meta?.noteskin ?? 'v-slice');
+		uiSkin = UISkinData.fromNoteskin(uiNoteskin);
 
 		conductor = new Conductor(chart.content.meta.bpm, chart.content.meta.timeSignature[0], chart.content.meta.timeSignature[1]);
 		conductor.onBeat.add(beatHit);
@@ -104,6 +109,7 @@ class PlayField extends FlxGroup
 		healthBar = new HealthBar(chart.content.meta.opponents, chart.content.meta.players, conductor);
 		// healthBar = new HealthBar(['dad', 'darnell'], ['bf', 'cg', 'monster'], conductor);
 		add(healthBar);
+		healthBar.applyUISkin(uiSkin);
 		healthBar.setPosition(0, 0);
 		healthBar.screenCenter(X);
 
@@ -112,22 +118,20 @@ class PlayField extends FlxGroup
 		add(accuracyBar);
 
 		// < -- COMBO AND JUDGEMENTS SETUP -- >//
-		// TODO: skins dammit
-		judgements = new JudgementSprite('moon-engine');
+		final judgeSkin = uiNoteskin.judgementsSkin ?? 'moon-engine';
+		judgements = new JudgementSprite(judgeSkin);
 		add(judgements);
 		add(judgements.extra);
 		add(judgements.sparkle);
 
-		combo = new ComboNumbers('moon-engine');
+		combo = new ComboNumbers(judgeSkin);
 		add(combo);
 
 		// Little text for testing out the accuracy.
 		// oh lol it doesn't even show accuracy anymore LMFAO
 		// fym it does now
-		stats = new FlxText(0, 0);
-		stats.setFormat(Paths.font('phantomuff/full.ttf'), 24, CENTER);
-		stats.antialiasing = true;
-		stats.setBorderStyle(SHADOW, FlxColor.BLACK, 4);
+		stats = UISkinData.makeText(uiSkin, '', 24, FlxColor.BLACK);
+		stats.alignment = CENTER;
 		add(stats);
 
 		// < -- STRUMLINES & INPUTS SETUP -- >//
@@ -202,7 +206,8 @@ class PlayField extends FlxGroup
 		// Set each input handler's notes.
 		for (handler in inputHandlers.iterator()) handler.thisNotes = noteSpawner.notes;
 	}
-
+	
+	var statsDistance:Float = 0;
 	public function settingsUpdate()
 	{
 		final downscroll = MoonSettings.callSetting('Downscroll');
@@ -229,9 +234,10 @@ class PlayField extends FlxGroup
 		}
 
 		noteSpawner.update(0);
-
 		healthBar.update(0);
-		healthBar.y = (downscroll) ? 64 : FlxG.height - 78;
+		
+		statsDistance = uiSkin?.healthBar?.statsDistance ?? 0;
+		healthBar.y = (downscroll) ? 64 + statsDistance : FlxG.height - 78 - statsDistance;
 		healthBar.updateBarPos(true);
 
 		accuracyBar.visible = MoonSettings.callSetting('Accuracy Bar');
@@ -244,7 +250,7 @@ class PlayField extends FlxGroup
 				'Stats Position'
 			) == 'On Player Lane') ? ((downscroll) ? playerStrum.y + playerStrum.height + stats.height - 8 : playerStrum.y - stats.height) : healthBar.y
 				+ stats.height
-				+ 8;
+				+ statsDistance;
 
 		playback.updateVolume();
 
@@ -339,7 +345,7 @@ class PlayField extends FlxGroup
 		}
 
 		stats.color = rankData.color;
-		stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} • Misses: ${stat.misses} • Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
+		stats.text = 'Score: ${MoonUtils.formatNumber(stat.score)} // Misses: ${stat.misses} // Acc: ${stat.accuracy}% (${Timings.getRank(stat.accuracy).short})';
 		centerText();
 	}
 

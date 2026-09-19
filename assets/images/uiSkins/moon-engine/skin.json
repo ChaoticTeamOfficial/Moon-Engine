@@ -1,0 +1,14 @@
+{
+  "name": "moon-engine",
+  "healthBar": {
+	"barBG": "healthbar",
+	"scale": 0.9,
+	"statsDistance": 16
+  },
+  "theme": {
+	  "font": "phantomuff/full.ttf",
+	  "antialiasing": true,
+	  "textOutline": "SHADOW",
+	  "textOutlineSize": 4
+  }
+}

@@ -38,6 +38,8 @@ class ComboNumbers extends FlxSpriteGroup
 			number.color = color;
 			add(number);
 
+			number.offset.set(0, 0);
+
 			var thisTwn:FlxTween = null;
 			number.setPosition(this.x + (number.width * i), this.y);
 

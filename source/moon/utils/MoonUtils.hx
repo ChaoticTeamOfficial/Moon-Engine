@@ -1,5 +1,6 @@
 package moon.utils;
 
+import moon.backend.data.NoteskinData.NoteskinPiece;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.FlxG;
@@ -154,5 +155,35 @@ class MoonUtils
 			FlxG.sound.playMusic(Paths.sound('$song.ogg'), (fade) ? 0 : MoonSettings.callSetting('Music Volume') / 100, true);
 			if (fade) FlxG.sound.music.fadeIn(3, 0, MoonSettings.callSetting('Music Volume') / 100);
 		}
+	}
+
+	static function applyNoteskinPiece(sprite:MoonSprite, piece:NoteskinPiece, dir:String, globalScale:Float = 1, globalAA:Bool = true):Void
+	{
+		if (piece == null) return;
+
+		final asset = piece.asset;
+		if (asset != null) sprite.frames = Paths.getSparrowAtlas(asset);
+
+		if (piece.animations != null) for (anim in piece.animations) sprite.animation.addByPrefix(
+			anim.name.split("{dir}").join(dir),
+			anim.prefix.split("{dir}").join(dir),
+			anim?.fps ?? 24,
+			anim?.looped ?? false
+		);
+
+		final s = piece.scale ?? globalScale;
+		sprite.scale.set(s, s);
+
+		sprite.antialiasing = piece.antialiasing ?? globalAA;
+
+		if (piece.centerAnimations != null) sprite.centerAnimations = piece.centerAnimations;
+		if (piece.offset != null) sprite.offset.set(piece.offset.x, piece.offset.y);
+
+		if (piece.extraOffset != null) sprite.extraOffset.set(piece.extraOffset.x, piece.extraOffset.y);
+
+		// TODO: this doesn't work.
+		if (piece.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(piece.blend);
+
+		sprite.updateHitbox();
 	}
 }

@@ -104,6 +104,7 @@ class Receptor extends FlxSpriteGroup
 		add(splashGroup);
 
 		// load the initial skin (this will call _updtGraphics)
+		// wow thanks past toffee nobody would've figured it out mhm
 		set_skin(skin);
 	}
 
@@ -138,31 +139,44 @@ class Receptor extends FlxSpriteGroup
 	 */
 	private function _updtGraphics():Void
 	{
-		// -- Create Strum Arrow -- //
-		strumNote = new StrumNote(_skin, data, isCPU);
+		final data = NoteskinData.get(_skin);
+		final dir = MoonUtils.intToDir(this.data);
+
+		// ---- Strum setupsies ---- //
+		strumNote = new StrumNote(_skin, this.data, isCPU);
 		strumNote.centerAnimations = true;
 		add(strumNote);
-		script.set("strumNote", strumNote);
+		MoonUtils.applyNoteskinPiece(strumNote, data.strum, dir, data.strumScale ?? 1, data.antialiasing ?? true);
 
-		// -- Create Note Splash -- //
-		splash = new RegularSplash(_skin, data);
+		strumNote.animation.onFinish.add(function(anim:String)
+		{
+			if (anim == '$dir-confirm' && isCPU) strumNote.playAnim('$dir-static');
+		});
+
+		strumNote.playAnim('$dir-static', true);
+
+		// ---- Splash setupsies ---- //
+		splash = new RegularSplash(_skin, this.data);
 		splashGroup.add(splash);
-		script.set("splash", splash);
 
-		// -- Create Sustain Splash -- //
-		sustainSplash = new SustainSplash(_skin, data);
+		MoonUtils.applyNoteskinPiece(splash, data.splash, dir, data.splashScale ?? 1, data.antialiasing ?? true);
+		splash.playRandom = data.extra?.splashPlayRandom ?? false;
+
+		if (data.extra?.splashAlphaOnFrame != null) splash.animation.onFrameChange.add((_, _, _) -> splash.alpha = data.extra.splashAlphaOnFrame);
+
+		sustainSplash = new SustainSplash(_skin, this.data);
 		splashGroup.add(sustainSplash);
 
-		script.set("sustainSplash", sustainSplash);
+		MoonUtils.applyNoteskinPiece(sustainSplash, data.sustainSplash, dir, data.splashScale ?? 1, data.antialiasing ?? true);
 
-		script.call("createReceptor", [MoonUtils.intToDir(data)]);
+		sustainSplash.animation.onFinish.add((anim:String) ->
+		{
+			if (anim == '$dir-end') sustainSplash.visible = sustainSplash.active = false;
+			else if (anim == 'pre') sustainSplash.playAnim('$dir-loop', true);
+		});
 
-		spacing = script.get("spacing") ?? 0;
-		judgementsSkin = script.get("judgementsSkin") ?? 'moon-engine';
-		// update hitboxes
-		strumNote.updateHitbox();
-		splash.updateHitbox();
-		sustainSplash.updateHitbox();
+		spacing = data.spacing ?? 0;
+		judgementsSkin = data.judgementsSkin ?? 'moon-engine';
 	}
 
 	/**

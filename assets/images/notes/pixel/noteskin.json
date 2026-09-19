@@ -1,0 +1,64 @@
+{
+	"name": "pixel",
+	"uiSkin": "pixelUI",
+	"judgementsSkin": "moon-pixel",
+	"spacing": -4,
+	"hasQuantization": false,
+	"noteScale": 3,
+	"strumScale": 3,
+	"splashScale": 4,
+	"antialiasing": false,
+
+	"strum": {
+		"asset": "notes/pixel/allNotes",
+		"scale": 3,
+		"antialiasing": false,
+		"centerAnimations": true,
+		"animations": [
+			{ "name": "{dir}-static", "prefix": "{dir}-static", "looped": true },
+			{ "name": "{dir}-press", "prefix": "{dir}-press" },
+			{ "name": "{dir}-confirm", "prefix": "{dir}-confirm" }
+		]
+	},
+
+	"note": {
+		"asset": "notes/pixel/allNotes",
+		"scale": 3,
+		"antialiasing": false,
+		"centerAnimations": true,
+		"animations": [
+			{ "name": "{dir}", "prefix": "note-{dir}", "looped": true },
+			{ "name": "{dir}-hold", "prefix": "sustain-{dir}0", "looped": true },
+			{ "name": "{dir}-holdEnd", "prefix": "sustainEnd-{dir}0", "looped": true }
+		]
+	},
+
+	"splash": {
+		"asset": "notes/pixel/splash",
+		"scale": 4,
+		"antialiasing": false,
+		"centerAnimations": true,
+		"blend": "ADD",
+		"animations": [
+			{ "name": "splash", "prefix": "{dir}0", "fps": 48 }
+		]
+	},
+
+	"sustainSplash": {
+		"asset": "notes/pixel/holdSplash",
+		"scale": 4,
+		"antialiasing": false,
+		"centerAnimations": true,
+		"extraOffset": { "x": 0, "y": 18 },
+		"animations": [
+			{ "name": "pre", "prefix": "loop-{dir}0", "fps": 32 },
+			{ "name": "{dir}-loop", "prefix": "loop-{dir}0", "fps": 32 },
+			{ "name": "{dir}-end", "prefix": "explode-{dir}0", "fps": 40 }
+		]
+	},
+
+	"extra": {
+		"splashPlayRandom": false,
+		"splashAlphaOnFrame": 0.8
+	}
+}

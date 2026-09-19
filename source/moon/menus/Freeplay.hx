@@ -32,18 +32,19 @@ class Freeplay extends FlxSubState
 	var songList:Array<SongBase> = [];
 
 	public var conductor:Conductor;
+	public var globalScript:MoonScript;
 	public var mainBG:FreeplayBG;
 	public var weekBG:MoonSprite;
 	public var thisDJ:FreeplayDJ;
 	public var selector:FreeplaySongSelector;
 	public var stars:DifficultyStars;
 	public var diffSelector:FreeplayDifficultySelector;
+	public var categorySelector:FreeplayCategorySelector;
 	public var modifiersMenu:ModifiersMenu;
 	public var modTmr:Float = 0;
 	public var currentCategory:String = 'all';
 
 	var categoryIndex:Int = 0;
-	var categoryText:FlxText;
 	var topBar:MoonSprite;
 
 	public var playerIcon:PixelIcon;
@@ -56,6 +57,10 @@ class Freeplay extends FlxSubState
 		this.character = character;
 		Global.allowInputs = false;
 		instance = this;
+
+		globalScript = new MoonScript();
+		globalScript.load('global/freeplayGlobal.hx');
+		Global.registerScript('globalFreeplayScript', globalScript);
 
 		mainBG = new FreeplayBG(character);
 		add(mainBG.behindBG);
@@ -118,12 +123,10 @@ class Freeplay extends FlxSubState
 		// Now load the song list with the default difficulty
 		songList = getMixSonglist('all', character, diffSelector.getSelected());
 
-		categoryText = new FlxText(0, 0, FlxG.width, SongLibrary.getCategoryDisplayName(currentCategory));
-		categoryText.setFormat(Paths.font('phantomuff/full.ttf'), 22, FlxColor.WHITE, CENTER);
-		categoryText.screenCenter(X);
-		categoryText.y = 132;
-		categoryText.x += 100;
-		add(categoryText);
+		categorySelector = new FreeplayCategorySelector();
+		categorySelector.setPos(FlxG.width * 0.5 + 180, 120);
+		categorySelector.setIndex(categoryIndex);
+		add(categorySelector);
 
 		selector = new FreeplaySongSelector();
 		selector.loadSongs(songList, curSelected);
@@ -209,6 +212,16 @@ class Freeplay extends FlxSubState
 		Global.scriptCall('onScroll');
 	}
 
+	function resolveSelection(preferredSong:String, preferredIndex:Int, list:Array<SongBase>):Int
+	{
+		if (list.length <= 0) return 0;
+
+		if (preferredSong != null) for (i in 0...list.length) if (list[i].song == preferredSong) return i;
+
+		if (preferredIndex >= 0 && preferredIndex < list.length) return preferredIndex;
+		return Std.int(FlxMath.bound(preferredIndex, 0, list.length - 1));
+	}
+
 	/**
 	 * Changes the active category.
 	 */
@@ -217,14 +230,18 @@ class Freeplay extends FlxSubState
 		final categories = SongLibrary.get().categoryOrder;
 		if (categories.length <= 1) return;
 
+		final preferredSong = songList.length > 0 ? songList[curSelected].song : null;
+		final preferredIndex = curSelected;
+
 		categoryIndex = flixel.math.FlxMath.wrap(categoryIndex + delta, 0, categories.length - 1);
 		currentCategory = categories[categoryIndex];
 
 		songList = getMixSonglist(currentCategory, character, diffSelector.getSelected());
+		curSelected = resolveSelection(preferredSong, preferredIndex, songList);
 		selector.loadSongs(songList, curSelected);
 
-		categoryText.text = SongLibrary.getCategoryDisplayName(currentCategory);
-		categoryText.screenCenter(X);
+		categorySelector.setIndex(categoryIndex, false);
+		categorySelector.updateUI(false, delta);
 
 		updateInfoText();
 		Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.2));
@@ -235,39 +252,21 @@ class Freeplay extends FlxSubState
 
 	/**
 	 * Changes the difficulty, reloading the song list to reflect it.
-	 * It attempts to keep the currently selected song if it exists in the new difficulty.
 	 */
 	public function changeDiff(delta:Int)
 	{
 		diffSelector.change(delta);
 
-		// Try to find the currently selected song in the new list
-		final curSongName:String = songList.length > 0 ? songList[curSelected].song : null;
+		final preferredSong = songList.length > 0 ? songList[curSelected].song : null;
+		final prefIndex = curSelected;
 
 		songList = getMixSonglist(currentCategory, character, diffSelector.getSelected());
-		var newSelected:Int = 0;
-		if (curSongName != null)
-		{
-			for (i in 0...songList.length)
-			{
-				if (songList[i].song == curSongName)
-				{
-					newSelected = i;
-					break;
-				}
-			}
-		}
-
-		curSelected = newSelected;
-		selector.loadSongs(songList, curSelected);
+		curSelected = resolveSelection(preferredSong, prefIndex, songList);
+		selector.loadSongs(songList, curSelected, diffSelector.getSelected());
 
 		updateInfoText();
 
-		if (songList.length <= 0)
-		{
-			stars.difficulty = 0;
-			//
-		}
+		if (songList.length <= 0) stars.difficulty = 0;
 
 		change(0);
 
@@ -394,7 +393,7 @@ class Freeplay extends FlxSubState
 
 		// DEBUG!
 		// TODO remove
-		if (FlxG.keys.justPressed.EIGHT) revealRank(selector.getSelected());
+		// if (FlxG.keys.justPressed.EIGHT) revealRank(selector.getSelected());
 
 		Global.scriptCall('onUpdate', [elapsed]);
 	}

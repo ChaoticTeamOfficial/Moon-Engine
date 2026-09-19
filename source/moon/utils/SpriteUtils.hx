@@ -38,11 +38,9 @@ class SpriteUtils
 		switch (anim)
 		{
 			case JUMP_IN, JUMP_OUT:
-				final ogOffset = sprite.offset.y;
-				sprite.offset.y = ogOffset;
 				sprite.offset.y = (anim == JUMP_IN) ? -8 : 8;
 				tween = FlxTween.tween(sprite, {
-					"offset.y": ogOffset
+					"offset.y": 0
 				}, duration, {
 					ease: FlxEase.expoOut,
 					onComplete: _ -> doDisappearAnim(sprite, outAnim, setTween)

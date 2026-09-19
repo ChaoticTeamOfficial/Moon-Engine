@@ -65,24 +65,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var opponentCharData:StageCharacter;
 	var playerCharData:StageCharacter;
 	var spectatorCharData:StageCharacter;
-	// sucks to be me
-	private var blendModes:Map<String, BlendMode> = [
-		"ADD" => ADD,
-		"ALPHA" => ALPHA,
-		"DARKEN" => DARKEN,
-		"DIFFERENCE" => DIFFERENCE,
-		"ERASE" => ERASE,
-		"HARDLIGHT" => HARDLIGHT,
-		"INVERT" => INVERT,
-		"LAYER" => LAYER,
-		"LIGHTEN" => LIGHTEN,
-		"MULTIPLY" => MULTIPLY,
-		"NORMAL" => NORMAL,
-		"OVERLAY" => OVERLAY,
-		"SCREEN" => SCREEN,
-		"SHADER" => SHADER,
-		"SUBTRACT" => SUBTRACT
-	];
 
 	public function new(stage:String = 'stage', conductor:Conductor)
 	{
@@ -185,7 +167,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				sprite.antialiasing = objData?.antialiasing ?? true;
 				sprite.flipX = objData?.flipX ?? false;
 				sprite.flipY = objData?.flipY ?? false;
-				if (objData.blend != null) sprite.blend = blendModes.get(objData.blend.toUpperCase());
+
+				// TODO: this doesn't work?
+				if (objData.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(objData.blend.toUpperCase());
 
 				if (objData.animations != null && objData.animations.length > 0) sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
 
@@ -304,7 +288,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	 */
 	public function addCharTo(charName:String, group:FlxSpriteGroup, ?attachedInputs:InputHandler)
 	{
-		if(charName == '') return;
+		if (charName == '') return;
 		group.recycle(Character, function():Character
 		{
 			var char = new Character(0, 0, charName, conductor);

@@ -96,6 +96,8 @@ class AssetManager
 		clearGraphics(false);
 		clearSounds(false);
 		runGC();
+
+		UISkinData.clearCache();
 	}
 
 	/**

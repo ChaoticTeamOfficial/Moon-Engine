@@ -1,0 +1,63 @@
+{
+	"name": "v-slice",
+	"uiSkin": "moon-engine",
+	"judgementsSkin": "moon-engine",
+	"spacing": 0,
+	"hasQuantization": false,
+	"noteScale": 0.6,
+	"strumScale": 0.6,
+	"splashScale": 0.8,
+	"antialiasing": true,
+
+	"strum": {
+		"asset": "notes/v-slice/notes",
+		"scale": 0.6,
+		"antialiasing": true,
+		"centerAnimations": true,
+		"animations": [
+			{ "name": "{dir}-static", "prefix": "{dir}-static", "looped": true },
+			{ "name": "{dir}-press", "prefix": "{dir}-press" },
+			{ "name": "{dir}-confirm", "prefix": "{dir}-confirm" }
+		]
+	},
+
+	"note": {
+		"asset": "notes/v-slice/notes",
+		"scale": 0.6,
+		"antialiasing": true,
+		"centerAnimations": true,
+		"animations": [
+			{ "name": "{dir}", "prefix": "{dir}0", "looped": true },
+			{ "name": "{dir}-hold", "prefix": "{dir}-hold0", "looped": true },
+			{ "name": "{dir}-holdEnd", "prefix": "{dir}-holdend0", "looped": true }
+		]
+	},
+
+	"splash": {
+		"asset": "notes/v-slice/splash",
+		"scale": 0.8,
+		"antialiasing": true,
+		"centerAnimations": true,
+		"blend": "ADD",
+		"animations": [
+			{ "name": "splash0", "prefix": "{dir}10", "fps": 32 },
+			{ "name": "splash1", "prefix": "{dir}20", "fps": 32 }
+		]
+	},
+
+	"sustainSplash": {
+		"asset": "notes/v-slice/holdSplash",
+		"scale": 0.8,
+		"antialiasing": true,
+		"centerAnimations": true,
+		"animations": [
+			{ "name": "pre", "prefix": "pre" },
+			{ "name": "{dir}-loop", "prefix": "{dir}-loop", "fps": 20, "looped": true },
+			{ "name": "{dir}-end", "prefix": "{dir}-end", "fps": 20 }
+		]
+	},
+
+	"extra": {
+		"splashPlayRandom": true
+	}
+}

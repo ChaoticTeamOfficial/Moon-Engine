@@ -1,0 +1,16 @@
+{
+  "name": "pixelUI",
+  "healthBar": {
+	"barBG": "healthbar",
+    "paddingX": 4,
+    "paddingY": 3,
+	"statsDistance": 24
+  },
+  "theme": {
+	  "font": "PIXEBOY-Z8XGD.TTF",
+	  "antialiasing": false,
+	  "fontSizeMultiplier": 1.5,
+	  "textOutline": "OUTLINE",
+	  "textOutlineSize": 2
+  }
+}

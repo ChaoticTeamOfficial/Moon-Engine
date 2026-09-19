@@ -134,11 +134,11 @@ class HealthBar extends FlxSpriteGroup
 
 		this.conductor = conductor;
 
-		barBG = cast new MoonSprite().loadGraphic(Paths.image('ingame/UI/healthbar'));
+		barBG = cast new MoonSprite();
 		barBG.scale.set(0.9, 0.9);
 		barBG.updateHitbox();
 
-		bar = new FlxBar(RIGHT_TO_LEFT, Std.int(barBG.width - 16), Std.int(barBG.height - 6), null, null, 0, 100);
+		bar = new FlxBar(RIGHT_TO_LEFT, 0, 0, null, null, 0, 100);
 		bar.y = barBG.y + (barBG.height - bar.height) / 2;
 		bar.x = barBG.x + (barBG.width - bar.width) / 2;
 
@@ -161,6 +161,68 @@ class HealthBar extends FlxSpriteGroup
 				for (ico in icons) ico.onStepHit(step, iconScale + ico.extraScale);
 			});
 		}
+
+		updateBarStats();
+		updateBarPos(true);
+	}
+
+	public function applyUISkin(uiSkin:UISkinData):Void
+	{
+		if (uiSkin == null) return;
+
+		final hb = uiSkin.healthBar;
+		
+		if(hb.barBG == null) hb.barBG = 'healthbar';
+
+		barBG.loadGraphic(Paths.image('uiSkins/${uiSkin.name}/${hb?.barBG}'));
+		final s = hb?.scale ?? 1;
+		barBG.scale.set(s, s);
+		barBG.updateHitbox();
+
+		final dir = switch ((hb?.fillDirection ?? "RIGHT_TO_LEFT").toUpperCase())
+		{
+			case "LEFT_TO_RIGHT":
+				FlxBarFillDirection.LEFT_TO_RIGHT;
+			case "TOP_TO_BOTTOM":
+				FlxBarFillDirection.TOP_TO_BOTTOM;
+			case "BOTTOM_TO_TOP":
+				FlxBarFillDirection.BOTTOM_TO_TOP;
+			default:
+				FlxBarFillDirection.RIGHT_TO_LEFT;
+		};
+
+		final vertical = hb?.vertical ?? false;
+		final padX = hb?.paddingX ?? 8;
+		final padY = hb?.paddingY ?? 3;
+
+		remove(bar, true);
+		bar.destroy();
+
+		bar = new FlxBar(
+			dir,
+			vertical ? Std.int(barBG.width - padX * 2) : Std.int(barBG.width - padX * 2),
+			vertical ? Std.int(barBG.height - padY * 2) : Std.int(barBG.height - padY * 2),
+			null,
+			null,
+			0,
+			100
+		);
+		bar.x = barBG.x + (barBG.width - bar.width) * 0.5;
+		bar.y = barBG.y + (barBG.height - bar.height) * 0.5;
+		insert(0, bar);
+
+		if (opponent != null && player != null) bar.createFilledBar(getRGBData(opponent), getRGBData(player));
+
+		bar.value = health;
+
+		if (hb?.iconScale != null) iconScale = hb.iconScale;
+		if (hb?.iconDistance != null) iconDistance = hb.iconDistance;
+		if (hb?.iconSpreadX != null) iconSpreadX = hb.iconSpreadX;
+		if (hb?.iconSpreadY != null) iconSpreadY = hb.iconSpreadY;
+		if (hb?.iconLayout != null) iconLayout = hb.iconLayout;
+
+		// TODO:
+		// iconsFollowHealth = hb?.iconsFollowHealth ?? true;
 
 		updateBarStats();
 		updateBarPos(true);

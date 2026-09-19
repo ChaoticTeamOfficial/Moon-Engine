@@ -17,7 +17,11 @@ class Prebuild
 		"Hello, World!",
 		"Don't forget to drink some water!",
 		"Why do we brainstorm with ideas only when we're not working?",
-		"I bet you have some awesome ideas stored in."
+		"I bet you have some awesome ideas stored in.",
+		"Also try Doido Engine!",
+		"Also try TechNotDrip Engine!",
+		"Also try WTF Engine!",
+		"Kade engine"
 	];
 
 	static function main():Void

@@ -1,0 +1,15 @@
+{
+	"judgementAnims": {
+		"appear": "light",
+		"disappear": "fade"
+	},
+	"comboAnims": {
+		"appear": "jump-in",
+		"disappear": "fade"
+	},
+	"comboRolls": false,
+	"antialiasing": false,
+
+	"judgementsSize": 4,
+	"comboSize": 4
+}

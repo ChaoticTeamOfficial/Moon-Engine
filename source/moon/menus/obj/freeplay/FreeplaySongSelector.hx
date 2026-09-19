@@ -12,20 +12,23 @@ using StringTools;
 class FreeplaySongSelector extends FlxGroup
 {
 	public static final VISIBLE_RADIUS:Int = 2;
-	static final Y_SPACING:Float = 95.0;
-	static final WIGGLE_SPEED:Float = 1.2;
-	static final SCROLL_LERP:Float = 10;
-	static final DEG_PER_SONG:Float = -25;
+	static final Y_SPACING:Float = 98.0;
+	static final WIGGLE_SPEED:Float = 1.1;
+	static final SCROLL_LERP:Float = 12;
 	static final DOT_RADIUS:Int = 5;
 	static final LINE_W:Int = 512;
 	static final LINE_H:Int = 3;
-	static final ENTER_DURATION:Float = 0.6;
+	static final ENTER_DURATION:Float = 0.65;
 	static final EXIT_DURATION:Float = 0.5;
-	static final STAGGER_DELAY:Float = 0.08;
-	static final DIFF_SWITCH_LOCK:Float = 0.25;
+	static final STAGGER_DELAY:Float = 0.07;
+	static final DIFF_SWITCH_LOCK:Float = 0.28;
+	static final FULL_LIST_ARC:Float = 360.0;
+	static final MIN_DEG_PER_SONG:Float = -12.0;
+	static final MAX_DEG_PER_SONG:Float = -48.0;
 
 	var scrollDelta:Float = 0;
 	var diskTargetAngle:Float = 0;
+	var degPerSong:Float = -25;
 	var selectPulse:Float = 0;
 	var isAnimating:Bool = false;
 	var previousDifficulty:String = '';
@@ -35,6 +38,7 @@ class FreeplaySongSelector extends FlxGroup
 	var noSongsSubtext:FlxText;
 	var lineSprites:Array<MoonSprite> = [];
 	var dots:Array<MoonSprite> = [];
+	var diskSpinVelocity:Float = 0;
 
 	public var items:Array<FreeplaySongItem> = [];
 
@@ -67,32 +71,18 @@ class FreeplaySongSelector extends FlxGroup
 	public function new()
 	{
 		super();
-		setupDisk();
-		setupAlbumTitle();
-		setupNoSongsMessage();
-		setupItemPool();
-		playEnterAnimation();
-	}
 
-	function setupDisk():Void
-	{
 		disk = new MoonSprite().loadGraphic(Paths.image('menus/freeplay/albums/volume1'));
 		disk.shader = new VinylDiskShader(0.46, 0.12, 0.03, 0.03);
 		disk.active = false;
 		disk.screenCenter();
 		disk.origin.set(disk.width / 2, disk.height / 2);
 		add(disk);
-	}
 
-	function setupAlbumTitle():Void
-	{
 		albumTitle = new MoonSprite();
 		albumTitle.visible = false;
 		add(albumTitle);
-	}
 
-	function setupNoSongsMessage():Void
-	{
 		noSongsText = new FlxText(0, 0, FlxG.width, 'NO SONGS FOUND');
 		noSongsText.setFormat(Paths.font('phantomuff/full.ttf'), 36, FlxColor.WHITE, CENTER);
 		noSongsText.screenCenter();
@@ -113,10 +103,7 @@ class FreeplaySongSelector extends FlxGroup
 
 		noSongsSubtext.x += 316;
 		noSongsText.x += 316;
-	}
 
-	function setupItemPool():Void
-	{
 		final poolSize = VISIBLE_RADIUS * 2 + 1;
 
 		for (i in 0...poolSize)
@@ -131,6 +118,8 @@ class FreeplaySongSelector extends FlxGroup
 			items.push(item);
 			add(item);
 		}
+
+		playEnterAnimation();
 	}
 
 	function createLine():MoonSprite
@@ -160,16 +149,18 @@ class FreeplaySongSelector extends FlxGroup
 
 		disk.scale.set(0, 0);
 		disk.updateHitbox();
-		disk.angle = -360;
+		disk.angle = -420;
 
 		FlxTween.tween(disk, {
 			"scale.x": 1,
-			"scale.y": 1
+			"scale.y": 1,
+			angle: 0
 		}, ENTER_DURATION, {
 			ease: FlxEase.backOut,
 			onUpdate: _ -> disk.updateHitbox(),
 			onComplete: _ ->
 			{
+				diskTargetAngle = 0;
 				isAnimating = false;
 				Global.allowInputs = true;
 			}
@@ -181,16 +172,13 @@ class FreeplaySongSelector extends FlxGroup
 			item.setEnterValues();
 
 			final isCenter = (i == VISIBLE_RADIUS);
-			final delay = isCenter ? ENTER_DURATION * 0.25 : ENTER_DURATION * 0.4 + Math.abs(i - VISIBLE_RADIUS) * STAGGER_DELAY;
-			final duration = isCenter ? ENTER_DURATION * 0.75 : ENTER_DURATION * 0.5;
-			final ease = isCenter ? FlxEase.backOut : FlxEase.circOut;
 
 			FlxTween.tween(item, {
 				lerpAlpha: isCenter ? 1 : item.targetAlpha,
 				lerpScale: isCenter ? 1 : item.targetScale
-			}, duration, {
-				ease: ease,
-				startDelay: delay
+			}, isCenter ? ENTER_DURATION * 0.8 : ENTER_DURATION * 0.55, {
+				ease: isCenter ? FlxEase.backOut : FlxEase.circOut,
+				startDelay: isCenter ? ENTER_DURATION * 0.2 : ENTER_DURATION * 0.35 + Math.abs(i - VISIBLE_RADIUS) * STAGGER_DELAY
 			});
 		}
 	}
@@ -201,9 +189,11 @@ class FreeplaySongSelector extends FlxGroup
 		isAnimating = true;
 		Global.allowInputs = false;
 
+		final exitSpin = disk.angle - 280;
 		FlxTween.tween(disk, {
 			"scale.x": 0,
-			"scale.y": 0
+			"scale.y": 0,
+			angle: exitSpin
 		}, EXIT_DURATION, {
 			ease: FlxEase.backIn,
 			onUpdate: _ -> disk.updateHitbox()
@@ -211,20 +201,19 @@ class FreeplaySongSelector extends FlxGroup
 
 		for (i in 0...items.length)
 		{
-			final delay = Math.abs(i - VISIBLE_RADIUS) * STAGGER_DELAY * 0.6;
+			final delay = Math.abs(i - VISIBLE_RADIUS) * STAGGER_DELAY * 0.55;
 			FlxTween.tween(items[i], {
 				lerpAlpha: 0,
 				lerpScale: 0
-			}, EXIT_DURATION * 0.6, {
+			}, EXIT_DURATION * 0.55, {
 				ease: FlxEase.backIn,
 				startDelay: delay
 			});
 		}
 
-		// Fade out auxiliary elements
 		if (albumTitle.visible) FlxTween.tween(albumTitle, {
 			alpha: 0
-		}, EXIT_DURATION * 0.4);
+		}, EXIT_DURATION * 0.35);
 
 		if (noSongsText.visible)
 		{
@@ -232,25 +221,47 @@ class FreeplaySongSelector extends FlxGroup
 			FlxTween.globalManager.cancelTweensOf(noSongsSubtext);
 			FlxTween.tween(noSongsText, {
 				alpha: 0
-			}, EXIT_DURATION * 0.3);
+			}, EXIT_DURATION * 0.25);
 			FlxTween.tween(noSongsSubtext, {
 				alpha: 0
-			}, EXIT_DURATION * 0.3);
+			}, EXIT_DURATION * 0.25);
 		}
 
-		new FlxTimer().start(EXIT_DURATION + 0.15, _ ->
+		new FlxTimer().start(EXIT_DURATION + 0.12, _ ->
 		{
 			isAnimating = false;
 			if (onComplete != null) onComplete();
 		});
 	}
 
+	/**
+	 * Difficulty switch: only the selected item flashes.
+	 * Non-selected slots are forced invisible so their backgrounds don't flash.
+	 */
 	function diffSwitchAnim():Void
 	{
 		if (isAnimating) return;
 		isAnimating = true;
 
-		for (i in 0...items.length) if (items[i].lerpAlpha > 0.1) items[i].playDifficultySwitchEffect();
+		for (i in 0...items.length)
+		{
+			final item = items[i];
+			if (i == VISIBLE_RADIUS)
+			{
+				item.playDifficultySwitchEffect();
+				continue;
+			}
+
+			item.bg.alpha = 0;
+			item.icon.filters = null;
+			item.targetAlpha = 0;
+			item.lerpAlpha = 0;
+			item.hide();
+			dots[i].visible = false;
+			lineSprites[i].visible = false;
+		}
+
+		diskSpinVelocity += degPerSong * 0.45 * (FlxG.random.bool() ? 1 : -1);
 
 		new FlxTimer().start(DIFF_SWITCH_LOCK, _ -> isAnimating = false);
 	}
@@ -263,14 +274,60 @@ class FreeplaySongSelector extends FlxGroup
 		songList = songs;
 		curSelected = (songs.length > 0) ? FlxMath.wrap(selected, 0, songs.length - 1) : 0;
 
+		updateDegPerSong();
 		refreshEntries();
 		scrollDelta = 0;
+		diskSpinVelocity = 0;
 		updateRankCounts();
 
 		if (isDifficultyChange) diffSwitchAnim();
+		else if (songs.length > 0) listReloadAnim();
 
-		refreshItems(!isDifficultyChange);
+		// Instant on difficulty change so invalid slots (and bgs) vanish immediately
+		refreshItems(isDifficultyChange);
 		updateNoSongsVisibility();
+	}
+
+	/**
+	 * Disk rotation step scales with list length so a full pass feels like ~one vinyl revolution.
+	 * Clamped so short/long lists still feel responsive.
+	 */
+	function updateDegPerSong():Void
+	{
+		if (songList.length <= 1)
+		{
+			degPerSong = -30;
+			return;
+		}
+
+		final raw = -FULL_LIST_ARC / songList.length;
+		degPerSong = FlxMath.bound(raw, MAX_DEG_PER_SONG, MIN_DEG_PER_SONG);
+	}
+
+	function listReloadAnim():Void
+	{
+		if (isAnimating) return;
+		isAnimating = true;
+
+		for (i in 0...items.length)
+		{
+			final item = items[i];
+			if (item.lerpAlpha < 0.05) continue;
+
+			final delay = Math.abs(i - VISIBLE_RADIUS) * 0.04;
+			final origScale = item.lerpScale;
+			item.lerpScale *= 0.92;
+
+			FlxTween.tween(item, {
+				lerpScale: origScale
+			}, 0.32, {
+				ease: FlxEase.elasticOut,
+				startDelay: delay
+			});
+		}
+
+		diskSpinVelocity += degPerSong * 0.6;
+		new FlxTimer().start(0.35, _ -> isAnimating = false);
 	}
 
 	function updateRankCounts():Void
@@ -345,7 +402,9 @@ class FreeplaySongSelector extends FlxGroup
 
 		curSelected = FlxMath.wrap(curSelected + delta, 0, songList.length - 1);
 		scrollDelta += delta * Y_SPACING;
-		diskTargetAngle += delta * DEG_PER_SONG;
+		diskTargetAngle += delta * degPerSong;
+
+		diskSpinVelocity += delta * degPerSong * 0.35;
 
 		refreshItems(false);
 	}
@@ -361,8 +420,12 @@ class FreeplaySongSelector extends FlxGroup
 
 		SongPreview.update(elapsed);
 
-		disk.angle = FlxMath.lerp(disk.angle, diskTargetAngle, elapsed * SCROLL_LERP);
-		scrollDelta = FlxMath.lerp(scrollDelta, 0, elapsed * SCROLL_LERP);
+		diskSpinVelocity = FlxMath.lerp(diskSpinVelocity, 0, elapsed * 6.5);
+		diskTargetAngle += diskSpinVelocity * elapsed * 8;
+
+		final angleLerp = elapsed * SCROLL_LERP;
+		disk.angle = FlxMath.lerp(disk.angle, diskTargetAngle, angleLerp);
+		scrollDelta = FlxMath.lerp(scrollDelta, 0, angleLerp);
 		selectPulse += elapsed * 6.0;
 
 		updateItems(elapsed);
@@ -407,20 +470,32 @@ class FreeplaySongSelector extends FlxGroup
 		item.bg.alpha = 0;
 	}
 
+	/**
+	 * Dots sit on the disk ring, aimed at each icon (same speed/spacing as the list).
+	 * This keeps spokes clean and in sync with item movement + disk rotation.
+	 */
 	function updateDots():Void
 	{
 		for (i in 0...dots.length)
 		{
 			final dot = dots[i];
-			if (!dot.visible) continue;
-
 			final item = items[i];
+
+			if (!isValidIndex(curSelected + (i - VISIBLE_RADIUS)) || item.lerpAlpha < 0.05)
+			{
+				dot.visible = false;
+				continue;
+			}
+
 			var iconCY = item.icon.y + item.icon.height * 0.5;
 			final iconCX = item.icon.x + item.icon.width * 0.5;
 
+			// Undo the selected-item wiggle so the spoke stays stable
 			if (i == VISIBLE_RADIUS) iconCY -= Math.sin(selectPulse * WIGGLE_SPEED) * 3.5;
 
 			final ang = Math.atan2(iconCY - diskCY, iconCX - diskCX);
+			dot.visible = true;
+			dot.alpha = item.targetAlpha;
 			dot.x = diskCX + Math.cos(ang) * diskRingR - DOT_RADIUS;
 			dot.y = diskCY + Math.sin(ang) * diskRingR - DOT_RADIUS;
 		}
@@ -478,14 +553,14 @@ class FreeplaySongSelector extends FlxGroup
 			if (!isValidIndex(songIdx))
 			{
 				item.targetAlpha = 0;
+				item.bg.alpha = 0;
+				item.icon.filters = null;
 				if (instant)
 				{
 					item.lerpAlpha = 0;
 					item.hide();
 				}
 				dots[i].visible = false;
-				item.icon.filters = null;
-				item.bg.alpha = 0;
 				continue;
 			}
 

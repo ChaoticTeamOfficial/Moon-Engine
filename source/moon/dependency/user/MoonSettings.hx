@@ -124,7 +124,10 @@ class Setting
 					;
 				}
 			case UNCAP_SLIDER: (v is Int) || (v is Float);
-			case SELECTOR: final list:Array<Dynamic> = options; list != null && list.contains(v);
+			case SELECTOR:
+				final list:Array<Dynamic> = options;
+				if (list == null || list.length == 0) true;
+				else list.contains(v);
 			case SELECTABLE, INFO:
 				true;
 		}

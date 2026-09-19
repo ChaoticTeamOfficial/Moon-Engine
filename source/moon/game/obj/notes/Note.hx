@@ -107,24 +107,19 @@ class Note extends MoonSprite
 
 	private function _updateGraphics():Void
 	{
-		var curSkin = ((type != "default" || type != null) && Paths.exists('images/ingame/UI/notes/$type')) ? type : skin;
-		var dir = MoonUtils.intToDir(direction);
+		final data = NoteskinData.get(skin);
+		final dir = MoonUtils.intToDir(direction);
 
-		if (!sharedScripts.exists(curSkin))
+		MoonUtils.applyNoteskinPiece(this, data.note, dir, data.noteScale ?? 1, data.antialiasing ?? true);
+
+		useQuantization = data.hasQuantization ?? false;
+
+		if (useQuantization && data.quantAsset != null)
 		{
-			var wawa = new MoonScript();
-			wawa.load('images/notes/$curSkin/noteskin.hx');
-			sharedScripts.set(curSkin, wawa);
-
-			if (!Global.scripts.exists(curSkin)) Global.registerScript(curSkin, wawa);
+			// TODO: keep a second atlas and re register the quant variants.
+			// Once we have a setting, make it use them.
 		}
 
-		script = sharedScripts.get(curSkin);
-		script.set("staticNote", this);
-		script.get("createStaticNote")(curSkin, dir);
-
-		// TODO: Have a setting for this instead, and make it use the default one!
-		useQuantization = script?.get("useQuantization") ?? false;
 		updateQuantAnim();
 		updateHitbox();
 		playAnim(dir);
