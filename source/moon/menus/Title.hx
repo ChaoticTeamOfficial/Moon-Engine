@@ -328,7 +328,7 @@ class Title extends FlxTransitionableState
 
 					FlxG.camera.fade(FlxColor.WHITE, 0.6, true);
 					Paths.playSFX('ui/confirmMenu.ogg');
-					FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker) -> FlxG.switchState(() -> new MainMenu()));
+					FlxFlicker.flicker(displayTxt, 1.3, 0.05, true, true, (flicker) -> ScriptUtils.switchTo('MainMenu'));
 				}
 			}
 		}

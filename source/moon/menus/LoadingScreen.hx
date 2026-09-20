@@ -168,7 +168,7 @@ class LoadingScreen extends FlxTransitionableState
 			loadDisplay.y += trackerB ? 5 : -5;
 		}
 
-		if (failed && (MoonInput.justPressed(ACCEPT) || MoonInput.justPressed(BACK))) FlxG.switchState(() -> new MainMenu());
+		if (failed && (MoonInput.justPressed(ACCEPT) || MoonInput.justPressed(BACK))) ScriptUtils.switchTo('MainMenu');
 
 		if (loadComplete && MoonInput.justPressed(ACCEPT) && !transitioning)
 		{

@@ -176,9 +176,8 @@ class LeftPanel extends FlxSpriteGroup
 					editor.sustainLoopOpp.pause();
 					editor.sustainLoopP1.pause();
 
-					var stt = new Settings();
-					stt.camera = editor.camFRONT;
-					FlxG.state.openSubState(stt);
+					ScriptUtils.openMenu('Settings');
+					FlxG.state.subState.camera = editor.camFRONT;
 				}
 
 			case 'saveL':

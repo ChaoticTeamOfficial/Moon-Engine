@@ -98,7 +98,7 @@ class PauseMenu extends FlxSubState
 	{
 		curSelected = FlxMath.wrap(curSelected + change, 0, options.length - 1);
 
-		if(mainTV != null && mainTV.animation != null) mainTV.playAnim(options[curSelected]);
+		if (mainTV != null && mainTV.animation != null) mainTV.playAnim(options[curSelected]);
 
 		if (change != 0) Paths.playSFX('ui/scrollMenu.ogg', 'sounds', true, FlxG.random.float(0.9, 1.1));
 	}
@@ -126,7 +126,7 @@ class PauseMenu extends FlxSubState
 					close();
 				case 'settings':
 					close();
-					FlxG.state.openSubState(new Settings());
+					ScriptUtils.openMenu('Settings');
 				case 'quit':
 					PlayState.instance.exit();
 			}

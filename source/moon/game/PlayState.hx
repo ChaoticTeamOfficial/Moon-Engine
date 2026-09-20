@@ -385,7 +385,7 @@ class PlayState extends FlxTransitionableState
 			setCameraZoom(1, 1, {
 				ease: FlxEase.expoOut
 			});
-			openSubState(new Gameover());
+			ScriptUtils.openMenu('Gameover');
 
 			final reasons = ['got blueballed', 'has skill issue', 'gave up', 'freakin sucks'];
 			moon.backend.archipelago.ArchipelagoManager.sendDeathLink(reasons[FlxG.random.int(0, reasons.length - 1)]);
@@ -711,9 +711,10 @@ class PlayState extends FlxTransitionableState
 		if (MoonShaderHandler.instances.length > 0) for (instance in MoonShaderHandler.instances) instance.destroy();
 		cameraShaderHandlers.clear();
 
+		// TODO: make sticker substate work with ScriptUtils.switchTo!
 		if (toMenu) openSubState(new StickerSubState(new MainMenu()));
 		else
-			FlxG.switchState(() -> new ResultsState(resultsStats, playField.chart.content.meta, playField.difficulty, savedData));
+			ScriptUtils.switchTo('ResultsState', [resultsStats, playField.chart.content.meta, playField.difficulty, savedData]);
 	}
 
 	static public function saveReplays()

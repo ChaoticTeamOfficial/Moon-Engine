@@ -191,10 +191,10 @@ class ArchipelagoMenu extends FlxTransitionableState
 					statusText.color = 0xFFff6666;
 				}
 			}
-			else if (curSelected == FIELD_BACK) FlxG.switchState(() -> new MainMenu());
+			else if (curSelected == FIELD_BACK) ScriptUtils.switchTo('MainMenu');
 		}
 
-		if (MoonInput.justPressed(BACK)) FlxG.switchState(() -> new MainMenu());
+		if (MoonInput.justPressed(BACK)) ScriptUtils.switchTo('MainMenu');
 
 		if (ArchipelagoManager.isConnected && statusText.color != 0xFF66ff66)
 		{

@@ -226,7 +226,7 @@ class CharSelect extends FlxState
 								ease: FlxEase.backInOut,
 								onComplete: _ ->
 								{
-									FlxG.switchState(() -> new MainMenu());
+									ScriptUtils.switchTo('MainMenu');
 									Global.allowInputs = true;
 								}
 							});

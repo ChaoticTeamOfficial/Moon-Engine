@@ -217,7 +217,7 @@ class Story extends FlxState
 				return;
 			}
 
-			FlxG.switchState(() -> new moon.menus.MainMenu());
+			ScriptUtils.switchTo('MainMenu');
 		};
 
 		if (MoonInput.justPressed(ACCEPT)) confirmWeek();

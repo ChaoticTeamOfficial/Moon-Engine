@@ -422,6 +422,7 @@ class ResultsState extends FlxState
 				});
 			}
 
+			// TODO: make this work with ScriptUtils.switchTo!
 			final state = ArchipelagoManager.isConnected ? new ArchipelagoPlayMenu() : new MainMenu();
 			openSubState(new StickerSubState(state));
 		}

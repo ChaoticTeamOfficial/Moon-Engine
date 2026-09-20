@@ -242,7 +242,7 @@ class JudgementsComboCustomize extends FlxSubState
 		if (MoonInput.justPressed(BACK))
 		{
 			FlxG.mouse.visible = false;
-			FlxG.state.openSubState(new Settings(true));
+			ScriptUtils.openMenu('Settings', [true]);
 		}
 	}
 

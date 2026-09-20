@@ -119,9 +119,9 @@ class MainMenu extends FlxTransitionableState
 				case 'mods':
 					FlxG.switchState(() -> new ModMenu());
 				case 'freeplay':
-					openSubState(new Freeplay('bf'));
+					ScriptUtils.openMenu('Freeplay', [MoonSettings.callSetting('Game Character')]);
 				case 'settings':
-					openSubState(new Settings());
+					ScriptUtils.openMenu('Settings');
 				case 'archipelago':
 					FlxG.switchState(() -> new ArchipelagoMenu());
 				case 'convert chart yeah': // FlxG.switchState(()->new ChartConvert());
@@ -131,9 +131,9 @@ class MainMenu extends FlxTransitionableState
 				case 'test script state':
 					FlxG.switchState(() -> new MoonScriptedState('MyCoolScriptedState'));
 				case 'story menu':
-					FlxG.switchState(() -> new Story());
+					ScriptUtils.switchTo('Story');
 				case 'trophies':
-					openSubState(new AchievementsMenu());
+					ScriptUtils.openMenu('AchievementsMenu');
 			}
 		}
 

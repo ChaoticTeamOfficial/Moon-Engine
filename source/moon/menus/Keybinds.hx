@@ -135,7 +135,7 @@ class Keybinds extends FlxSubState
 			if (MoonInput.justPressed(UI_UP)) changeSelection(-1);
 			else if (MoonInput.justPressed(UI_DOWN)) changeSelection(1);
 			if (MoonInput.justPressed(ACCEPT)) openRebindMode();
-			else if (MoonInput.justPressed(BACK)) FlxG.state.openSubState(new Settings(true));
+			else if (MoonInput.justPressed(BACK)) ScriptUtils.openMenu('Settings', [true]);
 			else if (FlxG.keys.justPressed.TAB)
 			{
 				showKeyboard = !showKeyboard;

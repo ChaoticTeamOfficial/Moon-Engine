@@ -375,7 +375,7 @@ class ModMenu extends FlxTransitionableState
 				Paths.playSFX('menus/mods/modHold.wav');
 			}
 
-			if (MoonInput.justPressed(BACK)) FlxG.switchState(() -> new MainMenu());
+			if (MoonInput.justPressed(BACK)) ScriptUtils.switchTo('MainMenu');
 		}
 
 		updateDraggingVisuals();

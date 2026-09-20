@@ -254,7 +254,7 @@ class Offset extends FlxSubState
 	{
 		if (FlxG.sound.music != null) FlxG.sound.music.stop();
 
-		FlxG.state.openSubState(new Settings(true));
+		ScriptUtils.openMenu('Settings', [true]);
 		close();
 	}
 }

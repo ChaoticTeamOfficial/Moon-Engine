@@ -78,7 +78,7 @@ class CrashHandler extends FlxState
 		{
 			canReturn = false;
 			FlxTransitionableState.skipNextTransIn = FlxTransitionableState.skipNextTransOut = true;
-			FlxG.switchState(() -> new MainMenu());
+			ScriptUtils.switchTo('MainMenu');
 		}
 	}
 }

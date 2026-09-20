@@ -73,8 +73,6 @@ class ScriptUtils
 				FlxG.switchState(() -> new MainMenu());
 			case 'Story':
 				FlxG.switchState(() -> new Story());
-			case 'ArchipelagoPlayMenu':
-				FlxG.switchState(() -> new ArchipelagoPlayMenu());
 			case 'LoadingScreen':
 				// TODO: find a way to make it so people won't need to recode the entire loading!
 				FlxG.switchState(() -> new LoadingScreen());
