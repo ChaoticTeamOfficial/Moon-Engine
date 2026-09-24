@@ -18,7 +18,7 @@ class MainMenu extends FlxTransitionableState
 		'mods',
 		'settings',
 		'archipelago',
-		'test script state'
+		'offset editor'
 	];
 	var buttons:Array<UIButton> = [];
 	var curSelected:Int = 0;
@@ -134,6 +134,8 @@ class MainMenu extends FlxTransitionableState
 					ScriptUtils.switchTo('Story');
 				case 'trophies':
 					ScriptUtils.openMenu('AchievementsMenu');
+				case 'offset editor':
+					FlxG.switchState(() -> new moon.toolkit.offset.OffsetEditor());
 			}
 		}
 

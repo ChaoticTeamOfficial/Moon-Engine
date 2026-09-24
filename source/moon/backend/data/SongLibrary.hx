@@ -233,6 +233,103 @@ class SongLibrary
 	function weekSonglist(week:String = 'all'):Array<SongBase> return (week == 'all') ? allSongs : (songsByWeek?.get(week) ?? []);
 
 	/**
+	 * Returns the owning mod's data id for a relative asset path, or `null` for vanilla.
+	 */
+	static function getOwningModName(path:String):Null<String> return Mods.getOwningMod(path)?.id;
+
+	/**
+	 * Resolves which active mod owns a song entry.
+	 * @return The owning `Mod`, or `null` for vanilla.
+	 */
+	static function getSongOwningMod(entry:SongBase):Null<Mod>
+	{
+		final mixPath = 'songs/${entry.song}/${entry.mix}';
+		var owner = Mods.getOwningMod(mixPath);
+		if (owner != null) return owner;
+
+		owner = Mods.getOwningMod('$mixPath/chart.json');
+		if (owner != null) return owner;
+
+		if (entry.difficulty != null && entry.difficulty != '')
+		{
+			owner = Mods.getOwningMod('$mixPath/chart-${entry.difficulty}.json');
+			if (owner != null) return owner;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Resolves which source owns a song entry.
+	 * @return Mod data id (`Mod.id`), or `null` for vanilla.
+	 */
+	static function getSongSource(entry:SongBase):Null<String> return getSongOwningMod(entry)?.id;
+
+	/**
+	 * Resolves which active mod owns a week id.
+	 * @return The owning `Mod`, or `null` for vanilla.
+	 */
+	static function getWeekOwningMod(weekId:String):Null<Mod>
+	{
+		if (weekId == null || weekId == '' || weekId == 'all') return null;
+		return Mods.getOwningMod('data/weeks/$weekId.json');
+	}
+
+	/**
+	 * Resolves which source owns a week id.
+	 * @return Mod data id (`Mod.id`), or `null` for vanilla.
+	 */
+	static function getWeekSource(weekId:String):Null<String> return getWeekOwningMod(weekId)?.id;
+
+	/**
+	 * Returns songs that belong only to the given source.
+	 * @param source `"vanilla"` for base-game songs, or a mod's `id`, folder name, or display name.
+	 * @param week   Optional week filter; `"all"` (default) keeps every matching song.
+	 */
+	function songsFrom(source:String = 'vanilla', week:String = 'all'):Array<SongBase>
+	{
+		final wantVanilla = source == null || source == '' || source.toLowerCase() == 'vanilla';
+		final target = wantVanilla ? null : Mods.getActiveMod(source);
+		if (!wantVanilla && target == null) return [];
+
+		final out:Array<SongBase> = [];
+		for (entry in weekSonglist(week))
+		{
+			final owner = getSongOwningMod(entry);
+			if (wantVanilla)
+			{
+				if (owner == null) out.push(entry);
+			}
+			else if (owner == target) out.push(entry);
+		}
+		return out;
+	}
+
+	/**
+	 * Returns week category ids that belong only to the given source.
+	 * @param source `"vanilla"` (default) for base-game weeks, or a mod's `id`, folder name, or display name.
+	 */
+	function weeksFrom(source:String = 'vanilla'):Array<String>
+	{
+		final wantVanilla = source == null || source == '' || source.toLowerCase() == 'vanilla';
+		final target = wantVanilla ? null : Mods.getActiveMod(source);
+		if (!wantVanilla && target == null) return [];
+
+		final out:Array<String> = [];
+		for (id in categoryOrder)
+		{
+			if (id == 'all') continue;
+			final owner = getWeekOwningMod(id);
+			if (wantVanilla)
+			{
+				if (owner == null) out.push(id);
+			}
+			else if (owner == target) out.push(id);
+		}
+		return out;
+	}
+
+	/**
 	 * Looks up a Difficulty by its internal name.
 	 * @param name The difficulty's internal name (e.g. "hard", "erect")
 	 */

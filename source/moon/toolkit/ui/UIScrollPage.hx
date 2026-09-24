@@ -72,6 +72,7 @@ class UIScrollPage extends UIPage
 	 */
 	override public function addComponent(component:UIComponent):UIComponent
 	{
+		component.camera = this.camera;
 		content.add(component);
 		return component;
 	}

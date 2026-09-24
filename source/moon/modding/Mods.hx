@@ -135,15 +135,63 @@ class Mods
 	 * Returns the root folder of the first active mod that contains `originalPath`,
 	 * or null if no active mod has it (meaning it lives in vanilla `assets/`).
 	 */
-	static function getOwningModRoot(originalPath:String, ?library:String):Null<String>
+	static function getOwningMod(originalPath:String, ?library:String):Null<Mod>
 	{
 		#if sys
 		for (mod in activeMods)
 		{
 			final modPath = mod.getAsset(originalPath, library);
-			if (modPath != null) return mod.root;
+			if (modPath != null) return mod;
 		}
 		#end
 		return null;
+	}
+
+	static function getOwningModRoot(originalPath:String, ?library:String):Null<String> return getOwningMod(originalPath, library)?.root;
+
+	/**
+	 * True when `query` matches this mod's `id`, folder name (`Mod.name`), or display name (`metadata.name`).
+	 */
+	static function matchesName(mod:Mod, query:String):Bool
+	{
+		if (mod == null || query == null || query == '') return false;
+
+		final q = query.toLowerCase();
+		if (mod.id != null && mod.id.toLowerCase() == q) return true;
+
+		if (mod.name.toLowerCase() == q) return true;
+		final display = mod.metadata?.name;
+
+		if (display != null && display != '' && display != 'None' && display.toLowerCase() == q) return true;
+		return false;
+	}
+
+	/**
+	 * Finds an active mod by id, folder name, or metadata display name.
+	 */
+	static function getActiveMod(name:String):Null<Mod>
+	{
+		for (mod in activeMods) if (matchesName(mod, name)) return mod;
+		return null;
+	}
+
+	/**
+	 * Finds any scanned mod by id, folder name, or metadata display name.
+	 */
+	static function getMod(name:String):Null<Mod>
+	{
+		for (mod in allMods) if (matchesName(mod, name)) return mod;
+		return null;
+	}
+
+	/**
+	 * Preferred human-readable name: metadata display name when set, otherwise folder name.
+	 */
+	static function getDisplayName(mod:Mod):String
+	{
+		if (mod == null) return '';
+		final display = mod.metadata?.name;
+		if (display != null && display != '' && display != 'None') return display;
+		return mod.name;
 	}
 }

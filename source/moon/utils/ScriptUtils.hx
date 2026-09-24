@@ -24,7 +24,6 @@ class ScriptUtils
 	public static function pointPolar(angle:Float, length:Float = 1) return flixel.math.FlxPoint.get(Math.cos(angle) * length, Math.sin(angle) * length);
 
 	// --- Menus Stuff. --- //
-	// TODO: use these.
 
 	/**
 	 * Opens a substate, preferring a mod script if one exists.

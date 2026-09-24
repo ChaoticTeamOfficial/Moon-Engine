@@ -79,7 +79,10 @@ class Character extends MoonSprite
 			conductor.onStep.add(step ->
 			{
 				if (
-					animation.curAnim != null
+					this != null
+					&& character != null
+					&& animation != null
+					&& animation.curAnim != null
 					&& (animation.curAnim.name.startsWith('sing') || animation.curAnim.name.startsWith('miss'))
 				) animationHold += conductor.stepCrochet / 1000;
 			});
@@ -105,7 +108,7 @@ class Character extends MoonSprite
 
 	public function checkDance(curBeat:Float)
 	{
-		if (animation.curAnim == null) return;
+		if (this == null || character == null || animation == null || animation.curAnim == null) return;
 
 		final beatInt = Std.int(curBeat);
 		final name = animation.curAnim.name;

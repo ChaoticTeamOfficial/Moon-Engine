@@ -13,7 +13,16 @@ using StringTools;
  */
 class Mod
 {
+	/**
+	 * Folder name under `mods/`.
+	 */
 	var name:String;
+
+	/**
+	 * ID used for lookups and data APIs.
+	 */
+	var id:String;
+
 	var metadata:ModMetadata = {
 		name: "None"
 	};
@@ -24,6 +33,9 @@ class Mod
 		this.name = name;
 		this.root = root;
 		loadMetadata();
+
+		final metaId = metadata?.id;
+		this.id = (metaId != null && metaId != '') ? metaId : name;
 	}
 
 	function loadMetadata()
@@ -51,9 +63,14 @@ class Mod
 typedef ModMetadata =
 {
 	/**
-	 * The mod's name.
+	 * The mod's display name.
 	 */
 	var name:String;
+
+	/**
+	 * Optional machine id for lookups / data APIs, mostly so other mods doesn't cause conflicts!
+	 */
+	var ?id:String;
 
 	/**
 	 * The mod's description.
