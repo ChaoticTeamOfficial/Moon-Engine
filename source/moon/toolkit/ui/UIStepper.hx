@@ -577,17 +577,24 @@ class UIStepper extends UIComponent implements ITextEditable implements IEditorC
 	static function measureWidth(s:String):Float
 	{
 		if (s == null || s.length == 0) return 0;
-		if (measurer == null)
+		try
 		{
-			measurer = new FlxText(0, 0, 0, "");
-			measurer.font = UITheme.FONT;
-			measurer.size = UITheme.FONT_SIZE;
-			measurer.wordWrap = false;
-			measurer.antialiasing = UITheme.FONT_ANTIALIASING;
-			measurer.active = false;
+			if (measurer == null)
+			{
+				measurer = new FlxText(0, 0, 0, "");
+				measurer.font = UITheme.FONT;
+				measurer.size = UITheme.FONT_SIZE;
+				measurer.wordWrap = false;
+				measurer.antialiasing = UITheme.FONT_ANTIALIASING;
+				measurer.active = false;
+			}
+			measurer.text = s;
+			return (measurer != null) ? (measurer?.width ?? 0) : 0;
 		}
-		measurer.text = s;
-		return measurer?.width ?? 0;
+		catch (e)
+		{
+			return 0;
+		}
 	}
 
 	override public function destroy():Void

@@ -17,6 +17,8 @@ class OffsetEditor extends FlxState
 	static inline final OFFSET_MIN:Int = -9999;
 	static inline final OFFSET_MAX:Int = 9999;
 	static inline final STAGE_NAME:String = 'mainStage';
+	static inline final ZOOM_MIN:Float = 0.05;
+	static inline final ZOOM_MAX:Float = 12.0;
 	static final ROLE_LABELS:Array<String> = ['Opponent', 'Player', 'Spectator'];
 	static final ROLE_TYPES:Array<CharacterType> = [OPPONENT, PLAYER, SPECTATOR];
 
@@ -149,6 +151,7 @@ class OffsetEditor extends FlxState
 			if (stage.spectators != null) rolePositions[2] = [stage.spectators.x, stage.spectators.y];
 		}
 
+		roleCamOffsets = [[0, 0], [0, 0], [0, 0]];
 		if (stage == null || stage.json == null || stage.json.characters == null) return;
 
 		for (ch in stage.json.characters)
@@ -446,6 +449,8 @@ class OffsetEditor extends FlxState
 			group.add(preview);
 		}
 		preview.conductor = conductor;
+		restoreCharCamOffsets(preview);
+		applyCharacterTransform(preview);
 
 		if (ghost == null) updateGhost();
 
@@ -457,6 +462,29 @@ class OffsetEditor extends FlxState
 
 		infoText.text = 'Loaded "$name" @ ${ROLE_LABELS[currentRoleIndex]} • ${animNames.length} anims';
 		infoText.color = UITheme.ACCENT;
+	}
+
+	function restoreCharCamOffsets(char:Character):Void
+	{
+		if (char == null) return;
+		if (char.data != null && char.data.camOffsets != null) char.camOffsets = [
+			char.data.camOffsets[0] ?? 0.0,
+			char.data.camOffsets[1] ?? 0.0
+		];
+		else
+			char.camOffsets = [0.0, 0.0];
+	}
+
+	function applyCharacterTransform(char:Character, ?scaleOverride:Float):Void
+	{
+		if (char == null) return;
+
+		final s = (scaleOverride != null) ? scaleOverride : ((char.data != null && char.data.scale != null) ? char.data.scale : 1.0);
+
+		char.scale.set(1, 1);
+		char.updateHitbox();
+		char.origin.set(char.width * 0.5, char.height);
+		char.scale.set(s, s);
 	}
 
 	function loadStage(name:String):Void
@@ -496,10 +524,11 @@ class OffsetEditor extends FlxState
 	{
 		if (currentChar == '') return;
 
-		ghostChar = (previousChar != '' && previousChar != currentChar) ? previousChar : currentChar;
+		ghostChar = currentChar;
 
 		if (ghost != null)
 		{
+			if (ghostGroup != null) ghostGroup.remove(ghost, true);
 			ghost.destroy();
 			ghost = null;
 		}
@@ -513,10 +542,8 @@ class OffsetEditor extends FlxState
 
 		if (ghost.isAnimate) ghost.useRenderTexture = true;
 
-		final s = scaleStepper != null ? scaleStepper.value / 100.0 : 1;
-		ghost.scale.set(s, s);
-		ghost.updateHitbox();
-		ghost.origin.set(ghost.width / 2, ghost.height);
+		final s = scaleStepper != null ? scaleStepper.value / 100.0 : ((ghost.data != null && ghost.data.scale != null) ? ghost.data.scale : 1.0);
+		applyCharacterTransform(ghost, s);
 
 		repositionChars();
 		syncGhostPose();
@@ -529,7 +556,15 @@ class OffsetEditor extends FlxState
 	{
 		if (ghost == null) return;
 		final animToPlay = ghost.animation.exists(currentAnim) ? currentAnim : 'idle-0';
-		if (ghost.animation.exists(animToPlay)) ghost.playAnim(animToPlay, true);
+		if (ghost.animation.exists(animToPlay))
+		{
+			if (preview != null && preview.animOffsets.exists(currentAnim))
+			{
+				final off = preview.animOffsets.get(currentAnim);
+				ghost.addOffset(animToPlay, off[0], off[1]);
+			}
+			ghost.playAnim(animToPlay, true);
+		}
 	}
 
 	function refreshAnimationList():Void
@@ -584,7 +619,7 @@ class OffsetEditor extends FlxState
 		suppressCallbacks = true;
 		syncCharOffsets();
 
-		final cam = preview.camOffsets;
+		final cam = (preview.data != null && preview.data.camOffsets != null) ? preview.data.camOffsets : preview.camOffsets;
 		camXStepper.value = Std.int(cam != null && cam.length > 0 ? cam[0] : 0);
 		camYStepper.value = Std.int(cam != null && cam.length > 1 ? cam[1] : 0);
 
@@ -617,6 +652,19 @@ class OffsetEditor extends FlxState
 			data.x = ox;
 			data.y = oy;
 		}
+		if (preview.data != null && preview.data.animations != null)
+		{
+			for (a in preview.data.animations)
+			{
+				if (a != null && a.name == currentAnim)
+				{
+					a.x = ox;
+					a.y = oy;
+					break;
+				}
+			}
+		}
+
 		replaySelectedAnim();
 	}
 
@@ -642,9 +690,9 @@ class OffsetEditor extends FlxState
 		final s = scaleStepper.value / 100.0;
 		if (preview.data != null) preview.data.scale = s;
 
-		preview.scale.set(s, s);
-		preview.updateHitbox();
-		preview.origin.set(preview.width / 2, preview.height);
+		applyCharacterTransform(preview, s);
+
+		if (ghost != null) applyCharacterTransform(ghost, s);
 
 		repositionChars();
 		updtCamMarker();
@@ -654,17 +702,16 @@ class OffsetEditor extends FlxState
 	function repositionChars():Void
 	{
 		final group = roleGroup(currentRoleIndex);
+		if (group == null) return;
 
-		if (preview != null)
-		{
-			preview.x = group.x + (extraXStepper != null ? extraXStepper.value : 0);
-			preview.y = group.y + (extraYStepper != null ? extraYStepper.value : 0);
-		}
+		if (preview != null) preview.setPosition(
+			group.x + (extraXStepper != null ? extraXStepper.value : 0),
+			group.y + (extraYStepper != null ? extraYStepper.value : 0)
+		);
 		if (ghost != null && ghostGroup != null)
 		{
 			final ge = (ghost.data != null && ghost.data.extraOffsets != null) ? ghost.data.extraOffsets : [0.0, 0.0];
-			ghost.x = ghostGroup.x + (ge.length > 0 ? ge[0] : 0);
-			ghost.y = ghostGroup.y + (ge.length > 1 ? ge[1] : 0);
+			ghost.setPosition(ghostGroup.x + (ge.length > 0 ? ge[0] : 0), ghostGroup.y + (ge.length > 1 ? ge[1] : 0));
 		}
 	}
 
@@ -728,12 +775,10 @@ class OffsetEditor extends FlxState
 	{
 		if (preview == null) return FlxPoint.get(0, 0);
 		final mid = preview.getMidpoint();
-		final roleCam = roleCamOffsets[currentRoleIndex];
+		final px = mid.x + ((preview.camOffsets != null && preview.camOffsets.length > 0) ? preview.camOffsets[0] : 0.0) + roleCamOffsets[currentRoleIndex][0];
+		final py = mid.y + ((preview.camOffsets != null && preview.camOffsets.length > 1) ? preview.camOffsets[1] : 0.0) + roleCamOffsets[currentRoleIndex][1];
 		mid.put();
-		return FlxPoint.get(
-			mid.x + (preview.camOffsets != null && preview.camOffsets.length > 0 ? preview.camOffsets[0] : 0) + roleCam[0],
-			mid.y + (preview.camOffsets != null && preview.camOffsets.length > 1 ? preview.camOffsets[1] : 0) + roleCam[1]
-		);
+		return FlxPoint.get(px, py);
 	}
 
 	function updtCamMarker():Void
@@ -750,6 +795,12 @@ class OffsetEditor extends FlxState
 		if (preview == null) return;
 		preview.playAnim(currentAnim, true);
 		if (ghostFollowMode) syncGhostPose();
+	}
+
+	function mouseOverPanel():Bool
+	{
+		if (panelBg == null) return false;
+		return FlxG.mouse.viewY >= panelBg.x;
 	}
 
 	function togglePreviewMode(?forceOn:Bool):Void
@@ -821,6 +872,7 @@ class OffsetEditor extends FlxState
 				if (FlxG.keys.pressed.SHIFT)
 				{
 					ghostFollowMode = !ghostFollowMode;
+					if (ghostFollowMode) syncGhostPose();
 					infoText.text = 'Ghost Follow: ${ghostFollowMode ? "ON (live)" : "OFF (frozen)"}';
 					infoText.color = UITheme.ACCENT;
 				}
@@ -849,7 +901,7 @@ class OffsetEditor extends FlxState
 			pos.put();
 		}
 
-		if (!previewMode && !(FlxG.mouse.viewX >= panelBg.x) && !UIDropdown.isAnyOpen())
+		if (!previewMode && !mouseOverPanel() && !UIDropdown.isAnyOpen())
 		{
 			// stole this from old syobon action advance lmaoooo
 			if (FlxG.mouse.pressedRight || FlxG.mouse.pressedMiddle)
@@ -871,9 +923,9 @@ class OffsetEditor extends FlxState
 
 			if (FlxG.mouse.wheel != 0)
 			{
-				final zoomSpeed = 0.1;
+				final zoomFactor = FlxG.mouse.wheel > 0 ? 1.12 : (1 / 1.12);
 				final oldZoom = camGAME.zoom;
-				camGAME.zoom = FlxMath.bound(camGAME.zoom + (FlxG.mouse.wheel > 0 ? zoomSpeed : -zoomSpeed), 0.25, 4);
+				camGAME.zoom = FlxMath.bound(oldZoom * zoomFactor, ZOOM_MIN, ZOOM_MAX);
 
 				final mx = FlxG.mouse.viewX;
 				final my = FlxG.mouse.viewY;
@@ -881,7 +933,7 @@ class OffsetEditor extends FlxState
 				camGAME.scroll.y += my / oldZoom - my / camGAME.zoom;
 			}
 		}
-		else if (!FlxG.mouse.pressedRight) camDragging = false;
+		else if (!FlxG.mouse.pressedRight && !FlxG.mouse.pressedMiddle) camDragging = false;
 
 		// what?
 		// trace(UIDropdown.isAnyOpen());

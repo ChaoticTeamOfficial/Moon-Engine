@@ -160,11 +160,7 @@ class PauseMenu extends FlxSubState
 			{
 				new FlxTimer().start(pf.conductor.crochet / 1000, function(_)
 				{
-					if (counter == -1)
-					{
-						PlayState.instance.resumeGame();
-						close();
-					}
+					if (counter == -1) close();
 					else
 					{
 						FlxTween.cancelTweensOf(sprite.scale);
@@ -188,6 +184,12 @@ class PauseMenu extends FlxSubState
 				}, 5);
 			});
 		});
+	}
+
+	override public function close()
+	{
+		PlayState.instance.resumeGame();
+		super.close();
 	}
 
 	function slideItems(items:Array<MoonSprite>, toLeft:Bool)
