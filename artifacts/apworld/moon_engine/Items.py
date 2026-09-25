@@ -1,4 +1,4 @@
-from typing import Dict, NamedTuple
+from typing import Dict, List, NamedTuple
 from BaseClasses import ItemClassification
 
 
@@ -20,21 +20,33 @@ DIFFICULTY_NAMES = [
     "Normal",
     "Hard",
     "Erect",
-    "Nightmare",
 ]
+
+# ---- TRAPS!!!! -------
+TRAP_HEALTH_DRAIN_ID = 9100
+TRAP_AD_VIDEO_ID = 9101
+TRAP_DROP_HP_ID = 9102
 
 item_table: Dict[str, ItemData] = {
     "Extra Health": ItemData(9000, ItemClassification.useful),
     "Filler Note": ItemData(9001, ItemClassification.filler),
-    "Health Drain Trap": ItemData(9100, ItemClassification.trap),
-    "Video Trap": ItemData(9101, ItemClassification.trap),
+    "Health Drain Trap": ItemData(TRAP_HEALTH_DRAIN_ID, ItemClassification.trap),
+    "AD Video Trap": ItemData(TRAP_AD_VIDEO_ID, ItemClassification.trap),
+    "Drop HP to 1": ItemData(TRAP_DROP_HP_ID, ItemClassification.trap),
 }
+
+TRAP_NAMES: List[str] = [
+    "Health Drain Trap",
+    "AD Video Trap",
+    "Drop HP to 1",
+]
 
 item_name_to_id: Dict[str, int] = {
     "Extra Health": 9000,
     "Filler Note": 9001,
-    "Health Drain Trap": 9100,
-    "Video Trap": 9101,
+    "Health Drain Trap": TRAP_HEALTH_DRAIN_ID,
+    "AD Video Trap": TRAP_AD_VIDEO_ID,
+    "Drop HP to 1": TRAP_DROP_HP_ID,
 }
 
 for i in range(1, MAX_SONGS + 1):

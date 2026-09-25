@@ -1,5 +1,6 @@
 package moon.game;
 
+import moon.game.obj.SubtitleDisplay.SubtitleBoxType;
 import sys.FileSystem;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
@@ -13,12 +14,10 @@ import moon.toolkit.level_editor.*;
 import moon.backend.gameplay.*;
 import moon.dependency.scripting.MoonEvent;
 import moon.game.submenus.PauseMenu;
-import moon.game.events.EventRegistry;
+import moon.game.events.*;
 import moon.game.obj.Character.CharacterType;
-import moon.game.obj.SubtitleDisplay;
-import moon.dependency.MoonShaderHandler;
-import moon.game.events.ShaderFilterRegistry;
 import moon.backend.gameplay.mechanics.*;
+import moon.backend.archipelago.ArchipelagoProgress;
 
 using StringTools;
 
@@ -168,7 +167,9 @@ class PlayState extends FlxTransitionableState
 		// Paths.clearStoredMemory();
 		instance = this;
 		events = [];
+		nextEventIndex = 0;
 		isDead = false;
+		moon.backend.archipelago.ArchipelagoProgress.resetSongTrapState();
 
 		Global.registerScript("songScript", songScript);
 		songScript.load('songs/${songData.song}/${songData.mix}/script.hx');
@@ -343,6 +344,7 @@ class PlayState extends FlxTransitionableState
 		Global.scriptCall('onUpdate', [elapsed]);
 		MechanicRegister.updateAll(elapsed);
 		if (cameraShaderHandlers != null) for (handler in cameraShaderHandlers) handler.update(elapsed);
+		moon.backend.archipelago.ArchipelagoProgress.updateTraps(elapsed);
 		super.update(elapsed);
 
 		// camGAME.rotation += 0.5;
@@ -370,7 +372,7 @@ class PlayState extends FlxTransitionableState
 			openSubState(new moon.toolkit.level_editor.LevelEditorRecode());
 		}
 
-		if (MoonInput.justPressed(PAUSE)) pauseGame();
+		if (MoonInput.justPressed(PAUSE)) pauseGame(true);
 
 		if (playField.healthBar.health <= 0 && !isDead)
 		{
@@ -540,6 +542,7 @@ class PlayState extends FlxTransitionableState
 	public function endSong()
 	{
 		Global.scriptCall('onSongEnd');
+		moon.backend.archipelago.ArchipelagoProgress.resetSongTrapState();
 		final stat = playField.inputHandlers.get('p1').stats;
 
 		// accumulate for multi-song runs
@@ -600,7 +603,7 @@ class PlayState extends FlxTransitionableState
 	{
 		super.onFocusLost();
 
-		if (playField != null && MoonSettings.callSetting('Auto Pause')) pauseGame(!onEditor);
+		if (MoonSettings.callSetting('Auto Pause')) pauseGame(!onEditor);
 	}
 
 	public function pauseGame(shouldOpenMenu:Bool = true)
@@ -768,6 +771,20 @@ class PlayState extends FlxTransitionableState
 	// ---------------- ARCHIPELAGO STUFF
 	/// -traps
 
+	public function triggerDropHpTrap():Void
+	{
+		if (isDead) return;
+		final handler = playField.inputHandlers.get('p1');
+		handler.stats.health = 1;
+	}
+
+	public function triggerHealthDrain(amount:Float):Void
+	{
+		final handler = playField.inputHandlers.get('p1');
+		if (isDead || amount <= 0 || handler.stats.health - amount <= 1) return;
+		handler.stats.health -= amount;
+	}
+
 	public function triggerVideoTrap()
 	{
 		if (subState != null) subState.close();
@@ -817,7 +834,7 @@ class PlayState extends FlxTransitionableState
 		if (videos.length == 0) return;
 
 		final curVid = videos[FlxG.random.int(0, videos.length - 1)];
-		trace('[ARCHIPELAGO] AD has been chosen: $curVid', "DEBUG");
+		trace('[AP] AD has been chosen: $curVid', "DEBUG");
 
 		canPause = false;
 		Global.allowInputs = false;

@@ -1,0 +1,7 @@
+TODO Traps:
+
+Mine Notes Randomly
+Healthdrain
+Drop HP to 1
+AD Video (Programmed on client side)
+Weird Modchart/Drunk Modchart

@@ -11,6 +11,7 @@ from .Items import (
     week_unlock_name,
     difficulty_unlock_name,
     DIFFICULTY_NAMES,
+    TRAP_NAMES,
     item_name_to_id as _static_item_name_to_id,
 )
 from .Locations import (
@@ -57,6 +58,9 @@ class MoonEngineWorld(World):
         week_count = self.options.week_clear_count.value
         if not self.options.song_clear_by_week:
             week_count = 0
+            
+        if self.options.goal.value == 2 and week_count == 0:
+            self.options.goal.value = 0
 
         self._item_data = build_dynamic_items(
             song_count,
@@ -107,9 +111,10 @@ class MoonEngineWorld(World):
         start_song_indices = []
         if self.options.unlock_mode == 0:
             n_start = min(self.options.starting_song_unlocks.value, song_count)
-            start_song_indices = self.random.sample(all_song_indices, n_start)
-            for i in start_song_indices:
-                self.multiworld.push_precollected(self.create_item(song_unlock_name(i)))
+            if n_start > 0 and song_count > 0:
+                start_song_indices = self.random.sample(all_song_indices, n_start)
+                for i in start_song_indices:
+                    self.multiworld.push_precollected(self.create_item(song_unlock_name(i)))
 
         for i in all_song_indices:
             if i not in start_song_indices:
@@ -120,9 +125,10 @@ class MoonEngineWorld(World):
         start_week_indices = []
         if self.options.unlock_mode == 1 and week_count > 0:
             n_start = min(self.options.starting_week_unlocks.value, week_count)
-            start_week_indices = self.random.sample(all_week_indices, n_start)
-            for i in start_week_indices:
-                self.multiworld.push_precollected(self.create_item(week_unlock_name(i)))
+            if n_start > 0:
+                start_week_indices = self.random.sample(all_week_indices, n_start)
+                for i in start_week_indices:
+                    self.multiworld.push_precollected(self.create_item(week_unlock_name(i)))
 
         for i in all_week_indices:
             if i not in start_week_indices:
@@ -130,22 +136,33 @@ class MoonEngineWorld(World):
 
         # Difficulty unlocks
         if self.options.unlockable_difficulties:
-            room = real_location_count - len(itempool)
             for diff in DIFFICULTY_NAMES:
-                if room <= 0:
-                    break
                 itempool.append(self.create_item(difficulty_unlock_name(diff)))
-                room -= 1
-
+        trap_pct = self.options.trap_percentage.value
         while len(itempool) < real_location_count:
-            itempool.append(self.create_item("Filler Note"))
+            if trap_pct > 0 and self.random.randint(1, 100) <= trap_pct:
+                itempool.append(self.create_item(self.random.choice(TRAP_NAMES)))
+            else:
+                itempool.append(self.create_item("Filler Note"))
 
+        trap_set = set(TRAP_NAMES)
         while len(itempool) > real_location_count:
             dropped = False
             for j in range(len(itempool) - 1, -1, -1):
-                if itempool[j].name in ("Filler Note", "Extra Health"):
+                if itempool[j].name in ("Filler Note", "Extra Health") or itempool[j].name in trap_set:
                     itempool.pop(j)
                     dropped = True
+                    break
+            if dropped:
+                continue
+            for diff in reversed(DIFFICULTY_NAMES):
+                name = difficulty_unlock_name(diff)
+                for j in range(len(itempool) - 1, -1, -1):
+                    if itempool[j].name == name:
+                        itempool.pop(j)
+                        dropped = True
+                        break
+                if dropped:
                     break
             if not dropped:
                 itempool.pop()
@@ -187,7 +204,7 @@ class MoonEngineWorld(World):
                     lambda state, n=i: state.can_reach(week_clear_name(n), "Location", self.player),
                 )
         elif goal == 1:
-            needed = max(1, (song_count * self.options.goal_percent.value) // 100)
+            needed = max(1, min(song_count, (song_count * self.options.goal_percent.value) // 100))
             for i in range(1, needed + 1):
                 add_rule(
                     victory,
@@ -201,10 +218,16 @@ class MoonEngineWorld(World):
                 )
 
     def fill_slot_data(self) -> Dict:
+        week_count = self.options.week_clear_count.value if self.options.song_clear_by_week else 0
+        goal = self.options.goal.value
+
+        if goal == 2 and week_count == 0:
+            goal = 0
+
         return {
             "unlock_mode": self.options.unlock_mode.value,
             "song_clear_count": self.options.song_clear_count.value,
-            "week_clear_count": self.options.week_clear_count.value if self.options.song_clear_by_week else 0,
+            "week_clear_count": week_count,
             "starting_song_unlocks": self.options.starting_song_unlocks.value,
             "starting_week_unlocks": self.options.starting_week_unlocks.value,
             "song_clear_by_difficulty": bool(self.options.song_clear_by_difficulty),
@@ -214,7 +237,8 @@ class MoonEngineWorld(World):
             "difficulties_as_checks": bool(self.options.difficulties_as_checks),
             "unlockable_difficulties": bool(self.options.unlockable_difficulties),
             "randomize_stages": bool(self.options.randomize_stages),
-            "goal": self.options.goal.value,
+            "goal": goal,
             "goal_percent": self.options.goal_percent.value,
+            "trap_percentage": self.options.trap_percentage.value,
             "death_link": bool(self.options.death_link),
         }

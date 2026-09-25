@@ -11,9 +11,11 @@ class UnlockMode(Choice):
     option_weeks = 1
     default = 0
 
-
+# TODO: make songs and weeks an array in the yaml file.
+# in the future, the YAMLs will be generated inside the game!
 class SongClearCount(Range):
-    """How many Song Clear locations are in the multiworld."""
+    """How many Song Clear locations are in the multiworld.
+    """
     display_name = "Song Clear Locations"
     range_start = 5
     range_end = 100
@@ -21,7 +23,10 @@ class SongClearCount(Range):
 
 
 class WeekClearCount(Range):
-    """How many Week Clear locations are in the multiworld"""
+    """How many Week Clear locations are in the multiworld.
+
+    Only used when Week Clear Checks is enabled.
+    """
     display_name = "Week Clear Locations"
     range_start = 0
     range_end = 30
@@ -80,7 +85,10 @@ class RandomizeStages(Toggle):
 
 
 class Goal(Choice):
-    """What is required to complete the game."""
+    """What is required to complete the game.
+
+    All Week Clears falls back to All Song Clears when Week Clear Checks is off.
+    """
     display_name = "Goal"
     option_all_song_clears = 0
     option_percent_song_clears = 1
@@ -101,6 +109,18 @@ class DeathLinkOption(DeathLink):
     display_name = "Death Link"
 
 
+class TrapPercentage(Range):
+    """Percentage of non-progression filler slots that become traps instead of Filler Notes.
+
+    Traps: Health Drain, Drop HP to 1, AD Video.
+    0 = no traps. 100 = every filler slot is a trap.
+    """
+    display_name = "Trap Percentage"
+    range_start = 0
+    range_end = 100
+    default = 20
+
+
 @dataclass
 class MoonEngineOptions(PerGameCommonOptions):
     unlock_mode: UnlockMode
@@ -117,4 +137,5 @@ class MoonEngineOptions(PerGameCommonOptions):
     randomize_stages: RandomizeStages
     goal: Goal
     goal_percent: GoalPercent
+    trap_percentage: TrapPercentage
     death_link: DeathLinkOption

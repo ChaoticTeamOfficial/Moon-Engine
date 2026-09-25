@@ -17,6 +17,12 @@ class ArchipelagoProgress
 	// Location IDs
 	static final SONG_CLEAR_BASE:Int = 10000;
 	static final WEEK_CLEAR_BASE:Int = 20000;
+	static final TRAP_HEALTH_DRAIN:Int = 9100;
+	static final TRAP_AD_VIDEO:Int = 9101;
+	static final TRAP_DROP_HP:Int = 9102;
+	///////////////////////////////////////////////////////////////////////////////////
+	static final HEALTH_DRAIN_RATE:Float = 5;
+	static final HEALTH_DRAIN_DURATION:Float = 40.0;
 
 	/**
 	 * Sorted unique song names available in the library.
@@ -43,6 +49,16 @@ class ArchipelagoProgress
 	 */
 	static var unlockedDifficulties:Map<String, Bool> = new Map();
 
+	/**
+	 * Trap item IDs waiting to be applied during gameplay.
+	 */
+	static var pendingTraps:Array<Int> = [];
+
+	/**
+	 * Remaining seconds of active Health Drain effect.
+	 */
+	static var healthDrainRemaining:Float = 0;
+
 	static var initialized:Bool = false;
 
 	static function init():Void
@@ -57,7 +73,51 @@ class ArchipelagoProgress
 		{
 			rebuildPools();
 			drainPending();
+			autoCheckSoftlocks();
 		});
+	}
+
+	/**
+	 * How many song clear locations the seed was generated with.
+	 */
+	static function generatedSongCount():Int
+	{
+		final sd = ArchipelagoManager.slotData;
+		if (sd == null || sd.song_clear_count == null) return songPool.length;
+		final n:Int = Std.int(sd.song_clear_count);
+		return n > 0 ? n : songPool.length;
+	}
+
+	/**
+	 * How many week clear locations the seed was generated with.
+	 */
+	static function generatedWeekCount():Int
+	{
+		final sd = ArchipelagoManager.slotData;
+		if (sd == null || sd.week_clear_count == null) return 0;
+		final n:Int = Std.int(sd.week_clear_count);
+		return n > 0 ? n : 0;
+	}
+
+	/**
+	 * Playable song slots.
+	 */
+	static function effectiveSongCount():Int
+	{
+		final gen = generatedSongCount();
+		final installed = songPool.length;
+		if (gen <= 0) return installed;
+		return Std.int(Math.min(gen, installed));
+	}
+
+	/**
+	 * Playable week slots.
+	 */
+	static function effectiveWeekCount():Int
+	{
+		final gen = generatedWeekCount();
+		if (gen <= 0) return 0;
+		return Std.int(Math.min(gen, weekPool.length));
 	}
 
 	/**
@@ -82,6 +142,42 @@ class ArchipelagoProgress
 
 		weekPool = [];
 		for (id in lib.categoryOrder) if (id != "all") weekPool.push(id);
+
+		if (ArchipelagoManager.isConnected) autoCheckSoftlocks();
+	}
+
+	static function autoCheckSoftlocks():Void
+	{
+		if (!ArchipelagoManager.isConnected) return;
+
+		final genSongs = generatedSongCount();
+		final genWeeks = generatedWeekCount();
+
+		final extra:Array<Int> = [];
+
+		if (genSongs > songPool.length && songPool.length >= 0)
+		{
+			for (i in (songPool.length + 1)...(genSongs + 1))
+			{
+				final locId = songClearLocationId(i);
+				if (!ArchipelagoSave.isLocationChecked(locId)) extra.push(locId);
+			}
+		}
+
+		if (genWeeks > weekPool.length && weekPool.length >= 0)
+		{
+			for (i in (weekPool.length + 1)...(genWeeks + 1))
+			{
+				final locId = weekClearLocationId(i);
+				if (!ArchipelagoSave.isLocationChecked(locId)) extra.push(locId);
+			}
+		}
+
+		if (extra.length > 0)
+		{
+			ArchipelagoManager.checkLocations(extra);
+			trace('[AP] Auto-checked ${extra.length} unreachable location(s).', "INFO");
+		}
 	}
 
 	static function onItems(items:Array<ap.PacketTypes.NetworkItem>):Void drainPending();
@@ -113,30 +209,127 @@ class ArchipelagoProgress
 		}
 		if (itemId >= DIFFICULTY_UNLOCK_BASE && itemId < 9000)
 		{
-			final names = [
-				"Easy",
-				"Normal",
-				"Hard",
-				"Erect",
-				"Nightmare"
-			];
+			final names = ["Easy", "Normal", "Hard", "Erect"];
 			final idx = itemId - DIFFICULTY_UNLOCK_BASE;
 			if (idx >= 0 && idx < names.length) unlockedDifficulties.set(names[idx].toLowerCase(), true);
+			return;
 		}
+
+		// TODO: clean these up.
+		if (itemId == TRAP_HEALTH_DRAIN || itemId == TRAP_AD_VIDEO || itemId == TRAP_DROP_HP)
+		{
+			pendingTraps.push(itemId);
+			trace('[AP] Queued trap ${trapName(itemId)}.', "INFO");
+			tryApplyTraps();
+		}
+	}
+
+	static function trapName(id:Int):String
+	{
+		return switch (id)
+		{
+			case TRAP_HEALTH_DRAIN:
+				"Health Drain";
+			case TRAP_AD_VIDEO:
+				"AD Video";
+			case TRAP_DROP_HP:
+				"Drop HP to 1";
+			default:
+				'Trap#$id';
+		}
+	}
+
+	/**
+	 * Apply any queued traps if the player is currently in an active PlayState.
+	 */
+	static function tryApplyTraps():Void
+	{
+		final ps = moon.game.PlayState.instance;
+		if (ps == null || ps.isDead) return;
+		if (ps.playField == null) return;
+
+		while (pendingTraps.length > 0)
+		{
+			final id = pendingTraps.shift();
+			switch (id)
+			{
+				case TRAP_HEALTH_DRAIN:
+					healthDrainRemaining = Math.max(healthDrainRemaining, 0) + HEALTH_DRAIN_DURATION;
+					trace('[AP] Health Drain active for ${healthDrainRemaining}s.', "INFO");
+
+				case TRAP_DROP_HP:
+					ps.triggerDropHpTrap();
+					trace('[AP] Drop HP to 1 applied.', "INFO");
+
+				case TRAP_AD_VIDEO:
+					ps.triggerVideoTrap();
+					trace('[AP] AD Video trap triggered.', "INFO");
+					return;
+
+				default:
+			}
+		}
+	}
+
+	/**
+	 * Updates ongoing trap effects.
+	 */
+	static function updateTraps(elapsed:Float):Void
+	{
+		final ps = moon.game.PlayState.instance;
+		if (ps == null || ps.isDead || ps.paused) return;
+
+		if (pendingTraps.length > 0) tryApplyTraps();
+
+		if (healthDrainRemaining > 0)
+		{
+			healthDrainRemaining -= elapsed;
+			ps.triggerHealthDrain(HEALTH_DRAIN_RATE * elapsed);
+			if (healthDrainRemaining <= 0)
+			{
+				healthDrainRemaining = 0;
+				trace('[AP] Health Drain ended.', "INFO");
+			}
+		}
+	}
+
+	static function resetSongTrapState():Void
+	{
+		// TODO... uhh... :P
+		healthDrainRemaining = 0;
 	}
 
 	// ---- queries!!!!!!!!! ----------------------------------------------------------
 
-	static function isSongUnlocked(index:Int):Bool return unlockedSongs.exists(index) && unlockedSongs.get(index);
+	static function isSongUnlocked(index:Int):Bool
+	{
+		if (index < 1 || index > effectiveSongCount()) return false;
+		return unlockedSongs.exists(index) && unlockedSongs.get(index);
+	}
 
-	static function isWeekUnlocked(index:Int):Bool return unlockedWeeks.exists(index) && unlockedWeeks.get(index);
+	static function isWeekUnlocked(index:Int):Bool
+	{
+		if (index < 1 || index > effectiveWeekCount()) return false;
+		return unlockedWeeks.exists(index) && unlockedWeeks.get(index);
+	}
 
 	static function isDifficultyUnlocked(name:String):Bool
 	{
-		// If the option is off, everything is unlocked!
 		final sd = ArchipelagoManager.slotData;
 		if (sd == null || !sd.unlockable_difficulties) return true;
-		return unlockedDifficulties.exists(name.toLowerCase()) && unlockedDifficulties.get(name.toLowerCase());
+
+		final key = name.toLowerCase();
+		if (unlockedDifficulties.exists(key) && unlockedDifficulties.get(key)) return true;
+
+		if (!hasDiffUnlock()) return key == "hard" || key == "normal" || key == "easy";
+
+		return false;
+	}
+
+	static function hasDiffUnlock():Bool
+	{
+		for (_ in unlockedDifficulties) return true;
+		return false;
 	}
 
 	/**
@@ -178,6 +371,7 @@ class ArchipelagoProgress
 
 		for (index => _ in unlockedSongs)
 		{
+			if (!isSongUnlocked(index)) continue;
 			final name = songNameForIndex(index);
 			if (name == null) continue;
 
@@ -201,7 +395,7 @@ class ArchipelagoProgress
 		final names:Array<String> = [];
 		for (index => on in unlockedSongs)
 		{
-			if (!on) continue;
+			if (!on || !isSongUnlocked(index)) continue;
 			final name = songNameForIndex(index);
 			if (name != null) names.push(name);
 		}
@@ -217,7 +411,7 @@ class ArchipelagoProgress
 		final ids:Array<String> = [];
 		for (index => on in unlockedWeeks)
 		{
-			if (!on) continue;
+			if (!on || !isWeekUnlocked(index)) continue;
 			final id = weekIdForIndex(index);
 			if (id != null) ids.push(id);
 		}
@@ -240,14 +434,16 @@ class ArchipelagoProgress
 	static function songUnlockCount():Int
 	{
 		var n = 0;
-		for (_ in unlockedSongs) n++;
+		final max = effectiveSongCount();
+		for (index => on in unlockedSongs) if (on && index >= 1 && index <= max) n++;
 		return n;
 	}
 
 	static function weekUnlockCount():Int
 	{
 		var n = 0;
-		for (_ in unlockedWeeks) n++;
+		final max = effectiveWeekCount();
+		for (index => on in unlockedWeeks) if (on && index >= 1 && index <= max) n++;
 		return n;
 	}
 
@@ -266,12 +462,23 @@ class ArchipelagoProgress
 			return;
 		}
 
+		final gen = generatedSongCount();
+		if (index > gen)
+		{
+			trace('[AP] Song clear index ${index} exceeds generated count ${gen}, skipping.', "WARNING");
+			ArchipelagoManager.pendingClearIndex = 0;
+			ArchipelagoManager.pendingClearIsWeek = false;
+			return;
+		}
+
 		final locId = songClearLocationId(index);
 		ArchipelagoManager.checkLocation(locId);
 		trace('[AP] Checked location Song Clear ${index} (id ${locId}) for "${songName}".', "INFO");
 
 		ArchipelagoManager.pendingClearIndex = 0;
 		ArchipelagoManager.pendingClearIsWeek = false;
+
+		autoCheckSoftlocks();
 	}
 
 	/**
@@ -288,12 +495,23 @@ class ArchipelagoProgress
 			return;
 		}
 
+		final gen = generatedWeekCount();
+		if (index > gen)
+		{
+			trace('[AP] Week clear index ${index} exceeds generated count ${gen}, skipping.', "WARNING");
+			ArchipelagoManager.pendingClearIndex = 0;
+			ArchipelagoManager.pendingClearIsWeek = false;
+			return;
+		}
+
 		final locId = weekClearLocationId(index);
 		ArchipelagoManager.checkLocation(locId);
 		trace('[AP] Checked location Week Clear ${index} (id ${locId}).', "INFO");
 
 		ArchipelagoManager.pendingClearIndex = 0;
 		ArchipelagoManager.pendingClearIsWeek = false;
+
+		autoCheckSoftlocks();
 	}
 
 	static function isSongNew(index:Int):Bool return isSongUnlocked(index) && !ArchipelagoSave.isSongSeen(index);
