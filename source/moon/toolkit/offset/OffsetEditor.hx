@@ -832,7 +832,7 @@ class OffsetEditor extends FlxState
 		}
 
 		if (previewMode && MoonInput.justPressed(BACK)) togglePreviewMode(false);
-		else if (!previewMode && MoonInput.justPressed(BACK))
+		else if (!previewMode && MoonInput.justPressed(BACK) && !UIDropdown.isAnyOpen() && UIEditFocus.current == null)
 		{
 			if (FlxG.sound.music != null) FlxG.sound.music.stop();
 			FlxG.switchState(() -> new moon.menus.MainMenu());
@@ -852,7 +852,7 @@ class OffsetEditor extends FlxState
 		if (!previewMode && !(FlxG.mouse.viewX >= panelBg.x) && !UIDropdown.isAnyOpen())
 		{
 			// stole this from old syobon action advance lmaoooo
-			if (FlxG.mouse.pressedRight)
+			if (FlxG.mouse.pressedRight || FlxG.mouse.pressedMiddle)
 			{
 				if (!camDragging)
 				{

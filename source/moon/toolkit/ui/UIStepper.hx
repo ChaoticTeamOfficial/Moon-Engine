@@ -587,7 +587,7 @@ class UIStepper extends UIComponent implements ITextEditable implements IEditorC
 			measurer.active = false;
 		}
 		measurer.text = s;
-		return measurer.width;
+		return measurer?.width ?? 0;
 	}
 
 	override public function destroy():Void
