@@ -64,20 +64,23 @@
 			"name": "gameover-loop",
 			"prefix": "Death Loop",
 			"looped": false,
-			"x": 22, "y": 15
+			"x": 22,
+			"y": 15
 		},
 		{
 			"sheet": "bf-death",
 			"name": "death-confirm",
 			"prefix": "Death Confirm",
-			"x": 22, "y": 15
+			"x": 22,
+			"y": 15
 		},
 		{
 			"sheet": "bfFakeOut",
 			"name": "gameover-fakeout",
 			"prefix": "fake out death BF",
 			"animType": "symbol",
-			"x": -3, "y": -65
+			"x": -3,
+			"y": -65
 		},
 		{
 			"name": "scared",

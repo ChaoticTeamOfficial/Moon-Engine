@@ -1,86 +1,89 @@
 {
-	"type": "atlas",
+	"extraOffsets": [-125, -200],
 	"danceFrequency": 1,
 	"icon": {
 		"color": [243, 255, 110]
 	},
+	"type": "atlas",
+	"overrideAnims": ["cheer", "combo50", "combo200", "comboBreak", "scared"],
 	"animations": [
 		{
-			"name": "idle-0",
 			"prefix": "Idle",
+			"name": "idle-0",
 			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 			"animType": "framelabel"
 		},
 		{
-			"name": "idle-1",
 			"prefix": "Idle",
-			"indices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+			"name": "idle-1",
+			"indices": [
+				15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+			],
 			"animType": "framelabel"
 		},
 		{
-			"name": "singLEFT",
 			"prefix": "Left",
+			"name": "singLEFT",
 			"animType": "framelabel"
 		},
 		{
-			"name": "singDOWN",
 			"prefix": "Down",
+			"name": "singDOWN",
 			"animType": "framelabel"
 		},
 		{
-			"name": "singUP",
 			"prefix": "Up",
+			"name": "singUP",
 			"animType": "framelabel"
 		},
 		{
-			"name": "singRIGHT",
 			"prefix": "Right",
+			"name": "singRIGHT",
 			"animType": "framelabel"
 		},
 		{
+			"prefix": "Cheer",
 			"name": "cheer",
-			"prefix": "Cheer",
 			"animType": "framelabel",
-			"indices": [0,1,2,3,4,5,6,7,8,9,10,11]
+			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 		},
 		{
+			"prefix": "Cheer",
+			"finishAnim": "idle",
 			"name": "combo50",
-			"prefix": "Cheer",
-			"animType": "framelabel",
-			"finishAnim": "idle"
+			"animType": "framelabel"
 		},
 		{
-			"name": "combo200",
 			"prefix": "Cheer 200",
-			"animType": "framelabel",
-			"finishAnim": "idle"
+			"finishAnim": "idle",
+			"name": "combo200",
+			"animType": "framelabel"
 		},
 		{
-			"name": "comboBreak",
+			"finishAnim": "idle",
 			"prefix": "Crying",
+			"name": "comboBreak",
 			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-			"animType": "framelabel",
-			"finishAnim": "idle"
+			"animType": "framelabel"
 		},
 		{
-			"name": "hairBlow",
 			"prefix": "Idle (Hair blowing)",
+			"name": "hairBlow",
 			"indices": [0, 1, 2, 3],
 			"animType": "framelabel"
 		},
 		{
-			"name": "hairFall",
 			"prefix": "Hair landing",
+			"name": "hairFall",
 			"indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 			"animType": "framelabel"
 		},
 		{
-			"name": "scared",
+			"finishAnim": "idle",
 			"prefix": "Fear",
+			"name": "scared",
 			"indices": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3],
-			"animType": "framelabel",
-			"finishAnim": "idle"
+			"animType": "framelabel"
 		}
-	],
-	"overrideAnims": ["cheer", "combo50", "combo200", "comboBreak", "scared"]
+	]
 }

@@ -26,13 +26,13 @@
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [353.5, 114],
+			"position": [478.5, 314],
 			"camOffsets": [23, 7],
 			"objectBehind": "stagefront"
 		},
 		{
 			"type": "opponent",
-			"position": [78, 50],
+			"position": [178, 400],
 			"camOffsets": [148, -97],
 			"objectBehind": "stagefront"
 		},

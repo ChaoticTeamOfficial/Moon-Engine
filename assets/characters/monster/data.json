@@ -1,40 +1,50 @@
 {
-	"camOffsets": [230, -100],
+	"extraOffsets": [
+		0,
+		-285
+	],
+	"danceFrequency": 2,
 	"icon": {
-		"color": [243, 255, 110]
+		"color": [
+			243,
+			255,
+			110
+		]
 	},
-	"extraOffsets": [0, -264],
+	"camOffsets": [
+		95,
+		-178
+	],
+	"scale": 1,
 	"type": "atlas",
+	"holdDuration": 8,
+	"flipX": false,
+	"antialiasing": true,
 	"animations": [
 		{
-			"name": "idle-0",
 			"prefix": "Idle",
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"name": "idle-0"
 		},
 		{
-			"name": "singLEFT",
 			"prefix": "Left",
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"name": "singLEFT"
 		},
 		{
-			"name": "singDOWN",
 			"prefix": "Down",
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"name": "singDOWN"
 		},
 		{
-			"name": "singUP",
 			"prefix": "Up",
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"name": "singUP"
 		},
 		{
-			"name": "singRIGHT",
 			"prefix": "Right",
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"name": "singRIGHT"
 		}
-	],
-	"antialiasing": true,
-	"danceFrequency": 2,
-	"flipX": false,
-	"scale": 1,
-	"holdDuration": 8
+	]
 }

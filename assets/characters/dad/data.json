@@ -1,65 +1,57 @@
 {
-	"type": "atlas",
-	"icon": {
-		"color": [175, 102, 206]
-	},
-	"animations": [
-		{
-			"name": "idle-0",
-			"prefix": "Idle",
-			"finishAnim": "hold-idle",
-			"animType": "framelabel"
-		},
-		{
-			"name": "hold-idle",
-			"prefix": "Idle",
-			"indices": [11, 12, 0, 1],
-			"looped": true,
-			"animType": "framelabel"
-		},
-		{
-			"name": "singUP",
-			"prefix": "Up",
-			"finishAnim": "singUP-hold",
-			"animType": "framelabel"
-		},
-		{
-			"name": "singUP-hold",
-			"prefix": "Up",
-			"indices": [3, 4, 5],
-			"looped": true,
-			"animType": "framelabel"
-		},
-		{
-			"name": "singDOWN",
-			"prefix": "Down",
-			"animType": "framelabel"
-		},
-		{
-			"name": "singLEFT",
-			"prefix": "Left",
-			"animType": "framelabel"
-		},
-		{
-			"name": "singLEFT-hold",
-			"prefix": "Left",
-			"indices": [3, 4, 5],
-			"looped": true,
-			"finishAnim": "singLEFT-hold",
-			"animType": "framelabel"
-		},
-		{
-			"name": "singRIGHT",
-			"prefix": "Right",
-			"finishAnim": "singRIGHT-hold",
-			"animType": "framelabel"
-		},
-		{
-			"name": "singRIGHT-hold",
-			"prefix": "Right",
-			"looped": true,
-			"indices": [3, 4, 5],
-			"animType": "framelabel"
-		}
-	]
+  "extraOffsets": [-100, -350],
+  "type": "atlas",
+  "animations": [
+    {
+      "finishAnim": "hold-idle",
+      "prefix": "Idle",
+      "name": "idle-0"
+    },
+    {
+      "prefix": "Idle",
+      "name": "hold-idle",
+      "indices": [11, 12, 0, 1],
+      "looped": true
+    },
+    {
+      "finishAnim": "singUP-hold",
+      "prefix": "Up",
+      "name": "singUP"
+    },
+    {
+      "prefix": "Up",
+      "name": "singUP-hold",
+      "indices": [3, 4, 5],
+      "looped": true
+    },
+    {
+      "prefix": "Down",
+      "name": "singDOWN"
+    },
+    {
+      "prefix": "Left",
+      "name": "singLEFT"
+    },
+    {
+      "finishAnim": "singLEFT-hold",
+      "prefix": "Left",
+      "name": "singLEFT-hold",
+      "indices": [3, 4, 5],
+      "looped": true
+    },
+    {
+      "finishAnim": "singRIGHT-hold",
+      "prefix": "Right",
+      "name": "singRIGHT"
+    },
+    {
+      "prefix": "Right",
+      "name": "singRIGHT-hold",
+      "looped": true,
+      "indices": [3, 4, 5]
+    }
+  ],
+  "icon": {
+    "color": [175, 102, 206]
+  }
 }

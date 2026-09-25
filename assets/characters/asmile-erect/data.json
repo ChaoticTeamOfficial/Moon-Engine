@@ -1,18 +1,49 @@
 {
-	"antialiasing": true,
-	"scale": 1,
-	"flipX": false,
-	"camOffsets": [219, -120],
-	"extraOffsets": [-64, -200],
+	"extraOffsets": [-100, -200],
+	"camOffsets": [232, -295],
 	"icon": {
 		"color": [210, 210, 3]
 	},
 	"danceFrequency": 2,
+	"scale": 1,
+	"type": "sparrow",
+	"flipX": false,
+	"antialiasing": true,
 	"animations": [
-		{ "name": "idle-0", "prefix": "idle", "x": 0, "y": 0, "fps": 24 },
-		{ "name": "singLEFT", "prefix": "left", "x": 0, "y": 0, "fps": 24 },
-		{ "name": "singDOWN", "prefix": "down", "x": 0, "y": 0, "fps": 24 },
-		{ "name": "singUP", "prefix": "up", "x": 0, "y": 0, "fps": 24 },
-		{ "name": "singRIGHT", "prefix": "right", "x": 0, "y": 0, "fps": 24 }
+		{
+			"x": 0,
+			"y": 0,
+			"fps": 24,
+			"prefix": "idle",
+			"name": "idle-0"
+		},
+		{
+			"x": -11,
+			"y": -1,
+			"fps": 24,
+			"prefix": "left",
+			"name": "singLEFT"
+		},
+		{
+			"x": 3,
+			"y": -11,
+			"fps": 24,
+			"prefix": "down",
+			"name": "singDOWN"
+		},
+		{
+			"x": 0,
+			"y": 0,
+			"fps": 24,
+			"prefix": "up",
+			"name": "singUP"
+		},
+		{
+			"x": 0,
+			"y": 0,
+			"fps": 24,
+			"prefix": "right",
+			"name": "singRIGHT"
+		}
 	]
 }

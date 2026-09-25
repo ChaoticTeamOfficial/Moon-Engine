@@ -1,156 +1,156 @@
 {
-	"camOffsets": [-64, -196],
-	"extraOffsets": [96, -120],
+	"extraOffsets": [-225, -55],
+	"danceFrequency": 2,
 	"icon": {
 		"color": [115, 94, 176]
 	},
+	"camOffsets": [-469, -430],
+	"gameoverColorScheme": "0xFF4924FF",
+	"scale": 1,
 	"type": "atlas",
+	"holdDuration": 8,
+	"flipX": false,
+	"antialiasing": true,
+	"overrideAnims": [],
 	"animations": [
 		{
-			"name": "idle-0",
-			"prefix": "Idle",
-			"fps": 24,
+			"finishAnim": null,
 			"x": -100,
 			"y": 17,
+			"fps": 24,
+			"prefix": "Idle",
 			"looped": false,
-			"finishAnim": null
+			"name": "idle-0"
 		},
 		{
-			"name": "singLEFT",
-			"prefix": "Pose Left",
-			"finishAnim": "singLEFT-hold",
-			"fps": 24,
 			"x": -52,
+			"finishAnim": "singLEFT-hold",
 			"y": 19,
-			"looped": false
+			"fps": 24,
+			"prefix": "Pose Left",
+			"looped": false,
+			"name": "singLEFT"
 		},
 		{
-			"name": "singLEFT-hold",
-			"prefix": "Left Flame Loop",
-			"fps": 24,
-			"looped": true,
+			"finishAnim": null,
 			"x": -75,
 			"y": 19,
-			"finishAnim": null
+			"fps": 24,
+			"prefix": "Left Flame Loop",
+			"name": "singLEFT-hold",
+			"looped": true
 		},
 		{
-			"name": "singDOWN",
-			"prefix": "Pose Down",
-			"finishAnim": "singDOWN-hold",
-			"fps": 24,
 			"x": -90,
+			"finishAnim": "singDOWN-hold",
 			"y": -43,
-			"looped": false
+			"fps": 24,
+			"prefix": "Pose Down",
+			"looped": false,
+			"name": "singDOWN"
 		},
 		{
-			"name": "singDOWN-hold",
-			"prefix": "Down Flame Loop",
-			"fps": 24,
-			"looped": true,
+			"finishAnim": null,
 			"x": -96.5,
 			"y": -43,
-			"finishAnim": null
+			"fps": 24,
+			"prefix": "Down Flame Loop",
+			"name": "singDOWN-hold",
+			"looped": true
 		},
 		{
-			"name": "singUP",
-			"prefix": "Pose Up",
-			"finishAnim": "singUP-hold",
-			"fps": 24,
 			"x": -84,
+			"finishAnim": "singUP-hold",
 			"y": 87,
-			"looped": false
+			"fps": 24,
+			"prefix": "Pose Up",
+			"looped": false,
+			"name": "singUP"
 		},
 		{
-			"name": "singUP-hold",
-			"prefix": "Up Flame Loop",
-			"fps": 24,
-			"looped": true,
+			"finishAnim": null,
 			"x": -101,
 			"y": 80.5,
-			"finishAnim": null
+			"fps": 24,
+			"prefix": "Up Flame Loop",
+			"name": "singUP-hold",
+			"looped": true
 		},
 		{
-			"name": "singRIGHT",
-			"prefix": "Pose Right",
-			"finishAnim": "singRIGHT-hold",
-			"fps": 24,
 			"x": -93,
+			"finishAnim": "singRIGHT-hold",
 			"y": 23,
-			"looped": false
+			"fps": 24,
+			"prefix": "Pose Right",
+			"looped": false,
+			"name": "singRIGHT"
 		},
 		{
-			"name": "singRIGHT-hold",
-			"prefix": "Right Flame Loop",
-			"fps": 24,
-			"looped": true,
+			"finishAnim": null,
 			"x": -100,
 			"y": 23,
-			"finishAnim": null
+			"fps": 24,
+			"prefix": "Right Flame Loop",
+			"name": "singRIGHT-hold",
+			"looped": true
 		},
 		{
-			"name": "laugh",
-			"prefix": "Laugh",
-			"fps": 24,
+			"finishAnim": null,
 			"x": -100,
 			"y": 14,
+			"fps": 24,
+			"prefix": "Laugh",
 			"looped": false,
-			"finishAnim": null
+			"name": "laugh"
 		},
 		{
-			"name": "laughCutscene",
+			"finishAnim": null,
+			"x": -100,
+			"y": 14,
+			"fps": 24,
 			"prefix": "Laugh",
+			"looped": false,
+			"name": "laughCutscene",
 			"indices": [
 				1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3,
 				4, 5, 6, 1, 2, 3, 4, 5, 6
-			],
-			"fps": 24,
-			"x": -100,
-			"y": 14,
-			"looped": false,
-			"finishAnim": null
+			]
 		},
 		{
-			"name": "lightCan",
-			"prefix": "Light Can",
-			"fps": 24,
+			"finishAnim": null,
 			"x": -113,
 			"y": -3,
+			"fps": 24,
+			"prefix": "Light Can",
 			"looped": false,
-			"finishAnim": null
+			"name": "lightCan"
 		},
 		{
-			"name": "kickCan",
-			"prefix": "Kick Up",
-			"fps": 24,
+			"finishAnim": null,
 			"x": 0,
 			"y": 27,
+			"fps": 24,
+			"prefix": "Kick Up",
 			"looped": false,
-			"finishAnim": null
+			"name": "kickCan"
 		},
 		{
-			"name": "kneeCan",
-			"prefix": "Knee Forward",
-			"fps": 24,
+			"finishAnim": null,
 			"x": -89,
 			"y": -3,
+			"fps": 24,
+			"prefix": "Knee Forward",
 			"looped": false,
-			"finishAnim": null
+			"name": "kneeCan"
 		},
 		{
-			"name": "pissed",
-			"prefix": "Gets Pissed",
-			"fps": 24,
+			"finishAnim": null,
 			"x": -99,
 			"y": 17,
+			"fps": 24,
+			"prefix": "Gets Pissed",
 			"looped": false,
-			"finishAnim": null
+			"name": "pissed"
 		}
-	],
-	"antialiasing": true,
-	"danceFrequency": 2,
-	"flipX": false,
-	"scale": 1,
-	"holdDuration": 8,
-	"gameoverColorScheme": "0xFF4924FF",
-	"overrideAnims": []
+	]
 }
