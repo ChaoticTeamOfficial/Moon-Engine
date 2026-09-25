@@ -180,9 +180,7 @@ class MoonUtils
 		if (piece.offset != null) sprite.offset.set(piece.offset.x, piece.offset.y);
 
 		if (piece.extraOffset != null) sprite.extraOffset.set(piece.extraOffset.x, piece.extraOffset.y);
-
-		// TODO: this doesn't work.
-		if (piece.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(piece.blend);
+		if (piece.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(piece.blend.toLowerCase());
 
 		sprite.updateHitbox();
 	}

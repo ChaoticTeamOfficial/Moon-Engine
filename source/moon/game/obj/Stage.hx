@@ -168,8 +168,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				sprite.flipX = objData?.flipX ?? false;
 				sprite.flipY = objData?.flipY ?? false;
 
-				// TODO: this doesn't work?
-				if (objData.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(objData.blend.toUpperCase());
+				if (objData.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(objData.blend.toLowerCase());
 
 				if (objData.animations != null && objData.animations.length > 0) sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
 
