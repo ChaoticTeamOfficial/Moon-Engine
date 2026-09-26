@@ -140,6 +140,7 @@ class PauseMenu extends FlxSubState
 		if (!MoonSettings.callSetting('Pause Countdown'))
 		{
 			close();
+			PlayState.instance.resumeGame();
 			return;
 		}
 
@@ -160,7 +161,11 @@ class PauseMenu extends FlxSubState
 			{
 				new FlxTimer().start(pf.conductor.crochet / 1000, function(_)
 				{
-					if (counter == -1) close();
+					if (counter == -1)
+					{
+						PlayState.instance.resumeGame();
+						close();
+					}
 					else
 					{
 						FlxTween.cancelTweensOf(sprite.scale);
@@ -188,7 +193,6 @@ class PauseMenu extends FlxSubState
 
 	override public function close()
 	{
-		PlayState.instance.resumeGame();
 		super.close();
 	}
 
