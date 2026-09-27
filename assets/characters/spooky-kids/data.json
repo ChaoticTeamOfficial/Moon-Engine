@@ -1,0 +1,77 @@
+{
+	"type": "sparrow",
+	"overrideAnims": [
+		"cheer"
+	],
+	"danceFrequency": 1,
+	"animations": [
+		{
+			"prefix": "spooky dance idle0",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			],
+			"name": "idle-0"
+		},
+		{
+			"x": -10,
+			"y": 0,
+			"prefix": "spooky dance idle0",
+			"name": "idle-1",
+			"indices": [
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			]
+		},
+		{
+			"x": 120,
+			"prefix": "note sing left",
+			"y": -15,
+			"name": "singLEFT"
+		},
+		{
+			"x": -50,
+			"prefix": "spooky DOWN note",
+			"y": -150,
+			"name": "singDOWN"
+		},
+		{
+			"x": -30,
+			"prefix": "spooky UP NOTE",
+			"y": 26,
+			"name": "singUP"
+		},
+		{
+			"x": -129,
+			"prefix": "spooky sing right",
+			"y": -15,
+			"name": "singRIGHT"
+		},
+		{
+			"finishAnim": "idle-0",
+			"x": 44,
+			"y": 30,
+			"prefix": "Spookiez YEAH cheer",
+			"name": "cheer"
+		}
+	],
+	"icon": {
+		"color": [
+			213,
+			126,
+			0
+		]
+	}
+}

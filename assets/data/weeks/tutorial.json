@@ -1,0 +1,9 @@
+{
+	"displayName": "Tutorial",
+	"description": "TODO",
+	"tracks": ["tutorial"],
+	"color": [165, 0, 77],
+	"mainMix": "bf",
+	"order": 0,
+	"beatAchievement": "beatTutorial"
+}

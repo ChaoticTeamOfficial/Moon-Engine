@@ -58,18 +58,20 @@
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [460, 450],
+			"position": [640, 230],
 			"objectBehind": "bgLight"
 		},
 		{
 			"type": "opponent",
-			"position": [182, 495],
-			"objectBehind": "bgLight"
+			"position": [182, 245],
+			"objectBehind": "bgLight",
+			"camOffsets": [220, -90]
 		},
 		{
 			"type": "player",
-			"position": [1050, 505],
-			"objectBehind": "bgLight"
+			"position": [1050, 305],
+			"objectBehind": "bgLight",
+			"camOffsets": [-220, -90]
 		}
 	]
 }

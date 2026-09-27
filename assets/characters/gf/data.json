@@ -2,7 +2,7 @@
 	"extraOffsets": [-125, -200],
 	"danceFrequency": 1,
 	"icon": {
-		"color": [243, 255, 110]
+		"color": [165, 0, 77]
 	},
 	"type": "atlas",
 	"overrideAnims": ["cheer", "combo50", "combo200", "comboBreak", "scared"],
@@ -83,7 +83,8 @@
 			"prefix": "Fear",
 			"name": "scared",
 			"indices": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3],
-			"animType": "framelabel"
+			"animType": "framelabel",
+			"finishAnim": "idle"
 		}
 	]
 }

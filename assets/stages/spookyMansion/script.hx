@@ -13,18 +13,10 @@ import Shortcuts;
 
 var lightningStrikeBeat:Int = 0;
 var lightningStrikeOffset:Int = 8;
-var darkShaders:Array<SilhouetteGlowShader> = [];
 
 function onPostCreate()
 {
 	for (snd in ["thunder_1", "thunder_2"]) FlxG.sound.cache(Paths.sound('stages/spookyMansion-erect/' + snd + '.ogg', 'sounds'));
-
-	for (ye in [Shortcuts.getPlayer(), Shortcuts.getOpponent(), Shortcuts.getSpectator()])
-	{
-		var bweh = new SilhouetteGlowShader();
-		bweh.attachedSprite = ye;
-		darkShaders.push(bweh);
-	}
 }
 
 function onBeat(beat)
@@ -45,30 +37,11 @@ function doLightningStrike(playSound:Bool, beat:Int)
 	lightningStrikeBeat = beat;
 	lightningStrikeOffset = FlxG.random.int(8, 24);
 
-	background.getObject('stairsLight').alpha = background.getObject('bgLight').alpha = 1;
-
-	for (s in darkShaders) s.brightness = 1;
-
-	new FlxTimer().start(0.06, _ ->
-	{
-		background.getObject('stairsLight').alpha = background.getObject('bgLight').alpha = 0;
-		for (s in darkShaders) s.brightness = 0;
-	});
-
-	new FlxTimer().start(0.12, _ ->
-	{
-		background.getObject('stairsLight').alpha = background.getObject('bgLight').alpha = 1;
-		for (s in darkShaders) s.brightness = 1;
-
-		for (s in darkShaders) FlxTween.tween(s, {
-			brightness: 0
-		}, 1.5);
-
-		for (bgEl in [
-			background.getObject('stairsLight'),
-			background.getObject('bgLight')
-		]) FlxTween.tween(bgEl, {
-			alpha: 0
-		}, 1.5);
-	});
+	background.getObject('halloween_bg').playAnim("lightning", true);
+	
+	if (Shortcuts.getPlayer() != null)
+		Shortcuts.getPlayer().playAnim('scared', true);
+	  
+	if (Shortcuts.getSpectator() != null)
+		Shortcuts.getSpectator().playAnim('scared', true);
 }

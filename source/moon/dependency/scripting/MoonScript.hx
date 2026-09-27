@@ -40,7 +40,8 @@ class MoonScript
 		"RainShader" => moon.hardcoded_shaders.RainShader,
 		"ShaderFilter" => openfl.filters.ShaderFilter,
 		"WiggleEffect" => moon.hardcoded_shaders.WiggleEffect,
-		"ShaderFilterRegistry" => moon.game.events.ShaderFilterRegistry
+		"ShaderFilterRegistry" => moon.game.events.ShaderFilterRegistry,
+		"SilhouetteGlowShader" => moon.hardcoded_shaders.SilhouetteGlowShader
 	];
 
 	public function new()

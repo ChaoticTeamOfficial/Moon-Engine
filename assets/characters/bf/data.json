@@ -84,8 +84,9 @@
 		},
 		{
 			"name": "scared",
-			"prefix": "Scared"
+			"prefix": "Scared",
+			"finishAnim": "idle"
 		}
 	],
-	"overrideAnims": ["hey", "cheer"]
+	"overrideAnims": ["hey", "cheer", "scared"]
 }

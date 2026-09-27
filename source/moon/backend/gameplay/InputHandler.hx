@@ -3,6 +3,7 @@ package moon.backend.gameplay;
 import moon.backend.gameplay.modifiers.Modifiers.ModifierIds;
 import moon.backend.gameplay.modifiers.ModifierManager;
 import moon.backend.gameplay.Timings.Judgement;
+import moon.backend.gameplay.Timings.AccuracySystem;
 import moon.game.obj.Character;
 import moon.game.obj.notes.Note.NoteState;
 import moon.game.obj.notes.*;
@@ -288,7 +289,9 @@ class InputHandler
 
 		if (note.state == TOO_LATE)
 		{
-			stats.accuracyCount -= Timings.get(MISS).accuracyCount;
+			stats.accuracyCount -= Timings.getAccuracyWeight(MISS);
+
+			stats.totalNotes = Std.int(Math.max(0, stats.totalNotes - 1));
 			stats.score -= Timings.get(MISS).score;
 			stats.health -= Timings.get(MISS).healthGain;
 			stats.misses = Std.int(Math.max(0, stats.misses - 1));
@@ -298,8 +301,7 @@ class InputHandler
 		forcedJudgements.remove(dir);
 
 		onHit(note, dir, judgement, false);
-		stats.totalNotes++;
-		stats.accuracyCount += Timings.get(judgement).accuracyCount;
+		applyAccuracy(judgement, note.time - inputTime);
 	}
 
 	private function processCPUInputs():Void
@@ -312,7 +314,12 @@ class InputHandler
 			);
 
 			// then call onhit
-			if (possibleNotes.length > 0) onHit(possibleNotes[0], i, SICK, true);
+			if (possibleNotes.length > 0)
+			{
+				final note = possibleNotes[0];
+				onHit(note, i, SICK, true);
+				applyAccuracy(SICK, 0);
+			}
 		}
 	}
 
@@ -349,8 +356,7 @@ class InputHandler
 						});
 
 						onHit(note, i, timing, false);
-						stats.totalNotes++;
-						stats.accuracyCount += Timings.get(timing).accuracyCount;
+						applyAccuracy(timing, note.time - conductor.time);
 					}
 				}
 				else
@@ -424,7 +430,6 @@ class InputHandler
 		stats.score += (!isSustain) ? Timings.get(timing).score : 2;
 		stats.combo++;
 		strumline.members[note.direction].onNoteHit(note, timing, isSustain);
-		stats.updtAccuracy();
 		// trace(stats.judgementsCounter, "DEBUG");
 
 		// even though this is here, notetypes can play a specific
@@ -453,13 +458,13 @@ class InputHandler
 		}
 
 		stats.isGold = false;
-		stats.accuracyCount += Timings.get(MISS).accuracyCount;
 		stats.score += Timings.get(MISS).score;
 		stats.health += Timings.get(MISS).healthGain;
 		stats.misses++;
 		stats.combo = 0;
 		stats.noSustainCombo = 0;
-		stats.updtAccuracy();
+
+		applyAccuracy(MISS, (note != null) ? (note.time - conductor.time) : Timings.get(MISS).maxMs);
 
 		onNoteMiss.dispatch(note);
 	}
@@ -551,5 +556,13 @@ class InputHandler
 		for (jt in Timings.values) if (timeDifference <= Timings.get(jt).maxMs) return jt;
 
 		return null;
+	}
+
+	function applyAccuracy(timing:Judgement, msOffset:Float = 0):Void
+	{
+		stats.accuracyCount += Timings.getAccuracyWeight(timing);
+
+		stats.totalNotes++;
+		stats.updtAccuracy();
 	}
 }

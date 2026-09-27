@@ -1,18 +1,9 @@
 {
-	"players": [
-		"bf"
-	],
-	"spectators": [
-		"gf"
-	],
+	"players": ["bf"],
+	"spectators": ["gf"],
 	"generatedBy": "Friday Night Funkin' - v0.8.1",
-	"opponents": [
-		"spooky"
-	],
-	"lanes": [
-		"opponent",
-		"p1"
-	],
+	"opponents": ["spooky-kids"],
+	"lanes": ["opponent", "p1"],
 	"artist": "Kawai Sprite",
 	"hasCountdown": {
 		"easy": true,
@@ -25,27 +16,21 @@
 		"normal": null
 	},
 	"version": "2.2.4",
-	"preview": [
-		0,
-		150000
-	],
+	"preview": [0, 150000],
 	"scrollSpd": {
 		"easy": 2.3,
 		"hard": 2.6,
 		"normal": 2.4
 	},
 	"charter": "ninjamuffin99 + MtH + Spazkid",
-	"timeSignature": [
-		4,
-		4
-	],
+	"timeSignature": [4, 4],
 	"healthMultiplier": {
 		"easy": 1,
 		"hard": 1,
 		"normal": 1
 	},
 	"displayName": "Spookeez",
-	"stage": "spookyMansion",
+	"stage": "spookyMansion-erect",
 	"noteskin": {
 		"easy": "v-slice",
 		"hard": "v-slice",
