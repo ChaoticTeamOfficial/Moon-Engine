@@ -193,6 +193,7 @@ class Character extends MoonSprite
 				this.frames = Paths.getPackerAtlas(sheetKey, 'characters');
 			case NONE:
 				this.loadGraphic(Paths.image(sheetKey, 'characters'), true, data?.frameWidth ?? 0, data?.frameHeight ?? 0);
+			case SOLID: // unsupported...
 			case ATLAS:
 				// TODO: quality configs?
 				this.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('characters/$sheetKey'), {

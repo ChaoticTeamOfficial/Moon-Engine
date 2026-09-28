@@ -1,0 +1,111 @@
+{
+	"id": "ughCutscene",
+	"skippable": true,
+	"canPause": false,
+	"actors": [
+		{
+			"character": "player",
+			"bindExisting": true
+		},
+		{
+			"character": "opponent",
+			"bindExisting": true
+		}
+	],
+	"actions": [
+		{
+			"type": "playsound",
+			"parallel": true,
+			"values": {
+				"id": "cutMusic",
+				"path": "cutscenes/week7/DISTORTO.ogg",
+				"from": "music",
+				"volume": 0
+			}
+		},
+		{
+			"type": "fadesound",
+			"parallel": true,
+			"values": { "id": "cutMusic", "from": 0, "to": 0.7 }
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"values": { "anim": "what do we got here-hold", "force": true },
+			"parallel": true
+		},
+		{
+			"type": "camera",
+			"target": "opponent",
+			"duration": 3,
+			"parallel": true,
+			"ease": "expoOut"
+		},
+		{ "type": "wait", "duration": 0.6 },
+		{
+			"type": "playsound",
+			"parallel": true,
+			"values": { "path": "cutscenes/week7/wellWellWell.ogg" }
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"duration": 2.3,
+			"values": { "anim": "what do we got here", "force": true }
+		},
+		{
+			"type": "camera",
+			"target": "player",
+			"duration": 3,
+			"ease": "expoOut",
+			"parallel": true
+		},
+		{ "type": "wait", "duration": 1.8 },
+		{
+			"type": "playsound",
+			"parallel": true,
+			"values": { "path": "cutscenes/week7/bfBeep.ogg" }
+		},
+		{
+			"type": "playAnim",
+			"target": "player",
+			"duration": 0.6,
+			"values": { "anim": "singUP", "force": true }
+		},
+		{
+			"type": "playAnim",
+			"target": "player",
+			"duration": 1,
+			"values": { "anim": "idle-0", "force": true }
+		},
+		{
+			"type": "camera",
+			"target": "opponent",
+			"duration": 3,
+			"ease": "expoOut",
+			"parallel": true
+		},
+		{
+			"type": "playsound",
+			"parallel": true,
+			"values": { "path": "cutscenes/week7/killYou.ogg" }
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"duration": 4.7,
+			"values": { "anim": "we should just kill you", "force": true }
+		},
+		{
+			"type": "fadesound",
+			"duration": 1.4,
+			"values": { "id": "cutMusic", "from": 1, "to": 0 }
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"parallel": true,
+			"values": { "anim": "idle-0", "force": true }
+		}
+	]
+}

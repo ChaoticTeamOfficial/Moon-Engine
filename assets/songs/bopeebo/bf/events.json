@@ -7,7 +7,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -29,7 +29,7 @@
 		"time": 4200,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -44,7 +44,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -66,7 +66,7 @@
 		"time": 9000,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -81,7 +81,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -103,7 +103,7 @@
 		"time": 13800,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -118,7 +118,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -140,7 +140,7 @@
 		"time": 18600,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -155,7 +155,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -177,7 +177,7 @@
 		"time": 23400,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -192,7 +192,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -214,7 +214,7 @@
 		"time": 28200,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -227,7 +227,7 @@
 		"time": 28500,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -242,7 +242,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -264,7 +264,7 @@
 		"time": 33000,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -279,7 +279,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -301,7 +301,7 @@
 		"time": 37800,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -316,7 +316,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -338,7 +338,7 @@
 		"time": 42600,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -353,7 +353,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -377,7 +377,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -399,7 +399,7 @@
 		"time": 52200,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -414,7 +414,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -436,7 +436,7 @@
 		"time": 57000,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -451,7 +451,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -473,7 +473,7 @@
 		"time": 61800,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -488,7 +488,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -510,7 +510,7 @@
 		"time": 66600,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -523,7 +523,7 @@
 		"time": 66900,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -538,7 +538,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -560,7 +560,7 @@
 		"time": 71400,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",
@@ -575,7 +575,7 @@
 			"x": 0,
 			"y": 0,
 			"duration": 26,
-			"character": "player",
+			"character": "opponent",
 			"ease": "expoOut"
 		}
 	},
@@ -597,7 +597,7 @@
 		"time": 76200,
 		"values": {
 			"reversed": false,
-			"target": "spectator",
+			"target": "player",
 			"force": true,
 			"frame": 0,
 			"anim": "hey",

@@ -153,9 +153,21 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						);
 					case ATLAS:
 						sprite.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('stages/$assetPath'));
+					case SOLID:
+						sprite.makeGraphic(
+							objData?.frameWidth ?? 1,
+							objData?.frameHeight ?? 1,
+							FlxColor.fromString(objData?.color),
+							true,
+							'stage-solid-${stg}-${name}'
+						);
 				}
 
-				AnimationUtils.mergeExtraSheets(sprite, objData.animations, stg, 'stages', objType);
+				if (objType != SOLID)
+				{
+					AnimationUtils.mergeExtraSheets(sprite, objData.animations, stg, 'stages', objType);
+					if (objData.color != null) sprite.color = FlxColor.fromString(objData?.color);
+				}
 
 				if (objData.scale != null) sprite.scale.set(objData.scale[0], objData.scale[1]);
 				sprite.updateHitbox();
@@ -164,13 +176,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 				sprite.angle = objData?.angle ?? 0;
 				sprite.alpha = objData?.alpha ?? 1;
-				sprite.antialiasing = objData?.antialiasing ?? true;
+				sprite.antialiasing = objData?.antialiasing ?? (objType != SOLID);
 				sprite.flipX = objData?.flipX ?? false;
 				sprite.flipY = objData?.flipY ?? false;
-
 				if (objData.blend != null) @:privateAccess sprite.blend = BlendMode.fromString(objData.blend.toLowerCase());
 
-				if (objData.animations != null && objData.animations.length > 0) sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
+				if (
+					objType != SOLID
+					&& objData.animations != null
+					&& objData.animations.length > 0
+				) sprite.idleAnims = sprite.loadAnimations(objData.animations, objType);
 
 				if (objData.startAnim != null) sprite.playAnim(objData.startAnim);
 
@@ -347,12 +362,12 @@ typedef StageJSONStructure =
 
 typedef StageObject =
 {
-	// TODO: ADD A COLOR FIELD
-	// and document too...
+	// TODO: document...
 	var name:String;
 	var position:Array<Float>;
 	var ?id:String;
 	var ?type:AtlasType;
+	var ?color:String;
 	var ?frameWidth:Int;
 	var ?frameHeight:Int;
 	var ?scale:Array<Float>;

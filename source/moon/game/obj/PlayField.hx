@@ -84,7 +84,7 @@ class PlayField extends FlxGroup
 
 		// < -- SONG SETUP -- >//
 		chart = new Chart(song, difficulty, mix);
-	
+
 		uiNoteskin = NoteskinData.get(chart?.content?.meta?.noteskin ?? 'v-slice');
 		uiSkin = UISkinData.fromNoteskin(uiNoteskin);
 
@@ -178,7 +178,6 @@ class PlayField extends FlxGroup
 		setModifiers();
 
 		conductor.time = (chart.content.meta.hasCountdown) ? -(conductor.crochet * 5) : -(conductor.crochet * 1);
-		inCountdown = true;
 	}
 
 	function setModifiers()
@@ -206,8 +205,9 @@ class PlayField extends FlxGroup
 		// Set each input handler's notes.
 		for (handler in inputHandlers.iterator()) handler.thisNotes = noteSpawner.notes;
 	}
-	
+
 	var statsDistance:Float = 0;
+
 	public function settingsUpdate()
 	{
 		final downscroll = MoonSettings.callSetting('Downscroll');
@@ -235,7 +235,7 @@ class PlayField extends FlxGroup
 
 		noteSpawner.update(0);
 		healthBar.update(0);
-		
+
 		statsDistance = uiSkin?.healthBar?.statsDistance ?? 0;
 		healthBar.y = (downscroll) ? 64 + statsDistance : FlxG.height - 78 - statsDistance;
 		healthBar.updateBarPos(true);

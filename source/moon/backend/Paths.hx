@@ -451,6 +451,11 @@ enum abstract AtlasType(String)
 	 * Adobe animate texture atlases, adressed by symbols or frame-labels.
 	 */
 	var ATLAS = 'atlas';
+
+	/**
+	 * Just a solid color sprite. Used for stages mainly.
+	 */
+	var SOLID = 'solid';
 }
 
 /** 

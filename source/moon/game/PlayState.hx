@@ -266,18 +266,6 @@ class PlayState extends FlxTransitionableState
 
 		Countdown.init(conductor, playField);
 
-		if (chartMeta.hasCountdown)
-		{
-			// playField.healthBar.visible = false;
-			Countdown.perform();
-
-			Countdown.onStart.addOnce(() ->
-			{
-				playField.healthBar.performTransition();
-				playField.healthBar.visible = true;
-			});
-		}
-
 		// call on post create for scripts
 		Global.scriptSet('game', instance);
 		Global.scriptCall('onPostStageCreate');
@@ -327,11 +315,36 @@ class PlayState extends FlxTransitionableState
 		MoonSettings.restartPending = false;
 
 		setEvents();
+
+		final cut = Cutscene.get('songs/${songData.song}/${songData.mix}/songCutscene');
+		if (cut != null)
+		{
+			final player = new CutscenePlayer(cut, this);
+			add(player);
+			player.onComplete.add(() -> {
+				// trace('AWAWSAW');
+			});
+			player.start();
+		}
+		else
+			startCountdown();
+
 		Global.scriptCall('onPostCreate');
 
 		// make sure we clean everything unused up
 		// AssetManager.clearUnused();
 		// wait shit it cleans the gameover stuff lol
+	}
+
+	public function startCountdown()
+	{
+		playField.inCutscene = false;
+		playField.inCountdown = true;
+		if (Shortcuts.getChart().meta.hasCountdown)
+		{
+			// playField.healthBar.visible = false;
+			Countdown.perform();
+		}
 	}
 
 	public function activeTweens(isActive:Bool)
@@ -445,7 +458,6 @@ class PlayState extends FlxTransitionableState
 		if (FlxG.keys.justPressed.F5)
 		{
 			Global.clearScriptList();
-			AssetManager.clearUnused();
 			Countdown.onStart.removeAll();
 			FlxG.resetState();
 		}
@@ -472,7 +484,7 @@ class PlayState extends FlxTransitionableState
 	public var camRot:FlxTween;
 	public var camZoom:FlxTween;
 
-	public function setCameraFocus(char:String, ?offsets:Array<Int>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
+	public function setCameraFocus(char:String, ?offsets:Array<Float>, ?duration:Float = 2, ?options:Null<TweenOptions>, ?isInstant:Bool = false)
 	{
 		TweenUtils.cancelTwn(camMov);
 		final charPos = getCamPos(char);

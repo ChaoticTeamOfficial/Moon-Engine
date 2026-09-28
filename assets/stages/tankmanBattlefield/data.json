@@ -1,100 +1,248 @@
 {
 	"camSettings": {
 		"zoom": 0.9,
-		"startX": 751.5,
-		"startY": 300
+		"startX": 616,
+		"startY": 532
 	},
 	"objects": [
 		{
-			"name": "crowd",
-			"position": [100, 269],
-			"scroll": [0.9, 0.9],
+			"name": "bgSolid",
+			"type": "solid",
+			"color": "#E3A26D",
+			"position": [-500, -1000],
+			"scale": [2400, 2000],
+			"scroll": [0, 0]
+		},
+		{
+			"name": "tankSky",
+			"position": [-1000, -400],
+			"scale": [3000, 1],
+			"scroll": [0, 0]
+		},
+		{
+			"name": "mountains2",
+			"id": "mountains",
+			"position": [-500, -35],
+			"scale": [1.2, 1.2],
+			"scroll": [0.2, 0.2]
+		},
+		{
+			"name": "tankBuildings",
+			"id": "buildings",
+			"position": [-260, -35],
+			"scale": [1.1, 1.1],
+			"scroll": [0.3, 0.3]
+		},
+		{
+			"name": "cityruins2",
+			"id": "ruins",
+			"position": [-200, 150],
+			"scale": [1.1, 1.1],
+			"scroll": [0.35, 0.35]
+		},
+		{
+			"name": "tankClouds",
+			"id": "clouds2",
+			"position": [0, 0],
+			"scale": [1, 1],
+			"scroll": [0.4, 0.4],
+			"alpha": 0
+		},
+		{
+			"name": "smokeLeft",
+			"position": [-380, -40],
+			"scale": [1, 1],
+			"scroll": [0.4, 0.4],
 			"type": "sparrow",
 			"animations": [
 				{
-					"name": "idle",
-					"prefix": "idle0",
-					"fps": 12,
-					"looped": true,
-					"x": 0,
-					"y": 0
+					"name": "smokeLeft",
+					"prefix": "SmokeBlurLeft",
+					"looped": true
 				}
 			],
-			"startAnim": "idle",
-			"animBehavior": "once",
-			"angle": 0
+			"startAnim": "smokeLeft"
 		},
 		{
-			"name": "brightLightSmall",
-			"position": [967, -103],
+			"name": "smokeRight",
+			"position": [1050, -35],
 			"scale": [1, 1],
-			"scroll": [1.2, 1.2],
-			"angle": 0
+			"scroll": [0.4, 0.4],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "smokeRight",
+					"prefix": "SmokeRight",
+					"looped": true
+				}
+			],
+			"startAnim": "smokeRight"
 		},
 		{
-			"name": "bg",
-			"position": [-765, -247],
+			"name": "tankWatchtower",
+			"id": "watchtower",
+			"position": [-35, 110],
+			"scale": [0.85, 0.85],
+			"scroll": [0.5, 0.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "watchtower gradient color"
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tankRolling",
+			"position": [300, 300],
 			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
+			"scroll": [0.5, 0.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "roll",
+					"prefix": "BG tank w lighting",
+					"looped": true
+				}
+			],
+			"startAnim": "roll"
 		},
 		{
-			"name": "server",
-			"position": [-991, 205],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
-		},
-		{
-			"name": "lightred",
-			"position": [-101, 560],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
-		},
-		{
-			"name": "lightgreen",
-			"position": [-171, 242],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
-		},
-		{
-			"name": "orangeLight",
-			"position": [189, 300],
-			"scale": [1, 1700],
-			"scroll": [1, 1],
-			"angle": 0
-		},
-		{
-			"name": "lights",
-			"position": [-847, -315],
-			"scale": [1, 1],
-			"scroll": [1.2, 1.2],
-			"angle": 0
-		},
-		{
-			"name": "lightAbove",
-			"position": [804, -117],
-			"scale": [1, 1],
+			"name": "tankGround",
+			"position": [-420, -150],
+			"scale": [1.15, 1.15],
 			"scroll": [1, 1]
+		},
+		{
+			"name": "bricksGround",
+			"id": "tankBricks",
+			"position": [438, 715],
+			"scale": [1.15, 1.15],
+			"scroll": [1, 1]
+		},
+		{
+			"name": "tank0",
+			"id": "tankmanAudience0",
+			"position": [-500, 650],
+			"scale": [1, 1],
+			"scroll": [1.7, 1.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "fg tankhead far right instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tank2",
+			"id": "tankmanAudience2",
+			"position": [360, 980],
+			"scale": [1, 1],
+			"scroll": [1.5, 1.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "foreground man 3 instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tank1",
+			"id": "tankmanAudience1",
+			"position": [-300, 750],
+			"scale": [1, 1],
+			"scroll": [2.0, 0.2],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "fg tankhead 5 instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tank5",
+			"id": "tankmanAudience5",
+			"position": [1550, 700],
+			"scale": [1, 1],
+			"scroll": [1.5, 1.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "fg tankhead far right instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tank4",
+			"id": "tankmanAudience4",
+			"position": [1200, 900],
+			"scale": [1, 1],
+			"scroll": [1.5, 1.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "fg tankman bobbin 3 instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
+		},
+		{
+			"name": "tank3",
+			"id": "tankmanAudience3",
+			"position": [1050, 1240],
+			"scale": [1, 1],
+			"scroll": [3.5, 2.5],
+			"type": "sparrow",
+			"animations": [
+				{
+					"name": "idle-0",
+					"prefix": "fg tankhead 4 instance 1",
+					"looped": false
+				}
+			],
+			"startAnim": "idle-0",
+			"animBehavior": "on-beat"
 		}
 	],
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [296, 374],
-			"objectBehind": "orangeLight"
+			"position": [460.5, 268],
+			"camOffsets": [0, 0],
+			"objectBehind": "tankGround"
 		},
 		{
 			"type": "opponent",
-			"position": [64, 396],
-			"objectBehind": "orangeLight"
+			"position": [30.5, 416],
+			"camOffsets": [150, -70],
+			"objectBehind": "tankBricks"
 		},
 		{
 			"type": "player",
-			"position": [916, 396],
-			"objectBehind": "orangeLight"
+			"position": [960.5, 416],
+			"camOffsets": [-290, -120],
+			"objectBehind": "tankBricks"
 		}
 	]
 }

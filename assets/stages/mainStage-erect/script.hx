@@ -2,6 +2,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import moon.dependency.MoonSprite;
 import moon.hardcoded_shaders.DropShadowShader;
+import Shortcuts;
 
 function onPostCreate()
 {
@@ -25,6 +26,8 @@ function onPostCreate()
 		contrast: 7,
 		saturation: 0
 	});
+	
+	Shortcuts.getSpectator().useRenderTexture = true;
 
 	//for (character in background.players.members) addShader(character, -23, 12, 7, 0, 0xFFffe346, 50);
 

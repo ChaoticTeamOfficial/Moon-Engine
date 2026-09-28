@@ -2766,8 +2766,8 @@
 				"data": 1,
 				"lane": "opponent",
 				"time": 62022,
-				"type": "hehPrettyGood",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "hehPrettyGood"}
 			},
 			{
 				"duration": 0,
@@ -9120,8 +9120,8 @@
 				"data": 1,
 				"lane": "opponent",
 				"time": 62022,
-				"type": "hehPrettyGood",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "hehPrettyGood"}
 			},
 			{
 				"duration": 0,
@@ -16146,8 +16146,8 @@
 				"data": 1,
 				"lane": "opponent",
 				"time": 62022,
-				"type": "hehPrettyGood",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "hehPrettyGood"}
 			},
 			{
 				"duration": 0,

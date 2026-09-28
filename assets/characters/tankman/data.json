@@ -1,0 +1,139 @@
+{
+	"extraOffsets": [
+		-124,
+		-151
+	],
+	"camOffsets": [
+		74,
+		0
+	],
+	"icon": {
+		"color": [
+			225,
+			225,
+			225
+		]
+	},
+	"scale": 1,
+	"type": "atlas",
+	"animations": [
+		{
+			"prefix": "idle",
+			"x": 0,
+			"name": "idle-0",
+			"y": 0
+		},
+		{
+			"prefix": "left",
+			"name": "singLEFT"
+		},
+		{
+			"prefix": "down",
+			"name": "singDOWN"
+		},
+		{
+			"x": 0,
+			"prefix": "up",
+			"y": -5,
+			"name": "singUP"
+		},
+		{
+			"prefix": "right",
+			"name": "singRIGHT"
+		},
+		{
+			"x": 5,
+			"y": -40,
+			"prefix": "pretty good",
+			"name": "hehPrettyGood",
+			"sheet": "extra-animations"
+		},
+		{
+			"x": 5,
+			"y": -37,
+			"prefix": "ugh",
+			"name": "ugh",
+			"sheet": "extra-animations"
+		},
+		{
+			"x": 3,
+			"y": -38,
+			"prefix": "laugh",
+			"name": "laugh",
+			"sheet": "extra-animations"
+		},
+		{
+			"x": 0,
+			"y": -37,
+			"prefix": "beat it",
+			"name": "beat it",
+			"sheet": "extra-animations"
+		},
+		{
+			"x": 1,
+			"y": -38,
+			"prefix": "argh",
+			"name": "augh",
+			"sheet": "extra-animations"
+		},
+		{
+			"x": 6,
+			"y": -10,
+			"prefix": "What do we got here",
+			"name": "what do we got here",
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 6,
+			"y": -10,
+			"prefix": "What do we got here",
+			"name": "what do we got here-hold",
+			"indices": [0],
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 6,
+			"y": -10,
+			"prefix": "We should just kill you",
+			"name": "we should just kill you",
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 6,
+			"y": -10,
+			"prefix": "In Game Cutscene 2",
+			"name": "tight bars",
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 6,
+			"y": -10,
+			"prefix": "In Game Cutscene 2",
+			"name": "tight bars-hold",
+			"indices": [0],
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 6,
+			"y": -11,
+			"prefix": "Sexually Ambiguous",
+			"name": "sexually ambiguous",
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 5,
+			"y": -12,
+			"prefix": "GOD EFFING DAMMIT",
+			"name": "god effing dammit",
+			"sheet": "cutscenes"
+		},
+		{
+			"x": 5,
+			"y": -12,
+			"prefix": "GOD EFFING DAMMIT",
+			"name": "god effing dammit-hold",
+			"indices": [0],
+			"sheet": "cutscenes"
+		}
+	]
+}

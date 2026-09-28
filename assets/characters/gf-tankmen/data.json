@@ -1,0 +1,132 @@
+{
+	"extraOffsets": [
+		-190,
+		-176
+	],
+	"icon": {
+		"color": [
+			165,
+			0,
+			77
+		]
+	},
+	"danceFrequency": 1,
+	"type": "sparrow",
+	"overrideAnims": [
+		"comboBreak"
+	],
+	"animations": [
+		{
+			"x": 0,
+			"y": -9,
+			"prefix": "GF Dancing at Gunpoint",
+			"name": "idle-0",
+			"indices": [
+				30,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"x": 0,
+			"y": -9,
+			"prefix": "GF Dancing at Gunpoint",
+			"name": "idle-1",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29
+			]
+		},
+		{
+			"x": -1,
+			"y": -27,
+			"prefix": "GF Crying at Gunpoint",
+			"name": "sad",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			]
+		},
+		{
+			"x": -1,
+			"y": -27,
+			"prefix": "GF Crying at Gunpoint",
+			"looped": true,
+			"name": "sad-loop",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			]
+		},
+		{
+			"x": -1,
+			"y": -27,
+			"prefix": "GF Crying at Gunpoint",
+			"name": "comboBreak",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			],
+			"finishAnim": "idle"
+		}
+	]
+}

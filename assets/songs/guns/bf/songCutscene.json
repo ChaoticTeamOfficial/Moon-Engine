@@ -1,0 +1,77 @@
+{
+	"id": "gunsCutscene",
+	"skippable": true,
+	"canPause": false,
+	"actors": [
+		{
+			"character": "player",
+			"bindExisting": true
+		},
+		{
+			"character": "opponent",
+			"bindExisting": true
+		}
+	],
+	"actions": [
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"values": { "anim": "tight bars-hold", "force": true },
+			"parallel": true
+		},
+		{
+			"type": "camera",
+			"target": "opponent",
+			"duration": 2.6,
+			"parallel": true,
+			"ease": "expoOut"
+		},
+		{ "type": "wait", "duration": 0.6 },
+		{
+			"type": "playsound",
+			"parallel": true,
+			"values": { "path": "cutscenes/week7/tightBars.ogg" }
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"duration": 4,
+			"values": { "anim": "tight bars", "force": true }
+		},
+		{
+			"type": "playAnim",
+			"target": "spectator",
+			"values": { "anim": "sad-loop", "force": true },
+			"parallel": true
+		},
+		{
+			"type": "camerazoom",
+			"duration": 2.5,
+			"ease": "elasticOut",
+			"values": {
+				"zoom": 1.1
+			}
+		},
+		{
+			"type": "camerazoom",
+			"duration": 4.5,
+			"ease": "sineInOut",
+			"values": {
+				"zoom": 0.9
+			}
+		},
+		{ "type": "wait", "duration": 0.6 },
+		{
+			"type": "playAnim",
+			"target": "spectator",
+			"values": { "anim": "idle-0", "force": true },
+			"parallel": true
+		},
+		{
+			"type": "playAnim",
+			"target": "opponent",
+			"parallel": true,
+			"values": { "anim": "idle-0", "force": true }
+		}
+	]
+}
