@@ -134,8 +134,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 5625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -1206,8 +1206,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 41625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -1390,8 +1390,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 49125,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -2134,8 +2134,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 77625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -2520,8 +2520,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 5625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -4448,8 +4448,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 41625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -4784,8 +4784,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 49125,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 140.625,
@@ -6224,8 +6224,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 77625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -6690,8 +6690,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 5625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -8434,8 +8434,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 41625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -8722,8 +8722,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 49125,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,
@@ -10010,8 +10010,8 @@
 				"data": 2,
 				"lane": "opponent",
 				"time": 77625,
-				"type": "ugh",
-				"values": {}
+				"type": "Alt Animation Note",
+				"values": {"anim": "ugh"}
 			},
 			{
 				"duration": 0,

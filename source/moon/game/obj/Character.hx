@@ -7,8 +7,6 @@ import moon.dependency.scripting.*;
 
 using StringTools;
 
-// TODO: when changing some characters (e.g. switching bf over dad and vice versa) seems to fuck up offsets.
-
 typedef HealthIconData =
 {
 	var ?icon:String;
@@ -37,6 +35,8 @@ typedef CharacterData =
 	var ?icon:HealthIconData;
 	var ?danceFrequency:Int;
 	var ?holdDuration:Int;
+	var ?jitterOnHold:Bool;
+	var ?jitterFrame:Int;
 	var ?gameoverColorScheme:String;
 	var ?spritesheet:String;
 	var animations:Array<Paths.AnimationData>;
@@ -51,6 +51,8 @@ class Character extends MoonSprite
 	public var animationHold:Float = 0;
 	public var script:MoonScript;
 	public var holdDuration:Int = 8;
+	public var jitterOnHold:Bool = true;
+	public var jitterFrame:Int = 0;
 	public var gameoverColorScheme:FlxColor;
 	public var camOffsets:Array<Float> = [];
 	public var type(default, set):CharacterType;
@@ -208,6 +210,8 @@ class Character extends MoonSprite
 		idleAnims = loadAnimations(data.animations, data.type);
 		danceFrequency = data?.danceFrequency ?? 2;
 		holdDuration = data?.holdDuration ?? 8;
+		jitterOnHold = data?.jitterOnHold ?? true;
+		jitterFrame = data?.jitterFrame ?? 0;
 		gameoverColorScheme = FlxColor.fromString(data?.gameoverColorScheme ?? '0xFF4924ff');
 		extendIdleDuration = data?.extendIdleDuration ?? false;
 		isPlayer = data?.isPlayer ?? false;

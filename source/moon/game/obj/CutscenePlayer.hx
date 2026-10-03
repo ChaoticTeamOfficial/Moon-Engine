@@ -21,6 +21,7 @@ class CutscenePlayer extends FlxGroup
 	public var playing(default, null):Bool = false;
 	public var skippable:Bool = true;
 	public var canPause:Bool = false;
+	public var hideHUD:Bool = true;
 
 	var playState:PlayState;
 	var actionIndex:Int = 0;
@@ -37,6 +38,7 @@ class CutscenePlayer extends FlxGroup
 		this.playState = playState ?? PlayState.instance;
 		this.skippable = cutscene.skippable ?? true;
 		this.canPause = cutscene.canPause ?? false;
+		this.hideHUD = cutscene.hideHUD ?? true;
 	}
 
 	/**
@@ -55,6 +57,7 @@ class CutscenePlayer extends FlxGroup
 		actionIndex = 0;
 
 		if (playState != null) playState.playField.inCutscene = true;
+		if (hideHUD && playState != null) playState.camHUD.alpha = 0;
 
 		spawnActors();
 		runNext();
@@ -83,7 +86,14 @@ class CutscenePlayer extends FlxGroup
 		cancelAll();
 		stopAllCutsceneSounds();
 
-		if (playState != null) playState.startCountdown();
+		if (playState != null)
+		{
+			playState.startCountdown();
+
+			if (hideHUD) FlxTween.tween(playState.camHUD, {
+				alpha: 1
+			}, 0.5);
+		}
 
 		for (id => spr in actors)
 		{

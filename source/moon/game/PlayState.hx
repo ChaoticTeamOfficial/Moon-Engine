@@ -432,24 +432,7 @@ class PlayState extends FlxTransitionableState
 
 		if (MoonInput.justPressed(PAUSE)) pauseGame(true);
 
-		if (playField.healthBar.health <= 0 && !isDead)
-		{
-			isDead = true;
-
-			playField.playback.state = PAUSE;
-
-			setCameraFocus('player', [0, 50], 1.4, {
-				ease: FlxEase.circOut,
-				startDelay: 0.01
-			});
-			setCameraZoom(1, 1, {
-				ease: FlxEase.expoOut
-			});
-			ScriptUtils.openMenu('Gameover');
-
-			final reasons = ['got blueballed', 'has skill issue', 'gave up', 'freakin sucks'];
-			moon.backend.archipelago.ArchipelagoManager.sendDeathLink(reasons[FlxG.random.int(0, reasons.length - 1)]);
-		}
+		if (playField.healthBar.health <= 0 && !isDead) triggerGameOver();
 
 		// TODO: REMOVE, THIS IS DEBUGGIN
 		if (FlxG.keys.justPressed.EIGHT) endSong();
@@ -594,6 +577,28 @@ class PlayState extends FlxTransitionableState
 	public function stepHit(curStep:Float)
 	{
 		Global.scriptCall('onStep', [curStep]);
+	}
+
+	public function triggerGameOver(triggerDeathlink:Bool = true)
+	{
+		isDead = true;
+
+		playField.playback.state = PAUSE;
+
+		setCameraFocus('player', [0, 50], 1.4, {
+			ease: FlxEase.circOut,
+			startDelay: 0.01
+		});
+		setCameraZoom(1, 1, {
+			ease: FlxEase.expoOut
+		});
+		ScriptUtils.openMenu('Gameover');
+
+		if (triggerDeathlink)
+		{
+			final reasons = ['got blueballed', 'has skill issue', 'gave up', 'freakin sucks'];
+			moon.backend.archipelago.ArchipelagoManager.sendDeathLink(reasons[FlxG.random.int(0, reasons.length - 1)]);
+		}
 	}
 
 	public function endSong()

@@ -111,6 +111,11 @@ typedef CutsceneFile =
 	var ?canPause:Bool;
 
 	/**
+	 * Whether should the HUD be hidden during the cutscene.
+	 */
+	var ?hideHUD:Bool;
+
+	/**
 	 * Actors spawned/bound before the first action.
 	 */
 	var ?actors:Array<CutsceneActor>;

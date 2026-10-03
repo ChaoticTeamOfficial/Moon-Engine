@@ -52,7 +52,7 @@
 		"extraOffset": { "x": 0, "y": 18 },
 		"animations": [
 			{ "name": "pre", "prefix": "loop-{dir}0", "fps": 32 },
-			{ "name": "{dir}-loop", "prefix": "loop-{dir}0", "fps": 32 },
+			{ "name": "{dir}-loop", "prefix": "loop-{dir}0", "fps": 32, "looped": true },
 			{ "name": "{dir}-end", "prefix": "explode-{dir}0", "fps": 40 }
 		]
 	},

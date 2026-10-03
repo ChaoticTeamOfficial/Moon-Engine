@@ -53,7 +53,8 @@
 			"y": -37,
 			"prefix": "ugh",
 			"name": "ugh",
-			"sheet": "extra-animations"
+			"sheet": "extra-animations",
+			"finishAnim": "idle-0"
 		},
 		{
 			"x": 3,

@@ -237,12 +237,7 @@ class ArchipelagoManager
 		try
 		{
 			if (ps.subState != null) ps.subState.close();
-			ps.paused = false;
-			ps.isDead = true;
-
-			if (ps.playField != null && ps.playField.playback != null) ps.playField.playback.state = PAUSE;
-
-			ps.openSubState(new moon.game.submenus.Gameover());
+			ps.triggerGameOver(false);
 
 			final source:String = (data != null && data.source != null) ? Std.string(data.source) : "?";
 			final cause:String = (data != null && data.cause != null) ? Std.string(data.cause) : "DeathLink";

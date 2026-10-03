@@ -431,9 +431,16 @@ class InputHandler
 		stats.combo++;
 		strumline.members[note.direction].onNoteHit(note, timing, isSustain);
 		// trace(stats.judgementsCounter, "DEBUG");
-
 		// even though this is here, notetypes can play a specific
-		if (attachedChar != null && !isTyped) attachedChar.playAnim('sing${convertedDir}', true);
+		if (attachedChar != null && !isTyped)
+		{
+			if (isSustain)
+			{
+				if (attachedChar.jitterOnHold) attachedChar.playAnim('sing${convertedDir}', true, false, attachedChar.jitterFrame);
+			}
+			else
+				attachedChar.playAnim('sing${convertedDir}', true);
+		}
 
 		// dispatch a note hit on the note registry!
 		if (isTyped && game != null) NoteTypeRegistry.executeHit(game, note, timing, isSustain);
