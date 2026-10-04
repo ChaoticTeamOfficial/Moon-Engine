@@ -1,5 +1,6 @@
 package moon.backend.archipelago;
 
+import moon.backend.archipelago.APTypes.APNetworkItem;
 import moon.backend.data.SongLibrary;
 import moon.backend.data.SongBase;
 import moon.backend.data.Week;
@@ -180,7 +181,7 @@ class ArchipelagoProgress
 		}
 	}
 
-	static function onItems(items:Array<ap.PacketTypes.NetworkItem>):Void drainPending();
+	static function onItems(items:Array<APNetworkItem>):Void drainPending();
 
 	/**
 	 * Apply every pending item from the save queue.

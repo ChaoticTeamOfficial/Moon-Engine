@@ -1,14 +1,11 @@
 package moon.backend.archipelago;
 
-import ap.Client;
-import ap.Definitions.State;
-import ap.PacketTypes.NetworkItem;
-import flixel.FlxG;
-import flixel.util.FlxSignal;
+import moon.backend.archipelago.APTypes.APState;
+import moon.backend.archipelago.APTypes.APNetworkItem;
 import haxe.crypto.Md5;
 
 /**
- * Central owner of the hxArchipelago client.
+ * Central owner of the archipelago client.
  */
 @:publicFields
 class ArchipelagoManager
@@ -28,7 +25,7 @@ class ArchipelagoManager
 	/**
 	 * Fired for every batch of items that arrives (including on reconnect).
 	 */
-	static final onItemsReceived = new FlxTypedSignal<Array<NetworkItem>->Void>();
+	static final onItemsReceived = new FlxTypedSignal<Array<APNetworkItem>->Void>();
 
 	/**
 	 * Fired when the server confirms locations were checked (local or remote).
@@ -48,7 +45,7 @@ class ArchipelagoManager
 	/**
 	 * The current loaded client.
 	 */
-	static var client:Client;
+	static var client:APClient;
 
 	static var host:String = "";
 	static var port:Int = 38281;
@@ -61,7 +58,7 @@ class ArchipelagoManager
 	 */
 	static var isConnected(get, never):Bool;
 
-	static function get_isConnected():Bool return client != null && client.state == State.SLOT_CONNECTED;
+	static function get_isConnected():Bool return client != null && client.state == APState.SLOT_CONNECTED;
 
 	static var initialized:Bool = false;
 	static var pendingClearIndex:Int = 0;
@@ -99,15 +96,19 @@ class ArchipelagoManager
 
 		ArchipelagoSave.load(host, port, slot);
 
-		final uri = '${host}:$port';
 		final uuid = Md5.encode('${Sys.systemName()}-${Date.now().getTime()}-${Math.random()}');
 
-		if (client != null) client = null;
+		if (client != null)
+		{
+			client.disconnect();
+			client = null;
+		}
 
-		client = new Client(uuid, GAME_NAME, uri);
+		client = new APClient(uuid, GAME_NAME);
 		wireCallbacks();
+		client.connect(host, port, slot, password);
 
-		trace('[AP] Connecting to $uri as "$slot"...', "INFO");
+		trace('[AP] Connecting to $host:$port as "$slot"...', "INFO");
 	}
 
 	/**
@@ -117,6 +118,7 @@ class ArchipelagoManager
 	{
 		if (client == null) return;
 
+		client.disconnect();
 		client = null;
 		slotData = null;
 		onDisconnected.dispatch();
@@ -155,7 +157,7 @@ class ArchipelagoManager
 			}
 		}
 
-		if (fresh.length > 0) client.LocationChecks(fresh);
+		if (fresh.length > 0) client.locationChecks(fresh);
 	}
 
 	/**
@@ -193,11 +195,11 @@ class ArchipelagoManager
 		lastDeathLinkTime = now;
 		try
 		{
-			if (client.Bounce({
+			if (client.bounce({
 				source: slot,
 				cause: cause,
 				time: now
-			}, [], [], ["DeathLink"])) trace('[AP] DeathLink sent ($cause).', "INFO");
+			}, null, null, ["DeathLink"])) trace('[AP] DeathLink sent ($cause).', "INFO");
 			else
 				trace('[AP] DeathLink Bounce failed to queue.', "WARNING");
 		}
@@ -259,20 +261,13 @@ class ArchipelagoManager
 	 */
 	static function pendingItemCount():Int return ArchipelagoSave.pendingCount();
 
-	// --- internal stuff!!! ---------------------------------------------------------
-
 	static function wireCallbacks():Void
 	{
-		client.onRoomInfo.add(() ->
-		{
-			client.ConnectSlot(slot, password == "" ? null : password, 7, ["DeathLink", "AP"], {
-				major: 0,
-				minor: 5,
-				build: 1
-			});
-		});
+		client.onRoomInfo = () -> {
+			// TODO ig lol
+		};
 
-		client.onSlotConnected.add((data:Dynamic) ->
+		client.onConnected = (data:Dynamic) ->
 		{
 			slotData = data;
 			if (ArchipelagoSave.data != null)
@@ -281,54 +276,54 @@ class ArchipelagoManager
 				ArchipelagoSave.data.seed = client.seed;
 				ArchipelagoSave.flush();
 			}
-			client.ConnectUpdate(null, ["DeathLink", "AP"]);
 
-			if (ArchipelagoSave.data != null && ArchipelagoSave.data.checkedLocations.length > 0) client.LocationChecks(ArchipelagoSave.data.checkedLocations);
+			client.connectUpdate(null, ["DeathLink", "AP"]);
+			if (ArchipelagoSave.data != null && ArchipelagoSave.data.checkedLocations.length > 0) client.locationChecks(ArchipelagoSave.data.checkedLocations);
 
 			trace('[AP] Connected to slot "${client.slot}" (seed ${client.seed}, tags ${client.tags.join(",")}).', "INFO");
 			onConnected.dispatch();
-		});
+		};
 
-		client.onSlotRefused.add((errors:Array<String>) ->
+		client.onConnectionRefused = (errors:Array<String>) ->
 		{
 			trace('[AP] Slot refused: ${errors.join(", ")}', "ERROR");
 			disconnect();
-		});
+		};
 
-		client.onSocketDisconnected.add(() ->
+		client.onDisconnected = () ->
 		{
 			trace('[AP] Socket disconnected.', "WARNING");
 			onDisconnected.dispatch();
-		});
+		};
 
-		client.onSocketError.add((msg:String) ->
+		client.onError = (msg:String) ->
 		{
 			trace('[AP] Socket error: $msg', "WARNING");
-		});
+		};
 
-		client.onItemsReceived.add((items:Array<NetworkItem>) ->
+		client.onItemsReceived = (items:Array<APNetworkItem>) ->
 		{
 			for (item in items) ArchipelagoSave.enqueueItem(item.item);
 
 			onItemsReceived.dispatch(items);
-		});
+		};
 
-		client.onLocationChecked.add((ids:Array<Int>) ->
+		client.onLocationsChecked = (ids:Array<Int>) ->
 		{
 			for (id in ids) ArchipelagoSave.markLocationChecked(id);
 
 			onLocationsChecked.dispatch(ids);
-		});
+		};
 
-		client.onBounced.add((data:Dynamic) ->
+		client.onBounced = (data:Dynamic) ->
 		{
 			queueRemoteDeathLink(data);
 			onBounced.dispatch(data);
-		});
+		};
 
-		client.onPrintJSON.add((parts, _item, _receiving) ->
+		client.onPrintJSON = (parts:Array<Dynamic>) ->
 		{
 			onPrintJSON.dispatch(parts);
-		});
+		};
 	}
 }
