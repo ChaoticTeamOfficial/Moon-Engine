@@ -1,5 +1,6 @@
 package moon.backend.archipelago;
 
+import flixel.util.FlxSignal;
 import moon.backend.archipelago.APTypes.APState;
 import moon.backend.archipelago.APTypes.APNetworkItem;
 import haxe.crypto.Md5;
