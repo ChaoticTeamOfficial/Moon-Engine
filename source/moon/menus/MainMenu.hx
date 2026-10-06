@@ -13,12 +13,12 @@ class MainMenu extends FlxTransitionableState
 		'test playlist',
 		'story menu',
 		'freeplay',
-		'convert chart yeah',
 		'trophies',
 		'mods',
 		'settings',
 		'archipelago',
-		'offset editor'
+		'offset editor',
+		'sticker clicker'
 	];
 	var buttons:Array<UIButton> = [];
 	var curSelected:Int = 0;
@@ -136,6 +136,23 @@ class MainMenu extends FlxTransitionableState
 					ScriptUtils.openMenu('AchievementsMenu');
 				case 'offset editor':
 					FlxG.switchState(() -> new moon.toolkit.offset.OffsetEditor());
+
+				case 'sticker clicker':
+					Global.allowInputs = false;
+					if (FlxG.sound.music != null)
+					{
+						FlxTween.tween(FlxG.sound.music, {
+							pitch: 0
+						}, 1, {
+							onComplete: _ ->
+							{
+								FlxG.sound.music.stop();
+								openSubState(new StickerSubState(new StickerClicker()));
+							}
+						});
+					}
+					else
+						openSubState(new StickerSubState(new StickerClicker()));
 			}
 		}
 
