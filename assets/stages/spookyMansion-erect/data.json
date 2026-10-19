@@ -14,64 +14,50 @@
 				{
 					"name": "bgtrees",
 					"prefix": "bgtrees",
-					"fps": 5,
 					"looped": true,
-					"x": 0,
-					"y": 0
+					"fps": 5
 				}
 			],
 			"startAnim": "bgtrees",
-			"animBehavior": "once",
-			"angle": 0
+			"animBehavior": "once"
 		},
 		{
 			"name": "bgDark",
-			"position": [-560, -220],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
+			"position": [-560, -220]
 		},
 		{
 			"name": "bgLight",
 			"position": [-560, -220],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0,
 			"alpha": 0
 		},
 		{
 			"name": "stairsDark",
-			"position": [966, -195],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0
+			"position": [966, -225]
 		},
 		{
 			"name": "stairsLight",
-			"position": [966, -195],
-			"scale": [1, 1],
-			"scroll": [1, 1],
-			"angle": 0,
+			"position": [966, -225],
 			"alpha": 0
 		}
 	],
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [640, 230],
-			"objectBehind": "bgLight"
+			"position": [524.5, 327],
+			"objectBehind": "bgLight",
+			"camOffsets": [46, 7]
 		},
 		{
 			"type": "opponent",
-			"position": [182, 245],
+			"position": [115, 377],
 			"objectBehind": "bgLight",
-			"camOffsets": [220, -90]
+			"camOffsets": [113, -90]
 		},
 		{
 			"type": "player",
-			"position": [1050, 305],
+			"position": [1033, 400],
 			"objectBehind": "bgLight",
-			"camOffsets": [-220, -90]
+			"camOffsets": [-132, -77]
 		}
 	]
 }
