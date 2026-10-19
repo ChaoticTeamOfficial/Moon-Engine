@@ -1,0 +1,30 @@
+{
+	"extraOffsets": [-102, -55],
+	"icon": {
+		"color": [191, 217, 115]
+	},
+	"type": "atlas",
+	"animations": [
+		{
+			"prefix": "Idle",
+			"name": "idle-0"
+		},
+		{
+			"prefix": "Left",
+			"name": "singRIGHT"
+		},
+		{
+			"prefix": "Down",
+			"name": "singDOWN"
+		},
+		{
+			"prefix": "Up",
+			"name": "singUP"
+		},
+		{
+			"prefix": "Right",
+			"name": "singLEFT"
+		}
+	],
+	"flipX": true
+}

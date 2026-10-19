@@ -1,0 +1,58 @@
+{
+  "camSettings": {
+		"zoom": 1.1,
+		"startX": 725,
+		"startY": 525
+	},
+  "objects": [
+    {
+      "name": "sky",
+      "position": [-100, 0],
+      "scroll": [0.1, 0.1]
+    },
+    {
+      "name": "city",
+      "position": [-255, 45],
+      "scale": [0.9, 0.9],
+      "scroll": [0.3, 0.3]
+    },
+    {
+      "name": "lights",
+      "position": [-184, 155],
+      "scale": [0.9, 0.9],
+      "scroll": [0.3, 0.3]
+    },
+    {
+      "name": "behind-train",
+      "position": [-299, 144]
+    },
+    {
+      "name": "train",
+      "position": [2000, 360]
+    },
+    {
+      "name": "street",
+      "position": [-299, 144]
+    }
+  ],
+  "characters": [
+    {
+      "type": "spectator",
+      "position": [478.5, 314],
+      "objectBehind": "street",
+      "camOffsets": [23, 7]
+    },
+    {
+      "type": "opponent",
+      "position": [144.5, 400],
+      "objectBehind": "street",
+      "camOffsets": [246, -73.5]
+    },
+    {
+      "type": "player",
+      "position": [806.5, 400],
+      "objectBehind": "street",
+      "camOffsets": [-236, -78]
+    }
+  ]
+}
