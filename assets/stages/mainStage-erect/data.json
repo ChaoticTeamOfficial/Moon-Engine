@@ -60,20 +60,20 @@
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [230.5, 340],
+			"position": [228.5, 342],
 			"camOffsets": [23, 7],
 			"objectBehind": "orangeLight"
 		},
 		{
 			"type": "opponent",
-			"position": [-50, 410],
-			"camOffsets": [148, -97],
+			"position": [-117, 400],
+			"camOffsets": [267, -97],
 			"objectBehind": "orangeLight"
 		},
 		{
 			"type": "player",
-			"position": [765, 420],
-			"camOffsets": [-200, -120],
+			"position": [763.5, 420],
+			"camOffsets": [-205.5, -118],
 			"objectBehind": "orangeLight"
 		}
 	]
