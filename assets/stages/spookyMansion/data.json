@@ -2,24 +2,21 @@
 	"camSettings": {
 		"zoom": 1,
 		"startX": 700,
-		"startY": 280
+		"startY": 480
 	},
 	"objects": [
 		{
 			"name": "halloween_bg",
 			"position": [-395, -505],
-			"scale": [1, 1],
 			"type": "atlas",
 			"animations": [
 				{
 					"name": "idle",
-					"prefix": "static",
-					"looped": false
+					"prefix": "static"
 				},
 				{
 					"name": "lightning",
-					"prefix": "thunder",
-					"looped": false
+					"prefix": "thunder"
 				}
 			],
 			"startAnim": "idle",
@@ -29,20 +26,21 @@
 	"characters": [
 		{
 			"type": "spectator",
-			"position": [640, 230],
-			"objectBehind": "halloween_bg"
+			"position": [477.5, 314],
+			"objectBehind": "halloween_bg",
+			"camOffsets": [23, 7]
 		},
 		{
 			"type": "opponent",
-			"position": [182, 245],
+			"position": [115, 377],
 			"objectBehind": "halloween_bg",
-			"camOffsets": [220, -90]
+			"camOffsets": [113, -90]
 		},
 		{
 			"type": "player",
-			"position": [950, 305],
+			"position": [774.5, 400],
 			"objectBehind": "halloween_bg",
-			"camOffsets": [-220, -90]
+			"camOffsets": [-136, -78]
 		}
 	]
 }
